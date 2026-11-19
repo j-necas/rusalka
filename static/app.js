@@ -499,7 +499,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $$('.pata .odkaz, #novyUvod .odkaz').forEach(b => b.onclick = () => otevriOkno('about'));   // More about Rusalka
   $$('.menu-vse').forEach(b => b.onclick = () => otevriOkno('menu'));
   // narrow screens: when the links don't fit (measured), the bar keeps AI and Menu; Menu lists the rest
-  const SOUSEDE = { kdo: '#kdo .logo-kdo, #kdo h1', domu: '#domu .ja, #domu .midi-stav', novy: '#novyZpet, #novyNadpis' };
+  const SOUSEDE = { kdo: '#kdo .logo-kdo, #kdo h1', domu: '#domu .ja, #domu .midi-stav', novy: '#novyZpet, #novyNadpis', pred: '#predZpet' };
   function prizpusobMenu() {
     const pres = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
     for (const nav of $$('.horni-menu')) {
@@ -576,6 +576,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
           data.pis('statistiky', S.statistiky);
         }
         const hraje = aktualni === S.pisen;
+        if (PRED.soubor === aktualni) { PRED.soubor = novy || aktualni; $('#predNazev').textContent = p.nazev || PRED.soubor; }
         if (novy && novy !== aktualni) aktualni = novy;
         puvodni = p;
         if (hraje) {
@@ -602,6 +603,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     try {
       await api.smaz(soubor);
       if (soubor === S.pisen) { stopVse(); S.pisen = null; S.data = null; }
+      if (soubor === PRED.soubor && !$('#pred').classList.contains('skryta')) ukaz('domu');   // it was open on Before playing
       SPRAVA = null;
       nactiPisne(); await vykresliSpravu();
       toast(t('app.pisenSmazana'));
@@ -1747,6 +1749,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         const xml = bezCeskehoH(doplnTempo(doplnPosuvky(pripravOriginal(S.puvodniXml, r.poradi)), S.puvodni.tempo), soustava());
         S.data = zpracujVerovio(await verovioTk(), xml, r.pisen, volbyVykresleni());
         S.model = r.pisen; S.poradi = r.poradi; S.original = true;
+        nahledPred();
         return;
       } catch (e) { console.warn('originál nejde vykreslit, hraju zjednodušené noty', e); }
     }
@@ -1760,6 +1763,11 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const r = rozvin(verze);
     S.model = r.pisen; S.poradi = r.poradi;
     S.data = await zpracujModel(S.model);
+    nahledPred();
+  }
+  /** Before playing shows the notes of the current version (it may change there: More options, Settings → Display) */
+  function nahledPred() {
+    if (!$('#pred').classList.contains('skryta') && S.data && S.pisen === PRED.soubor) $('#predNoty').innerHTML = S.data.svg;
   }
   function nastavRuku() {
     const v = S.dvojice || S.data.osnovy.length < 2 ? 'vse' : (S.rukaVolba || '1');

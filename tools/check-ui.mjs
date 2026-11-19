@@ -674,6 +674,12 @@ try {
     kontrola('More to do: Learn in pieces, Play as a pair and Echo as a button with one line each', /Další možnosti/.test(await h.locator('#vicPanel').innerText())
       && await radek(h, '#pruvodce') && await radek(h, '#dvojice') && await radek(h, '#ozvena'));
     kontrola('Before playing has no Edit or Delete', (await h.locator('#pred #upravit, #pred #smazatPisen').count()) === 0);
+    // the top menu as on Home: Settings → Display for this player, without going back
+    await h.evaluate(() => scrollTo(0, 0)); await snimek(h, 'pred-menu');
+    await menu(h, 'pred', 'settings');
+    kontrola('Before playing has the top menu; its Settings show Display for the player', await vMenu(h, 'pred', 'songs')
+      && await viditelna(h, '#nastaveniZobrazeni #prepPismena') && await viditelna(h, '#pred'));
+    await h.keyboard.press('Escape');
     // Copy for the helper: an easier version sends the song as written, not the played version (here: generated left hand)
     if (await h.locator('#predCo [data-uroven="4"]:not([disabled])').count()) {
       await h.locator('#predCo [data-uroven="4"]').click();
