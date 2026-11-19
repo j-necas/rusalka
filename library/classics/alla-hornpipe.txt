@@ -1,0 +1,20 @@
+title: Alla Hornpipe
+author: Georg Friedrich Händel
+time: 3/2
+key: 2
+tempo: 120
+clef: treble
+---
+# Water Music, Suite No. 2 in D major, HWV 349: the main theme (first violins, joined from bar 5 by the second violins),
+# in the original key; trill in bar 1 left out
+1) D A@4 | A4/2 D5/2 E5/2
+2) D | F#5/4 D5/2 E5/4 F#5/4 E5/8 D5/8
+3) A | E5/4 A5/2 E5/4 F#5/4 E5/8 D5/8
+4) A | E5/4 A5/2 E5/4 F#5/4 E5/8 D5/8
+5) A | E5/4 A4/2 A5/4 A5/4 A5/4
+6) A7 | A5/4 G5/8 F#5/8 G5/4 G5/4 G5/4 G5/4
+7) D | G5/4 F#5/8 E5/8 F#5/4 A5/4 A5/4 A5/4
+8) A7 | A5/4 G5/8 F#5/8 G5/4 G5/4 G5/4 G5/4
+9) G D@3 | G5/2. A5/4 F#5/4 E5/4
+10) D A7@2 | F#5/4 G5/4 E5/2. D5/4
+11) D | D5/2

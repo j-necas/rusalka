@@ -1,0 +1,26 @@
+title: Greensleeves
+author: traditional
+time: 6/8
+key: 0
+tempo: 84
+clef: treble
+---
+# transposed from G minor (fr.wikipedia ABC) to A minor; minor sixth (F natural) in the verse as in most sources
+# verse and refrain once; the dotted figures carry one syllable over two notes
+1) | A4/8=A-
+2) Am | C5/4=las, D5/8=my E5/8.=love F5/16 E5/8=you
+3) G | D5/4=do B4/8=me G4/8.=wrong, A4/16 B4/8=to
+4) Am | C5/4=cast A4/8=me A4/8.=off G#4/16 A4/8=dis-
+5) E | B4/4=cour- G#4/8=teous- E4/4=ly, A4/8=for
+6) Am | C5/4=I D5/8=have E5/8.=loved F5/16 E5/8=you
+7) G | D5/4=well B4/8=and G4/8.=long, A4/16 B4/8=de-
+8) Am E@1.5 | C5/8.=light- B4/16=ing A4/8=in G#4/8.=your F#4/16=com- G#4/8=pa-
+9) Am | A4/2.=ny.
+10) C | G5/4.=Green- G5/8.=sleeves F#5/16 E5/8=was
+11) G | D5/4=all B4/8=my G4/8.=joy, A4/16 B4/8=Green-
+12) Am | C5/4=sleeves A4/8=was A4/8.=my G#4/16 A4/8=de-
+13) E | B4/4=light, G#4/8 E4/4.
+14) C | G5/4.=Green- G5/8.=sleeves F#5/16=was E5/8=my
+15) G | D5/4=heart B4/8=of G4/8.=gold, A4/16 B4/8=and
+16) Am E@1.5 | C5/8.=who B4/16=but A4/8=my G#4/8.=la- F#4/16=dy G#4/8=Green-
+17) Am | A4/2.=sleeves.

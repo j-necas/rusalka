@@ -1,0 +1,40 @@
+title: Il est né, le divin Enfant
+author: traditional
+time: 2/4
+key: 1
+tempo: 116
+clef: treble
+---
+# Refrain and first verse, G major as printed; D.C. back to the refrain, which ends at Fine.
+1) G | D4/4=Il G4/4=est
+2) G | G4/4=né B4/8=le G4/8=di-
+3) G | D4/4=vin G4/4=En-
+4) G | G4/2=fant,
+5) G | G4/4=jou- G4/8=ez A4/8=haut-
+6) G | B4/4=bois, C5/8=ré- B4/8=son-
+7) D | A4/4=nez G4/4=mu-
+8) D | A4/8=set- F#4/8 D4/4=tes!
+9) G | D4/4=Il G4/4=est
+10) G | G4/4=né B4/8=le G4/8=di-
+11) G | D4/4=vin G4/4=En-
+12) G | G4/2=fant,
+13) G | G4/4=chan- A4/4=tons
+14) G | B4/4=tous C5/8=son B4/8=a-
+15) D7 | A4/4=vè- D5/4=ne-
+16) {fine} G | G4/2=ment!
+17) G | B4/4=De- C5/4=puis
+18) G | D5/4=plus C5/8=de B4/8=qua-
+19) D7 | C5/4=tre E5/4=mille
+20) G | D5/2=ans
+21) G | B4/4=nous C5/4=le
+22) G | D5/4=pro- E5/8=met- D5/8=taient
+23) G | C5/4=les B4/4=pro-
+24) D7 | B4/4=phè- A4/4=tes,
+25) G | B4/4=de- C5/4=puis
+26) G | D5/4=plus C5/8=de B4/8=qua-
+27) D7 | C5/4=tre E5/4=mille
+28) G | D5/2=ans
+29) G | B4/4=nous C5/4=at-
+30) G | D5/4=ten- E5/8=dions D5/8=cet
+31) D7 G@1 | C5/4=heu- B4/4=reux
+32) {dc} D7 | A4/2=temps.

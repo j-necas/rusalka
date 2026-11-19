@@ -1,0 +1,18 @@
+title: Kočka leze dírou
+author: traditional
+time: 2/4
+key: 0
+tempo: 120
+clef: treble
+---
+1) C | C4/8=Ko- D4/8=čka E4/8=le- F4/8=ze
+2) C | G4/4=dí- G4/4=rou,
+3) F | A4/4=pes A4/4=o-
+4) C | G4/2=knem,
+5) F | A4/4=pes A4/4=o-
+6) C | G4/2=knem,
+7) {|:} G7 | F4/8=ne- F4/8=bu- F4/8=de- F4/8=li
+8) C | E4/4=pr- E4/4=šet,
+9) G7 | D4/4=ne- D4/4=zmok-
+10) {1. :|} C | G4/2=nem,
+11) {2.} C | C4/2=nem.

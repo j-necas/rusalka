@@ -1,0 +1,23 @@
+title: Já do lesa nepojedu
+author: traditional
+time: 3/4
+key: 0
+tempo: 132
+clef: treble
+---
+1) C | C4/8=Já E4/8=do G4/4=le- G4/4=sa
+2) C | C5/8=ne- C5/8=po- G4/4=je- G4/4=du,
+3) G7 | F4/8=já F4/8=do D4/4=le- D4/4=sa
+4) C | C4/8=ne- E4/8=půj- G4/2=du.
+5) C | C4/8=Kdy- E4/8=by G4/4=na G4/4=mě
+6) C | C5/8=haj- C5/8=ný G4/4=při- G4/4=šel,
+7) G7 | F4/8=on F4/8=by D4/4=mně D4/4=vzal
+8) C | C4/8=se- E4/8=ke- C4/2=ru.
+9) G7 | F4/8=Se- F4/8=ke- D4/4=ra D4/4=je
+10) C | C4/8=za E4/8=dva G4/4=zla- G4/4=tý
+11) G7 | F4/8=a F4/8=to- D4/4=půr- D4/4=ko
+12) C | C4/8=za E4/8=to- G4/2=lar,
+13) C | C4/8=kdy- E4/8=by G4/4=na G4/4=mě
+14) C | C5/8=haj- C5/8=ný G4/4=při- G4/4=šel,
+15) G7 | F4/8=on F4/8=by D4/4=mně D4/4=to
+16) C | C4/8=všec- E4/8=ko C4/2=vzal.

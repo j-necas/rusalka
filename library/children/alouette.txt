@@ -1,0 +1,21 @@
+title: Alouette
+author: traditional
+time: 4/4
+key: 1
+tempo: 120
+clef: treble
+---
+# G major as in the English Wikipedia and musicaviva scores. Refrain – first verse („la tête“) – refrain, written out.
+1) G | G4/4.=A- A4/8=lou- B4/4=et- B4/4=te,
+2) D7 G@2 | A4/8=gen- G4/8=tille A4/8=a- B4/8=lou- G4/4=et- D4/4=te,
+3) G | G4/4.=A- A4/8=lou- B4/4=et- B4/4=te,
+4) D7 G@2 | A4/8=je G4/8=te A4/8=plu- B4/8=me- G4/2=rai.
+5) G | G4/8=Je A4/8=te B4/8=plu- C5/8=me- D5/8=rai D5/8=la D5/4=tête,
+6) D7 G@2 | D5/8=je E5/8=te D5/8=plu- C5/8=me- B4/8=rai A4/8=la G4/4=tête,
+7) D7 | D5/8=et D5/8=la D5/4=tête, D4/8=et D4/8=la D4/4=tête,
+8) D7 | D5/8=A- D5/8=lou- D5/4=ette, D4/8=a- D4/8=lou- D4/4=ette,
+9) D7 | D5/4=Ah! C5/4 B4/4 A4/4
+10) G | G4/4.=A- A4/8=lou- B4/4=et- B4/4=te,
+11) D7 G@2 | A4/8=gen- G4/8=tille A4/8=a- B4/8=lou- G4/4=et- D4/4=te,
+12) G | G4/4.=A- A4/8=lou- B4/4=et- B4/4=te,
+13) D7 G@2 | A4/8=je G4/8=te A4/8=plu- B4/8=me- G4/2=rai.

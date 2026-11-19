@@ -1,0 +1,24 @@
+title: Hänschen klein
+author: traditional, lyrics by Franz Wiedemann
+time: 4/4
+key: -1
+tempo: 160
+clef: treble
+---
+# written in 4/4 with quarter notes instead of 2/4 with eighths; the common one-verse text, written out (no repeat)
+1) F | C5/4=Häns- A4/4=chen A4/2=klein
+2) C7 | Bb4/4=ging G4/4=al- G4/2=lein
+3) F | F4/4=in G4/4=die A4/4=wei- Bb4/4=te
+4) F | C5/4=Welt C5/4=hi- C5/2=nein.
+5) F | C5/4=Stock A4/4=und A4/2=Hut
+6) C7 | Bb4/4=stehn G4/4=ihm G4/2=gut,
+7) F C7@2 | F4/4=ist A4/4=gar C5/4=wohl- C5/4=ge-
+8) F | F4/2=mut. r/2
+9) C7 | G4/4=A- G4/4=ber G4/4=Mut- G4/4=ter
+10) C7 | G4/4=wei- A4/4=net Bb4/2=sehr,
+11) F | A4/4=hat A4/4=ja A4/4=nun A4/4=kein
+12) F | A4/4=Häns- Bb4/4=chen C5/2=mehr!
+13) F | C5/4=Da A4/4=be- A4/2=sinnt
+14) C7 | Bb4/4=sich G4/4=das G4/2=Kind,
+15) F C7@2 | F4/4=läuft A4/4=nach C5/4=Haus C5/4=ge-
+16) F | F4/1=schwind.

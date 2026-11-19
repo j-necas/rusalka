@@ -1,0 +1,16 @@
+title: Pop Goes the Weasel
+author: traditional
+time: 6/8
+key: 1
+tempo: 132
+clef: treble
+---
+# transposed from C major to G major; the verse as sung (the 8-bar first strain)
+1) G D7@1.5 | G4/4=All G4/8=a- A4/4=round A4/8=the
+2) G | B4/8=mul- D5/8=ber- B4/8=ry G4/4=bush, D4/8=the
+3) G D7@1.5 | G4/4=mon- G4/8=key A4/4=chased C5/8=the
+4) G | B4/4.=wea- G4/4=sel. D4/8=The
+5) G D7@1.5 | G4/4=mon- G4/8=key A4/4=thought A4/8=’twas
+6) G | B4/8=all D5/8=in B4/8 G4/4.=fun.
+7) C D7@1.5 | E5/4.=Pop! A4/4=goes C5/8=the
+8) G | B4/4.=wea- G4/4.=sel!

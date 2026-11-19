@@ -1,0 +1,24 @@
+title: Kling, Glöckchen, klingelingeling
+author: traditional, lyrics by Karl Enslin
+time: 2/4
+key: -1
+tempo: 72
+clef: treble
+---
+# First verse, F major as printed; the closing "Kling, Glöckchen" lines are written out.
+1) F | C5/4=Kling, A4/8=Glöck- Bb4/8=chen,
+2) F | C5/16=klin- D5/16=ge- C5/16=lin- D5/16=ge- C5/4=ling,
+3) C7 | Bb4/4=kling, G4/8=Glöck- C5/8=chen,
+4) F | A4/2=kling!
+5) C7 F@1 | G4/8=Lasst G4/8=mich A4/8=ein, F4/8=ihr
+6) F C7@1 | A4/4=Kin- G4/4=der,
+7) C7 | Bb4/8=ist Bb4/8=so C5/8=kalt G4/8=der
+8) C7 F@1 | Bb4/4=Win- A4/4=ter,
+9) C | G4/8=öff- G4/8=net A4/8=mir B4/8=die
+10) C | C5/4=Tü- G4/4=ren,
+11) Dm G7@1 | A4/8=lasst D5/8=mich C5/8=nicht B4/8=er-
+12) G7 C@1 | D5/4=frie- C5/4=ren!
+13) F | C5/4=Kling, A4/8=Glöck- Bb4/8=chen,
+14) F | C5/16=klin- D5/16=ge- C5/16=lin- D5/16=ge- C5/4=ling,
+15) C7 | Bb4/4=kling, G4/8=Glöck- C5/8=chen,
+16) F | A4/2=kling!

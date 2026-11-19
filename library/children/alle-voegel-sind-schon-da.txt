@@ -1,0 +1,19 @@
+title: Alle Vögel sind schon da
+author: traditional, lyrics by August Heinrich Hoffmann von Fallersleben
+time: 4/4
+key: 2
+tempo: 132
+clef: treble
+---
+1) D | D4/4.=Al- F#4/8=le A4/4=Vö- D5/4=gel
+2) G D@2 | B4/4=sind D5/8=schon B4/8 A4/2=da,
+3) A7 D@2 | G4/4.=al- A4/8=le F#4/4=Vö- D4/4=gel,
+4) A7 D@2 | E4/2=al- D4/4=le! r/4
+5) D A7@2 | A4/4=Welch A4/4=ein G4/4=Sin- G4/4=gen,
+6) D A@2 | F#4/4=Mu- A4/8=si- F#4/8 E4/2=ziern,
+7) D A7@2 | A4/4=Pfei- A4/4=fen, G4/4=Zwit- G4/4=schern,
+8) D A@2 | F#4/4=Ti- A4/8=ri- F#4/8 E4/2=liern!
+9) D | D4/4.=Früh- F#4/8=ling A4/4=will D5/4=nun
+10) G D@2 | B4/4=ein- D5/8=mar- B4/8 A4/2=schiern,
+11) A7 D@2 | G4/4.=kommt A4/8=mit F#4/4=Sang D4/4=und
+12) A7 D@2 | E4/2=Schal- D4/4=le. r/4

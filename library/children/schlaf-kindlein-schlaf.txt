@@ -1,0 +1,18 @@
+title: Schlaf, Kindlein, schlaf
+author: traditional, melody after Johann Friedrich Reichardt
+time: 4/4
+key: -1
+tempo: 100
+clef: treble
+---
+# the version of the Carus/Reclam Wiegenlieder-Buch (Liederprojekt), in quarter notes
+1) F C7@2 | A4/2=Schlaf, G4/4=Kind- G4/4=lein,
+2) F | F4/2.=schlaf! F4/4=Der
+3) F C7@2 | C5/4=Va- C5/4=ter Bb4/4=hüt’ Bb4/4=die
+4) F | A4/2.=Schaf, F4/4=die
+5) C7 | Bb4/4=Mut- Bb4/4=ter G4/4=schüt- G4/4=telt’s
+6) F | C5/4=Bäu- C5/4=me- A4/4=lein, A4/4=da
+7) C7 | Bb4/4=fällt Bb4/4=he- G4/4=rab G4/4=ein
+8) F | C5/4=Träu- C5/4=me- A4/2=lein.
+9) F C7@2 | A4/2=Schlaf, G4/4=Kind- G4/4=lein,
+10) F | F4/1=schlaf!

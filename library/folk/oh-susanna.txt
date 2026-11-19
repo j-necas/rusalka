@@ -1,0 +1,33 @@
+title: Oh! Susanna
+author: Stephen Foster
+time: 2/4
+key: 1
+tempo: 104
+clef: treble
+---
+# Foster's first verse (four lines) and the chorus, in G major as in the 1848 edition; the chorus repeat is left out
+1) | G4/16=I A4/16
+2) G | B4/8=come D5/8=from D5/8.=Al- E5/16=a-
+3) G | D5/8=ba- B4/8=ma G4/8.=with A4/16=a
+4) G | B4/8=ban- B4/8=jo A4/8=on G4/8=my
+5) D7 | A4/4.=knee, G4/16=I'm A4/16
+6) G | B4/8=goin' D5/8=to D5/8.=Lou- E5/16=si-
+7) G | D5/8=an- B4/8=a, G4/8.=my A4/16
+8) G D7@1 | B4/8=true B4/8=love A4/8=for A4/8=to
+9) G | G4/4=see. r/8 G4/16=It A4/16
+10) G | B4/8=rained D5/8=all D5/8.=night E5/16=the
+11) G | D5/8=day B4/8=I G4/8.=left, A4/16=the
+12) G | B4/8=wea- B4/8=ther A4/8=it G4/8=was
+13) D7 | A4/4.=dry, G4/16=the A4/16
+14) G | B4/8=sun D5/8=so D5/8.=hot E5/16=I
+15) G | D5/8=froze B4/8=to G4/8.=death, A4/16=Su-
+16) G D7@1 | B4/8=san- B4/8=na, A4/8=don't A4/8=you
+17) G | G4/4=cry. r/4
+18) C | C5/4=Oh, C5/4=Su-
+19) C | E5/8=san- E5/4=na, E5/8=oh
+20) G | D5/8=don't D5/8=you B4/8=cry G4/8=for
+21) D7 | A4/4.=me, G4/16=for A4/16=I
+22) G | B4/8=come D5/8=from D5/8.=Al- E5/16=a-
+23) G | D5/8=ba- B4/8=ma G4/8.=with A4/16=a
+24) G D7@1 | B4/8=ban- B4/8=jo A4/8=on A4/8=my
+25) G | G4/4=knee.

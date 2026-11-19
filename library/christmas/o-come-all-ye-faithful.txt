@@ -1,0 +1,29 @@
+title: O Come, All Ye Faithful
+author: music by John Francis Wade (ADESTE FIDELES), lyrics by John Francis Wade, English translation by Frederick Oakeley
+time: 4/4
+key: 1
+tempo: 96
+clef: treble
+---
+# Tune ADESTE FIDELES; first verse and refrain
+1) G | G4/4=O
+2) G | G4/2=come, D4/4=all G4/4=ye
+3) D | A4/2=faith- D4/2=ful,
+4) G C@3 | B4/4=joy- A4/4=ful B4/4=and C5/4=tri-
+5) G D@2 | B4/2=um- A4/4=phant, G4/4=O
+6) Em A7@2 | G4/2=come F#4/4=ye, E4/4=O
+7) D | F#4/4=come G4/4 A4/4=ye B4/4=to
+8) D A7@2 | F#4/2=Beth- E4/4. D4/8=le-
+9) D | D4/1=hem.
+10) G | D5/2=Come C5/4=and B4/4=be-
+11) C G@2 | C5/2=hold B4/2=Him,
+12) D | A4/4=born B4/4=the G4/4=King A4/4=of
+13) D G@3 | F#4/2=an- D4/4=gels; G4/4=O
+14) G | G4/4=come, F#4/4=let G4/4=us A4/4=a-
+15) G | G4/2=dore D4/4=Him, B4/4=O
+16) G C@3 | B4/4=come, A4/4=let B4/4=us C5/4=a-
+17) G D@2 | B4/2=dore A4/4=Him, B4/4=O
+18) C D7@2 | C5/4=come, B4/4=let A4/4=us G4/4=a-
+19) D G@2 | F#4/2=dore G4/4=Him, C5/4
+20) G D7@2 | B4/2=Christ A4/4. G4/8=the
+21) G | G4/1=Lord.

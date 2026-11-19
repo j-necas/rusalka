@@ -1,0 +1,37 @@
+title: Rondo alla turca
+author: Wolfgang Amadeus Mozart
+time: 2/4
+key: 0
+tempo: 120
+clef: treble
+---
+# Piano Sonata in A major, K. 331, 3rd movement (Alla turca, Allegretto): the main theme in A minor, original key and octave;
+# the upbeats are written into 1st and 2nd endings so that each repeat starts with its upbeat;
+# melody only (top notes of the right-hand thirds and sixths); grace notes in bars 6–8 and the trill in bar 24 left out
+1) | B4/16 A4/16 G#4/16 A4/16
+2) {|:} Am | C5/8 r/8 D5/16 C5/16 B4/16 C5/16
+3) Am | E5/8 r/8 F5/16 E5/16 D#5/16 E5/16
+4) Am | B5/16 A5/16 G#5/16 A5/16 B5/16 A5/16 G#5/16 A5/16
+5) Am | C6/4 A5/8 C6/8
+6) E | B5/8 A5/8 G5/8 A5/8
+7) E | B5/8 A5/8 G5/8 A5/8
+8) E | B5/8 A5/8 G5/8 F#5/8
+9) {1. :|} E | E5/4 B4/16 A4/16 G#4/16 A4/16
+10) {2.} E | E5/4 E5/8 F5/8
+11) {|:} C | G5/8 G5/8 A5/16 G5/16 F5/16 E5/16
+12) G | D5/4 E5/8 F5/8
+13) C | G5/8 G5/8 A5/16 G5/16 F5/16 E5/16
+14) G | D5/4 C5/8 D5/8
+15) Am | E5/8 E5/8 F5/16 E5/16 D5/16 C5/16
+16) E | B4/4 C5/8 D5/8
+17) Am | E5/8 E5/8 F5/16 E5/16 D5/16 C5/16
+18) E | B4/4 B4/16 A4/16 G#4/16 A4/16
+19) Am | C5/8 r/8 D5/16 C5/16 B4/16 C5/16
+20) Am | E5/8 r/8 F5/16 E5/16 D#5/16 E5/16
+21) Am | B5/16 A5/16 G#5/16 A5/16 B5/16 A5/16 G#5/16 A5/16
+22) Dm | C6/8 r/8 A5/8 B5/8
+23) Am E@1 | C6/8 B5/8 A5/8 G#5/8
+24) Am Dm@1 | A5/8 E5/8 F5/8 D5/8
+25) Am E@1 | C5/4 B4/8. A4/32 B4/32
+26) {1. :|} Am | A4/4 E5/8 F5/8
+27) {2.} Am | A4/4

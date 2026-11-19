@@ -1,0 +1,24 @@
+title: Kdyby byl Bavorov
+author: traditional
+time: 4/4
+key: 0
+tempo: 160
+clef: treble
+---
+# C major as on Pavel Hokr's sheet
+1) C | E4/4=Kdy- E4/4=by E4/2=byl
+2) C | G4/4=Ba- A4/4=vo- G4/2=rov,
+3) G7 | G4/4=co F4/4=jsou D4/4=Vod- F4/4=ňa-
+4) C | E4/1=ny,
+5) C | E4/4=dal E4/4=bych E4/2=ti
+6) C | G4/4=hu- A4/4=bič- G4/2=ku
+7) G7 | G4/4=na F4/4=o- D4/4=bě F4/4=stra-
+8) C | E4/1=ny.
+9) {|:} F | A4/4=A- A4/4=le A4/4=že A4/4=je
+10) C | A4/4=za G4/4=vo- G4/2=dou,
+11) G7 | G4/4=za A4/4=vo- G4/4=dič- F4/4=kou
+12) C | F4/4=stu- E4/4=de- E4/2=nou,
+13) C | E4/4=ne- E4/4=dám E4/2=ti,
+14) C | G4/4=má A4/4=mi- G4/2=lá,
+15) G7 | G4/4=a- F4/4=ni D4/4=je- F4/4=di-
+16) {:|} C | E4/1=nou.

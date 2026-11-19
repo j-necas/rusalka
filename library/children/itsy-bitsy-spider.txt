@@ -1,0 +1,24 @@
+title: Itsy Bitsy Spider
+author: traditional
+time: 6/8
+key: 1
+tempo: 105
+clef: treble
+---
+1) | D4/8=The
+2) G | G4/4=it- G4/8=sy G4/4=bit- A4/8=sy
+3) G | B4/4.=spi- B4/4=der B4/8=climbed
+4) D7 | A4/4=up G4/8=the A4/4=wa- B4/8=ter-
+5) G | G4/2.=spout.
+6) G | B4/4.=Down B4/4=came C5/8=the
+7) D7 | D5/4.=rain D5/4.=and
+8) D7 | C5/4=washed B4/8=the C5/4=spi- D5/8=der
+9) G | B4/2.=out.
+10) G | G4/4.=Out G4/4=came A4/8=the
+11) Em | B4/4.=sun B4/4.=and
+12) D7 | A4/4=dried G4/8=up A4/4=all B4/8=the
+13) G | G4/4.=rain, D4/4=and D4/8=the
+14) G | G4/4=it- G4/8=sy G4/4=bit- A4/8=sy
+15) G | B4/4.=spi- B4/4=der B4/8=climbed
+16) D7 | A4/4=up G4/8=the A4/4=spout B4/8=a-
+17) G | G4/4.~=gain. G4/4

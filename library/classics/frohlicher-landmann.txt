@@ -1,0 +1,26 @@
+title: Fröhlicher Landmann
+author: Robert Schumann
+time: 4/4
+key: -1
+tempo: 108
+clef: treble
+---
+# Album für die Jugend, Op. 68 No. 10 ("Fröhlicher Landmann, von der Arbeit zurückkehrend"): bars 1–14 (the first section and the
+# middle part up to its cadence on F);
+# in bars 1–8 and 13–14 the tune is in the left hand under off-beat chords: here it is the melody alone, moved up an octave
+# in bars 10–11 the line is the upper voice (the left hand runs a third below it)
+1) | C4/8
+2) F | F4/4. A4/8 C5/4. F4/8
+3) Bb F@2 | Bb4/8 D5/8 F5/8 D5/8 C5/4. A4/8
+4) C7 F@2 | Bb4/8 G4/8 C4/8 Bb4/8 A4/8 F4/8 C4/8 A4/8
+5) C | E4/4 D4/4 C4/4 r/8 C4/8
+6) F | F4/4. A4/8 C5/4. F4/8
+7) Bb F@2 | Bb4/8 D5/8 F5/8 D5/8 C5/4. A4/8
+8) C7 F@2 | Bb4/8 G4/8 C4/8 Bb4/8 A4/8 F4/8 C4/8 A4/8
+9) C | E4/4 D4/4 C4/4 r/8 C4/8
+10) C7 | Bb4/4. A4/8 G4/4. C4/8
+11) C7 | Bb4/8 A4/8 G4/8 F4/8 G4/4. C4/8
+12) F | F4/4. A4/8 C5/4. F4/8
+13) Bb F@2 | Bb4/8 D5/8 F5/8 D5/8 C5/4. A4/8
+14) C7 F@2 | Bb4/8 G4/8 C4/8 Bb4/8 A4/8 F4/8 C4/8 A4/8
+15) C7 F@2 | G4/4 E4/4 F4/4

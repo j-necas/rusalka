@@ -1,0 +1,23 @@
+title: Halí, belí
+author: traditional
+time: 3/4
+key: 1
+tempo: 100
+clef: treble
+---
+1) G D7@1 | B4/4=Ha- A4/2=lí,
+2) G | B4/4=be- G4/2=lí,
+3) G D7@1 | B4/4=ko- A4/2=ně
+4) G | B4/4=v_ze- G4/2=lí
+5) G D7@1 | B4/4=a A4/2=hří-
+6) G | B4/4=bát- G4/2=ka
+7) G D7@1 | B4/4=v_pe- A4/2=tr-
+8) G | B4/4=že- G4/2=li.
+9) G D7@1 | B4/4=A A4/2=kra-
+10) G | B4/4=věn- G4/2=ky
+11) G D7@1 | B4/4=jak A4/2=pa-
+12) G | B4/4=nen- G4/2=ky
+13) G D7@1 | B4/4=šly A4/2=se
+14) G | B4/4=kou- G4/2=pat
+15) G D7@1 | B4/4=do A4/2=vo-
+16) G | B4/4=děn- G4/2=ky.

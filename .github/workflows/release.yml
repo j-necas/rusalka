@@ -1,0 +1,37 @@
+# Release: after pushing a v* tag (e.g. v0.2.0) it builds the optional skills (zips for Claude / ChatGPT) and
+# prepares a DRAFT release on GitHub with them. A human publishes it. The website
+# itself (which also serves the skill zips) is deployed by pages.yml.
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  balicek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run skills
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" build/rusalka-sheet-music.zip build/rusalka-progress.zip --draft --title "Rusalka ${{ github.ref_name }}" --notes "$(cat <<'TEXT'
+          Rusalka – a piano trainer for kids – runs in the browser: open the website in Chrome or Edge (see README.md).
+
+          The AI tools work with any AI chat: in Rusalka, AI (top right) → Copy instructions, then paste the chat's
+          answer back with Paste notes from the AI chat. Optional upgrade:
+          - **rusalka-sheet-music.zip**, **rusalka-progress.zip** – skills for Claude (Settings → Skills → Upload) or ChatGPT
+            (Skills → Create → Upload from your computer); for Claude Code and Codex see INSTALL-AGENT.md.
+
+          ---
+          Rusalka běží v prohlížeči (Chrome nebo Edge). AI nástroje fungují s jakýmkoli AI chatem: odkaz AI vpravo nahoře.
+          Zipy se skilly jsou volitelné vylepšení pro Claude a ChatGPT. Návod: GUIDE.cs.md.
+          TEXT
+          )"

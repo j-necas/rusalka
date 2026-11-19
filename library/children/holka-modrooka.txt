@@ -1,0 +1,23 @@
+title: Holka modrooká
+author: traditional
+time: 4/4
+key: 0
+tempo: 120
+clef: treble
+---
+1) C F@2 | G4/2=Hol- A4/2=ka
+2) C | G4/4=mod- G4/4=ro- E4/4=o- G4/4=ká,
+3) G7 | F4/4=ne- F4/4=se- D4/4=dá- F4/4=vej
+4) C | G4/4=u G4/4=po- E4/4=to- F4/4=ka,
+5) C F@2 | G4/2=hol- A4/2=ka
+6) C | G4/4=mod- G4/4=ro- E4/4=o- G4/4=ká,
+7) G7 | F4/4=ne- F4/4=se- D4/4=dá- F4/4=vej
+8) C | E4/1=tam.
+9) G7 | F4/4=V_po- F4/4=to- D4/4=ce F4/4=se
+10) C | G4/4=vo- G4/4=da E4/4=to- G4/4=čí,
+11) G7 | F4/4=po- F4/4=de- D4/4=me- F4/4=le
+12) C | G4/4=tvo- G4/4=je E4/4=o- F4/4=či,
+13) C F@2 | G4/2=hol- A4/2=ka
+14) C | G4/4=mod- G4/4=ro- E4/4=o- G4/4=ká,
+15) G7 | F4/4=ne- F4/4=se- D4/4=dá- F4/4=vej
+16) C | E4/1=tam.

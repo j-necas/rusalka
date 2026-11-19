@@ -1,0 +1,23 @@
+title: Narodil se Kristus Pán
+author: traditional
+time: 4/4
+key: -1
+tempo: 100
+clef: treble
+---
+# First strophe; F major as printed. The augmented fourth (B natural) in bars 1 and 3 is how the carol is sung today.
+1) F | F4/4=Na- F4/4=ro- A4/4=dil B4/4=se
+2) F | C5/4=Kris- C5/4=tus C5/2=Pán,
+3) G | B4/4=ve- C5/4=sel- D5/2=me
+4) C | C5/2=se, r/2
+5) F C7@2 | C5/4=z_rů- C5/4=že Bb4/4=kví- Bb4/4=tek
+6) F C@2 | A4/4=vy- A4/4=kvet G4/2=nám,
+7) F C7@2 | A4/4=ra- Bb4/4=duj- A4/4=me G4/4
+8) F | F4/2=se; r/2
+9) F | A4/4=z_ži- G4/4=vo- A4/4=ta Bb4/4=čis-
+10) C F@2 | C5/2=té- F4/2=ho,
+11) F | A4/4=z_ro- G4/4=du A4/4=krá- Bb4/4=lov-
+12) C F@2 | C5/2=ské- F4/2=ho
+13) F Bb@2 | F4/2=nám, D5/2=nám
+14) C7 | C5/4=na- Bb4/4=ro- A4/4=dil G4/4
+15) F | F4/2.=se. r/4

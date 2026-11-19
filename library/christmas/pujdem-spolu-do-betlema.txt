@@ -1,0 +1,17 @@
+title: Půjdem spolu do Betléma
+author: traditional
+time: 2/4
+key: 1
+tempo: 96
+clef: treble
+---
+# First strophe, G major as printed; the repeat of "Ježíšku, panáčku" with first and second ending as in the 1902 print.
+1) G | G4/8=Půj- G4/8=dem D4/8=spo- D4/8=lu
+2) G | B4/8=do B4/8=Bet- G4/8=lé- G4/8=ma,
+3) D | C#5/16=duj- D5/16 E5/16=daj, D5/16 C#5/16=duj- D5/16 E5/16=daj, D5/16
+4) A7 D@1 | C#5/16=duj- D5/16 E5/16=daj C#5/16 D5/4=dá!
+5) {|:} C D7@1 | C5/8=Je- C5/16=žíš- E5/16 A4/4=ku,
+6) G | B4/8=pa- B4/16=náč- D5/16 G4/4=ku,
+7) D7 | A4/8=já A4/8=tě G4/16=bu- F#4/16 E4/16=du D4/16
+8) {1. :|} G | G4/8=ko- B4/8=lí- G4/8=ba- B4/8=ti,
+9) {2.} G | G4/8=ko- B4/8=lí- G4/4=bat.

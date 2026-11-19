@@ -1,0 +1,24 @@
+title: Angels We Have Heard on High
+author: traditional French melody (GLORIA), English lyrics by James Chadwick
+time: 4/4
+key: -1
+tempo: 112
+clef: treble
+---
+# First verse with the refrain; the repeat of the verse melody is written out for the second half of the verse
+1) F | A4/4=An- A4/4=gels A4/4=we C5/4=have
+2) C7 F@2 | C5/4.=heard Bb4/8=on A4/2=high,
+3) F | A4/4=sweet- G4/4=ly A4/4=sing- C5/4=ing
+4) C7 F@2 | A4/4.=o'er G4/8=the F4/2=plains,
+5) F | A4/4=and A4/4=the A4/4=moun- C5/4=tains
+6) C7 F@2 | C5/4.=in Bb4/8=re- A4/2=ply
+7) F | A4/4=e- G4/4=cho- A4/4=ing C5/4=their
+8) C7 F@2 | A4/4.=joy- G4/8=ous F4/2=strains.
+9) {|:} F | C5/2=Glo- D5/8 C5/8 Bb4/8 A4/8
+10) Gm C7@2 | Bb4/2 C5/8 Bb4/8 A4/8 G4/8
+11) F Bb@2 | A4/2 Bb4/8 A4/8 G4/8 F4/8
+12) C7 | G4/4. C4/8=ri- C4/2=a
+13) F Bb@3 | F4/4=in G4/4=ex- A4/4=cel- Bb4/4=sis
+14) {1. :|} F C@2 | A4/2=De- G4/2=o!
+15) {2.} F C7@2 | A4/2=De- G4/2=o!
+16) {2.} F | F4/1

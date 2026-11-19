@@ -1,0 +1,24 @@
+title: Koupím já si koně vraný
+author: traditional
+time: 3/4
+key: -1
+tempo: 160
+clef: treble
+---
+# F major, upper voice of the two-voice prints (Pesničky pre všetkých, Shýbal's waltz arrangement)
+1) F | C4/4=Kou- A4/4=pím A4/4=já
+2) F | A4/2.=si
+3) C7 | C4/4=ko- Bb4/4=ně Bb4/4=vra-
+4) C7 | Bb4/2.=ný,
+5) C7 | C4/4=až Bb4/4=na Bb4/4=tu
+6) C7 | Bb4/4=voj- C5/4=nu D5/4=pů-
+7) F | C5/2.~=jdu,
+8) F | C5/4 r/2
+9) {|:} F | A4/4=a C5/4=na C5/4=te-
+10) F | C5/2.=be,
+11) Bb | D5/4=mo- D5/4=je D5/4=mi-
+12) Bb | F5/2.=lá,
+13) C7 | E5/4=na E5/4=te- D5/4=be
+14) C7 | C5/4=za- C5/4=po- Bb4/4=me-
+15) F | A4/2.~=nu.
+16) {:|} F | A4/4 r/2

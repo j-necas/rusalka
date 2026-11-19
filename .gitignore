@@ -1,0 +1,23 @@
+# dependencies and builds
+node_modules/
+.venv/
+__pycache__/
+static/vendor/
+# private songs (copyright, family) – never into the repository
+private/
+.DS_Store
+/web/
+
+# built packages (npm run skills)
+/build/
+
+# local Playwright CLI artefacts
+/.playwright-cli/
+/output/
+.superpowers/
+
+# design sets from the illustrator (large, not for the public repository)
+navrhy/
+
+# working plans and design specs of AI agents (superpowers), kept locally only
+docs/superpowers/

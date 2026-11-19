@@ -1,0 +1,24 @@
+title: Early One Morning
+author: traditional
+time: 2/4
+key: -1
+tempo: 60
+clef: treble
+---
+# first verse with the refrain
+1) F | F4/4=Ear- F4/8=ly F4/8=one
+2) F | F4/8=morn- A4/8 C5/8=ing C5/8=just
+3) Gm | D5/8=as Bb4/8=the G4/8=sun F4/8=was
+4) C7 | E4/8=ris- G4/8 C4/8=ing C4/8=I
+5) F | F4/4=heard F4/8=a F4/8=maid
+6) Dm | F4/8=sing A4/8 C5/8=in C5/8=the
+7) Gm C7@1 | D5/8=val- Bb4/8 G4/8=ley E4/8=be-
+8) F | F4/4=low: r/4
+9) Gm | G4/4=O A4/8=don't Bb4/8=de-
+10) F | C5/8=ceive A4/8 F4/4=me!
+11) Gm | G4/4=O A4/8=ne- Bb4/8=ver
+12) F | C5/8=leave A4/8 F4/4=me!
+13) Dm | F4/8=How A4/8 C5/8=could F5/8=you
+14) C7 | E5/8=use D5/8 C5/8=a Bb4/8
+15) Gm C7@1 | A4/8=poor G4/8 F4/8=mai- E4/8=den
+16) F | F4/4.=so? r/8

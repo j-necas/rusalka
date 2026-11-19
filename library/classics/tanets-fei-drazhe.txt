@@ -1,0 +1,25 @@
+title: Танец Феи Драже
+author: Pyotr Ilyich Tchaikovsky
+time: 2/4
+key: 1
+tempo: 66
+clef: treble
+---
+# The Nutcracker, Op. 71, Act 2: Dance of the Sugar Plum Fairy, the celesta theme (bars 5–20 after the 4-bar introduction),
+# in the original E minor, written two octaves lower than the celesta sounds
+1) Em | r/8 G5/16 E5/16 G5/8 F#5/8
+2) Em | D#5/8 E5/8 D5/16 D5/16 D5/8
+3) A7 Am@1 | C#5/16 C#5/16 C#5/8 C5/16 C5/16 C5/8
+4) Em | B4/16 E5/16 C5/16 E5/16 B4/8 r/8
+5) C D7@1 | r/8 G4/16 E4/16 G4/8 F#4/8
+6) G | C5/8 B4/8 G5/16 G5/16 G5/8
+7) F#7 | F#5/16 F#5/16 F#5/8 E5/16 E5/16 E5/8
+8) B7 | D#5/16 F#5/16 E5/16 F#5/16 D#5/8 r/8
+9) Em | r/8 G5/16 E5/16 G5/8 F#5/8
+10) Em | D#5/8 E5/8 D5/16 D5/16 D5/8
+11) A7 Am@1 | C#5/16 C#5/16 C#5/8 C5/16 C5/16 C5/8
+12) Em | B4/16 E5/16 C5/16 E5/16 B4/8 r/8
+13) F#7 B7@1.5 | r/8 E5/16 C#5/16 E5/8 D#5/8
+14) E7 A7@1.5 | r/8 D5/16 B4/16 D5/8 C#5/8
+15) D7 G@1.5 | r/8 C5/16 A4/16 C5/8 B4/8
+16) B7 Em@1 | r/8 B4/32 D#5/32 F#5/32 B5/32 E5/8 r/8

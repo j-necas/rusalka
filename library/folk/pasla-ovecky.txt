@@ -1,0 +1,23 @@
+title: Pásla ovečky
+author: traditional
+time: 3/4
+key: 0
+tempo: 152
+clef: treble
+---
+1) C | G4/2=Pá- F4/4=sla
+2) C | E4/4=o- G4/4=ve- C5/4=čky
+3) G | B4/4=v_ze- A4/4=le- B4/4=ném
+4) C | C5/4=há- G4/4=je- G4/4=čku,
+5) C | G4/2=pá- F4/4=sla
+6) C | E4/4=o- G4/4=ve- C5/4=čky
+7) G | B4/4=v_čer- A4/4=ném B4/4=le-
+8) C | C5/2=se; r/4
+9) G | D5/4=já G4/4=za G4/4=ní
+10) G | G4/8=du- A4/8=py, G4/8=du- A4/8=py, G4/8=dup, r/8
+11) G | D5/4=o- G4/4=na G4/4=zas
+12) G | G4/8=cu- A4/8=py, G4/8=cu- A4/8=py, G4/8=cup, r/8
+13) C | G4/2=hou- F4/4=fem,
+14) C | E4/4=o- G4/4=ve- C5/4=čky,
+15) G7 | B4/4=se- A4/4=ber- B4/4=te
+16) C | C5/2=se. r/4

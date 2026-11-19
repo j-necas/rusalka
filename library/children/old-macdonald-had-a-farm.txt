@@ -1,0 +1,23 @@
+title: Old MacDonald Had a Farm
+author: traditional
+time: 4/4
+key: 1
+tempo: 120
+clef: treble
+---
+1) G | G4/4=Old G4/4=Mac- G4/4=Don- D4/4=ald
+2) C G@2 | E4/4=had E4/4=a D4/2=farm,
+3) D7 | B4/4=E- B4/4=I- A4/4=E- A4/4=I-
+4) G | G4/2.=O! D4/4=And
+5) G | G4/4=on G4/4=his G4/4=farm D4/4=he
+6) C G@2 | E4/4=had E4/4=a D4/2=cow,
+7) D7 | B4/4=E- B4/4=I- A4/4=E- A4/4=I-
+8) G | G4/2.=O! D4/8=With D4/8=a
+9) G | G4/4=moo, G4/4=moo G4/4=here D4/8=and D4/8=a
+10) G | G4/4=moo, G4/4=moo G4/2=there,
+11) G | G4/8=here G4/8=a G4/4=moo, G4/8=there G4/8=a G4/4=moo,
+12) G | G4/8=ev- G4/8=ery- G4/8=where G4/8=a G4/4=moo, G4/4=moo.
+13) G | G4/4=Old G4/4=Mac- G4/4=Don- D4/4=ald
+14) C G@2 | E4/4=had E4/4=a D4/2=farm,
+15) D7 | B4/4=E- B4/4=I- A4/4=E- A4/4=I-
+16) G | G4/1=O!

@@ -1,0 +1,40 @@
+title: We Three Kings
+author: music and lyrics by John Henry Hopkins Jr.
+time: 3/4
+key: 1
+tempo: 168
+clef: treble
+---
+# Tune KINGS OF ORIENT; first verse with the refrain, written in 3/4 (note values doubled) instead of 3/8; the repeats are written out for the second lines of text
+1) Em | B4/2=We A4/4=three
+2) Em | G4/2=kings E4/4=of
+3) B7 | F#4/4=O- G4/4=ri- F#4/4=ent
+4) Em | E4/2=are, r/4
+5) Em | B4/2=bear- A4/4=ing
+6) Em | G4/2=gifts E4/4=we
+7) B7 | F#4/4=tra- G4/4=verse F#4/4=a-
+8) Em | E4/2=far; r/4
+9) Em | G4/2=field G4/4=and
+10) D | A4/2=foun- A4/4=tain,
+11) G | B4/2=moor B4/4=and
+12) G | D5/4=moun- C5/4 B4/4=tain,
+13) Am | A4/4=fol- B4/4=low- A4/4=ing
+14) Em B7@2 | G4/2=yon- F#4/4=der
+15) Em | E4/2=star. r/4
+16) D7 | F#4/2=O A4/4
+17) G | G4/2=star G4/4=of
+18) G | G4/2=won- D4/4=der,
+19) C | G4/2=star E4/4=of
+20) G | G4/2=night, r/4
+21) G | G4/2=star G4/4=with
+22) G | G4/2=roy- D4/4=al
+23) C | G4/2=beau- E4/4=ty
+24) G | G4/2=bright, r/4
+25) Em | G4/2=west- G4/4=ward
+26) D | A4/2=lead- B4/4=ing,
+27) C | C5/2=still B4/4=pro-
+28) D | A4/2=ceed- B4/4=ing,
+29) G | G4/2=guide G4/4=us
+30) G | G4/2=to D4/4=thy
+31) C | G4/2=per- E4/4=fect
+32) G | G4/2.=light.

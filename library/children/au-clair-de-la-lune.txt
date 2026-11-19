@@ -1,0 +1,23 @@
+title: Au clair de la lune
+author: traditional
+time: 4/4
+key: 0
+tempo: 100
+clef: treble
+---
+1) C | C5/4=Au C5/4=clair C5/4=de D5/4=la
+2) C G7@2 | E5/2=lu- D5/2=ne,
+3) C G7@2 | C5/4=mon E5/4=a- D5/4=mi D5/4=Pier-
+4) C | C5/1=rot,
+5) C | C5/4=prê- C5/4=te- C5/4=moi D5/4=ta
+6) C G7@2 | E5/2=plu- D5/2=me
+7) C G7@2 | C5/4=pour E5/4=é- D5/4=crire D5/4=un
+8) C | C5/1=mot.
+9) G | D5/4=Ma D5/4=chan- D5/4=delle D5/4=est
+10) D | A4/2=mor- A4/2=te,
+11) D7 | D5/4=je C5/4=n’ai B4/4=plus A4/4=de
+12) G7 | G4/1=feu;
+13) C | C5/4=ou- C5/4=vre- C5/4=moi D5/4=ta
+14) C G7@2 | E5/2=por- D5/2=te
+15) C G7@2 | C5/4=pour E5/4=l’a- D5/4=mour D5/4=de
+16) C | C5/1=Dieu.

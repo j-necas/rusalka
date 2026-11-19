@@ -1,0 +1,13 @@
+title: Morgenstemning
+author: Edvard Grieg
+time: 6/8
+key: 0
+tempo: 80
+clef: treble
+---
+# Peer Gynt Suite No. 1, Op. 46 No. 1: the opening phrase (flute, bars 1–4), transposed from E major to C major
+# and an octave lower, where the oboe answers with it; grace notes left out
+1) C | G4/8 E4/8 D4/8 C4/8 D4/8 E4/8
+2) C | G4/8 E4/8 D4/8 C4/8 D4/16 E4/16 D4/16 E4/16
+3) C Am@1.5 | G4/8 E4/8 G4/8 A4/8 E4/8 A4/8
+4) C | G4/8 E4/8 D4/8 C4/4 r/8

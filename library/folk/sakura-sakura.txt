@@ -1,0 +1,22 @@
+title: さくらさくら
+author: traditional
+time: 4/4
+key: -1
+tempo: 72
+clef: treble
+---
+# transposed up a fourth (from the A-based print to D, written with one flat); original lyrics of 1888, one kana per syllable
+1) Dm | D5/4=さ D5/4=く E5/2=ら
+2) Dm | D5/4=さ D5/4=く E5/2=ら
+3) Dm | D5/4=や E5/4=よ F5/4=い E5/4=の
+4) Dm A@1 Bb@2 | D5/4=そ E5/8=ら D5/8 Bb4/2=は
+5) Dm Gm@3 | A4/4=み F4/4=わ A4/4=た Bb4/4=す
+6) Dm A@2 | A4/4=か A4/8=ぎ F4/8 E4/2=り
+7) Dm | D5/4=か E5/4=す F5/4=み E5/4=か
+8) Dm A@1 Bb@2 | D5/4=く E5/8=も D5/8 Bb4/2=か
+9) Dm Gm@3 | A4/4=に F4/4=お A4/4=い Bb4/4=ぞ
+10) Dm A@2 | A4/4=い A4/8=ず F4/8 E4/2=る
+11) Dm | D5/4=い D5/4=ざ E5/2=や
+12) Dm | D5/4=い D5/4=ざ E5/2=や
+13) Gm | A4/4=み Bb4/4=に E5/8=ゆ D5/8 Bb4/4=か
+14) Dm | A4/2=ん r/2

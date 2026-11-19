@@ -1,0 +1,25 @@
+title: Ihr Kinderlein, kommet
+author: Johann Abraham Peter Schulz, lyrics by Christoph von Schmid
+time: 2/4
+key: 2
+tempo: 84
+clef: treble
+---
+# First verse, D major as printed.
+1) | A4/8=Ihr
+2) D | A4/4=Kin- F#4/8=der- A4/8=lein,
+3) D | A4/4=kom- F#4/8=met, A4/8=o
+4) A7 | G4/4=kom- E4/8=met G4/8=doch
+5) D | F#4/4=all! r/8 A4/8=Zur
+6) D | A4/4=Krip- F#4/8=pe A4/8=her
+7) D | A4/4=kom- F#4/8=met A4/8=in
+8) A7 | G4/4=Beth- E4/8=le- G4/8=hems
+9) D | F#4/4=Stall r/8 F#4/8=und
+10) A7 | E4/4=seht, E4/8=was E4/8=in
+11) A7 | G4/4=die- G4/8=ser G4/8=hoch-
+12) D | F#4/4=hei- F#4/8=li- F#4/8=gen
+13) G | B4/4=Nacht r/8 B4/8=der
+14) D | A4/4=Va- A4/8=ter A4/8=im
+15) D | D5/4=Him- A4/8=mel F#4/8=für
+16) G A7@1 | G4/4=Freu- E4/8=de C#4/8=uns
+17) D | D4/4.=macht!

@@ -1,0 +1,24 @@
+title: Na tý louce zelený
+author: traditional
+time: 3/4
+key: 1
+tempo: 132
+clef: treble
+---
+# G major as in Erben's Nápěvy (1862, no. 437); bar 10 as sung today (Pavel Hokr's sheet)
+1) G | B4/2=Na A4/4=tý
+2) G | B4/2=lou- D5/4=ce
+3) D7 | D5/2=ze- C5/4=le-
+4) D7 | A4/2=ný r/4
+5) C | C5/2=pa- B4/4=sou
+6) C | C5/2=se E5/4=tam
+7) C G@2 | E5/2=je- D5/4=le-
+8) G | B4/2=ni: r/4
+9) {|:} G | G5/2=pa- F#5/4=se
+10) C | G5/4=je F#5/4 E5/4=tam
+11) G | D5/2=my- G5/4=sli-
+12) G | B4/2=ve- D5/4=ček
+13) C | C5/2=v_ka- B4/4=mi-
+14) D7 | C5/2=zol- A4/4=ce
+15) G D7@2 | B4/4=ze- C5/4 D5/4=le-
+16) {:|} G | B4/2=ný. r/4

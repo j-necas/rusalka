@@ -1,0 +1,32 @@
+title: Chtíc, aby spal
+author: Adam Václav Michna z Otradovic
+time: 3/4
+key: 1
+tempo: 100
+clef: treble
+---
+# First strophe with Michna's original words (1647); transposed to G major. The repeat of the first line (new words) is written out.
+1) D | D4/4=Chtíc, E4/4=a- F#4/4=by
+2) G | G4/2=spal, G4/4=tak
+3) D | A4/2=zpí- A4/4=va-
+4) G C@2 | B4/2=la C5/4=sy-
+5) G D@1 | B4/4=náč- A4/2=ko-
+6) G | G4/2=vi r/4
+7) D | D4/4=Mat- E4/4=ka, F#4/4=jež
+8) G | G4/2=po- G4/4=no-
+9) D | A4/2=co- A4/4=va-
+10) G C@2 | B4/2=la, C5/4=mi-
+11) G D@1 | B4/4=láč- A4/2=ko-
+12) G | G4/2=vi: r/4
+13) G | B4/4=Ny- B4/4=nej, A4/4=roz-
+14) G D@2 | B4/2=koš- A4/4=né
+15) G | B4/4=dě- G4/2=ťát-
+16) D | A4/2=ko, G4/4=Sy-
+17) D A7@1 | F#4/4=nu E4/2=Bo-
+18) D | D4/2=ží! r/4
+19) G | B4/4=Ny- B4/4=nej, A4/4=ny-
+20) G D@2 | B4/2=nej, A4/4=ne-
+21) G | B4/4=mluv- G4/2=ňát-
+22) D7 | A4/2=ko, C5/4=svě-
+23) G D7@1 | B4/4=ta A4/2=zbo-
+24) G | G4/2.=ží!

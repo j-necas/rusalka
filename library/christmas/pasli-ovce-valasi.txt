@@ -1,0 +1,16 @@
+title: Pásli ovce Valaši
+author: traditional
+time: 2/4
+key: 0
+tempo: 104
+clef: treble
+---
+# First strophe with the refrain, C major as in today's sources.
+1) C | C5/8=Pá- G4/8=sli G4/8=ov- F4/8=ce
+2) C | E4/8=Va- F4/8=la- G4/4=ši
+3) C | C5/8=při G4/8=bet- G4/8=lém- F4/8=ské
+4) G7 C@1 | E4/8=sa- D4/8=la- C4/4=ši.
+5) C | C4/8=Haj- E4/8=dom, E4/8=haj- F4/8=dom,
+6) C | E4/8=ty- D4/8=dli- E4/4=dom,
+7) C | C4/8=haj- E4/8=dom, E4/8=haj- F4/8=dom,
+8) G7 C@1 | E4/8=ty- D4/8=dli- C4/4=dom.

@@ -1,0 +1,4 @@
+Salamander Grand Piano V3 (Yamaha C5), recorded by Alexander Holm.
+License: Creative Commons Attribution 3.0 (CC BY 3.0), https://creativecommons.org/licenses/by/3.0/
+Source: https://archive.org/details/SalamanderGrandPianoV3 ; this subset (one velocity, a sample every three
+semitones, MP3) is the one published by the Tone.js project at https://tonejs.github.io/audio/salamander/

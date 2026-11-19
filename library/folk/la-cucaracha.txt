@@ -1,0 +1,25 @@
+title: La cucaracha
+author: traditional
+time: 3/4
+key: -1
+tempo: 112
+clef: treble
+---
+# F major as in the sources; refrain, then the verse („Ya murió la cucaracha“)
+1) | C4/8=La C4/8=cu- C4/8=ca-
+2) F | F4/4=ra- A4/8=cha, C4/8=la C4/8=cu- C4/8=ca-
+3) F | F4/4=ra- A4/2=cha,
+4) F C7@1 | F4/8=ya F4/8=no E4/8=pue- E4/8=de D4/8=ca- D4/8=mi-
+5) C7 | C4/4.=nar, C4/8=por- C4/8=que C4/8=no
+6) C7 | E4/4=tie- G4/8=ne, C4/8=por- C4/8=que C4/8=le
+7) C7 | E4/4=fal- G4/2=tan
+8) C7 | C5/8=las D5/8=dos C5/8=pa- Bb4/8=ti- A4/8=tas G4/8=de_a-
+9) F | F4/2.=trás.
+10) F | C4/8=Ya C4/8=mu- F4/8=rió F4/8=la A4/8=cu- A4/8=ca-
+11) F | C5/4=ra- A4/2=cha,
+12) F | C5/8=ya D5/8=la C5/8=lle- Bb4/8=van A4/8=a C5/8=en-
+13) C7 | Bb4/4=te- G4/2=rrar,
+14) C7 | C4/8=en- C4/8=tre E4/8=cua- E4/8=tro G4/8=zo- G4/8=pi-
+15) C7 | Bb4/4=lo- G4/2=tes
+16) C7 | C5/8=y D5/8=un C5/8=ra- Bb4/8=tón A4/8=de G4/8=sa-
+17) F | A4/4=cris- F4/2=tán.

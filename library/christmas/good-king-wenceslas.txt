@@ -1,0 +1,25 @@
+title: Good King Wenceslas
+author: traditional melody (TEMPUS ADEST FLORIDUM, Piae Cantiones 1582), lyrics by John Mason Neale
+time: 4/4
+key: 1
+tempo: 116
+clef: treble
+---
+# First verse; the repeat of the first line of music is written out for the second line of text
+1) G | G4/4=Good G4/4=King G4/4=Wen- A4/4=ces-
+2) G | G4/4=las G4/4=looked D4/2=out
+3) C D7@2 | E4/4=on D4/4=the E4/4=Feast F#4/4=of
+4) G | G4/2=Ste- G4/2=phen,
+5) G | G4/4=when G4/4=the G4/4=snow A4/4=lay
+6) G | G4/4=round G4/4=a- D4/2=bout,
+7) C D7@2 | E4/4=deep D4/4=and E4/4=crisp F#4/4=and
+8) G | G4/2=e- G4/2=ven;
+9) G | D5/4=bright- C5/4=ly B4/4=shone A4/4=the
+10) Em | B4/4=moon A4/4=that G4/2=night,
+11) C D7@2 | E4/4=though D4/4=the E4/4=frost F#4/4=was
+12) G | G4/2=cru- G4/2=el,
+13) D | D4/4=when D4/4=a E4/4=poor F#4/4=man
+14) G D@2 | G4/4=came G4/4=in A4/2=sight,
+15) G | D5/4=gath- C5/4='ring B4/4=win- A4/4=ter
+16) G C@2 | G4/2=fu- C5/2
+17) G | G4/1=el.

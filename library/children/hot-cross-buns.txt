@@ -1,0 +1,15 @@
+title: Hot Cross Buns
+author: traditional
+time: 4/4
+key: 1
+tempo: 100
+clef: treble
+---
+1) G | D5/4=Hot D4/4=cross G4/2=buns!
+2) G | D5/4=Hot D4/4=cross G4/2=buns!
+3) G | D5/8=One C5/8=a B4/8=pen- A4/8=ny, G4/8=two A4/8=a B4/8=pen- C5/8=ny,
+4) G | D5/4=Hot D4/4=cross G4/2=buns!
+5) G D7@2 | D5/8=If D5/8=you D5/8=have D5/8=no C5/4=daugh- C5/4=ters,
+6) G D7@2 | B4/8=give B4/8=them B4/8=to B4/8=your A4/2=sons.
+7) G | D5/8=One C5/8=a B4/8=pen- A4/8=ny, G4/8=two A4/8=a B4/8=pen- C5/8=ny,
+8) G | D5/4=Hot D4/4=cross G4/2=buns!

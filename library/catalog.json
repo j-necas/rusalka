@@ -1,0 +1,1511 @@
+[
+ {
+  "txt": "children/alle-meine-entchen.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Melody compared note by note with the score in the German Wikipedia article „Alle meine Entchen“ (the common version); written in quarter notes instead of eighths",
+  "volne": "traditional (German children's song; melody 18th century, text 19th century, authors unknown)",
+  "preklad": {
+   "en": "All My Little Ducklings",
+   "cs": "Všechny moje kachničky"
+  }
+ },
+ {
+  "txt": "children/au-clair-de-la-lune.txt",
+  "police": "children",
+  "jazyk": "fr",
+  "zdroj": "Melody and lyrics compared note by note with the score in the French Wikipedia article „Au clair de la lune“; written in 4/4 instead of 2/2",
+  "volne": "traditional (French song, 18th century)",
+  "preklad": {
+   "en": "By the Light of the Moon",
+   "cs": "Při svitu měsíce"
+  }
+ },
+ {
+  "txt": "children/skakal-pes.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Common version today, compared note by note with the melody on Czech Wikisource („Skákal pes“, ABC notation)",
+  "volne": "traditional (Czech children's song)",
+  "preklad": {
+   "en": "The Dog Jumped over the Oats"
+  }
+ },
+ {
+  "txt": "children/old-macdonald-had-a-farm.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with the flutetunes.com score (PDF and MIDI, G major) and the mfiles.co.uk piano version (MIDI, F major), which agree; lyrics: the standard first verse (cow) as given in the English Wikipedia article; chords our own",
+  "volne": "traditional (folk song; the standard tune known from 1920s recordings, no known author)",
+  "preklad": {
+   "cs": "Starý MacDonald měl farmu"
+  }
+ },
+ {
+  "txt": "children/hickory-dickory-dock.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with the score in the English Wikipedia article „Hickory Dickory Dock“, the MusicXML of Walter Crane's The Baby's Opera (1877, Project Gutenberg #25418) and the mfiles.co.uk MIDI; the pickup to „the mouse“ follows Crane and mfiles (F#; Wikipedia has A), the underlay of „mouse“ and „up“ over two notes follows Crane",
+  "volne": "traditional (English nursery rhyme, 1744)",
+  "preklad": {
+   "cs": "Myška a hodiny"
+  }
+ },
+ {
+  "txt": "children/humpty-dumpty.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "The common tune, compared note by note with the score in the English Wikipedia article „Humpty Dumpty“ and the mfiles.co.uk MIDI (G major), which agree; transposed from B-flat to C major; lyrics as in the Wikipedia article. J. W. Elliott's National Nursery Rhymes (1870/1872 print, ICDL scan) has a different tune, so it was not followed",
+  "volne": "traditional (English nursery rhyme; the common tune is anonymous)",
+  "preklad": {
+   "cs": "Vajíčko Humpty Dumpty"
+  }
+ },
+ {
+  "txt": "children/pop-goes-the-weasel.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "First strain (the sung verse) compared note by note with the flutetunes.com score (PDF and MIDI) and the Digital Tradition ABC, which agree; transposed from C to G major, their instrumental pickup left out because the words start on the downbeat; American lyrics („All around the mulberry bush“). Wikipedia's score has D D instead of D F in bar 3 and mfiles another variant",
+  "volne": "traditional (English song and dance tune, 1850s)",
+  "preklad": {
+   "cs": "Lasička vyskočí"
+  }
+ },
+ {
+  "txt": "children/the-muffin-man.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with the flutetunes.com score (PDF and MIDI, G major); the mfiles.co.uk MIDI agrees except bar 7 (E A F# D, here E A G F# as flutetunes); lyrics as in the English Wikipedia article (first verse, without the optional „Oh“)",
+  "volne": "traditional (English nursery rhyme, c. 1820)",
+  "preklad": {
+   "cs": "Prodavač muffinů"
+  }
+ },
+ {
+  "txt": "children/hot-cross-buns.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "The English tune with the octave leap, compared note by note with the flutetunes.com score and the mfiles.co.uk MIDI (identical, G major); bars 1–4 and 7–8 also match the English Wikipedia article „Hot Cross Buns (song)“ and Crane's The Baby's Bouquet (Gutenberg #25432), which print a different middle section (bars 5–6, „If you have no daughters…“); not the three-note B-A-G recorder version; chords our own",
+  "volne": "traditional (English street cry and nursery rhyme)",
+  "preklad": {
+   "cs": "Bochánky s křížkem"
+  }
+ },
+ {
+  "txt": "children/polly-put-the-kettle-on.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with the MusicXML and PDF of Walter Crane's The Baby's Bouquet (1879, Project Gutenberg #25432) and the mfiles.co.uk MIDI (F major), which agree; with the „Sukey, take it off again“ half as both print it; chords our own",
+  "volne": "traditional (English nursery rhyme, tune from the 1770s)",
+  "preklad": {
+   "cs": "Polly, postav konvici"
+  }
+ },
+ {
+  "txt": "children/three-blind-mice.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with the flutetunes.com score (PDF and MIDI, D major), the Digital Tradition ABC (C major) and the mfiles.co.uk MIDI, which agree; Crane's The Baby's Opera (1877) has the same tune; lyrics the common modern verse",
+  "volne": "traditional (English round, 1609)",
+  "preklad": {
+   "cs": "Tři slepé myšky"
+  }
+ },
+ {
+  "txt": "children/here-we-go-round-the-mulberry-bush.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics compared note by note with the score in the English Wikipedia article „Here We Go Round the Mulberry Bush“ (American ending „So early in the morning“), whose notes are followed; Crane's The Baby's Opera (1877), transposed from E major, agrees only in bars 1, 2 and 5, and the mfiles.co.uk MIDI has another ending",
+  "volne": "traditional (English singing game, 18th-century tune)",
+  "preklad": {
+   "cs": "Chodíme kolem moruše"
+  }
+ },
+ {
+  "txt": "children/itsy-bitsy-spider.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with the score in the English Wikipedia article „Itsy Bitsy Spider“ and the hubguitar.com tab (C major); „and the“ before the last line follows the tab (D D, as at the start; Wikipedia has F#), bar 8 follows Wikipedia (C B C D); lyrics as in the Wikipedia article",
+  "volne": "traditional (American children's song, words printed 1910, author unknown)",
+  "preklad": {
+   "cs": "Malinký pavouček"
+  }
+ },
+ {
+  "txt": "children/sing-a-song-of-sixpence.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with version 1 („most well-known in Britain“) in the English Wikipedia article „Sing a Song of Sixpence“, written in 4/4 eighths; the mfiles.co.uk MIDI has the same notes in 6/8, Crane's The Baby's Opera (1877) the same tune with a few chromatic notes; first verse",
+  "volne": "traditional (English nursery rhyme, c. 1744)",
+  "preklad": {
+   "cs": "Zazpívej píseň za šest pencí"
+  }
+ },
+ {
+  "txt": "children/kocka-leze-dirou.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with two scores on Wikimedia Commons (Kočka-leze-dírou.svg with lyrics, Kocka_leze_dirou.svg) and with Pavel Hokr's teaching sheet (pavelhokr.cz, written out in 4/4); all three agree on the notes; the repeat of the second line with the 1st/2nd ending (G, then C) follows Kočka-leze-dírou.svg and Hokr; first verse",
+  "volne": "traditional (Czech children's song)",
+  "preklad": {
+   "en": "The Cat Crawls through the Hole"
+  }
+ },
+ {
+  "txt": "children/prsi-prsi.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Prší prší“ (pavelhokr.cz, 4/4 in quarter notes, the same source as the published Skákal pes); only source checked; first verse",
+  "volne": "traditional (Czech children's song)",
+  "preklad": {
+   "en": "It's Raining, It's Raining"
+  }
+ },
+ {
+  "txt": "children/pec-nam-spadla.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Pec nám spadla“ (pavelhokr.cz), the only melody source checked; text of the first verse as in the Czech Wikipedia article „Pec nám spadla“",
+  "volne": "traditional (Czech children's song)",
+  "preklad": {
+   "en": "Our Stove Has Fallen Down"
+  }
+ },
+ {
+  "txt": "children/holka-modrooka.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Holka modrooká“ (pavelhokr.cz); the whole tune once with the text „V potoce se voda točí, podemele tvoje oči“ as printed there (the song is listed in F. J. Peřina's songbook Zpívejme!, 1888)",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "Blue-Eyed Girl"
+  }
+ },
+ {
+  "txt": "children/ja-do-lesa-nepojedu.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Já do lesa nepojedu“ (pavelhokr.cz), the whole 16-bar tune with the first verse; „přišel“ in bar 14 corrected from the sheet's misprint „přiše“",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "I Won't Go to the Forest"
+  }
+ },
+ {
+  "txt": "children/ovcaci-ctveraci.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Erben's melody on Czech Wikisource (Prostonárodní české písně a říkadla, „Ovčáci“, nápěv 492, G major 2/4) and with Pavel Hokr's teaching sheet „Ovčáci“ (pavelhokr.cz, C major); they agree; the text and the held note on „ci“ (Erben: quarter and rest) follow Hokr as sung today; transposed to C major",
+  "volne": "traditional (Czech children's song)",
+  "preklad": {
+   "en": "Shepherds, You Rascals"
+  }
+ },
+ {
+  "txt": "children/kalamajka.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Kalamajka“ (pavelhokr.cz), the only source checked, including its text („vzal si ženu Elišku“); first verse",
+  "volne": "traditional (Czech children's song and dance)",
+  "preklad": {
+   "en": "Kalamajka"
+  }
+ },
+ {
+  "txt": "children/jede-jede-postovsky-panacek.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Jede jede poštovský panáček“ (pavelhokr.cz, C major, 3/4); transposed to G major so the low notes stay above middle C; first verse",
+  "volne": "traditional (Czech children's song)",
+  "preklad": {
+   "en": "Here Comes the Little Postman"
+  }
+ },
+ {
+  "txt": "children/mela-babka-ctyri-jabka.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with the 8notes.com voice arrangement „Mela babka ctyri jabka (Czech Trad.)“ (its MIDI file with the lyrics, F major 3/4), the only source checked; notes and rhythm follow it; in bar 4 „dvě“ is put on D5 with C5 as its continuation (the MIDI's lyric events put „dvě“ on C5, which looks automatic)",
+  "volne": "traditional (Czech children's song)",
+  "preklad": {
+   "en": "Grandma Had Four Apples"
+  }
+ },
+ {
+  "txt": "children/bezi-liska-k-taboru.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Když jsem husy pásala / Běží liška k Táboru“ (pavelhokr.cz, C major, 4/4) and the ZUŠ Karla Komzáka (Týn nad Vltavou) recorder sheet „Běží liška k Táboru“ (zuskomzaka.cz, G major, 4/4); they agree; text as in Hokr, which is today's short form of Erben's counting rhyme (Wikisource, Počítadla přede hrou No. 26, without its „běž, zajíčku“ lines)",
+  "volne": "traditional (Czech children's song; text in Erben 1864)",
+  "preklad": {
+   "en": "The Fox Runs to Tábor"
+  }
+ },
+ {
+  "txt": "children/hali-beli.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with the ZUŠ Karla Komzáka (Týn nad Vltavou) recorder sheet „Halí belí“ (zuskomzaka.cz, G major 3/4, 8 bars with a repeat, no text) and with two field transcriptions in Zlínský kraj v lidové písni – Písně pro děti (Zlín 2024, No. 43 Chrastěšov 1958, No. 69 Lukoveček 1956); all have the same B–A / B–G rocking tune in G major; text and the written-out 16 bars follow No. 69, whose words („koně v zelí … šly se koupat do voděnky“) are the text commonly given today (pisnicky-pro-deti.eu, promaminky.cz)",
+  "volne": "traditional (Czech lullaby)",
+  "preklad": {
+   "en": "Hushaby, Lullaby"
+  }
+ },
+ {
+  "txt": "children/haenschen-klein.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German Wikipedia article „Hänschen klein“ and the Liederprojekt sheet (Carus/Reclam Kinderlieder-Buch), which agree; Böhme's „Alles neu macht der Mai“ (1897, Essen collection) has the same tune but ends the first line on the third, the common version ends on the tonic. Written out with the common one-verse text, in quarter notes",
+  "volne": "traditional melody (18th-century hunting song „Fahret hin“); lyrics Franz Wiedemann †1882, common shortened text an anonymous folk adaptation (printed by 1900)",
+  "preklad": {
+   "en": "Little Hans",
+   "cs": "Malý Jeníček"
+  }
+ },
+ {
+  "txt": "children/kuckuck-kuckuck-rufts-aus-dem-wald.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German Wikipedia article, the 1868 print „Frühlingsbote“ (Wikimedia Commons) and the Liederprojekt sheet; all three agree. Today's text „tanzen und springen“ (1868: „lasset uns springen“)",
+  "volne": "traditional Austrian melody; lyrics Hoffmann von Fallersleben †1874",
+  "preklad": {
+   "en": "Cuckoo, Cuckoo, Calls from the Wood",
+   "cs": "Kuku, kuku, volá to z lesa"
+  }
+ },
+ {
+  "txt": "children/alle-voegel-sind-schon-da.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German Wikipedia article, the print in „Unsere Lieder“ (Hamburg 1861, Wikimedia Commons, in G), the Liederprojekt sheet and Erk's „Nun so reis ich weg von hier“ (Essen collection); all agree",
+  "volne": "traditional melody (18th century, composer unknown); lyrics Hoffmann von Fallersleben †1874",
+  "preklad": {
+   "en": "All the Birds Are Here Already",
+   "cs": "Všichni ptáci už jsou tu"
+  }
+ },
+ {
+  "txt": "children/ein-maennlein-steht-im-walde.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the 1860 print on Wikimedia Commons (G major, 2/4), the Humperdinck version in „Unser Liederbuch“ (Schott 1902, Wikimedia Commons) and the score on German Wikibooks (Liederbuch); all agree. Written in quarter notes, the repeat of the first line written out, text with modern spelling",
+  "volne": "traditional melody; lyrics Hoffmann von Fallersleben †1874",
+  "preklad": {
+   "en": "A Little Man Stands in the Forest",
+   "cs": "V lese stojí mužíček"
+  }
+ },
+ {
+  "txt": "children/fuchs-du-hast-die-gans-gestohlen.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German Wikipedia article (written out, quarter notes), the Liederprojekt sheet and „Der Gänsedieb“ in „Unser Liederbuch“ (Schott 1902); all agree. The 1824 first print (Wikimedia Commons, number notation) and Fink's songbook (Essen collection) have an older ending of „Schießgewehr“; the common version is followed",
+  "volne": "traditional melody; lyrics Ernst Anschütz †1861",
+  "preklad": {
+   "en": "Fox, You Have Stolen the Goose",
+   "cs": "Lišáku, ukradl jsi husu"
+  }
+ },
+ {
+  "txt": "children/summ-summ-summ.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the 1843 first print „Biene“ (Hoffmann's Funfzig Kinderlieder, Wikimedia Commons), the score in the German Wikipedia article and the Liederprojekt sheet (F major); all agree. Written in quarter notes; text in modern spelling as on the Liederprojekt sheet",
+  "volne": "traditional Bohemian melody; lyrics Hoffmann von Fallersleben †1874",
+  "preklad": {
+   "en": "Buzz, Buzz, Buzz",
+   "cs": "Bzum, bzum, bzum"
+  }
+ },
+ {
+  "txt": "children/kommt-ein-vogel-geflogen.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German Wikipedia article and the score on German Wikibooks (Liederbuch, in D); they agree (Wikibooks holds „Fuß“ as a half note, Wikipedia has a quarter and a rest; the half note is used). Older prints (Fink 1843 and Erk in the Essen collection, „Unser Liederbuch“ 1902) end the second line on the third instead of rising to „mein’ Fuß“; today's version is followed, with today's children's text",
+  "volne": "traditional (Austrian folk song; the children's text „von der Mutter“ is an anonymous variant, recorded about 1911)",
+  "preklad": {
+   "en": "A Bird Comes Flying",
+   "cs": "Přiletěl ptáček"
+  }
+ },
+ {
+  "txt": "children/haeschen-in-der-grube.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German Wikipedia article and the Liederprojekt sheet; they agree. Older variants in Böhme's Kinderlied collection (Essen collection) differ and were not used. Liederprojekt attributes the melody to Karl Enslin (1819–1875); Wikipedia calls it an adaptation of the folk tune „Wer die Gans gestohlen hat“. Written in quarter notes",
+  "volne": "traditional melody (adapted from the folk tune „Wer die Gans gestohlen hat“; attributed to Karl Enslin †1875 by Liederprojekt only); lyrics Friedrich Fröbel †1852",
+  "preklad": {
+   "en": "Little Hare in the Hollow",
+   "cs": "Zajíček ve své jamce"
+  }
+ },
+ {
+  "txt": "children/weisst-du-wie-viel-sternlein-stehen.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the Liederprojekt sheet (the score in the German Wikipedia article is copied from it, so it is the same source) and, as the independent check, with the older soldiers' song on the same tune, „O du Deutschland, ich muss marschieren“ (Erk, Essen collection), which matches note for note; both repeats written out with their own words",
+  "volne": "traditional melody (known since about 1809); lyrics Wilhelm Hey †1854",
+  "preklad": {
+   "en": "Do You Know How Many Stars",
+   "cs": "Víš, kolik hvězdiček je na nebi"
+  }
+ },
+ {
+  "txt": "children/schlaf-kindlein-schlaf.txt",
+  "police": "children",
+  "jazyk": "de",
+  "zdroj": "Follows the Liederprojekt sheet (Carus/Reclam Wiegenlieder-Buch, 4/4) as the version sung today; compared with the score in the German Wikipedia article (= Böhme 1897), which differs in three places („Der“ on F–A, „die“ on A, the last „Schlaf“ on B-flat), and with Erk-Böhme 1894 (Wikimedia Commons), which shares the ending with the Liederprojekt sheet; first verse",
+  "volne": "traditional (melody after Johann Friedrich Reichardt †1814; text Des Knaben Wunderhorn 1808)",
+  "preklad": {
+   "en": "Sleep, Baby, Sleep",
+   "cs": "Spi, děťátko, spi"
+  }
+ },
+ {
+  "txt": "children/cizecku-cizecku.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with two scores on Wikimedia Commons: Cizecku-cizecku.svg with its LilyPond MIDI (D major, 2/4, with lyrics) and the songbook scan Čížečku, čížečku.jpg; both agree; text of the first verse as in the Czech Wikipedia article „Čížečku, čížečku“; transposed from D to G major",
+  "volne": "traditional (Czech children's song and singing game)",
+  "preklad": {
+   "en": "Little Siskin, Little Siskin"
+  }
+ },
+ {
+  "txt": "children/ja-mam-kone-vrany-kone.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with three scores on Czech Wikisource (Erben „Bujné koně“, nápěv 179, C major; A. Vorel, Naše písně No. 41; F. Sládek, Náš poklad) and with Pavel Hokr's teaching sheet „Já mám koně“ (pavelhokr.cz, F major); all agree on the notes; form A (repeated) B A as in Hokr (Erben also repeats B A), „vovsa/hopsa“ bar as G–F–D as in Náš poklad and Hokr (Erben F–D); text after Erben and Náš poklad with the modern spelling „vraný“; written in 4/4 quarters instead of 2/4 eighths",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "I Have Horses, Black Horses"
+  }
+ },
+ {
+  "txt": "children/travicka-zelena.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Travička zelená“ (pavelhokr.cz) and the harmonika.cz sheet „Travička zelená / The Green Grass“; the notes agree; the last bar of each line follows Hokr (half note; harmonika.cz has a quarter and a rest) and so does the order „sednu … lehnu“ (harmonika.cz has „lehnu … sednu“); first verse",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "Green Grass"
+  }
+ },
+ {
+  "txt": "children/utikej-kaco.txt",
+  "police": "children",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet „Utíkej Káčo“ (pavelhokr.cz, melody only) and the harmonika.cz sheet „Utíkej Káčo, utíkej“ (with lyrics); the notes agree; text of the first verse as in harmonika.cz („honí tě kocour divokej“), syllables placed as there",
+  "volne": "traditional (Czech folk song and dance game)",
+  "preklad": {
+   "en": "Run, Káča, Run"
+  }
+ },
+ {
+  "txt": "children/sur-le-pont-d-avignon.txt",
+  "police": "children",
+  "jazyk": "fr",
+  "zdroj": "Compared note by note with the score in the French Wikipedia article „Sur le pont d'Avignon“ (F major), the Mama Lisa score and MIDI (F major), Widor's Vieilles chansons et rondes pour les petits enfants (1883, Wikisource) and Rondes populaires enfantines (Wikisource), which have the same refrain notes; the couplet rhythm and the words (on y danse, tous en rond, Les belles dames) follow French Wikipedia, today's version; Weckerlin 1870 and flutetunes.com have the older rhythm without the pickup, not followed; transposed from F to G major",
+  "volne": "traditional (French round; popular since the 19th century, no known author)",
+  "preklad": {
+   "en": "On the Bridge of Avignon",
+   "cs": "Na mostě v Avignonu"
+  }
+ },
+ {
+  "txt": "children/il-etait-une-bergere.txt",
+  "police": "children",
+  "jazyk": "fr",
+  "zdroj": "Compared note by note with the score in the French Wikipedia article „Il était une bergère“ (C major), Chansons populaires enfantines (B-flat major) and Weckerlin's Chansons et rondes enfantines (1870, A major) on French Wikisource; all three have the same tune; C major as in Wikipedia, first verse",
+  "volne": "traditional (French song, 18th century)",
+  "preklad": {
+   "en": "There Was a Shepherdess",
+   "cs": "Byla jednou pastýřka"
+  }
+ },
+ {
+  "txt": "children/une-souris-verte.txt",
+  "police": "children",
+  "jazyk": "fr",
+  "zdroj": "Compared note by note with the Mama Lisa score and MIDI, the abcnotation.com ABC (Bernard Loffet) and the score in the French Wikipedia article „Une souris verte (chanson)“, all G major; they agree up to „trempez-la dans l'eau“; in „ça fera un escargot“ the notes follow Mama Lisa and the ABC (es-car-got on G G A; Wikipedia's high D on „car“ looks like a slip), the word „un“ on G follows Mama Lisa and Wikipedia; first verse up to „tout chaud“",
+  "volne": "traditional (French nursery rhyme, late 17th or 18th century)",
+  "preklad": {
+   "en": "A Green Mouse",
+   "cs": "Zelená myška"
+  }
+ },
+ {
+  "txt": "children/alouette.txt",
+  "police": "children",
+  "jazyk": "fr",
+  "zdroj": "Compared note by note with the score in the English Wikipedia article „Alouette“, the musicaviva ABC (abcnotation.com, G major), the Digital Tradition ABC (C major) and the flutetunes.com MIDI (C major); „Je te plumerai la tête“ rises step by step as in musicaviva, Digital Tradition and flutetunes (Wikipedia repeats G), the closing „Ah!“ goes down D–C–B–A as in Wikipedia and flutetunes; refrain, first verse (la tête) and refrain written out",
+  "volne": "traditional (French-Canadian song, first printed 1879)",
+  "preklad": {
+   "en": "Skylark",
+   "cs": "Skřivánek"
+  }
+ },
+ {
+  "txt": "children/savez-vous-planter-les-choux.txt",
+  "police": "children",
+  "jazyk": "fr",
+  "zdroj": "The tune sung today, compared note by note with the Mama Lisa score and MIDI (G major) and two abcnotation.com ABCs (Bernard Loffet, G major; Michel Bellon / galouvielle, C major), which have the same notes; the 6/8 tune in Weckerlin 1870, Widor 1883 and Rondes populaires enfantines (Wikisource) is different and was not followed",
+  "volne": "traditional (French round)",
+  "preklad": {
+   "en": "Do You Know How to Plant Cabbages?",
+   "cs": "Umíte sázet zelí?"
+  }
+ },
+ {
+  "txt": "children/j-ai-du-bon-tabac.txt",
+  "police": "children",
+  "jazyk": "fr",
+  "zdroj": "Compared note by note with the abcnotation.com ABC (C major), Weckerlin 1870, Widor 1883 and Chansons populaires enfantines (Wikisource), the 18th-century ABC „La servante au bon tabac“ (abcnotation.com) and the opening on Wikimedia Commons („Jai du bon tabac avec rythme.svg“); they agree except the modern ABC ending „râpé“ on F–E, where the old prints and the 18th-century ABC (D) are followed; words of the short version as in French Wikipedia („Mais ce n'est pas pour ton vilain nez“)",
+  "volne": "traditional; words attributed to Gabriel-Charles de Lattaignant †1779",
+  "preklad": {
+   "en": "I Have Good Tobacco",
+   "cs": "Mám dobrý tabák"
+  }
+ },
+ {
+  "txt": "children/cadet-rousselle.txt",
+  "police": "children",
+  "jazyk": "fr",
+  "zdroj": "Compared note by note with the score in the French Wikipedia article „Cadet Rousselle (chanson)“ (G major), two Wikimedia Commons MIDIs („Cadet Rousselle.mid“, „Cadet Rousselle (pg).mid“, G major), Weckerlin 1870, Weckerlin's Chansons de France pour les petits Français and Chansons populaires enfantines (Wikisource) and the ABC of Plon's 1858 print (abcnotation.com); the old prints sing „hi-ron-del-les“ on C–B–B–A, today's sources on C–D–C–B, which is followed (for „Que direz-vous“ too, as in both MIDIs); „Oui, vraiment“ as in Wikipedia; the bar „vous d'Ca-det Rous-“ follows the two Commons MIDIs (the fr.WP score has A A B C there)",
+  "volne": "traditional; lyrics Gaspard de Chenu (1792, born 1717)",
+  "preklad": {
+   "en": "Cadet Rousselle",
+   "cs": "Cadet Rousselle"
+  }
+ },
+ {
+  "txt": "children/baby-shark.txt",
+  "police": "children",
+  "jazyk": "en",
+  "zdroj": "Traditional campfire song; written from the melody as commonly sung, at the parent's request – no notation of the traditional version from before 2015 was found. Not the Pinkfong arrangement or recording (2016); the Seoul Central District Court (2021) held that the song is a traditional folk song",
+  "volne": "traditional (campfire song)",
+  "preklad": {
+   "cs": "Žraloček"
+  }
+ },
+ {
+  "txt": "folk/pasla-ovecky.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Common version today, compared with two scores on Czech Wikisource: A. Vorel, Naše písně (Brno 1912) and Náš poklad, which agree except the „dupy/cupy“ bars (10, 12); there this follows Naše písně (alternating notes; Náš poklad repeats one note) with the common text „cupy, cupy, cup“; confirmed as sung today in the parent's review (17 Nov 2026); first strophe",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "She Was Herding Her Sheep"
+  }
+ },
+ {
+  "txt": "folk/auld-lang-syne.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics compared note by note with the score in the English Wikipedia article „Auld Lang Syne“ (first verse and chorus)",
+  "volne": "traditional Scottish melody; lyrics Robert Burns †1796",
+  "preklad": {
+   "cs": "Za starých časů"
+  }
+ },
+ {
+  "txt": "folk/red-river-valley.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics compared note by note with the score in the English Wikipedia article „Red River Valley (song)“ (first verse); chords our own",
+  "volne": "traditional (North American folk song, 1880s, author unknown)",
+  "preklad": {
+   "cs": "Údolí Red River"
+  }
+ },
+ {
+  "txt": "folk/ach-synku-synku.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with three scores that agree: the Wikimedia Commons score and MIDI used in the Czech Wikipedia article „Ach synku, synku“ (CC0, C major, followed here with its lyrics), L. Kuba, Slovanstvo ve svých zpěvech (Czech Wikisource, B major) and F. Sládek, Náš poklad (Czech Wikisource, A-flat major); Vorel's Naše písně has a different, rarer variant with leaps, not used; first strophe",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "Oh Son, My Son"
+  }
+ },
+ {
+  "txt": "folk/andulko-safarova.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Melody and lyrics compared note by note with F. Sládek, Náš poklad (Czech Wikisource, D major; grace notes left out), the lidovepisne.cz MIDI file (Wayback Machine copy, C major) and the abcnotation.com transcription „Andulko The Goose Girl“ (folkinfo.org, BBC Singing Together 1957, C major). The first line is repeated, as in Náš poklad and the MIDI (the abc version sings it once). „ven“ is on the 5th, as in the MIDI and the abc version (Náš poklad has the 3rd). First strophe",
+  "volne": "traditional (Czech folk song; the melody is sometimes credited to František Kmoch †1912, free either way)",
+  "preklad": {
+   "en": "Annie, the Steward's Daughter"
+  }
+ },
+ {
+  "txt": "folk/na-ty-louce-zeleny.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with K. J. Erben's tune (Nápěvy prostonárodních písní českých, 1862, no. 437, on Czech Wikisource, „Mysliveček (Na tý louce)“) and Pavel Hokr's teaching sheet (pavelhokr.cz, C major, no lyrics). They agree except on „je“ in bar 10, where this follows Hokr (two slurred notes, as sung today). Second half repeated as in both. First strophe, Erben's text",
+  "volne": "traditional (Czech folk song from Chodsko)",
+  "preklad": {
+   "en": "On That Green Meadow"
+  }
+ },
+ {
+  "txt": "folk/tancuj-tancuj-vykrucaj.txt",
+  "police": "folk",
+  "jazyk": "sk",
+  "zdroj": "Today's tune, compared note by note with M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, melody sheet in F major, upper voice of the two-voice setting) and Die Klingende Brücke no. 1650 (F major). They agree in the verse. In the tra-la-la refrain this follows Jurči (Klingende Brücke has rests and a C-sharp). E. Hula, Slovenské kvety (1923, Wikimedia Commons) prints a different, older tune, which I didn't use. First verse and refrain",
+  "volne": "traditional (Slovak folk song)",
+  "preklad": {
+   "en": "Dance, Dance, Spin Around"
+  }
+ },
+ {
+  "txt": "folk/tece-voda-tece.txt",
+  "police": "folk",
+  "jazyk": "sk",
+  "zdroj": "Follows Pavel Hokr's teaching sheet „Teče voda teče cez velický majír“ (pavelhokr.cz, C major, 4/4), transposed to G major. Its pitches match the first voice of E. Hula, Slovenské kvety (1923, Wikimedia Commons „Slovakia folk songs 02113.jpg“, G major, 3/4 „voľne“), which has a freer rhythm. Text from Hula. First strophe. Spelling „Velecký“, „nehal“ and „starodávny“ as printed in Hula (Hokr has „velický“ and „starodávný“)",
+  "volne": "traditional (Slovak folk song)",
+  "preklad": {
+   "en": "The Water Flows",
+   "cs": "Teče voda, teče"
+  }
+ },
+ {
+  "txt": "folk/horela-lipa-horela.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "The Czech song „Hořela lípa, hořela“ (the Slovak „Horela lipka“ has another tune). Bars 1-4 compared note by note with R. Wünsch, České nápěvy (1922, Czech Wikisource, G major, melody without lyrics) and M. Jurči, Pesničky pre všetkých, song id 15658 (pesnicky.orava.sk/data/noty/h/horela_lipa_horela_akordeon_1.pdf, D major, 3/4, with lyrics); they agree. Bars 5-8 and the lyrics follow Jurči (as sung today). There Wünsch has a variant (A G F# G A B | C D E | D G D C B A | B A G) whose underlay is unclear. Jurči's other „Hořela lípa“ (id 8771, horela_lipa_horela_akordeon.pdf, 2/4) is a different tune, not used. First strophe",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "The Linden Tree Was Burning"
+  }
+ },
+ {
+  "txt": "folk/kdyby-byl-bavorov.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet (pavelhokr.cz, C major), the harmonika.cz sheet (C major) and M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, F major, upper voice). All three agree. In „za vodičkou“ this uses even notes (harmonika.cz, Jurči; Hokr dots the first). First strophe",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "If Bavorov Were Where Vodňany Is"
+  }
+ },
+ {
+  "txt": "folk/kdyz-jsem-ja-slouzil.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet (pavelhokr.cz, C major, 4/4) and M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, D major, 2/4). They agree except on the first note, where this follows Hokr. Rhythm as in Jurči, transposed to G major. Text as in Erben, Prostonárodní české písně a říkadla (no. 126). First strophe",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "When I Was in Service"
+  }
+ },
+ {
+  "txt": "folk/cerveny-satecku.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Follows the single-line vocal part of M. Jurči, Pesničky pre všetkých, guitar edition (pesnicky.orava.sk/data/noty/c/cerveny_satecku_kolem_se_toc_gitara.pdf, G major), transposed to C major. The leaps on „se“ are in that vocal line. The same author's two-voice melody sheet (B-flat major) agrees in its upper voice except bar 6, where I followed the vocal line. The notypisni.cz free preview shows only bars 1-4, and they agree. The repeat is written out for the second line („má milá se hněvá“). First strophe",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "Little Red Kerchief"
+  }
+ },
+ {
+  "txt": "folk/okolo-hradce.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Follows the upper voice of M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, piano sheet, G major, two voices); the notypisni.cz free preview (first eight bars, also two voices) agrees. I found no single-line source. Bars 6-8 („tři růže (tři růže)“) therefore follow Jurči's upper voice. Verse and refrain with repeats and endings as printed; the „Vojáci jdou“ trio is left out. First strophe",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "Around Hradec"
+  }
+ },
+ {
+  "txt": "folk/koupim-ja-si-kone-vrany.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Upper voice of two two-voice prints that agree: M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, piano, accordion and heligonka sheets, F major) and P. Shýbal's waltz arrangement (midisoubory.cz scans). I found no single-line source. I took the upper voice because Jurči puts the tune on top wherever it can be checked: his two-voice sheets match single-line sources in Červený šátečku (his own guitar edition), Tancuj (Die Klingende Brücke) and Kdyby byl Bavorov (Hokr). Not proven for this song. First strophe; the second half is repeated as printed; confirmed by the single-line tune in J. and K. Filip, Kantareto (1948), no. 24 (Wikimedia Commons scan), which equals this upper voice in all 16 bars",
+  "volne": "traditional (Czech folk song)",
+  "preklad": {
+   "en": "I'll Buy Myself Black Horses"
+  }
+ },
+ {
+  "txt": "folk/dobru-noc-ma-mila.txt",
+  "police": "folk",
+  "jazyk": "sk",
+  "zdroj": "Compared note by note with Pavel Hokr's teaching sheet (pavelhokr.cz, A minor, 4/4) and M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, vocal line in A minor, 2/4). They agree. Written with Hokr's note values, an octave higher. Lyrics from Slovak Wikisource (Slovenské spevy 1883, no. 13). First strophe",
+  "volne": "traditional (Slovak folk song)",
+  "preklad": {
+   "en": "Good Night, My Love",
+   "cs": "Dobrou noc, má milá"
+  }
+ },
+ {
+  "txt": "folk/la-cucaracha.txt",
+  "police": "folk",
+  "jazyk": "es",
+  "zdroj": "Melody compared note by note with the score in the Spanish and English Wikipedia articles „La cucaracha“, taken from the Public Domain Song Anthology page on Wikimedia Commons (CC0, F major, 3/4), and with Frank Nordberg's musicaviva.com ABC (D major, 4/4), whose pitches agree (it ends the verse straight on the tonic); refrain words as given first in the English Wikipedia article, verse „Ya murió la cucaracha“ as quoted there among the traditional Revolution-era verses",
+  "volne": "traditional (Spanish tune known from the 19th century, Mexican verses from the Revolution; anonymous)",
+  "preklad": {
+   "en": "The Cockroach",
+   "cs": "Šváb"
+  }
+ },
+ {
+  "txt": "folk/de-colores.txt",
+  "police": "folk",
+  "jazyk": "es",
+  "zdroj": "Upper voice of John Chambers' transcription on abcnotation.com (2005, Mexico, 6/8, C major) compared note by note with the habanera version in Jack Campin's ABC (from Música Tradicional Asturiana, 2/4, C major); the pitches agree except two details where this follows Chambers: B-flat only on „lu-“ before „lucir“ (Asturian: three) and both endings of the refrain on E (Asturian goes to G the first time); Chambers' last ending rises to C in the harmony, here the melody ends on E as in his first ending; words: the traditional first verse and refrain as given in the English Wikipedia article (the later verses attributed to 1940s Cursillo participants are not used)",
+  "volne": "traditional (Spanish-language folk song, author unknown)",
+  "preklad": {
+   "en": "In Colours",
+   "cs": "V barvách"
+  }
+ },
+ {
+  "txt": "folk/sakura-sakura.txt",
+  "police": "folk",
+  "jazyk": "ja",
+  "zdroj": "Melody and kana underlay compared note by note with the score File:Sakura.song.png on Wikimedia Commons (used by Japanese Wikisource, 4/4, A-based) and with Frank Nordberg's musicaviva.com ABC (A minor): bars 1–12 agree, the last two bars follow the Commons score (E F B-A F | E), Nordberg has a rarer ending (D-E F | B-A F E); lyrics: the 1888 Sōkyokushū text as on Japanese Wikisource, checked against the NDL scan of that book (dl.ndl.go.jp/pid/857651, opened), in modern kana; transposed up a fourth",
+  "volne": "traditional (Edo-period koto tune, lyrics anonymous, published 1888)",
+  "preklad": {
+   "en": "Cherry Blossoms",
+   "cs": "Sakura, sakura (Třešňové květy)"
+  }
+ },
+ {
+  "txt": "folk/a-la-claire-fontaine.txt",
+  "police": "folk",
+  "jazyk": "fr",
+  "zdroj": "Melody and lyrics compared note by note with the score in the French Wikipedia article „À la claire fontaine“ (F major, 2/4) and the melody of A. E. Heacox's setting in Jameson & Heacox, Chants de France (1922, p. 112, Wikimedia Commons), which agree; first verse and the refrain „Il y a longtemps que je t’aime“ as in Wikipedia („baignée“; the 1922 print has „baigné“ and „Lui ya“)",
+  "volne": "traditional (French song, 18th century or earlier)",
+  "preklad": {
+   "en": "By the Clear Fountain",
+   "cs": "U čisté studánky"
+  }
+ },
+ {
+  "txt": "folk/oh-susanna.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with Foster's 1848 edition (F. D. Benteen, Baltimore, plate 1427; scans 'Oh! Susanna 2–4.jpg' on Wikimedia Commons) and the abcnotation.com versions (Digital Tradition, Paul Hardy's Session Tunebook, CFD vol. 2, musicaviva); following today's version, the 'Alabama' figure is dotted every time and 'Susanna, don't you cry' is in even eighths, and the chorus is not repeated. Words: Foster's first verse with today's spelling ('I come from Alabama with a banjo on my knee', 'goin'' for 'gwyne', 'for I come' in the chorus); chords our own",
+  "volne": "Stephen Foster †1864 (music and lyrics)",
+  "preklad": {
+   "cs": "Ach, Zuzano"
+  }
+ },
+ {
+  "txt": "folk/home-on-the-range.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with the abcnotation.com versions from musicaviva.com (G major) and the rlwalker/gulfweb collection (D major, with lyrics), which agree; words of the first verse and chorus as in Lomax's Cowboy Songs (1910), quoted in the English Wikipedia article; Guion's 1925 arrangement was not used; chords our own",
+  "volne": "music Daniel E. Kelley †1905, lyrics Brewster M. Higley †1911 (today's wording from John A. Lomax's Cowboy Songs 1910, Lomax †1948)",
+  "preklad": {
+   "cs": "Domov na prérii"
+  }
+ },
+ {
+  "txt": "folk/swing-low-sweet-chariot.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with the abcnotation.com versions from the John C. Campbell Folk School Song Book (G major, with lyrics) and the Digital Tradition (E major), which agree except 'I looked o-ver': we follow Campbell (the low D on '-ver'). The 1873 Fisk Jubilee Singers print (Wikimedia Commons) is a more ornamented version and was not followed; chords our own",
+  "volne": "traditional (African-American spiritual, 19th century; attributed to Wallace Willis)",
+  "preklad": {
+   "cs": "Snes se níž, vozíčku"
+  }
+ },
+ {
+  "txt": "folk/when-the-saints-go-marching-in.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics compared note by note with the abcnotation.com version from musicaviva.com (C major, with lyrics) and Lester Bailey's collection (G major), which agree; first verse as in the English Wikipedia article, with the plain 'I want to be in that number'; chords our own",
+  "volne": "traditional (African-American spiritual, first recorded 1923 without an author; later copyright claims concern 1930s arrangements)",
+  "preklad": {
+   "cs": "Až svatí přijdou pochodem"
+  }
+ },
+ {
+  "txt": "folk/shenandoah.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody compared with five abcnotation.com versions (musicaviva.com, Digital Tradition, Serpent Publications, Jack Campin's Nine-Note Tunebook, the 4/4 version from Paul Hardy's tunebook); where they differ ('a-way', 'I'm', 'Mis-') we follow the majority. The free meter (changing 4/4 and 3/4) is evened out into 4/4 bars, following the 4/4 version for the rhythm of 'hear you'; words of the first verse as in musicaviva and the English Wikipedia article ('I long to hear you'; 'I'm bound away' as in musicaviva and Serpent); chords our own",
+  "volne": "traditional (American folk song, early 19th century)",
+  "preklad": {
+   "cs": "Shenandoah"
+  }
+ },
+ {
+  "txt": "folk/oh-my-darling-clementine.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics compared note by note with the abcnotation.com versions from the rlwalker/gulfweb collection (with lyrics) and the Digital Tradition, both D major, which agree apart from dotted or even pairs (we follow the dotted ones); transposed to G major. Barker Bradford's 1885 sheet music (Wikimedia Commons) has other words and a variant tune and was not followed; chords our own",
+  "volne": "traditional (American folk ballad; tune of unknown origin, words published 1884, attributed to Percy Montrose)",
+  "preklad": {
+   "cs": "Ach, má milá Klementýno"
+  }
+ },
+ {
+  "txt": "folk/she-ll-be-coming-round-the-mountain.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics compared note by note with the score on Wikimedia Commons ('She’ll Be Coming ’Round the Mountain.svg', G major, used in the English Wikipedia article) and the abcnotation.com rlwalker/gulfweb version (D major, with lyrics), which have the same notes; written in even eighths instead of the dotted rhythm of the Commons score; chords our own",
+  "volne": "traditional (American folk song from the spiritual 'When the Chariot Comes', 19th century)",
+  "preklad": {
+   "cs": "Ona přijede přes hory"
+  }
+ },
+ {
+  "txt": "folk/michael-row-the-boat-ashore.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with the first printing in Slave Songs of the United States (1867, scan on Wikimedia Commons; first line, and the lower voice of the second line) and the score in the English Wikipedia article (C major, today's version). The melody follows the 1867 print throughout: it matches today's version except the 'lu' of the last 'Hallelujah', a held note in 1867 (E–D today); this keeps clear of Tony Saletan's 1954 adaptation (copyright 1958). Only the 1867 refrain words are used; chords our own",
+  "volne": "traditional (spiritual from St. Helena Island, first printed 1867)",
+  "preklad": {
+   "cs": "Michaeli, veslu ke břehu"
+  }
+ },
+ {
+  "txt": "folk/greensleeves.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics compared note by note with the ABC score in the French Wikipedia article „Greensleeves“ (G minor, 6/8), the Mutopia Project hymn-tune edition (E minor) and the thesession.org setting 1598 (E minor); they agree, all with the minor sixth (F natural here) in the verse, as in the Wikipedia/Commons melody file; some modern copies (abcnotation: colinhume.com, chrisspen violin) raise it to F-sharp, not used. Transposed to A minor; verse and refrain once; syllables under the dotted figures placed by us; second line sung as „For I have loved you well and long“",
+  "volne": "traditional (English, 16th century; lyrics from A Handful of Pleasant Delights, 1584)",
+  "preklad": {
+   "cs": "Zelené rukávy"
+  }
+ },
+ {
+  "txt": "folk/scarborough-fair.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Follows the score marked „Version commonly used today“ in the English Wikipedia article „Scarborough Fair (ballad)“ (D Dorian, with lyrics); compared with the University of Cambridge folk-song audition scores (cam.ac.uk, D Dorian; holds „thyme“ one bar longer and sings „going“ on one note) and the thesession.org setting 7522 (E Dorian); first verse. Not the Simon & Garfunkel arrangement",
+  "volne": "traditional (English ballad)",
+  "preklad": {
+   "cs": "Jarmark ve Scarborough"
+  }
+ },
+ {
+  "txt": "folk/danny-boy.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with two abcnotation.com transcriptions (trillian.mit.edu Ireland/song, F and G major), Paul Hardy's Songs Tunebook (pghardy.net, C major) and the Londonderry Air score in the English Wikipedia (E-flat major); they agree. On „It's I'll be“ (bar 13) this follows pghardy and Wikipedia (repeated note; the trillian copies rise and fall). F major; lyrics (first verse) from the English Wikipedia article „Danny Boy“",
+  "volne": "traditional Irish melody (Londonderry Air); lyrics Frederic Weatherly †1929",
+  "preklad": {
+   "cs": "Danny, chlapče"
+  }
+ },
+ {
+  "txt": "folk/my-bonnie-lies-over-the-ocean.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with the score in the English Wikipedia article „My Bonnie Lies over the Ocean“ and the abcnotation.com transcriptions from pghardy.net, colinhume.com, Digital Tradition and Lester Bailey (D major); they agree, except that the refrain line „Bring back, bring back, oh, bring back…“ has the extra „oh“ (A–G) in all abc versions and in the Wikipedia lyrics, which this follows (the Wikipedia score holds A). Transposed from G to D major; verse written out, refrain with repeat",
+  "volne": "traditional (Scottish); first published 1881 by Charles E. Pratt †1902 under pseudonyms",
+  "preklad": {
+   "cs": "Můj milý je za mořem"
+  }
+ },
+ {
+  "txt": "folk/loch-lomond.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with the abcnotation.com transcriptions of Allan's Violin Gems (Nigel Gatherer), Kerr's Merry Melodies (trillian.mit.edu) and Digital Tradition (E major); they agree. A second variant with „B B A G“ in bar 2 (thesession.org 4952, trillian Loch_Lomond-G) was not used; syllable placement checked against the lyric underlay of trillian Loch_Lomond-G. G major, first verse (the chorus has the same tune)",
+  "volne": "traditional (Scottish)",
+  "preklad": {
+   "cs": "Krásné břehy Loch Lomondu"
+  }
+ },
+ {
+  "txt": "folk/molly-malone.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics compared note by note with the abcnotation.com transcription of BBC Singing Together 1974 (folkinfo.org, G major, with lyric underlay) and the trillian.mit.edu „Cockles and Mussels“ (C major); they agree in pitch. G major, first verse and chorus",
+  "volne": "traditional (first printed anonymously in Boston 1876; an 1882 source credits J. B. Geoghegan †1889, an 1884 London edition James Yorkston of Edinburgh)",
+  "preklad": {
+   "cs": "Molly Maloneová"
+  }
+ },
+ {
+  "txt": "folk/early-one-morning.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics follow the University of Cambridge folk-song audition score „Early one morning“ (cam.ac.uk, F major, 2/4, with lyrics); pitches compared with the flutetunes.com sheet (C major, 4/4), which agrees but uses dotted rhythms in bars 2–4. First verse with the refrain",
+  "volne": "traditional (English)",
+  "preklad": {
+   "cs": "Jednou časně ráno"
+  }
+ },
+ {
+  "txt": "folk/the-water-is-wide.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melody and lyrics follow the University of Cambridge folk-song audition score „O Waly, Waly“ (cam.ac.uk, G major, 3/2, Cecil Sharp's Somerset tune); „can carry two“ as sung today; compared with Sharp's 1905 field transcription (abcnotation.com, folkinfo.org, G major), which has the same tune with a freer rhythm, and the flutetunes.com „The Water Is Wide“ (G major, 4/4, ornamented modern variant). First verse",
+  "volne": "traditional (tune noted by Cecil Sharp †1924)",
+  "preklad": {
+   "cs": "Voda je široká"
+  }
+ },
+ {
+  "txt": "folk/what-shall-we-do-with-the-drunken-sailor.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with the score in the German Wikipedia article „Drunken Sailor“ (D Dorian, 2/4), Paul Hardy's Session Tunebook (pghardy.net, E Dorian) and thesession.org setting 15961 (E Dorian); they agree. D Dorian in 4/4 with pghardy's note values; verse and chorus („Way, hay, and up she rises“)",
+  "volne": "traditional (sea shanty)",
+  "preklad": {
+   "cs": "Co uděláme s opilým námořníkem"
+  }
+ },
+ {
+  "txt": "folk/amazing-grace.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with the score in the English Wikipedia article „Amazing Grace“ (Excell 1900 setting, as sung in English today), the abcnotation.com transcriptions from chrisspen (gitlab) and godsongs.net, and for lines 1, 2 and 4 also colinhume.com, pghardy.net, kaz.neocities.org and the German/French Wikipedia scores (these simplify „I once was lost“ to a repeat of line 1, not used). The held „me“ bar follows godsongs.net and the abc versions. First verse",
+  "volne": "traditional tune New Britain (1829); lyrics John Newton †1807",
+  "preklad": {
+   "cs": "Úžasná milost"
+  }
+ },
+ {
+  "txt": "folk/muss-i-denn.txt",
+  "police": "folk",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the scores in the German Wikipedia article „Muss i denn, muss i denn zum Städtele hinaus“ (E-flat, 4/4, Silcher's version) and the English Wikipedia article „Muss i denn“ (A major, 2/4), which agree in notes and underlay, and with Erk's Remstal version (ESAC, abcnotation.com), which has the same pitches; transposed to C major; the whole tune once (A A B A), the repeat of the last half that both Wikipedia scores print is left out because its words are the same",
+  "volne": "traditional (Swabian folk song; first verse traditional, arranged by Friedrich Silcher †1860)",
+  "preklad": {
+   "en": "Must I Then",
+   "cs": "Musím už z městečka"
+  }
+ },
+ {
+  "txt": "folk/die-gedanken-sind-frei.txt",
+  "police": "folk",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German and English Wikipedia articles (after Hoffmann von Fallersleben's Schlesische Volkslieder, 1842), the German Wikibooks „Liederbuch/ Die Gedanken sind frei“ and Erk's print (ESAC, abcnotation.com); in „Kein Mensch kann sie wissen, kein Jäger erschießen“ the version sung today (B D B | C E C, Wikibooks, Erk, John Chambers' abc) is followed instead of the 1842 B D D | C E E; text as in the Wikipedia article; the pickup to the last line („die Ge-“) is C E as in Wikibooks and Erk, matching the modern form used throughout (Wikipedia has G E); pitches agree, the dotted rhythm of the old prints in „Kein Mensch kann sie wissen“ is sung as even quarters today",
+  "volne": "traditional (German folk song, c. 1800)",
+  "preklad": {
+   "en": "Thoughts Are Free",
+   "cs": "Myšlenky jsou svobodné"
+  }
+ },
+ {
+  "txt": "folk/annchen-von-tharau.txt",
+  "police": "folk",
+  "jazyk": "de",
+  "zdroj": "Silcher's tune compared note by note with the score in the German Wikipedia article „Ännchen von Tharau“, the Mutopia edition (Silcher, after C. F. Peters 1915, soprano part, B-flat) and Böhme's and Fink's prints (ESAC, abcnotation.com), which all agree; the repeated first half is written out because the words change; text of Herder's High German version (as in the Wikipedia article)",
+  "volne": "Friedrich Silcher †1860; lyrics Simon Dach †1659, Johann Gottfried Herder †1803",
+  "preklad": {
+   "en": "Annie of Tharaw",
+   "cs": "Anička z Tharau"
+  }
+ },
+ {
+  "txt": "folk/die-lorelei.txt",
+  "police": "folk",
+  "jazyk": "de",
+  "zdroj": "Silcher's tune and the German underlay compared note by note with the Allgemeines Deutsches Kommersbuch (scan on Wikimedia Commons, „De Schauenburg Allgemeines Deutsches Kommersbuch 220/221.jpg“, D major), Fink's and Böhme's prints (ESAC, abcnotation.com) and the Mutopia edition „The Loreley“ (English words); in „Die Luft ist kühl und es dunkelt“ the Kommersbuch and Fink are followed (Böhme and Mutopia differ by one note); transposed to C major",
+  "volne": "Friedrich Silcher †1860; lyrics Heinrich Heine †1856",
+  "preklad": {
+   "en": "The Lorelei",
+   "cs": "Lorelei"
+  }
+ },
+ {
+  "txt": "folk/der-mond-ist-aufgegangen.txt",
+  "police": "folk",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German and English Wikipedia articles (F major, with a repeat and two endings), the musicaviva abc and Böhme's print (ESAC, abcnotation.com, both G major), which agree; the repeat is written out so that the whole first verse fits; transposed to G major",
+  "volne": "J. A. P. Schulz †1800; lyrics Matthias Claudius †1815",
+  "preklad": {
+   "en": "The Moon Has Risen",
+   "cs": "Měsíc už vyšel"
+  }
+ },
+ {
+  "txt": "folk/santa-lucia.txt",
+  "police": "folk",
+  "jazyk": "it",
+  "zdroj": "Compared note by note with the score in the Italian Wikipedia article „Santa Lucia (brano musicale)“ (B-flat), The Everyday Song Book (1927, abc by John Chambers) and Kerr's Merry Melodies (abc), which agree; in „placida è l'onda“ the dotted rhythm of Wikipedia and Kerr is followed (the Everyday Song Book has even quarters); Italian text by Cossovich as in the Wikipedia article; transposed to C major",
+  "volne": "Teodoro Cottrau †1879; Italian lyrics Enrico Cossovich †1911",
+  "preklad": {
+   "cs": "Svatá Lucie"
+  }
+ },
+ {
+  "txt": "folk/funiculi-funicula.txt",
+  "police": "folk",
+  "jazyk": "it",
+  "zdroj": "Compared note by note with the score in the Italian Wikipedia article „Funiculì funiculà“ (E-flat, verse and refrain with underlay), John Chambers' abc of a fife part (G major) and the thesession.org setting, which agree (in „Addó lo fuoco coce“ Wikipedia and thesession are followed, Chambers has one C natural); Neapolitan text as in Wikipedia; transposed to F major",
+  "volne": "Luigi Denza †1922; lyrics Peppino Turco †1903",
+  "preklad": {
+   "en": "Funicular Song",
+   "cs": "Píseň o lanovce"
+  }
+ },
+ {
+  "txt": "christmas/hoj-ty-stedry-vecere.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with the score on Czech Wikisource (Lidoví zpěváci na Prácheňsku, „Hoj, ty Štědrý večere“); transposed from E-flat to G major; first strophe",
+  "volne": "traditional (Czech carol)",
+  "preklad": {
+   "en": "Hey, Christmas Eve"
+  }
+ },
+ {
+  "txt": "christmas/o-tannenbaum.txt",
+  "police": "christmas",
+  "jazyk": "de",
+  "zdroj": "Melody, chords and lyrics compared note by note with the score in the German Wikipedia article „O Tannenbaum“ (first verse); the D.C. al Fine is written out",
+  "volne": "traditional melody; lyrics Ernst Anschütz †1861",
+  "preklad": {
+   "en": "O Christmas Tree",
+   "cs": "Ó jedličko"
+  }
+ },
+ {
+  "txt": "christmas/joy-to-the-world.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody and underlay compared note by note with Douglas D. Anderson's ANTIOCH (abcnotation.com, the 1848 form sung today), Paul Hardy's Xmas Tunebook (abcnotation.com) and the 1839 Modern Psalmist score in the English Wikipedia article „Joy to the World“; follows the 1848 form where they differ (one bar on „King“, octave leap D–D on „and heav'n“; 1839 has a longer „King“ and F#), confirmed via a hymnary.org summary of its ANTIOCH MusicXML; first verse, D major as printed; chords our own",
+  "volne": "music Lowell Mason †1872 (tune ANTIOCH, after Handel †1759); lyrics Isaac Watts †1748",
+  "preklad": {
+   "cs": "Raduj se, světe"
+  }
+ },
+ {
+  "txt": "christmas/o-come-all-ye-faithful.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody and underlay compared note by note with the score in the English Wikipedia article „O Come, All Ye Faithful“ (G major, soprano) and Paul Hardy's Xmas Tunebook (abcnotation.com); where they differ („King of angels“: Hardy dotted F#-E-D) this follows Wikipedia's hymnal version (F# half, D quarter); first verse and refrain; chords our own",
+  "volne": "music and Latin text John Francis Wade †1786 (tune ADESTE FIDELES); English translation Frederick Oakeley †1880",
+  "preklad": {
+   "cs": "Pojďte, věrní"
+  }
+ },
+ {
+  "txt": "christmas/hark-the-herald-angels-sing.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody and underlay compared note by note with the score in the English Wikipedia article „Hark! The Herald Angels Sing“ (F major, soprano, after an IMSLP full score) and Paul Hardy's Xmas Tunebook (abcnotation.com, in G); where they differ (bar 7, „born in“: Hardy repeats the tonic where Wikipedia has the leading note E) this follows Wikipedia; first verse with refrain; chords our own",
+  "volne": "music Felix Mendelssohn †1847 (tune MENDELSSOHN, adapted by William H. Cummings †1915); lyrics Charles Wesley †1788 (altered by George Whitefield †1770)",
+  "preklad": {
+   "cs": "Slyš, jak andělé zpívají"
+  }
+ },
+ {
+  "txt": "christmas/deck-the-halls.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody and underlay compared note by note with „Deck the Hall“ from The Everyday Song Book (1927, F major; John Chambers' ABC transcription on abcnotation.com) and Paul Hardy's Xmas Tunebook (abcnotation.com, D major); follows the Everyday Song Book where they differ (raised B natural in „fa la la, la la la“, as commonly sung); today's text („Deck the halls“, „Don we now our gay apparel“); the repeat is written out for the second line of text; chords our own",
+  "volne": "traditional Welsh melody (Nos Galan); English lyrics Thomas Oliphant †1873, revised anonymously in the 19th century",
+  "preklad": {
+   "cs": "Ozdobte síně"
+  }
+ },
+ {
+  "txt": "christmas/we-wish-you-a-merry-christmas.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Compared note by note with three ABC versions on abcnotation.com: BBC Singing Together 1965 (via folkinfo.org, with lyrics), Paul Hardy's Xmas Tunebook and Ted Neil (abcusers 2002); follows the majority where they differ („Christmas, we“ with the drop to C in bar 3 and to D in bar 5) and the BBC underlay for the last line („We wish you a merry Christmas and a happy New Year“); transposed from B-flat (BBC) to G; chords our own",
+  "volne": "traditional (English West Country carol; popular version arranged by Arthur Warrell †1939)",
+  "preklad": {
+   "cs": "Přejeme vám veselé Vánoce"
+  }
+ },
+ {
+  "txt": "christmas/god-rest-you-merry-gentlemen.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody and underlay compared note by note with the score in the German Wikipedia article „God Rest You Merry, Gentlemen“ (E minor, soprano) and Paul Hardy's Xmas Tunebook (abcnotation.com, which adds a rest before „to save us“; Wikipedia's held note kept); today's common text („Remember Christ our Saviour was born on Christmas Day“); the repeat is written out for the second line of text; chords our own",
+  "volne": "traditional (English carol)",
+  "preklad": {
+   "cs": "Bůh vám dej radost, pánové"
+  }
+ },
+ {
+  "txt": "christmas/the-first-nowell.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with Paul Hardy's Xmas Tunebook and Douglas D. Anderson's „The First Nowell“ (both abcnotation.com, D major) and with the melody-only MusicXML of Worship and Rejoice #229 on hymnary.org; the three agree; underlay after Anderson; the verse melody is written out for the second half of the verse; chords our own",
+  "volne": "traditional (English carol, printed by Davies Gilbert 1823 and William Sandys 1833)",
+  "preklad": {
+   "cs": "První Noel"
+  }
+ },
+ {
+  "txt": "christmas/good-king-wenceslas.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with Paul Hardy's Xmas Tunebook and Ted Neil's version (abcusers 2002), both on abcnotation.com in G major, which agree; text from Neale's first verse; the repeat is written out for the second line of text; chords our own",
+  "volne": "traditional melody (TEMPUS ADEST FLORIDUM, Piae Cantiones 1582); lyrics John Mason Neale †1866",
+  "preklad": {
+   "cs": "Dobrý král Václav"
+  }
+ },
+ {
+  "txt": "christmas/away-in-a-manger.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Kirkpatrick's tune CRADLE SONG compared note by note with the second score in the English Wikipedia article „Away in a Manger“ (F major, with lyrics) and Paul Hardy's Xmas Tunebook (abcnotation.com, G major); they agree; text as in Wikipedia (Kirkpatrick 1895 with „no crib for a bed“); transposed from F to G; chords our own",
+  "volne": "music William J. Kirkpatrick †1921 (tune CRADLE SONG); lyrics anonymous (USA, 1880s)",
+  "preklad": {
+   "cs": "V jesličkách"
+  }
+ },
+ {
+  "txt": "christmas/angels-we-have-heard-on-high.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody and underlay compared note by note with the score in the English Wikipedia article „Angels We Have Heard on High“ (F major, soprano), the Psalter Hymnal (Gray) #347 MusicXML on hymnary.org and Douglas D. Anderson's version (abcnotation.com, G major); follows the first two where Anderson differs (the note before „-ri-a“); verse melody written out for the second half of the verse, the Gloria refrain with its repeat and endings as printed; Barnes' harmony not used, chords our own",
+  "volne": "traditional French melody (tune GLORIA, „Les Anges dans nos campagnes“); English lyrics James Chadwick †1882",
+  "preklad": {
+   "cs": "Andělé na výsostech"
+  }
+ },
+ {
+  "txt": "christmas/we-three-kings.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody and underlay compared note by note with the score in the English Wikipedia article „We Three Kings“ (E minor, 3/8) and Paul Hardy's Xmas Tunebook (abcnotation.com, 6/8); they agree; written in 3/4 with doubled note values, fermata on „O“ left out, repeats written out for the second lines of text; chords our own",
+  "volne": "music and lyrics John Henry Hopkins Jr. †1891 (tune KINGS OF ORIENT)",
+  "preklad": {
+   "cs": "Tři králové z východu"
+  }
+ },
+ {
+  "txt": "christmas/jolly-old-saint-nicholas.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Melody compared note by note with two ABC versions on abcnotation.com: Douglas D. Anderson's (B-flat, with lyrics) and Thornton Rose's from „An Online Christmas Songbook“ (G); they agree; the low-resolution 1881 scan of Franklin Square Song Collection No. 1 (Wikimedia Commons, A major) was used for the words and to confirm the contour where readable; first verse as printed in 1881; transposed to G; chords our own",
+  "volne": "music James R. Murray †1905 (attributed, first printed 1874); lyrics after Emily Huntington Miller †1913, as printed 1881",
+  "preklad": {
+   "cs": "Veselý svatý Mikuláš"
+  }
+ },
+ {
+  "txt": "christmas/narodil-se-kristus-pan.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Melody compared note by note with the ABC score in the Czech Wikipedia article „Narodil se Kristus Pán“ and with Jednotný kancionál no. 201 (kancional.cz, the form sung today), which agree; a harmonized public-domain ABC from the stephenmerrony.co.uk hymn collection (abcnotation.com, in G) confirms the pitches incl. the augmented fourth (B natural); the optional grace note in bar 1 of the Kancionál is left out; first strophe, F major as printed; chords our own",
+  "volne": "traditional (Czech carol, 15th century)",
+  "preklad": {
+   "en": "Christ the Lord Is Born"
+  }
+ },
+ {
+  "txt": "christmas/pasli-ovce-valasi.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Today's form with the refrain compared note by note with Ondřej Fafejta's PMX source and PDF (CTAN, pmxchords/doc/examples/noel/pasli_ovce_valasi) and the school carol sheet „Veselé Vánoce v Květnici“ (kvetnice.eu, piano score, melody only), which agree; the free old print (Pazdírek, Malý koledníček 1939, „Pastýři Betlemští“) has an older tune without the refrain that agrees only in the closing fall to the tonic, so it is not followed; words of the first strophe as on Czech Wikisource („při betlémské salaši“, „tydlidom“); sung without the repeats some sheets add; chords our own",
+  "volne": "traditional (Moravian Wallachian carol)",
+  "preklad": {
+   "en": "The Wallachian Shepherds Grazed Their Sheep"
+  }
+ },
+ {
+  "txt": "christmas/nesem-vam-noviny.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Compared with L. R. Pazdírek, Malý koledníček (Brno 1939, no. 21, scan in the Moravian Library's Kramerius) and Jednotný kancionál no. 222 (kancional.cz); the old print has a plainer line (e.g. „Nesem vám“ C C D); this follows the Kancionál, the version sung today (the turns C–A, D–B♭ and A–C, G–A); first strophe, F major as printed; chords our own",
+  "volne": "traditional (Czech carol)",
+  "preklad": {
+   "en": "We Bring You News"
+  }
+ },
+ {
+  "txt": "christmas/pujdem-spolu-do-betlema.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Compared note by note with two prints in the Moravian Library's Kramerius: Národní písně pro školy obecné (1891, no. 81, after Erben) and Nový zpěvník z národních a vlasteneckých písní (1902, no. 25, melody of a three-part setting), which agree; repeat and endings as in 1902 (1891 writes them out); text as on Czech Wikisource („kolíbati“); first strophe, G major as printed; chords our own",
+  "volne": "traditional (Czech carol, in Erben's Prostonárodní české písně a říkadla)",
+  "preklad": {
+   "en": "Let's Go Together to Bethlehem"
+  }
+ },
+ {
+  "txt": "christmas/chtic-aby-spal.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Compared with Michna's melody in Capella regia musicalis (1693) and Pazdírek's Malý koledníček (1939), both transcribed on Czech Wikisource, and with Jednotný kancionál no. 220 (kancional.cz); rhythm as sung today (Kancionál, same as 1693; Pazdírek has rests after „zpívala“), Michna's original first strophe („Nynej, rozkošné děťátko“) instead of the Kancionál's newer words; transposed from F (1693) / A♭ (Pazdírek) to G major; chords our own",
+  "volne": "Adam Václav Michna z Otradovic †1676 (music and words)",
+  "preklad": {
+   "en": "Wishing Him to Sleep"
+  }
+ },
+ {
+  "txt": "christmas/jak-jsi-krasne-nevinatko.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Melody read note by note from F. Bartoš, Nové národní písně moravské s nápěvy do textu vřaděnými (1882, no. 406, scan in the Moravian Library's Kramerius), G major, second half repeated; the contour agrees with the score image on Radio Prague's carol page (in C); words as on Czech Wikisource („v prostřed bídy“, „před tebú“); first strophe; chords our own",
+  "volne": "traditional (Moravian carol)",
+  "preklad": {
+   "en": "How Beautiful You Are, Innocent Child"
+  }
+ },
+ {
+  "txt": "christmas/alle-jahre-wieder.txt",
+  "police": "christmas",
+  "jazyk": "de",
+  "zdroj": "Silcher's melody compared note by note with the scores in the German and English Wikipedia articles „Alle Jahre wieder“ (D major) and with F. M. Böhme's version under another text („Ich stand auf Berges Halde“, ESAC, abcnotation.com), which has the same pitches; first verse, D major as printed; chords our own",
+  "volne": "music Friedrich Silcher †1860; lyrics Wilhelm Hey †1854",
+  "preklad": {
+   "en": "Every Year Again",
+   "cs": "Každý rok zas"
+  }
+ },
+ {
+  "txt": "christmas/ihr-kinderlein-kommet.txt",
+  "police": "christmas",
+  "jazyk": "de",
+  "zdroj": "Compared note by note with the score in the German Wikipedia article „Ihr Kinderlein, kommet“ (D major), Douglas D. Anderson's ABC (abcnotation.com, E-flat) and Schulz's original melody „Wie reizend, wie wonnig“ in F. M. Böhme's collection (ESAC, abcnotation.com); in the last line Anderson repeats E where Wikipedia and Böhme have the leading note C♯ („uns“), followed here; first verse, D major as printed; chords our own",
+  "volne": "music Johann Abraham Peter Schulz †1800; lyrics Christoph von Schmid †1854",
+  "preklad": {
+   "en": "O Come, Little Children",
+   "cs": "Pojďte, dětičky"
+  }
+ },
+ {
+  "txt": "christmas/kling-glockchen-klingelingeling.txt",
+  "police": "christmas",
+  "jazyk": "de",
+  "zdroj": "Melody and lyrics compared note by note with the score in the German Wikipedia article „Kling, Glöckchen, klingelingeling“ (F major; the English Wikipedia score is the same); no second independent free score found; first verse with the closing lines written out; chords our own",
+  "volne": "traditional melody (19th century, composer unknown); lyrics Karl Enslin †1875",
+  "preklad": {
+   "en": "Ring, Little Bell",
+   "cs": "Zvonečku, cinkej"
+  }
+ },
+ {
+  "txt": "christmas/es-ist-ein-ros-entsprungen.txt",
+  "police": "christmas",
+  "jazyk": "de",
+  "zdroj": "Soprano of Michael Praetorius' setting (1609) compared note by note with the score in the German Wikipedia article „Es ist ein Ros entsprungen“ (F major) and with an anonymous ABC in John Chambers' collection (trillian.mit.edu via abcnotation.com, 2/4), which has the same pitches with plainer rhythm and passing notes on „bracht“; follows Praetorius' rhythm (ties and syncopes) as sung today; first verse, the repeat written out with its own words; chords our own",
+  "volne": "traditional (melody Speyer 1599, setting Michael Praetorius †1621; lyrics anonymous, 16th century)",
+  "preklad": {
+   "en": "Lo, How a Rose E'er Blooming",
+   "cs": "Vyrostla růže"
+  }
+ },
+ {
+  "txt": "christmas/il-est-ne-le-divin-enfant.txt",
+  "police": "christmas",
+  "jazyk": "fr",
+  "zdroj": "Compared note by note with the score in the English Wikipedia article „Il est né, le divin Enfant“ (G major), Paul Hardy's Xmas Tunebook and R. Stein's ABC (both abcnotation.com); the verse agrees in all three; on „chantons tous“ Hardy and Stein have G G–A where Wikipedia (with the words underlaid) has G A, followed here; refrain and first verse with D.C. al Fine; chords our own",
+  "volne": "traditional (French carol)",
+  "preklad": {
+   "en": "He Is Born, the Divine Child",
+   "cs": "Narodil se božský Syn"
+  }
+ },
+ {
+  "txt": "classics/mesicku-na-nebi-hlubokem.txt",
+  "police": "classics",
+  "jazyk": "cs",
+  "zdroj": "Melody compared note by note with the flutetunes.com flute-and-piano edition „Song to the Moon“ (G-flat major, 3/8, PDF and MIDI); lyrics from Kvapil's libretto on Czech Wikisource; transposed to G major, first strophe. The IMSLP piano-vocal score (Hudební matice 1910) could not be downloaded (IMSLP bot check); syllable placement under the ornaments (bars 3, 7, 14, 19, 22) approved in the parent's review (17 Nov 2026)",
+  "volne": "Antonín Dvořák †1904; libretto Jaroslav Kvapil †1950",
+  "preklad": {
+   "en": "Song to the Moon"
+  }
+ },
+ {
+  "txt": "classics/i-dovregubbens-hall.txt",
+  "police": "classics",
+  "jazyk": "no",
+  "zdroj": "Compared note by note with the Mutopia Project LilyPond source of Grieg's piano version (The University Society 1918, public domain): main theme A A B B A with the closing bar of the theme; transposed from B minor to A minor, written in the treble clef",
+  "volne": "Edvard Grieg †1907; no lyrics",
+  "preklad": {
+   "en": "In the Hall of the Mountain King",
+   "cs": "V jeskyni krále hor"
+  }
+ },
+ {
+  "txt": "classics/menuet-in-g-moll.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "Melody and bass compared note by note with the Mutopia Project edition (anna-magdalena-05, LilyPond source and PDF, after the Bach-Gesellschaft edition); whole minuet in the original G minor, ornaments and the inner notes of the two final chords left out",
+  "volne": "Christian Petzold †1733 (formerly attributed to J. S. Bach †1750)",
+  "preklad": {
+   "en": "Minuet in G Minor",
+   "cs": "Menuet g moll"
+  }
+ },
+ {
+  "txt": "classics/musette-in-d-dur.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "Melody compared note by note with the Mutopia Project edition (anna-magdalena-22), the flutetunes.com edition and the Bach-Gesellschaft scan of the Notebook (1894, Wikimedia Commons); form follows the Bach-Gesellschaft print (A repeated, Fine, B once, Da capo), the Mutopia and flutetunes editions repeat B and omit the Da capo; melody only",
+  "volne": "anonymous, Notebook for Anna Magdalena Bach 1725 (attributed to J. S. Bach †1750)",
+  "preklad": {
+   "en": "Musette in D Major",
+   "cs": "Musette D dur"
+  }
+ },
+ {
+  "txt": "classics/marche-in-d-dur.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "Melody and bass compared note by note with the Bach-Gesellschaft scan of the Notebook (1894, Wikimedia Commons) and the Musica Viva ABC on abcnotation.com; in bar 7 the ABC has E an octave too low, the Bach-Gesellschaft E5 is followed; written in 4/4 instead of cut time",
+  "volne": "C. P. E. Bach †1788",
+  "preklad": {
+   "en": "March in D Major",
+   "cs": "Pochod D dur"
+  }
+ },
+ {
+  "txt": "classics/air-orchestersuite-nr-3.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "The whole Air (first violin, both sections with repeats) compared note by note with two Mutopia Project editions after the Bach-Gesellschaft (bach-air, orchestral score; bach_air_bmv_1068, flute and guitar), which agree; transposed from D major to G major, grace notes and the final trill left out",
+  "volne": "J. S. Bach †1750; no lyrics",
+  "preklad": {
+   "en": "Air on the G String",
+   "cs": "Árie na struně G"
+  }
+ },
+ {
+  "txt": "classics/alla-hornpipe.txt",
+  "police": "classics",
+  "jazyk": "it",
+  "zdroj": "Compared note by note with the score excerpt „Handel Hornpipe from Water Music“ (Wikimedia Commons, used in the Wikipedia article Syncopation) and with the 18th-century print „The Celebrated Water Musick in Score“ (BnF scan on Wikimedia Commons, pp. 39–40, violins 1 and 2); in bar 2 the print has a quarter D, the commonly played eighths E–D (Wikipedia excerpt, as in the parallel bars 3–4) are used",
+  "volne": "G. F. Händel †1759; no lyrics",
+  "preklad": {
+   "en": "Hornpipe (Water Music)",
+   "cs": "Hornpipe z Vodní hudby"
+  }
+ },
+ {
+  "txt": "classics/ombra-mai-fu.txt",
+  "police": "classics",
+  "jazyk": "it",
+  "zdroj": "Vocal line and Italian text compared note by note with the piano-vocal edition by Pierre Gouin (Éditions Outremontaises, from IMSLP via Wikimedia Commons, in E-flat major) and checked against the public-domain vocal score „Largo von Händel mit deutschem Text“ (Wikimedia Commons, F major), which has the same melody; transposed to F major",
+  "volne": "G. F. Händel †1759; libretto Silvio Stampiglia †1725 after Nicolò Minato †1698",
+  "preklad": {
+   "en": "Largo (Never Was a Shade)",
+   "cs": "Largo z opery Xerxes"
+  }
+ },
+ {
+  "txt": "classics/abdelazer-rondeau.txt",
+  "police": "classics",
+  "jazyk": "en",
+  "zdroj": "First strain compared note by note with the setting „The Abdelazer Rondeau“ on thesession.org (tune 10911, D minor, 3/2) and with Jan Leontsky's trumpet arrangement on archive.org (abdelazer_trumpet), which have the same notes",
+  "volne": "Henry Purcell †1695; no lyrics",
+  "preklad": {
+   "cs": "Abdelazer: Rondeau"
+  }
+ },
+ {
+  "txt": "classics/la-primavera.txt",
+  "police": "classics",
+  "jazyk": "it",
+  "zdroj": "Compared note by note with the Mutopia Project edition of Vivaldi's Spring (spring1.ly, solo violin part, Allegro, bars 1–10); transposed from E major to G major",
+  "volne": "Antonio Vivaldi †1741; no lyrics",
+  "preklad": {
+   "en": "Spring",
+   "cs": "Jaro"
+  }
+ },
+ {
+  "txt": "classics/eine-kleine-nachtmusik.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "Opening theme (bars 1–10) of the first violin compared note by note with the Mutopia Project edition of K. 525/I (eine-kleine-nachtmusik-mvt1, LilyPond source and violin I PDF); moved down an octave, top note of the opening chords only, trills and grace notes left out",
+  "volne": "W. A. Mozart †1791",
+  "preklad": {
+   "en": "A Little Night Music",
+   "cs": "Malá noční hudba"
+  }
+ },
+ {
+  "txt": "classics/sonata-facile.txt",
+  "police": "classics",
+  "jazyk": "it",
+  "zdroj": "Bars 1–12 (right hand and left hand, up to the cadence on G) compared note by note with the Mutopia Project edition of K. 545/I (K545-1, LilyPond source and PDF, after IMSLP); original key and octave, trill in bar 4 written as plain notes",
+  "volne": "W. A. Mozart †1791",
+  "preklad": {
+   "en": "Piano Sonata in C Major, K. 545",
+   "cs": "Klavírní sonáta C dur KV 545"
+  }
+ },
+ {
+  "txt": "classics/rondo-alla-turca.txt",
+  "police": "classics",
+  "jazyk": "it",
+  "zdroj": "The A-minor main theme (both repeated parts) compared note by note with the Mutopia Project edition of K. 331/III (KV331_3_RondoAllaTurca, LilyPond source and PDF); original key and octave, top notes of the right-hand thirds and sixths, grace notes and trill left out",
+  "volne": "W. A. Mozart †1791",
+  "preklad": {
+   "en": "Turkish March",
+   "cs": "Turecký pochod"
+  }
+ },
+ {
+  "txt": "classics/der-vogelfanger-bin-ich-ja.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "Pitches and rhythm of the voice part (first strophe) compared note by note with the flutetunes.com flute version (G major) and the Commons score „Mozart. Papageno aria in Ukrainian.pdf“ (bass clef, with the German text), which agree; underlay as in that score and the Edition Peters vocal score (1893, Internet Archive), used for the text; written an octave above Papageno's bass clef, modern spelling (Weiß, aufs, Drum, heißa)",
+  "volne": "W. A. Mozart †1791; lyrics Emanuel Schikaneder †1812",
+  "preklad": {
+   "en": "The Bird-Catcher Am I",
+   "cs": "Já jsem ptáčník"
+  }
+ },
+ {
+  "txt": "classics/surprise-symphony.txt",
+  "police": "classics",
+  "jazyk": "en",
+  "zdroj": "Theme bars 1–16 compared note by note with the first-violin score excerpt in the English Wikipedia article „Symphony No. 94 (Haydn)“ and the 1858 William Clarke manuscript tune „Haydns Surprise“ (Village Music Project ABC, G major), which agree; transposed from C to G major, the surprise chord written as a close D major triad",
+  "volne": "J. Haydn †1809",
+  "preklad": {
+   "cs": "Symfonie s úderem kotlů"
+  }
+ },
+ {
+  "txt": "classics/sonatine-in-g.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "First section (bars 1–8, both hands) compared note by note with the Ravina edition „Sonatine en sol majeur“ (Leduc, Paris, BnF Gallica scan btv1b9073642k on Wikimedia Commons, p. 2) and the Musica Viva ABC (Frank Nordberg) on abcnotation.com, which agree; grace notes left out",
+  "volne": "attributed to L. van Beethoven †1827 (Anh. 5, composer uncertain, published 1830s)",
+  "preklad": {
+   "en": "Sonatina in G Major",
+   "cs": "Sonatina G dur"
+  }
+ },
+ {
+  "txt": "classics/frohlicher-landmann.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "Bars 1–14 (first section and the middle part up to its cadence on F) compared note by note with the Mutopia Project edition of Op. 68 No. 10 (schumann-op68-10-gai-laboureur, LilyPond source and PDF); where the tune is in the left hand it is written as the melody, an octave higher, without the off-beat chords",
+  "volne": "R. Schumann †1856",
+  "preklad": {
+   "en": "The Happy Farmer",
+   "cs": "Veselý rolník"
+  }
+ },
+ {
+  "txt": "classics/melodie.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "Whole piece, both hands, compared note by note with the Mutopia Project edition of Op. 68 No. 1 (schumann-op68-01-melodie, LilyPond source and PDF); the right hand's short second voice in bars 8 and 16 left out",
+  "volne": "R. Schumann †1856",
+  "preklad": {
+   "en": "Melody",
+   "cs": "Melodie"
+  }
+ },
+ {
+  "txt": "classics/heidenroslein.txt",
+  "police": "classics",
+  "jazyk": "de",
+  "zdroj": "Voice part and text of the first strophe compared note by note with the Mutopia Project edition of D 257 (SchubertF-D257-Heidenroeslein, LilyPond source and PDF); syllables follow its beaming (melismas), original key",
+  "volne": "F. Schubert †1828; lyrics J. W. von Goethe †1832",
+  "preklad": {
+   "en": "Little Rose on the Heath",
+   "cs": "Růžička na vřesovišti"
+  }
+ },
+ {
+  "txt": "classics/prelude-op-28-no-7.txt",
+  "police": "classics",
+  "jazyk": "fr",
+  "zdroj": "Whole prelude compared note by note with the Mutopia Project edition of Op. 28 No. 7 (Chop-28-7, LilyPond source and PDF); top notes of the right-hand chords as the melody, transposed from A to G major",
+  "volne": "F. Chopin †1849",
+  "preklad": {
+   "en": "Prelude in A Major, Op. 28 No. 7",
+   "cs": "Preludium A dur op. 28 č. 7"
+  }
+ },
+ {
+  "txt": "classics/lebedinoe-ozero.txt",
+  "police": "classics",
+  "jazyk": "ru",
+  "zdroj": "Oboe theme of the Scene (Act 2, No. 10), bars 1–8, compared note by note with the flutetunes.com „Swan Theme“ (PDF and MIDI, B minor) and Frank Nordberg's musicaviva.com ABC (D minor), which agree except bar 4: B tied over (flutetunes) vs. a rest before the upbeat (musicaviva); the tie is followed; transposed from B minor to A minor",
+  "volne": "P. I. Tchaikovsky †1893; no lyrics",
+  "preklad": {
+   "en": "Swan Lake",
+   "cs": "Labutí jezero"
+  }
+ },
+ {
+  "txt": "classics/tanets-fei-drazhe.txt",
+  "police": "classics",
+  "jazyk": "ru",
+  "zdroj": "Celesta theme (bars 5–20) compared note by note with the mfiles.co.uk orchestral score (celesta part, PDF and MIDI) and the flutetunes.com edition (PDF and MIDI), which agree; original E minor, two octaves below the sounding celesta",
+  "volne": "P. I. Tchaikovsky †1893; no lyrics",
+  "preklad": {
+   "en": "Dance of the Sugar Plum Fairy",
+   "cs": "Tanec Cukrové víly"
+  }
+ },
+ {
+  "txt": "classics/humoreska.txt",
+  "police": "classics",
+  "jazyk": "cs",
+  "zdroj": "Main theme (bars 1–8, repeated) compared note by note with the Simrock first edition of Op. 101 (scan on Wikimedia Commons, „Humoresques for Piano, Op. 101“, p. 10) and the mfiles.co.uk piano edition (PDF and MIDI), which agree; the flutetunes.com flute version has G-flat instead of E-flat at the start of bar 6 and was not followed; transposed from G-flat to F major, written in 4/4 with doubled note values",
+  "volne": "Antonín Dvořák †1904; no lyrics",
+  "preklad": {
+   "en": "Humoresque",
+   "cs": "Humoreska"
+  }
+ },
+ {
+  "txt": "classics/largo-z-novosvetske-symfonie.txt",
+  "police": "classics",
+  "jazyk": "cs",
+  "zdroj": "Cor anglais solo (bars 7–18) compared note by note with the cor anglais part excerpt „Dv CA extrait.jpg“ (Wikimedia Commons), the theme book „Orchesterwerke Romantik Themen“ (Wikimedia Commons, p. 229, first 4 bars) and the flutetunes.com edition (D-flat major), which agree; transposed to C major; instrumental, the later „Goin' Home“ words (W. A. Fisher) are not used",
+  "volne": "Antonín Dvořák †1904; no lyrics",
+  "preklad": {
+   "en": "Largo from the New World Symphony",
+   "cs": "Largo z Novosvětské symfonie"
+  }
+ },
+ {
+  "txt": "classics/vltava.txt",
+  "police": "classics",
+  "jazyk": "cs",
+  "zdroj": "Main theme compared note by note with the theme book „Orchesterwerke Romantik Themen“ (Wikimedia Commons, p. 829, „Die Moldau“) and the flutetunes.com edition (E minor, PDF and MIDI), which agree; the 8-bar phrase that Smetana writes out twice is written as a repeat with two endings; transposed from E minor to A minor",
+  "volne": "Bedřich Smetana †1884; no lyrics",
+  "preklad": {
+   "en": "The Moldau",
+   "cs": "Vltava"
+  }
+ },
+ {
+  "txt": "classics/morgenstemning.txt",
+  "police": "classics",
+  "jazyk": "no",
+  "zdroj": "Opening flute phrase (bars 1–4) compared note by note with the theme book „Orchesterwerke Romantik Themen“ (Wikimedia Commons, p. 287) and the mfiles.co.uk orchestral parts (flute 1 and oboes, PDF), which agree; the oboe's answer (bars 5–8) ends in G-sharp major and is left out; transposed from E major to C major, an octave lower",
+  "volne": "Edvard Grieg †1907; no lyrics",
+  "preklad": {
+   "en": "Morning Mood",
+   "cs": "Ráno"
+  }
+ },
+ {
+  "txt": "classics/galop-infernal.txt",
+  "police": "classics",
+  "jazyk": "fr",
+  "zdroj": "Main theme compared note by note with the flutetunes.com edition (D major, PDF and MIDI) and the ABC versions on abcnotation.com (John Chambers' „Galop“, Terry Traub's „The Galop“, „Can Can II“ from spuds.thursdaycontra.com); the first note follows flutetunes and Can Can II (a fifth below the second note; Chambers and Traub have it a fourth above), the 1st ending follows flutetunes; transposed from D to G major",
+  "volne": "Jacques Offenbach †1880; no lyrics",
+  "preklad": {
+   "en": "Infernal Galop (Can-can)",
+   "cs": "Pekelný galop (kankán)"
+  }
+ },
+ {
+  "txt": "classics/couplets-du-toreador.txt",
+  "police": "classics",
+  "jazyk": "fr",
+  "zdroj": "Refrain („Toréador, en garde“) compared note by note, with the French text and its underlay, with the Schirmer piano-vocal score (1895, Internet Archive „carmenoperainfou00bize2“, pp. 136–137, Escamillo) and checked against the flutetunes.com edition (PDF and MIDI); in bar 1 Escamillo's slurred A–A on „dor“ is written as one dotted eighth, as flutetunes and the chorus repeat have it; original F major, an octave above Escamillo",
+  "volne": "Georges Bizet †1875; libretto Henri Meilhac †1897 and Ludovic Halévy †1908",
+  "preklad": {
+   "en": "Toreador Song",
+   "cs": "Toreadorova píseň"
+  }
+ },
+ {
+  "txt": "classics/the-entertainer.txt",
+  "police": "classics",
+  "jazyk": "en",
+  "zdroj": "A section (first strain) compared note by note with the Mutopia Project edition (JoplinS/entertainer, LilyPond source after the 1902 edition, top notes of the right hand) and the flutetunes.com edition (PDF and MIDI), which agree; the 2nd ending is the close of the strain where it returns later in the piece; original C major, melody only",
+  "volne": "Scott Joplin †1917; no lyrics"
+ }
+]

@@ -1,0 +1,24 @@
+title: Dobrú noc, má milá
+author: traditional
+time: 4/4
+key: 0
+tempo: 100
+clef: treble
+---
+# A minor as on Pavel Hokr's sheet, an octave higher (the register of Pesničky pre všetkých)
+1) Am | E5/2=Do- F5/4=brú E5/4=noc,
+2) Dm | D5/2=má E5/4=mi- D5/4=lá,
+3) Am E@2 | C5/2=do- B4/2=brú
+4) Am | A4/1=noc,
+5) Am | E5/2=nech F5/4=ti E5/4=je
+6) Dm | D5/2=sám E5/4=Pán- D5/4=boh
+7) Am E@2 | C5/2=na B4/2=po-
+8) Am | A4/1=moc.
+9) C G@2 | C5/2=Do- D5/2=brú
+10) C | E5/1=noc,
+11) G | G5/2=do- F5/2=bre
+12) C | E5/1=spi,
+13) Am | E5/2=nech F5/4=sa E5/4=ti
+14) Dm | D5/2=sní- E5/4=va- D5/4=jú
+15) Am E@2 | C5/2=slad- B4/2=ké
+16) Am | A4/1=sny.

@@ -1,0 +1,20 @@
+title: Nesem vám noviny
+author: traditional
+time: 3/4
+key: -1
+tempo: 120
+clef: treble
+---
+# First strophe, F major. The repeat of the first line (new words) is written out; the third line repeats as printed.
+1) F Bb@2 | C5/4=Ne- C5/8=sem A4/8 D5/8=vám Bb4/8
+2) F Bb@2 | C5/4=no- C5/8=vi- A4/8 D5/8=ny, Bb4/8
+3) F C7@2 | C5/4=po- A4/8=slou- C5/8 G4/8=chej- A4/8
+4) F | F4/2=te, r/4
+5) F Bb@2 | C5/4=z_bet- C5/8=lém- A4/8 D5/8=ské Bb4/8
+6) F Bb@2 | C5/4=kra- C5/8=ji- A4/8 D5/8=ny, Bb4/8
+7) F C7@2 | C5/4=po- A4/8=zor C5/8 G4/8=dej- A4/8
+8) F | F4/2=te. r/4
+9) {|:} F | F4/4=Slyš- A4/8=te F4/8=je A4/8=pil- C5/8=ně
+10) {:|} F C@2 | F4/4=a A4/8=ne- F4/8=o- G4/8=myl- C4/8=ně,
+11) F C7@2 | C5/4=roz- A4/8=jí- C5/8 G4/8=mej- A4/8
+12) F | F4/2.=te!

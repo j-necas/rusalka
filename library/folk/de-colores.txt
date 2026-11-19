@@ -1,0 +1,28 @@
+title: De colores
+author: traditional
+time: 6/8
+key: 0
+tempo: 96
+clef: treble
+---
+# C major as in the Chambers transcription (its upper voice); the refrain is sung twice
+1) C | G4/4.~=De G4/4 F4/8=co-
+2) C | F4/8=lo- E4/4=res, r/8 E4/8=de F4/8=co-
+3) C | G4/8=lo- G4/8.=res G4/16=se G4/8=vis- F4/8=ten E4/8=los
+4) C | G4/8=cam- G4/8.=pos G4/16=en G4/8=la F4/8=pri- E4/8=ma-
+5) G7 | G4/8=ve- F4/4~=ra. F4/4 r/8
+6) G7 | F4/4.~=De F4/4 E4/8=co-
+7) G7 | E4/8=lo- D4/4=res, r/8 F4/8=de G4/8=co-
+8) G7 | A4/8=lo- A4/8.=res A4/16=son A4/8=los G4/8=pa- F4/8=ja-
+9) G7 | A4/8=ri- A4/8.=tos A4/16=que A4/8=vie- G4/8=nen F4/8=de_a-
+10) C | A4/8=fue- G4/4~=ra. G4/4 r/8
+11) C | G4/4.~=De G4/4 F4/8=co-
+12) C | F4/8=lo- E4/4=res, r/8 E4/8=de F4/8=co-
+13) C | G4/8=lo- G4/8=res G4/8=es G4/8=el F4/8=ar- E4/8=co
+14) C C7@1.5 | G4/8=i- G4/8.=ris G4/16=que G4/8=ve- A4/8=mos Bb4/8=lu-
+15) F | A4/4.=cir. r/8 F4/8=Y G4/8=por
+16) {|:} F G7@1.5 | A4/8=e- A4/8=so A4/8=los A4/8=gran- B4/8.=des A4/16=a-
+17) C Am@1.5 | A4/8=mo- G4/8.=res G4/16=de G4/8=mu- A4/8=chos G4/8=co-
+18) Dm G7@1.5 | G4/8=lo- F4/8=res G4/8=me A4/8=gus- G4/8=tan F4/8=a
+19) {1. :|} C | E4/4.=mí. r/8 F4/8=Y G4/8=por
+20) {2.} C | E4/4.=mí.

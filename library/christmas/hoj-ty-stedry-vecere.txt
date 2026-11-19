@@ -1,0 +1,23 @@
+title: Hoj, ty Štědrý večere
+author: traditional
+time: 3/4
+key: 1
+tempo: 108
+clef: treble
+---
+1) G | G4/2=Hoj, D4/4=ty
+2) G | G4/2=Štěd- B4/4=rý
+3) D7 | A4/2=ve- B4/4=če-
+4) G | G4/2=re, r/4
+5) G | G4/2=ty D4/4=ta-
+6) G | G4/2=jem- B4/4=ný
+7) D7 | A4/2=svát- B4/4
+8) G | G4/2=ku, r/4
+9) D | A4/2=co- G4/4=že
+10) D | F#4/2=ko- G4/4=mu
+11) D7 | A4/2=dob- B4/4=ré-
+12) D7 | C5/2=ho r/4
+13) G | B4/2=ne- D5/4=seš
+14) G | B4/2=na G4/4=pa-
+15) G D7@2 | B4/2=mát- A4/4
+16) G | G4/2=ku. r/4

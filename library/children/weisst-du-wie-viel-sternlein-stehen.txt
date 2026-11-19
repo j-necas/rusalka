@@ -1,0 +1,25 @@
+title: Weißt du, wie viel Sternlein stehen
+author: traditional, lyrics by Wilhelm Hey
+time: 3/4
+key: -1
+tempo: 84
+clef: treble
+---
+# both repeats written out (each with its own words)
+1) | F4/8=Weißt G4/8=du,
+2) F C7@2 | A4/4=wie A4/4=viel Bb4/8=Stern- G4/8=lein
+3) F | D5/8=ste- C5/8 C5/4=hen A4/8=an C5/8=dem
+4) C7 | C5/8=blau- Bb4/8 Bb4/4=en C5/8=Him- Bb4/8=mels-
+5) F | A4/2=zelt? F4/8=Weißt G4/8=du,
+6) F C7@2 | A4/4=wie A4/4=viel Bb4/8=Wol- G4/8=ken
+7) F | D5/8=ge- C5/8 C5/4=hen A4/8=weit- C5/8=hin
+8) C7 | C5/8=ü- Bb4/8 Bb4/4=ber C5/8=al- Bb4/8=le
+9) F | A4/2=Welt? C5/8=Gott A4/8=der
+10) C7 | A4/8=Herr G4/8 G4/4=hat D5/8=sie Bb4/8=ge-
+11) F | Bb4/8=zäh- A4/8 A4/4=let, C5/8=dass A4/8=ihm
+12) C7 | A4/8=auch G4/8 G4/4=nicht D5/8=ei- Bb4/8=nes
+13) F | Bb4/8=feh- A4/8 A4/4=let F4/8=an G4/8=der
+14) F C7@2 | A4/4=gan- A4/4=zen Bb4/8=gro- G4/8=ßen
+15) F | D5/4=Zahl, C5/4 A4/8=an C5/8=der
+16) C7 | C5/8=gan- Bb4/8 Bb4/4=zen C5/8=gro- Bb4/8=ßen
+17) F | A4/2=Zahl.

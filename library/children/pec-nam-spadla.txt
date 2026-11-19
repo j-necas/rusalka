@@ -1,0 +1,15 @@
+title: Pec nám spadla
+author: traditional
+time: 4/4
+key: 0
+tempo: 112
+clef: treble
+---
+1) C | G4/4=Pec E4/4=nám E4/4=spad- E4/4=la,
+2) C | G4/4=pec E4/4=nám E4/4=spad- E4/4=la,
+3) C | G4/4=kdo- G4/4=pak A4/4=nám G4/4=ji
+4) G7 | G4/4=po- F4/4=sta- F4/2=ví?
+5) G7 | F4/4=Sta- D4/4=rý D4/4=pe- D4/4=cař
+6) G7 | F4/4=ne- D4/4=ní D4/4=do- D4/4=ma
+7) G7 | F4/4=a F4/4=mla- G4/4=dý F4/4=to
+8) G7 C@1 | F4/4=ne- E4/4=u- E4/2=mí.

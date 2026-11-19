@@ -1,0 +1,24 @@
+title: Auld Lang Syne
+author: traditional, lyrics by Robert Burns
+time: 4/4
+key: -1
+tempo: 84
+clef: treble
+---
+1) | C4/4=Should
+2) F | F4/4.=auld F4/8=ac- F4/4=quain- A4/4=tance
+3) C7 | G4/4.=be F4/8=for- G4/4=got, A4/4=and
+4) F | F4/4.=ne- F4/8=ver A4/4=brought C5/4=to
+5) Bb | D5/2.=mind? D5/4=Should
+6) F | C5/4.=auld A4/8=ac- A4/4=quain- F4/4=tance
+7) C7 | G4/4.=be F4/8=for- G4/4=got, A4/4=and
+8) Dm C7@2 | F4/4.=auld D4/8 D4/4=lang C4/4
+9) F | F4/2.=syne? D5/4=For
+10) F | C5/4.=auld A4/8 A4/4=lang F4/4
+11) C7 | G4/4.=syne, F4/8=my G4/4=jo, D5/4=for
+12) F | C5/4.=auld A4/8 A4/4=lang C5/4
+13) Bb | D5/2.=syne, D5/4=we’ll
+14) F | C5/4.=tak’ A4/8=a A4/4=cup F4/4=o’
+15) C7 | G4/4.=kind- F4/8=ness G4/4=yet, A4/4=for
+16) Dm C7@2 | F4/4.=auld D4/8 D4/4=lang C4/4
+17) F | F4/2.=syne.

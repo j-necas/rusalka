@@ -1,0 +1,16 @@
+title: Hořela lípa, hořela
+author: traditional
+time: 3/4
+key: 1
+tempo: 116
+clef: treble
+---
+# G major as in Wünsch, České nápěvy (1922); bars 5-8 as sung today (Pesničky pre všetkých, horela_lipa_horela_akordeon_1.pdf, from D major)
+1) G | D5/4=Ho- D5/8=ře- C5/8=la B4/8=lí- C5/8=pa,
+2) G | D5/8=ho- C5/8=ře- B4/4=la, r/4
+3) Am | C5/4=pod C5/8=ní B4/8=pa- A4/8=nen- B4/8=ka
+4) D7 | C5/8=se- B4/8=dě- A4/4=la, r/4
+5) {|:} Am | A4/4=jis- A4/8=křič- G4/8=ky F#4/8=na G4/8=ni
+6) D | A4/8=pa- B4/8=da- C5/4=ly, r/4
+7) D7 | C5/8=mlá- E5/8 D5/8=den- C5/8=ci B4/8=pro A4/8=ni
+8) {:|} G | B4/8=pla- A4/8=ka- G4/4=li. r/4

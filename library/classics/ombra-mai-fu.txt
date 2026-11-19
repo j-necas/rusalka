@@ -1,0 +1,23 @@
+title: Ombra mai fù
+author: music by Georg Friedrich Händel, lyrics by Silvio Stampiglia after Nicolò Minato
+time: 3/4
+key: -1
+tempo: 60
+clef: treble
+---
+# Serse (Xerxes), HWV 40, Act 1: the first strophe of the aria (vocal line), transposed from E-flat major (edition used) to F major;
+# the two bars of orchestral interlude after „fù“ kept as rests; trill in bar 11 left out
+1) F | r/4 C5/2~=Om-
+2) F | C5/2.~
+3) C7 | C5/4 A4/4=bra G4/8.=mai F4/16
+4) Dm | F4/2.=fù
+5) F Bb@2 | r/2.
+6) F | r/2.
+7) Gm F@2 | D4/4=di E4/4=ve- F4/16=ge- G4/16 A4/8
+8) C | G4/4.=ta- F4/8=bi- G4/4=le
+9) Bb | D5/4=ca- D5/4=ra_ed E5/4=a-
+10) F | F5/4.=ma- C5/8=bi- C5/4=le
+11) Gm C@2 | r/8 D5/8=so- Bb4/4.=a- A4/8=ve
+12) F | A4/2=più; F4/4~=om-
+13) C7 | F4/4 E4/4=bra D4/8.=mai C4/16
+14) F | C4/2.=fù

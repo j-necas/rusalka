@@ -1,0 +1,25 @@
+title: Cadet Rousselle
+author: traditional, lyrics by Gaspard de Chenu
+time: 6/8
+key: 1
+tempo: 132
+clef: treble
+---
+# G major as in the French Wikipedia score; first verse.
+1) | D4/8=Ca- E4/8=det F#4/8=Rous-
+2) G | G4/4=selle G4/8=a G4/4=trois B4/8=mai-
+3) G | G4/4.=sons, A4/8=Ca- A4/8=det A4/8=Rous-
+4) D7 | A4/4=selle G4/8=a F#4/4=trois E4/8=mai-
+5) G | D4/4.=sons, D4/8=qui E4/8=n’ont F#4/8=ni
+6) G | G4/4=pou- G4/8=tres G4/4=ni B4/8=che-
+7) G | G4/4.=vrons, A4/8=qui A4/8=n’ont A4/8=ni
+8) D7 | A4/4=pou- G4/8=tres F#4/4=ni E4/8=che-
+9) G D7@1.5 | D4/4.=vrons. A4/8=C’est A4/8=pour A4/8=lo-
+10) D7 | A4/4=ger B4/8=les C5/4=hi- D5/8=ron-
+11) D7 | C5/4=del- B4/8=les, A4/8=que A4/8=di- A4/8=rez-
+12) D7 | A4/4=vous B4/8=d’Ca- C5/4=det D5/8=Rous-
+13) D7 G@1.5 | C5/4=sel- B4/8=le_? G4/4.=Ah_!
+14) G | G4/4.=Ah_! G4/8=Ah_! F#4/8=Oui, E4/8=vrai-
+15) G | D4/4.=ment, G4/8=Ca- F#4/8=det G4/8=Rous-
+16) D7 | A4/4=selle A4/8=est G4/4=bon F#4/8=en-
+17) G | G4/4.=fant_!

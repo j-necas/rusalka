@@ -1,0 +1,12 @@
+{
+  "name": "rusalka-sheet-music",
+  "private": true,
+  "type": "module",
+  "description": "Skill helper script: checks, renders and adds sheet music to the Rusalka app (piano coach)",
+  "license": "MIT",
+  "dependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "@xmldom/xmldom": "0.9.8",
+    "verovio": "6.4.1"
+  }
+}

@@ -1,0 +1,15 @@
+title: Měla babka čtyři jabka
+author: traditional
+time: 3/4
+key: -1
+tempo: 120
+clef: treble
+---
+1) F | A4/8=Mě- C5/8=la F4/4=bab- F4/4=ka
+2) C | E4/8=čty- G4/8=ři C4/4=jab- C4/4=ka
+3) C7 | Bb4/8=a Bb4/8=dě- A4/4=dou- G4/4=šek
+4) F C@1 | A4/8=jen D5/8=dvě. C5/4 r/4
+5) F | A4/8=Dej C5/8=mi, F4/4=bab- F4/4=ko,
+6) C | E4/8=jed- G4/8=no C4/4=jab- C4/4=ko,
+7) C7 | Bb4/8=bu- Bb4/8=de- A4/4=me G4/4=mít
+8) C7 F@1 | G4/4=stej- F4/4=ně.

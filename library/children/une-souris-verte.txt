@@ -1,0 +1,25 @@
+title: Une souris verte
+author: traditional
+time: 2/4
+key: 1
+tempo: 100
+clef: treble
+---
+# G major as in the French Wikipedia and Mama Lisa scores; first verse (up to „tout chaud“).
+1) G | G4/8=U- G4/8=ne G4/8=sou- A4/8=ris
+2) G | G4/4=ver- D4/4=te
+3) G | G4/8=qui G4/8=cou- G4/8=rait A4/8=dans
+4) G | G4/4=l’her- D4/4=be.
+5) C | C5/8=Je B4/8=l’at- A4/8=tra- B4/8=pe
+6) D7 | C5/8=par B4/8=la A4/4=queue,
+7) C | C5/8=je B4/8=la A4/8=mon- B4/8=tr’à
+8) D7 | C5/8=ces B4/8=mes- A4/4=sieurs.
+9) G | G4/8=Ces G4/8=mes- G4/8=sieurs A4/8=me
+10) G | G4/4=di- D4/4=sent:
+11) G | G4/8=trem- G4/8=pez- G4/8=la A4/8=dans
+12) G | G4/4=l’hui- D4/4=le,
+13) G | G4/8=trem- G4/8=pez- G4/8=la G4/8=dans
+14) D7 G@1 | A4/4=l’eau, G4/8=ça G4/8=fe-
+15) D7 G@0.5 | A4/8=ra G4/8=un G4/8=es- G4/8=car-
+16) D7 | A4/4=got D5/4=tout
+17) G | G4/2=chaud.

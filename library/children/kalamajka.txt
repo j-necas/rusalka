@@ -1,0 +1,15 @@
+title: Kalamajka
+author: traditional
+time: 4/4
+key: 0
+tempo: 152
+clef: treble
+---
+1) C | G4/4=Ka- E4/4=la- G4/4=maj- E4/4=ka
+2) F | F4/4=mik G4/4=mik A4/2=mik,
+3) G7 | F4/4=o- D4/4=že- F4/4=nil D4/4=se
+4) C | E4/4=ko- F4/4=mi- G4/2=ník,
+5) C | E4/4=vzal C4/4=si E4/4=že- C4/4=nu
+6) G7 | D4/4=E- E4/4=liš- F4/2=ku
+7) G7 | D4/4=v_roz- B3/4=tr- D4/4=ha- B3/4=ným
+8) C | C4/4=ko- E4/4=žíš- C4/2=ku.

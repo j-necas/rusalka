@@ -1,0 +1,20 @@
+title: Summ, summ, summ
+author: traditional, lyrics by August Heinrich Hoffmann von Fallersleben
+time: 4/4
+key: 1
+tempo: 132
+clef: treble
+---
+# written in 4/4 with quarter notes instead of 2/4 with eighths
+1) G D7@2 | D5/2=Summ, C5/2=summ,
+2) G | B4/2=summ! r/2
+3) Am D7@2 | A4/4=Bien- B4/4=chen, C5/4=summ A4/4=her-
+4) G | G4/2=um! r/2
+5) G | B4/4=Ei, C5/4=wir D5/4=tun B4/4=dir
+6) D | A4/4=nichts B4/4=zu- C5/4=lei- A4/4=de,
+7) G | B4/4=flieg C5/4=nur D5/4=aus B4/4=in
+8) D | A4/4=Wald B4/4=und C5/4=Hei- A4/4=de!
+9) G D7@2 | D5/2=Summ, C5/2=summ,
+10) G | B4/2=summ! r/2
+11) Am D7@2 | A4/4=Bien- B4/4=chen, C5/4=summ A4/4=her-
+12) G | G4/2=um! r/2

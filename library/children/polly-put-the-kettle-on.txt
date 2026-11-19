@@ -1,0 +1,23 @@
+title: Polly Put the Kettle On
+author: traditional
+time: 2/4
+key: 1
+tempo: 100
+clef: treble
+---
+1) G | D5/8=Pol- E5/8=ly, D5/8=put C5/8=the
+2) G | B4/8=ket- G4/8=tle G4/4=on,
+3) D7 | A4/8=Pol- B4/8=ly, A4/8=put G4/8=the
+4) D7 | F#4/8=ket- D4/8=tle D4/4=on,
+5) G | D5/8=Pol- E5/8=ly, D5/8=put C5/8=the
+6) G | B4/8=ket- G4/8=tle G4/8=on, B4/8=we’ll
+7) C D7@1 | E4/4=all F#4/4=have
+8) G | G4/2=tea.
+9) G D7@1 | B4/8=Su- G4/8=key, C5/8=take A4/8=it
+10) G | B4/8=off G4/8=a- G4/4=gain,
+11) C D7@1 | C5/8=Su- E4/8=key, A4/8=take G4/8=it
+12) D7 | F#4/8=off D4/8=a- D4/4=gain,
+13) G D7@1 | B4/8=Su- G4/8=key, C5/8=take A4/8=it
+14) G | B4/8=off G4/8=a- G4/8=gain, B4/8=they’ve
+15) C D7@1 | E4/4=all F#4/8=gone F#4/8=a-
+16) G | G4/2=way.

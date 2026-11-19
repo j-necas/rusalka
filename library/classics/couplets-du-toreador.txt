@@ -1,0 +1,21 @@
+title: Couplets du Toréador
+author: music by Georges Bizet, lyrics by Henri Meilhac and Ludovic Halévy
+time: 4/4
+key: -1
+tempo: 108
+clef: treble
+---
+# Carmen, Act 2, No. 14: the refrain "Toréador, en garde" as Escamillo sings it, in the original F major,
+# written an octave higher in the treble clef (as the sopranos sing it in the chorus); grace notes left out
+1) F | C5/4=To- D5/8.=ré- C5/16=a- A4/8.=dor, r/16 A4/4=en
+2) F | A4/8.=gar- G4/16 A4/8. Bb4/16 A4/4~=de! A4/8 r/8
+3) C7 | Bb4/4=To- G4/8.=ré- C5/16=a- A4/4~=dor! A4/8 r/8
+4) F C7@2 | F4/4=To- D4/8.=ré- G4/16=a- C4/4~=dor! C4/8 r/8
+5) Gm | G4/2=Et G4/8=son- D5/8=ge C5/8=bien, Bb4/8=oui,
+6) F | A4/8=son- G4/8=ge_en A4/8=com- Bb4/8=bat- A4/4~=tant A4/8 r/8
+7) Am E@3 | E4/4=Qu'un A4/4=œil A4/4=noir G#4/8=te B4/8=re-
+8) A | E5/1=gar-
+9) A7 C7@2 | E5/8=de D5/16t=Et E5/16t D5/16t C#5/8=que D5/8=l'a- G4/8=mour A4/8=t'at- Bb4/4=tend,
+10) F | r/8 A4/16t=To- Bb4/16t A4/16t F4/8=ré- D5/8=a- C5/4~=dor, C5/8 r/8
+11) C7 | r/8 F4/16t=L'a- G4/16t F4/16t C4/8=mour, Bb4/8=l'a- A4/4=mour G4/4=t'at-
+12) F | F4/4.=tend!

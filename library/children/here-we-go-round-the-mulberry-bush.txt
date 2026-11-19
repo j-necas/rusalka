@@ -1,0 +1,15 @@
+title: Here We Go Round the Mulberry Bush
+author: traditional
+time: 6/8
+key: 1
+tempo: 108
+clef: treble
+---
+1) G | G4/8=Here G4/8=we G4/8=go G4/4=round B4/8=the
+2) G | D5/4=mul- B4/8=b’ry G4/4=bush, G4/8=the
+3) D7 | A4/4=mul- A4/8=b’ry A4/4=bush, G4/8=the
+4) D | F#4/4=mul- E4/8=b’ry D4/4.=bush.
+5) G | G4/8=Here G4/8=we G4/8=go G4/4=round B4/8=the
+6) G | D5/4=mul- B4/8=b’ry G4/4=bush, G4/8=so
+7) D7 | A4/4=ear- A4/8=ly D4/4=in D4/8=the
+8) G | G4/4.=mor- G4/4.=ning.

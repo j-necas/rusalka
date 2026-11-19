@@ -1,0 +1,25 @@
+title: Surprise Symphony
+author: Joseph Haydn
+time: 2/4
+key: 1
+tempo: 60
+clef: treble
+---
+# Symphony No. 94 in G major, Hob. I:94, 2nd movement (Andante): the theme (bars 1–16, first violin), played softly twice;
+# the second time ends with the loud "surprise" chord (bar 16). Transposed from C major to G major; the chord is written as a close D major triad
+1) G | G4/8 G4/8 B4/8 B4/8
+2) G | D5/8 D5/8 B4/4
+3) D7 | C5/8 C5/8 A4/8 A4/8
+4) D7 | F#4/8 F#4/8 D4/4
+5) G | G4/8 G4/8 B4/8 B4/8
+6) G | D5/8 D5/8 B4/4
+7) A7 | G5/8 G5/8 C#5/8 C#5/8
+8) D | D5/4 D4/8 r/8
+9) G | G4/8 G4/8 B4/8 B4/8
+10) G | D5/8 D5/8 B4/4
+11) D7 | C5/8 C5/8 A4/8 A4/8
+12) D7 | F#4/8 F#4/8 D4/4
+13) G | G4/8 G4/8 B4/8 B4/8
+14) G | D5/8 D5/8 B4/4
+15) A7 | G5/8 G5/8 C#5/8 C#5/8
+16) D | D5/8 r/8 D4+F#4+A4/4

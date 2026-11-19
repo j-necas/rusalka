@@ -1,0 +1,17 @@
+title: Alle meine Entchen
+author: traditional
+time: 4/4
+key: 0
+tempo: 120
+clef: treble
+---
+1) C | C4/4=Al- D4/4=le E4/4=mei- F4/4=ne
+2) C | G4/2=Ent- G4/2=chen
+3) F | A4/4=schwim- A4/4=men A4/4=auf A4/4=dem
+4) C | G4/1=See,
+5) F | A4/4=schwim- A4/4=men A4/4=auf A4/4=dem
+6) C | G4/1=See,
+7) G7 | F4/4=Köpf- F4/4=chen F4/4=in F4/4=das
+8) C | E4/2=Was- E4/2=ser,
+9) G7 | D4/4=Schwänz- D4/4=chen D4/4=in D4/4=die
+10) C | C4/1=Höh’.

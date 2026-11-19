@@ -1,0 +1,16 @@
+title: Kommt ein Vogel geflogen
+author: traditional
+time: 3/4
+key: -1
+tempo: 100
+clef: treble
+---
+1) | A4/8=Kommt Bb4/8=ein
+2) F | C5/4=Vo- A4/4=gel A4/4=ge-
+3) C7 | A4/4=flo- G4/4=gen, G4/8=setzt A4/8=sich
+4) C7 | Bb4/4=nie- G4/4=der G4/8=auf D5/8=mein’
+5) F | C5/2=Fuß, A4/8=hat Bb4/8=ein’
+6) F | C5/4=Zet- A4/4=tel A4/4=im
+7) C7 | A4/4=Schna- G4/4=bel, G4/8=von A4/8=der
+8) C7 | Bb4/4=Mut- E4/4=ter E4/4=ein’
+9) F | F4/2=Gruß.

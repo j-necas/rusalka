@@ -1,0 +1,33 @@
+title: Molly Malone
+author: traditional
+time: 3/4
+key: 1
+tempo: 132
+clef: treble
+---
+# first verse and chorus
+1) | D4/4=In
+2) G | G4/4=Dub- G4/4.=lin's G4/8=fair
+3) G | G4/8=ci- B4/4.=ty, G4/8=where G4/8=the
+4) D7 | A4/4=girls A4/4.=are A4/8=so
+5) D7 | A4/8=pret- C5/4.=ty, A4/4=I
+6) G | B4/4=first A4/4=set G4/4=my
+7) G | D5/4=eyes C5/4=on B4/4=sweet
+8) Em | B4/4.=Mol- A4/8=ly G4/4=Ma-
+9) D7 | A4/2=lone, D4/8=as D4/8=she
+10) G | G4/4=wheeled G4/4.=her G4/8=wheel-
+11) G | G4/8=bar- B4/4.=row G4/4=through
+12) D7 | A4/4=streets A4/4.=broad A4/8=and
+13) D7 | A4/8=nar- C5/4.=row, A4/8=cry- A4/8=ing
+14) G | B4/8=Cock- D5/4.=les C5/4=and
+15) G | B4/8=mus- D5/4.=sels, C5/4=a-
+16) G D7@2 | B4/4.=live, G4/8=a- A4/4=live,
+17) G | G4/2=oh! D4/4=A-
+18) G | G4/4.=live, G4/8=a- G4/4=live,
+19) G | G4/8=oh! B4/4. G4/4=a-
+20) D7 | A4/4.=live, A4/8=a- A4/4=live,
+21) D7 | A4/8=oh! C5/4. A4/8=cry- A4/8=ing
+22) G | B4/8=Cock- D5/4.=les C5/4=and
+23) G | B4/8=mus- D5/4.=sels, C5/4=a-
+24) G D7@2 | B4/4.=live, G4/8=a- A4/4=live,
+25) G | G4/2.=oh!

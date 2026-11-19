@@ -1,0 +1,24 @@
+title: What Shall We Do with the Drunken Sailor
+author: traditional
+time: 4/4
+key: 0
+tempo: 144
+clef: treble
+---
+# D Dorian (all white keys), transposed from E Dorian (pghardy, thesession); verse and chorus
+1) Dm | A4/4=What A4/8=shall A4/8=we A4/4=do A4/8=with A4/8=the
+2) Dm | A4/4=drunk- D4/4=en F4/4=sail- A4/4=or,
+3) C | G4/4=What G4/8=shall G4/8=we G4/4=do G4/8=with G4/8=the
+4) C | G4/4=drunk- C4/4=en E4/4=sail- G4/4=or,
+5) Dm | A4/4=What A4/8=shall A4/8=we A4/4=do A4/8=with A4/8=the
+6) Dm | A4/4=drunk- B4/4=en C5/4=sail- D5/4=or
+7) C | C5/4=ear- A4/4=ly G4/4=in E4/4=the
+8) Dm | D4/2=morn- D4/4=ing? r/4
+9) Dm | A4/2=Way, A4/4.=hay, A4/8=and
+10) Dm | A4/4=up D4/4=she F4/4=ri- A4/4=ses,
+11) C | G4/2=Way, G4/4.=hay, G4/8=and
+12) C | G4/4=up C4/4=she E4/4=ri- G4/4=ses,
+13) Dm | A4/2=Way, A4/4.=hay, A4/8=and
+14) Dm | A4/4=up B4/4=she C5/4=ri- D5/4=ses
+15) C | C5/4=ear- A4/4=ly G4/4=in E4/4=the
+16) Dm | D4/2=morn- D4/4=ing. r/4

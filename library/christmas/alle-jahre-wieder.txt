@@ -1,0 +1,16 @@
+title: Alle Jahre wieder
+author: Friedrich Silcher, lyrics by Wilhelm Hey
+time: 4/4
+key: 2
+tempo: 92
+clef: treble
+---
+# First verse, D major as printed.
+1) D A7@3 | A4/4.=Al- B4/8=le A4/4=Jah- G4/4=re
+2) D A@2 | F#4/2=wie- E4/2=der
+3) D | D4/4=kommt E4/8=das F#4/8 G4/4=Chris- F#4/4=tus-
+4) A7 | E4/2.=kind r/4
+5) D | F#4/4=auf A4/4=die B4/4=Er- A4/4=de
+6) G A7@2 | D5/2=nie- C#5/4=der, B4/4
+7) D A7@2 | A4/4=wo G4/8=wir F#4/8 G4/4=Men- A4/4=schen
+8) D | F#4/2.=sind. r/4

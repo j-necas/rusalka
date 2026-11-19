@@ -1,0 +1,20 @@
+title: À la claire fontaine
+author: traditional
+time: 2/4
+key: -1
+tempo: 72
+clef: treble
+---
+# F major as in both sources
+1) F | F4/4=À F4/8=la A4/8=clai-
+2) F | A4/8=re G4/8=fon- A4/8=tai- G4/8=ne
+3) F | F4/4=M’en F4/8=al- A4/8=lant
+4) F | A4/8=pro- G4/8=me- A4/4=ner,
+5) F | A4/4=J’ai A4/8=trou- G4/8=vé
+6) F | F4/8=l’eau A4/8=si C5/8=bel- A4/8=le
+7) F | C5/4=Que C5/8=je A4/8=m’y
+8) F C7@1 | F4/8=suis A4/8=bai- G4/4=gnée.
+9) F | F4/4=Il F4/8=y_a A4/8=long-
+10) F | A4/8=temps G4/16=que F4/16=je A4/8=t’ai- F4/8=me,
+11) F | A4/4=Ja- A4/8=mais G4/16=je F4/16=ne
+12) C7 F@1 | A4/8=t’ou- G4/8=blie- F4/4=rai.

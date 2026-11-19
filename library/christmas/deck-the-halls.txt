@@ -1,0 +1,24 @@
+title: Deck the Halls
+author: traditional Welsh melody (Nos Galan), lyrics by Thomas Oliphant
+time: 4/4
+key: -1
+tempo: 126
+clef: treble
+---
+# First verse; the repeat of the first line of music is written out for the second line of text
+1) F | C5/4.=Deck Bb4/8=the A4/4=halls G4/4=with
+2) F | F4/4=boughs G4/4=of A4/4=hol- F4/4=ly,
+3) C7 F@2 | G4/8=Fa A4/8=la Bb4/8=la G4/8=la A4/4.=la, G4/8=la
+4) C7 F@2 | F4/4=la E4/4=la F4/2=la.
+5) F | C5/4.='Tis Bb4/8=the A4/4=sea- G4/4=son
+6) F | F4/4=to G4/4=be A4/4=jol- F4/4=ly,
+7) C7 F@2 | G4/8=Fa A4/8=la Bb4/8=la G4/8=la A4/4.=la, G4/8=la
+8) C7 F@2 | F4/4=la E4/4=la F4/2=la.
+9) C7 | G4/4.=Don A4/8=we Bb4/4=now G4/4=our
+10) F C@3 | A4/4.=gay Bb4/8=ap- C5/4=par- G4/4=el,
+11) F G7@2 | A4/8=Fa B4/8=la C5/4=la, D5/8=la E5/8=la F5/4=la,
+12) C | E5/4=la D5/4=la C5/2=la.
+13) F | C5/4.=Troll Bb4/8=the A4/4=an- G4/4=cient
+14) F | F4/4=Yule- G4/4=tide A4/4=car- F4/4=ol,
+15) Bb F@2 | D5/8=Fa D5/8=la D5/8=la D5/8=la C5/4.=la, Bb4/8=la
+16) C7 F@2 | A4/4=la G4/4=la F4/2=la.

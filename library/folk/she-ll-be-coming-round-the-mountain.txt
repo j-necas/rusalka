@@ -1,0 +1,16 @@
+title: She'll Be Coming 'Round the Mountain
+author: traditional
+time: 4/4
+key: 1
+tempo: 120
+clef: treble
+---
+1) | D4/8=She'll E4/8=be
+2) G | G4/8=com- G4/8=ing G4/8='round G4/8=the E4/8=moun- D4/8=tain B3/8=when D4/8=she
+3) G | G4/2=comes, r/4 G4/8=she'll A4/8=be
+4) G | B4/8=com- B4/8=ing B4/8='round B4/8=the D5/8=moun- B4/8=tain A4/8=when G4/8=she
+5) D7 | A4/2=comes, r/4 D5/8=she'll C5/8=be
+6) G G7@2 | B4/8=com- B4/8=ing B4/8='round B4/8=the A4/8=moun- G4/8=tain, G4/8=she'll G4/8=be
+7) C D7@2 | E4/8=com- E4/8=ing E4/8='round E4/8=the A4/8=moun- G4/8=tain, F#4/8=she'll E4/8=be
+8) G D7@2 | D4/8=com- D4/8=ing D4/8='round D4/8=the B4/8=moun- A4/8=tain E4/8=when F#4/8=she
+9) G | G4/2=comes.

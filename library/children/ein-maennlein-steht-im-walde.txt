@@ -1,0 +1,25 @@
+title: Ein Männlein steht im Walde
+author: traditional, lyrics by August Heinrich Hoffmann von Fallersleben
+time: 4/4
+key: 1
+tempo: 132
+clef: treble
+---
+# written in 4/4 with quarter notes instead of 2/4 with eighths; the repeat of the first line is written out
+1) | D4/4=Ein
+2) G | G4/4=Männ- A4/4=lein B4/4=steht C5/4=im
+3) G C@2 | D5/2=Wal- E5/4=de C5/4=ganz
+4) G D7@2 | B4/2=still A4/2=und
+5) G | G4/2=stumm, r/4 D4/4=es
+6) G | G4/4=hat A4/4=von B4/4=lau- C5/4=ter
+7) G C@2 | D5/2=Pur- E5/4=pur C5/4=ein
+8) G D7@2 | B4/2=Mänt- A4/2=lein
+9) G | G4/2=um. r/2
+10) G | D5/4.=Sagt, C5/8=wer B4/4=mag D5/4=das
+11) D7 | C5/4=Männ- B4/4=lein A4/2=sein,
+12) G | D5/4.=das C5/8=da B4/4=steht D5/4=im
+13) D7 | C5/4=Wald B4/4=al- A4/2=lein
+14) G | G4/4=mit A4/4=dem B4/4=pur- C5/4=pur-
+15) G C@2 | D5/2=ro- E5/4=ten C5/4
+16) G D7@2 | B4/2=Män- A4/2=te-
+17) G | G4/2=lein?

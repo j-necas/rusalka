@@ -1,0 +1,22 @@
+title: Heidenröslein
+author: music by Franz Schubert, lyrics by Johann Wolfgang von Goethe
+time: 2/4
+key: 1
+tempo: 69
+clef: treble
+---
+# D 257 (Op. 3 No. 3): the voice part, first strophe; original key; the two-bar piano postlude left out
+1) G | B4/8=Sah B4/8=ein B4/8=Knab’ B4/8=ein
+2) Am | D5/16=Rös- C5/16 C5/16=lein B4/16 A4/4=stehn,
+3) D7 | A4/8=Rös- A4/8=lein B4/8=auf C5/8=der
+4) G | D5/4=Hei- G5/8=den, r/8
+5) G | B4/8=War B4/8=so B4/8=jung B4/8=und
+6) A7 | D5/16=mor- C#5/16 C#5/16=gen- B4/16 A4/4=schön,
+7) D Em@1 | D5/8=Lief D5/8=er E5/8.=schnell, D5/16=es
+8) A7 D@1 | C#5/16=nah D5/16 E5/16=zu F#5/16 D5/4=sehn,
+9) D | D5/16=Sah’s F#5/16 E5/16=mit D5/16 C#5/16=vie- B4/16 A#4/16=len B4/16
+10) A7 D@1 | G5/8.=Freu- C#5/16 D5/4=den.
+11) D7 | A4/8=Rös- A4/8=lein, B4/8=Rös- C5/8=lein,
+12) G | D5/8=Rös- E5/16=lein F#5/16 G5/4=rot,
+13) C | E5/8=Rös- G5/8=lein C5/8=auf E5/8=der
+14) G D7@0.5 G@1 | G4/8=Hei- B4/16 A4/16 G4/4=den.

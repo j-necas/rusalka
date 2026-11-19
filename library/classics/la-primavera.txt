@@ -1,0 +1,20 @@
+title: La primavera
+author: Antonio Vivaldi
+time: 4/4
+key: 1
+tempo: 100
+clef: treble
+---
+# The Four Seasons, Op. 8 No. 1 (Spring), RV 269, 1st movement (Allegro): the opening ritornello up to the first cadence,
+# transposed from E major to G major; the trill in bar 10 left out
+1) | G4/8
+2) G | B4/8 B4/8 B4/8 A4/16 G4/16 D5/4. D5/16 C5/16
+3) G | B4/8 B4/8 B4/8 A4/16 G4/16 D5/4. D5/16 C5/16
+4) G D@2 | B4/8 C5/16 D5/16 C5/8 B4/8 A4/8 F#4/8 D4/8 G4/8
+5) G | B4/8 B4/8 B4/8 A4/16 G4/16 D5/4. D5/16 C5/16
+6) G | B4/8 B4/8 B4/8 A4/16 G4/16 D5/4. D5/16 C5/16
+7) G D@2 | B4/8 C5/16 D5/16 C5/8 B4/8 A4/4 r/8 G4/8
+8) G C@2 | D5/8 C5/16 B4/16 C5/8 D5/8 E5/8 D5/4 G4/8
+9) G C@2 | D5/8 C5/16 B4/16 C5/8 D5/8 E5/8 D5/4 G4/8
+10) C D@2 | E5/8 D5/4 C5/8 B4/8 A4/16 G4/16 A4/4
+11) G | G4/4

@@ -1,0 +1,23 @@
+title: Three Blind Mice
+author: traditional
+time: 6/8
+key: 2
+tempo: 105
+clef: treble
+---
+1) D A7@1.5 | F#4/4.=Three E4/4.=blind
+2) D | D4/2.=mice,
+3) D A7@1.5 | F#4/4.=three E4/4.=blind
+4) D | D4/2.=mice.
+5) A7 | A4/4.=See G4/4=how G4/8=they
+6) D | F#4/2.=run,
+7) A7 | A4/4.=see G4/4=how G4/8=they
+8) D | F#4/4.~=run. F#4/4 A4/8=They
+9) D A7@1.5 | D5/4=all D5/8=ran C#5/8=af- B4/8=ter C#5/8=the
+10) D | D5/4=far- A4/8=mer’s A4/4=wife, A4/8=who
+11) D A7@1.5 | D5/8=cut D5/8=off D5/8=their C#5/8=tails B4/8=with C#5/8=a
+12) D | D5/4=car- A4/8=ving A4/4=knife. A4/8=Did
+13) D A7@1.5 | D5/8=you D5/8=ev- D5/8=er C#5/8=see B4/8=such C#5/8=a
+14) D | D5/8=sight A4/8=in A4/8=your A4/4=life, G4/8=as
+15) D A7@1.5 | F#4/4.=three E4/4.=blind
+16) D | D4/2.=mice?

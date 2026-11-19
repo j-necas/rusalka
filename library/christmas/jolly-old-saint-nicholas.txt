@@ -1,0 +1,24 @@
+title: Jolly Old Saint Nicholas
+author: music by James R. Murray, lyrics after Emily Huntington Miller
+time: 2/4
+key: 1
+tempo: 100
+clef: treble
+---
+# First verse as printed in Franklin Square Song Collection No. 1 (1881); transposed from A major to G major
+1) G | B4/8=Jol- B4/8=ly B4/8=old B4/8=Saint
+2) D | A4/8=Nich- A4/8=o- A4/4=las,
+3) G | G4/8=lean G4/8=your G4/8=ear G4/8=this
+4) G | B4/2=way!
+5) C | E4/8=Don't E4/8=you E4/8=tell E4/8=a
+6) G | D4/8=sin- D4/8=gle G4/4=soul
+7) D | F#4/8=what G4/8=I'm A4/8=going B4/8=to
+8) D | A4/2=say;
+9) G | B4/8=Christ- B4/8=mas B4/8=Eve B4/8=is
+10) D | A4/8=com- A4/8=ing A4/4=soon;
+11) G | G4/8=now, G4/8=you G4/8=dear G4/8=old
+12) G | B4/2=man,
+13) C | E4/8=whis- E4/8=per E4/8=what E4/8=you'll
+14) G | D4/8=bring D4/8=to G4/4=me;
+15) D7 | A4/8=tell G4/8=me A4/8=if B4/8=you
+16) G | G4/2=can.

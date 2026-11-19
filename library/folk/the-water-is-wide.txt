@@ -1,0 +1,17 @@
+title: The Water Is Wide
+author: traditional
+time: 3/2
+key: 1
+tempo: 96
+clef: treble
+---
+# the Somerset tune noted by Cecil Sharp ("O Waly, Waly"); first verse
+1) | D4/4=The G4/4=wa- A4/8=ter A4/8=is
+2) G | B4/2.=wide, A4/8=I A4/8=can- G4/4=not E4/4=get
+3) D | D4/2.=o'er, D4/4=and G4/4=nei- F#4/4=ther
+4) G | G4/2.=have A4/4=I B4/4=wings C5/8=to B4/8
+5) D | A4/2.=fly. G4/4=Give A4/4=me B4/8=a C5/8
+6) G | D5/2.=boat C5/8=that C5/8=can B4/4=car- A4/8=ry G4/8
+7) Em | B4/2.=two, A4/4=and G4/4=both E4/4=shall
+8) D D7@4 | D4/2=row, D4/2=my D4/4=love E4/8=and F#4/8
+9) G | G4/2.=I.

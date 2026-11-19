@@ -1,0 +1,24 @@
+title: Když jsem já sloužil
+author: traditional
+time: 2/4
+key: 1
+tempo: 116
+clef: treble
+---
+# G major (Hokr's sheet is in C, Pesničky pre všetkých in D); rhythm as in Pesničky pre všetkých
+1) G | G4/4=Když G4/8=jsem G4/8=já
+2) G | G4/4=slou- B4/4=žil
+3) D7 | A4/8=to G4/8=prv- F#4/8=ní G4/8=lé-
+4) D7 | A4/4=to, r/4
+5) D7 | A4/4=vy- A4/8=slou- A4/8=žil
+6) D7 | A4/4=jsem C5/4=si
+7) G D7@1 | B4/8=ku- B4/8=řát- A4/8=ko A4/8=za
+8) G | G4/4=to. r/4
+9) G | D4/8=A G4/8=to G4/8=ku- G4/8=ře
+10) G | B4/4=krá- G4/8=ko- G4/8=ře,
+11) D7 | A4/8=bě- G4/8=há F#4/8=po G4/8=dvo-
+12) D7 | A4/4=ře, r/4
+13) D7 | A4/8=má A4/8=pa- A4/8=nen- A4/8=ka
+14) D7 | A4/4=plá- C5/4=če
+15) G D7@1 | B4/8=do- B4/8=ma A4/8=v_ko- A4/8=mo-
+16) G | G4/4=ře. r/4

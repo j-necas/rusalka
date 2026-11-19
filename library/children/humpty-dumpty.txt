@@ -1,0 +1,16 @@
+title: Humpty Dumpty
+author: traditional
+time: 6/8
+key: 0
+tempo: 84
+clef: treble
+---
+# transposed from B-flat major to C major
+1) C F@1.5 | E4/4=Hump- G4/8=ty F4/4=Dump- A4/8=ty
+2) G7 C@1.5 | G4/8=sat A4/8=on B4/8=a C5/4.=wall,
+3) C F@1.5 | E4/4=Hump- G4/8=ty F4/4=Dump- A4/8=ty
+4) C G7@1.5 | G4/8=had E4/8=a C4/8=great D4/4.=fall.
+5) C F@1.5 | E4/8=All E4/8=the G4/8=king’s F4/8=hor- F4/8=ses A4/8=and
+6) G7 C@1.5 | G4/8=all A4/8=the B4/8=king’s C5/4.=men
+7) C F@1.5 | E5/8=could- E5/8=n’t C5/8=put F5/8=Hump- F5/8=ty E5/8=to-
+8) G7 C@1.5 | D5/8=ge- C5/8=ther B4/8=a- C5/4.=gain.

@@ -1,0 +1,18 @@
+title: Humoreska
+author: Antonín Dvořák
+time: 4/4
+key: -1
+tempo: 120
+clef: treble
+---
+# Humoresky, Op. 101 No. 7: the main theme (bars 1–8 with their repeat), melody only, transposed from G-flat major to F major;
+# written in 4/4 with doubled note values (2/4 bars of sixteenths and thirty-seconds become 4/4 bars of eighths and sixteenths);
+# the short staccato notes are written as plain dotted rhythm, grace notes left out
+1) {|:} F | F4/8. G4/16 F4/8. G4/16 A4/8. C5/16 D5/8. C5/16
+2) Bb | F5/8. E5/16 G5/8. F5/16 E5/8. G5/16 F5/8. D5/16
+3) F | C5/8. C5/16 D5/8. C5/16 F5/8. D5/16 C5/8. A4/16
+4) C7 | G4/1
+5) F | F4/8. G4/16 F4/8. G4/16 A4/8. C5/16 D5/8. C5/16
+6) Bb | D5/8. E5/16 G5/8. F5/16 E5/8. G5/16 F5/8. D5/16
+7) F C7@2 | C5/8. C5/16 F5/8. F4/16 G4/4 C5/4
+8) {:|} F | F4/2. r/4

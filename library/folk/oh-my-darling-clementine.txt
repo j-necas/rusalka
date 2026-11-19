@@ -1,0 +1,25 @@
+title: Oh My Darling, Clementine
+author: traditional
+time: 3/4
+key: 1
+tempo: 108
+clef: treble
+---
+# First verse and the chorus (the same tune twice); transposed from D major to G major
+1) | G4/8.=In G4/16=a
+2) G | G4/4=cav- D4/4=ern, B4/8.=in B4/16=a
+3) G | B4/4=can- G4/4=yon, G4/8.=ex- B4/16=ca-
+4) G | D5/4.=vat- D5/8=ing C5/8=for B4/8=a
+5) D7 | A4/2=mine, A4/8.=dwelt B4/16=a
+6) D7 | C5/4=min- C5/4=er, B4/8.=for- A4/16=ty-
+7) G | B4/4=nin- G4/4=er, G4/8.=and B4/16=his
+8) D7 | A4/4=daugh- D4/4=ter, F#4/8=Clem- A4/8=en-
+9) G | G4/2=tine. G4/8.=Oh, G4/16=my
+10) G | G4/4=dar- D4/4=ling, B4/8.=oh B4/16=my
+11) G | B4/4=dar- G4/4=ling, G4/8.=oh B4/16=my
+12) G | D5/4.=dar- D5/8=ling, C5/8=Clem- B4/8=en-
+13) D7 | A4/2=tine, A4/8.=you B4/16=are
+14) D7 | C5/4=lost C5/4=and B4/8.=gone A4/16=for-
+15) G | B4/4=ev- G4/4=er, G4/8.=dread- B4/16=ful
+16) D7 | A4/4=sor- D4/4=ry, F#4/8=Clem- A4/8=en-
+17) G | G4/2=tine.

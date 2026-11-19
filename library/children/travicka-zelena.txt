@@ -1,0 +1,23 @@
+title: Travička zelená
+author: traditional
+time: 4/4
+key: 0
+tempo: 104
+clef: treble
+---
+1) C G7@2 | E4/4=Tra- E4/4=vič- F4/2=ka
+2) C | G4/4=ze- G4/4=le- E4/2=ná,
+3) G7 | F4/4=to F4/4=je D4/4=mo- D4/4=je
+4) C | G4/4=po- G4/4=tě- E4/4=še- E4/4=ní,
+5) C G7@2 | E4/4=tra- E4/4=vič- F4/2=ka
+6) C | G4/4=ze- G4/4=le- E4/2=ná,
+7) G7 | F4/4=to F4/4=je D4/4=mo- D4/4=je
+8) C | C4/4=pe- E4/4=ři- C4/2=na.
+9) G7 | F4/4=Když F4/4=si D4/4=smys- D4/4=lím,
+10) C | G4/4=na G4/4=ní E4/4=sed- E4/4=nu,
+11) G7 | F4/4=když F4/4=si D4/4=smys- D4/4=lím,
+12) C | G4/4=na G4/4=ní E4/4=leh- E4/4=nu,
+13) C G7@2 | E4/4=tra- E4/4=vič- F4/2=ka
+14) C | G4/4=ze- G4/4=le- E4/2=ná,
+15) G7 | F4/4=to F4/4=je D4/4=mo- D4/4=je
+16) C | C4/4=pe- E4/4=ři- C4/2=na.

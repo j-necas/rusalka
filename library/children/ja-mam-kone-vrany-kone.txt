@@ -1,0 +1,20 @@
+title: Já mám koně, vraný koně
+author: traditional
+time: 4/4
+key: 0
+tempo: 116
+clef: treble
+---
+# C major as in Erben (Pavel Hokr's sheet is in F major); the 2/4 eighths of the old prints written as quarters in 4/4
+1) {|:} C G7@2 | C5/4=Já C5/4=mám B4/4=ko- G4/4=ně,
+2) C G7@2 | C5/4=vra- C5/4=ný B4/4=ko- G4/4=ně,
+3) F G7@2 | A4/4=to A4/4=jsou B4/4=ko- B4/4=ně
+4) {:|} C | C5/2=mý; r/2
+5) C | C5/4=když E5/4=já E5/4=jim G5/4=dám
+6) G7 | G5/4=vo- F5/4 D5/2=vsa,
+7) C | C5/4=vo- E5/4=ni E5/4=ská- G5/4=čou
+8) G7 | G5/4=ho- F5/4 D5/2=psa,
+9) C G7@2 | C5/4=já C5/4=mám B4/4=ko- G4/4=ně,
+10) C G7@2 | C5/4=vra- C5/4=ný B4/4=ko- G4/4=ně,
+11) F G7@2 | A4/4=to A4/4=jsou B4/4=ko- B4/4=ně
+12) C | C5/2=mý. r/2

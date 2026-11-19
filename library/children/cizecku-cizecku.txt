@@ -1,0 +1,24 @@
+title: Čížečku, čížečku
+author: traditional
+time: 2/4
+key: 1
+tempo: 88
+clef: treble
+---
+# transposed from D major to G major (the D major original goes down to A3)
+1) G | G4/8=Čí- D4/8=žeč- G4/8=ku, A4/8=čí-
+2) G | B4/4=žeč- G4/4=ku,
+3) D7 | A4/4=ptáč- F#4/8=ku F#4/8=ma-
+4) G | G4/4=lič- D4/4=ký,
+5) G | G4/8=po- D4/8=věz G4/8=mi A4/8=čí-
+6) G | B4/4=žeč- G4/4=ku,
+7) D7 | A4/4=jak F#4/8=se- F#4/8=jou
+8) G | G4/4=mák? r/4
+9) C | C5/8=Aj C5/8=tak, A4/4=tak
+10) G | B4/8=se- B4/8=jou G4/4=mák,
+11) D7 | A4/8=aj A4/8=tak, F#4/4=tak
+12) G | G4/8=se- A4/8=jou B4/4=mák,
+13) C | C5/8=aj C5/8=tak, A4/4=tak
+14) G | B4/8=se- B4/8=jou G4/4=mák,
+15) D7 | A4/4=tak F#4/8=se- F#4/8=jou
+16) G | G4/4=mák. r/4

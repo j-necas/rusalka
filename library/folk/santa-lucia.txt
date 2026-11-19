@@ -1,0 +1,26 @@
+title: Santa Lucia
+author: Teodoro Cottrau, lyrics by Enrico Cossovich
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+# Transposed from B-flat major (Italian Wikipedia) to C major. Both halves are repeated as printed, with the same words.
+1) {|:} C | G4/4=Sul G4/4.=ma- C5/8=re
+2) G7 | C5/8=luc- B4/8=ci- B4/2=ca
+3) F | F4/4=l’a- F4/4.=stro A4/8=d’ar-
+4) C | A4/8=gen- G4/8 G4/2=to;
+5) A7 | E4/4=pla- A4/4.=ci- G4/8=da_è
+6) Dm | G4/8=l’on- F#4/8 F4/2=da,
+7) G7 | F4/4=pro- E4/4=spe- D4/4=ro_il
+8) {:|} C | A4/4=ven- G4/2=to.
+9) {|:} C | E5/4=Ve- D5/4=ni- C5/4=te_al-
+10) G7 | B4/8=l’a- A4/8=gi- D5/2=le
+11) F | D5/4=bar- C5/4=chet- A4/4=ta
+12) C | F#4/8=mi- G4/8 C5/2=a!
+13) C | E5/8=San- C5/8 C5/8=ta G4/8 G4/8=Lu- E4/8
+14) Dm | F4/8=ci- D5/8 D5/2=a,
+15) {1.} G7 | D5/4=San- A4/4.=ta B4/8=Lu-
+16) {1. :|} C | D5/4=ci- C5/4=a! r/4
+17) {2.} G7 | D5/4=San- E5/4.=ta D5/8=Lu-
+18) {2.} C | D5/4=ci- C5/4=a!

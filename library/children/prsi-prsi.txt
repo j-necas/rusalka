@@ -1,0 +1,15 @@
+title: Prší, prší
+author: traditional
+time: 4/4
+key: 0
+tempo: 112
+clef: treble
+---
+1) C | G4/4=Pr- G4/4=ší, A4/4=pr- G4/4=ší,
+2) C | G4/4=jen G4/4=se A4/4=le- G4/4=je,
+3) C | G4/4=kam G4/4=ko- A4/4=níč- G4/4=ky
+4) C | G4/4=po- G4/4=je- A4/4=de- G4/4=me?
+5) G7 | F4/4=Po- F4/4=je- F4/4=de- F4/4=me
+6) C | E4/4=na E4/4=lu- E4/2=ka,
+7) G7 | D4/4=až D4/4=ku- G4/4=kač- G4/4=ka
+8) C | C4/4=za- C4/4=ku- C4/2=ká.

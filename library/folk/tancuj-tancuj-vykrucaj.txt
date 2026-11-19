@@ -1,0 +1,32 @@
+title: Tancuj, tancuj, vykrúcaj
+author: traditional
+time: 2/4
+key: -1
+tempo: 100
+clef: treble
+---
+# F major as in Pesničky pre všetkých (upper voice) and Die Klingende Brücke; verse and tra-la-la refrain
+1) F | A4/4=Tan- A4/4=cuj,
+2) F | C5/4=tan- C5/4=cuj,
+3) C7 | C5/8=vy- Bb4/4=krú- Bb4/8=caj,
+4) C7 | C5/8=vy- Bb4/4=krú- Bb4/8=caj,
+5) C7 | G4/4=len G4/4=mi
+6) C7 | Bb4/4=piec- Bb4/4=ku
+7) F | Bb4/8=ne- A4/4=zrú- A4/8=caj,
+8) F | Bb4/8=ne- A4/4=zrú- A4/8=caj,
+9) Dm | F4/4=dob- F4/4=rá
+10) Dm | A4/4=piec- A4/4=ka
+11) Gm | A4/8=na G4/4=zi- G4/8=mu,
+12) Gm | A4/8=na G4/4=zi- G4/8=mu,
+13) C7 | C5/4=ne- C4/4=má
+14) C7 | D4/4=kaž- E4/4=dý
+15) F | G4/8=pe- F4/4=ri- F4/8=nu,
+16) F | G4/8=pe- F4/4=ri- F4/8=nu.
+17) {|:} F | A4/4.=Tra- F4/8=la-
+18) F | C4/4=la- C4/4=la,
+19) Gm | Bb4/4.=tra- G4/8=la-
+20) C7 | E4/4=la- D4/4=la,
+21) C7 | C4/4=tra- C4/4=la-
+22) C7 | D4/4=la- E4/4=la,
+23) F | G4/8=la- F4/4=la- F4/8=la,
+24) {:|} F | G4/8=la- F4/4=la- F4/8=la.

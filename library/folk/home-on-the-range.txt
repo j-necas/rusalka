@@ -1,0 +1,40 @@
+title: Home on the Range
+author: music by Daniel E. Kelley, lyrics by Brewster M. Higley
+time: 3/4
+key: 1
+tempo: 120
+clef: treble
+---
+# First verse and the chorus; the words as sung today (as in Lomax's Cowboy Songs, 1910)
+1) | D4/4=Oh,
+2) G | D4/4=give G4/4=me A4/4=a
+3) G | B4/2=home G4/8=where F#4/8=the
+4) C | E4/4=buf- C5/4=fa- C5/4=lo
+5) C | C5/2=roam, B4/8=where C5/8=the
+6) G | D5/4.=deer G4/8=and G4/4=the
+7) G | G4/4=an- F#4/4=te- G4/4=lope
+8) D7 | A4/2.~=play.
+9) D7 | A4/4 r/4 D4/8=Where D4/8
+10) G | D4/4=sel- G4/4=dom A4/4=is
+11) G | B4/2=heard G4/8=a F#4/8=dis-
+12) C | E4/4=cour- C5/4=ag- C5/4=ing
+13) C | C5/2=word, C5/8=and C5/8=the
+14) G | B4/4.=skies A4/8=are G4/4=not
+15) D7 | F#4/4=cloud- G4/4=y A4/4=all
+16) G | G4/2.~=day.
+17) G | G4/4 r/2
+18) G | D5/2.=Home,
+19) D7 | C5/4=home B4/4.=on A4/8=the
+20) G | B4/2.~=range,
+21) G | B4/4 r/4 D4/8=where D4/8=the
+22) G | G4/4.=deer G4/8=and G4/4=the
+23) G | G4/4=an- F#4/4=te- G4/4=lope
+24) D7 | A4/2.~=play.
+25) D7 | A4/4 r/4 D4/8=Where D4/8
+26) G | D4/4=sel- G4/4=dom A4/4=is
+27) G | B4/2=heard G4/8=a F#4/8=dis-
+28) C | E4/4=cour- C5/4=ag- C5/4=ing
+29) C | C5/2=word, C5/8=and C5/8=the
+30) G | B4/4.=skies A4/8=are G4/4=not
+31) D7 | F#4/4=cloud- G4/4=y A4/4=all
+32) G | G4/2.=day.

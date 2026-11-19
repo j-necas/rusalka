@@ -1,0 +1,16 @@
+title: Hickory Dickory Dock
+author: traditional
+time: 6/8
+key: 2
+tempo: 95
+clef: treble
+---
+# "mouse" and "up" are sung over two notes each (as in Crane's The Baby's Opera)
+1) D | F#4/8=Hick- G4/8=o- A4/8=ry, A4/8=dick- B4/8=o- C#5/8=ry
+2) D | D5/4.~=dock, D5/4 F#4/8=the
+3) D | F#4/8=mouse G4/8 A4/8=ran A4/8=up B4/8 C#5/8=the
+4) D | D5/4.~=clock. D5/4 A4/8=The
+5) D A7@1.5 | D5/4=clock D5/8=struck C#5/4=one, C#5/8=the
+6) G D@1.5 | B4/4=mouse B4/8=ran A4/4.=down,
+7) A7 | A4/8=hick- B4/8=o- A4/8=ry, G4/8=dick- F#4/8=o- E4/8=ry
+8) D | D4/2.=dock.

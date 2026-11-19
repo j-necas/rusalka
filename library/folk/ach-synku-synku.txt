@@ -1,0 +1,22 @@
+title: Ach synku, synku
+author: traditional
+time: 3/4
+key: 0
+tempo: 100
+clef: treble
+---
+# C major as on the Wikipedia/Commons score; Kuba (B major) and Sládek (A-flat major) have the same tune
+1) C | C4/4=Ach, C4/4=syn- C4/4=ku,
+2) C | C4/8=syn- D4/8 E4/2=ku,
+3) G7 | F4/8=do- E4/8=ma- D4/2=li
+4) C | C4/2=jsi? r/4
+5) C | E4/4=Ach, E4/4=syn- E4/4=ku,
+6) C | E4/8=syn- F4/8 G4/2=ku,
+7) F C@2 | A4/8=do- G4/8=ma- F4/4=li E4/4=jsi?
+8) G | D4/4=Ta- D4/4=tí- D4/4=ček
+9) G7 | D4/8=se E4/8 F4/2=ptá,
+10) G7 | G4/8=o- F4/8=ral- E4/4=li D4/4=jsi?
+11) C | C4/4=Ta- C4/4=tí- C4/4=ček
+12) C | C4/8=se D4/8 E4/2=ptá,
+13) G7 | F4/8=o- E4/8=ral- D4/2=li
+14) C | C4/2=jsi? r/4

@@ -1,0 +1,26 @@
+title: Es ist ein Ros entsprungen
+author: traditional
+time: 4/4
+key: -1
+tempo: 80
+clef: treble
+---
+# First verse; the melody (soprano) of Michael Praetorius' setting (1609), F major as printed. The repeat of the first half (new words) is written out.
+1) | C5/2=Es
+2) F Bb@2 | C5/4=ist C5/4=ein D5/4=Ros C5/4=ent-
+3) C Dm@2 | C5/2=sprun- A4/2=gen
+4) Bb F@2 | Bb4/2=aus A4/4=ei- G4/4~=ner
+5) C | G4/4 F4/2=Wur- E4/4=zel
+6) F | F4/2=zart, C5/2=wie
+7) F Bb@2 | C5/4=uns C5/4=die D5/4=Al- C5/4=ten
+8) C Dm@2 | C5/2=sun- A4/2=gen,
+9) Bb F@2 | Bb4/2=von A4/4=Jes- G4/4~=se
+10) C | G4/4 F4/2=kam E4/4=die
+11) F | F4/2=Art r/4 A4/4=und
+12) C Dm@2 | G4/4=hat E4/4=ein F4/4=Blüm- D4/4=lein
+13) C | C4/2=bracht r/4 C5/4=mit-
+14) F Bb@2 | C5/4=ten C5/4=im D5/4=kal- C5/4=ten
+15) C Dm@2 | C5/2=Win- A4/2=ter,
+16) Bb F@2 | Bb4/2=wohl A4/4=zu G4/4~=der
+17) C | G4/4 F4/2=hal- E4/4=ben
+18) F | F4/2=Nacht.

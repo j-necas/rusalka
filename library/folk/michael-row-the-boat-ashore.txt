@@ -1,0 +1,17 @@
+title: Michael, Row the Boat Ashore
+author: traditional
+time: 4/4
+key: 0
+tempo: 100
+clef: treble
+---
+# Melody as printed in 1867 (the "lu" of the last Hallelujah is a held E, not E–D as often sung today)
+1) | C4/4=Mi- E4/4=chael,
+2) C | G4/4.=row E4/8=the G4/4=boat A4/4=a-
+3) C | G4/2=shore, E4/4=Hal- G4/4=le-
+4) F | A4/1=lu-
+5) C | G4/2=jah! E4/4=Mi- G4/4=chael,
+6) C | G4/4.=row E4/8=the F4/4=boat E4/4=a-
+7) G7 | D4/2=shore, C4/4=Hal- D4/4=le-
+8) C | E4/1=lu-
+9) C | C4/1=jah!

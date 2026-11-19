@@ -1,0 +1,23 @@
+title: When the Saints Go Marching In
+author: traditional
+time: 4/4
+key: 0
+tempo: 120
+clef: treble
+---
+1) | C4/4=Oh, E4/4=when F4/4=the
+2) C | G4/1=saints
+3) C | r/4 C4/4=go E4/4=march- F4/4=ing
+4) C | G4/1=in,
+5) C | r/4 C4/4=oh, E4/4=when F4/4=the
+6) C | G4/2=saints E4/2=go
+7) C | C4/2=march- E4/2=ing
+8) G7 | D4/1=in.
+9) G7 | r/4 E4/4=I E4/4=want D4/4=to
+10) C | C4/1=be
+11) C7 | E4/2=in G4/2=that
+12) F | G4/4=num- F4/2.=ber,
+13) F | r/2 E4/4=when F4/4=the
+14) C | G4/2=saints E4/2=go
+15) C G7@2 | C4/2=march- D4/2=ing
+16) C | C4/1=in.

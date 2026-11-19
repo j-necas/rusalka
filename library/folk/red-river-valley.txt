@@ -1,0 +1,16 @@
+title: Red River Valley
+author: traditional
+time: 4/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | D4/8=From G4/8=this
+2) G | B4/4=val- B4/8=ley B4/8=they B4/4=say A4/8=you B4/8=are
+3) G | A4/4=go- G4/2=ing. B4/8=We B4/8=will
+4) G | B4/4=miss G4/8=your B4/8=bright D5/4=eyes C5/8=and B4/8=sweet
+5) D7 | A4/2.=smile, D5/8=for C5/8=they
+6) G G7@2 | B4/4=say B4/8=you A4/8=are G4/4=ta- A4/8=king B4/8=the
+7) C | D5/4=sun- C5/2=shine, E4/8=that E4/8=has
+8) D7 | D4/4=bright- F#4/8=ened G4/8=our A4/4=path- B4/8=way A4/8=a
+9) G | G4/1=while.

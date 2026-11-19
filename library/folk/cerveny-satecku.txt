@@ -1,0 +1,24 @@
+title: Červený šátečku
+author: traditional
+time: 3/4
+key: 0
+tempo: 176
+clef: treble
+---
+# Vocal line of Pesničky pre všetkých (guitar edition, G major), transposed to C major; the repeat is written out for the second line of the verse
+1) C | G4/4.=Čer- G4/8=ve- G4/4=ný
+2) C | G4/4=šá- A4/4=teč- B4/4=ku,
+3) C | C5/4=ko- C5/4=lem E4/4=se
+4) C | G4/2=toč, C5/4
+5) G7 | B4/4=ko- B4/4=lem D4/4=se
+6) G7 | F4/2=toč, A4/4
+7) G7 | G4/4=ko- G4/4=lem F4/4=se
+8) C | E4/2.=toč,
+9) C | G4/4.=má G4/8=mi- G4/4=lá
+10) C | G4/4=se A4/4=hně- B4/4=vá,
+11) C | C5/4=já C5/4=ne- E4/4=vím
+12) C | G4/2=proč, C5/4
+13) G7 | B4/4=já B4/4=ne- D4/4=vím
+14) G7 | F4/2=proč, A4/4
+15) G7 | G4/4=já G4/4=ne- F4/4=vím
+16) C | E4/2.=proč.

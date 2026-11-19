@@ -1,0 +1,22 @@
+title: Häschen in der Grube
+author: traditional, lyrics by Friedrich Fröbel
+time: 4/4
+key: 2
+tempo: 132
+clef: treble
+---
+# written in 4/4 with quarter notes instead of 2/4 with eighths
+1) D A7@2 | D4/4=Häs- E4/4=chen F#4/4=in G4/4=der
+2) D | A4/2=Gru- A4/2=be
+3) G | B4/4=saß G4/4 D5/4=und B4/4
+4) D | A4/2=schlief, r/2
+5) G | B4/4=saß G4/4 D5/4=und B4/4
+6) D | A4/2=schlief. r/2
+7) A7 | A4/4=Ar- G4/4=mes G4/4=Häs- G4/4=chen,
+8) D | G4/4=bist F#4/4=du F#4/2=krank,
+9) A7 | F#4/4=dass E4/4=du F#4/4=nicht E4/4=mehr
+10) D | D4/4=hüp- F#4/4=fen A4/2=kannst?
+11) A7 D@2 | A4/4=Häs- A4/4=chen, D5/2=hüpf!
+12) A7 D@2 | A4/4=Häs- A4/4=chen, D5/2=hüpf!
+13) A7 | A4/2=Häs- A4/2=chen,
+14) D | D4/2=hüpf! r/2

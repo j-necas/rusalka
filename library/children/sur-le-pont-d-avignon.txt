@@ -1,0 +1,30 @@
+title: Sur le pont d'Avignon
+author: traditional
+time: 2/4
+key: 1
+tempo: 120
+clef: treble
+---
+# Transposed from F major (French Wikipedia, Mama Lisa) to G major (as in the old prints).
+# Refrain – first couplet („Les belles dames“) – refrain, written out as in the French Wikipedia score.
+1) | G4/8=Sur G4/8=le
+2) G | G4/4=pont A4/8=d’A- A4/8=vi-
+3) D7 | A4/4=gnon, B4/8=on C5/8=y
+4) G | D5/8=dan- G4/8=se, F#4/8=on G4/8=y
+5) D7 G@1 | A4/8=dan- D4/8=se, G4/8=sur G4/8=le
+6) G | G4/4=pont A4/8=d’A- A4/8=vi-
+7) D7 | A4/4=gnon, B4/8=on C5/8=y
+8) G D7@1 | D5/8=dan- G4/8=se A4/8=tous F#4/8=en
+9) G | G4/4=rond. G4/8=Les G4/8=belles
+10) G D7@1 | G4/8=dames G4/8=font A4/4=comm’
+11) G | G4/4=ça, G4/8=et G4/8=puis
+12) G D7@1 | G4/8=en- G4/8=cor’ A4/4=comm’
+13) G | G4/4=ça. G4/8=Sur G4/8=le
+14) G | G4/4=pont A4/8=d’A- A4/8=vi-
+15) D7 | A4/4=gnon, B4/8=on C5/8=y
+16) G | D5/8=dan- G4/8=se, F#4/8=on G4/8=y
+17) D7 G@1 | A4/8=dan- D4/8=se, G4/8=sur G4/8=le
+18) G | G4/4=pont A4/8=d’A- A4/8=vi-
+19) D7 | A4/4=gnon, B4/8=on C5/8=y
+20) G D7@1 | D5/8=dan- G4/8=se A4/8=tous F#4/8=en
+21) G | G4/4=rond.

@@ -1,0 +1,23 @@
+{
+  "name": "Rusalka – piano trainer",
+  "short_name": "Rusalka",
+  "description": "Learn to play a song from sheet music on a piano connected over MIDI.",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#CFE2F2",
+  "theme_color": "#1F4C78",
+  "icons": [
+    {
+      "src": "icons/192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

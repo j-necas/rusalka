@@ -1,0 +1,15 @@
+title: Skákal pes
+author: traditional
+time: 4/4
+key: 0
+tempo: 120
+clef: treble
+---
+1) C | G4/4=Ská- G4/4=kal E4/2=pes
+2) C | G4/4=přes G4/4=o- E4/2=ves,
+3) C | G4/4=přes G4/4=ze- A4/4=le- G4/4=nou
+4) G7 | G4/2=lou- F4/2=ku,
+5) G7 | F4/4=šel F4/4=za D4/2=ním
+6) G7 | F4/4=my- F4/4=sli- D4/2=vec,
+7) G7 | F4/4=pé- F4/4=ro G4/4=na F4/4=klo-
+8) G7 C@2 | F4/2=bou- E4/2=ku.

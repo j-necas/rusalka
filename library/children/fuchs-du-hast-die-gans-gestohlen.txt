@@ -1,0 +1,22 @@
+title: Fuchs, du hast die Gans gestohlen
+author: traditional, lyrics by Ernst Anschütz
+time: 4/4
+key: 2
+tempo: 144
+clef: treble
+---
+# the repeat of the second half is written out, as in the sources
+1) D | D4/4=Fuchs, E4/4=du F#4/4=hast G4/4=die
+2) D | A4/4=Gans A4/4=ge- A4/4=stoh- A4/4=len,
+3) G D@2 | B4/4=gib G4/4=sie D5/4=wie- B4/4=der
+4) D | A4/1=her,
+5) G D@2 | B4/4=gib G4/4=sie D5/4=wie- B4/4=der
+6) D | A4/1=her!
+7) A7 | A4/4=Sonst G4/4=wird G4/4=dich G4/4=der
+8) D | G4/4=Jä- F#4/4=ger F#4/4=ho- F#4/4=len
+9) A7 | F#4/4=mit E4/4=dem F#4/4=Schieß- E4/4=ge-
+10) D | D4/4=wehr, F#4/4 A4/2
+11) A7 | A4/4=sonst G4/4=wird G4/4=dich G4/4=der
+12) D | G4/4=Jä- F#4/4=ger F#4/4=ho- F#4/4=len
+13) A7 | F#4/4=mit E4/4=dem F#4/4=Schieß- E4/4=ge-
+14) D | D4/1=wehr.

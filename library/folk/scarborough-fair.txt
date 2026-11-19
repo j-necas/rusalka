@@ -1,0 +1,24 @@
+title: Scarborough Fair
+author: traditional
+time: 3/4
+key: 0
+tempo: 108
+clef: treble
+---
+# the traditional tune commonly sung today, D Dorian (all white keys); first verse
+1) Dm | D4/2=Are D4/4=you
+2) Dm | A4/8=go- A4/4.=ing A4/4=to
+3) C | E4/4.=Scar- F4/8=bo- E4/4=rough
+4) Dm | D4/2.=Fair?
+5) Dm | r/4 A4/4=Pars- C5/4=ley,
+6) Dm | D5/2=sage, C5/4=rose-
+7) Dm G@1 | A4/4=ma- B4/4=ry G4/4=and
+8) Dm | A4/2=thyme. D5/4=Re-
+9) Dm | D5/2=mem- D5/4=ber
+10) Am | C5/2=me A4/4=to
+11) Dm | A4/4=one G4/4=who F4/4=lives
+12) Am | E4/2.=there,
+13) Dm | D4/2=she A4/4=once
+14) C | G4/2=was F4/4=a
+15) C | E4/4=true D4/4=love C4/4=of
+16) Dm | D4/2.=mine.

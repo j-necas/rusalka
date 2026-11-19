@@ -1,0 +1,17 @@
+title: Savez-vous planter les choux
+author: traditional
+time: 2/4
+key: 1
+tempo: 108
+clef: treble
+---
+# The tune sung today (Mama Lisa, G major); the 19th-century prints have a different tune in 6/8.
+1) | D4/8=Sa- D4/8=vez-
+2) G | B4/8=vous B4/8=plan- A4/8=ter B4/8=les
+3) G | G4/4=choux, F#4/8=à G4/8=la
+4) D7 | A4/8=mo- A4/8=de, G4/8=à A4/8=la
+5) G | B4/8=mo- G4/8=de, D4/8=sa- D4/8=vez-
+6) G | B4/8=vous B4/8=plan- A4/8=ter B4/8=les
+7) G | G4/4=choux, F#4/8=à G4/8=la
+8) D7 | A4/8=mo- C5/8=de B4/8=de A4/8=chez
+9) G | G4/4=nous_?

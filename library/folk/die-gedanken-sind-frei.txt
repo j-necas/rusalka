@@ -1,0 +1,24 @@
+title: Die Gedanken sind frei
+author: traditional
+time: 3/4
+key: 0
+tempo: 120
+clef: treble
+---
+1) | G4/8=Die G4/8=Ge-
+2) C | C5/4=dan- C5/4=ken E5/8=sind C5/8
+3) C | G4/2=frei, G4/4=wer
+4) G7 | F4/4=kann D4/4=sie G4/4=er-
+5) C | E4/4=ra- C4/4=ten? G4/4=Sie
+6) C | C5/4=flie- C5/4=gen E5/8=vor- C5/8
+7) C | G4/2=bei G4/4=wie
+8) G7 | F4/4=nächt- D4/4=li- G4/4=che
+9) C | E4/4=Schat- C4/4=ten. C5/4=Kein
+10) G7 | B4/4=Mensch D5/4=kann B4/4=sie
+11) C | C5/4=wis- E5/4=sen, C5/4=kein
+12) G7 | B4/4=Jä- D5/4=ger B4/4=er-
+13) C | C5/4=schie- E5/4=ßen, C5/4=es
+14) F | A4/4=blei- A4/4=bet C5/8=da- A4/8
+15) C | G4/2=bei: C5/8=die E5/8=Ge-
+16) C G7@1 | E5/8=dan- D5/8 C5/4=ken B4/4=sind
+17) C | C5/2=frei.

@@ -1,0 +1,19 @@
+title: Kuckuck, Kuckuck, ruft’s aus dem Wald
+author: traditional, lyrics by August Heinrich Hoffmann von Fallersleben
+time: 3/4
+key: 1
+tempo: 152
+clef: treble
+---
+1) G | D5/4=Ku- B4/4=ckuck, r/4
+2) G | D5/4=Ku- B4/4=ckuck, r/4
+3) D7 | A4/4=ruft’s G4/4=aus A4/4=dem
+4) G | G4/2.=Wald.
+5) D7 | A4/4=Las- A4/4=set B4/4=uns
+6) D7 | C5/2=sin- A4/4=gen,
+7) G | B4/4=tan- B4/4=zen C5/4=und
+8) G | D5/2=sprin- B4/4=gen!
+9) G | D5/2=Früh- B4/4=ling,
+10) G | D5/2=Früh- B4/4=ling,
+11) D7 | C5/4=wird B4/4=es A4/4=nun
+12) G | G4/2.=bald.

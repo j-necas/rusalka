@@ -1,0 +1,19 @@
+title: Utíkej, Káčo
+author: traditional
+time: 3/4
+key: 0
+tempo: 144
+clef: treble
+---
+1) C | C4/4=U- E4/4=tí- G4/4=kej,
+2) F | C5/2=Ká- A4/4=čo,
+3) C | A4/4=u- G4/4=tí- G4/4=kej,
+4) C | A4/4=u- G4/4=tí- G4/4=kej,
+5) C | E4/4=ho- E4/4=ní E4/4=tě
+6) G | G4/2=ko- D4/4=cour
+7) C | F4/4=di- E4/4=vo- E4/4=kej,
+8) C | F4/4=di- E4/4=vo- E4/4=kej,
+9) C | C4/4=ho- E4/4=ní G4/4=tě
+10) C | C5/2=ko- E5/4=cour
+11) G7 | D5/2=di- D5/4=vo-
+12) C | C5/2.=kej.

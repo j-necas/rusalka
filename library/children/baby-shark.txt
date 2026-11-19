@@ -1,0 +1,13 @@
+title: Baby Shark
+author: traditional
+time: 4/4
+key: 1
+tempo: 116
+clef: treble
+---
+# the traditional campfire song, first verse, as commonly sung; not the Pinkfong arrangement (2016)
+1) | D4/8=Ba- E4/8=by
+2) G | G4/4=shark, G4/8=doo G4/8=doo G4/16=doo G4/16=doo G4/16=doo G4/16=doo D4/8=Ba- E4/8=by
+3) G | G4/4=shark, G4/8=doo G4/8=doo G4/16=doo G4/16=doo G4/16=doo G4/16=doo D4/8=Ba- E4/8=by
+4) G | G4/4=shark, G4/8=doo G4/8=doo G4/16=doo G4/16=doo G4/16=doo G4/16=doo D4/8=Ba- E4/8=by
+5) D | F#4/2.=shark! r/4

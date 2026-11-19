@@ -1,0 +1,27 @@
+title: Okolo Hradce
+author: traditional
+time: 2/4
+key: 1
+tempo: 120
+clef: treble
+---
+# G major as in Pesničky pre všetkých (upper voice); verse and refrain, the "Vojáci jdou" trio left out
+1) {|:} G D7@1 | D4/8=O- G4/4=ko- F#4/8=lo
+2) G | A4/4=Hrad- G4/4=ce
+3) G | B4/8=v_ma- D5/4=lé D5/8=za-
+4) D7 G@1 | C5/4=hrad- B4/4=ce
+5) D7 | A4/8=ros- A4/4=tou G4/8=tam
+6) D7 | F#4/4=tři A4/4=rů-
+7) D7 | D4/4=že, D4/4=tři
+8) {:|} C D7@1 | E4/4=rů- F#4/4=že.
+9) {|:} G | D5/8=Jed- D5/4=ná B4/8=je
+10) C | E5/8=čer- E5/8=ve- E5/4=ná,
+11) D7 | C5/8=dru- C5/4=há A4/8=je
+12) G | D5/4=bí- D5/4=lá,
+13) {1.} G | B4/8=tře- B4/4=tí B4/8=kve-
+14) {1.} D7 | C5/4=te A4/4=mo-
+15) {1.} G | D5/4=dře, B4/4=ca-
+16) {1. :|} G | C5/4=ra- D5/4=ra,
+17) {2.} G | B4/8=tře- B4/4=tí B4/8=kve-
+18) {2.} D7 | C5/4=te A4/4=mo-
+19) {2.} G | G4/4=dře. r/4

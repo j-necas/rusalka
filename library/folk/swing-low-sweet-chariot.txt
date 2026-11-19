@@ -1,0 +1,24 @@
+title: Swing Low, Sweet Chariot
+author: traditional
+time: 4/4
+key: 1
+tempo: 72
+clef: treble
+---
+# Refrain, then the first verse
+1) G | B4/4=Swing G4/2=low, B4/4=sweet
+2) C G@2 | G4/4.=char- G4/8=i- E4/8=ot, D4/4.
+3) G | G4/8=com- G4/8=in' G4/8=for G4/8=to B4/8=car- B4/8=ry D5/4=me
+4) D7 | D5/1=home.
+5) G | E5/8=Swing D5/8 B4/2=low, D5/4=sweet
+6) C G@2 | G4/4.=char- G4/8=i- E4/8=ot, D4/4.
+7) G D7@3 | G4/8=com- G4/8=in' G4/8=for G4/8=to B4/8=car- B4/8=ry A4/4=me
+8) G | G4/2.=home. B4/4=I
+9) G | D5/4=looked G4/8=o- D4/8=ver G4/4=Jor- G4/8=dan, G4/8=and
+10) C D7@2 | G4/8=what G4/8=did G4/4=I E4/8=see, D4/4.
+11) G | G4/8=com- G4/8=in' G4/8=for G4/8=to B4/8=car- B4/8=ry D5/4=me
+12) D7 | D5/2.=home? D5/4=A
+13) G | E5/8=band D5/8 B4/4=of B4/4=an- G4/4=gels
+14) C G@2 | G4/8=com- G4/8=in' G4/8=af- G4/8=ter E4/8=me, D4/4.
+15) G D7@3 | G4/8=com- G4/8=in' G4/8=for G4/8=to B4/8=car- B4/8=ry A4/4=me
+16) G | G4/1=home.

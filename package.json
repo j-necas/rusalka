@@ -1,0 +1,27 @@
+{
+  "name": "rusalka",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "vendor": "mkdir -p static/vendor/fonts && cp node_modules/verovio/dist/verovio-toolkit-wasm.js static/vendor/ && for v in 400 700 800; do for r in latin latin-ext; do cp node_modules/@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-$r-$v-normal.woff2 static/vendor/fonts/; done; done && cp node_modules/@fontsource/atkinson-hyperlegible-next/LICENSE static/vendor/fonts/OFL.txt",
+    "test": "node --test tests/*.test.mjs",
+    "skill": "cp static/lib/song.js static/lib/note_names.js static/lib/notation.js plugin/skills/rusalka-sheet-music/scripts/lib/ && node tools/format-js.mjs",
+    "song-list": "node tools/song-list.mjs",
+    "library": "node tools/library.mjs",
+    "dev": "node tools/server.mjs",
+    "web": "npm run vendor && npm run song-list && npm run library && node tools/web.mjs",
+    "skills": "node tools/skills.mjs"
+  },
+  "dependencies": {
+    "verovio": "6.4.1"
+  },
+  "devDependencies": {
+    "@fontsource/atkinson-hyperlegible-next": "5.3.0",
+    "@xmldom/xmldom": "^0.9.12",
+    "fake-indexeddb": "^6.2.8"
+  },
+  "type": "module",
+  "description": "Rusalka – a piano trainer for kids in the browser: play songs from MusicXML or MIDI on a MIDI piano",
+  "author": "Jiří Nečas",
+  "license": "MIT"
+}

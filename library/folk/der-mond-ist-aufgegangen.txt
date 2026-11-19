@@ -1,0 +1,21 @@
+title: Der Mond ist aufgegangen
+author: Johann Abraham Peter Schulz, lyrics by Matthias Claudius
+time: 4/4
+key: 1
+tempo: 84
+clef: treble
+---
+# Transposed from F major (German Wikipedia) to G major. The printed repeat is written out so that the whole first verse fits: the second ending (bar 13) is "wun-der-bar".
+1) | G4/4=Der
+2) D7 G@1 | A4/4=Mond G4/4=ist C5/4=auf- B4/4=ge-
+3) D7 G@2 | A4/2=gan- G4/4=gen, B4/4=die
+4) Em C@2 | B4/4=gold- B4/4=nen E5/4=Stern- D5/4=lein
+5) Am G@2 | C5/2=pran- B4/4=gen B4/4=am
+6) Em Am@2 | B4/4=Him- B4/4=mel C5/4=hell B4/4=und
+7) D7 | A4/2.=klar. G4/4=Der
+8) D7 G@1 | A4/4=Wald G4/4=steht C5/4=schwarz B4/4=und
+9) D7 G@2 | A4/2=schwei- G4/4=get, B4/4=und
+10) Em C@2 | B4/4=aus B4/4=den E5/4=Wie- D5/4=sen
+11) Am G@2 | C5/2=stei- B4/4=get B4/4=der
+12) Em Am@2 | B4/4=wei- B4/4=ße C5/4=Ne- B4/4=bel
+13) D7 G@2 | A4/4=wun- A4/4=der- G4/4=bar.

@@ -1,0 +1,15 @@
+title: The Muffin Man
+author: traditional
+time: 2/4
+key: 1
+tempo: 100
+clef: treble
+---
+1) G | D4/8=Do G4/8=you G4/8.=know A4/16=the
+2) G | B4/8=muf- G4/8=fin G4/8.=man, G4/16=the
+3) C D7@1 | E4/8=muf- A4/8=fin A4/8.=man, G4/16=the
+4) D7 | F#4/8=muf- D4/8=fin D4/4=man?
+5) G | D4/8=Do G4/8=you G4/8.=know A4/16=the
+6) G | B4/8=muf- G4/8=fin G4/8=man G4/8=who
+7) C D7@1 | E4/8=lives A4/8=on G4/8=Dru- F#4/8=ry
+8) G | G4/2=Lane?

@@ -1,0 +1,25 @@
+title: We Wish You a Merry Christmas
+author: traditional
+time: 3/4
+key: 1
+tempo: 150
+clef: treble
+---
+# First verse with the refrain "Good tidings"
+1) | D4/4=We
+2) G | G4/4=wish G4/8=you A4/8=a G4/8=mer- F#4/8=ry
+3) C | E4/4=Christ- C4/4=mas, E4/4=we
+4) A7 | A4/4=wish A4/8=you B4/8=a A4/8=mer- G4/8=ry
+5) D | F#4/4=Christ- D4/4=mas, D4/4=we
+6) B7 | B4/4=wish B4/8=you C5/8=a B4/8=mer- A4/8=ry
+7) Em | G4/4=Christ- E4/4=mas D4/8=and D4/8=a
+8) C D7@2 | E4/4=hap- A4/4=py F#4/4=New
+9) G | G4/2=Year. D4/4=Good
+10) G | G4/4=ti- G4/4=dings G4/4=we
+11) D | F#4/2=bring F#4/4=to
+12) C D@1 | G4/4=you F#4/4=and E4/4=your
+13) D | D4/2=kin; A4/4=we
+14) G | B4/4=wish A4/8=you A4/8=a G4/8=mer- G4/8=ry
+15) G | D5/4=Christ- D4/4=mas D4/8=and D4/8=a
+16) C D7@2 | E4/4=hap- A4/4=py F#4/4=New
+17) G | G4/2=Year!

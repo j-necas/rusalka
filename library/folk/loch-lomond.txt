@@ -1,0 +1,17 @@
+title: Loch Lomond
+author: traditional
+time: 4/4
+key: 1
+tempo: 88
+clef: treble
+---
+# first verse; the chorus ("O ye'll tak' the high road") is sung to the same tune
+1) | D4/8=By E4/8
+2) G | G4/4=yon G4/8=bon- A4/8=nie B4/4=banks A4/8=and G4/8=by
+3) D C@2 | A4/4=yon A4/8=bon- G4/8=nie E4/4=braes, D4/8=where E4/8=the
+4) G | G4/4=sun G4/4=shines G4/4=bright B4/8=on D5/8=Loch
+5) C G@2 | E5/2=Lo- D5/4=mond, D5/4=where
+6) C G@2 | E5/4=me E5/8=and D5/8=my B4/4=true B4/8=love D5/8=were
+7) Am C@2 | C5/8=ev- B4/8=er A4/8=wont G4/8=to E4/4=gae, D4/8=on E4/8=the
+8) G C@2 | G4/8=bon- G4/8=nie, B4/8=bon- D5/8=nie E5/4=banks D5/8=o' B4/8=Loch
+9) D7 G@2 | A4/2=Lo- G4/4=mond.

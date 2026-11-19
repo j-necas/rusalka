@@ -1,0 +1,61 @@
+title: Funiculì, funiculà
+author: Luigi Denza, lyrics by Peppino Turco
+time: 6/8
+key: -1
+tempo: 112
+clef: treble
+---
+# Transposed from E-flat major (Italian Wikipedia) to F major. The whole verse (solo lines with the chorus echoes "tu saje addó" etc.) and the refrain, first verse.
+1) | C5/8=Ais-
+2) F | F5/2.~=sé-
+3) F C7@1.5 | F5/4 F5/8=ra,_oje E5/4=Nan- E5/8=ni-
+4) C7 | C5/4=né, C5/8=me D5/4=ne D5/8=sa-
+5) F | A4/4.=gliet- A4/4.~=te,
+6) F C7@1.5 | A4/4 A4/8=tu G4/4=saje F4/8=ad-
+7) F | F4/2.~=dó?
+8) F C7@1.5 | F4/8 r/8 A4/8=tu G4/4=saje F4/8=ad-
+9) F | F4/2.~=dó?
+10) F | F4/4 r/8 r/4 C5/8=Ad-
+11) F | F5/2.~=dó
+12) F C7@1.5 | F5/4 F5/8=’stu E5/4=co- E5/8=re
+13) C7 | C5/4=’ngra- C5/8=to D5/4=cchiù D5/8=di-
+14) F | A4/4.=spiet- A4/4.~=to
+15) F C7@1.5 | A4/4 A4/8=far- G4/4=me F4/8=nun
+16) F | F4/2.~=pò!
+17) F C7@1.5 | F4/8 r/8 A4/8=Far- G4/4=me F4/8=nun
+18) F | F4/2.~=pò!
+19) F | F4/4 r/8 r/4 A4/8=Ad-
+20) Am | A4/2.~=dó
+21) Am E7@1.5 | A4/4 A4/8=lu B4/4=fuo- B4/8=co
+22) Am E7@1.5 | A4/4=co- A4/8=ce, B4/4=ma B4/8=si
+23) Am | A4/4.=fu- A4/4.~=je
+24) E7 | A4/4 E4/8=te E4/4=las- E4/8=sa
+25) E7 | E4/2.~=stà!
+26) E7 | E4/8 r/8 E4/8=Te E4/4=las- E4/8=sa
+27) E7 | E4/2.~=stà!
+28) E7 | E4/4 r/8 r/4 C5/8=E
+29) C | C5/2.~=nun
+30) C G7@1.5 | C5/4 C5/8=te D5/4=cor- D5/8=re_ap-
+31) C G7@1.5 | C5/4=pries- C5/8=so, D5/4=nun D5/8=te
+32) C | C5/4.=stru- C5/4.~=je
+33) C7 | C5/4 G4/8=su- G4/4=lo_a G4/8=guar-
+34) C7 | G4/2.~=dà,
+35) C7 | G4/8 r/8 G4/8=su- G4/4=lo_a G4/8=guar-
+36) C7 | G4/2.~=dà!
+37) C7 | G4/4 r/8 r/4.
+38) C7 | E5/4.=Jam- D5/8=me, r/8 r/8
+39) C7 | E5/4.=jam- D5/8=me r/8 r/8
+40) C7 | F5/4=’ncop- E5/8=pa, D5/4=jam- F5/8=me
+41) C7 | E5/4.~=jà, E5/4 r/8
+42) C7 | E5/4.=Jam- D5/8=me, r/8 r/8
+43) C7 | E5/4.=jam- D5/8=me r/8 r/8
+44) C7 | F5/4=’ncop- E5/8=pa, D5/4=jam- F5/8=me
+45) F | C5/8=jà, r/8 A4/8=fu- A4/4=ni- A4/8=cu-
+46) A7 | A4/4=lì, A4/8=fu- A4/4=ni- A4/8=cu-
+47) Dm | A4/4=là! A4/8=fu- A4/4=ni- A4/8=cu-
+48) A7 | A4/4=lì, A4/8=fu- A4/4=ni- A4/8=cu-
+49) Dm | F5/2.=là!
+50) Bb | G5/4=’ncop- F5/8=pa, D5/4=jam- F5/8=me
+51) F | C5/8=jà, r/8 A4/8=fu- A4/4=ni- Bb4/8=cu-
+52) C7 | C5/4=lì, Bb4/8=fu- A4/4=ni- G4/8=cu-
+53) F | F4/4=là!

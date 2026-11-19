@@ -1,0 +1,16 @@
+title: Abdelazer: Rondeau
+author: Henry Purcell
+time: 3/2
+key: -1
+tempo: 120
+clef: treble
+---
+# Abdelazer, or The Moor’s Revenge, Z. 570: the Rondeau theme (first strain), in the original key of D minor
+1) {|:} Dm | D4/2 F4/2 A4/2
+2) Dm A@4 | D5/4 E5/8 F5/8 G5/8 F5/8 E5/8 D5/8 C#5/2
+3) Dm Gm@4 | A5/4 D5/8 F5/8 A5/8 F5/8 D5/4 Bb5/2
+4) C F@4 | G5/4 C5/8 E5/8 G5/8 E5/8 C5/4 A5/2
+5) Bb Gm@4 | F5/4 Bb4/8 D5/8 F5/8 D5/8 Bb4/4 G5/2
+6) A Dm@4 | E5/4 A4/8 C#5/8 E5/8 C#5/8 A4/4 F5/2
+7) A7 Dm@3 | E5/8 F5/8 E5/8 D5/8 C#5/4 F5/4 E5/8 F5/8 E5/8 D5/8
+8) {:|} Dm A7@2 Dm@4 | A4/4 D5/4 C#5/8 D5/8 E5/8 D5/8 D5/2

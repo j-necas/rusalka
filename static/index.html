@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="prvni.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Rusalka">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="author" content="Jiří Nečas">
+<title>Rusalka – learn piano with the songs you choose</title>
+<meta name="description" content="Free piano trainer in the browser for children and adults. Learn the songs you choose: MusicXML, MIDI, or a photo of sheet music via any AI chat. No account, no ads.">
+<link rel="canonical" href="https://rusalkapiano.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rusalka">
+<meta property="og:url" content="https://rusalkapiano.com/">
+<meta property="og:title" content="Rusalka – learn piano with the songs you choose">
+<meta property="og:description" content="Free piano trainer in the browser. Your own sheet music (MusicXML, MIDI, or a photo via any AI chat), a MIDI piano or the on-screen keys, 16 languages, no account.">
+<meta property="og:image" content="https://rusalkapiano.com/icons/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rusalka: notes with letter names above a piano keyboard, the next key highlighted">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rusalka", "url": "https://rusalkapiano.com/",
+ "description": "Free piano trainer in the browser for children and adults: learn the songs you choose from MusicXML, MIDI or a photo of sheet music converted by any AI chat.",
+ "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "browserRequirements": "Chrome or Edge for a MIDI piano",
+ "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+ "inLanguage": ["ar", "cs", "de", "en", "es", "fr", "hi", "it", "ja", "pl", "pt", "pt-BR", "ru", "sk", "uk", "zh-CN"],
+ "image": "https://rusalkapiano.com/icons/og.png", "author": {"@type": "Person", "name": "Jiří Nečas"}}
+</script>
+<link rel="icon" href="icons/32.png" sizes="32x32">
+<link rel="icon" href="icons/192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<noscript><p>Rusalka is a free piano trainer in the browser: load the songs you choose (MusicXML, MIDI, or a photo of sheet
+music via any AI chat) and play them on a MIDI piano or the on-screen keys. It needs JavaScript.
+<a href="en/">About Rusalka</a> · <a href="cs/" hreflang="cs">O Rusalce česky</a></p></noscript>
+
+<main id="kdo" class="obrazovka nova skryta">
+  <a class="logo-kdo logo-odkaz" href="en/"><img src="icons/logo.svg" alt="Rusalka"></a>
+  <nav class="horni-menu"><label class="jazyk-pole"><span class="skryty-popis" data-t="rodice.jazykAplikace"></span><select class="jazyk-volba vyber-maly"></select></label><button class="text-tl menu-songs" data-t="menu.songs"></button><button class="text-tl menu-players" data-t="menu.players"></button><button class="text-tl menu-ai" data-t="menu.ai"></button><button class="text-tl menu-settings" data-t="menu.settings"></button><button id="oRusalce" class="text-tl menu-about" data-t="about.odkaz"></button><button class="text-tl menu-vse" data-t="menu.vse" aria-haspopup="dialog"></button></nav>
+  <div class="kdo-in">
+    <h1 data-t="kdo.nadpis"></h1>
+    <div id="kdoHraci" class="hraci"></div>
+    <div class="kdo-pod">
+      <button id="kdoNovy" class="text-tl" data-t="kdo.novy"></button>
+      <button id="kdoUpravit" class="text-tl" aria-pressed="false" data-t="kdo.upravit"></button>
+    </div>
+    <p class="pata"><span data-t="pata"></span> <button type="button" class="odkaz" data-t="pata.vice"></button></p>
+  </div>
+</main>
+
+<main id="novy" class="obrazovka nova skryta">
+  <div class="horni"><a class="logo-novy logo-odkaz skryta" href="en/"><img src="icons/logo.svg" alt="Rusalka"></a><button id="novyZpet" class="zpet"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="zpet"></span></button>
+    <nav class="horni-menu"><label class="jazyk-pole"><span class="skryty-popis" data-t="rodice.jazykAplikace"></span><select class="jazyk-volba vyber-maly"></select></label><button class="text-tl menu-songs" data-t="menu.songs"></button><button class="text-tl menu-players" data-t="menu.players"></button><button class="text-tl menu-ai" data-t="menu.ai"></button><button class="text-tl menu-settings" data-t="menu.settings"></button><button id="oRusalceNovy" class="text-tl menu-about" data-t="about.odkaz"></button><button class="text-tl menu-vse" data-t="menu.vse" aria-haspopup="dialog"></button></nav></div>
+  <div class="novy">
+    <div>
+      <h1 id="novyNadpis"></h1>
+      <p id="novyUvod" class="novy-uvod skryta"><span data-t="pata"></span> <button type="button" class="odkaz" data-t="pata.vice"></button></p>
+      <input id="novyJmeno" class="jmeno-vstup" maxlength="20" autocomplete="off" data-t-placeholder="novy.jmeno">
+      <h2 data-t="novy.kdo"></h2>
+      <div class="kdo-jsi"><button data-vek="dite" data-t="novy.dite"></button><button data-vek="dospely" data-t="novy.dospely"></button></div>
+      <h2 data-t="novy.obrazek"></h2>
+      <div id="novyObrazky" class="obrazky"></div>
+      <h2 data-t="novy.barva"></h2>
+      <div id="novyBarvy" class="barvy"></div>
+    </div>
+    <div class="nahled-hrace">
+      <div id="novyNahled" class="dlazdice-hrace"><span id="novyObr"></span><b id="novyNahledJmeno"></b></div>
+      <p data-t="novy.nahled"></p>
+      <button id="novyHotovo" class="hrat-velke" data-t="hotovo"></button>
+    </div>
+  </div>
+  <p class="pata"><span data-t="pata"></span> <button type="button" class="odkaz" data-t="pata.vice"></button></p>
+</main>
+
+<main id="domu" class="obrazovka nova skryta">
+  <div class="horni">
+    <div class="ja-obal">
+      <button id="mujProfilOtevrit" class="ja" aria-haspopup="menu" aria-expanded="false" aria-controls="jaMenu"></button>
+      <div id="jaMenu" class="ja-menu skryta" role="menu" aria-labelledby="mujProfilOtevrit">
+        <button id="upravitHrace" role="menuitem" data-t="domu.upravit"></button>
+        <button id="zmenitHrace" role="menuitem" data-t="domu.zmenitHrace"></button>
+      </div>
+    </div>
+    <div class="vpravo">
+      <div class="vstup-obal">
+        <button id="vstupTlacitko" class="midi-stav vstup-tlacitko" aria-haspopup="menu" aria-expanded="false" aria-controls="vstupMenu"><span class="tecka"></span><span class="text"></span><svg class="sipka" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 5.5 7 9.5l4-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div id="vstupMenu" class="ja-menu vstup-menu skryta" role="menu" data-t-aria="vstup.nadpis">
+          <button role="menuitemradio" data-vstup="midi" aria-checked="false"><b data-t="vstup.midi"></b><small class="vstup-midi-popis"></small></button>
+          <button role="menuitemradio" data-vstup="mikrofon" aria-checked="false"><b data-t="vstup.mikrofon"></b><small data-t="vstup.mikrofonPopis"></small></button>
+          <button role="menuitemradio" data-vstup="obrazovka" aria-checked="false"><b data-t="vstup.obrazovka"></b><small data-t="vstup.obrazovkaPopis"></small></button>
+          <a class="vstup-appstore skryta" role="menuitem" target="_blank" rel="noopener">Web MIDI Browser (App Store)</a>
+        </div>
+      </div>
+      <nav class="horni-menu"><button class="text-tl menu-songs" data-t="menu.songs"></button><button class="text-tl menu-players" data-t="menu.players"></button><button class="text-tl menu-ai" data-t="menu.ai"></button><button class="text-tl menu-settings" data-t="menu.settings"></button><button class="text-tl menu-about" data-t="about.odkaz"></button><button class="text-tl menu-vse" data-t="menu.vse" aria-haspopup="dialog"></button></nav>
+    </div>
+  </div>
+  <div class="obsah">
+    <section id="pokracuj" class="pokracuj">
+      <div class="maly" id="pokracujCo"></div>
+      <h2 id="pokracujNazev"></h2>
+      <div id="pokracujCesta" class="cesta"></div>
+      <button id="pokracujHrat" class="velke-hrat"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M8 5v20l17-10z" fill="currentColor"/></svg><span data-t="hrat"></span></button>
+    </section>
+    <div class="vyber-pisne">
+      <h3 data-t="domu.jina"></h3>
+      <div id="zalozky" class="zalozky">
+        <button data-zalozka="pro-me" class="ted" data-t="domu.proMe"></button>
+        <button data-zalozka="oblibene" data-t="domu.oblibene"></button>
+        <button data-zalozka="children" data-t="knihovna.police.children"></button>
+        <button data-zalozka="folk" data-t="knihovna.police.folk"></button>
+        <button data-zalozka="christmas" data-t="knihovna.police.christmas"></button>
+        <button data-zalozka="classics" data-t="knihovna.police.classics"></button>
+        <button data-zalozka="moje" data-t="domu.moje"></button>
+      </div>
+      <div id="obtiznost" class="obtiznost-filtr" role="group" data-t-aria="domu.obtiznostSkupina"><span data-t="domu.obtiznost"></span>
+        <button type="button" data-obtiznost="" aria-pressed="true" data-t="domu.vse"></button><button type="button" data-obtiznost="1" aria-pressed="false" data-t="domu.snadne"></button><button type="button" data-obtiznost="2" aria-pressed="false" data-t="domu.stredni"></button><button type="button" data-obtiznost="3" aria-pressed="false" data-t="domu.tezsi"></button>
+      </div>
+      <input id="hledat" class="hledat" type="search" autocomplete="off" data-t-placeholder="domu.hledat">
+    </div>
+    <div id="pisne" class="dlazdice"></div>
+  </div>
+  <p class="pata"><span data-t="pata"></span> <button type="button" class="odkaz" data-t="pata.vice"></button></p>
+</main>
+
+<main id="pred" class="obrazovka nova skryta">
+  <div class="horni"><button id="predZpet" class="zpet"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="domu.pisnicky"></span></button></div>
+  <div class="pred">
+    <div>
+      <div class="pred-titul"><h1 id="predNazev"></h1>
+        <button id="predOblibena" class="hvezda-tl" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.5 6 .8-4.4 4.1 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8z" stroke-linejoin="round"/></svg></button></div>
+      <div class="autor-radek"><span id="predAutor" class="autor"></span><button id="oPisni" class="odkaz" data-t="vic.oPisni"></button></div>
+      <h2 data-t="pred.jak"></h2>
+      <div id="predKroky"></div>
+      <h2 data-t="pred.rychle"></h2>
+      <div id="predRychlost" class="rychlosti"></div>
+      <p class="presne"><button id="predPresne" class="odkaz" aria-controls="presnePole" aria-expanded="false"></button></p>
+      <label id="presnePole" class="rychlost-presna skryta"><input type="range" id="rychlost" data-t-aria="vic.presna" min="40" max="100" step="10" value="70"><span id="rychlostText"></span></label>
+    </div>
+    <div class="prava">
+      <div class="nahled-not"><div id="predNoty" class="nahled-noty"></div></div>
+      <div class="akce">
+        <button id="predPoslech" class="text-tl ikonka"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3.5v13l10.5-6.5z" fill="currentColor"/></svg><span data-t="pred.poslech"></span></button>
+        <button id="predHrat" class="velke-hrat"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M8 5v20l17-10z" fill="currentColor"/></svg><span data-t="hrat"></span></button>
+      </div>
+      <p id="predVstup" class="pred-vstup skryta"><span id="predVstupText"></span> <button type="button" id="predMikrofon" class="odkaz" data-t="vstup.zapnoutMikrofon"></button></p>
+      <p id="predSouhrn" class="pred-souhrn"><span id="predSouhrnText"></span>
+        <button id="predZmenit" class="odkaz" data-t="verze.zmenit" aria-controls="vicPanel" aria-expanded="false"></button></p>
+      <div id="vicPanel" class="vic-panel skryta">
+        <h3 id="coNadpis" data-t="verze.nadpis"></h3>
+        <div id="predCo" class="verze-karty" role="group" aria-labelledby="coNadpis"></div>
+        <label id="stylPole"><span data-t="vic.styl"></span><select id="styl" class="vyber"></select></label>
+        <div id="predRuce" class="ruce" role="group" aria-labelledby="ruceNadpis">
+          <span id="ruceNadpis" data-t="verze.ktera"></span>
+          <span class="ruce-volby"><button type="button" data-ruka="1" data-t="verze.prava"></button><button type="button" data-ruka="2" data-t="verze.leva"></button><button type="button" data-ruka="vse" data-t="verze.obe"></button></span>
+          <small data-t="verze.druhou"></small>
+        </div>
+        <label><span data-t="vic.kus"></span><select id="usek" class="vyber"></select></label>
+        <label><span data-t="vic.tonina"></span><select id="tonina" class="vyber">
+          <option value="ne" data-t="html.toninaPuvodni"></option><option value="snadna" data-t="html.toninaSnadna"></option><option value="C" data-t="html.toninaC"></option></select></label>
+        <label id="vzorPole"><span><span data-t="vic.rytmus"></span><small data-t="vic.rytmusVsude"></small></span><select id="vzorDoprovodu" class="vyber"></select></label>
+        <section class="okno-blok vic-dalsi" aria-labelledby="dalsiNadpis">
+          <h3 id="dalsiNadpis" data-t="vic.dalsi"></h3>
+          <div class="okno-krok"><button id="pruvodce" class="tlacitko sekundarni" data-t="vic.naucit"></button><p data-t="vic.naucitPopis"></p></div>
+          <div class="okno-krok"><button id="dvojice" class="tlacitko sekundarni" data-t="vic.dvojice"></button><p data-t="vic.dvojicePopis"></p></div>
+          <div class="okno-krok"><button id="ozvena" class="tlacitko sekundarni" data-t="vic.ozvena"></button><p data-t="doplnky.ui.ozvenaPopis"></p></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="pauzaPrekryv" class="prekryv stred skryta">
+  <div class="pauza-karta">
+    <h2 data-t="hra.pauza"></h2>
+    <button id="pauzaPokracovat" class="hrat-velke" data-t="pauza.pokracovat"></button>
+    <button id="znovu" class="polozka" data-t="pauza.znovu"></button>
+    <button id="pauzaZobrazeni" class="polozka" data-t="pauza.zobrazeni"></button>
+    <button id="pauzaKonec" class="polozka" data-t="hra.konec"></button>
+  </div>
+</div>
+
+<div id="zobrazeni" class="prekryv skryta">
+  <aside class="rodice-panel">
+    <button id="zobrazeniZavrit" class="text-tl zavrit" data-t-aria="html.zavrit">×</button>
+    <h2 data-t="pauza.zobrazeni"></h2>
+    <div class="prepinace">
+      <button id="prepPismena" class="prepinac" data-t="html.prepPismena"></button>
+      <button id="prepBarvy" class="prepinac" data-t="html.prepBarvy"></button>
+      <button id="prepPrstoklad" class="prepinac" data-t="html.prepPrstoklad" data-t-title="html.prepPrstoklad.titul"></button>
+      <button id="prepStranka" class="prepinac" data-t="html.prepStranka" data-t-title="html.prepStranka.titul"></button>
+      <button id="prepKlaviatura" class="prepinac" data-t="html.prepKlaviatura" data-t-title="html.prepKlaviatura.titul"></button>
+      <button id="prepDoprovod" class="prepinac prep-doprovod" data-t="html.prepDoprovod"></button>
+      <button id="prepMetronom" class="prepinac" data-t="html.prepMetronom" data-t-title="html.prepMetronom.titul"></button>
+      <button id="prepZvukKlavir" class="prepinac skryta" data-t="html.prepZvukKlavir"></button>
+      <button id="prepSmycka" class="prepinac" data-t="html.prepSmycka" data-t-title="html.prepSmycka.titul"></button>
+      <button id="kalibrace" class="prepinac skryta" data-t="html.kalibrace" data-t-title="html.kalibrace.titul"></button>
+    </div>
+  </aside>
+</div>
+
+<main id="hra" class="obrazovka skryta">
+  <header class="hra-hlava">
+    <button id="zpet" class="text-tl ikonka" aria-label="Konec"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4 4 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span data-t="hra.konec"></span></button>
+    <div id="hracAvatar" class="avatar maly"></div>
+    <div class="nazev" id="hraNazev"></div>
+    <span id="hraJak" class="hra-jak"></span>
+    <div class="prubeh"><div id="prubeh"></div></div>
+    <div class="midi-stav mini" data-t-title="html.klavir"><span class="tecka"></span></div>
+    <button id="pauza" class="text-tl ikonka"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3.5v11M13 3.5v11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><span data-t="hra.pauza"></span></button>
+  </header>
+  <div id="rezimy" class="skryta">
+    <button data-rezim="cekam" class="zvoleno"></button><button data-rezim="pockej"></button><button data-rezim="tempo"></button>
+    <button data-rezim="poslech"></button>
+  </div>
+  <div id="dvojiceLista" class="dvojice-lista skryta"></div>
+  <div id="noty" class="noty">
+    <div id="pas"></div>
+    <div class="kurzor"></div>
+    <button id="start" class="start skryta">▶ Spustit</button>
+    <div id="odpocet" class="odpocet skryta"></div>
+  </div>
+  <div id="prehledChyb" class="prehled-chyb skryta">
+    <button id="chybaPredchozi" class="kulate" data-t-aria="app.chyby.predchozi">◀</button>
+    <span id="chybaPocet" class="chyba-pocet" aria-live="polite"></span>
+    <button id="chybaDalsi" class="kulate" data-t-aria="app.chyby.dalsi">▶</button>
+    <button id="chybaProcvicit" class="tlacitko"></button>
+    <button id="chybaZpet" class="text-tl" data-t="app.chyby.zpet"></button>
+  </div>
+  <div id="pruvodceText" class="pruvodce skryta"></div>
+  <div id="hlaska" class="hlaska"></div>
+  <div id="klavesy" class="klavesy"></div>
+</main>
+
+<div id="vysledek" class="modal skryta">
+  <div class="karta">
+    <div id="vysAvatar" class="avatar velky"></div>
+    <div id="vysHvezdy" class="hvezdy hvezdicky"></div>
+    <h2 id="vysNadpis"></h2>
+    <p id="vysText"></p>
+    <p id="vysZvire" class="zvire-veta"></p>
+    <div id="vysDvojice" class="vys-dvojice"></div>
+    <p id="vysTrener" class="trener"></p>
+    <button id="vysHlavni" class="velke-hrat"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M8 5v20l17-10z" fill="currentColor"/></svg><span></span></button>
+    <div class="vedlejsi">
+      <button id="vysUkol" class="text-tl skryta"></button>
+      <button id="vysChyby" class="text-tl skryta" data-t="vys.chyby"></button>
+      <button id="vysZnovu" class="text-tl" data-t="vys.znovu"></button>
+      <button id="vysVymenit" class="text-tl" data-t="vys.vymenit"></button>
+      <button id="vysPrednes" class="text-tl skryta" data-t="vys.prednes"></button>
+      <button id="vysDomu" class="text-tl" data-t="vys.jina"></button>
+    </div>
+  </div>
+</div>
+
+<div id="vlozitOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="vlozitNadpis">
+  <div class="karta vlozit-karta">
+    <h2 id="vlozitNadpis" data-t="pomocnik.vlozitNadpis"></h2>
+    <p id="vlozitNavod" class="napoveda" data-t="pomocnik.vlozitNavod"></p>
+    <textarea id="vlozitText" rows="12" aria-labelledby="vlozitNadpis" aria-describedby="vlozitNavod" spellcheck="false" data-t-placeholder="pomocnik.vlozitPlaceholder"></textarea>
+    <div id="vlozitChyby" class="vlozit-chyby skryta" role="status"></div>
+    <div class="tlacitka"><button id="vlozitZrusit" class="tlacitko sekundarni" data-t="zrusit"></button>
+      <button id="vlozitOtevrit" class="tlacitko" data-t="pomocnik.vlozitOtevrit"></button></div>
+  </div>
+</div>
+
+<div id="dvojiceOkno" class="modal skryta">
+  <div class="karta">
+    <h2 id="dvojiceNadpis"></h2>
+    <p id="dvojiceText" class="napoveda"></p>
+    <div id="dvojiceHraci" class="profily dvojice-hraci"></div>
+    <div class="tlacitka"><button id="dvojiceZrusit" class="tlacitko sekundarni" data-t="zrusit"></button></div>
+  </div>
+</div>
+
+<div id="midiOkno" class="modal skryta">
+  <form class="karta siroka" id="midiForm" autocomplete="off">
+    <h2 data-t="html.midi.nadpis"></h2>
+    <p class="napoveda" id="midiInfo"></p>
+    <label class="popis-pole"><span data-t="html.midi.nazev"></span>
+      <input id="midiNazev" class="pole" maxlength="80">
+    </label>
+    <label class="popis-pole"><span data-t="html.midi.melodie"></span>
+      <select id="midiMelodie" class="pole"></select>
+    </label>
+    <label class="popis-pole"><span data-t="app.levaRuka"></span>
+      <select id="midiLeva" class="pole"></select>
+    </label>
+    <p class="napoveda" data-t="html.midi.napoveda"></p>
+    <div class="tlacitka">
+      <button type="submit" class="tlacitko" data-t="html.midi.prevest"></button>
+      <button type="button" id="midiPoslech" class="tlacitko sekundarni" data-t="html.midi.poslech"></button>
+      <button type="button" id="midiZrusit" class="tlacitko sekundarni" data-t="zrusit"></button>
+    </div>
+  </form>
+</div>
+
+<div id="menuOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="menuNadpis">
+  <div class="karta menu-seznam" tabindex="-1">
+    <h2 id="menuNadpis" data-t="menu.vse"></h2>
+    <button class="polozka menu-songs" data-t="menu.songs"></button>
+    <button class="polozka menu-players" data-t="menu.players"></button>
+    <button class="polozka menu-settings" data-t="menu.settings"></button>
+    <button class="polozka menu-about" data-t="about.odkaz"></button>
+    <div class="tlacitka"><button type="button" class="tlacitko" data-zavrit data-t="html.zavrit"></button></div>
+  </div>
+</div>
+
+<div id="pisnickyOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="pisnickyNadpis">
+  <div class="karta siroka menu-okno" tabindex="-1">
+    <h2 id="pisnickyNadpis" data-t="menu.songs"></h2>
+    <section class="okno-blok" aria-labelledby="pridatNadpis">
+      <h3 id="pridatNadpis" data-t="rodice.pridat"></h3>
+      <div class="okno-krok"><label id="pisnickySoubor" class="tlacitko sekundarni" tabindex="0"><span data-t="rodice.pridatSoubor"></span>
+        <input type="file" id="soubor" accept=".musicxml,.xml,.mxl,.mid,.midi,.kar,.txt" hidden></label><p data-t="rodice.pridatPopis"></p></div>
+      <div class="okno-krok"><button id="pisnickyVlozit" class="tlacitko sekundarni" data-t="pomocnik.vlozitBtn"></button><p data-t="pomocnik.vlozitPopis"></p></div>
+      <div class="okno-krok"><button id="zdroje" class="tlacitko sekundarni" data-t="rodice.zdroje"></button><p data-t="rodice.zdrojePopis"></p></div>
+      <div class="okno-krok"><button id="pisnickyVymysli" class="tlacitko sekundarni" data-t="domu.vymysli"></button><p data-t="menu.vymysliPopis"></p></div>
+    </section>
+    <section class="okno-blok" aria-labelledby="spravaNadpis">
+      <h3 id="spravaNadpis" class="skryty-popis" data-t="menu.spravovat"></h3>
+      <input id="spravaHledat" class="hledat sprava-hledat" type="search" autocomplete="off" aria-labelledby="spravaNadpis" data-t-placeholder="menu.spravaHledat">
+      <section id="spravaAkce" class="sprava-akce skryta" aria-live="polite">
+        <h4 id="spravaNazev"></h4>
+        <div class="okno-krok"><button id="spravaUpravit" class="tlacitko sekundarni" data-t="rodice.upravit"></button><p data-t="menu.upravitPopis"></p></div>
+        <div class="okno-krok"><button id="spravaJednodussi" class="tlacitko sekundarni" data-t="menu.jednodussi"></button><p data-t="menu.jednodussiPopis"></p></div>
+        <div class="okno-krok"><button id="spravaSmazat" class="tlacitko sekundarni" data-t="rodice.smazatPisen"></button><p data-t="menu.smazatPopis"></p></div>
+      </section>
+      <div id="spravaSeznam" class="sprava-seznam"></div>
+    </section>
+    <div class="tlacitka"><button type="button" class="tlacitko" data-zavrit data-t="html.zavrit"></button></div>
+  </div>
+</div>
+
+<div id="hraciOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="hraciNadpis">
+  <div class="karta siroka menu-okno" tabindex="-1">
+    <h2 id="hraciNadpis" data-t="menu.players"></h2>
+    <div id="statHraci" class="stat-hraci" role="group" data-t-aria="stat.koho"></div>
+    <p id="statZadny" class="prazdne skryta" data-t="stat.zadnyHrac"></p>
+    <section class="okno-blok" aria-labelledby="statH1">
+      <div class="stat-hlava"><h3 id="statH1" data-t="stat.cviceni"></h3><small id="statTyden"></small></div>
+      <div id="statKalendar" class="stat-kalendar"></div>
+      <div class="stat-legenda" aria-hidden="true"><span data-t="stat.mene"></span><i data-n="0"></i><i data-n="1"></i><i data-n="2"></i><i data-n="3"></i><span data-t="stat.vice"></span></div>
+    </section>
+    <section class="okno-blok" aria-labelledby="statH2">
+      <div class="stat-hlava"><h3 id="statH2" data-t="stat.zlepsovani"></h3><small data-t="stat.zlepsovaniPopis"></small></div>
+      <div id="statGraf" class="stat-graf"></div>
+    </section>
+    <section class="okno-blok" aria-labelledby="statH3">
+      <div class="stat-hlava"><h3 id="statH3" data-t="stat.pisne"></h3><small id="statNauceno"></small></div>
+      <div id="statPisne" class="stat-pisne"></div>
+      <button id="statVic" type="button" class="odkaz skryta"></button>
+    </section>
+    <section class="okno-blok" aria-labelledby="statH4">
+      <div class="stat-hlava"><h3 id="statH4" data-t="stat.mista"></h3><small data-t="stat.mistaPopis"></small></div>
+      <div id="statMista" class="stat-mista"></div>
+    </section>
+    <div class="tlacitka"><button type="button" class="tlacitko" data-zavrit data-t="html.zavrit"></button></div>
+  </div>
+</div>
+
+<div id="nastaveniOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="nastaveniNadpis">
+  <div class="karta siroka menu-okno" tabindex="-1">
+    <h2 id="nastaveniNadpis" data-t="menu.settings"></h2>
+    <section class="okno-blok" aria-labelledby="jazykNadpis">
+      <h3 id="jazykNadpis" data-t="menu.jazykNadpis"></h3>
+      <label class="volba-radek"><span data-t="rodice.jazykAplikace"></span>
+        <select id="volbaJazyka" class="vyber jazyk-volba"></select></label>
+      <label class="volba-radek"><span data-t="rodice.nazvyTonu"></span>
+        <select id="volbaSoustavy" class="vyber"><option value="cs" data-t="rodice.soustavaCs"></option><option value="en" data-t="rodice.soustavaEn"></option><option value="do" data-t="rodice.soustavaDo"></option></select></label>
+    </section>
+    <section class="okno-blok" aria-labelledby="pianoNadpis">
+      <h3 id="pianoNadpis" data-t="menu.piano"></h3>
+      <p id="nastaveniStav" class="okno-stav"></p>
+      <p id="nastaveniPiano" class="napoveda" data-t="menu.pianoText"></p>
+      <div class="vstup-volby" role="radiogroup" data-t-aria="vstup.nadpis">
+        <button type="button" role="radio" data-vstup="midi" aria-checked="false"><b data-t="vstup.midi"></b><small class="vstup-midi-popis"></small></button>
+        <button type="button" role="radio" data-vstup="mikrofon" aria-checked="false"><b data-t="vstup.mikrofon"></b><small data-t="vstup.mikrofonPopis"></small></button>
+        <button type="button" role="radio" data-vstup="obrazovka" aria-checked="false"><b data-t="vstup.obrazovka"></b><small data-t="vstup.obrazovkaPopis"></small></button>
+      </div>
+      <a class="vstup-appstore skryta" target="_blank" rel="noopener">Web MIDI Browser (App Store)</a>
+      <div class="prepinace"><button id="nastaveniDoprovod" type="button" class="prepinac prep-doprovod" data-t="html.prepDoprovod"></button></div>
+      <p class="napoveda" data-t="vstup.doprovodPopis"></p>
+    </section>
+    <section id="nastaveniZobrazeni" class="okno-blok skryta" aria-labelledby="zobrazeniNadpis">
+      <h3 id="zobrazeniNadpis" data-t="pauza.zobrazeni"></h3>
+      <p id="nastaveniZobrazeniPro" class="okno-stav"></p>
+    </section>
+    <section id="uloziste" class="okno-blok" aria-labelledby="dataNadpis">
+      <h3 id="dataNadpis" data-t="menu.data"></h3>
+      <p id="ulozisteText" class="okno-stav"></p>
+      <div class="okno-krok"><button id="ulozistePovolit" class="tlacitko skryta" data-t="html.povolit"></button><p data-t="html.povolit.titul"></p></div>
+      <div class="okno-krok"><button id="ulozisteZaloha" class="tlacitko sekundarni" data-t="html.zaloha"></button><p data-t="html.zaloha.titul"></p></div>
+      <div class="okno-krok"><label id="ulozisteObnovit" class="tlacitko sekundarni" tabindex="0"><span data-t="html.obnovit"></span><input type="file" id="ulozisteObnova" accept=".zip" hidden></label><p data-t="html.obnovit.titul"></p></div>
+      <div class="okno-krok"><button id="ulozisteSlozka" class="tlacitko sekundarni skryta"></button><p data-t="html.slozka.titul"></p></div>
+      <div class="okno-krok"><button id="ulozisteProhlizec" class="tlacitko sekundarni skryta" data-t="html.jenProhlizec"></button><p data-t="html.jenProhlizec.popis"></p></div>
+    </section>
+    <div class="tlacitka"><button type="button" class="tlacitko" data-zavrit data-t="html.zavrit"></button></div>
+  </div>
+</div>
+
+<div id="aiOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="aiNadpis">
+  <div class="karta siroka ai-okno" tabindex="-1">
+    <h2 id="aiNadpis" data-t="pomocnik.titul"></h2>
+    <p class="ai-uvod" data-t="pomocnik.uvod"></p>
+    <div id="pomocnik">
+      <section class="okno-blok" aria-labelledby="aiNoty">
+        <h3 id="aiNoty" data-t="pomocnik.notyNadpis"></h3>
+        <div class="okno-krok"><button id="pomocnikPokyny" class="tlacitko sekundarni" data-t="pomocnik.pokynyBtn"></button><p data-t="pomocnik.pokynyPopis"></p></div>
+        <div class="okno-krok"><button id="pomocnikVlozit" class="tlacitko sekundarni" data-t="pomocnik.vlozitBtn"></button><p data-t="pomocnik.vlozitPopis"></p></div>
+        <details class="pomocnik-video">
+          <summary data-t="pomocnik.videoUkazka"></summary>
+          <video data-video="ai" loop muted playsinline preload="none"></video>
+        </details>
+      </section>
+      <section class="okno-blok" aria-labelledby="aiTyden">
+        <h3 id="aiTyden" data-t="pomocnik.tydenNadpis"></h3>
+        <div class="okno-krok"><button id="pomocnikVysledky" class="tlacitko sekundarni" data-t="pomocnik.vysledkyBtn"></button><p data-t="pomocnik.vysledkyPopis"></p></div>
+      </section>
+      <section class="okno-blok" aria-labelledby="aiUprava">
+        <h3 id="aiUprava" data-t="pomocnik.upravaNadpis"></h3>
+        <div class="okno-krok"><button id="pomocnikUprava" class="tlacitko sekundarni" data-t="pomocnik.upravaBtn"></button><p data-t="pomocnik.upravaPopis"></p></div>
+      </section>
+      <label id="pomocnikKopie" class="pomocnik-kopie skryta"><span data-t="pomocnik.kopiePopis"></span><textarea id="pomocnikText" rows="3" readonly></textarea></label>
+      <details class="pomocnik-skill">
+        <summary data-t="pomocnik.skillTitul"></summary>
+        <p data-t="pomocnik.skillPopis"></p>
+        <p><a href="helper/rusalka-sheet-music.zip" download data-t="pomocnik.skillNoty"></a> · <a href="helper/rusalka-progress.zip" download data-t="pomocnik.skillPrehled"></a></p>
+        <p class="napoveda" data-t="pomocnik.skillNavod"></p>
+      </details>
+    </div>
+    <div class="tlacitka"><button type="button" id="aiZavrit" class="tlacitko" data-t="html.zavrit"></button></div>
+  </div>
+</div>
+
+<div id="oRusalceOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="oRusalceNadpis">
+  <div class="karta siroka o-rusalce" tabindex="-1">
+    <h2 id="oRusalceNadpis" data-t="about.nadpis"></h2>
+    <video class="o-rusalce-video" data-video="playing" loop muted playsinline preload="none" aria-hidden="true"></video>
+    <h3 data-t="about.pribeh"></h3>
+    <p data-t="about.pribeh1"></p>
+    <p data-t="about.pribeh2"></p>
+    <video class="o-rusalce-video" data-video="ai" loop muted playsinline preload="none" aria-hidden="true"></video>
+    <p data-t="about.pribeh3"></p>
+    <h3 data-t="about.potrebujes"></h3>
+    <p data-t="about.potrebujesText"></p>
+    <h3 data-t="about.zacit"></h3>
+    <p data-t="about.zacitText"></p>
+    <h3 data-t="about.data"></h3>
+    <p data-t="about.dataText"></p>
+    <h3 data-t="about.zdarma"></h3>
+    <p data-t="about.zdarmaText"></p>
+    <p class="o-rusalce-zvuk" data-t="about.zvuk"></p>
+    <p class="o-rusalce-zvuk">© 2026 Jiří Nečas</p>
+    <p id="oRusalceKod" class="skryta"><button type="button" class="odkaz" data-t="about.kod"></button></p>
+    <div class="tlacitka"><button type="button" id="oRusalceZavrit" class="tlacitko" data-t="html.zavrit"></button></div>
+  </div>
+</div>
+
+<div id="zdrojeOkno" class="modal skryta">
+  <div class="karta siroka">
+    <h2 data-t="rodice.zdroje"></h2>
+    <p class="napoveda" data-t-html="html.zdroje.uvod"></p>
+    <ul class="zdroje">
+      <li><button type="button" class="odkaz" data-url="https://www.mutopiaproject.org/">Mutopia</button>: <span data-t="html.zdroje.mutopia"></span></li>
+      <li><button type="button" class="odkaz" data-url="https://openscore.cc/">OpenScore</button>: <span data-t="html.zdroje.openscore"></span></li>
+      <li><button type="button" class="odkaz" data-url="https://musescore.com/">MuseScore.com</button>: <span data-t="html.zdroje.musescore"></span></li>
+      <li><button type="button" class="odkaz" data-url="https://imslp.org/">IMSLP</button>: <span data-t="html.zdroje.imslp"></span></li>
+      <li><button type="button" class="odkaz" data-url="https://musescore.org/cs">MuseScore Studio</button>: <span data-t="html.zdroje.studio"></span></li>
+      <li><button type="button" class="odkaz" data-url="https://audiveris.github.io/audiveris/">Audiveris</button>: <span data-t="html.zdroje.audiveris"></span></li>
+    </ul>
+    <p class="napoveda" data-t-html="html.zdroje.papir"></p>
+    <div class="tlacitka">
+      <button type="button" id="zdrojeZavrit" class="tlacitko sekundarni" data-t="html.zavrit"></button>
+    </div>
+  </div>
+</div>
+
+<div id="potvrzeni" class="prekryv stred skryta" role="alertdialog" aria-modal="true" aria-describedby="potvrzeniText">
+  <div class="pauza-karta">
+    <p id="potvrzeniText" class="potvrzeni-text"></p>
+    <button id="potvrzeniAno" class="hrat-velke"></button>
+    <button id="potvrzeniNe" class="polozka" data-t="zrusit"></button>
+  </div>
+</div>
+
+<div id="toast" class="toast skryta"></div>
+<script src="vendor/verovio-toolkit-wasm.js"></script>
+<script src="start.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

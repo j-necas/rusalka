@@ -1,0 +1,32 @@
+title: Ännchen von Tharau
+author: Friedrich Silcher, lyrics by Simon Dach (after Johann Gottfried Herder)
+time: 3/4
+key: 0
+tempo: 112
+clef: treble
+---
+# Silcher's tune; the repeated first part is written out because its words change.
+1) C | G4/4.=Änn- A4/8=chen G4/4=von
+2) C | G4/4=Tha- C5/4=rau C5/4=ist,
+3) G7 | D5/4.=die E5/8=mir D5/4=ge-
+4) C | C5/2=fällt; r/4
+5) G | B4/4=sie B4/4=ist B4/4=mein
+6) D7 G@2 | D5/4.=Le- C5/8=ben, B4/4=mein
+7) D7 | A4/4.=Gut B4/8=und A4/4=mein
+8) G | G4/2=Geld. r/4
+9) C | G4/4.=Änn- A4/8=chen G4/4=von
+10) C | G4/4=Tha- C5/4=rau C5/4=hat
+11) G7 | D5/4.=wie- E5/8=der D5/4=ihr
+12) C | C5/2=Herz r/4
+13) G | B4/4=auf B4/4=mich B4/4=ge-
+14) D7 G@2 | D5/4.=rich- C5/8=tet B4/4=in
+15) D7 | A4/4.=Lieb’ B4/8=und A4/4=in
+16) G | G4/2=Schmerz. r/4
+17) G | G4/4.=Änn- G4/8=chen A4/4=von
+18) G D7@2 | B4/4=Tha- G4/4=rau, A4/4=mein
+19) G | B4/4=Reich- B4/4=tum, C5/4=mein
+20) G7 | D5/2=Gut, r/4
+21) C | C5/4=du D5/4=mei- E5/4=ne
+22) F | F5/4.=See- E5/8=le, D5/4=mein
+23) C G7@1 | C5/4=Fleisch D5/4=und B4/4=mein
+24) C | C5/2=Blut!

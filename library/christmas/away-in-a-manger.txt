@@ -1,0 +1,25 @@
+title: Away in a Manger
+author: music by William J. Kirkpatrick (CRADLE SONG), lyrics anonymous
+time: 3/4
+key: 1
+tempo: 96
+clef: treble
+---
+# Tune CRADLE SONG (Kirkpatrick, 1895); first verse; transposed from F major to G major
+1) | D4/4=A-
+2) G D7@2 | G4/4=way G4/4=in A4/8=a B4/8
+3) G | G4/4=man- G4/4=ger, B4/8=no C5/8
+4) G Em@2 | D5/4=crib D5/4=for E5/4=a
+5) Am | C5/2=bed, A4/8=the B4/8
+6) D7 | C5/4=lit- C5/4=tle D5/4=Lord
+7) G | B4/4=Je- B4/4=sus G4/8=laid B4/8
+8) A7 | A4/4=down E4/4=his G4/4=sweet
+9) D7 | F#4/2=head. D4/4=The
+10) G D7@2 | G4/4=stars G4/4=in A4/8=the B4/8
+11) G | G4/4=bright G4/4=sky B4/8=looked C5/8
+12) G Em@2 | D5/4=down D5/4=where E5/4=he
+13) Am | C5/2=lay, A4/8=the B4/8
+14) D7 | C5/4=lit- C5/4=tle D5/4=Lord
+15) G | B4/4=Je- B4/4=sus G4/8=a- B4/8
+16) Am D7@2 | A4/4=sleep E4/4=on F#4/4=the
+17) G | G4/2=hay.

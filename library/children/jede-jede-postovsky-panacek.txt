@@ -1,0 +1,24 @@
+title: Jede, jede poštovský panáček
+author: traditional
+time: 3/4
+key: 1
+tempo: 144
+clef: treble
+---
+# transposed from C major to G major (the C version goes down to G3)
+1) G | B4/2=Je- D5/4=de,
+2) G | G4/2=je- B4/4=de
+3) D7 | D5/4=poš- D4/4=tov- D4/4=ský
+4) G | G4/4=pa- B4/4=ná- D5/4=ček,
+5) G | B4/2=je- D5/4=de,
+6) G | G4/2=je- B4/4=de
+7) D7 | D5/4=poš- D4/4=tov- D4/4=ský
+8) G | G4/2.=pán.
+9) D7 | D5/4=Má D4/4=vra- D4/4=né
+10) G | G4/4=ko- B4/4=níč- D5/4=ky
+11) D7 | D5/4=ja- D4/4=ko D4/4=dvě
+12) G | G4/4=ry- B4/4=bič- D5/4=ky,
+13) G | B4/2=je- D5/4=de,
+14) G | G4/2=je- B4/4=de
+15) D7 | D5/4=do D4/4=Ro- D4/4=ky-
+16) G | G4/2.=can.

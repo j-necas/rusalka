@@ -1,0 +1,22 @@
+title: Teče voda, teče
+author: traditional
+time: 4/4
+key: 1
+tempo: 80
+clef: treble
+---
+# Slovak song (cez Velecký majír); Pavel Hokr's sheet transposed from C to G major, slowly and freely
+1) G | G4/2.=Te- A4/4=če
+2) G | B4/4=vo- A4/4=da, B4/4=te- G4/4~=če
+3) G | G4/1
+4) D | D4/1
+5) G | G4/2.=cez A4/4=Ve-
+6) G | B4/4=le- A4/4=cký B4/4=ma- G4/4
+7) D | A4/1~=jír;
+8) D | A4/1
+9) {|:} D | D5/2.=pre- C5/4=čo
+10) G | B4/4=si A4/4=ma B4/4=ne- G4/4~=hal,
+11) G | G4/1
+12) A | A4/2.=sta- G4/4=ro-
+13) D | F#4/4=dáv- E4/4=ny F#4/4=fra- D4/4
+14) {:|} G | G4/1=jír?

@@ -1,0 +1,31 @@
+title: Der Vogelfänger bin ich ja
+author: music by Wolfgang Amadeus Mozart, lyrics by Emanuel Schikaneder
+time: 2/4
+key: 1
+tempo: 76
+clef: treble
+---
+# Die Zauberflöte, K. 620, No. 2 (Papageno's Lied, Andante): the voice part, first strophe; original key G major,
+# written an octave higher than Papageno sings it; the short orchestral interludes are kept as rests;
+# the grace note in bar 14 and the fermata in bar 15 left out
+1) | B4/16=Der A4/16
+2) G | G4/8=Vo- G4/8=gel- A4/16=fän- G4/16 F#4/16=ger G4/16
+3) D7 | A4/8=bin B4/8=ich A4/8=ja, A4/16=stets F#4/16
+4) G | D4/8.=lu- D4/16=stig D5/8.=hei- D5/16=ßa
+5) G | B4/8=hop- A4/8=sa- G4/8=sa! B4/8=ich
+6) D7 | A4/16=Vo- G4/16 F#4/16=gel- G4/16 A4/16=fän- G4/16 F#4/16=ger G4/16
+7) D7 | A4/8=bin B4/8=be- A4/8=kannt r/16 A4/16=bei
+8) D | D5/8.=Alt D5/16=und A4/8.=Jung A4/16=im
+9) A7 D@1 | F#4/8=gan- E4/8=zen D4/8=Land. r/8
+10) D | r/2
+11) D7 | r/4 r/8 D4/16=Weiß F#4/16
+12) D7 | A4/8=mit A4/8=dem B4/16=Lo- A4/16 G4/16=cken A4/16
+13) G | B4/8=um- A4/8=zu- G4/8=gehn, D5/8=und
+14) D7 | F#4/8.=mich F#4/16=aufs A4/16=Pfei- G4/16 F#4/16=fen G4/16
+15) D | A4/8=zu B4/8=ver- A4/8=stehn! r/8
+16) D7 | r/2
+17) G | r/4 r/8 G4/16=Drum A4/16
+18) G | B4/8.=kann B4/16=ich C5/16=froh B4/16 A4/16=und B4/16
+19) C D7@1 | C5/8=lu- D5/8=stig E5/8=sein, C5/16=denn A4/16
+20) D7 | F#4/8.=al- F#4/16=le G4/16=Vö- F#4/16 E4/16=gel F#4/16
+21) G | G4/8=sind A4/16=ja F#4/16 G4/8=mein. r/8

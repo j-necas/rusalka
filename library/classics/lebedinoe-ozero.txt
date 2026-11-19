@@ -1,0 +1,16 @@
+title: Лебединое озеро
+author: Pyotr Ilyich Tchaikovsky
+time: 4/4
+key: 0
+tempo: 84
+clef: treble
+---
+# Swan Lake, Op. 20, Act 2, No. 10 (Scene): the oboe theme, first 8 bars, transposed from B minor to A minor
+1) Am | E5/2 A4/8 B4/8 C5/8 D5/8
+2) Am | E5/4. C5/8 E5/4. C5/8
+3) Am Dm@2 | E5/4. A4/8 C5/8 A4/8 F4/8 C5/8
+4) Am E7@2 | A4/2~ A4/8 D5/8 C5/8 B4/8
+5) Am | E5/2 A4/8 B4/8 C5/8 D5/8
+6) Am | E5/4. C5/8 E5/4. C5/8
+7) Am Dm@2 | E5/4. A4/8 C5/8 A4/8 F4/8 C5/8
+8) Am | A4/2.

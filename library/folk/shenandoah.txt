@@ -1,0 +1,18 @@
+title: Shenandoah
+author: traditional
+time: 4/4
+key: 1
+tempo: 66
+clef: treble
+---
+# Sung freely, often printed with changing 4/4 and 3/4 bars; here evened out into 4/4
+1) | D4/4=Oh
+2) G | G4/8=Shen- G4/8=an- G4/4.=doah, A4/8=I B4/8=long C5/8=to
+3) C G@1.5 | E5/4.=hear D5/4.=you, G5/8=a- F#5/8
+4) C G@2 | E5/4.=way, D5/8=you E5/8=roll- D5/8=ing B4/8=ri- D5/8~=ver.
+5) G | D5/2. r/8 D5/8=Oh
+6) Em | E5/8=Shen- E5/8=an- E5/4.=doah, B4/8=I D5/8=long B4/8=to
+7) D G@1 | A4/4=hear G4/4.=you, r/8 A4/4=a-
+8) G | B4/4.=way, G4/8=I'm B4/8.=bound E5/16=a- D5/4~=way,
+9) G | D5/4 G4/8.='cross A4/16=the B4/4.=wide G4/8=Mis-
+10) D7 G@1 | A4/4=sou- G4/2.=ri.

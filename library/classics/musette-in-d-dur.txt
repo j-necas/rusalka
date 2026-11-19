@@ -1,0 +1,29 @@
+title: Musette in D-Dur
+author: attributed to J. S. Bach
+time: 2/4
+key: 2
+tempo: 100
+clef: treble
+---
+# Notebook for Anna Magdalena Bach (1725), BWV Anh. 126: the whole piece, melody only (the left hand of octave leaps is left out);
+# A section repeated, B section once, then Da capo al Fine, as in the Bach-Gesellschaft edition
+1) {|:} D | A5/4 G5/16 F#5/16 E5/16 D5/16
+2) D | A5/4 G5/16 F#5/16 E5/16 D5/16
+3) D | F#4/16 G4/16 A4/8 G4/8 F#4/8
+4) A D@1 | E4/8 A4/8 F#4/8 D4/8
+5) D | A5/4 G5/16 F#5/16 E5/16 D5/16
+6) D | A5/4 G5/16 F#5/16 E5/16 D5/16
+7) D | F#4/16 G4/16 A4/8 G4/8 F#4/8
+8) {:| fine} A D@1 | E4/8 A4/8 D4/4
+9) A | C#5/16 D5/16 E5/8 C#5/16 D5/16 E5/8
+10) A | A5/8 E5/8 E5/4
+11) A | A5/8 E5/8 A5/8 E5/8
+12) A E@1 | D5/16 C#5/16 B4/16 A4/16 B4/8 E4/8
+13) E7 | E5/8 D#5/8 E4/8 D5/8~
+14) A E7@1 | D5/8 C#5/8 A5/8 G#5/8
+15) E7 | E5/8 D#5/8 E4/8 D5/8~
+16) A E7@1 | D5/8 C#5/8 A5/8 G#5/8
+17) E7 | E5/16 D#5/16 C#5/16 D#5/16 E5/16 D#5/16 C#5/16 D#5/16
+18) E7 | E5/8 G#4/8 A4/8 D5/8
+19) A | C#5/16 D5/16 E5/8 A4/8 D4/8
+20) {dc} A | C#4/16 D4/16 E4/8 A3/4

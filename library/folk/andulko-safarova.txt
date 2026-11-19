@@ -1,0 +1,28 @@
+title: Andulko šafářova
+author: traditional
+time: 3/4
+key: 2
+tempo: 126
+clef: treble
+---
+# D major as in Náš poklad; grace notes left out; the first line is repeated as in Náš poklad and lidovepisne.cz
+1) {|:} D | F#4/4=An- F#4/4=dul- F#4/4=ko
+2) A7 | G4/4=ša- F#4/4=fá- G4/4=řo-
+3) D | A4/2=va, F#5/4=hu-
+4) D | D5/2=sič- A4/4=ky
+5) A7 | B4/4=ne- A4/4=máš G4/4=do-
+6) {:|} D | F#4/2.=ma.
+7) D A7@2 | D5/2=Hu- C#5/4=sy
+8) A7 | G4/2.=jsou
+9) G D@2 | B4/2=v_ječ- A4/4=me-
+10) D | F#4/2.=ně,
+11) D A7@2 | D5/2=An- C#5/4=dul-
+12) A7 | G4/2.=ko,
+13) G D@2 | B4/2=vy- A4/4=žeň
+14) D | F#4/2.=je,
+15) D | F#4/4=vy- F#4/4=žeň F#4/4=je
+16) A7 | G4/4=z_ječ- F#4/4=me- G4/4=ne
+17) D | A4/2=ven F#5/4=dřív,
+18) D | D5/2=než A4/4=bu-
+19) A7 | B4/4=de A4/4=bí- G4/4=lej
+20) D | F#4/2.=den.

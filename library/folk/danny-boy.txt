@@ -1,0 +1,25 @@
+title: Danny Boy
+author: traditional (Londonderry Air), lyrics by Frederic Weatherly
+time: 4/4
+key: -1
+tempo: 66
+clef: treble
+---
+# F major (as in the trillian.mit.edu setting); first verse
+1) | E4/8=Oh, F4/8=Dan- G4/8=ny
+2) F | A4/4.=boy, G4/8=the A4/8=pipes, D5/8=the C5/8=pipes A4/8=are
+3) Bb | G4/8=call- F4/8 D4/4=ing r/8 F4/8=from A4/8=glen Bb4/8=to
+4) F | C5/4.=glen, D5/8=and C5/8=down A4/8=the F4/8=moun- A4/8=tain
+5) C | G4/2=side. r/8 E4/8=The F4/8=sum- G4/8=mer's
+6) F | A4/4.=gone, G4/8=and A4/8=all D5/8=the C5/8=ro- A4/8=ses
+7) Bb C@2 | G4/8=fall- F4/8 D4/4=ing, r/8 E4/8=It's F4/8=you, G4/8=it's
+8) F C7@2 | A4/4.=you Bb4/8=must A4/8=go G4/8=and F4/8=I G4/8=must
+9) F | F4/2=bide. r/8 C5/8=But D5/8=come E5/8=ye
+10) F Bb@2 | F5/4.=back E5/8=when E5/8=sum- D5/8=mer's C5/8=in D5/8=the
+11) F | C5/8=mea- A4/8 F4/4=dow, r/8 C5/8=Or D5/8=when E5/8=the
+12) F Bb@2 | F5/4.=val- E5/8=ley's E5/8=hushed D5/8=and C5/8=white A4/8=with
+13) C | G4/2=snow, r/8 C5/8=It's C5/8=I'll C5/8=be
+14) F Bb@2 | A5/4.=here G5/8=in G5/8=sun- F5/8=shine D5/8=or F5/8=in
+15) F | C5/8=sha- A4/8 F4/4=dow, r/8 E4/8=Oh, F4/8=Dan- G4/8=ny
+16) F C7@2 | A4/8=boy, D5/8=oh C5/8=Dan- A4/8=ny G4/8=boy, F4/8=I D4/8=love E4/8=you
+17) F | F4/2=so!

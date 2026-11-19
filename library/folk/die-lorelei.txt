@@ -1,0 +1,25 @@
+title: Die Lorelei
+author: Friedrich Silcher, lyrics by Heinrich Heine
+time: 6/8
+key: 0
+tempo: 72
+clef: treble
+---
+# Transposed from D major (Allgemeines Deutsches Kommersbuch) to C major.
+1) | G4/8=Ich
+2) C | G4/8.=weiß A4/16=nicht, G4/8=was C5/8=soll B4/8=es A4/8=be-
+3) G7 | G4/4.=deu- F4/4=ten, F4/8=dass
+4) C G7@1.5 | E4/4=ich E4/8=so D4/8=trau- C4/8 D4/8=rig
+5) C | E4/2=bin; r/8 G4/8=ein
+6) C | G4/8.=Mär- A4/16=chen G4/8=aus C5/8=al- B4/8 A4/8=ten
+7) G7 | G4/4.=Zei- F4/4=ten, F4/8=das
+8) C G7@1.5 | E4/4=kommt E4/8=mir G4/8=nicht F4/8=aus D4/8=dem
+9) C | C4/2=Sinn. r/8 E4/8=Die
+10) G | D4/8.=Luft E4/16 D4/8=ist G4/8=kühl, D4/8=und D4/8=es
+11) G | B4/4.=dun- A4/4=kelt, A4/8=und
+12) D7 | G4/4=ru- G4/8=hig F#4/8=fließt G4/8 A4/8=der
+13) G | G4/4.~=Rhein; G4/4 G4/8=der
+14) C | G4/8.=Gip- A4/16=fel G4/8=des C5/8=Ber- B4/8 A4/8=ges
+15) C G7@1.5 | G4/4=fun- E5/8 D5/4=kelt D5/8=im
+16) F G7@1.5 | C5/4=A- C5/8=bend- B4/8=son- A4/8 B4/8=nen-
+17) C | C5/2=schein.

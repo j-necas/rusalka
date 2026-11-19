@@ -1,0 +1,31 @@
+// A visitor of rusalkapiano.com who does not play yet goes to the introduction page in their language (/cs/, /de/ …,
+// tools/uvod.mjs); its "Start playing" button remembers the visit (localStorage "rusalka-uvod") and comes back here.
+// Checked twice: here before the app loads (nothing of Rusalka in this browser = a brand new visitor), and by the app
+// once its data is read (window.naUvodniStranku: no player yet, e.g. someone who once looked and left).
+// An installed app, a link with a hash or query, Tauri and the dev server are never redirected.
+// A separate file because of the security policy (CSP without inline scripts).
+(() => {
+  // the folders of the introduction pages (= the app's languages, lowercase)
+  const UVODY = ['en', 'es', 'fr', 'pt', 'pt-br', 'de', 'it', 'pl', 'uk', 'cs', 'sk', 'ru', 'zh-cn', 'hi', 'ar', 'ja'];
+  /** a language tag (cs-CZ, pt-BR, zh-Hans-CN …) → the folder of its introduction page, English when there is none */
+  function slozka(tag) {
+    const t = String(tag || '').toLowerCase(), zaklad = t.split('-')[0];
+    if (zaklad === 'zh') return 'zh-cn';
+    if (zaklad === 'pt') return t === 'pt-br' || t.startsWith('pt-br') ? 'pt-br' : 'pt';
+    return UVODY.includes(zaklad) ? zaklad : 'en';
+  }
+  /** kod: the language; uzHraje: this browser already has players (or a folder with data) → stay in the app */
+  function naUvodniStranku(kod, uzHraje) {
+    try {
+      if (uzHraje || !/^(www\.)?rusalkapiano\.com$/.test(location.hostname) || location.pathname !== '/' || location.search || location.hash) return false;
+      if (matchMedia('(display-mode: standalone)').matches || navigator.standalone || localStorage.getItem('rusalka-uvod')) return false;
+      location.replace('/' + slozka(kod) + '/');
+      return true;
+    } catch { return false; }   // no localStorage (private window settings): stay in the app
+  }
+  window.naUvodniStranku = naUvodniStranku;
+  window.slozkaUvodu = slozka;
+  let znamy = false;
+  try { znamy = Object.keys(localStorage).some(k => k.startsWith('kt-')); } catch { /* see above */ }
+  naUvodniStranku((navigator.languages && navigator.languages[0]) || navigator.language || '', znamy);
+})();

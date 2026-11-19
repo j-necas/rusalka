@@ -1,0 +1,26 @@
+title: Prélude op. 28 n° 7
+author: Frédéric Chopin
+time: 3/4
+key: 1
+tempo: 72
+clef: treble
+---
+# 24 Préludes, Op. 28 No. 7 (Andantino): the whole piece (pickup + 16 bars), transposed from A major to G major;
+# melody only (the top notes of the right-hand chords); the grace note in bar 15 left out
+1) | D4/4
+2) D7 | B4/8. C5/16 A4/4 A4/4
+3) D7 | A4/2 E5/4
+4) G | C#5/8. D5/16 G5/4 G5/4
+5) G | G5/2 B4/4
+6) E7 | G#4/8. A4/16 C5/4 C5/4
+7) D7 | C5/2 F#4/4
+8) D7 G@1 | F#4/8. G4/16 B4/4 B4/4
+9) G | B4/2 D4/4
+10) D7 | B4/8. C5/16 A4/4 A4/4
+11) D7 | A4/2 E5/4
+12) G | C#5/8. D5/16 B5/4 B5/4
+13) E7 | B5/2 B4/4
+14) Am | B4/8. C5/16 E5/4 E5/4
+15) D7 | E5/2 F#4/4
+16) D7 G@1 | A4/8. G4/16 G5/4 G5/4
+17) G | G5/2 r/4

@@ -1,0 +1,31 @@
+title: Měsíčku na nebi hlubokém
+author: music by Antonín Dvořák, lyrics by Jaroslav Kvapil
+time: 3/8
+key: 1
+tempo: 36
+clef: treble
+---
+# Rusalka, Act 1: the first strophe of Rusalka's song, transposed from G-flat major to G major
+1) G | B4/8=Mě- B4/8=síč- A4/8=ku
+2) G | B4/8=na D5/8=ne- A4/8=bi
+3) G C@0.5 | B4/16=hlu- G4/16=bo- E4/8=kém, G4/8~
+4) G | G4/8 r/8 r/8
+5) D | A4/8=svět- A4/8=lo B4/8=tvé
+6) D | A4/8=da- A4/8=le- B4/8=ko
+7) Am | C5/16=vi- A4/16~=dí, A4/4
+8) D7 | r/4.
+9) G | B4/8=po B4/8=svě- A4/8=tě
+10) Am | C5/4=blou- B4/8=díš
+11) D7 | E5/16=ši- C5/16=ro- D5/4=kém,
+12) D7 | r/4.
+13) G | D5/8=dí- C5/8=váš B4/8=se
+14) A7 | B4/8=v_pří- E5/8=byt- F#4/16=ky G4/16
+15) D | B4/16=li- A4/8.=dí. r/8
+16) D7 | r/4.
+17) G | D5/8=Mě- D5/8=síč- C5/8=ku,
+18) C | E5/4=po- D5/8=stůj
+19) C | F#5/16=chví- D5/16 E5/4=li,
+20) C | r/4.
+21) Em | E5/8=řek- D5/8=ni B4/8=mi,
+22) Am D7@0.5 | C5/8=kde B4/8=je A4/16=můj D4/16
+23) G | A4/16=mi- G4/8.=lý? r/8

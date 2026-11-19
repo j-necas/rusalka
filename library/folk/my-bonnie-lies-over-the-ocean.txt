@@ -1,0 +1,36 @@
+title: My Bonnie Lies over the Ocean
+author: traditional
+time: 3/4
+key: 2
+tempo: 132
+clef: treble
+---
+# transposed from G major (Wikipedia, pghardy) to D major so the low notes stay above middle C
+# verse written out, refrain with the repeat and two endings
+1) | A4/4=My
+2) D | F#5/4=Bon- E5/4=nie D5/4=lies
+3) G | E5/4=o- D5/4=ver B4/4=the
+4) D | A4/4=o- F#4/2~=cean,
+5) D | F#4/4 r/4 A4/4=my
+6) D | F#5/4=Bon- E5/4=nie D5/4=lies
+7) E7 | D5/4=o- C#5/4=ver D5/4=the
+8) A | E5/2.~=sea,
+9) A7 | E5/4 r/4 A4/4=my
+10) D | F#5/4=Bon- E5/4=nie D5/4=lies
+11) G | E5/4=o- D5/4=ver B4/4=the
+12) D | A4/4=o- F#4/2~=cean,
+13) Bm | F#4/4 r/4 A4/4=oh,
+14) Em | B4/4=bring E5/4=back D5/4=my
+15) A7 | C#5/4=Bon- B4/4=nie C#5/4=to
+16) D | D5/2.~=me.
+17) D | D5/2 r/4
+18) {|:} D | A4/2.=Bring
+19) D7 | D5/2.=back,
+20) G | B4/2.=bring
+21) E7 | E5/2=back, D5/4=oh,
+22) A | C#5/4=bring C#5/4=back C#5/4=my
+23) A7 | C#5/4=Bon- B4/4=nie C#5/4=to
+24) {1.} D | D5/2=me, E5/4=to
+25) {1. :|} D | F#5/2.=me.
+26) {2.} D | D5/2.~=me.
+27) {2.} D | D5/2

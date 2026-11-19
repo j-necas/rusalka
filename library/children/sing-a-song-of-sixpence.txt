@@ -1,0 +1,15 @@
+title: Sing a Song of Sixpence
+author: traditional
+time: 4/4
+key: 0
+tempo: 108
+clef: treble
+---
+1) C | C5/8=Sing B4/8=a A4/8=song G4/8=of C5/4=six- E4/8=pence, E4/8=a
+2) C | G4/8=pock- A4/8=et G4/8=full E4/8=of G4/2=rye.
+3) C | C5/8=Four B4/8=and A4/8=twen- G4/8=ty C5/4=black- E4/4=birds
+4) Am | D4/4=baked A4/8=in A4/8=a A4/2=pie.
+5) C | G4/8=When C5/8=the C5/8=pie C5/8=was C5/4=o- C5/8=pened, C5/8=the
+6) G | B4/8=birds D5/8=be- D5/8=gan D5/8=to D5/2=sing;
+7) C F@2 | E5/8=was- D5/8=n’t C5/8=that B4/8=a C5/8=dain- B4/8=ty A4/8=dish G4/8=to
+8) G7 C@2 | A4/8=set C5/8=be- B4/8=fore D5/8=the C5/2=king?

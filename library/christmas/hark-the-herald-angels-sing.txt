@@ -1,0 +1,28 @@
+title: Hark! The Herald Angels Sing
+author: music by Felix Mendelssohn (MENDELSSOHN, adapted by W. H. Cummings), lyrics by Charles Wesley
+time: 4/4
+key: -1
+tempo: 104
+clef: treble
+---
+# Tune MENDELSSOHN (from Mendelssohn's Festgesang, adapted by William H. Cummings); first verse with the refrain
+1) F | C4/4=Hark! F4/4=the F4/4.=her- E4/8=ald
+2) F C@3 | F4/4=an- A4/4=gels A4/4=sing, G4/4
+3) F Bb@2 | C5/4=Glo- C5/4=ry C5/4.=to Bb4/8=the
+4) C F@2 | A4/4=new- G4/4=born A4/2=King;
+5) F | C4/4=peace F4/4=on F4/4.=earth, E4/8=and
+6) Dm G@2 | F4/4=mer- A4/4=cy A4/4=mild, G4/4
+7) C | C5/4=God G4/4=and G4/4.=sin- E4/8=ners
+8) G7@1 C@2 | E4/4=rec- D4/4=on- C4/2=ciled!
+9) F | C5/4=Joy- C5/4=ful, C5/4=all F4/4=ye
+10) C7 F@1 | Bb4/4=na- A4/4=tions A4/4=rise, G4/4
+11) F | C5/4=join C5/4=the C5/4=tri- F4/4=umph
+12) C7 F@1 | Bb4/4=of A4/4=the A4/4=skies; G4/4
+13) Bb | D5/4=with D5/4=th'an- D5/4=gel- C5/4=ic
+14) Bb | Bb4/4=host A4/4=pro- Bb4/2=claim,
+15) C7 F@2 | G4/4=Christ A4/8=is Bb4/8 C5/4.=born F4/8=in
+16) C7@1 F@2 | F4/4=Beth- G4/4=le- A4/2=hem!
+17) Bb | D5/4.=Hark! D5/8=the D5/4=her- C5/4=ald
+18) Bb Gm@2 | Bb4/4=an- A4/4=gels Bb4/2=sing,
+19) C7 F@2 | G4/4=Glo- A4/8=ry Bb4/8 C5/4.=to F4/8=the
+20) C7@1 F@2 | F4/4=new- G4/4=born F4/2=King!

@@ -1,0 +1,18 @@
+title: Ovčáci, čtveráci
+author: traditional
+time: 2/4
+key: 0
+tempo: 100
+clef: treble
+---
+# transposed from G major (Erben) to C major
+1) C | C4/4=Ov- E4/4=čá-
+2) C | G4/2=ci,
+3) C | C4/4=čtve- E4/4=rá-
+4) C | G4/2=ci,
+5) C | E4/8=vy E4/8=jste D4/8=na- E4/8=ši
+6) G7 | F4/4=vič- D4/4=ku
+7) C | E4/8=i E4/8=tu D4/8=čo- E4/8=čo-
+8) G7 | F4/4=vič- D4/4=ku
+9) C G7@1 | E4/4=vy- D4/4=pá-
+10) C | C4/2=sli.

@@ -1,0 +1,20 @@
+title: O Tannenbaum
+author: traditional, lyrics by Ernst Anschütz
+time: 3/4
+key: 1
+tempo: 96
+clef: treble
+---
+1) | D4/8=O
+2) G D@2 | G4/8.=Tan- G4/16=nen- G4/4=baum, A4/4=o
+3) G | B4/8.=Tan- B4/16=nen- B4/4.=baum! B4/8=Wie
+4) Am D7@2 | A4/8=treu B4/8=sind C5/4=dei- F#4/4=ne
+5) D7 G@1 | A4/4=Blät- G4/4=ter; r/8 D5/8=du
+6) G7 C@1 | D5/8=grünst B4/8=nicht E5/4.=nur D5/8=zur
+7) D7 | D5/8=Som- C5/8=mer- C5/4.=zeit, C5/8=nein,
+8) D7 | C5/8=auch A4/8=im D5/4.=Win- C5/8=ter,
+9) G | C5/8=wenn B4/8=es B4/4=schneit. r/8 D4/8=O
+10) G D@2 | G4/8.=Tan- G4/16=nen- G4/4=baum, A4/4=o
+11) G | B4/8.=Tan- B4/16=nen- B4/4.=baum! B4/8=wie
+12) Am D7@2 | A4/8=treu B4/8=sind C5/4=dei- F#4/4=ne
+13) D7 G@1 | A4/4=Blät- G4/4=ter!

@@ -1,0 +1,27 @@
+title: Joy to the World
+author: music by Lowell Mason (ANTIOCH, after Handel), lyrics by Isaac Watts
+time: 2/4
+key: 2
+tempo: 100
+clef: treble
+---
+# Tune ANTIOCH in Lowell Mason's 1848 form as sung today; first verse
+1) D | D5/4=Joy C#5/8.=to B4/16=the
+2) D | A4/4.=world! G4/8=The
+3) D A@1 | F#4/4=Lord E4/4=is
+4) D | D4/4.=come! A4/8=Let
+5) G | B4/4.=earth B4/8=re-
+6) A | C#5/4.=ceive C#5/8=her
+7) D | D5/4.=King; D5/8=Let
+8) D | D5/8=ev'- C#5/8 B4/8=ry A4/8
+9) D | A4/8.=heart G4/16 F#4/8 D5/8=pre-
+10) D | D5/8=pare C#5/8 B4/8=Him A4/8
+11) D | A4/8.=room, G4/16 F#4/8 F#4/8=And
+12) D | F#4/8=heav'n F#4/8=and F#4/8=na- F#4/16=ture G4/16
+13) D | A4/4.=sing, G4/16=And F#4/16
+14) A | E4/8=heav'n E4/8=and E4/8=na- E4/16=ture F#4/16
+15) A7 | G4/4.=sing, F#4/16=And E4/16
+16) D G@1 | D4/8=heav'n, D5/4 B4/8=and
+17) D | A4/8.=heav'n G4/16 F#4/8 G4/8=and
+18) D A7@1 | F#4/4=na- E4/4=ture
+19) D | D4/2=sing.

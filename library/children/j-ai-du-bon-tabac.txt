@@ -1,0 +1,32 @@
+title: J'ai du bon tabac
+author: traditional
+time: 2/4
+key: 0
+tempo: 112
+clef: treble
+---
+# C major as in the abcnotation.com score; the old prints are in G and F major.
+1) C | C4/8=J’ai D4/8=du E4/8=bon C4/8=ta-
+2) G7 | D4/4=bac D4/8=dans E4/8=ma
+3) G7 | F4/4=ta- F4/4=ba-
+4) C | E4/4=tiè- E4/4=re,
+5) C | C4/8=j’ai D4/8=du E4/8=bon C4/8=ta-
+6) G7 | D4/4=bac, D4/8=tu E4/8=n’en
+7) G7 | F4/4=au- G4/4=ras
+8) C | C4/2=pas.
+9) G7 | G4/4=J’en G4/8=ai F4/8=du
+10) C | E4/4=fin D4/8=et E4/8=du
+11) G7 | F4/4=bien G4/4=râ-
+12) G | D4/2=pé,
+13) G7 | G4/4=mais G4/8=ce F4/8=n’est
+14) C | E4/4=pas D4/8=pour E4/8=ton
+15) G7 | F4/4=vi- G4/4=lain
+16) G | D4/2=nez_!
+17) C | C4/8=J’ai D4/8=du E4/8=bon C4/8=ta-
+18) G7 | D4/4=bac D4/8=dans E4/8=ma
+19) G7 | F4/4=ta- F4/4=ba-
+20) C | E4/4=tiè- E4/4=re,
+21) C | C4/8=j’ai D4/8=du E4/8=bon C4/8=ta-
+22) G7 | D4/4=bac, D4/8=tu E4/8=n’en
+23) G7 | F4/4=au- G4/4=ras
+24) C | C4/2=pas.
