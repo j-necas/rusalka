@@ -17,9 +17,10 @@ if (!klid && 'IntersectionObserver' in window) {
   }, { threshold: .35 });
   videa.forEach(v => io.observe(v));
 } else if (!klid) videa.forEach(v => { nacti(v); v.play().catch(() => {}); });
-// links into the app (Start playing, Open Rusalka): remember the visit, so rusalkapiano.com opens the app from now on
+// links into the app (Start playing, Open Rusalka): this tab opens the app (New player); without a player
+// a later visit to rusalkapiano.com shows the introduction again (static/prvni.js)
 for (const a of document.querySelectorAll('a[href="../"]')) {
-  a.addEventListener('click', () => { try { localStorage.setItem('rusalka-uvod', '1'); } catch { /* private window */ } });
+  a.addEventListener('click', () => { try { sessionStorage.setItem('rusalka-uvod', '1'); } catch { /* private window */ } });
 }
 // the language menu closes on a click outside it or on Escape
 const menu = document.querySelector('.jazyk-menu');

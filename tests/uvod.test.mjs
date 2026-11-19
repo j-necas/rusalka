@@ -46,3 +46,24 @@ test('the first-visit redirect (static/prvni.js) knows every page and maps brows
   assert.equal(slozka('cs-CZ'), 'cs'); assert.equal(slozka('pt-BR'), 'pt-br'); assert.equal(slozka('pt-PT'), 'pt');
   assert.equal(slozka('zh-Hans-CN'), 'zh-cn'); assert.equal(slozka('nl-NL'), 'en'); assert.equal(slozka(''), 'en');
 });
+
+test('rusalkapiano.com without a player: the introduction, unless this tab came from its Start playing', () => {
+  const zkus = ({ lokalni = {}, relace = {}, hraci = false } = {}) => {
+    let kam = null;
+    const ulozka = m => Object.defineProperties(m, {     // like Storage: Object.keys lists the stored keys only
+      getItem: { value: k => (Object.hasOwn(m, k) ? m[k] : null) }, setItem: { value: (k, v) => { m[k] = String(v); } },
+      removeItem: { value: k => { delete m[k]; } } });
+    const okno = { location: { hostname: 'rusalkapiano.com', pathname: '/', search: '', hash: '', replace: u => { kam = u; } },
+      navigator: { languages: ['cs-CZ'] }, localStorage: ulozka(lokalni), sessionStorage: ulozka(relace), matchMedia: () => ({ matches: false }) };
+    okno.window = okno;
+    vm.runInNewContext(readFileSync(new URL('../static/prvni.js', import.meta.url), 'utf8'), Object.assign(okno, { Object, String }));
+    if (!kam) okno.naUvodniStranku('cs', hraci);           // the app's own check once its data is read
+    return { kam, lokalni };
+  };
+  assert.equal(zkus().kam, '/cs/');
+  const stara = zkus({ lokalni: { 'rusalka-uvod': '1', 'kt-nastaveni': '{}' } });   // looked once, no player made
+  assert.equal(stara.kam, '/cs/');
+  assert.ok(!('rusalka-uvod' in stara.lokalni));
+  assert.equal(zkus({ relace: { 'rusalka-uvod': '1' } }).kam, null);                // Start playing → New player
+  assert.equal(zkus({ lokalni: { 'kt-profily': '[]' }, hraci: true }).kam, null);   // a player → the app
+});

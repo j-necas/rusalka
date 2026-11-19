@@ -1,5 +1,6 @@
 // A visitor of rusalkapiano.com who does not play yet goes to the introduction page in their language (/cs/, /de/ …,
-// tools/uvod.mjs); its "Start playing" button remembers the visit (localStorage "rusalka-uvod") and comes back here.
+// tools/uvod.mjs); its "Start playing" button comes back here and lets this tab stay in the app (sessionStorage
+// "rusalka-uvod"), so the New player form follows. Without a player a new visit shows the introduction again.
 // Checked twice: here before the app loads (nothing of Rusalka in this browser = a brand new visitor), and by the app
 // once its data is read (window.naUvodniStranku: no player yet, e.g. someone who once looked and left).
 // An installed app, a link with a hash or query, Tauri and the dev server are never redirected.
@@ -18,7 +19,8 @@
   function naUvodniStranku(kod, uzHraje) {
     try {
       if (uzHraje || !/^(www\.)?rusalkapiano\.com$/.test(location.hostname) || location.pathname !== '/' || location.search || location.hash) return false;
-      if (matchMedia('(display-mode: standalone)').matches || navigator.standalone || localStorage.getItem('rusalka-uvod')) return false;
+      localStorage.removeItem('rusalka-uvod');          // the old lasting mark of a visit: from now on only for the tab
+      if (matchMedia('(display-mode: standalone)').matches || navigator.standalone || sessionStorage.getItem('rusalka-uvod')) return false;
       location.replace('/' + slozka(kod) + '/');
       return true;
     } catch { return false; }   // no localStorage (private window settings): stay in the app
