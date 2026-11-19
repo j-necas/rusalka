@@ -405,9 +405,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (zdrojeZPisnicek) { zdrojeZPisnicek = false; navratDoPisnicek = true; otevriOkno('songs'); }   // back to Songs where it was opened
   };
   // About Rusalka: a window over the current screen; #about in the address opens it (also on start, see the end)
-  // the public repository; empty while it is private (the link in About is hidden then). Making it public: put the address
-  // back and revert the commit that took “open source” out of the texts (pata, about.zdarma, about.zdarmaText)
-  const ZDROJOVY_KOD = '';
+  const ZDROJOVY_KOD = 'https://github.com/j-necas/rusalka';   // the public repository
   const APP_STORE_MIDI = 'https://apps.apple.com/app/web-midi-browser/id953846217';   // Web MIDI Browser: a MIDI piano on an iPad/iPhone
   /** "Web MIDI Browser" in a translated text becomes a link to the App Store (the name is the same in every language) */
   function odkazAppStore(el) {
