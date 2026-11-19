@@ -371,6 +371,10 @@ try {
     kontrola('Keep going shows the last played song', (await d.locator('#pokracujNazev').textContent()).includes('Frère Jacques'));
     const cesta = await d.locator('#pokracujCesta > div').evaluateAll(el => el.map(e => e.className));
     kontrola('step bars by stars', cesta.join() === 'hotovo,ted,nezacato', cesta.join());
+    const pruhy = await d.locator('#pokracujCesta > div > i').evaluateAll(el => el.map(e => getComputedStyle(e).backgroundColor));
+    kontrola('Keep going: a full bar = a step done (as on the tiles), the waiting step only outlined', pruhy[0] === 'rgb(255, 255, 255)'
+      && pruhy[1] === 'rgba(0, 0, 0, 0)' && pruhy[2] !== pruhy[0], pruhy.join(' | '));
+    await snimek(d, 'domu-pokracuj');
     kontrola('no song is „new“ after an update', (await d.locator('#pisne .stitek-nova').count()) === 0);
     const kubo = await d.locator('#pisne .dl', { hasText: 'Frère Jacques' }).locator('.kroky3 i').evaluateAll(el => el.map(e => e.className));
     kontrola('tile has three step bars', kubo.join() === 'ano,,', kubo.join());
