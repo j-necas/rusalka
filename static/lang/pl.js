@@ -879,7 +879,7 @@ export default {
   'about.potrebujes': 'Czego potrzeba',
   'about.potrebujesText': 'Komputera z przeglądarką Chrome lub Edge oraz pianina cyfrowego podłączonego kablem USB albo przez Bluetooth. Bez pianina cyfrowego można grać na klawiszach na ekranie lub na zwykłym pianinie, którego Rusalka posłucha przez mikrofon. Safari nie obsługuje pianina MIDI; działają tam klawisze ekranowe i mikrofon. Na iPadzie i iPhonie pianino można podłączyć w aplikacji Web MIDI Browser z App Store.',
   'about.zacit': 'Jak zacząć',
-  'about.zacitText': 'Na początek wystarczy dodać gracza i wybrać piosenkę. Każdej uczy się w trzech krokach: w kroku Znajdź nuty Rusalka czeka na właściwy klawisz, Z akompaniamentem gra z graczem i czeka na niego, a W rytmie gra się już w tempie. Własne nuty można dodać w Piosenkach jako MusicXML lub MIDI.',
+  'about.zacitText': 'Na początek wystarczy dodać gracza i wybrać piosenkę. Każdej uczy się w trzech krokach: w kroku Znajdź nuty Rusalka czeka na właściwy klawisz, Z akompaniamentem gra z graczem i czeka na niego, a W rytmie gra się już w tempie. Własne nuty można dodać w menu Moje piosenki jako MusicXML lub MIDI.',
   'about.data': 'Dane',
   'about.dataText': 'Piosenki, gracze i wyniki pozostają w tej przeglądarce. Rusalka nigdzie ich nie wysyła, nie ma kont ani reklam. W Ustawieniach można pobrać kopię zapasową lub wybrać folder na komputerze, w którym wszystko będzie zapisywane.',
   'about.zdarma': 'Bezpłatna i open source',

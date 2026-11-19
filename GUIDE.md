@@ -3,8 +3,8 @@
 Česky: [GUIDE.cs.md](GUIDE.cs.md)
 
 ## Using Rusalka
-The menu in the top right (Who is playing, Home, New player): **Songs** (add a song, paste notes from the AI chat,
-where to get sheet music, make up a song, **My songs**: your own songs; edit notes, an easier version, delete), **Players**
+The menu in the top right (Who is playing, Home, New player): **My songs** (add a song, paste notes from the AI chat,
+where to get sheet music, make up a song, and the list of your own songs: edit notes, an easier version, delete), **Players**
 (the week, edit, delete, add), **AI** (AI tools), **Settings** (language, note names, the
 piano, data and backups) and **About**. Where the links don't fit, the bar shows **AI** and **Menu**.
 

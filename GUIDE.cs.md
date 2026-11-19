@@ -3,8 +3,8 @@
 English: [GUIDE.md](GUIDE.md)
 
 ## Použití
-Menu vpravo nahoře (Kdo jde hrát, Domů, Nový hráč): **Písničky** (přidat písničku, vložit noty z AI chatu,
-kde vzít noty, vymyslet písničku, **Moje písničky**: vaše vlastní písničky; upravit noty, lehčí verze, smazat), **Hráči**
+Menu vpravo nahoře (Kdo jde hrát, Domů, Nový hráč): **Moje písničky** (přidat písničku, vložit noty z AI chatu,
+kde vzít noty, vymyslet písničku a seznam vašich vlastních písniček: upravit noty, lehčí verze, smazat), **Hráči**
 (týden, úprava, smazání, přidání), **AI** (AI nástroje), **Nastavení** (jazyk, názvy tónů, klavír, data a zálohy)
 a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
 

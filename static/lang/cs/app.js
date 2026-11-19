@@ -432,7 +432,7 @@ export default {
   "about.potrebujes": "Co potřebujete",
   "about.potrebujesText": "Počítač s prohlížečem Chrome nebo Edge a digitální piano připojené kabelem USB nebo přes Bluetooth. Bez digitálního piana můžete hrát na klávesách na obrazovce, nebo na obyčejný klavír, který Rusalka uslyší mikrofonem. Safari klavír přes MIDI neumí, tam fungují klávesy na obrazovce a mikrofon. Na iPadu a iPhonu se klavír připojí v aplikaci Web MIDI Browser z App Storu.",
   "about.zacit": "Jak začít",
-  "about.zacitText": "Přidejte hráče a vyberte písničku. Každá se učí ve třech krocích: v kroku Najdi noty Rusalka počká na správnou klávesu, S doprovodem hraje s hráčem a čeká na něj a V rytmu se už hraje v tempu. Vlastní noty přidáte v Písničky jako MusicXML nebo MIDI.",
+  "about.zacitText": "Přidejte hráče a vyberte písničku. Každá se učí ve třech krocích: v kroku Najdi noty Rusalka počká na správnou klávesu, S doprovodem hraje s hráčem a čeká na něj a V rytmu se už hraje v tempu. Vlastní noty přidáte v nabídce Moje písničky jako MusicXML nebo MIDI.",
   "about.data": "Vaše data",
   "about.dataText": "Písničky, hráči a výsledky zůstávají v tomto prohlížeči. Rusalka je nikam neodesílá a nemá účty ani reklamy. V Nastavení si stáhnete zálohu, nebo tam vyberete složku v počítači, kam se bude všechno ukládat.",
   "about.zdarma": "Zdarma a open source",

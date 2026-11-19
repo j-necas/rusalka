@@ -448,7 +448,7 @@ export default {
   "about.potrebujes": "Ce qu’il vous faut",
   "about.potrebujesText": "Un ordinateur avec Chrome ou Edge et un piano numérique connecté par câble USB ou Bluetooth. Sans piano numérique, vous pouvez jouer sur les touches à l’écran ou sur un piano acoustique que Rusalka écoute au micro. Safari ne gère pas le piano MIDI : le clavier à l’écran et le micro y fonctionnent. Sur iPad et iPhone, connectez le piano dans l’app Web MIDI Browser de l’App Store.",
   "about.zacit": "Commencer",
-  "about.zacitText": "Ajoutez un joueur et choisissez une chanson. Chaque chanson s’apprend en trois étapes : dans « Trouve les notes », Rusalka attend la bonne touche ; dans « Avec accompagnement », elle joue avec vous et vous attend ; dans « En rythme », vous gardez le tempo. Vous pouvez ajouter vos propres partitions au format MusicXML ou MIDI dans Chansons.",
+  "about.zacitText": "Ajoutez un joueur et choisissez une chanson. Chaque chanson s’apprend en trois étapes : dans « Trouve les notes », Rusalka attend la bonne touche ; dans « Avec accompagnement », elle joue avec vous et vous attend ; dans « En rythme », vous gardez le tempo. Vous pouvez ajouter vos propres partitions au format MusicXML ou MIDI dans Mes chansons.",
   "about.data": "Vos données",
   "about.dataText": "Les chansons, les joueurs et les résultats restent dans ce navigateur. Rusalka ne les envoie nulle part et ne propose ni comptes ni publicités. Dans Paramètres, vous pouvez télécharger une sauvegarde ou choisir un dossier sur votre ordinateur pour tout enregistrer.",
   "about.zdarma": "Gratuite et open source",

@@ -460,7 +460,7 @@ export default {
   "about.potrebujes": "Was Sie brauchen",
   "about.potrebujesText": "Einen Computer mit Chrome oder Edge und ein Digitalpiano, das per USB-Kabel oder Bluetooth verbunden ist. Ohne Digitalpiano können Sie auf den Bildschirmtasten spielen oder auf einem gewöhnlichen Klavier, das Rusalka über das Mikrofon hört. Safari unterstützt kein MIDI-Klavier; dort funktionieren die Bildschirmtasten und das Mikrofon. Auf iPad und iPhone verbinden Sie das Klavier in der App Web MIDI Browser aus dem App Store.",
   "about.zacit": "Erste Schritte",
-  "about.zacitText": "Fügen Sie einen Spieler hinzu und wählen Sie ein Lied. Jedes Lied lernen Sie in drei Schritten: Bei „Finde die Noten“ wartet Rusalka auf die richtige Taste, bei „Mit Begleitung“ spielt sie mit und wartet auf Sie, und bei „Im Rhythmus“ spielen Sie im vorgegebenen Tempo. Eigene Noten können Sie unter „Lieder“ als MusicXML oder MIDI hinzufügen.",
+  "about.zacitText": "Fügen Sie einen Spieler hinzu und wählen Sie ein Lied. Jedes Lied lernen Sie in drei Schritten: Bei „Finde die Noten“ wartet Rusalka auf die richtige Taste, bei „Mit Begleitung“ spielt sie mit und wartet auf Sie, und bei „Im Rhythmus“ spielen Sie im vorgegebenen Tempo. Eigene Noten können Sie unter „Meine Lieder“ als MusicXML oder MIDI hinzufügen.",
   "about.data": "Ihre Daten",
   "about.dataText": "Lieder, Spieler und Ergebnisse bleiben in diesem Browser. Rusalka sendet sie nirgendwohin und hat weder Konten noch Werbung. In den Einstellungen können Sie ein Backup herunterladen oder einen Ordner auf Ihrem Computer wählen, in dem alles gespeichert wird.",
   "about.zdarma": "Kostenlos und Open Source",

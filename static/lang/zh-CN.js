@@ -654,7 +654,7 @@ export default {
   'about.potrebujes': '你需要什么',
   'about.potrebujesText': '一台安装了 Chrome 或 Edge 的电脑，以及通过 USB 线或蓝牙连接的数码钢琴。没有数码钢琴时，你可以弹奏屏幕琴键，也可以弹奏普通钢琴，让 Rusalka 通过麦克风聆听。Safari 不支持 MIDI 钢琴，只能使用屏幕琴键和麦克风。在 iPad 和 iPhone 上，可以在 App Store 的 Web MIDI Browser 应用中连接钢琴。',
   'about.zacit': '开始使用',
-  'about.zacitText': '添加一位玩家并选择一首歌。每首歌分三步学习：“寻找音符”中 Rusalka 会等待你弹对琴键；“伴奏练习”中它会伴奏并等待你；“跟上节奏”中你需要保持速度。你可以在“歌曲”中以 MusicXML 或 MIDI 格式添加自己的乐谱。',
+  'about.zacitText': '添加一位玩家并选择一首歌。每首歌分三步学习：“寻找音符”中 Rusalka 会等待你弹对琴键；“伴奏练习”中它会伴奏并等待你；“跟上节奏”中你需要保持速度。你可以在“我的歌曲”中以 MusicXML 或 MIDI 格式添加自己的乐谱。',
   'about.data': '你的数据',
   'about.dataText': '歌曲、玩家和成绩保留在此浏览器中。Rusalka 不会把这些数据发送到任何地方，也没有账号或广告。你可以在设置中下载备份，或选择电脑上的一个文件夹保存所有数据。',
   'about.zdarma': '免费且开源',
