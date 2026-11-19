@@ -83,9 +83,9 @@ function priradDynamiku(mei, noty, zacatkyTaktu) {
   }
 }
 
-/** options for a whole page: lines (systems) stacked to the window width, everything on one long page */
-export function volbyStranky(sirkaPx = 1200) {
-  const meritko = 55;                                  // note size; the page width is converted to Verovio units
+/** options for a whole page: lines (systems) stacked to the window width, everything on one long page; meritko = note size */
+export function volbyStranky(sirkaPx = 1200, meritko = 55) {
+  // the page width is converted to Verovio units
   return { ...VOLBY_RADKU, breaks: 'auto', adjustPageWidth: false, scale: meritko,
     pageWidth: Math.max(800, Math.round(sirkaPx * 100 / meritko)), pageHeight: 60000,
     pageMarginLeft: 40, pageMarginRight: 40, pageMarginTop: 30, pageMarginBottom: 30, spacingSystem: 14 };
@@ -98,7 +98,7 @@ export function volbyStranky(sirkaPx = 1200) {
  * with the same number of bars) supplies chord symbols for the accompaniment, and the tempo when the file has none.
  */
 export function zpracujVerovio(tk, xml, model, volby = {}) {
-  tk.setOptions(volby.stranka ? volbyStranky(volby.sirka) : VOLBY_RADKU);
+  tk.setOptions(volby.stranka ? { ...volbyStranky(volby.sirka, volby.meritko), ...volby.verovio } : VOLBY_RADKU);
   if (!tk.loadData(xml)) throw new Error(t('cviceni.chyba.vykresleni'));
   const svg = tk.renderToSVG(1);
   const tm = tk.renderToTimemap({ includeMeasures: true });

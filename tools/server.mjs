@@ -25,6 +25,18 @@ createServer(async (req, res) => {
       res.end(uvod ? stranka(uvod.kod) : mapaWebu());
       return;
     }
+    // the song pages and their lists (tools/pisne.mjs), imported anew on every request so an edit shows without a restart
+    if (/^\/[a-z-]+\/[a-z-]+\/([a-z0-9-]+\/)?(index\.html)?$/.test(cesta)) {
+      const { JAZYKY_PISNI, pisne, strankaPisne, seznamPisni } = await import(`./pisne.mjs?${Date.now()}`);
+      const c = cesta.replace(/^\/|index\.html$/g, '');
+      const p = pisne().find(q => q.cesta === c);
+      const kod = JAZYKY_PISNI.find(k => seznamPisni(k).cesta === c);
+      if (p || kod) {
+        res.writeHead(200, { 'Content-Type': TYPY['.html'], 'Cache-Control': 'no-store' });
+        res.end(p ? (await strankaPisne(p)).html : seznamPisni(kod).html);
+        return;
+      }
+    }
     if (cesta.endsWith('/')) cesta += 'index.html';
     const helper = cesta.startsWith('/helper/');
     const zaklad = cesta.startsWith('/songs/') ? KOREN : helper || cesta.startsWith('/library/') ? join(KOREN, 'build') : join(KOREN, 'static');

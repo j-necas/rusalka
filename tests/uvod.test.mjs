@@ -27,7 +27,7 @@ test('every app language has an introduction page with the same texts as English
   assert.match(stranka('ar'), /dir="rtl"/);
   assert.match(stranka('sk'), /noty-cs\.webp/);
   assert.match(stranka('de'), /noty-en\.webp/);
-  assert.equal(mapaWebu().match(/<loc>/g).length, UVODY.length);
+  assert.ok(mapaWebu().match(/<loc>/g).length > UVODY.length);   // + the song pages (tests/pisne.test.mjs)
   assert.ok(!mapaWebu().includes('<loc>https://rusalkapiano.com/</loc>'), 'the app at / redirects crawlers, not in the sitemap');
   for (const kod of ['cs', 'ja', 'ar']) {
     const ld = JSON.parse(stranka(kod).match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);

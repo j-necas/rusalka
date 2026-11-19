@@ -7,6 +7,7 @@ import { jeNota } from '../static/lib/files.js';
 import { zabalVse } from './skills.mjs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { UVODY, stranka, mapaWebu } from './uvod.mjs';
+import { JAZYKY_PISNI, pisne, strankaPisne, seznamPisni } from './pisne.mjs';
 
 // RUSALKA_WEB_OUT: a different output folder (tests build into a temp folder, so parallel test files don't collide)
 const K = new URL('../', import.meta.url);
@@ -30,6 +31,10 @@ for (const u of UVODY) {
   mkdirSync(new URL(`${u.slug}/`, W), { recursive: true });
   writeFileSync(new URL(`${u.slug}/index.html`, W), stranka(u.kod));
 }
+// the song pages /<language>/<folder>/<song>/ and their lists (tools/pisne.mjs)
+const zapis = ({ cesta, html }) => { mkdirSync(new URL(cesta, W), { recursive: true }); writeFileSync(new URL(`${cesta}index.html`, W), html); };
+for (const kod of JAZYKY_PISNI) zapis(seznamPisni(kod));
+for (const p of pisne()) zapis(await strankaPisne(p));
 writeFileSync(new URL('sitemap.xml', W), mapaWebu());
 // offline: sw.js = every file of the website with its content hash (except the skill zips and videos) + tools/service-worker.js
 napisServiceWorker(fileURLToPath(W));

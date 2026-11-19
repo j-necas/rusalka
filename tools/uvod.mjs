@@ -3,6 +3,7 @@
 // Czech and Slovak show the Czech recordings and the Czech folk song, the others the English ones and Twinkle, Twinkle.
 import { readFileSync } from 'node:fs';
 import { NAZVY_JAZYKU } from '../static/lib/texts.js';
+import { JAZYKY_PISNI, pisne, adresyPisni } from './pisne.mjs';
 
 const WEB = 'https://rusalkapiano.com/';
 const OG = { en: 'en_GB', es: 'es_ES', fr: 'fr_FR', pt: 'pt_PT', 'pt-BR': 'pt_BR', de: 'de_DE', it: 'it_IT', pl: 'pl_PL', uk: 'uk_UA',
@@ -22,6 +23,14 @@ const strukturovana = (kod, t) => JSON.stringify({
   image: WEB + 'icons/og.png', author: { '@type': 'Person', name: 'Jiří Nečas' },
 }).replace(/</g, '\\u003c');
 const SIPKA = '<svg viewBox="0 0 48 24" width="48" height="24" aria-hidden="true"><path d="M2 12h40M32 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/** a link from an introduction page to the sheet music of its language (tools/pisne.mjs), when it has some */
+function odkazNaNoty(kod) {
+  if (!JAZYKY_PISNI.includes(kod)) return '';
+  const t = JSON.parse(readFileSync(new URL(`uvod/pisne-${kod}.json`, import.meta.url), 'utf8'));
+  const pocet = pisne().filter(p => p.stranka === kod).length;
+  return `  <p><a href="${t.folder}/">${esc(t.landingLink.replace('{count}', pocet))}</a></p>\n`;
+}
 
 /** the page of one language as HTML */
 export function stranka(kod) {
@@ -158,7 +167,7 @@ ${sekce('otazky', x('faqH2'), dvojice('faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'f
 
 <footer class="pata sirka">
   <p id="jazyky" class="jazyky">${jazyky}</p>
-  <p><a href="../">rusalkapiano.com</a></p>
+${odkazNaNoty(kod)}  <p><a href="../">rusalkapiano.com</a></p>
   <p>${x('creditPiano')} ${x(m === 'cs' ? 'creditSheetCs' : 'creditSheetEn')}</p>
 </footer>
 </body>
@@ -167,7 +176,7 @@ ${sekce('otazky', x('faqH2'), dvojice('faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'f
 }
 
 /**
- * the sitemap: every introduction page with its language versions. Not the app at /: for a crawler (a visitor without
+ * the sitemap: every introduction page with its language versions, then the song pages and their lists (tools/pisne.mjs). Not the app at /: for a crawler (a visitor without
  * players) static/prvni.js redirects it to an introduction page, so it is not a page of its own in search.
  */
 export function mapaWebu() {
@@ -176,6 +185,7 @@ export function mapaWebu() {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${UVODY.map(u => `  <url><loc>${WEB}${u.slug}/</loc>\n${alt}\n  </url>`).join('\n')}
+${adresyPisni().map(a => `  <url><loc>${a}</loc></url>`).join('\n')}
 </urlset>
 `;
 }
