@@ -359,6 +359,13 @@ try {
     await p.locator('#kdo .dlazdice-hrace', { hasText: 'Marta' }).click();
     const marta = await p.evaluate(() => [document.body.classList.contains('bez-pismen'), document.querySelector('#prepPismena').classList.contains('zap')]);
     kontrola('per-player settings apply after switching', fik.join() === 'false,true' && marta.join() === 'true,false', `Fík ${fik} | Marta ${marta}`);
+    // they are data (the folder, the backup), not only this browser: kept without localStorage
+    const ulozene = await ulozenaData(p, 'nastaveni');
+    await p.evaluate(() => Object.keys(localStorage).filter(k => k.startsWith('kt-nastaveni')).forEach(k => localStorage.removeItem(k)));
+    await p.reload(); await p.waitForTimeout(1500);
+    if (await viditelna(p, '#kdo')) await p.locator('#kdo .dlazdice-hrace', { hasText: 'Marta' }).click();
+    kontrola('a player\'s settings are saved in the data, kept after the browser forgets them',
+      Object.values(ulozene || {}).some(v => v.pismena === false) && await p.evaluate(() => document.body.classList.contains('bez-pismen')), JSON.stringify(ulozene));
   });
   kontrola('no page errors (Task 5)', p.chyby.length === 0, p.chyby.join(' | '));
   await p.close();
@@ -1247,7 +1254,7 @@ try {
     kontrola('Edit notes opens the editor for that song', await viditelna(m, '.editor') && /Silent Night/.test(await m.locator('.editor .editor-nazev').inputValue())
       && !(await viditelna(m, '#pisnickyOkno')));
     await m.locator('.editor [data-akce="ulozit"]').click();
-    await m.waitForTimeout(400);
+    await m.waitForFunction(() => /✓/.test(document.querySelector('.editor [data-akce="ulozit"]')?.textContent), null, { timeout: 4000 }).catch(() => {});
     const ulozit = await m.locator('.editor [data-akce="ulozit"]').textContent();
     kontrola('Save says Saved on the button itself', ulozit === 'Uloženo ✓', `${ulozit} | ${await m.locator('.editor .editor-info').textContent()}`);
     await m.locator('.editor [data-akce="zavrit"]').click();

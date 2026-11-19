@@ -8,7 +8,7 @@ import { sluc } from './merge.js';
 import { jeNota, volneJmeno, MAX_VELIKOST } from './files.js';
 import { zabalZip, rozbalZip } from './zip.js';
 
-export const KLICE_DAT = ['profily', 'profil', 'vysledky', 'statistiky', 'oblibene', 'skryte', 'knihovnaSkryte', 'zaloha_pred_smazanim', 'denik'];
+export const KLICE_DAT = ['profily', 'profil', 'vysledky', 'statistiky', 'oblibene', 'skryte', 'knihovnaSkryte', 'zaloha_pred_smazanim', 'denik', 'nastaveni'];
 const en = new TextEncoder(), de = new TextDecoder();
 
 // ---------------------------------------------------------------- IndexedDB

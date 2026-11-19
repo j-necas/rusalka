@@ -111,7 +111,7 @@ Rusalka klavír najde sama (zelená tečka vpravo nahoře). Safari a prohlíže�
 na obrazovce nebo s mikrofonem.
 
 ## Kde jsou data
-- **V prohlížeči** (výchozí, IndexedDB): písničky, hráči, výsledky, statistiky. **Stáhnout zálohu** je stáhne jako `.zip`,
+- **V prohlížeči** (výchozí, IndexedDB): písničky, hráči, jejich nastavení, výsledky, statistiky. **Stáhnout zálohu** je stáhne jako `.zip`,
   **Obnovit ze zálohy** je nahraje zpět (i do jiného prohlížeče), stejně jako zip celé složky `Rusalka`. Obojí je v **Nastavení → Data a zálohy**.
 - **Ve složce** (Chrome, Edge): **Ukládat do složky…** a vybrat složku, doporučeně `~/Rusalka` (Dokumenty se často
   synchronizují přes iCloud, který při souběhu dělá kopie souborů). Prázdnou složku aplikace nabídne naplnit daty

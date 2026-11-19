@@ -49,6 +49,7 @@ export function sluc(klic, jejich, nase) {
     }
     case 'skryte': return sjednot(jejich, nase);
     case 'knihovnaSkryte': return maxSlouceni(jejich, nase);   // { [pid]: { [soubor]: ms } }
+    case 'nastaveni': return { ...jejich, ...nase };            // { [pid]: settings }: ours per player, the others kept
     default: return nase;
   }
 }

@@ -119,7 +119,7 @@ next to the piano (the piano must be on and not connected to another device, e.g
 an iPad don't support MIDI: there you play on the on-screen keys or with the microphone.
 
 ## Where the data lives
-- **In the browser** (default, IndexedDB): songs, players, results, statistics. **Download a backup** downloads them as a
+- **In the browser** (default, IndexedDB): songs, players, their settings, results, statistics. **Download a backup** downloads them as a
   `.zip`, **Restore from a backup** loads them back (into another browser too), also a zip of the whole `Rusalka` folder. Both are in **Settings → Data and backups**.
 - **In a folder** (Chrome, Edge): **Save to folder…** and pick a folder, ideally `~/Rusalka` (Documents is often
   synced through iCloud, which makes duplicate files when two programs write at once). For an empty folder, the

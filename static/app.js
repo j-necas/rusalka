@@ -64,7 +64,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   document.documentElement.lang = JAZYK;
   document.documentElement.dir = smerJazyka(JAZYK);
   const S = {
-    profily: [], profil: null, vysledky: {}, knihovna: [], knihovnaSkryte: {},
+    profily: [], profil: null, vysledky: {}, knihovna: [], knihovnaSkryte: {}, nastaveniHracu: {},
     nastaveni: Object.assign({ rychlost: 70, pismena: true, barvy: true, doprovod: true, kalibrace: 0, klaviatura: true, zvukKlavir: true }, uloz.cti('kt-nastaveni', {})),
     seznam: [], pisen: null, data: null, rezim: 'cekam', ruka: new Set([1]),
     uroven: 2, tonina: 'ne', prstoklad: false, usek: null, smycka: { zapnuto: false, cisteVRade: 0 },
@@ -173,6 +173,12 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     S.oblibene = await data.cti('oblibene', {});
     S.denik = await data.cti('denik', {});              // plays and accuracy per day (static/lib/stats.js)
     S.knihovnaSkryte = await data.cti('knihovnaSkryte', {});
+    // each player's settings (display, keyboard, speed…); earlier only in this browser (localStorage): moved over once
+    S.nastaveniHracu = await data.cti('nastaveni', null);
+    if (!S.nastaveniHracu) {
+      S.nastaveniHracu = Object.fromEntries(S.profily.map(p => [p.id, uloz.cti('kt-nastaveni-' + p.id, null)]).filter(([, v]) => v));
+      if (Object.keys(S.nastaveniHracu).length) data.pis('nastaveni', S.nastaveniHracu);
+    }
     if (!viditelni(S.profily).some(p => p.id === S.profil)) S.profil = viditelni(S.profily)[0]?.id || null;
   }
   let UKAZKY = null;
@@ -947,12 +953,18 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   const VYCHOZI_NASTAVENI = { rychlost: 70, pismena: true, barvy: true, doprovod: true, kalibrace: 0, klaviatura: true, zvukKlavir: true };
   /** Listen plays the whole song at full speed (poslechCelePisne); the player's own choices wait here until it ends */
   let POSLECH = null;
-  const ulozNastaveni = () => uloz.pis(S.profil ? 'kt-nastaveni-' + S.profil : 'kt-nastaveni',
-    POSLECH ? { ...S.nastaveni, rychlost: POSLECH.zaloha.rychlost } : S.nastaveni);
+  /** a player's settings go to the data (the folder, the backup); without a player to this browser */
+  function ulozNastaveni() {
+    const v = POSLECH ? { ...S.nastaveni, rychlost: POSLECH.zaloha.rychlost } : { ...S.nastaveni };
+    if (!S.profil) { uloz.pis('kt-nastaveni', v); return; }
+    S.nastaveniHracu = { ...S.nastaveniHracu, [S.profil]: v };
+    data.pis('nastaveni', S.nastaveniHracu);
+  }
   const PREPINACE = [];
   function nactiNastaveniHrace() {
     S.rukaVolba = null;                                 // a new player: the hand by their age again
-    S.nastaveni = Object.assign({}, VYCHOZI_NASTAVENI, uloz.cti('kt-nastaveni', {}), S.profil ? uloz.cti('kt-nastaveni-' + S.profil, {}) : {});
+    S.nastaveni = Object.assign({}, VYCHOZI_NASTAVENI, uloz.cti('kt-nastaveni', {}),
+      S.profil ? S.nastaveniHracu?.[S.profil] || uloz.cti('kt-nastaveni-' + S.profil, {}) : {});
     PREPINACE.forEach(f => f());                       // including the toggles' effects (letters, colours, keyboard…)
     $('#prepMetronom').classList.toggle('zap', !!S.nastaveni.metronom);
     $('#vzorDoprovodu').value = S.nastaveni.vzorDoprovodu || 'auto';
@@ -1426,13 +1438,14 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (!p || !(await potvrd(t('rodice.smazatHrace', { jmeno: p.jmeno }), t('rodice.smazatHraceAno', { jmeno: p.jmeno })))) return;
     const zal = (await data.cti('zaloha_pred_smazanim', [])) || [];
     zal.push({ kdy: Date.now(), profil: p, vysledky: S.vysledky[id] || {}, statistiky: S.statistiky?.[id] || {}, oblibene: S.oblibene?.[id] || [], denik: S.denik?.[id] || {},
-      knihovnaSkryte: S.knihovnaSkryte?.[id] || {} });
+      knihovnaSkryte: S.knihovnaSkryte?.[id] || {}, nastaveni: S.nastaveniHracu?.[id] || {} });
     data.pis('zaloha_pred_smazanim', zal.slice(-5));
     const byl = S.profil === id;
     const n = smazHrace({ profily: S.profily, profil: S.profil, vysledky: S.vysledky, statistiky: S.statistiky, oblibene: S.oblibene, denik: S.denik,
       knihovnaSkryte: S.knihovnaSkryte }, id, Date.now());
     Object.assign(S, n);
     uloz.pis('kt-nastaveni-' + id, null);
+    if (S.nastaveniHracu?.[id]) { const { [id]: _, ...ostatni } = S.nastaveniHracu; S.nastaveniHracu = ostatni; data.pis('nastaveni', ostatni); }
     for (const k of ['profily', 'profil', 'vysledky', 'statistiky', 'oblibene', 'denik', 'knihovnaSkryte']) data.pis(k, S[k]);
     toast(t('rodice.smazanoHrac', { jmeno: p.jmeno }));
     vykresliKdo(); vykresliProfily(); vykresliPisne();

@@ -78,6 +78,12 @@ test('merge: library songs hidden from home keep the later time per player and s
   assert.ok(KLICE_DAT.includes('knihovnaSkryte'), 'backup, restore and folder copy include the key');
 });
 
+test('players\' settings are data: in the folder and the backup, merged per player', () => {
+  assert.ok(KLICE_DAT.includes('nastaveni'));
+  assert.deepEqual(sluc('nastaveni', { e: { klaviatura: true }, f: { pismena: false } }, { e: { klaviatura: false } }),
+    { e: { klaviatura: false }, f: { pismena: false } });
+});
+
 test('copy browser → folder and backup/restore', async () => {
   const p = new ProhlizecUloziste();
   for (const { soubor } of await p.seznam()) await p.smaz(soubor);
