@@ -1246,6 +1246,10 @@ try {
     await m.waitForTimeout(800);
     kontrola('Edit notes opens the editor for that song', await viditelna(m, '.editor') && /Silent Night/.test(await m.locator('.editor .editor-nazev').inputValue())
       && !(await viditelna(m, '#pisnickyOkno')));
+    await m.locator('.editor [data-akce="ulozit"]').click();
+    await m.waitForTimeout(400);
+    const ulozit = await m.locator('.editor [data-akce="ulozit"]').textContent();
+    kontrola('Save says Saved on the button itself', ulozit === 'Uloženo ✓', `${ulozit} | ${await m.locator('.editor .editor-info').textContent()}`);
     await m.locator('.editor [data-akce="zavrit"]').click();
     await m.waitForTimeout(300);
     kontrola('closing the editor returns to Songs on the same title', await viditelna(m, '#pisnickyOkno') && (await m.locator('#spravaNazev').textContent()) === 'Silent Night');

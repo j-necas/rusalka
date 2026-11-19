@@ -177,6 +177,10 @@ async function klik(e) {
         await STAV.volby.onUloz(kopie(STAV.pisen));
         STAV.zmeneno = false;
         info(t('editor.ulozeno'));
+        // the button itself says it for a moment (the line under the notes is easy to miss)
+        clearTimeout(b._ulozeno);
+        b.textContent = t('editor.ulozeno').replace(/[.。।]$/u, '') + ' ✓';
+        b._ulozeno = setTimeout(() => { b.textContent = t('editor.ulozit'); }, 2000);
       } catch (err) { info(t('editor.ulozeniSelhalo', { chyba: err.message || err })); }
       return;
     }
