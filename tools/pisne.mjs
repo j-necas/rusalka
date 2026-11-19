@@ -230,6 +230,8 @@ export async function strankaPisne(p) {
   const dalsi = [...vsechny.filter(q => q.police === p.police), ...vsechny.filter(q => q.police !== p.police)].slice(0, 8);
   const popis = r(t.description).replace('{chords}', akordy.length ? t.withChords : '').replace('{lyrics}', text.length ? t.withLyrics : '');
   const titulek = r(t.title), url = WEB + p.cesta, seznamUrl = `${WEB}${kod}/${t.folder}/`;
+  // into the app straight to this song (static/app.js, #pisen=): the library file, or the starter song's
+  const hrat = `../../../#pisen=${encodeURIComponent(p.txt ? `library/${p.txt.replace(/\.txt$/, '.musicxml')}` : p.soubor)}`;
   const jakoPisen = p.jazyk !== kod ? ` lang="${p.jazyk}"` : '';
   const slozeni = { '@type': 'MusicComposition', name: nazev, url, inLanguage: p.jazyk, isAccessibleForFree: true };
   if (!/traditional|\bby\b|,/.test(model.autor || '') && model.autor) slozeni.composer = { '@type': 'Person', name: model.autor };
@@ -253,7 +255,7 @@ ${hlavicka(u, '../../../', '../../')}
     <div><dt>${esc(t.time)}</dt><dd>${esc(model.takt)}</dd></div>
     <div><dt>${esc(t.bars)}</dt><dd>${model.takty.length}</dd></div>
   </dl>
-  <p class="akce"><a class="hrat" href="../../../">${esc(t.play)}</a><span class="drobne">${esc(t.playSmall)}</span></p>
+  <p class="akce"><a class="hrat" href="${hrat}">${esc(t.play)}</a><span class="drobne">${esc(t.playSmall)}</span></p>
 </div>
 
 <section class="sirka" aria-labelledby="noty">
@@ -288,7 +290,7 @@ ${text.length ? `
 ${[1, 2, 3].map(i => `    <li><h3><span class="cislo">${i}</span>${esc(u[`step${i}h`])}</h3>
       <p>${esc(u[`step${i}p`])}</p></li>`).join('\n')}
   </ol>
-  <p class="akce"><a class="hrat" href="../../../">${esc(t.play)}</a></p>
+  <p class="akce"><a class="hrat" href="${hrat}">${esc(t.play)}</a></p>
 </section>
 
 <section class="sirka" aria-labelledby="dalsi">

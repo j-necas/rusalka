@@ -198,6 +198,24 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     }
     return KNIHOVNA || ukazky();
   }
+  // a song page of the website (rusalkapiano.com/cs/noty/…, tools/pisne.mjs) links here with #pisen=<file>: the song
+  // opens in Before playing as soon as somebody plays (chosen or created); the address loses the hash right away
+  let CEKA_PISEN = (() => {
+    const m = /^#pisen=(.+)$/.exec(location.hash);
+    if (!m) return null;
+    history.replaceState(null, '', location.pathname + location.search);
+    try { return decodeURIComponent(m[1]); } catch { return null; }
+  })();
+  /** the song from the address, once there is a player; false when there is none (or it is not known) */
+  async function otevriPisenZAdresy() {
+    if (!CEKA_PISEN || !S.profil) return false;
+    const soubor = CEKA_PISEN;
+    CEKA_PISEN = null;
+    if (!pisenSouboru(soubor)) prijmiKnihovnu(await knihovna());
+    if (!pisenSouboru(soubor)) return false;
+    otevriPred(soubor);
+    return true;
+  }
   /** a song by its file: own, or from the library (samples included); undefined if neither has it */
   const pisenSouboru = soubor => S.seznam.find(p => p.soubor === soubor) || S.knihovna.find(p => p.soubor === soubor);
   /** a sample, unless the user has an own song with the same file name */
@@ -944,6 +962,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     S.profil = id; data.pis('profil', id);
     nactiNastaveniHrace();
     vykresliProfily(); vykresliPisne(); ukaz('domu');
+    otevriPisenZAdresy();
   }
   // Who is playing: a tile chooses the player; Edit players adds Edit and Delete under each tile
   let UPRAVY_HRACU = false;
@@ -981,7 +1000,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   });
   function uvodniObrazovka() {
     const hraci = viditelni(S.profily);
-    if (hraci.length === 1) { S.profil = hraci[0].id; nactiNastaveniHrace(); vykresliProfily(); vykresliPisne(); ukaz('domu'); }
+    if (hraci.length === 1) { S.profil = hraci[0].id; nactiNastaveniHrace(); vykresliProfily(); vykresliPisne(); ukaz('domu'); otevriPisenZAdresy(); }
     else if (!hraci.length) otevriProfil(null);           // first launch: create a player straight away
     else { vykresliKdo(); ukaz('kdo'); }
   }
@@ -2873,8 +2892,9 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   prelozStranku();
   pripravUloziste().then(nactiTrvalaData).finally(() => {
-    // nobody plays here yet (no player, no folder): on rusalkapiano.com the introduction page first (static/prvni.js)
-    if (window.naUvodniStranku?.(jazyk(), viditelni(S.profily).length > 0 || !!UL.slozka)) return;
+    // nobody plays here yet (no player, no folder): on rusalkapiano.com the introduction page first (static/prvni.js),
+    // unless a song page sent them here to play its song
+    if (window.naUvodniStranku?.(jazyk(), viditelni(S.profily).length > 0 || !!UL.slozka || !!CEKA_PISEN)) return;
     vykresliProfily(); stavUloziste(); nactiPisne(); uvodniObrazovka(); oknoZAdresy();
   });
   // songs added to the folder meanwhile (AI agent, Finder) appear after returning to the window

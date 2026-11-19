@@ -46,6 +46,7 @@ test('a song page: canonical, the notes in coloured circles with Czech names, ly
   assert.match(html, /class="pismeno tmave"[^>]*>E</);
   assert.match(html, /Skákal pes přes oves,<br>/);
   assert.match(html, /<b>G7<\/b>/);
+  assert.match(html, /<a class="hrat" href="\.\.\/\.\.\/\.\.\/#pisen=library%2Fchildren%2Fskakal-pes\.musicxml">/, 'the button opens this song in the app');
   assert.ok(!html.includes('>Melodie<'), 'no part name on the staff');
   for (const blok of html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s).slice(1)) JSON.parse(blok);
   // H, not B, on the Czech pages; Do-Re-Mi on the French ones
