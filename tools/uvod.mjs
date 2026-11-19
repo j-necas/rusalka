@@ -13,6 +13,14 @@ const PISEN = { cs: 'Černé oči jděte spát', en: 'Twinkle, Twinkle, Little S
 
 const texty = kod => JSON.parse(readFileSync(new URL(`uvod/${kod}.json`, import.meta.url), 'utf8'));
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+/** structured data of the app (schema.org), in the page's language; '<' escaped so the JSON cannot close the script */
+const strukturovana = (kod, t) => JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'WebApplication', '@id': WEB + '#app', name: 'Rusalka', url: WEB,
+  description: t.description, inLanguage: kod, availableLanguage: Object.keys(NAZVY_JAZYKU),
+  applicationCategory: 'EducationalApplication', operatingSystem: 'Any', browserRequirements: 'Chrome or Edge for a MIDI piano',
+  isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  image: WEB + 'icons/og.png', author: { '@type': 'Person', name: 'Jiří Nečas' },
+}).replace(/</g, '\\u003c');
 const SIPKA = '<svg viewBox="0 0 48 24" width="48" height="24" aria-hidden="true"><path d="M2 12h40M32 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 /** the page of one language as HTML */
@@ -52,6 +60,7 @@ ${alternativy}
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">${strukturovana(kod, t)}</script>
 <link rel="icon" href="../icons/32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="../icons/192.png">
 <link rel="stylesheet" href="../fonts.css">
@@ -157,13 +166,15 @@ ${sekce('otazky', x('faqH2'), dvojice('faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'f
 `;
 }
 
-/** the sitemap: the app and every introduction page with its language versions */
+/**
+ * the sitemap: every introduction page with its language versions. Not the app at /: for a crawler (a visitor without
+ * players) static/prvni.js redirects it to an introduction page, so it is not a page of its own in search.
+ */
 export function mapaWebu() {
   const alt = UVODY.map(v => `    <xhtml:link rel="alternate" hreflang="${v.kod}" href="${WEB}${v.slug}/"/>`).join('\n')
     + `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${WEB}en/"/>`;
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>${WEB}</loc></url>
 ${UVODY.map(u => `  <url><loc>${WEB}${u.slug}/</loc>\n${alt}\n  </url>`).join('\n')}
 </urlset>
 `;
