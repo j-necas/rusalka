@@ -692,7 +692,11 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     return v;
   }
   const NAPLANOVANE = new Set();
+  /** notes the app itself plays (accompaniment, listening): the microphone must not take them for the player's keys */
+  let VLASTNI_TONY = [];
   function hlas(p, kdy, delka, sila = 0.6) {
+    if (VLASTNI_TONY.length > 256) VLASTNI_TONY = VLASTNI_TONY.filter(v => v.do > kdy - 2);
+    VLASTNI_TONY.push({ p, od: kdy, do: kdy + (delka ?? 1.5) });
     if (doKlaviru()) return hlasKlavir(p, kdy, delka, sila);
     const ac = audio();
     const vz = NAHRAVKY.size === VZORKY.length ? nejblizsiVzorek(p, NAHRAVKY.keys()) : null;   // all loaded, or none used
@@ -905,6 +909,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     ocekavane: ocekavaneTony,
     trefa: m => { vstupOn(m, 80, 'mikrofon'); setTimeout(() => S.klavesy[m]?.classList.remove('stisk'), 150); },
     vedle: m => { vstupOn(m, 80, 'mikrofon'); setTimeout(() => S.klavesy[m]?.classList.remove('stisk'), 150); },
+    vlastni: () => VLASTNI_TONY,
     stav: text => {
       midiStav();
       if (text) hlaska(esc(text));
@@ -2008,6 +2013,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     H.timery.forEach(clearTimeout); H.timery = [];
     [...NAPLANOVANE].filter(v => v.naplanovany).forEach(v => v.zrus());
     tichoVKlaviru();
+    const ted = AC ? AC.currentTime : 0;
+    VLASTNI_TONY = VLASTNI_TONY.filter(v => v.od <= ted).map(v => ({ ...v, do: Math.min(v.do, ted) }));   // cancelled notes will not sound
   }
   function reset() {
     stopVse();

@@ -481,6 +481,21 @@ export class Rozpoznavac {
   }
 }
 
+// ---------------------------------------------------------------- the app's own notes
+/**
+ * Is a "wrong note" the microphone heard really a note the app itself is playing (accompaniment, listening) from the
+ * speakers or the piano? With backing on, the step's accompaniment sounds right after a hit, and its onset would
+ * otherwise count as the player's wrong key (the next note then turns orange).
+ * Counts the same pitch class (the monophonic estimate may be an octave off) and the 3rd harmonic, from the note's
+ * start until `dozvuk` s after its end (input latency, ringing).
+ * @param {number} midi heard note
+ * @param {{p:number, od:number, do:number}[]} vlastni the app's notes: pitch, start and end in s (the AudioContext clock)
+ * @param {number} cas now, the same clock
+ */
+export function zVlastnichTonu(midi, vlastni, cas, dozvuk = 0.6) {
+  return vlastni.some(v => v.od <= cas + 0.05 && cas <= v.do + dozvuk && ((midi - v.p) % 12 === 0 || midi === v.p + 19));
+}
+
 // ---------------------------------------------------------------- tuning
 /**
  * Estimates the instrument's tuning (A4 in Hz) from frames where a known note sounds – e.g. an out-of-tune acoustic piano.

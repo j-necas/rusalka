@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  fft, midiNaHz, hzNaMidi, energie, vyska, obsahujeTony, DetektorNastupu, Rozpoznavac, kalibraceLadeni,
+  fft, midiNaHz, hzNaMidi, energie, vyska, obsahujeTony, DetektorNastupu, Rozpoznavac, kalibraceLadeni, zVlastnichTonu,
 } from '../static/lib/microphone.js';
 
 const VZ = 48000;
@@ -406,6 +406,26 @@ test('kalibraceLadeni: piano detuned ±30 cents and 445 Hz, various tones, unusa
   // no risk of an octave error: bass with a weak fundamental
   const bas = okno(klavir(midiNaHz(36, 442), 6000, { slabyZaklad: true, B: 0.0001 }));
   assert.ok(Math.abs(kalibraceLadeni([bas], VZ, 36) - 442) < 2);
+});
+
+// ---------------------------------------------------------------- the app's own notes (accompaniment from the speakers)
+test('Rozpoznavac: accompaniment from the speakers after a hit is heard as a wrong note – zVlastnichTonu recognises it', () => {
+  const n = sekund(3), C3 = 48, F4 = 65;
+  // “Find the notes” with backing: C4 is hit, the app plays the step's bass C3 at once, the player then plays F4
+  const x = smichej(klavir(midiNaHz(C4), n, { od: sekund(0.3) }), klavir(midiNaHz(C3), n, { od: sekund(0.6), amp: 0.25 }),
+    klavir(midiNaHz(F4), n, { od: sekund(1.6) }));
+  const u = prehraj(x, [[0, [C4]], [0.45, [F4]]]);
+  assert.deepEqual(u.map(e => [e.typ, e.midi]), [['trefa', [C4]], ['vedle', C3], ['trefa', [F4]]], JSON.stringify(u));
+  const G2 = 43, vlastni = [{ p: G2, od: 0.6, do: 1.4 }];
+  assert.ok(zVlastnichTonu(C3, [{ p: C3, od: 0.6, do: 1.4 }], u[1].cas), 'the bass the app plays');
+  assert.ok(zVlastnichTonu(G2, vlastni, 0.7), 'G2 too');
+  assert.ok(zVlastnichTonu(G2 + 12, vlastni, 0.7), 'heard an octave higher');
+  assert.ok(zVlastnichTonu(G2 + 19, vlastni, 0.7), 'its 3rd harmonic');
+  assert.ok(zVlastnichTonu(G2, vlastni, 1.9), 'still ringing shortly after release');
+  assert.ok(!zVlastnichTonu(G2 + 1, vlastni, 0.7), 'a different note is the player\'s');
+  assert.ok(!zVlastnichTonu(G2, vlastni, 0.3), 'not before the app plays it');
+  assert.ok(!zVlastnichTonu(G2, vlastni, 2.5), 'nor long after');
+  assert.ok(!zVlastnichTonu(G2, [], 0.7), 'nothing played by the app');
 });
 
 // ---------------------------------------------------------------- performance

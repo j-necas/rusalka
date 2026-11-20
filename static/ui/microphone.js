@@ -1,6 +1,6 @@
 // Microphone as a replacement for MIDI: sound from the microphone → lib/microphone.js (Rozpoznavac) → the same vstupOn as the piano.
 // The app always knows which notes it expects (`ocekavane()`), so it only has to verify them – more reliable than general transcription.
-import { Rozpoznavac } from '../lib/microphone.js';
+import { Rozpoznavac, zVlastnichTonu } from '../lib/microphone.js';
 import { t } from '../lib/texts.js';
 
 const RAMEC = 4096;              // ~85 ms – needed for bass notes below C3
@@ -9,7 +9,8 @@ const KALIBRACE_RAMCU = 25;      // ~0.5 s of silence to estimate the noise
 
 /**
  * @param {{ audio: () => AudioContext, ocekavane: () => number[]|null, trefa: (midi:number) => void,
- *           vedle: (midi:number) => void, stav: (text:string, aktivni:boolean) => void }} volby
+ *           vedle: (midi:number) => void, stav: (text:string, aktivni:boolean) => void,
+ *           vlastni?: () => {p:number, od:number, do:number}[] }} volby   vlastni = notes the app itself plays now
  */
 export function vytvorMikrofon(volby) {
   let proud = null, zdroj = null, analyzer = null, casovac = 0, rozpoznavac = null;
@@ -53,7 +54,8 @@ export function vytvorMikrofon(volby) {
         const nove = u.midi.filter(m => !(posledniTrefa.midi.includes(m) && ac.currentTime - posledniTrefa.cas < 0.25));
         if (nove.length) { posledniTrefa = { midi: u.midi, cas: ac.currentTime }; nove.forEach(m => volby.trefa(m)); }
       }
-      else if (u?.typ === 'vedle') volby.vedle(u.midi);
+      // the accompaniment from the speakers is not the player's wrong key
+      else if (u?.typ === 'vedle' && !zVlastnichTonu(u.midi, volby.vlastni?.() || [], ac.currentTime)) volby.vedle(u.midi);
     }, KROK_MS);
   }
 
