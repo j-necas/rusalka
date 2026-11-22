@@ -56,7 +56,7 @@
   "need2h": "Nemáte digitálne piano?",
   "need2p": "Hrajte na klávesoch na obrazovke alebo na obyčajnom klavíri, ktorý Rusalka počuje mikrofónom.",
   "need3h": "iPad alebo iPhone",
-  "need3p": "Safari klavír cez MIDI nepodporuje. Pripojte ho v bezplatnej aplikácii {webmidi}.",
+  "need3p": "Safari klavír cez MIDI nepodporuje. Najspoľahlivejší je počítač (Mac alebo PC) s Chrome alebo Edge, kde funguje aj ukladanie do priečinka. Na iPade môžete skúsiť bezplatnú aplikáciu {webmidi}, Rusalka v nej však nie je vyskúšaná.",
   "need4h": "Nič sa neinštaluje",
   "need4p": "Otvorte {app} a hrajte. Rusalku si môžete pridať na plochu alebo do docku ako aplikáciu.",
   "faqH2": "Otázky",

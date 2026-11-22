@@ -49,9 +49,10 @@ po klasiku.
 <img src="docs/images/cs/statistics.png" alt="Statistiky: kalendář cvičení, přesnost za 30 dní, písničky a kde to drhne" width="480">
 
 ## Jak začít
-1. Otevřete [Rusalku](https://rusalkapiano.com/). Klavír přes MIDI potřebuje **Chrome nebo Edge**; v Safari
-   se hraje na klávesy na obrazovce nebo s mikrofonem. Na iPadu a iPhonu otevřete Rusalku v aplikaci [Web MIDI Browser](https://apps.apple.com/app/web-midi-browser/id953846217)
-   (App Store), pak funguje i klavír přes MIDI. Rusalku si můžete nainstalovat i jako aplikaci (**Instalovat**
+1. Otevřete [Rusalku](https://rusalkapiano.com/). Nejlépe funguje na počítači (Mac nebo PC) v **Chrome nebo Edge**:
+   jen tam jde klavír přes MIDI i ukládání do složky. V Safari se hraje na klávesy na obrazovce nebo s mikrofonem.
+   Na iPadu a iPhonu můžete klavír přes MIDI zkusit v aplikaci [Web MIDI Browser](https://apps.apple.com/app/web-midi-browser/id953846217)
+   (App Store), Rusalka v ní ale není vyzkoušená. Rusalku si můžete nainstalovat i jako aplikaci (**Instalovat**
    v adresním řádku Chromu, **Aplikace → Nainstalovat tento web jako aplikaci** v Edge). Po první návštěvě funguje
    i bez internetu: uloží se do prohlížeče a až bude internet zase k dispozici, sama se aktualizuje.
 2. Připojte klavír kabelem USB nebo přes Bluetooth (na Macu: Nastavení Audio MIDI → Okno → Zobrazit MIDI studio →

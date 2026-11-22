@@ -56,7 +56,7 @@
   "need2h": "没有数码钢琴？",
   "need2p": "可以弹屏幕上的琴键，也可以弹普通钢琴，由 Rusalka 通过麦克风聆听。",
   "need3h": "iPad 或 iPhone",
-  "need3p": "Safari 无法使用 MIDI 钢琴。请改在免费应用 {webmidi} 中连接。",
+  "need3p": "Safari 无法使用 MIDI 钢琴。最可靠的是装有 Chrome 或 Edge 的电脑（Mac 或 PC），在那里也能保存到文件夹。在 iPad 上可以试试免费应用 {webmidi}，但 Rusalka 未在其中测试过。",
   "need4h": "无需安装",
   "need4p": "打开 {app} 就能弹。也可以像应用一样把它添加到主屏幕或程序坞。",
   "faqH2": "常见问题",

@@ -56,7 +56,7 @@
   "need2h": "Nie masz pianina cyfrowego?",
   "need2p": "Graj na klawiszach na ekranie albo na zwykłym pianinie, które Rusalka słyszy przez mikrofon.",
   "need3h": "iPad lub iPhone",
-  "need3p": "Safari nie obsługuje pianina MIDI. Podłącz je w darmowej aplikacji {webmidi}.",
+  "need3p": "Safari nie obsługuje pianina MIDI. Najpewniej działa komputer (Mac lub PC) z Chrome lub Edge, gdzie działa też zapisywanie w folderze. Na iPadzie można spróbować darmowej aplikacji {webmidi}, ale Rusalka nie była w niej testowana.",
   "need4h": "Nic nie trzeba instalować",
   "need4p": "Otwórz {app} i graj. Rusalkę możesz dodać do ekranu początkowego lub do Docka jak aplikację.",
   "faqH2": "Pytania",

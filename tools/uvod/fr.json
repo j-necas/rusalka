@@ -56,7 +56,7 @@
   "need2h": "Pas de piano numérique ?",
   "need2p": "Jouez sur les touches à l’écran, ou sur un piano acoustique que Rusalka entend par le micro.",
   "need3h": "iPad ou iPhone",
-  "need3p": "Safari ne peut pas utiliser un piano MIDI. Connectez-le plutôt dans l’application gratuite {webmidi}.",
+  "need3p": "Safari ne peut pas utiliser un piano MIDI. Le plus fiable est un ordinateur (Mac ou PC) avec Chrome ou Edge, où l’enregistrement dans un dossier fonctionne aussi. Sur iPad, vous pouvez essayer l’application gratuite {webmidi}, mais Rusalka n’y a pas été testée.",
   "need4h": "Rien à installer",
   "need4p": "Ouvrez {app} et jouez. Vous pouvez l’ajouter à l’écran d’accueil ou au Dock comme une application.",
   "faqH2": "Questions",

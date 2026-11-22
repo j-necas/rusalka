@@ -51,9 +51,10 @@ pieces.
 <img src="docs/images/en/statistics.png" alt="Statistics: a practice calendar, accuracy over 30 days, songs and where it gets stuck" width="480">
 
 ## Getting started
-1. Open [Rusalka](https://rusalkapiano.com/). A piano over MIDI needs **Chrome or Edge**; in Safari you play
-   on the on-screen keys or with the microphone. On an iPad or iPhone, open Rusalka in the [Web MIDI Browser](https://apps.apple.com/app/web-midi-browser/id953846217) app
-   (App Store) to use a MIDI piano. You can also install it as an app (**Install** in Chrome's address bar, **Apps →
+1. Open [Rusalka](https://rusalkapiano.com/). It works best on a computer (Mac or PC) in **Chrome or Edge**: only
+   there do a MIDI piano and saving to a folder work. In Safari you play on the on-screen keys or with the microphone.
+   On an iPad or iPhone you can try a MIDI piano in the [Web MIDI Browser](https://apps.apple.com/app/web-midi-browser/id953846217)
+   app (App Store), but Rusalka hasn't been tested in it. You can also install it as an app (**Install** in Chrome's address bar, **Apps →
    Install this site as an app** in Edge). After the first visit it works offline too: it keeps itself in the browser
    and updates itself when the internet is back.
 2. Connect the piano with a USB cable or over Bluetooth (on a Mac: Audio MIDI Setup → Window → Show MIDI Studio →

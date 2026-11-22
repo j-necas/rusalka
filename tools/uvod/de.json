@@ -56,7 +56,7 @@
   "need2h": "Kein Digitalpiano?",
   "need2p": "Spielen Sie auf den Tasten am Bildschirm oder auf einem gewöhnlichen Klavier, das Rusalka über das Mikrofon hört.",
   "need3h": "iPad oder iPhone",
-  "need3p": "Safari kann kein MIDI-Klavier nutzen. Verbinden Sie es stattdessen in der kostenlosen App {webmidi}.",
+  "need3p": "Safari kann kein MIDI-Klavier nutzen. Am zuverlässigsten ist ein Computer (Mac oder PC) mit Chrome oder Edge, dort funktioniert auch das Speichern in einem Ordner. Auf dem iPad können Sie die kostenlose App {webmidi} ausprobieren, Rusalka ist darin aber nicht getestet.",
   "need4h": "Keine Installation",
   "need4p": "Öffnen Sie {app} und spielen Sie los. Sie können Rusalka als App zum Home-Bildschirm oder zum Dock hinzufügen.",
   "faqH2": "Fragen",
