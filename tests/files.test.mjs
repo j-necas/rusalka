@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { nastavJazyk } from '../static/lib/texts.js';
 
 import assert from 'node:assert/strict';
-import { deflateRawSync } from 'node:zlib';
+import { crc32, deflateRawSync } from 'node:zlib';
 import { rozbalZip, zabalZip } from '../static/lib/zip.js';
 import { xmlZBajtu, nazevZXml, jmenoSouboru, volneJmeno, jeNota, vyberBezFiltru } from '../static/lib/files.js';
 
@@ -28,9 +28,9 @@ function mxl({ deflate = true, container = true } = {}) {
   for (const [jm, data] of soubory) {
     const komp = deflate ? deflateRawSync(data) : data, j = en.encode(jm);
     const h = Buffer.alloc(30); h.writeUInt32LE(0x04034b50, 0); h.writeUInt16LE(deflate ? 8 : 0, 8);
-    h.writeUInt32LE(komp.length, 18); h.writeUInt32LE(data.length, 22); h.writeUInt16LE(j.length, 26);
+    h.writeUInt32LE(crc32(data), 14); h.writeUInt32LE(komp.length, 18); h.writeUInt32LE(data.length, 22); h.writeUInt16LE(j.length, 26);
     const c = Buffer.alloc(46); c.writeUInt32LE(0x02014b50, 0); c.writeUInt16LE(deflate ? 8 : 0, 10);
-    c.writeUInt32LE(komp.length, 20); c.writeUInt32LE(data.length, 24); c.writeUInt16LE(j.length, 28); c.writeUInt32LE(off, 42);
+    c.writeUInt32LE(crc32(data), 16); c.writeUInt32LE(komp.length, 20); c.writeUInt32LE(data.length, 24); c.writeUInt16LE(j.length, 28); c.writeUInt32LE(off, 42);
     lok.push(h, j, komp); cen.push(c, j);
     off += 30 + j.length + komp.length;
   }

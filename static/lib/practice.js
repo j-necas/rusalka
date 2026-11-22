@@ -13,11 +13,11 @@
 import { zlomek, metrum, rozvin, soucetTaktu, kontrolaPolozky } from './song.js';
 import { nazevTonu } from './note_names.js';
 import { t, jazyk } from './texts.js';
+import { MAX_HISTORIE } from './stats.js';
 
 // ---------------------------------------------------------------- constants
 const UTLUM_POKUS = 0.8;                 // weight of older data in bars the new attempt played
 const POLOCAS_DNU = 30;                  // time decay of statistics (half-life in days)
-const MAX_HISTORIE = 30;
 const PRAH_SPECH_MS = 40;                // average shift (real ms) from which it counts as "early" / "late"
 const MIN_RYCHLOST = 40, MAX_RYCHLOST = 100;
 const INTERP = /[.,!?;:…]$/;

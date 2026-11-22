@@ -4,34 +4,75 @@
 //    may add songs to the same folder. Layout: rusalka.json, pisne/*.musicxml|xml|mxl, data/<key>.json.
 // Both have the same interface: seznam(), cti(soubor), zapis(soubor, bajty, { prepsat }), smaz(soubor), ctiData(klic),
 // zapisData(klic, hodnota).
-import { sluc } from './merge.js';
+import { slucZmeny, stejnaData } from './merge.js';
+import { t } from './texts.js';
 import { jeNota, volneJmeno, MAX_VELIKOST } from './files.js';
 import { zabalZip, rozbalZip } from './zip.js';
 
 export const KLICE_DAT = ['profily', 'profil', 'vysledky', 'statistiky', 'oblibene', 'skryte', 'knihovnaSkryte', 'zaloha_pred_smazanim', 'denik', 'nastaveni'];
-const en = new TextEncoder(), de = new TextDecoder();
+const en = new TextEncoder(), de = new TextDecoder('utf-8', { fatal: true });
+const VERZE = 1;
+const znacka = () => en.encode(`{ "verze": ${VERZE} }\n`);
+const chybaDat = (klic, parametry, cause) => new Error(t(klic, parametry), { cause });
+function overData(klic, v) {
+  let platne = v == null;
+  if (klic === 'profil') platne ||= typeof v === 'string';
+  else if (klic === 'profily') platne ||= Array.isArray(v) && v.every(p => typeof p?.id === 'string');
+  else if (klic === 'skryte' || klic === 'zaloha_pred_smazanim') platne ||= Array.isArray(v);
+  else platne ||= typeof v === 'object' && !Array.isArray(v);
+  if (!platne) throw chybaDat('app.dataPoskozeny', { soubor: `data/${klic}.json` });
+  return v;
+}
+function ctiJson(bajty, soubor) {
+  try { return JSON.parse(de.decode(bajty)); }
+  catch (e) { throw chybaDat('app.dataPoskozeny', { soubor }, e); }
+}
+function overVerzi(bajty) {
+  if (ctiJson(bajty, 'rusalka.json')?.verze > VERZE) throw chybaDat('app.dataVerze');
+}
+async function pokudExistuje(fn) {
+  try { return await fn(); }
+  catch (e) { if (e.name !== 'NotFoundError') throw e; return null; }
+}
+const ctiSoubor = (dir, jm) => pokudExistuje(async () => new Uint8Array(await (await (await dir.getFileHandle(jm)).getFile()).arrayBuffer()));
+const podZamkem = (klic, fn) => globalThis.navigator?.locks?.request ? navigator.locks.request(`rusalka-data-${klic}`, fn) : fn();
 
 // ---------------------------------------------------------------- IndexedDB
 let DB = null;
-function db(idb = globalThis.indexedDB) {
+function db() {
   if (DB) return DB;
-  DB = new Promise((ok, chyba) => {
-    const r = idb.open('rusalka', 1);
+  const spojeni = new Promise((ok, chyba) => {
+    const r = indexedDB.open('rusalka', 1);
     r.onupgradeneeded = () => { for (const s of ['pisne', 'data', 'nastaveni']) r.result.createObjectStore(s); };
-    r.onsuccess = () => ok(r.result);
+    r.onsuccess = () => {
+      const d = r.result;
+      d.onclose = () => { if (DB === spojeni) DB = null; };
+      d.onversionchange = () => { d.onclose(); d.close(); };
+      ok(d);
+    };
     r.onerror = () => chyba(r.error);
   });
-  return DB;
+  DB = spojeni;
+  spojeni.catch(() => { if (DB === spojeni) DB = null; });
+  return spojeni;
 }
 async function idb(store, rezim, fn) {
-  const d = await db();
-  return new Promise((ok, chyba) => {
-    const tx = d.transaction(store, rezim), s = tx.objectStore(store);
-    const r = fn(s);
-    tx.oncomplete = () => ok(r?.result);
-    tx.onerror = () => chyba(tx.error);
-    tx.onabort = () => chyba(tx.error);
-  });
+  for (let pokus = 0; ; pokus++) {
+    const spojeni = db();
+    try {
+      const d = await spojeni;
+      return await new Promise((ok, chyba) => {
+        const tx = d.transaction(store, rezim);
+        const r = fn(tx.objectStore(store));
+        tx.oncomplete = () => ok(typeof r === 'function' ? r() : r?.result);
+        tx.onabort = () => chyba(tx.error || new DOMException('Transaction aborted', 'AbortError'));
+      });
+    } catch (e) {
+      const odpojeno = e.name === 'InvalidStateError' || /connection.*(?:lost|clos)/i.test(e.message);
+      if (odpojeno && DB === spojeni) DB = null;
+      if (!odpojeno || pokus) throw e;
+    }
+  }
 }
 /** tests only: forget the open connection */
 export function _resetDb() { DB = null; }
@@ -45,17 +86,18 @@ export const nastaveniProhlizece = {
 
 export class ProhlizecUloziste {
   druh = 'prohlizec';
+  cteno = new Map();
   async seznam() {
     const klice = await idb('pisne', 'readonly', s => s.getAllKeys());
     return klice.filter(k => jeNota(k) && !k.includes('/')).sort().map(soubor => ({ soubor }));
   }
   async cti(soubor) {
     const b = await idb('pisne', 'readonly', s => s.get(soubor));
-    if (!b) throw new Error(`písnička ${soubor} neexistuje`);
+    if (!b) throw chybaDat('app.dataPisenChybi', { soubor });
     return new Uint8Array(b);
   }
   async zapis(soubor, bajty, { prepsat = false } = {}) {
-    if (bajty.length > MAX_VELIKOST) throw new Error('soubor je moc velký');
+    if (bajty.length > MAX_VELIKOST) throw chybaDat('app.dataVelky');
     const je = new Set(await idb('pisne', 'readonly', s => s.getAllKeys()));
     const jm = prepsat ? soubor : volneJmeno(soubor, x => je.has(x));
     await idb('pisne', 'readwrite', s => s.put(new Uint8Array(bajty), jm));
@@ -69,14 +111,36 @@ export class ProhlizecUloziste {
     const b = await idb('pisne', 'readonly', s => s.get(soubor));
     if (b) await idb('pisne', 'readwrite', s => s.put(b, k));
   }
-  async ctiData(klic) { return (await idb('data', 'readonly', s => s.get(klic))) ?? null; }
-  zapisData(klic, hodnota) { return idb('data', 'readwrite', s => s.put(hodnota, klic)); }
+  async ctiData(klic) {
+    const hodnota = overData(klic, (await idb('data', 'readonly', s => s.get(klic))) ?? null);
+    this.cteno.set(klic, structuredClone(hodnota));
+    return hodnota;
+  }
+  async zapisData(klic, hodnota, { zaklad = this.cteno.get(klic), prepsat = false, prenos = false } = {}) {
+    const co = await idb('data', 'readwrite', s => {
+      let vysledek;
+      const r = s.get(klic);
+      r.onsuccess = () => {
+        const jejich = r.result ?? null;
+        vysledek = prepsat ? hodnota : slucZmeny(klic, jejich, hodnota, zaklad, { prenos });
+        s.put(vysledek, klic);
+      };
+      return () => vysledek;
+    });
+    this.cteno.set(klic, structuredClone(hodnota));
+    return co;
+  }
 }
 
 // ---------------------------------------------------------------- folder
 export class SlozkaUloziste {
   druh = 'slozka';
-  constructor(handle) { this.h = handle; this.cteno = {}; }
+  constructor(handle, hlasit = console.warn) { this.h = handle; this.cteno = new Map(); this.hlasit = hlasit; }
+  async overVerzi() {
+    const b = await ctiSoubor(this.h, 'rusalka.json');
+    if (b) overVerzi(b);
+    return !!b;
+  }
   get nazev() { return this.h.name; }
   /** 'granted' | 'prompt' | 'denied' – after a browser restart permission usually has to be granted again */
   async stav() { return this.h.queryPermission ? this.h.queryPermission({ mode: 'readwrite' }) : 'granted'; }
@@ -87,19 +151,19 @@ export class SlozkaUloziste {
     return false;
   }
   async maData() {
-    try {
-      const d = await this.h.getDirectoryHandle('data');
-      for await (const [jm] of d.entries()) if (jm.endsWith('.json')) return true;
-    } catch { /* no data/ */ }
+    const d = await pokudExistuje(() => this.h.getDirectoryHandle('data'));
+    if (d) for await (const [jm] of d.entries()) if (jm.endsWith('.json')) return true;
     return false;
   }
   async pripravit() {
+    const maZnacku = await this.overVerzi();
     await this.h.getDirectoryHandle('pisne', { create: true });
     await this.h.getDirectoryHandle('data', { create: true });
-    try { await this.h.getFileHandle('rusalka.json'); } catch { await zapisSoubor(this.h, 'rusalka.json', en.encode('{ "verze": 1 }\n')); }
+    if (!maZnacku) await zapisSoubor(this.h, 'rusalka.json', znacka());
   }
   async seznam() {
-    const d = await this.h.getDirectoryHandle('pisne', { create: true }), out = [];
+    const d = await pokudExistuje(() => this.h.getDirectoryHandle('pisne')), out = [];
+    if (!d) return out;
     for await (const [jm, h] of d.entries()) if (h.kind === 'file' && jeNota(jm) && !jm.startsWith('.')) out.push({ soubor: jm });
     return out.sort((a, b) => (a.soubor < b.soubor ? -1 : 1));
   }
@@ -108,64 +172,105 @@ export class SlozkaUloziste {
     return new Uint8Array(await (await (await d.getFileHandle(soubor)).getFile()).arrayBuffer());
   }
   async zapis(soubor, bajty, { prepsat = false } = {}) {
-    if (bajty.length > MAX_VELIKOST) throw new Error('soubor je moc velký');
+    if (bajty.length > MAX_VELIKOST) throw chybaDat('app.dataVelky');
+    await this.overVerzi();
     const d = await this.h.getDirectoryHandle('pisne', { create: true });
     const je = new Set((await this.seznam()).map(x => x.soubor));
     const jm = prepsat ? soubor : volneJmeno(soubor, x => je.has(x));
     await zapisSoubor(d, jm, bajty);
     return jm;
   }
-  async smaz(soubor) { await (await this.h.getDirectoryHandle('pisne')).removeEntry(soubor); }
+  async smaz(soubor) { await this.overVerzi(); await (await this.h.getDirectoryHandle('pisne')).removeEntry(soubor); }
   /** before the first overwrite from the editor: the original file goes to zalohy/ (only once) */
   async zalohuj(soubor) {
+    await this.overVerzi();
     const z = await this.h.getDirectoryHandle('zalohy', { create: true });
-    try { await z.getFileHandle(soubor); return; } catch { /* not there yet */ }
+    if (await pokudExistuje(() => z.getFileHandle(soubor))) return;
     await zapisSoubor(z, soubor, await this.cti(soubor));
   }
   async ctiData(klic) {
-    try {
-      const d = await this.h.getDirectoryHandle('data');
-      const f = await (await d.getFileHandle(`${klic}.json`)).getFile();
-      this.cteno[klic] = f.lastModified;
-      return JSON.parse(de.decode(await f.arrayBuffer()));
-    } catch (e) {
-      if (e instanceof SyntaxError) throw new Error(`soubor data/${klic}.json je poškozený`);
-      return null;
-    }
+    await this.overVerzi();
+    const jm = `${klic}.json`, d = await pokudExistuje(() => this.h.getDirectoryHandle('data'));
+    const b = d && await ctiSoubor(d, jm);
+    const hodnota = b ? overData(klic, ctiJson(b, `data/${jm}`)) : null;
+    this.cteno.set(klic, structuredClone(hodnota));
+    return hodnota;
   }
-  /** write; if the file is newer than when we read it (changed elsewhere), merge it first */
-  async zapisData(klic, hodnota) {
-    const d = await this.h.getDirectoryHandle('data', { create: true });
-    let co = hodnota;
-    try {
-      const f = await (await d.getFileHandle(`${klic}.json`)).getFile();
-      if (this.cteno[klic] == null || f.lastModified > this.cteno[klic]) co = sluc(klic, JSON.parse(de.decode(await f.arrayBuffer())), hodnota);
-    } catch { /* file doesn't exist yet */ }
-    const f = await zapisSoubor(d, `${klic}.json`, en.encode(JSON.stringify(co, null, 1)));
-    this.cteno[klic] = f?.lastModified ?? Date.now();
-    return co;
+  /** Compare the contents: sync tools may keep the mtime and file size unchanged. */
+  zapisData(klic, hodnota, { zaklad = this.cteno.get(klic), prepsat = false, prenos = false } = {}) {
+    return podZamkem(klic, async () => {
+      await this.overVerzi();
+      const jm = `${klic}.json`, d = await this.h.getDirectoryHandle('data', { create: true });
+      const b = await ctiSoubor(d, jm);
+      let jejich = null, poskozeny = null;
+      if (b) {
+        try { jejich = overData(klic, ctiJson(b, `data/${jm}`)); }
+        catch {
+          const kopie = `${jm}.poskozeny-${Date.now()}-${crypto.randomUUID()}`;
+          await zapisSoubor(d, kopie, b);
+          poskozeny = chybaDat('app.dataZachraneno', { soubor: `data/${kopie}` });
+        }
+      }
+      const co = prepsat || poskozeny ? hodnota : slucZmeny(klic, jejich, hodnota, zaklad, { prenos });
+      if (!b || poskozeny || !stejnaData(jejich, co)) await zapisSoubor(d, jm, en.encode(JSON.stringify(co, null, 1)));
+      if (poskozeny) this.hlasit(poskozeny, klic);
+      this.cteno.set(klic, structuredClone(hodnota));
+      return co;
+    });
   }
 }
 async function zapisSoubor(dir, jm, bajty) {
   const fh = await dir.getFileHandle(jm, { create: true });
   const w = await fh.createWritable();
-  await w.write(bajty);
-  await w.close();
-  return fh.getFile ? fh.getFile() : null;
+  try { await w.write(bajty); await w.close(); }
+  catch (e) { await w.abort?.().catch(() => {}); throw e; }
+}
+
+// ---------------------------------------------------------------- writes from the application
+export function datoveZapisy(ul, ulozeno, chyba) {
+  const fronty = new Map(), cteno = new Map();
+  let revize = 0;
+  return {
+    get revize() { return revize; },
+    cteno(k, v) { cteno.set(k, structuredClone(v)); },
+    pis(k, v) {
+      const hodnota = structuredClone(v);
+      const zapis = async () => {
+        try {
+          const co = await ul.zapisData(k, hodnota, { zaklad: cteno.get(k) });
+          const posledni = fronty.get(k) === p;
+          cteno.set(k, structuredClone(posledni ? co : hodnota));
+          if (posledni && !stejnaData(co, hodnota)) ulozeno(k, co);
+        } catch (e) { chyba(k, e); }
+        finally { if (fronty.get(k) === p) fronty.delete(k); }
+      };
+      const p = (fronty.get(k) || Promise.resolve()).then(zapis);
+      fronty.set(k, p); revize++;
+    },
+    async dokonci() {
+      while (fronty.size) await Promise.all([...fronty.values()]);
+    },
+  };
 }
 
 // ---------------------------------------------------------------- transfer, backup
-/** copies songs and data from one storage to another (overwrites identical names) */
-export async function kopiruj(z, kam) {
-  for (const { soubor } of await z.seznam()) await kam.zapis(soubor, await z.cti(soubor), { prepsat: true });
-  for (const k of KLICE_DAT) {
-    const v = await z.ctiData(k);
-    if (v != null) await kam.zapisData(k, v);
+export async function snimekDat(ul) {
+  return Object.fromEntries(await Promise.all(KLICE_DAT.map(async k => [k, await ul.ctiData(k)])));
+}
+/** Move changes made without folder access, or copy the full contents on request. */
+export async function kopiruj(z, kam, { zaklad } = {}) {
+  const snimek = await snimekDat(z);
+  if (!zaklad) for (const { soubor } of await z.seznam()) await kam.zapis(soubor, await z.cti(soubor), { prepsat: true });
+  for (const [k, v] of Object.entries(snimek)) {
+    if (zaklad ? !stejnaData(v, zaklad[k] ?? null) : v != null) {
+      await kam.zapisData(k, v, { zaklad: zaklad?.[k] ?? null, prenos: true });
+    }
   }
+  return snimek;
 }
 /** backup: a ZIP with the same layout as the folder */
 export async function zaloha(ul) {
-  const m = new Map([['rusalka.json', en.encode('{ "verze": 1 }\n')]]);
+  const m = new Map([['rusalka.json', znacka()]]);
   for (const { soubor } of await ul.seznam()) m.set(`pisne/${soubor}`, await ul.cti(soubor));
   for (const k of KLICE_DAT) {
     const v = await ul.ctiData(k);
@@ -173,10 +278,10 @@ export async function zaloha(ul) {
   }
   return zabalZip(m);
 }
-/** restore from backup: songs and data from the ZIP (overwrites identical names) → { pisni, dat } */
-export async function obnov(ul, zipBajty) {
+/** Restore recognised entries after validating the archive and saving the optional safety copy. */
+export async function obnov(ul, zipBajty, { predObnovou } = {}) {
   let m = await rozbalZip(zipBajty);
-  const jeZaloha = mm => [...mm.keys()].some(k => k.startsWith('pisne/') || k.startsWith('data/'));
+  const jeZaloha = mm => [...mm.keys()].some(k => k === 'rusalka.json' || k.startsWith('pisne/') || k.startsWith('data/'));
   if (!jeZaloha(m)) {                     // a zip of the Rusalka folder itself (Finder): one wrapping folder, Mac extras aside
     const klice = [...m.keys()].filter(k => !k.startsWith('__MACOSX/'));
     const obal = new Set(klice.map(k => k.split('/')[0]));
@@ -185,13 +290,21 @@ export async function obnov(ul, zipBajty) {
       m = new Map(klice.map(k => [k.slice(o.length), m.get(k)]));
     }
   }
-  if (!jeZaloha(m)) throw new Error('tohle není záloha Rusalky');
-  let pisni = 0, dat = 0;
+  if (m.has('rusalka.json')) overVerzi(m.get('rusalka.json'));
+  const pisne = [], data = [];
   for (const [jm, b] of m) {
-    const [slozka, soubor] = [jm.split('/')[0], jm.split('/').slice(1).join('/')];
-    if (slozka === 'pisne' && jeNota(soubor) && !soubor.includes('/')) { await ul.zapis(soubor, b, { prepsat: true }); pisni++; }
-    const k = slozka === 'data' && soubor.replace(/\.json$/, '');
-    if (k && KLICE_DAT.includes(k)) { await ul.zapisData(k, JSON.parse(de.decode(b))); dat++; }
+    const [slozka, soubor, dalsi] = jm.split('/');
+    if (!soubor || dalsi !== undefined || /[\\\0]/.test(soubor)) continue;
+    if (slozka === 'pisne' && jeNota(soubor)) {
+      if (b.length > MAX_VELIKOST) throw chybaDat('app.dataVelky');
+      pisne.push([soubor, b]);
+    }
+    const k = slozka === 'data' && soubor.endsWith('.json') && soubor.slice(0, -5);
+    if (k && KLICE_DAT.includes(k)) data.push([k, overData(k, ctiJson(b, jm))]);
   }
-  return { pisni, dat };
+  if (!(pisne.length || data.length || m.has('rusalka.json'))) throw chybaDat('app.dataNeniZaloha');
+  if (predObnovou) await predObnovou(await zaloha(ul));
+  for (const [soubor, b] of pisne) await ul.zapis(soubor, b, { prepsat: true });
+  for (const [k, v] of data) await ul.zapisData(k, v, { prepsat: true });
+  return { pisni: pisne.length, dat: data.length };
 }
