@@ -17,7 +17,8 @@ import {
 } from './song.js';
 import { fraze, tezkaMista } from './practice.js';
 import { jakaTonina, harmonizuj } from './levels.js';
-import { t as preklad, jazyk, JAZYKY } from './texts.js';
+import { t as preklad, jazyk } from './texts.js';
+import { TEMATA_JAZYKU } from '../lang/temata.js';
 import { nazevKroku, soustava } from './note_names.js';
 
 // ---------------------------------------------------------------- texts
@@ -1162,9 +1163,9 @@ export function doprovodVeStylu(pisen, styl) {
 /** topics for children in the UI language (a child doesn't type free text) */
 export const temata = () => tsez('temata');
 /** Czech topics (fixed list for older callers; the UI uses temata()) */
-export const TEMATA = JAZYKY.cs['doplnky.temata'].split('|');
+export const TEMATA = TEMATA_JAZYKU.cs.split('|');
 /** the child's topic must be one of the preset ones (in any language) */
-const predvoleneTema = tema => Object.values(JAZYKY).flatMap(s => String(s['doplnky.temata'] || '').split('|'))
+const predvoleneTema = tema => Object.values(TEMATA_JAZYKU).flatMap(s => s.split('|'))
   .find(x => x.toLowerCase() === tema.toLowerCase());
 
 const VULGARNI = /(?<![a-z])(kurv|prdel|hovn|srac|sracka|zmrd|kokot|pic[aeiu](?![a-z])|curak|kreten|debil|idiot|hajzl|mrd|jeb|fuck|shit|bitch|cunt|chcip|buzn|buzerant|ser(?:e|u|ou)(?![a-z]))/;

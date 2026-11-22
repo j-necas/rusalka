@@ -1,4 +1,5 @@
 // Русский — дополнительные тексты
+import { TEMATA_JAZYKU } from '../temata.js';
 export default {
 'doplnky.a':' и ',
 'doplnky.slovy':"ноль|одна|две|три|четыре|пять|шесть|семь|восемь|девять|десять|одиннадцать|двенадцать",
@@ -87,7 +88,7 @@ export default {
 'doplnky.pruvodce.kroky':'Мелодия движется преимущественно поступенно.',
 'doplnky.pruvodce.vraceji':'Такты {takty} возвращаются в тактах {znovu}.',
 'doplnky.pruvodce.stavba':'Структура фраз: {schema} — {odhad}.',
-'doplnky.pruvodce.akordy':{one:'Всего аккордов: {n}; чаще всего — {akordy}.',few:'Всего аккордов: {n}; чаще всего — {akordy}.',many:'Всего аккордов: {n}; чаще всего — {akordy}.',other:'Всего аккордов: {n}; чаще всего — {akordy}.'},
+'doplnky.pruvodce.akordy': { one: "В пьесе {n} аккорд: {akordy}.", few: "В пьесе {n} аккорда, чаще всего встречаются {akordy}.", many: "В пьесе {n} аккордов, чаще всего встречаются {akordy}.", other: "В пьесе {n} аккорда, чаще всего встречаются {akordy}." },
 'doplnky.pruvodce.tip.tezkyDite':'Такт {takt} посложнее ({duvody}). Сначала сыграй его медленно.',
 'doplnky.pruvodce.tip.tezky':'Такт {takt}: {duvody} — потренируйте его отдельно и медленно.',
 'doplnky.pruvodce.tip.naucDite':'Сначала выучи такты {takty}.',
@@ -192,7 +193,7 @@ export default {
 'doplnky.styl.tango.popis':'Ритм хабанеры: восьмая с точкой, шестнадцатая и аккорды.',
 'doplnky.styl.popBalada.nazev':'Поп-баллада',
 'doplnky.styl.popBalada.popis':'Долгая басовая нота с квинтой и выдержанным аккордом.',
-'doplnky.temata':'животные|котёнок|щенок|лес|луг|зима|весна|лето|осень|море|паровозик|солнце|дождь|звёзды|Рождество|день рождения|друзья|сказка',
+'doplnky.temata': TEMATA_JAZYKU["ru"],
 'doplnky.nova.nazev':'Моя песня',
 'doplnky.nova.nazevTema':'Моя песня — {tema}',
 'doplnky.tyden.prazdnoDite':'На этой неделе занятий не было.',

@@ -1,5 +1,6 @@
 // English – area doplnky; keys start with 'doplnky.'
 // Word lists (numerals, interval names, topics…) are strings separated by '|'; the code picks from them by index.
+import { TEMATA_JAZYKU } from '../temata.js';
 export default {
   // ---------------------------------------------------------------- small things
   'doplnky.a': ' and ',
@@ -243,7 +244,7 @@ export default {
   'doplnky.styl.popBalada.popis': 'A long bass note with the fifth and a held chord.',
 
   // ---------------------------------------------------------------- new song
-  'doplnky.temata': 'animals|kitten|puppy|forest|meadow|winter|spring|summer|autumn|the sea|little train|sunshine|rain|stars|Christmas|birthday|friends|fairy tale',
+  'doplnky.temata': TEMATA_JAZYKU["en"],
   'doplnky.nova.nazev': 'My song',
   'doplnky.nova.nazevTema': 'My song – {tema}',
 

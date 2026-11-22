@@ -14,7 +14,7 @@ const K = new URL('../', import.meta.url);
 const W = process.env.RUSALKA_WEB_OUT ? pathToFileURL(process.env.RUSALKA_WEB_OUT.replace(/\/?$/, '/')) : new URL('web/', K);
 if (!existsSync(new URL('static/vendor/verovio-toolkit-wasm.js', K))) throw new Error('static/vendor missing – run npm run vendor');
 rmSync(W, { recursive: true, force: true });
-cpSync(new URL('static/', K), W, { recursive: true });
+cpSync(new URL('static/', K), W, { recursive: true, dereference: true });
 mkdirSync(new URL('songs/', W));
 for (const f of readdirSync(new URL('songs/', K))) {
   if (jeNota(f) || f === 'index.json') cpSync(new URL(`songs/${encodeURIComponent(f)}`, K), new URL(`songs/${encodeURIComponent(f)}`, W));
@@ -32,24 +32,37 @@ for (const u of UVODY) {
   writeFileSync(new URL(`${u.slug}/index.html`, W), stranka(u.kod));
 }
 // the song pages /<language>/<folder>/<song>/ and their lists (tools/pisne.mjs)
-const zapis = ({ cesta, html }) => { mkdirSync(new URL(cesta, W), { recursive: true }); writeFileSync(new URL(`${cesta}index.html`, W), html); };
+const zapis = ({ cesta, html, soubory = {} }) => {
+  const adresar = new URL(cesta, W);
+  mkdirSync(adresar, { recursive: true });
+  writeFileSync(new URL('index.html', adresar), html);
+  for (const [nazev, obsah] of Object.entries(soubory)) writeFileSync(new URL(nazev, adresar), obsah);
+};
 for (const kod of JAZYKY_PISNI) zapis(seznamPisni(kod));
-for (const p of pisne()) zapis(await strankaPisne(p));
+for (const p of pisne()) zapis(await strankaPisne(p, { externe: true }));
 writeFileSync(new URL('sitemap.xml', W), mapaWebu());
-// offline: sw.js = every file of the website with its content hash (except the skill zips and videos) + tools/service-worker.js
-napisServiceWorker(fileURLToPath(W));
-console.log(`${fileURLToPath(W)} done`);
+const web = fileURLToPath(W);
+const cesty = readdirSync(web, { recursive: true, withFileTypes: true })
+  .filter(f => f.isFile() && f.name !== '.DS_Store')
+  .map(f => relative(web, join(f.parentPath, f.name)).split(sep).join('/'))
+  .filter(cesta => cesta !== 'sitemap.xml' && !/^(helper|video|uvod)\//.test(cesta) && !UVODY.some(u => cesta.startsWith(u.slug + '/')))
+  .sort();
 
-function napisServiceWorker(web) {
-  const soubory = {};
-  for (const f of readdirSync(web, { recursive: true, withFileTypes: true })) {
-    if (!f.isFile() || f.name === '.DS_Store') continue;
-    const cesta = relative(web, join(f.parentPath, f.name)).split(sep).join('/');
-    if (cesta === 'sw.js' || cesta === 'sitemap.xml' || /^(helper|video|uvod)\//.test(cesta) || UVODY.some(u => cesta.startsWith(u.slug + '/'))) continue;   // videos and the introduction pages: online only
-    soubory[cesta] = createHash('sha256').update(readFileSync(join(web, cesta))).digest('hex').slice(0, 12);
-  }
-  const serazene = Object.fromEntries(Object.keys(soubory).sort().map(k => [k, soubory[k]]));
-  const verze = createHash('sha256').update(JSON.stringify(serazene)).digest('hex').slice(0, 12);
-  const sablona = readFileSync(new URL('service-worker.js', import.meta.url), 'utf8');
-  writeFileSync(join(web, 'sw.js'), `const VERZE = '${verze}';\nconst SOUBORY = ${JSON.stringify(serazene)};\n\n${sablona}`);
+const hash = data => createHash('sha256').update(data).digest('hex').slice(0, 12);
+const otisky = () => Object.fromEntries(cesty.map(c => [c, hash(readFileSync(join(web, c)))]));
+const sablona = readFileSync(new URL('service-worker.js', import.meta.url), 'utf8');
+// One version for the ES module graph, avoiding recursive hashes across imports.
+// Derive it before rewriting URLs; then verify downloads against the hashes of the final files.
+const verze = hash(JSON.stringify(otisky()) + sablona + readFileSync(new URL(import.meta.url), 'utf8'));
+const dotaz = '?v=' + verze;
+function prepis(cesta, vzor, nahrada) {
+  const soubor = join(web, cesta), obsah = readFileSync(soubor, 'utf8');
+  writeFileSync(soubor, obsah.replace(vzor, nahrada));
 }
+prepis('index.html', /(\b(?:src|href)=")([\w/.-]+\.(?:js|css))"/g, '$1$2' + dotaz + '"');
+for (const cesta of cesty.filter(c => /^(app\.js$|(?:lib|ui|lang)\/.*\.js$)/.test(c))) {
+  prepis(cesta, /^((?:import|export)\s+(?:[\w\s{},*$]+?\s+from\s+)?)(['"])(\.{1,2}\/[^'"\r\n]+\.js)\2/gm, '$1$2$3' + dotaz + '$2');
+}
+prepis('fonts.css', /(url\(\s*['"]?)(vendor\/[^'")]+\.woff2)/g, '$1$2' + dotaz);
+writeFileSync(join(web, 'sw.js'), `const VERZE = '${verze}';\nconst SOUBORY = ${JSON.stringify(otisky())};\n\n${sablona}`);
+console.log(`${web} done`);

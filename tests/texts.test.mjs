@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { t, nastavJazyk, jazyk, JAZYKY } from '../static/lib/texts.js';
+import { t, nastavJazyk, jazyk, nactiSlovnik } from '../static/lib/texts.js';
 import cs from '../static/lang/cs.js';
 import en from '../static/lang/en.js';
 import { vychoziJazyk, NAZVY_JAZYKU } from '../static/lib/texts.js';
@@ -38,7 +38,7 @@ test('a new install starts in the first browser language Rusalka speaks, else En
 
 test('the language selects: the most spoken European languages first, then Russian and Asian ones', () => {
   assert.deepEqual(Object.keys(NAZVY_JAZYKU), ['en', 'es', 'fr', 'pt', 'pt-BR', 'de', 'it', 'pl', 'uk', 'cs', 'sk', 'ru', 'zh-CN', 'hi', 'ar', 'ja']);
-  assert.deepEqual(Object.keys(NAZVY_JAZYKU).sort(), Object.keys(JAZYKY).sort());
+  assert.deepEqual(Object.keys(NAZVY_JAZYKU).sort(), ['ar', 'cs', 'de', 'en', 'es', 'fr', 'hi', 'it', 'ja', 'pl', 'pt', 'pt-BR', 'ru', 'sk', 'uk', 'zh-CN']);
 });
 
 test('an existing installation without a saved language stays in Czech', () => {
@@ -46,9 +46,9 @@ test('an existing installation without a saved language stays in Czech', () => {
   assert.equal(vychoziJazyk('en-US', false), 'en');
 });
 
-test('German, French and Spanish dictionaries provide every text and preserve placeholders', () => {
+test('German, French and Spanish dictionaries provide every text and preserve placeholders', async () => {
   for (const [code, greeting] of [['de', 'Zurück'], ['fr', 'Retour'], ['es', 'Volver']]) {
-    nastavJazyk(code);
+    nastavJazyk(code, await nactiSlovnik(code));
     assert.equal(t('zpet'), greeting);
     for (const [key, value] of Object.entries(en)) {
       const source = typeof value === 'string' ? value : value.other;
@@ -63,9 +63,8 @@ test('German, French and Spanish dictionaries provide every text and preserve pl
 });
 
 test('new dictionaries cover the original keys and preserve placeholders in all plural forms', async () => {
-  const { JAZYKY } = await import('../static/lib/texts.js');
   for (const code of ['uk', 'sk', 'pl', 'it', 'pt', 'ru', 'zh-CN', 'ja', 'pt-BR', 'hi', 'ar']) {
-    const dict = JAZYKY[code];
+    const dict = await nactiSlovnik(code);
     assert.ok(dict, `${code} dictionary`);
     assert.deepEqual(Object.keys(en).filter(key => !(key in dict)), [], `${code} missing keys`);
     const ordinalKeys = new Intl.PluralRules(code, { type: 'ordinal' }).resolvedOptions().pluralCategories
@@ -93,9 +92,10 @@ test('new dictionaries cover the original keys and preserve placeholders in all 
   }
 });
 
-test('Ukrainian selects the right song plural forms', () => {
-  nastavJazyk('uk');
-  const forms = JAZYKY.uk.pisni;
+test('Ukrainian selects the right song plural forms', async () => {
+  const slovnik = await nactiSlovnik('uk');
+  nastavJazyk('uk', slovnik);
+  const forms = slovnik.pisni;
   assert.deepEqual([1, 2, 5, 21].map(n => t('pisni', { n })), [forms.one, forms.few, forms.many, forms.one].map((s, i) => s.replace('{n}', [1, 2, 5, 21][i])));
   nastavJazyk('cs');
 });
@@ -112,9 +112,9 @@ test('Arabic uses the full cardinal plural categories', () => {
   assert.deepEqual([0, 1, 2, 3, 11, 100].map(n => rules.select(n)), ['zero', 'one', 'two', 'few', 'many', 'other']);
 });
 
-test('Arabic plurals provide every form selected by the runtime', () => {
+test('Arabic plurals provide every form selected by the runtime', async () => {
   const categories = new Intl.PluralRules('ar').resolvedOptions().pluralCategories;
-  for (const [key, value] of Object.entries(JAZYKY.ar)) {
+  for (const [key, value] of Object.entries(await nactiSlovnik('ar'))) {
     if (typeof value !== 'object') continue;
     for (const form of categories) assert.equal(typeof value[form], 'string', `${key}.${form}`);
   }
@@ -134,4 +134,31 @@ test('Czech texts for parents and adults use the formal address (vykání); chil
   const tykaji = Object.entries(cs).filter(([k, v]) => dospeli.some(p => k.startsWith(p)) && typeof v === 'string' && ty.test(v)).map(([k]) => k);
   assert.deepEqual(tykaji, []);
   assert.match(cs['cviceni.trener.dite.zlepsenyTakt'], /ti už jde/);   // the coach for children still says ty
+});
+
+test('fetching a dictionary does not switch the language until applied', async () => {
+  nastavJazyk('cs');
+  const de = await nactiSlovnik('de');
+  assert.equal(jazyk(), 'cs');
+  assert.equal(await nactiSlovnik('de'), de);
+  nastavJazyk('de', de);
+  assert.equal(t('zpet'), 'Zurück');
+  nastavJazyk('cs');
+});
+
+test('editor and song guide select the right Slavic plurals', async () => {
+  for (const [kod, texty] of Object.entries({
+    cs: ['1 nejistý takt z převodu', '2 nejisté takty z převodu', '5 nejistých taktů z převodu'],
+    sk: ['1 neistý takt z prevodu', '2 neisté takty z prevodu', '5 neistých taktov z prevodu'],
+    pl: ['1 niepewny takt po konwersji', '2 niepewne takty po konwersji', '5 niepewnych taktów po konwersji'],
+    ru: ['1 неточный такт', '2 неточных такта', '5 неточных тактов'],
+    uk: ['1 такт', '2 такти', '5 тактів'],
+  })) {
+    const slovnik = await nactiSlovnik(kod);
+    nastavJazyk(kod, slovnik);
+    const n = [1, 2, 5];
+    assert.deepEqual(n.map(n => t('editor.nejisteTakty', { n }).split(' ').slice(0, kod === 'ru' ? 3 : kod === 'uk' ? 2 : undefined).join(' ')), texty, kod);
+    assert.equal(new Set(n.map(n => t('doplnky.pruvodce.akordy', { n, akordy: 'C' }).replace(String(n), ''))).size, 3, kod);
+  }
+  nastavJazyk('cs');
 });

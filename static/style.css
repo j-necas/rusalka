@@ -70,7 +70,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
   min-height: 100px; cursor: pointer;
 }
 .pisen:hover { background: #fff; }
-.pisen .chyba { color: var(--cervena); font-size: 14px; }
+.pisen .chyba { color: #A92A32; font-size: 14px; }
 
 /* buttons press like keys: the bottom edge shrinks when pressed */
 .tlacitko {
@@ -137,7 +137,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 .prepinac:focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
 #kalibrace::after { content: none; }                  /* calibration is an action, not a switch */
 @media (prefers-reduced-motion: reduce) { .prepinac::after { transition: none; } }
-.vyber { min-height: 40px; border-radius: 8px; border: 1px solid var(--hrana); background: var(--karta); padding: 4px 10px; }
+.vyber { min-height: 44px; border-radius: 8px; border: 1px solid var(--hrana); background: var(--karta); padding: 4px 10px; }
 
 .prubeh { height: 6px; margin: 4px 14px; background: var(--plocha); border-radius: 3px; overflow: hidden; }
 #prubeh { height: 100%; width: 0; background: var(--zelena); transition: width .3s; }
@@ -169,7 +169,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 #pas .ovl.vedle .kruh { fill: var(--oranzova); stroke: #1F2533; stroke-width: 30; stroke-dasharray: 90 60; }
 #pas .ovl.minul .kruh { fill: var(--cervena); }
 #pas .ovl .pismeno { fill: #fff; font-weight: 700; font-family: "Atkinson Hyperlegible Next", -apple-system, Arial, sans-serif; pointer-events: none; }
-#pas .ovl .pismeno.tmave { fill: #3A2E00; }
+#pas .ovl .pismeno.tmave { fill: #0D0D0D; }
 /* Show mistakes: wrong keys as red hollow noteheads left of their note; the current one at full strength */
 #pas g.duchove { opacity: .42; transition: opacity .2s; pointer-events: none; }
 #pas g.duchove.ted { opacity: 1; }
@@ -207,12 +207,16 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
   box-shadow: inset 0 -6px 0 #E4DED5; }
 .klavesa.cerna { height: 60%; z-index: 2; background: linear-gradient(#3A3A3A, #151515); border-radius: 0 0 6px 6px;
   box-shadow: inset 0 -5px 0 #000, 0 2px 3px rgba(0, 0, 0, .3); }
-.klavesa .jm { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); width: 34px; height: 34px;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px;
+.klavesa .jm { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); width: 34px; max-width: 100%; aspect-ratio: 1;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; overflow: hidden;
   background: var(--barva); color: #fff; }
-.klavesa .jm.tmave { color: #3A2E00; }
-.klavesa.nepouzita .jm { background: transparent; color: #B8B0A5; font-weight: 500; }
+.klavesa .jm.tmave { color: #0D0D0D; }
+.klavesa.nepouzita .jm { background: transparent; color: #655B50; font-weight: 500; }
 .klavesa.cerna .jm { width: auto; height: auto; padding: 2px 4px; bottom: 8px; font-size: 13px; border-radius: 6px; }
+@media (max-width: 580px) {
+  .klavesa .jm { font-size: 12px; }
+  .klavesa.cerna .jm { max-width: 150%; padding-inline: 1px; font-size: 9px; }
+}
 .bez-barev .klavesa .jm { background: #2B2B2B; }
 .bez-barev .klavesa .jm.tmave { color: #fff; }
 .bez-barev .klavesa.nepouzita .jm { background: transparent; }
@@ -241,6 +245,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
   text-decoration: underline; cursor: pointer; }
 .modal { position: fixed; inset: 0; background: rgba(20, 26, 40, .4); display: flex; align-items: center; justify-content: center; z-index: 10;
   padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)); }
+.modal > .karta { max-height: 100%; overflow: auto; }
 .karta { background: var(--karta); border-radius: 6px 6px 22px 22px; padding: 26px 30px; max-width: 460px; width: 100%;
   text-align: center; border: 1px solid var(--hrana); box-shadow: 0 2px 4px rgba(20, 26, 40, .12); }
 .karta h2 { margin: 10px 0 6px; font-size: 26px; }
@@ -253,6 +258,10 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--text); color: #fff;
   padding: 12px 20px; border-radius: 6px 6px 12px 12px; z-index: 20; font-size: 16px; max-width: 90vw; }
 
+.toast:empty { padding: 0; }
+.aktualizace { top: max(12px, env(safe-area-inset-top)); bottom: auto; z-index: 42; width: max-content;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
+
 @media (max-width: 760px) {
   .rychlost input { width: 90px; }
   #rychlostText { min-width: 0; }
@@ -264,6 +273,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
    Safari's bars cover the bottom of the screen (dvh above counts only the visible part) */
 .karta.siroka > .tlacitka:last-child { position: sticky; bottom: -26px; margin: 18px -30px -26px; padding: 12px 30px 16px;
   background: var(--karta); border-top: 1px solid var(--hrana); }
+.modal.doplnek { z-index: 45; }
 .doplnek .karta.siroka { max-width: 600px; }
 .karta.siroka h2 { margin-top: 0; }
 .popis-pole { display: block; font-weight: 600; margin-top: 14px; }
@@ -287,10 +297,10 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 .editor-info { padding: 6px 16px; min-height: 30px; font-size: 15px; }
 .editor-info .chyba { color: var(--cervena); }
 .editor-info .nejisty-text { color: #B5651D; }
-.editor-info .porovnani { color: var(--zelena); }
+.editor-info .porovnani { color: #226333; }
 .editor-nastroje { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px 14px 14px; background: var(--plocha); }
-.editor-nastroje .skupina { display: inline-flex; gap: 4px; align-items: center; background: var(--karta); border: 1px solid var(--hrana); border-radius: 10px; padding: 4px; font-size: 14px; }
-.editor-nastroje button { min-width: 38px; min-height: 36px; border: 0; border-radius: 8px; background: var(--plocha); font-size: 17px; }
+.editor-nastroje .skupina { display: inline-flex; flex-wrap: wrap; max-width: 100%; gap: 4px; align-items: center; background: var(--karta); border: 1px solid var(--hrana); border-radius: 10px; padding: 4px; font-size: 14px; }
+.editor-nastroje button { min-width: 44px; min-height: 44px; border: 0; border-radius: 8px; background: var(--plocha); font-size: 17px; }
 .editor-nastroje button:hover { background: var(--modra-svetla); }
 .editor-nastroje input { border: 1px solid var(--linka); border-radius: 8px; padding: 6px 8px; font-size: 15px; }
 .editor-nastroje .hlavicka label { display: inline-flex; gap: 4px; align-items: center; padding: 0 4px; }
@@ -298,6 +308,9 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 .editor-nastroje .napoveda { flex-basis: 100%; margin: 0; font-size: 13px; }
 .kulate:disabled { opacity: .35; }
 @media (max-width: 900px) { .editor-telo.s-originalem { grid-template-columns: 1fr; grid-template-rows: 1fr 1.4fr; } }
+@media (max-width: 640px), (max-height: 550px) {
+  .editor-nastroje { max-height: 40dvh; overflow: auto; }
+}
 
 /* ---------------- coach */
 .trener { background: var(--akcent-svetla); border-radius: 8px; padding: 10px 14px; font-size: 17px; text-align: left; }
@@ -830,7 +843,7 @@ html[dir="rtl"] .prepinac { text-align: right; }
 /* difficulty filter under the song tabs: a quiet second row, for the chosen tab and the search */
 .obtiznost-filtr { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 4px; flex: 1 1 320px; font-size: 15px; color: var(--slaby2); }
 .obtiznost-filtr span { margin-right: 6px; }
-.obtiznost-filtr button { border: 0; background: none; font: inherit; font-weight: 700; color: var(--slaby2); padding: 6px 12px; min-height: 40px; border-radius: 12px; cursor: pointer; }
+.obtiznost-filtr button { border: 0; background: none; font: inherit; font-weight: 700; color: var(--slaby2); padding: 6px 12px; min-height: 44px; border-radius: 12px; cursor: pointer; }
 .obtiznost-filtr button[aria-pressed="true"] { background: var(--sv); color: var(--ink); }
 
 /* without Web MIDI (Safari, iPad, iPhone): the app that brings MIDI to an iPad, on the App Store */

@@ -1,4 +1,5 @@
 // العربية – الشروح والإضافات
+import { TEMATA_JAZYKU } from '../temata.js';
 export default {
   "doplnky.a": " و",
   "doplnky.slovy": "صفر|واحدة|اثنتان|ثلاث|أربع|خمس|ست|سبع|ثمانٍ|تسع|عشر|إحدى عشرة|اثنتا عشرة",
@@ -172,7 +173,7 @@ export default {
   "doplnky.styl.tango.popis": "إيقاع هابانيرا: نغمة ذات سنّ منقّطة، ونغمة ذات سنّين، وتآلفات.",
   "doplnky.styl.popBalada.nazev": "أغنية بوب هادئة",
   "doplnky.styl.popBalada.popis": "نغمة باص طويلة مع الخامسة وتآلف ممتد.",
-  "doplnky.temata": "حيوانات|قطة صغيرة|جرو|غابة|مرج|شتاء|ربيع|صيف|خريف|البحر|قطار صغير|أشعة الشمس|مطر|نجوم|عيد الميلاد|عيد ميلاد|أصدقاء|حكاية خرافية",
+  "doplnky.temata": TEMATA_JAZYKU["ar"],
   "doplnky.nova.nazev": "أغنيتي",
   "doplnky.nova.nazevTema": "أغنيتي – {tema}",
   "doplnky.tyden.prazdnoDite": "لا تدريب هذا الأسبوع.",

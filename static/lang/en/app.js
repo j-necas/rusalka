@@ -460,4 +460,8 @@ export default {
   "menu.spravaHledat": "Find a song",
   "menu.mojeNic": "Songs you add will appear here.",
   "menu.vse": "Menu",
+  "app.midiInfo": "Time signature {takt}, tempo {tempo}, {stopy}",
+  "app.novaVerze": "A new version is available.",
+  "app.obnovitVerzi": "Reload",
+  "app.jazykChyba": "The language could not be loaded.",
 };

@@ -75,3 +75,28 @@ test('the lists, the sitemap and the links from the introduction pages', () => {
   assert.equal(mapa.match(/<loc>/g).length, UVODY.length + adresyPisni().length);
   assert.ok(mapa.includes('<loc>https://rusalkapiano.com/cs/noty/skakal-pes/</loc>'));
 });
+
+test('the published page lazy-loads just one layout for a large score and preserves its accessible name', async () => {
+  const p = pisne().find(q => q.jmeno === 'jingle-bells');
+  const puvodni = await strankaPisne(p);
+  const hotova = await strankaPisne(p, { externe: true });
+  assert.ok(Buffer.byteLength(puvodni.html) > 150000);
+  assert.ok(Buffer.byteLength(hotova.html) < 150000);
+  assert.match(hotova.html, /<picture>\s*<source media="\(max-width: 600px\)" srcset="noty-uzke\.svg"/);
+  assert.match(hotova.html, /<img src="noty-siroke\.svg" loading="lazy"[^>]+alt="Sheet music of Jingle Bells/);
+  for (const f of ['noty-uzke.svg', 'noty-siroke.svg']) {
+    assert.match(hotova.soubory[f], /^<svg viewBox="0 0 \d+ \d+"/);
+    assert.match(hotova.soubory[f], /<style>[^<]+\.pismeno/);
+    assert.match(hotova.soubory[f], /<g class="ovl">/);
+  }
+});
+
+test('introduction and song pages set CSP before scripts and preserve structured data', () => {
+  for (const html of [stranka('cs'), seznamPisni('cs').html]) {
+    const csp = html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1];
+    assert.ok(csp);
+    assert.ok(html.indexOf(csp) < html.indexOf('<script'));
+    assert.match(csp, /script-src 'self';/);
+    assert.match(html, /<script type="application\/ld\+json">/);
+  }
+});

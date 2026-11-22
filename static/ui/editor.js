@@ -7,7 +7,7 @@ import { t } from '../lib/texts.js';
 import { nazevKroku, soustava } from '../lib/note_names.js';
 
 const $ = (s, el = document) => el.querySelector(s);
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const DELKY_KLIC = { '1/1': 'cela', '1/2': 'pulova', '1/4': 'ctvrtova', '1/8': 'osminova', '1/16': 'sestnactinova', '1/32': 'dvaatricetinova' };
 const tt = (klic, parametry) => esc(t(klic, parametry));     // text for HTML (attributes and content)
 
@@ -58,8 +58,8 @@ export function otevriEditor(volby) {
         </select></div>
       <div class="skupina hlavicka">
         <label>${tt('editor.takt')} <input class="editor-takt" size="4" value="${esc(volby.pisen.takt)}"></label>
-        <label>${tt('editor.predznamenani')} <input class="editor-predzn" type="number" min="-7" max="7" value="${volby.pisen.predznamenani}"></label>
-        <label>${tt('editor.tempo')} <input class="editor-tempo" type="number" min="0" max="300" value="${volby.pisen.tempo || 0}"></label>
+        <label>${tt('editor.predznamenani')} <input class="editor-predzn" type="number" min="-7" max="7" value="${esc(volby.pisen.predznamenani)}"></label>
+        <label>${tt('editor.tempo')} <input class="editor-tempo" type="number" min="0" max="300" value="${esc(volby.pisen.tempo || 0)}"></label>
       </div>
       <p class="napoveda">${tt('editor.napoveda')}</p>
     </footer>`;

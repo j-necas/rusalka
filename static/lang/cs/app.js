@@ -460,4 +460,8 @@ export default {
   "menu.spravaHledat": "Najít písničku",
   "menu.mojeNic": "Písničky, které přidáte, najdete tady.",
   "menu.vse": "Menu",
+  "app.midiInfo": "Takt {takt}, tempo {tempo}, {stopy}",
+  "app.novaVerze": "Je k dispozici nová verze.",
+  "app.obnovitVerzi": "Obnovit",
+  "app.jazykChyba": "Jazyk se nepodařilo načíst.",
 };

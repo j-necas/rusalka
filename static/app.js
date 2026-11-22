@@ -1,6 +1,7 @@
 /* Rusalka (piano coach) – playing from sheet music on a piano connected over MIDI (or on the on-screen keys). ES module. */
 import { zMusicXml, naMusicXml, rozvin, tonyAkordu, kopie, metrum } from './lib/song.js';
 import * as Editor from './ui/editor.js';
+import { otevriDialog, zavriDialog } from './ui/dialog.js';
 import * as Cviceni from './lib/practice.js';
 import { vytvorMikrofon } from './ui/microphone.js';
 import { obtiznost } from './lib/difficulty.js';
@@ -18,7 +19,7 @@ import { vytvorVystup, vyberVystup, KANAL as KANAL_VYSTUPU } from './lib/midi_ou
 import { obrazekHrace } from './ui/pictures.js';
 import { spustMrkani, radost as radostZvirete, pozdrav, zvedavost } from './ui/animals.js';
 import { PALETY, OBRAZKY, VSECHNY_OBRAZKY, paleta, prevedProfil, viditelni, smazHrace } from './lib/profiles.js';
-import { t, jazyk, nastavJazyk, vychoziJazyk, smerJazyka, NAZVY_JAZYKU } from './lib/texts.js';
+import { t, jazyk, nastavJazyk, nactiSlovnik, vychoziJazyk, smerJazyka, NAZVY_JAZYKU } from './lib/texts.js';
 import { nastavSoustavu, soustava, jmenaKlaves, vychoziSoustava } from './lib/note_names.js';
 import { pokyny, vysledkyText, videoUkazky } from './lib/helper.js';
 import { notaProChybu, chybyKPrehledu, polohaDucha } from './lib/mistakes.js';
@@ -38,8 +39,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   const SVGNS = 'http://www.w3.org/2000/svg';
   // colour by note name (C red … B violet); an accidental takes the colour of its natural note
   const BARVY = ['#E53935', '#E53935', '#F57C00', '#F57C00', '#F2C200', '#43A047', '#43A047', '#00A3B8', '#00A3B8', '#3F51B5', '#3F51B5', '#8E24AA'];
-  const BARVY_TEXT = BARVY.map((b, i) => (i === 4 ? '#B58A00' : b));
-  const TMAVE = new Set([4]);
+  const BARVY_TEXT = ['#B51F20', '#B51F20', '#9B4800', '#9B4800', '#785B00', '#286631', '#286631', '#006574', '#006574', '#3F51B5', '#3F51B5', '#8E24AA'];
+  const TMAVE = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const CERNE = new Set([1, 3, 6, 8, 10]);
   const OKNO = 220;          // ms of real time: how far a note may drift in “In rhythm” mode
 
@@ -57,9 +58,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   };
   // language and note names (Settings); default language from the browser, default note names from the language
   const uzPouzivana = (() => { try { return Object.keys(localStorage).some(k => k.startsWith('kt-')); } catch { return false; } })();
-  const JAZYK = uloz.cti('kt-jazyk', null) || vychoziJazyk(navigator.languages?.length ? navigator.languages : navigator.language, uzPouzivana);
-  if (!uloz.cti('kt-jazyk', null)) uloz.pis('kt-jazyk', JAZYK);   // the choice is stored so that a later change of the default language does not switch anyone
-  nastavJazyk(JAZYK);
+  const ulozenyJazyk = uloz.cti('kt-jazyk', null);
+  const zadanyJazyk = Object.hasOwn(NAZVY_JAZYKU, ulozenyJazyk) ? ulozenyJazyk
+    : vychoziJazyk(navigator.languages?.length ? navigator.languages : navigator.language, uzPouzivana);
+  const slovnik = await nactiSlovnik(zadanyJazyk).catch(() => null);
+  const JAZYK = slovnik ? zadanyJazyk : 'en';
+  if (!ulozenyJazyk) uloz.pis('kt-jazyk', zadanyJazyk);   // preserve the choice when browser defaults or connectivity change
+  nastavJazyk(JAZYK, slovnik);
   nastavSoustavu(uloz.cti('kt-soustava', null) || vychoziSoustava(JAZYK), t('tony.solmizace').split('|'));
   document.documentElement.lang = JAZYK;
   document.documentElement.dir = smerJazyka(JAZYK);
@@ -79,7 +84,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   }
   /** error text: translated if the error carries a key (e.klic), otherwise its message */
   const chybaText = e => (e?.klic ? t(e.klic) : e?.message || String(e));
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const aktualniProfil = () => S.profily.find(p => p.id === S.profil) || null;
   function svetla(hex, a) {
     const n = parseInt(hex.slice(1), 16);
@@ -92,8 +97,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   let toastTimer = 0;
   function toast(t, ms = 2600) {
     if (!$('#vysledek').classList.contains('skryta')) return;     // results take precedence over messages
-    const el = $('#toast'); el.textContent = t; el.classList.remove('skryta');
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.add('skryta'), ms);
+    const el = $('#toast'); el.textContent = t;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { el.textContent = ''; }, ms);
   }
   const OBRAZOVKY = ['kdo', 'domu', 'pred', 'hra', 'novy'];
   function ukaz(id) {
@@ -136,8 +141,18 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     document.head.append(s);
   }
   // offline: the website keeps itself in the browser (sw.js); after loading, so it does not slow down the start
-  if (document.readyState === 'complete') zapnoutOffline({ serviceWorker: navigator.serviceWorker });
-  else addEventListener('load', () => zapnoutOffline({ serviceWorker: navigator.serviceWorker }), { once: true });
+  const offline = () => zapnoutOffline({
+    serviceWorker: navigator.serviceWorker,
+    setritData: navigator.connection?.saveData,
+    aktualizace: obnov => {
+      $('#aktualizace').classList.remove('skryta');
+      $('#aktualizaceText').textContent = t('app.novaVerze');
+      $('#aktualizaceObnovit').onclick = obnov;
+    },
+    obnovit: () => location.reload(),
+  });
+  if (document.readyState === 'complete') offline();
+  else addEventListener('load', offline, { once: true });
   const UL = { prohlizec: new ProhlizecUloziste(), slozka: null, aktivni: null, stavSlozky: null };
   UL.aktivni = UL.prohlizec;
   const LZE_SLOZKU = typeof window.showDirectoryPicker === 'function';
@@ -390,11 +405,11 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#midiMelodie').value = String(navrh.melodie);
     $('#midiLeva').value = navrh.leva == null ? '' : String(navrh.leva);
     $('#midiNazev').value = m.nazev || f.name.replace(/\.[^.]+$/, '');
-    $('#midiInfo').textContent = `Takt ${m.takt}, tempo ${Math.round(m.tempo)}, `
-      + t('app.midiStopy', { stopy: t('stop', { n: pr.length }) });
-    $('#midiOkno').classList.remove('skryta');
+    $('#midiInfo').textContent = t('app.midiInfo', { takt: m.takt, tempo: Math.round(m.tempo),
+      stopy: t('app.midiStopy', { stopy: t('stop', { n: pr.length }) }) });
+    otevriDialog($('#midiOkno'), { fokus: $('#midiNazev') });
   }
-  $('#midiZrusit').onclick = () => $('#midiOkno').classList.add('skryta');
+  $('#midiZrusit').onclick = () => zavriDialog($('#midiOkno'));
   $('#midiPoslech').onclick = () => {                     // first ~10 s of the chosen track (for a split track only above middle C)
     if (!MIDI) return;
     const { m } = MIDI, id = Number($('#midiMelodie').value);
@@ -415,7 +430,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       const leva = $('#midiLeva').value;
       const v = MidiSoubor.midiNaPisen(MIDI.m, { melodie: Number($('#midiMelodie').value),
         leva: leva === '' ? null : Number(leva), nazev: $('#midiNazev').value.trim() });
-      $('#midiOkno').classList.add('skryta');
+      zavriDialog($('#midiOkno'));
       editorNovePisne(v.pisen, { poznamky: v.poznamky });
       toast(t('app.zkontrolujUloz'), 5000);
     } catch (err) { toast('MIDI: ' + chybaText(err), 6000); }
@@ -423,10 +438,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   // ------------------------------------------------------------ where to get sheet music
   let zdrojeZPisnicek = false;
-  $('#zdroje').onclick = () => { zavriOkno('songs'); zdrojeZPisnicek = true; $('#zdrojeOkno').classList.remove('skryta'); };
+  $('#zdroje').onclick = () => { zavriOkno('songs'); zdrojeZPisnicek = true; otevriDialog($('#zdrojeOkno'), { zavrit: () => $('#zdrojeZavrit').click() }); };
   $('#zdrojeZavrit').onclick = () => {
-    $('#zdrojeOkno').classList.add('skryta');
-    if (zdrojeZPisnicek) { zdrojeZPisnicek = false; navratDoPisnicek = true; otevriOkno('songs'); }   // back to Songs where it was opened
+    zavriDialog($('#zdrojeOkno'));
+    if (zdrojeZPisnicek) { zdrojeZPisnicek = false; navratDoPisnicek = true; otevriOkno('songs'); $('#zdroje').focus(); }   // back to Songs where it was opened
   };
   // About Rusalka: a window over the current screen; #about in the address opens it (also on start, see the end)
   const ZDROJOVY_KOD = 'https://github.com/j-necas/rusalka';   // the public repository
@@ -441,21 +456,6 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     el.replaceChildren(text.slice(0, i), a, text.slice(i + 'Web MIDI Browser'.length));
   }
   $$('.vstup-appstore').forEach(a => { a.href = APP_STORE_MIDI; });
-  /** a window over the current screen (About, AI helper): focus moves in and back to where it was opened */
-  function okno(sel, otevrit) {
-    const o = $(sel);
-    if (otevrit) {
-      if (!o.classList.contains('skryta')) return false;
-      o._odkud = document.activeElement;
-      o.classList.remove('skryta');
-      o.querySelector('.karta').focus();
-      return true;
-    }
-    if (o.classList.contains('skryta')) return false;
-    o.classList.add('skryta');
-    o._odkud?.focus?.();
-    return true;
-  }
   const otevreno = sel => !$(sel).classList.contains('skryta');
   // the top menu: one window per item, each also opens from its address (#songs, #players, #ai, #settings, #about)
   let navratDoPisnicek = false;                         // Songs reopens from the editor or the sources: keep the search and the title
@@ -488,18 +488,18 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     about: () => { $('#oRusalceKod').classList.toggle('skryta', !ZDROJOVY_KOD); odkazAppStore($('#oRusalceOkno [data-t="about.potrebujesText"]')); $$('.o-rusalce-video').forEach(v => hrajUkazku(v, '#oRusalceOkno')); },
   };
   /** opens a menu window (another open one closes first) */
-  function otevriOkno(klic) {
+  function otevriOkno(klic, navrat) {
     for (const [k, sel] of Object.entries(OKNA)) if (k !== klic && otevreno(sel)) zavriOkno(k);
     PRED_OTEVRENIM[klic]?.();
-    okno(OKNA[klic], true);
+    otevriDialog($(OKNA[klic]), { zavrit: () => zavriOkno(klic), navrat });
   }
   function zavriOkno(klic) {
-    if (okno(OKNA[klic], false) && location.hash === '#' + klic) history.replaceState(null, '', location.pathname + location.search);
+    if (zavriDialog($(OKNA[klic])) && location.hash === '#' + klic) history.replaceState(null, '', location.pathname + location.search);
   }
   const otevreneOkno = () => Object.keys(OKNA).find(k => otevreno(OKNA[k]));
   const ai = otevrit => (otevrit ? otevriOkno('ai') : zavriOkno('ai'));
   for (const k of Object.keys(OKNA)) {
-    $$('.menu-' + k).forEach(b => b.onclick = () => otevriOkno(k));
+    $$('.menu-' + k).forEach(b => b.onclick = () => otevriOkno(k, b));
     $(OKNA[k]).addEventListener('click', e => { if (e.target === e.currentTarget || e.target.closest('[data-zavrit]')) zavriOkno(k); });
   }
   $$('.pata .odkaz, #novyUvod .odkaz').forEach(b => b.onclick = () => otevriOkno('about'));   // More about Rusalka
@@ -620,16 +620,9 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#spravaSmazat').onclick = () => SPRAVA && smazSoubor(SPRAVA);
 
   // ------------------------------------------------------------ notes: model → Verovio (single-line SVG, note times, chords)
-  let VTK = null;
   async function verovioTk() {
-    // WASM may initialise before we manage to set onRuntimeInitialized → just keep trying until it works
-    for (let i = 0; !VTK; i++) {
-      try { VTK = new verovio.toolkit(); } catch (e) {
-        if (i > 300) throw new Error(t('app.verovioChyba'));
-        await Promise.race([window.VEROVIO_PRIPRAVENO, new Promise(r => setTimeout(r, 100))]);
-      }
-    }
-    return VTK;
+    try { return await window.nactiVerovio(); }
+    catch { throw new Error(t('app.verovioChyba')); }
   }
   /**
    * Unrolled song model → everything the game needs: single-line SVG, notes with times (and bar), chords, bar starts.
@@ -1329,12 +1322,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   function potvrd(text, ano) {
     return new Promise(hotovo => {
       $('#potvrzeniText').textContent = text; $('#potvrzeniAno').textContent = ano;
-      const odkud = document.activeElement;
-      $('#potvrzeni').classList.remove('skryta');
-      $('#potvrzeniNe').focus();                         // the safe choice has the focus; Escape cancels
-      const konec = v => { $('#potvrzeni').classList.add('skryta'); odkud?.focus?.(); hotovo(v); };
+      const konec = v => { zavriDialog($('#potvrzeni')); hotovo(v); };
       $('#potvrzeniAno').onclick = () => konec(true);
       $('#potvrzeniNe').onclick = () => konec(false);
+      otevriDialog($('#potvrzeni'), { fokus: $('#potvrzeniNe'), zavrit: () => konec(false) });
     });
   }
   /** the Players window: the week per player, the players with Edit and Delete, Change player when one is chosen */
@@ -1487,7 +1478,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     return true;
   }
   function ukazChybyZapisu(chyby) {
-    $('#vlozitOkno').classList.remove('skryta');
+    otevriDialog($('#vlozitOkno'), { fokus: $('#vlozitText') });
     $('#vlozitChyby').innerHTML = `<p>${esc(t('pomocnik.vlozitChyby'))}</p><ul>${chyby.map(c => `<li>${esc(c)}</li>`).join('')}</ul>`;
     $('#vlozitChyby').classList.remove('skryta');
   }
@@ -1497,16 +1488,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#pomocnikPokyny').onclick = e => zkopiruj(pokyny('noty'), e.currentTarget);
   $('#pomocnikVysledky').onclick = e => zkopiruj(vysledkyText({ profily: S.profily, statistiky: S.statistiky, vysledky: S.vysledky, seznam: [...S.seznam, ...S.knihovna] }), e.currentTarget);
   $('#pomocnikUprava').onclick = () => { otevriOkno('songs'); $('#spravaHledat').focus(); };   // the easier version is per song
-  let vlozitOdkud = null;
-  function zavriVlozit() {
-    if ($('#vlozitOkno').classList.contains('skryta')) return;
-    $('#vlozitOkno').classList.add('skryta');
-    vlozitOdkud?.focus?.();                               // focus back where the dialog was opened
-  }
+  const zavriVlozit = () => zavriDialog($('#vlozitOkno'));
   $('#pomocnikVlozit').onclick = $('#pisnickyVlozit').onclick = e => {
-    vlozitOdkud = e.currentTarget;
     $('#vlozitText').value = ''; $('#vlozitChyby').classList.add('skryta');
-    $('#vlozitOkno').classList.remove('skryta'); $('#vlozitText').focus();
+    otevriDialog($('#vlozitOkno'), { fokus: $('#vlozitText'), navrat: e.currentTarget });
   };
   $('#vlozitOtevrit').onclick = () => otevriZapis($('#vlozitText').value);
   $('#vlozitZrusit').onclick = zavriVlozit;
@@ -1518,8 +1503,16 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     sel.value = JAZYK;
   }
   $('#volbaSoustavy').value = soustava();
-  $$('.jazyk-volba').forEach(sel => sel.onchange = e => {   // new language: save it, set note names to match, reload the page
-    uloz.pis('kt-jazyk', e.target.value); uloz.pis('kt-soustava', vychoziSoustava(e.target.value)); location.reload();
+  $$('.jazyk-volba').forEach(sel => sel.onchange = async () => {
+    const kod = sel.value;
+    sel.disabled = true;
+    try {
+      await nactiSlovnik(kod);
+      uloz.pis('kt-jazyk', kod); uloz.pis('kt-soustava', vychoziSoustava(kod)); location.reload();
+    } catch {
+      sel.value = JAZYK;
+      toast(t('app.jazykChyba'), 5000);
+    } finally { sel.disabled = false; }
   });
   $('#volbaSoustavy').onchange = e => { uloz.pis('kt-soustava', e.target.value); location.reload(); };
   $('#pokracujHrat').onclick = () => S.pokracuj && otevriPred(S.pokracuj);
@@ -1636,7 +1629,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     }
     if (/\.(pdf|png|jpe?g|webp|heic)$/i.test(f.name)) {  // the app does not convert sheet music from an image / PDF
       e.target.value = '';
-      $('#zdrojeOkno').classList.remove('skryta');
+      otevriDialog($('#zdrojeOkno'), { zavrit: () => $('#zdrojeZavrit').click() });
       toast(t('app.pdfNejde'), 6000);
       return;
     }
@@ -2021,7 +2014,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     H = novyStav();
     for (const id in S.el) nastavStav(id, '');
     zavriPrehled();
-    $('#vysledek').classList.add('skryta');
+    zavriDialog($('#vysledek'));
     $('#odpocet').classList.add('skryta');
     $('.kurzor').classList.toggle('skryta', S.rezim === 'cekam');
     $('#kalibrace').classList.toggle('skryta', S.rezim !== 'tempo');
@@ -2300,7 +2293,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   /** player selection dialog → profile, or null (Cancel) */
   function vyberHrace(nadpis, text, seznam) {
     return new Promise(hotovo => {
-      const zavri = p => { $('#dvojiceOkno').classList.add('skryta'); hotovo(p); };
+      const zavri = p => { zavriDialog($('#dvojiceOkno')); hotovo(p); };
       $('#dvojiceNadpis').textContent = nadpis; $('#dvojiceText').textContent = seznam.length ? text : t('app.dvojiceBezHrace');
       const el = $('#dvojiceHraci'); el.innerHTML = '';
       for (const p of seznam) {
@@ -2311,7 +2304,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         el.appendChild(b);
       }
       $('#dvojiceZrusit').onclick = () => zavri(null);
-      $('#dvojiceOkno').classList.remove('skryta');
+      otevriDialog($('#dvojiceOkno'), { zavrit: () => zavri(null), navrat: $('#dvojice') });
     });
   }
   $('#dvojice').onclick = async () => {
@@ -2328,7 +2321,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     zmenaDvojice();
   };
   async function zmenaDvojice() {
-    stopVse(); $('#vysledek').classList.add('skryta');
+    stopVse(); zavriDialog($('#vysledek'));
     if (S.pruvodce) ukonciPruvodce();
     S.smycka.zapnuto = false; $('#prepSmycka').classList.remove('zap');
     try { await pripravVerzi(); } catch (e) {
@@ -2393,14 +2386,15 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#vysNadpis').textContent = t(cisti ? 'app.spoluBezChyby' : 'app.spolu');
     $('#vysUkol').classList.add('skryta'); $('#vysPrednes').classList.add('skryta'); $('#vysTrener').textContent = '';
     $('#vysChyby').classList.toggle('skryta', !chybyPokusu().length);
-    $('#toast').classList.add('skryta');
+    $('#toast').textContent = '';
     AKCE = null; $('#vysHlavni').classList.add('skryta'); $('#vysZnovu').classList.remove('skryta');   // as a pair, no main action
     hlavniTlacitko();
     $('#vysledek').classList.add('ve-dvou');
-    $('#vysledek').classList.remove('skryta');
+    otevriVysledek();
   }
 
   // ------------------------------------------------------------ result
+  const otevriVysledek = () => otevriDialog($('#vysledek'), { navrat: $('#zpet') });
   function konec() {
     stopVse(); oznacCil(null); prubeh(1);
     const zv = ZVIRATA[aktualniProfil()?.zvire];
@@ -2596,7 +2590,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     nastavRychlost(u.rychlost);
     S.smycka.zapnuto = true; S.smycka.cisteVRade = 0;
     if (u.ruka && S.data.osnovy.length > 1 && !S.dvojice) S.rukaVolba = u.ruka === 'leva' ? '2' : u.ruka === 'obe' ? 'vse' : '1';
-    $('#vysledek').classList.add('skryta');
+    zavriDialog($('#vysledek'));
     nabidkaUseku(); $('#prepSmycka').classList.add('zap');
     nastavRuku();
   };
@@ -2623,7 +2617,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     S.usek = { od, do: dok };
     nastavRychlost(Math.min(80, S.nastaveni.rychlost));
     S.smycka.zapnuto = true; S.smycka.cisteVRade = 0;
-    $('#vysledek').classList.add('skryta');
+    zavriDialog($('#vysledek'));
     nabidkaUseku(); $('#prepSmycka').classList.add('zap');
     nastavRuku();
   }
@@ -2631,7 +2625,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const a = AKCE;
     if (!a || a.druh === 'znovu') { reset(); return; }
     if (a.druh === 'procvicit') { procvicUsek(a.misto.od, a.misto.do); return; }
-    $('#vysledek').classList.add('skryta'); stopVse();
+    zavriDialog($('#vysledek')); stopVse();
     await otevriPred(a.druh === 'dalsi' ? a.pisen.soubor : S.pisen);
     if (a.druh !== 'dalsi') { PRED.krok = a.krok; if (a.rychlost) PRED.rychlost = a.rychlost; vykresliPred(); }
   };
@@ -2643,7 +2637,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#vysZnovu').classList.toggle('skryta', AKCE?.druh === 'znovu');
     $('#vysPrednes').classList.toggle('skryta', !(S.posledniZaznam && S.rezim !== 'poslech' && hv != null && H.silaZMidi));
     $('#vysChyby').classList.toggle('skryta', !chybyPokusu().length);
-    $('#toast').classList.add('skryta');
+    $('#toast').textContent = '';
     hlavniTlacitko();
     $('#vysAvatar').innerHTML = avatarSvg(aktualniProfil());
     setTimeout(() => radostZvirete($('#vysAvatar .zvire')), 150);   // joy after playing
@@ -2651,7 +2645,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#vysNadpis').textContent = nadpis;
     $('#vysText').textContent = text;
     $('#vysZvire').textContent = veta;
-    $('#vysledek').classList.remove('skryta');
+    otevriVysledek();
   }
   $('#vysZnovu').onclick = () => reset();
 
@@ -2753,7 +2747,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     zavriPrehled();
     PREHLED.polozky = chybyPokusu().map(c => ({ ...c, g: nakresliDuchy(c) }));
     if (!PREHLED.polozky.length) return;
-    $('#vysledek').classList.add('skryta');
+    zavriDialog($('#vysledek'));
     $('#hra').classList.add('prehled');
     $('#prehledChyb').classList.remove('skryta');
     $('#chybaProcvicit').classList.toggle('skryta', !!S.dvojice);   // loop practice is for one player
@@ -2791,7 +2785,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     zavriPrehled();
     procvicUsek(c.takt, c.takt);
   };
-  $('#chybaZpet').onclick = () => { zavriPrehled(); $('#vysledek').classList.remove('skryta'); $('#vysChyby').focus(); };
+  $('#chybaZpet').onclick = () => { zavriPrehled(); otevriVysledek(); $('#vysChyby').focus(); };
   $('#vysPrednes').onclick = () => Doplnky.prednes(S.posledniZaznam);
   $('#oPisni').onclick = () => { stopVse(); Doplnky.pruvodcePisne(); };
   $('#ozvena').onclick = () => { stopVse(); Doplnky.ozvena(); };
@@ -2848,10 +2842,6 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (e.key === 'Escape') {
       if (jaMenuOtevrene()) { jaMenu(false, { fokus: true }); return; }
       if (vstupMenuOtevrene()) { vstupMenu(false, { fokus: true }); return; }
-      if (otevreno('#potvrzeni')) { $('#potvrzeniNe').click(); return; }               // the confirmation is on top
-      if (!$('#vlozitOkno').classList.contains('skryta')) { zavriVlozit(); return; }   // the dialog first, not the panel under it
-      const k = otevreneOkno();
-      if (k) { zavriOkno(k); return; }
       prekryv('#zobrazeni', false);
     }
   });
@@ -2924,6 +2914,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     // unless a song page sent them here to play its song
     if (window.naUvodniStranku?.(jazyk(), viditelni(S.profily).length > 0 || !!UL.slozka || !!CEKA_PISEN)) return;
     vykresliProfily(); stavUloziste(); nactiPisne(); uvodniObrazovka(); oknoZAdresy();
+    if (!navigator.connection?.saveData) setTimeout(window.prednactiVerovio, 1000);
   });
   // songs added to the folder meanwhile (AI agent, Finder) appear after returning to the window
   const obnovSeznam = () => { if (!$('#domu').classList.contains('skryta') && document.visibilityState === 'visible') nactiPisne(); };

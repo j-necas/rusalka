@@ -1,7 +1,7 @@
-// Comparison of two transcriptions of the same song (model "Pisen" from ./song.js). Pure functions, no DOM, no state.
+// Comparison of two transcriptions of the same song (model "Pisen" from ./song.js). No DOM.
 //
 //  (a) porovnej(vzor, test) – accuracy of a conversion (e.g. sheet music via AI) against a verified reference: bars,
-//      pitches, durations, chords, syllables + a list of differences in Czech.
+//      pitches, durations, chords, syllables + a localized list of differences.
 //  (b) rozdilyCteni(a, b) / slucCteni(a, b, rozhodnuti) – "two independent readings": where they differ and how to merge them.
 //
 // Method: each hand of a bar is turned into "events" (note/chord/rest with a position in the bar in quarter beats);
@@ -12,6 +12,7 @@
 //
 // Bar indexes are 0-based (as in the model); in the "popis" texts bar numbers start at 1, as a person sees them.
 
+import { t } from './texts.js';
 import { zlomek, naZlomek, metrum, vysky, tonyAkordu, rozvin, kopie } from './song.js';
 
 const EPS = 1e-6;
@@ -192,37 +193,36 @@ function jadro(a, b, { rozvinout, ruka }) {
 }
 
 // ---------------------------------------------------------------- texts
-const delkaText = q => naZlomek(q) || `${Math.round(q * 1000) / 1000} dob`;
-const vyskaText = e => (e.t === 'r' ? 'pomlka' : e.t);
-function naDobe(pos, doba) {
+const porovnani = (klic, hodnoty) => t('editor.porovnani.' + klic, hodnoty);
+const delkaText = (q, lokalni = false) => {
+  const n = Math.round(q * 1000) / 1000;
+  return naZlomek(q) || (lokalni ? porovnani('doby', { n }) : `${n} dob`);
+};
+const vyskaText = (e, lokalni = false) => e.t === 'r' ? (lokalni ? t('editor.pomlka') : 'pomlka') : e.t;
+function naDobe(pos, doba, lokalni = false) {
   const k = Math.floor(pos / doba + EPS), zb = pos - k * doba;
-  return `na ${k + 1}. době` + (zb > EPS ? ` + ${delkaText(zb)}` : '');
+  const zaklad = lokalni ? porovnani('doba', { n: k + 1 }) : `na ${k + 1}. době`;
+  return zaklad + (zb > EPS ? ` + ${delkaText(zb, lokalni)}` : '');
 }
 const prefixRuky = (r, ruce) => (ruce.length > 1 && r === 'l' ? 'levá ruka – ' : ruce.length > 1 && r === 'p' ? 'pravá ruka – ' : '');
 
 /** difference → text in the style "test instead of reference" */
-function textVzor(r, doba, ruce) {
-  const kde = naDobe(r.pos, doba), pre = prefixRuky(r.ruka, ruce);
+function textVzor(r, doba) {
+  const kde = naDobe(r.pos, doba, true);
   const { a, b } = r;
+  const vyska = e => vyskaText(e, true), delka = e => delkaText(e.d, true);
   switch (r.druh) {
-    case 'vyska': return `${pre}${vyskaText(b)} místo ${vyskaText(a)} ${kde}`;
+    case 'vyska': return porovnani('vyska', { a: vyska(a), b: vyska(b), kde });
     case 'delka': {
-      const da = delkaText(a.d), db = delkaText(b.d), u = ` (${vyskaText(a)} ${kde})`;
-      if (rovno(a.d, b.d * 1.5)) return `${pre}chybí tečka – ${db} místo ${da}${u}`;
-      if (rovno(b.d, a.d * 1.5)) return `${pre}tečka navíc – ${db} místo ${da}${u}`;
-      return `${pre}délka ${db} místo ${da}${u}`;
+      const klic = rovno(a.d, b.d * 1.5) ? 'chybiTecka' : rovno(b.d, a.d * 1.5) ? 'teckaNavic' : 'delka';
+      return porovnani(klic, { a: delka(a), b: delka(b), nota: vyska(a), kde });
     }
-    case 'vyskaDelka': return `${pre}${vyskaText(b)} ${delkaText(b.d)} místo ${vyskaText(a)} ${delkaText(a.d)} ${kde}`;
-    case 'chybi': return `${pre}chybí ${vyskaText(a)} ${delkaText(a.d)} ${kde}`;
-    case 'navic': return `${pre}navíc ${vyskaText(b)} ${delkaText(b.d)} ${kde}`;
-    case 'slabika':
-      if (!a.s) return `${pre}slabika „${b.s}“ navíc (${vyskaText(a)} ${kde})`;
-      if (!b.s) return `${pre}chybí slabika „${a.s}“ (${vyskaText(a)} ${kde})`;
-      return `${pre}slabika „${b.s}“ místo „${a.s}“ (${vyskaText(a)} ${kde})`;
-    case 'akord':
-      if (!b) return `chybí akord ${a.znacka} ${kde}`;
-      if (!a) return `akord ${b.znacka} navíc ${kde}`;
-      return `akord ${b.znacka} místo ${a.znacka} ${kde}`;
+    case 'vyskaDelka': return porovnani('vyska', { a: `${vyska(a)} ${delka(a)}`, b: `${vyska(b)} ${delka(b)}`, kde });
+    case 'chybi': return porovnani('chybi', { nota: `${vyska(a)} ${delka(a)}`, kde });
+    case 'navic': return porovnani('navic', { nota: `${vyska(b)} ${delka(b)}`, kde });
+    case 'slabika': return porovnani(!a.s ? 'slabikaNavic' : !b.s ? 'chybiSlabika' : 'slabika',
+      { a: a.s, b: b.s, nota: vyska(a), kde });
+    case 'akord': return porovnani(!b ? 'chybiAkord' : !a ? 'akordNavic' : 'akord', { a: a?.znacka, b: b?.znacka, kde });
     default: return r.druh;
   }
 }
@@ -271,14 +271,18 @@ export function porovnej(vzor, test, { rozvinout = true, ruka = 'p' } = {}) {
     const tv = p.i != null ? J.poradiA[p.i] : null, tt = p.j != null ? J.poradiB[p.j] : null;
     if (p.i != null && p.j != null) {
       if (!p.rozdily.length) shodnych++;
-      for (const r of p.rozdily) pridej(tv, tt, r.druh, `takt ${tv + 1}: ${textVzor(r, J.doba, J.ruce)}`);
+      for (const r of p.rozdily) {
+        let text = textVzor(r, J.doba);
+        if (J.ruce.length > 1 && (r.ruka === 'l' || r.ruka === 'p')) text = porovnani(r.ruka === 'l' ? 'leva' : 'prava', { text });
+        pridej(tv, tt, r.druh, porovnani('takt', { n: tv + 1, text }));
+      }
     } else if (p.i != null) {
       chybejicich++;
-      pridej(tv, null, 'chybiTakt', `chybí takt ${tv + 1}`);
+      pridej(tv, null, 'chybiTakt', porovnani('chybiTakt', { n: tv + 1 }));
     } else {
       navic++;
-      pridej(null, tt, 'taktNavic', posledniVzor == null ? `takt navíc na začátku (v testu takt ${tt + 1})`
-        : `takt navíc za taktem ${posledniVzor + 1} (v testu takt ${tt + 1})`);
+      pridej(null, tt, 'taktNavic', porovnani(posledniVzor == null ? 'navicNaZacatku' : 'navicZaTaktem',
+        { n: tt + 1, za: posledniVzor + 1 }));
     }
     if (tv != null) posledniVzor = tv;
   }
@@ -299,24 +303,25 @@ export function porovnej(vzor, test, { rozvinout = true, ruka = 'p' } = {}) {
 
 const procenta = x => `${x >= 1 - EPS ? 100 : Math.min(99, Math.round(x * 100))} %`;
 
-/** porovnej result → 2–3 lines in Czech */
+/** porovnej result → three localized lines */
 export function souhrnText(v) {
   const celkem = v.zarovnani ? v.zarovnani.length : v.taktuVzor;
-  const casti = [`Takty ${v.shodnychTaktu}/${celkem} (${procenta(v.presnostTaktu)})`,
-    `výšky ${procenta(v.presnostVysek)}`, `délky ${procenta(v.presnostDelek)}`];
-  if (v.presnostAkordu != null) casti.push(`akordy ${procenta(v.presnostAkordu)}`);
-  if (v.presnostSlabik != null) casti.push(`slabiky ${procenta(v.presnostSlabik)}`);
+  const casti = [porovnani('takty', { a: v.shodnychTaktu, b: celkem, p: procenta(v.presnostTaktu) })];
+  for (const [klic, podil] of [['vysky', v.presnostVysek], ['delky', v.presnostDelek], ['akordy', v.presnostAkordu], ['slabiky', v.presnostSlabik]]) {
+    if (podil != null) casti.push(porovnani(klic, { p: procenta(podil) }));
+  }
   const radky = [casti.join(', ')];
-  let r2 = `Noty: ${v.noty.shoda} z ${v.noty.vzor} ve vzoru přesně (výška i délka ${procenta(v.presnostNot)})`;
+  let r2 = porovnani('noty', { a: v.noty.shoda, b: v.noty.vzor, p: procenta(v.presnostNot) });
   if (v.chybejicichTaktu || v.taktuNavic) {
-    r2 += `; vzor má ${v.taktuVzor} taktů, test ${v.taktuTest}`
-      + (v.chybejicichTaktu ? `, chybí ${v.chybejicichTaktu}` : '') + (v.taktuNavic ? `, navíc ${v.taktuNavic}` : '');
+    r2 += '; ' + porovnani('poctyTaktu', { a: v.taktuVzor, b: v.taktuTest });
+    if (v.chybejicichTaktu) r2 += ', ' + porovnani('chybiCelkem', { n: v.chybejicichTaktu });
+    if (v.taktuNavic) r2 += ', ' + porovnani('navicCelkem', { n: v.taktuNavic });
   }
   radky.push(r2 + '.');
-  if (!v.rozdily.length) radky.push('Bez rozdílů.');
+  if (!v.rozdily.length) radky.push(porovnani('shoda'));
   else {
     const uk = v.rozdily.slice(0, 3).map(r => r.popis).join('; ');
-    radky.push(`Rozdílů ${v.rozdily.length}: ${uk}${v.rozdily.length > 3 ? '; …' : ''}`);
+    radky.push(porovnani('rozdily', { n: v.rozdily.length, text: uk + (v.rozdily.length > 3 ? '; …' : '') }));
   }
   return radky.join('\n');
 }

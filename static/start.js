@@ -1,5 +1,40 @@
-// Waits for Verovio (WASM) to initialise. A separate file because of the security policy (CSP without inline scripts).
-window.VEROVIO_PRIPRAVENO = new Promise(r => { verovio.module.onRuntimeInitialized = r; });
+// Prefetch the engine after startup and instantiate it only when a score needs it.
+(() => {
+  const adresa = new URL('vendor/verovio-toolkit-wasm.js', document.currentScript.src);
+  adresa.search = new URL(document.currentScript.src).search;
+  let nacteni, prednacteni;
+  window.prednactiVerovio = () => {
+    if (nacteni || prednacteni) return;
+    prednacteni = document.createElement('link');
+    prednacteni.rel = 'prefetch';
+    prednacteni.as = 'script';
+    prednacteni.href = adresa.href;
+    document.head.append(prednacteni);
+  };
+  window.nactiVerovio = () => nacteni ??= new Promise((resolve, reject) => {
+    const skript = document.createElement('script');
+    let casovac;
+    const chyba = () => {
+      clearTimeout(casovac);
+      skript.remove();
+      reject(new Error('Verovio could not be loaded'));
+    };
+    skript.src = adresa.href;
+    skript.onerror = chyba;
+    skript.onload = () => {
+      casovac = setTimeout(chyba, 30000);
+      const v = window.verovio;
+      if (!v?.module) return chyba();
+      const hotovo = () => {
+        clearTimeout(casovac);
+        try { resolve(new v.toolkit()); } catch { chyba(); }
+      };
+      if (v.module.calledRun || v.module._vrvToolkit_constructor) hotovo();
+      else v.module.onRuntimeInitialized = hotovo;
+    };
+    document.head.append(skript);
+  }).catch(e => { nacteni = null; throw e; });
+})();
 
 // A startup error (broken module, bad data) must not end in a blank window: it is written into the page.
 (() => {
@@ -29,6 +64,7 @@ window.VEROVIO_PRIPRAVENO = new Promise(r => { verovio.module.onRuntimeInitializ
   };
   window.addEventListener('error', e => {
     if (e.message) return ukaz(`${e.message} (${e.filename || ''}:${e.lineno || ''})`);
+    if (e.target?.src?.includes('/vendor/verovio-toolkit-wasm.js')) return;
     if (e.target?.tagName === 'SCRIPT' && znovu()) return;
     const f = selhane();
     ukaz(`nenačetl se soubor ${e.target?.src || e.target?.href || ''}` + (e.target?.type === 'module' ? ' (nebo soubor, který potřebuje)' : '')
