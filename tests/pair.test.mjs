@@ -33,6 +33,23 @@ test('In rhythm: hits are notes with a record', () => {
   assert.deepEqual([b.trefy, b.podil, b.hvezdy], [1, 0.5, 1]);
 });
 
+test('wrong keys reduce a duet result in every mode and count for their own side only', () => {
+  const zaznam = new Map(NOTY.map(n => [n.id, {}]));
+  const chybneStisky = [{ pitch: 54 }, { pitch: 70 }];
+  for (const rezim of ['cekam', 'tempo', 'pockej']) {
+    const spol = { noty: NOTY, zaznam, chybneStisky, rezim, hranice: 54 };
+    assert.equal(vysledekHrace({ ...spol, staff: 1 }).hvezdy, 1);
+    assert.equal(vysledekHrace({ ...spol, staff: 2 }).hvezdy, 3);
+  }
+});
+
+test('one played unison credits the note to both duet players', () => {
+  const noty = [{ ...n('a', 60, 1), souzvuk: [n('b', 60, 2)] }];
+  const spol = { noty, zaznam: new Map([['a', {}]]), chybneStisky: [], rezim: 'pockej', hranice: 60 };
+  assert.equal(vysledekHrace({ ...spol, staff: 1 }).pocet, 1);
+  assert.equal(vysledekHrace({ ...spol, staff: 2 }).trefy, 1);
+});
+
 test('a player with no notes in their staff → null', () => {
   assert.equal(vysledekHrace({ noty: NOTY.filter(x => x.staff === 1), zaznam: new Map(), chybneStisky: [], rezim: 'cekam', staff: 2, hranice: 54 }), null);
 });

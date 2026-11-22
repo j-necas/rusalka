@@ -1,4 +1,4 @@
-// Practice logic: sections (phrases), attempt records, mistake statistics, tempo plan and facts for the
+// Practice logic: playable steps, sections (phrases), attempt records, mistake statistics, tempo plan and facts for the
 // "coach after playing" (template text). Pure functions with no DOM, timers or network.
 //
 // BAR NUMBERING: all `takt`, `od`, `do`, `index` fields are bar indexes of the EXPANDED song, starting at 0 (play
@@ -195,11 +195,68 @@ export function fraze(pisen) {
   return out.map(f => ({ ...f, nazev: nazevZRozvinute(r, f.od, f.do) }));
 }
 
+// ---------------------------------------------------------------- gameplay and scoring
+/** Notes are ordered by onset. One key plays a unison, including both written noteheads. */
+export function herniKroky(noty) {
+  const kroky = [];
+  for (const n of noty) {
+    let k = kroky.at(-1);
+    if (!k || n.ms - k.ms >= 5) {
+      k = { ms: n.ms, q: n.q, noty: [], vyska: new Set(), konec: n.ms + n.dur };
+      kroky.push(k);
+    }
+    if (k.vyska.has(n.pitch)) {
+      const i = k.noty.findIndex(x => x.pitch === n.pitch), prvni = k.noty[i];
+      k.noty[i] = { ...prvni, dur: Math.max(prvni.dur, n.ms + n.dur - prvni.ms), souzvuk: [...(prvni.souzvuk || []), n] };
+    } else {
+      k.vyska.add(n.pitch); k.noty.push(n);
+    }
+    k.konec = Math.max(k.konec, n.ms + n.dur);
+  }
+  return kroky;
+}
+
+/** With backing only the current step is eligible. In rhythm use the oldest note still in the window. */
+export function najdiZasah(kroky, { pitch, cas, okno, hotovo, od, pockej = false }) {
+  for (let i = od; i < kroky.length; i++) {
+    const k = kroky[i];
+    if (k.ms > cas + okno) break;
+    if (pockej || k.ms >= cas - okno) {
+      const nota = k.noty.find(n => n.pitch === pitch && !hotovo.has(n.id));
+      if (nota) return { nota, index: i };
+    }
+    if (pockej) break;
+  }
+  return null;
+}
+
+export function zacatekHry(kroky, takty, qNaMs, takt = kroky[0].noty[0].takt) {
+  return Math.min(kroky[0].ms, qNaMs(takty[takt] ?? kroky[0].q));
+}
+
+export const doprovodUseku = (udalosti, od, dok) => udalosti.filter(e => e.ms >= od - 1 && e.ms < dok);
+
+/** A cursor walks a sorted sequence once, allocating sound only inside the current look-ahead. */
+export function vytvorPlanZvuku(udalosti) {
+  let i = 0;
+  return (doMs, prehraj) => {
+    while (i < udalosti.length && udalosti[i].ms <= doMs) prehraj(udalosti[i++]);
+  };
+}
+
+export const podilZasahu = (trefy, celkem, chyby) => celkem + chyby ? trefy / (celkem + chyby) : 1;
+
+/** In Find the notes completing the song earns at least one star. */
+export function hvezdyZPodilu(podil, rezim) {
+  const hv = podil >= 0.95 ? 3 : podil >= 0.8 ? 2 : podil >= 0.5 ? 1 : 0;
+  return rezim === 'cekam' ? Math.max(1, hv) : hv;
+}
+
 // ---------------------------------------------------------------- attempt record and summary
 /**
  * ATTEMPT RECORD (filled in by the app while playing; all ms are in song time = ms at 100 % tempo):
  * @typedef {Object} ZaznamPokusu
- * @property {'cekam'|'tempo'} rezim       Step by step / In rhythm (timing is not scored for 'cekam')
+ * @property {'cekam'|'pockej'|'tempo'} rezim  Find the notes / With backing / In rhythm (timing is scored only in rhythm)
  * @property {number} rychlost             speed in % (40–100)
  * @property {number} od                   first bar of the section (expanded song index)
  * @property {number} do                   last bar of the section (inclusive)
@@ -241,34 +298,42 @@ function odhadDoby(zaznam) {
 
 /**
  * Summary of one attempt.
- * presnost = ok / (number of notes + wrong presses not explained by a 'vedle' note), 0–1.
- * cisty = no note missed or wrong and accuracy ≥ 95 %.
+ * presnost = hits / (number of notes + wrong presses), 0–1. Older records may explain a wrong press with 'vedle'.
+ * cisty = all notes played without wrong presses.
  * prumernaOdchylkaMs = average absolute onset deviation in real ms (only 'tempo', otherwise null),
- * prumernyPosunMs = signed average (negative = early), spech 'brzy'|'pozde'|'presne' (null for 'cekam').
+ * prumernyPosunMs = signed average (negative = early), spech 'brzy'|'pozde'|'presne' (null outside 'tempo').
  * takty[i] = { chyby, noty, odchylka (average shift, real ms | null), tony (confused pitches), vynechane }.
  * nejhorsiTakty = [{ takt, chyby, noty, druh: 'tony'|'vynechane' }] (at most 3).
  * vzorce = deterministically found causes: [{ typ: 'pulton'|'skok'|'spech'|'drzeni', klic, pocet, takty, popis, … }]
  */
 export function souhrnPokusu(zaznam) {
-  const noty = (zaznam.noty || []).map(n => ({
-    ...n,
-    odchylkaMs: n.odchylkaMs ?? (n.zahranoMs != null && n.ocekavanoMs != null ? n.zahranoMs - n.ocekavanoMs : null),
-  }));
+  const chybneKroky = new Set(); // An older attempt may have marked the entire chord for one wrong press.
+  const noty = (zaznam.noty || []).map(n => {
+    let vysledek = n.vysledek;
+    if (vysledek === 'vedle' && n.index != null) {
+      const klic = `${n.takt}:${n.index}`;
+      if (chybneKroky.has(klic)) vysledek = 'ok';
+      chybneKroky.add(klic);
+    }
+    return { ...n, vysledek,
+      odchylkaMs: n.odchylkaMs ?? (n.zahranoMs != null && n.ocekavanoMs != null ? n.zahranoMs - n.ocekavanoMs : null) };
+  });
   const stisky = zaznam.chybneStisky || [];
   const sp = Math.max(0.05, (Number(zaznam.rychlost) || 100) / 100);
-  const vRytmu = zaznam.rezim === 'tempo';
+  const rezim = rezimPokusu(zaznam), vRytmu = rezim === 'tempo';
   const becka = (zaznam.predznamenani ?? 0) < 0;
   const ok = noty.filter(n => n.vysledek === 'ok').length;
   const vedle = noty.filter(n => n.vysledek === 'vedle').length;
   const vynechane = noty.filter(n => n.vysledek === 'vynechana').length;
   const navic = Math.max(0, stisky.length - vedle);
-  const presnost = noty.length ? ok / (noty.length + navic) : (stisky.length ? 0 : 1);
+  const presnost = podilZasahu(ok, noty.length, navic);
 
   // timing (In rhythm only, hit notes only), real ms
   const posun = n => n.odchylkaMs / sp;
-  const merene = vRytmu ? noty.filter(n => n.vysledek === 'ok' && n.odchylkaMs != null) : [];
-  const prumPosun = merene.length >= 3 ? prumer(merene.map(posun)) : null;
-  const prumAbs = merene.length ? prumer(merene.map(n => Math.abs(posun(n)))) : null;
+  const merene = new Set(vRytmu ? noty.filter(n => n.vysledek === 'ok' && n.odchylkaMs != null) : []);
+  const posuny = [...merene].map(posun);
+  const prumPosun = posuny.length >= 3 ? prumer(posuny) : null;
+  const prumAbs = prumer(posuny.map(Math.abs));
   const spech = !vRytmu ? null : prumPosun == null ? 'presne'
     : prumPosun < -PRAH_SPECH_MS ? 'brzy' : prumPosun > PRAH_SPECH_MS ? 'pozde' : 'presne';
 
@@ -280,7 +345,7 @@ export function souhrnPokusu(zaznam) {
     t.noty++;
     if (n.vysledek === 'vedle') { t.chyby++; t.tony++; }
     if (n.vysledek === 'vynechana') { t.chyby++; t.vynechane++; }
-    if (merene.includes(n)) t._p.push(posun(n));
+    if (merene.has(n)) t._p.push(posun(n));
   }
   const vedlePoTaktech = {};
   for (const n of noty) if (n.vysledek === 'vedle') vedlePoTaktech[n.takt] = (vedlePoTaktech[n.takt] || 0) + 1;
@@ -297,10 +362,10 @@ export function souhrnPokusu(zaznam) {
     .slice(0, 3);
 
   return {
-    rezim: zaznam.rezim, ...(zaznam.krok ? { krok: zaznam.krok } : {}), rychlost: Number(zaznam.rychlost) || 100, od: zaznam.od, do: zaznam.do,
+    rezim, ...(zaznam.krok ? { krok: zaznam.krok } : {}), rychlost: Number(zaznam.rychlost) || 100, od: zaznam.od, do: zaznam.do,
     ruka: zaznam.ruka || null,
     pocetNot: noty.length, ok, vedle, vynechane, chybnychStisku: stisky.length,
-    presnost: zaokr(presnost, 3), cisty: vedle === 0 && vynechane === 0 && presnost >= 0.95 && noty.length > 0,
+    presnost: zaokr(presnost, 3), cisty: noty.length > 0 && ok === noty.length && stisky.length === 0,
     prumernaOdchylkaMs: zaokr(prumAbs), prumernyPosunMs: zaokr(prumPosun), spech,
     takty, nejhorsiTakty,
     vzorce: najdiVzorce(noty, stisky, { sp, vRytmu, becka, doba: odhadDoby({ ...zaznam, noty }) }),
@@ -308,6 +373,7 @@ export function souhrnPokusu(zaznam) {
 }
 
 const unikatni = a => [...new Set(a)].sort((x, y) => x - y);
+const rezimPokusu = z => z.krok === 'pockej' ? 'pockej' : z.rezim;
 
 function najdiVzorce(noty, stisky, { sp, vRytmu, becka, doba }) {
   const out = [];
@@ -461,11 +527,16 @@ export function tezkaMista(statistika, pisen, n = 3) {
 /**
  * Tempo plan for a section loop: 3 clean passes in a row → +5 % (max 100), accuracy < 70 % → −10 % (min 40),
  * otherwise unchanged. stavSmycky = { rychlost, cisteVRade }; returns the new state + { zmena, zprava, hotovo }.
- * hotovo = 3 clean passes at full tempo.
+ * hotovo = 3 clean passes at full tempo, or 3 clean passes at any speed in Find the notes.
  */
 export function dalsiTempo(stavSmycky, souhrn) {
   const r0 = Number(stavSmycky?.rychlost ?? souhrn?.rychlost ?? 70);
   let cisteVRade = (souhrn?.cisty ? (stavSmycky?.cisteVRade || 0) + 1 : 0);
+  if (souhrn?.rezim === 'cekam') {
+    cisteVRade = Math.min(3, cisteVRade);
+    return { rychlost: r0, cisteVRade, zmena: 0, hotovo: cisteVRade === 3,
+      zprava: souhrn.cisty ? t('app.cisteZe3', { n: cisteVRade }) : t('app.jesteVKlidu') };
+  }
   let rychlost = r0, zmena = 0, zprava, hotovo = false;
   if ((souhrn?.presnost ?? 1) < 0.7) {
     rychlost = Math.max(MIN_RYCHLOST, r0 - 10); zmena = rychlost - r0; cisteVRade = 0;
@@ -486,7 +557,7 @@ function vekovePasmo(profil) {
   if (Number.isFinite(profil?.vek)) return profil.vek < 15 ? 'dite' : 'dospely';
   return 'dite';                                           // the app is mainly for children
 }
-const stejnyPokus = (h, s) => h && h.rezim === s.rezim && h.rychlost === s.rychlost && h.od === s.od && h.do === s.do
+const stejnyPokus = (h, s) => h && rezimPokusu(h) === s.rezim && h.rychlost === s.rychlost && h.od === s.od && h.do === s.do
   && h.presnost === s.presnost && h.cisty === s.cisty;
 
 /**
@@ -502,7 +573,7 @@ export function faktaProTrenera(souhrn, statistika, pisen, profil) {
   // trend: same mode, overlapping section, previous attempts (at most 3)
   let hist = [...(statistika?.historie || [])];
   if (stejnyPokus(hist[hist.length - 1], souhrn)) hist.pop();
-  const predchozi = hist.filter(h => h.rezim === souhrn.rezim && h.od <= dok && h.do >= od).slice(-3);
+  const predchozi = hist.filter(h => rezimPokusu(h) === souhrn.rezim && h.od <= dok && h.do >= od).slice(-3);
   const ted = Math.round(100 * (souhrn.presnost ?? 0));
   let trend = null;
   if (predchozi.length) {

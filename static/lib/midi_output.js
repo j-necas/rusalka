@@ -14,13 +14,14 @@ export function vyberVystup(vystupy, nazvyVstupu) {
 
 export function vytvorVystup({ ted = () => performance.now(), interval = (f, ms) => setInterval(f, ms),
   zrusInterval = id => clearInterval(id), tikMs = 25, dopredu = 100 } = {}) {
-  let port = null, fronta = [], poradi = 0, casovac = null;
+  let port = null, fronta = [], casovac = null;
   const zni = new Map();                              // pitch → how many times it is sounding right now
   const posli = (b, ts) => { try { port.send(b, ts); } catch { /* the piano was disconnected */ } };
   function tik() {
     const hranice = ted() + dopredu;
-    while (fronta.length && fronta[0].t <= hranice) {
-      const u = fronta.shift();
+    let i = 0;
+    for (; i < fronta.length && fronta[i].t <= hranice; i++) {
+      const u = fronta[i];
       if (!port) continue;
       if (u.v > 0) {
         const n = zni.get(u.p) || 0;
@@ -33,6 +34,7 @@ export function vytvorVystup({ ted = () => performance.now(), interval = (f, ms)
         else { zni.delete(u.p); posli([0x80 | KANAL, u.p, 0], u.t); }
       }
     }
+    if (i) fronta.splice(0, i);
     if (!fronta.length && casovac != null) { zrusInterval(casovac); casovac = null; }
   }
   const V = {
@@ -48,8 +50,15 @@ export function vytvorVystup({ ted = () => performance.now(), interval = (f, ms)
       if (!port) return false;
       V.pouzivaSe = true;
       const t0 = ted();
-      for (const u of udalosti) fronta.push({ t: t0 + Math.max(0, u.ms), i: poradi++, p: u.p & 0x7f, v: Math.max(0, Math.min(127, u.v | 0)) });
-      fronta.sort((a, b) => a.t - b.t || a.i - b.i);
+      for (const u of udalosti) {
+        const t = t0 + Math.max(0, u.ms);
+        let od = 0, dok = fronta.length;
+        while (od < dok) {
+          const m = (od + dok) >> 1;
+          if (fronta[m].t <= t) od = m + 1; else dok = m;
+        }
+        fronta.splice(od, 0, { t, p: u.p & 0x7f, v: Math.max(0, Math.min(127, u.v | 0)) });
+      }
       if (casovac == null) casovac = interval(tik, tikMs);
       tik();
       return true;
