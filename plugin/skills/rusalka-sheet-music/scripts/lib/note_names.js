@@ -25,7 +25,7 @@ export function nazevKroku(krok, alter = 0, s = SOUSTAVA) {
   if (alter === 1) return z + 'is';
   if (alter === 2) return z + 'isis';
   if (alter === -1) return CS_BECKO[k];
-  if (alter === -2) return z + 'eses';
+  if (alter === -2) return z + ('ea'.includes(k) ? 'ses' : 'eses');
   return z;
 }
 

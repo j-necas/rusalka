@@ -177,3 +177,110 @@ test('naMusicXml: a note inside a chain of ties stops the tie before starting th
   assert.match(prostredni, /<tie type="stop"\/><tie type="start"\/>/);
   assert.match(prostredni, /<tied type="stop"\/><tied type="start"\/>/);
 });
+
+const notaXml = (krok, delka = 4, dalsi = '') =>
+  `<note><pitch><step>${krok}</step><octave>4</octave></pitch><duration>${delka}</duration>${dalsi}</note>`;
+const taktXml = (obsah, i) => `<measure number="${i + 1}">${obsah}</measure>`;
+const xmlTakty = (...takty) => '<score-partwise><part id="P1">' + takty.map(taktXml).join('') + '</part></score-partwise>';
+const deleni = '<attributes><divisions>4</divisions></attributes>';
+const repZac = '<barline location="left"><repeat direction="forward"/></barline>';
+const voltaZac = cisla => `<barline location="left"><ending number="${cisla}" type="start"/></barline>`;
+const voltaKon = (cisla, times) => `<barline location="right"><ending number="${cisla}" type="${times ? 'stop' : 'discontinue'}"/>`
+  + (times ? `<repeat direction="backward" times="${times}"/>` : '') + '</barline>';
+const smer = w => `<direction><direction-type><words>${w}</words></direction-type></direction>`;
+
+test('MusicXML: volta covers every bar up to stop or discontinue and survives export', () => {
+  const p = zMusicXml(xmlTakty(deleni + repZac + notaXml('C'), notaXml('D'),
+    voltaZac('1') + notaXml('E'), notaXml('F') + voltaKon('1', 2),
+    voltaZac('2') + notaXml('G'), notaXml('A') + voltaKon('2'), notaXml('B')));
+  const poradi = [0, 1, 2, 3, 0, 1, 4, 5, 6];
+  assert.deepEqual(rozvin(p).poradi, poradi);
+  const xml = naMusicXml(p);
+  assert.equal((xml.match(/<ending [^>]*type="start"/g) || []).length, 2);
+  assert.deepEqual(rozvin(zMusicXml(xml)).poradi, poradi);
+});
+
+for (const skok of ['D.C.', 'D.S.']) {
+  test(`${skok} al Fine plays the last ending without repeating the section`, () => {
+    const p = zMusicXml(xmlTakty(deleni + repZac + notaXml('C')
+      + '<direction><direction-type><segno/></direction-type></direction>',
+    voltaZac('1') + notaXml('D') + voltaKon('1', 2),
+    voltaZac('2') + notaXml('E') + smer('Fine') + voltaKon('2'), notaXml('F'), notaXml('G') + smer(skok + ' al Fine')));
+    assert.deepEqual(rozvin(p).poradi, [0, 1, 0, 2, 3, 4, 0, 2]);
+  });
+}
+
+test('MusicXML: repeat times=3 plays the combined first and second ending twice', () => {
+  const p = zMusicXml(xmlTakty(deleni + repZac + notaXml('C'),
+    voltaZac('1,2') + notaXml('D') + voltaKon('1,2', 3), voltaZac('3') + notaXml('E') + voltaKon('3')));
+  const poradi = [0, 1, 0, 1, 0, 2];
+  assert.deepEqual(rozvin(p).poradi, poradi);
+  assert.deepEqual(rozvin(zMusicXml(naMusicXml(p))).poradi, poradi);
+});
+
+test('To Coda with a coda glyph jumps to the actual Coda bar', () => {
+  const coda = '<direction-type><coda/></direction-type>';
+  const p = zMusicXml(xmlTakty(deleni + notaXml('C'),
+    notaXml('D') + '<direction>' + coda + '<direction-type><words>To Coda</words></direction-type></direction>',
+    notaXml('E') + smer('D.C. al Coda'), '<direction>' + coda + '</direction>' + notaXml('F')));
+  assert.deepEqual(rozvin(p).poradi, [0, 1, 2, 0, 1, 3]);
+});
+
+test('Czech chord roots and slash basses retain their accidentals', () => {
+  assert.deepEqual(['Es', 'As', 'Asm', 'Esmi', 'Ases', 'Eses', 'Bes'].map(s => tonyAkordu(s).koren), [3, 8, 8, 3, 7, 2, 9]);
+  assert.equal(akordZnacky('Esmi').druh, 'minor');
+  assert.equal(akordZnacky('Asm').druh, 'minor');
+  assert.deepEqual(['C/Fis', 'C/Es', 'C/Ges', 'C/Ases'].map(s => tonyAkordu(s).bas), [6, 3, 6, 7]);
+  assert.deepEqual(['B', 'Bb', 'H'].map(s => tonyAkordu(s).koren), [11, 10, 11]);
+  const p = zaklad([{ noty: [n('C4', '3/4')], akordy: [{ doba: 0, znacka: 'Ases/Eses' }] }]);
+  assert.deepEqual(tonyAkordu(zMusicXml(naMusicXml(p)).takty[0].akordy[0].znacka), tonyAkordu('Ases/Eses'));
+});
+
+test('chord suffixes distinguish uppercase major from minor and power chords omit the third', () => {
+  assert.deepEqual(['CM7', 'CM', 'Cm7', 'C5'].map(s => akordZnacky(s).druh), ['major-seventh', 'major', 'minor-seventh', 'power']);
+  assert.deepEqual(tonyAkordu('C5').tony, [0, 7]);
+});
+
+test('MusicXML uses the kind element value when its custom display text disagrees', () => {
+  const akord = (druh, text) => `<harmony><root><root-step>C</root-step></root><kind text="${text}">${druh}</kind></harmony>`;
+  const p = zMusicXml(xmlTakty(deleni + akord('minor', '-') + notaXml('C') + akord('power', 'maj') + notaXml('D')));
+  assert.deepEqual(p.takty[0].akordy.map(a => akordZnacky(a.znacka).druh), ['minor', 'power']);
+});
+
+test('MusicXML keeps gaps from forward and the duration of omitted cue notes per voice', () => {
+  const p = zMusicXml(xmlTakty(deleni + notaXml('C')
+    + '<forward><duration>2</duration><voice>1</voice><staff>1</staff></forward>'
+    + '<note><cue/><pitch><step>A</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice></note>'
+    + '<harmony><root><root-step>G</root-step></root><kind>major</kind></harmony>'
+    + notaXml('E') + '<forward><duration>4</duration><voice>1</voice><staff>1</staff></forward>'
+    + '<backup><duration>16</duration></backup>'
+    + notaXml('G', 16, '<voice>2</voice><staff>2</staff>')));
+  assert.deepEqual(p.takty[0].akordy, [{ doba: 2, znacka: 'G' }]);
+  assert.deepEqual(p.takty[0].noty.map(n => [n.t, n.d]), [['C4', '1/4'], ['r', '1/4'], ['E4', '1/4'], ['r', '1/4']]);
+  assert.deepEqual(p.takty[0].leva.map(n => [n.t, n.d]), [['G4', '1/1']]);
+});
+
+test('a quintuplet of sixteenths retains its sounding lengths through import and export', () => {
+  const skupina = 'CDEFG'.split('').map(t => notaXml(t, 4,
+    '<type>16th</type><time-modification><actual-notes>5</actual-notes><normal-notes>4</normal-notes></time-modification>')).join('');
+  const p = zMusicXml(xmlTakty('<attributes><divisions>20</divisions></attributes>' + skupina));
+  const delky = Array(5).fill('1/20');
+  assert.deepEqual(p.takty[0].noty.map(n => n.d), delky);
+  const xml = naMusicXml(p);
+  assert.match(xml, /<actual-notes>5<\/actual-notes><normal-notes>4<\/normal-notes>/);
+  assert.deepEqual(zMusicXml(xml).takty[0].noty.map(n => n.d), delky);
+});
+
+test('mixed quarter and eighth triplets close the bracket after a complete group', () => {
+  const xml = naMusicXml(zaklad([{ noty: [n('C4', '1/6'), n('D4', '1/12'),
+    n('E4', '1/12'), n('F4', '1/12'), n('G4', '1/12')] }]));
+  assert.deepEqual(xml.match(/<note>[\s\S]*?<\/note>/g).map(n => [...n.matchAll(/<tuplet type="(\w+)"/g)].map(m => m[1])),
+    [['start'], ['stop'], ['start'], [], ['stop']]);
+});
+
+test('first key, meter and clef can follow a divisions-only attributes block', () => {
+  const p = zMusicXml(xmlTakty(deleni + '<attributes><key><fifths>-2</fifths></key>'
+    + '<time><beats>3</beats><beat-type>8</beat-type></time><clef><sign>F</sign><line>4</line></clef></attributes>'
+    + notaXml('C'), '<attributes><key><fifths>3</fifths></key></attributes>' + notaXml('D')));
+  assert.deepEqual([p.predznamenani, p.takt, p.klic], [-2, '3/8', 'basovy']);
+});

@@ -8,11 +8,11 @@
 //   3 Melody and bass          – left hand holds the chord root (no chords → simple I/IV/V… harmonization)
 //   4 Melody with accompaniment – left hand bass + chord by metre (waltz, polka, 6/8)
 //   5 Original                 – as written (available only with its own left hand)
-// Options: transpozice 'ne' | 'C' | 'snadna', prstoklad true/false.
+// Options: transpozice 'ne' | 'C' | 'snadna', prstoklad true/false, vek 'dite' | 'dospely'.
 
 import {
   DIV, DRUHY, zlomek, naZlomek, typNoty, metrum, soucetTaktu, vyska, vysky, zMidi, alterVTonine, akordZnacky,
-  tonyAkordu, kopie,
+  tonyAkordu, kopie, rozvin,
 } from './song.js';
 import { t } from './texts.js';
 
@@ -168,6 +168,18 @@ function nejlepsiOktava(tony, semi, dole, nahore, rozsah = 2) {
   return nej;
 }
 
+/** Additional octaves the left hand can move up relative to the right without introducing a crossing. */
+function odstupRukou(takty) {
+  let odstup = Infinity;
+  for (const t of takty) {
+    const prave = znejiciMelodie(t.noty, zlomek), leve = znejiciMelodie(t.leva, zlomek);
+    for (const l of leve) for (const p of prave) {
+      if (l.od < p.do - EPS && p.od < l.do - EPS) odstup = Math.min(odstup, p.midi - l.midi);
+    }
+  }
+  return Math.max(0, Math.floor(odstup / 12));
+}
+
 /**
  * Transposes the song (notes, left hand, chords, key signature). cil: 'ne' | 'C' (C major / A minor) |
  * 'snadna' (nearest of C/G/F/D major, or A/E/D minor). The melody moves by an octave into C4–C6 if needed.
@@ -188,9 +200,16 @@ export function transponuj(pisen, cil = 'C') {
   let diat = mod(KROKY.indexOf(T.krok) - KROKY.indexOf(ton.krok), 7);   // by how many steps (C → D = 1)
   if ((semi < 0 && diat > 0) || (semi === 0 && diat > 3)) diat -= 7;
 
-  const k = nejlepsiOktava(tonyMelodie(p), semi, 57, 86);     // C4–C6 with a tolerance of a minor third / second
+  let k = nejlepsiOktava(tonyMelodie(p), semi, 57, 86);     // C4–C6 with a tolerance of a minor third / second
   const levaTony = p.takty.flatMap(t => (t.leva || []).flatMap(n => vysky(n.t).map(v => ({ midi: v.midi, q: zlomek(n.d) }))));
-  const kl = levaTony.length ? nejlepsiOktava(levaTony, semi, 36, 62, 1) : 0;
+  let kl = levaTony.length ? nejlepsiOktava(levaTony, semi, 36, 62, 1) : 0;
+  if (levaTony.length && kl > k) {
+    const odstup = odstupRukou(p.takty);
+    if (kl - k > odstup) {
+      kl = Math.max(-1, k + odstup);
+      k = Math.max(k, kl - odstup);
+    }
+  }
   for (const t of p.takty) {
     t.noty = (t.noty || []).map(n => posunNotu(n, diat + 7 * k, semi + 12 * k, cilF));
     if (t.leva) t.leva = t.leva.map(n => posunNotu(n, diat + 7 * kl, semi + 12 * kl, cilF));
@@ -442,7 +461,7 @@ function doplnAkordy(p) {
 function akordyPoTaktech(p) {
   let posledni = null;
   return p.takty.map(t => {
-    const L = (t.noty || []).reduce((a, n) => a + tiky(n.d), 0);
+    const L = Math.round(soucetTaktu(t.noty) * DIV);
     const vlastni = (t.akordy || [])
       .map(a => ({ pos: Math.round((Number(a.doba) || 0) * DIV / 6) * 6, znacka: a.znacka }))   // to sixteenths
       .filter(a => tonyAkordu(a.znacka) && a.pos < Math.max(L, 1))
@@ -500,11 +519,11 @@ function vzorDoprovodu(takt) {
 }
 
 /** the bar's melody as intervals [od, do) with MIDI pitches */
-function znejiciMelodie(noty) {
+function znejiciMelodie(noty, delka = d => zlomek(d) * DIV) {
   const out = [];
   let pos = 0;
   for (const n of noty || []) {
-    const d = tiky(n.d);
+    const d = delka(n.d) || 0;
     for (const v of vysky(n.t)) out.push({ od: pos, do: pos + d, midi: v.midi });
     pos += d;
   }
@@ -545,7 +564,7 @@ function levaRuka(p, doprovod) {
   const akordy = akordyPoTaktech(p);
   p.takty.forEach((t, ti) => {
     const noty = t.noty || [];
-    const L = noty.reduce((a, n) => a + tiky(n.d), 0);
+    const delka = soucetTaktu(noty) * DIV, L = Math.round(delka);
     if (!L) { delete t.leva; return; }
     const seznam = akordy[ti];
     const zmeny = seznam.map(a => a.pos).filter(x => x > 0 && x < L);
@@ -580,7 +599,7 @@ function levaRuka(p, doprovod) {
       predBas = znacka;
       return { ...u, t: doRozsahu(ton, BAS_DOLE) };
     });
-    let leva = sestavLevou(udalosti);
+    let leva = Math.abs(delka - L) < EPS ? sestavLevou(udalosti) : null;
     if (!leva) leva = noty.map(n => ({ t: 'r', d: n.d, lig: false, s: '' }));   // fallback: rests in the melody's rhythm
     t.leva = leva;
   });
@@ -594,27 +613,29 @@ const ROZPETI = {
   23: [1, 1, 1, 2, 3, 5], 24: [1, 1, 3, 4, 5, 7], 25: [2, 2, 5, 6, 8, 10],
   34: [1, 1, 1, 2, 2, 4], 35: [1, 1, 3, 4, 5, 7], 45: [1, 1, 1, 2, 3, 5],
 };
+const ROZPETI_DITE = Object.fromEntries(Object.entries(ROZPETI).map(([par, delky]) =>
+  [par, delky.map(d => Math.round(d * 0.6))]));
 const KRIZENI = { 2: 2.5, 3: 1, 4: 1.5, 5: 6 };            // thumb under / crossing over the thumb
 const CERNE = new Set([1, 3, 6, 8, 10]);
 const NEMOZNE = 100;
 
 /** is the finger pair span playable? (for tests and checks) */
-export function hratelnePrstoklad(f1, m1, f2, m2) {
+export function hratelnePrstoklad(f1, m1, f2, m2, vek) {
   if (f1 === f2 || Math.abs(m2 - m1) > 12) return true;
   const lo = Math.min(f1, f2), hi = Math.max(f1, f2);
   const d = f1 < f2 ? m2 - m1 : m1 - m2;
-  const [minP, , , , , maxP] = ROZPETI[lo * 10 + hi];
+  const [minP, , , , , maxP] = (vek === 'dite' ? ROZPETI_DITE : ROZPETI)[lo * 10 + hi];
   return d >= minP && d <= maxP;
 }
 
-function cenaPrechodu(f1, a, f2, b) {
+function cenaPrechodu(f1, a, f2, b, rozpeti) {
   const i = b.midi - a.midi;
   if (i === 0) return f1 === f2 ? 0 : 2;                      // repeated note with the same finger
   if (f1 === f2) return 6;                                     // same finger on a different note = hand shift
   if (Math.abs(i) > 12) return 3 + (f2 === 1 || f2 === 5 ? 0 : 0.5);   // leap: the hand moves
   const lo = Math.min(f1, f2), hi = Math.max(f1, f2);
   const d = f1 < f2 ? i : -i;
-  const [minP, minC, minR, maxR, maxC, maxP] = ROZPETI[lo * 10 + hi];
+  const [minP, minC, minR, maxR, maxC, maxP] = rozpeti[lo * 10 + hi];
   if (d < minP || d > maxP) return NEMOZNE;
   if (d < 0) return KRIZENI[hi] + Math.max(0, -d - 2);         // crossing over the thumb (only the thumb can)
   let c = 0;
@@ -636,7 +657,8 @@ function cenaTonu(f, x) {
  * noty: array of Notes ({t, d}), pitches ('E4') or MIDI numbers. Returns an array of the same length: 1–5, null for rests.
  * For a chord it uses the top note. Deterministic.
  */
-export function prstoklad(noty) {
+export function prstoklad(noty, vek) {
+  const rozpeti = vek === 'dite' ? ROZPETI_DITE : ROZPETI;
   const body = [];
   let pauza = 0;
   (noty || []).forEach((n, idx) => {
@@ -662,7 +684,7 @@ export function prstoklad(noty) {
     const volno = b.pauza >= 1 - EPS;                            // after a rest of at least a quarter the hand has time to move
     for (let f2 = 1; f2 <= 5; f2++) {
       for (let f1 = 1; f1 <= 5; f1++) {
-        let c = cenaPrechodu(f1, a, f2, b);
+        let c = cenaPrechodu(f1, a, f2, b, rozpeti);
         if (volno) c = Math.min(c, 4) * 0.5;
         const celk = cena[k - 1][f1] + c + cenaTonu(f2, b);
         if (celk < cena[k][f2] - EPS) { cena[k][f2] = celk; zpet[k][f2] = f1; }
@@ -679,9 +701,9 @@ export function prstoklad(noty) {
 }
 
 /** fills in fingers for right-hand notes (only where missing; not for chords or tie continuations) */
-function doplnPrstoklad(p) {
+function doplnPrstoklad(p, vek) {
   const rada = p.takty.flatMap(t => t.noty || []);
-  const prsty = prstoklad(rada);
+  const prsty = prstoklad(rada, vek);
   rada.forEach((n, i) => {
     const predchozi = rada[i - 1];
     const pokracovani = predchozi && predchozi.lig && predchozi.t === n.t;
@@ -717,19 +739,28 @@ export function seznamUrovni(pisen) {
 }
 
 /**
- * Song level as a new model. volby: { transpozice: 'ne' | 'C' | 'snadna', prstoklad: bool }.
+ * Song level as a new model. volby: { transpozice: 'ne' | 'C' | 'snadna', prstoklad: bool, vek }.
  * Bars stay 1:1 with the original (same count, same repeat marks), only their content changes.
  * An unavailable level 5 returns the song unchanged (without a left hand).
  */
 export function vytvorUroven(pisen, id, volby = {}) {
+  return sestavUroven(pisen, id, volby, false).pisen;
+}
+
+/** Playback version: accompaniment follows the chords in the played order. */
+export function vytvorHranouUroven(pisen, id, volby = {}) {
+  return sestavUroven(pisen, id, volby, true);
+}
+
+function sestavUroven(pisen, id, volby, hrana) {
   const p = transponuj(pisen, volby.transpozice || 'ne');
   const u = Number(id);
   if (u <= 4) for (const t of p.takty) delete t.leva;
   if (u === 1) zjednodusRytmus(p);
-  if (u === 3 || u === 4) {
-    if (!maAkordy(p)) doplnAkordy(p);
-    levaRuka(p, u === 4);
-  }
-  if (volby.prstoklad) doplnPrstoklad(p);
-  return p;
+  const sDoprovodem = u === 3 || u === 4;
+  if (sDoprovodem && !maAkordy(p)) doplnAkordy(p);
+  if (volby.prstoklad) doplnPrstoklad(p, volby.vek);
+  const r = hrana ? rozvin(p) : { pisen: p };
+  if (sDoprovodem) levaRuka(r.pisen, u === 4);
+  return r;
 }

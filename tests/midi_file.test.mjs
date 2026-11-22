@@ -2,7 +2,7 @@ import './setup.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ctiMidi, prehledStop, navrhniStopy, midiNaPisen } from '../static/lib/midi_file.js';
-import { kontrola, naMusicXml, zMusicXml } from '../static/lib/song.js';
+import { kontrola, naMusicXml, soucetTaktu, zMusicXml } from '../static/lib/song.js';
 
 // ---------------------------------------------------------------- a small SMF writer for tests
 const vlq = v => { const o = [v & 0x7f]; while ((v >>= 7)) o.unshift((v & 0x7f) | 0x80); return o; };
@@ -141,4 +141,50 @@ test('not MIDI → a clear error', () => {
   assert.throws(() => ctiMidi(new TextEncoder().encode('<score-partwise/>')), /není soubor MIDI/);
   const m = ctiMidi(soubor([stopa(hlavicka())]));
   assert.throws(() => navrhniStopy(m), /nejsou žádné noty/);
+});
+
+for (const [tonina, sf, minor, vysky, ocekavane] of [
+  ['D minor', -1, true, [61, 62], ['C#4', 'D4']],
+  ['G minor', -2, true, [66, 67], ['F#4', 'G4']],
+  ['C major', 0, false, [70, 71, 72], ['Bb4', 'B4', 'C5']],
+  ['B-flat minor', -5, true, [66, 68, 69, 70], ['Gb4', 'Ab4', 'A4', 'Bb4']],
+]) {
+  test(`MIDI spells pitches in ${tonina}`, () => {
+    const m = ctiMidi(soubor([stopa([[0, meta(0x59, [sf & 255, Number(minor)])],
+      ...noty(vysky.map((v, i) => [v, i, 1]))])]));
+    assert.deepEqual(midiNaPisen(m, { melodie: 0 }).pisen.takty[0].noty.filter(n => n.t !== 'r').map(n => n.t), ocekavane);
+  });
+}
+
+test('legacy MIDI text encoding is chosen once for all track names and syllables', () => {
+  const m = ctiMidi(soubor([stopa([[0, meta(0x03, [80, 237, 115, 101, 242])]]),
+    stopa([[0, meta(0x03, [77, 101, 108, 111, 100, 105, 101])],
+      [0, meta(0x05, [0xc3, 0xa9])], [480, meta(0x05, [0xe8])], ...noty([[60, 0, 1], [61, 1, 1]])])]));
+  assert.equal(m.nazev, 'Píseň');
+  // C3 A9 could also be UTF-8 for é, but belongs to a Windows-1250 file.
+  assert.deepEqual(m.slova.map(s => s.text), ['Ă©', 'č']);
+});
+
+test('Western European MIDI lyrics use Windows-1252 when accented characters are ambiguous', () => {
+  const m = ctiMidi(soubor([stopa([[0, meta(0x05, [108, 0xe8])]])]));
+  assert.equal(m.slova[0].text, 'lè');
+});
+
+test('duplicate time signatures across tracks preserve the pickup', () => {
+  const takty = [[0, meta(0x58, [1, 2, 24, 8])], [480, meta(0x58, [3, 2, 24, 8])]];
+  const m = ctiMidi(soubor([stopa(takty), stopa([...takty, ...noty([[60, 0, 1], [62, 1, 3]])])]));
+  assert.deepEqual([m.takt, m.predtakti, m.zmenyTaktu], ['3/4', 1, false]);
+  assert.deepEqual(midiNaPisen(m, { melodie: 0 }).pisen.takty.map(tony), ['C4/1/4', 'D4/3/4']);
+});
+
+test('mixed MIDI grids preserve the entire duration when splitting notes', () => {
+  const delitel = 480;
+  const m = ctiMidi(soubor([stopa(hlavicka()), stopa(noty([[60, 0, 5 / 12], [62, 5 / 12, 1 / 3],
+    [64, 3 / 4, 1 / 4], [65, 1, 3]], { ppq: delitel, legato: 1 }))], { ppq: delitel }));
+  const { pisen, mrizka } = midiNaPisen(m, { melodie: 0 });
+  assert.equal(mrizka, 1 / 12);
+  const prvni = pisen.takty[0].noty.filter(n => n.t === 'C4');
+  assert.ok(Math.abs(soucetTaktu(prvni) - 5 / 12) < 1e-9);
+  assert.ok(prvni.slice(0, -1).every(n => n.lig));
+  assert.deepEqual(kontrola(pisen), []);
 });

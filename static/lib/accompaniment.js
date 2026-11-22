@@ -54,7 +54,7 @@ export function tonyProRoli(role, a) {
 }
 
 /** original accompaniment: a chord with bass at the start of the bar, in a long bar also in the middle (without bass) */
-function jenAkordy(akordy, takty, konecQ) {
+function jenAkordy(akordy, takty, konecQ, bezBasu) {
   const udery = [];
   takty.forEach((q, i) => {
     const delka = (takty[i + 1] ?? konecQ) - q;
@@ -67,7 +67,7 @@ function jenAkordy(akordy, takty, konecQ) {
     const body = [a.q, ...udery.filter(u => u > a.q + 0.01 && u < doQ - 0.01)];
     body.forEach((q, k) => {
       const q2 = Math.min(body[k + 1] ?? doQ, doQ);
-      out.push({ q, dq: q2 - q, p: tonyProRoli(k % 2 === 0 ? 'akord' : 'souzvuk', a), sila: k % 2 === 0 ? 0.42 : 0.3 });
+      out.push({ q, dq: q2 - q, p: tonyProRoli(!bezBasu && k % 2 === 0 ? 'akord' : 'souzvuk', a), sila: k % 2 === 0 ? 0.42 : 0.3 });
     });
   });
   return out;
@@ -81,18 +81,17 @@ function jenAkordy(akordy, takty, konecQ) {
  */
 export function doprovodZAkordu({ akordy, takty, konecQ, takt = '4/4', tempo = 100, styl = 'auto', bezBasu = false }) {
   if (!akordy?.length || !takty?.length) return [];
-  // in duet mode a child plays the bass: only the chords remain from the accompaniment (bass, fifth and octave gone, chord without bass)
-  if (bezBasu) {
-    return doprovodZAkordu({ akordy, takty, konecQ, takt, tempo, styl })
-      .map(e => ({ ...e, p: e.p.filter(p => p >= SOUZVUK_OD) })).filter(e => e.p.length);
-  }
-  if (styl === 'jenAkordy') return jenAkordy(akordy, takty, konecQ);
+  if (styl === 'jenAkordy') return jenAkordy(akordy, takty, konecQ, bezBasu);
   const id = styl === 'auto' || !STYLY.some(s => s.id === styl) ? stylPodleTaktu(takt, tempo) : styl;
   const vzor = vzorProTakt(id, takt);
   const plna = metrum(takt).delka, P = vzor.delka || plna;
   const akordV = q => { let a = null; for (const x of akordy) { if (x.q <= q + EPS) a = x; else break; } return a; };
   const out = [];
   const pridej = (q, dq, role, sila) => {
+    if (bezBasu) {
+      if (role !== 'akord' && role !== 'souzvuk') return;
+      role = 'souzvuk';
+    }
     // at a chord change inside a tone the tone is split: the second part already uses the new chord
     const zmeny = akordy.map(a => a.q).filter(x => x > q + EPS && x < q + dq - EPS);
     const body = [q, ...zmeny, q + dq];

@@ -116,6 +116,10 @@ export default {
   'cviceni.kontrola.soucet': 'součet délek {soucet} místo {metrum}',
 
   // chyby při čtení a vykreslení not (song.js, render.js)
+  "cviceni.chyba.mxlNeniZip": "soubor .mxl není ZIP archiv",
+  "cviceni.chyba.mxlBezNot": "v archivu nejsou noty",
+  "cviceni.chyba.necitelneXml": "soubor nejde přečíst",
+  "cviceni.chyba.jenPartwise": "použijte MusicXML s party (score-partwise)",
   'cviceni.chyba.zadneNoty': 'v souboru nejsou noty',
   'cviceni.chyba.vykresleni': 'noty se nepodařilo vykreslit',
   'cviceni.chyba.prazdnaPisen': 'v písničce nejsou žádné noty',

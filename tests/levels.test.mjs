@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { zlomek, vyska, vysky, typNoty, kontrola, naMusicXml, zMusicXml, soucetTaktu, tonyAkordu } from '../static/lib/song.js';
 import {
-  seznamUrovni, vytvorUroven, prstoklad, jakaTonina, transponuj, harmonizuj, hratelnePrstoklad,
+  seznamUrovni, vytvorUroven, vytvorHranouUroven, prstoklad, jakaTonina, transponuj, harmonizuj, hratelnePrstoklad,
 } from '../static/lib/levels.js';
 
 const n = (t, d, extra = {}) => ({ t, d, lig: false, s: '', ...extra });
@@ -317,5 +317,44 @@ test('real songs: all levels and transpositions pass (private, only when availab
       if (zlomek(x.d) < 0.5 - 1e-6 || typNoty(zlomek(x.d)).trioly) assert.ok(String(x.s || '').trim(), `${f}: ${x.t} ${x.d}`);
     }
     assert.equal(JSON.stringify(p), snimek);
+  }
+});
+
+test('child fingering uses a hand shift for intervals wider than nine semitones', () => {
+  const rada = ['C4', 'A4', 'C4', 'C5'];
+  const p = zaklad([{ noty: rada.map(t => n(t, '1/4')) }], { takt: '4/4' });
+  const prsty = vek => vytvorUroven(p, 2, { prstoklad: true, vek }).takty[0].noty.map(n => n.prst);
+  assert.deepEqual(prsty('dospely'), [1, 5, 1, 5]);
+  const detske = prsty('dite');
+  assert.equal(detske[2], detske[3], 'the octave requires moving the hand');
+});
+
+test('transposition does not introduce crossing between simultaneous hands', () => {
+  const p = zaklad([{ noty: [n('C7', '1/1')], leva: [n('B6', '1/4'), n('C2', '3/4')] },
+    { noty: [n('C7', '1/1')], leva: [n('C2', '1/1')] }], { predznamenani: 0, takt: '4/4' });
+  const [t] = transponuj(p, 'C').takty;
+  assert.ok(midi(t.noty[0].t) >= midi(t.leva[0].t));
+});
+
+test('accompaniment of the second ending inherits the chord from the played predecessor', () => {
+  const p = zaklad([
+    { noty: [n('C4', '3/4')], akordy: [{ doba: 0, znacka: 'C' }], znacky: { zacatekRepetice: true } },
+    { noty: [n('D4', '3/4')], akordy: [{ doba: 0, znacka: 'G' }], znacky: { volta: [1], konecRepetice: true } },
+    { noty: [n('E4', '3/4')], znacky: { volta: [2] } },
+  ]);
+  for (const id of [3, 4]) {
+    const { pisen, poradi } = vytvorHranouUroven(p, id);
+    assert.deepEqual(poradi, [0, 1, 0, 2]);
+    assert.equal(midi(pisen.takty.at(-1).leva[0].t) % 12, 0);
+  }
+});
+
+test('generated left hand ends on the barline after five sixteenth-note quintuplets', () => {
+  const p = zaklad([{ akordy: [{ doba: 0, znacka: 'C' }], noty: [...'CDEFG'].map(k => n(k + '4', '1/20')) }], { takt: '1/4' });
+  for (const id of [3, 4]) {
+    const { pisen } = vytvorHranouUroven(p, id);
+    const bar = pisen.takty[0];
+    assert.equal(soucetTaktu(bar.noty), soucetTaktu(bar.leva));
+    assert.equal(bar.leva[0].t, 'C3');
   }
 });
