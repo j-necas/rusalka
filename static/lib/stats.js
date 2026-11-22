@@ -1,6 +1,6 @@
 // Statistics for a parent, from what Rusalka already stores per player: `statistiky` ({ 'file#level': { historie, takty } })
 // and `vysledky` ({ file: { cekam|pockej|tempo: { hvezdy } } }). Three questions: practising regularly? improving? stuck where?
-import { umim, doporuceni, nejrychlejsiCisty } from './recommend.js';
+import { umim, doporuceni, nejrychlejsiCisty, KROKY } from './recommend.js';
 
 export const MAX_HISTORIE = 30;
 
@@ -66,7 +66,7 @@ export function stavPisni(stat, vys) {
     const v = vys?.[soubor] || {};
     const stav = umim(v, stat, soubor) ? { druh: 'naucena' }
       : { druh: 'krok', krok: doporuceni(v, stat, soubor).krok, rychlost: nejrychlejsiCisty(stat, soubor) };
-    return { soubor, hvezdy: ['cekam', 'pockej', 'tempo'].map(k => v[k]?.hvezdy || 0), stav, posledni: posledni.get(soubor) || 0 };
+    return { soubor, hvezdy: KROKY.map(k => v[k]?.hvezdy || 0), stav, posledni: posledni.get(soubor) || 0 };
   }).sort((a, b) => b.posledni - a.posledni);
 }
 

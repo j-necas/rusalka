@@ -176,7 +176,9 @@ Requirements: Node.js 18+. The GitHub Pages website is built and deployed by `.g
 - **`static/lib/`** – pure modules without the DOM, covered by tests:
   - `song.js` – the song model, MusicXML ↔ model, bar checks, unrolling repeats;
   - `levels.js` – levels, transposition, harmonisation, fingering;
-  - `practice.js` – phrases, attempt summary, statistics, tempo plan, coach;
+  - `practice.js` – phrases, attempt summary and scoring (stars, best results), statistics, tempo plan and section
+    loop, guide plan, coach;
+  - `game.js` – play modes (`REZIM`), game timers, one frame of a running game, Find the notes key presses, guide steps;
   - `editor.js` – editor operations and history;
   - `compare.js` – compares a transcription with a verified song (conversion accuracy);
   - `microphone.js` – pitch detection from the microphone (MPM, spectrum, onsets);

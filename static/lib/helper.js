@@ -6,6 +6,7 @@ import { FORMAT } from './format.js';
 import { naText } from './notation.js';
 import { faktaTydne } from './extras.js';
 import { viditelni } from './profiles.js';
+import { KROKY } from './recommend.js';
 
 /** a short demo video (video/<nazev>.mp4): Czech UI and captions for Czech and Slovak, English otherwise */
 export function videoUkazky(kod, nazev = 'ai') {
@@ -49,7 +50,7 @@ export function vysledkyText({ profily, statistiky, vysledky, seznam }, ted = Da
       for (const h of statistika.historie || []) if (h.kdy >= od && h.kdy <= ted) dny.add(new Date(h.kdy).toDateString());
       const posledni = (statistika.historie || []).filter(h => h.kdy >= od && h.kdy <= ted).at(-1);
       const hv = vysledky?.[p.id]?.[soubor] || {};
-      const kroky = ['cekam', 'pockej', 'tempo'].filter(k => hv[k]?.hvezdy).map(k => `${t('krok.' + k)} ${hvezdicky(hv[k].hvezdy)}`);
+      const kroky = KROKY.filter(k => hv[k]?.hvezdy).map(k => `${t('krok.' + k)} ${hvezdicky(hv[k].hvezdy)}`);
       radky.push('- ' + t('pomocnik.vysledky.pisen', {
         nazev: s.nazev, uroven: /^\d+$/.test(uroven) ? t('pomocnik.vysledky.uroven', { n: uroven }) : '',
         pokusu: s.pokusu, cistych: s.cistych, od: s.presnost.zacatek, do: s.presnost.konec, rychlost: s.rychlost.max,
