@@ -32,7 +32,7 @@ import { pocitatNavstevy, POCITADLO } from './lib/visits.js';
 import { zapnoutOffline } from './lib/offline.js';
 import { rukaPoKarte, stylPriOtevreni, souhrn, poslechCelePisne } from './lib/version.js';
 import { VZORKY, naMidi, nejblizsiVzorek } from './lib/piano.js';
-import { pokusyHrace, kalendar, presnostPoDnech, stavPisni, mistaKdeDrhne, zapisDoDeniku } from './lib/stats.js';
+import { pokusyHrace, kalendar, presnostPoDnech, stavPisni, mistaKdeDrhne, zapisDoDeniku, prvniHrani, pripomenoutZalohu } from './lib/stats.js';
 import { nactiVstup, doprovodZapnuty, sDoprovodem, poZmeneKlaviru, prijimaZdroj, pripojeneVstupy, seznamPortu, klavesyViditelne, vytvorMereniDrzeni } from './lib/input.js';
 import { KROKY, RYCHLOSTI, stavKroku, umim, doporuceni, proMe, jeNova, akcePoVysledku } from './lib/recommend.js';
 import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny } from './lib/library.js';
@@ -433,7 +433,19 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const pripominka = $('#ulozistePripominka'), kdy = uloz.cti('kt-zaloha', null);
     pripominka.classList.toggle('skryta', slozka || UL.trvale);
     pripominka.textContent = kdy ? t('app.dataPosledniZaloha', { datum: new Date(kdy).toLocaleDateString(JAZYK) }) : t('app.dataPripominka');
+    pripominkaNaDomove();
   }
+  /** Home: the results are only in this browser and the last backup is old (or none) → a reminder with Download and Later */
+  function pripominkaNaDomove() {
+    const kdy = uloz.cti('kt-zaloha', null);
+    const ukazat = pripomenoutZalohu({ slozka: UL.aktivni === UL.slozka, posledniZaloha: kdy, odlozeno: uloz.cti('kt-zaloha-pozdeji', null),
+      prvni: prvniHrani(S.denik, S.statistiky) });
+    $('#zalohaPripominka').classList.toggle('skryta', !ukazat);
+    if (ukazat) $('#zalohaPripominkaText').textContent = kdy
+      ? t('app.zalohaPripominkaStara', { datum: new Date(kdy).toLocaleDateString(JAZYK) }) : t('app.zalohaPripominkaNikdy');
+  }
+  $('#zalohaPripominkaStahnout').onclick = () => $('#ulozisteZaloha').click();
+  $('#zalohaPripominkaPozdeji').onclick = () => { uloz.pis('kt-zaloha-pozdeji', Date.now()); pripominkaNaDomove(); };
   async function prepniNa(ul, { obnova = false } = {}) {
     await frontaDat.dokonci();
     const jina = UL.aktivni !== ul;
@@ -1417,6 +1429,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   function vykresliPisne() {
     const el = $('#pisne');
     if (!el) return;
+    pripominkaNaDomove();
     const vys = vysHrace(), stat = statHrace(), info = S.infoPisni || {};
     const hratelne = domaciPisne().filter(p => !p.chyba);
     const prvni = prvniVyskyty();

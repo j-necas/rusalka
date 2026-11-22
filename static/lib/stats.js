@@ -85,3 +85,23 @@ export function mistaKdeDrhne(stat, max = 3) {
   }
   return mista.map(({ noty, chyby, ...m }) => ({ ...m, podil: chyby / noty })).sort((a, b) => b.podil - a.podil).slice(0, max);
 }
+
+// ---------------------------------------------------------------- backup reminder on Home
+/** the earliest day anyone played (diary of every player and the song histories); null = nobody has played yet */
+export function prvniHrani(denik, statistiky) {
+  const dny = Object.values(denik || {}).flatMap(d => Object.keys(d || {}))
+    .map(k => { const [r, m, d] = k.split('-').map(Number); return new Date(r, m - 1, d).getTime(); });
+  const pokusy = Object.values(statistiky || {}).flatMap(s => pokusyHrace(s).map(h => h.kdy));
+  const vse = [...dny, ...pokusy].filter(Number.isFinite);
+  return vse.length ? Math.min(...vse) : null;
+}
+/**
+ * Remind on Home to download a backup: the data are only in this browser (no folder), someone has been playing for a week
+ * and the last backup is missing or older than 30 days. "Later" (odlozeno) silences it for 14 days.
+ */
+export function pripomenoutZalohu({ slozka, posledniZaloha, odlozeno, prvni, ted = Date.now() }) {
+  const den = 864e5;
+  if (slozka || prvni == null || ted - prvni < 7 * den) return false;
+  if (odlozeno && ted - odlozeno < 14 * den) return false;
+  return !posledniZaloha || ted - posledniZaloha >= 30 * den;
+}

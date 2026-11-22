@@ -550,6 +550,20 @@ try {
     kontrola('the 30 piano recordings are loaded and an on-screen key plays one', new Set(mp3.filter(u => /\/sounds\/piano\//.test(u))).size === 30
       && await vs.evaluate(() => window.__nahravky > 0), `${mp3.length} mp3, ${await vs.evaluate(() => window.__nahravky)} played`);
   kontrola('no page errors (How you play)', vs.chyby.length === 0, vs.chyby.join(' | '));
+  // backup reminder on Home: playing for over a week and no backup yet → shown; Later hides it
+  const zp = await stranka({ ...DATA(), data: { ...DATA().data, statistiky: JSON.stringify({ e: { 'Ode to Joy.musicxml#2': { verze: 1, pokusu: 1,
+    posledni: ted - 10 * DEN, takty: {}, historie: [{ kdy: ted - 10 * DEN, rezim: 'cekam', krok: 'cekam', rychlost: 60, presnost: 0.9 }] } } }) } });
+  await zkus('Backup reminder on Home', async () => {
+    await zp.locator('#kdo .dlazdice-hrace', { hasText: 'Ela' }).click();
+    await zp.waitForTimeout(500);
+    kontrola('Home reminds to download a backup after a week of playing without one', await viditelna(zp, '#zalohaPripominka')
+      && /prohlížeči/.test(await zp.locator('#zalohaPripominkaText').textContent()));
+    await snimek(zp, 'domu-zaloha');
+    await zp.locator('#zalohaPripominkaPozdeji').click();
+    kontrola('… Later hides it', !(await viditelna(zp, '#zalohaPripominka')));
+  });
+  kontrola('no page errors (backup reminder)', zp.chyby.length === 0, zp.chyby.join(' | '));
+  await zp.close();
   // restoring a backup on the first visit (New player): Settings close and Who is playing shows the restored players
   const ob = await stranka(DATA([]), undefined, undefined, 'cs', false);
   await zkus('Restore from a backup', async () => {

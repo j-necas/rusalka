@@ -102,3 +102,20 @@ test('merging statistics preserves the newest 30 attempts across both histories'
     { e: { a: { posledni: 19, historie: historie(1, 19) } } });
   assert.deepEqual(st.e.a, { posledni: 34, historie: historie(5, 34), takty: { 1: 2 } });
 });
+
+test('backup reminder on Home: only without a folder, after a week of playing, 30 days after the last backup, 14 days after Later', async () => {
+  const { prvniHrani, pripomenoutZalohu } = await import('../static/lib/stats.js');
+  const den = 864e5, ted = new Date(2026, 10, 22, 12).getTime();
+  assert.equal(prvniHrani({}, {}), null);
+  assert.equal(prvniHrani({ a: { '2026-11-01': [1, 1, 1] } }, { b: { 'x.musicxml#2': { historie: [{ kdy: ted - 5 * den }] } } }),
+    new Date(2026, 10, 1).getTime());
+  const prvni = ted - 10 * den;
+  assert.equal(pripomenoutZalohu({ prvni, ted }), true, 'never backed up');
+  assert.equal(pripomenoutZalohu({ prvni, ted, slozka: true }), false, 'the folder is the backup');
+  assert.equal(pripomenoutZalohu({ prvni: ted - 3 * den, ted }), false, 'too early after the first play');
+  assert.equal(pripomenoutZalohu({ prvni: null, ted }), false, 'nobody played');
+  assert.equal(pripomenoutZalohu({ prvni, ted, posledniZaloha: ted - 10 * den }), false);
+  assert.equal(pripomenoutZalohu({ prvni, ted, posledniZaloha: ted - 31 * den }), true);
+  assert.equal(pripomenoutZalohu({ prvni, ted, odlozeno: ted - 5 * den }), false, 'Later');
+  assert.equal(pripomenoutZalohu({ prvni, ted, odlozeno: ted - 15 * den }), true);
+});
