@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { kontrola, naMusicXml, zMusicXml, rozvin, vyska, kopie } from '../static/lib/song.js';
+import * as Hra from '../static/lib/practice.js';
 import {
   fraze, nazevUseku, cisloTaktu, jmenoTonu, souhrnPokusu, slucStatistiky, tezkaMista, dalsiTempo, faktaProTrenera,
   textTrenera,
@@ -181,6 +182,88 @@ test('summary: rushing and average offset in real ms (by speed)', () => {
   assert.equal(k.prumernaOdchylkaMs, null);
 });
 
+test('With backing contributes no timing feedback or timing statistics, including older attempt records', () => {
+  const z = zaznam([[0, 62, 'ok', -120], [0, 64, 'ok', -120], [0, 66, 'ok', -120]], { krok: 'pockej' });
+  for (const rezim of ['pockej', 'tempo']) {
+    const s = souhrnPokusu({ ...z, rezim });
+    assert.equal(s.rezim, 'pockej');
+    assert.equal(s.spech, null);
+    assert.equal(s.prumernaOdchylkaMs, null);
+    assert.equal(slucStatistiky(null, s, 0).takty[0].mereno, 0);
+  }
+});
+
+test('one extra key in a chord counts once; even one extra key breaks a clean pass', () => {
+  const z = zaznam(Array.from({ length: 24 }, (_, i) => [0, 60 + i, 'ok']), {
+    rezim: 'cekam', chybneStisky: [{ pitch: 59, ms: 0, takt: 0, index: 0 }],
+  });
+  z.noty.slice(0, 3).forEach(n => { n.index = 0; });
+  const s = souhrnPokusu(z);
+  assert.equal(s.takty[0].chyby, 1);
+  assert.equal(s.presnost, 0.96);
+  assert.equal(s.cisty, false);
+  // Older records could mark an entire chord as wrong for the same press.
+  z.noty.slice(0, 3).forEach(n => { n.vysledek = 'vedle'; });
+  assert.equal(souhrnPokusu(z).takty[0].chyby, 1);
+});
+
+test('the Find the notes loop finishes after three consecutive clean passes at any speed', () => {
+  let stav = { rychlost: 60, cisteVRade: 0 };
+  for (const [cisty, n] of [[true, 1], [false, 0], [true, 1], [true, 2], [true, 3]]) {
+    stav = dalsiTempo(stav, { rezim: 'cekam', cisty, presnost: cisty ? 1 : 0.6 });
+    assert.deepEqual([stav.rychlost, stav.cisteVRade, stav.hotovo], [60, n, n === 3]);
+  }
+});
+
+const herniNota = (id, pitch, ms, navic = {}) => ({ id, pitch, ms, q: ms / 500, dur: 150, takt: 0, staff: 1, ...navic });
+
+test('unison staves share one required key and keep both score ids and the longer duration', () => {
+  const noty = [herniNota('a', 60, 0), herniNota('b', 60, 0, { staff: 2, dur: 300 }), herniNota('c', 60, 180)];
+  const K = Hra.herniKroky(noty);
+  assert.deepEqual(K.map(k => k.noty.map(n => [n.id, n.dur])), [[['a', 300]], [['c', 150]]]);
+  assert.deepEqual(K[0].noty[0].souzvuk.map(n => n.id), ['b']);
+  assert.equal(K[0].konec, 300);
+  assert.equal(noty[0].dur, 150);
+});
+
+test('overlapping windows give the first repeat the first key, while expired notes are skipped', () => {
+  const K = Hra.herniKroky([herniNota('a', 60, 0), herniNota('b', 60, 180)]);
+  const zasah = (cas, hotovo = new Set()) => Hra.najdiZasah(K, { pitch: 60, cas, okno: 220, hotovo, od: 0 })?.nota.id;
+  assert.equal(zasah(150), 'a');
+  assert.equal(zasah(150, new Set(['a'])), 'b');
+  assert.equal(zasah(221), 'b');
+});
+
+test('With backing accepts the awaited chord within its early window or as late as needed', () => {
+  const K = Hra.herniKroky([herniNota('a', 60, 500), herniNota('b', 62, 680)]);
+  const zasah = (pitch, cas) => Hra.najdiZasah(K, { pitch, cas, okno: 220, hotovo: new Set(), od: 0, pockej: true })?.nota.id;
+  assert.equal(zasah(60, 279), undefined, 'a press during the count-in, far ahead of the note');
+  assert.equal(zasah(60, 300), 'a');
+  assert.equal(zasah(62, 500), undefined, 'the second step cannot jump ahead of the first');
+  assert.equal(zasah(60, 1500), 'a');
+});
+
+test('section accompaniment includes the first beat during a leading rest', () => {
+  const K = Hra.herniKroky([herniNota('a', 60, 3000, { takt: 1 })]);
+  const udalosti = [1900, 2000, 2500, 3100, 3200].map(ms => ({ ms }));
+  const zacatek = Hra.zacatekHry(K, [0, 4], q => q * 500, 1);
+  assert.equal(zacatek, 2000);
+  assert.deepEqual(Hra.doprovodUseku(udalosti, zacatek, 3150).map(e => e.ms), [2000, 2500, 3100]);
+});
+
+test('advance scheduling sends each event once and stays inside the requested window', () => {
+  const plan = Hra.vytvorPlanZvuku([0, 2500, 3000, 9000].map(ms => ({ ms })));
+  const hrano = [];
+  const prehraj = e => hrano.push(e.ms);
+  plan(2500, prehraj);
+  assert.deepEqual(hrano, [0, 2500]);
+  plan(2500, prehraj);
+  plan(4500, prehraj);
+  assert.deepEqual(hrano, [0, 2500, 3000]);
+  plan(9000, prehraj);
+  assert.deepEqual(hrano, [0, 2500, 3000, 9000]);
+});
+
 test('pattern: F instead of F# repeatedly → forgets the sharp', () => {
   const F = midi('F4'), FIS = midi('F#4');
   const z = zaznam([[0, FIS, 'vedle'], [0, midi('A4'), 'ok'], [1, midi('G4'), 'ok'], [1, FIS, 'vedle'], [2, FIS, 'ok'], [3, FIS, 'vedle']], {
@@ -352,7 +435,7 @@ test('template coach: child and adult tone, a concrete task, no superlatives', (
   assert.equal(r.veta, 'Nástupy jsou v průměru o 72 ms později.');
 });
 
-test('history remembers the step (With accompaniment and In rhythm both have rezim tempo)', () => {
+test('history preserves the step supplied by a legacy summary', () => {
   const st = slucStatistiky(null, { rezim: 'tempo', krok: 'pockej', rychlost: 80, od: 0, do: 3, presnost: 1, cisty: true, takty: {} }, 1000);
   assert.equal(st.historie[0].krok, 'pockej');
 });

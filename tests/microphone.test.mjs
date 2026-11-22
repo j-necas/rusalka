@@ -429,23 +429,29 @@ test('Rozpoznavac: accompaniment from the speakers after a hit is heard as a wro
 });
 
 // ---------------------------------------------------------------- performance
-test('performance: 2048 samples at 48 kHz under 2 ms (vyska, obsahujeTony, DetektorNastupu, Rozpoznavac)', () => {
+test('performance: at 48 kHz, CPU time stays below 2 ms for 2048 samples and 4 ms for 4096', () => {
   const x = smichej(klavir(midiNaHz(C4), sekund(1)), klavir(midiNaHz(E4), sekund(1)), sum(sekund(1), 0.005));
-  const mer = (nazev, f, opak = 200) => {
-    for (let i = 0; i < 20; i++) f(i);
-    const t0 = performance.now();
-    for (let i = 0; i < opak; i++) f(i);
-    const ms = (performance.now() - t0) / opak;
-    assert.ok(ms < 2, `${nazev}: ${ms.toFixed(3)} ms`);
-    return ms;
+  const mer = (nazev, f, limit = 2) => {
+    let i = 0;
+    const zpracuj = () => { f(i % 200, i * 0.01); i++; };
+    for (let j = 0; j < 40; j++) zpracuj();
+    // CPU time excludes pauses imposed by the OS when the other test processes run.
+    const casy = Array.from({ length: 5 }, () => {
+      const opak = 80, t0 = process.cpuUsage();
+      for (let j = 0; j < opak; j++) zpracuj();
+      const { user, system } = process.cpuUsage(t0);
+      return (user + system) / opak / 1000;
+    }).sort((a, b) => a - b);
+    const ms = casy[2];
+    assert.ok(ms < limit, `${nazev}: ${ms.toFixed(3)} ms CPU (budget ${limit} ms)`);
   };
   const r2048 = i => x.subarray(i * 64, i * 64 + 2048);
   mer('vyska', i => vyska(r2048(i), VZ));
   mer('obsahujeTony', i => obsahujeTony(r2048(i), VZ, [C4, E4, G4]));
   const d = new DetektorNastupu();
-  mer('DetektorNastupu', i => d.zpracuj(r2048(i), i * 0.01));
+  mer('DetektorNastupu', (i, cas) => d.zpracuj(r2048(i), cas));
   const r = new Rozpoznavac({ vzorkovani: VZ }); r.ocekavej([C4, E4]);
-  mer('Rozpoznavac 2048', i => r.zpracuj(r2048(i), i * 0.01));
+  mer('Rozpoznavac 2048', (i, cas) => r.zpracuj(r2048(i), cas));
   const r4 = new Rozpoznavac({ vzorkovani: VZ }); r4.ocekavej([C4, E4]);
-  mer('Rozpoznavac 4096', i => r4.zpracuj(x.subarray(i * 64, i * 64 + 4096), i * 0.01), 100);
+  mer('Rozpoznavac 4096', (i, cas) => r4.zpracuj(x.subarray(i * 64, i * 64 + 4096), cas), 4);
 });

@@ -1,6 +1,7 @@
 // How this device plays: piano over MIDI, microphone, or only the on-screen keys (one at a time, remembered per device).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import * as Vstup from '../static/lib/input.js';
 import { REZIMY, nactiVstup, doprovodZapnuty, sDoprovodem, poZmeneKlaviru, prijimaZdroj, pripojeneVstupy, seznamPortu, klavesyViditelne } from '../static/lib/input.js';
 
 test('three modes', () => {
@@ -64,4 +65,31 @@ test('MIDI ports from the Web MIDI Browser app on an iPad (its values() is not i
   assert.deepEqual(pripojeneVstupy(seznamPortu(ipad(porty))), ['Network Session 1', 'FP-10']);
   assert.deepEqual(seznamPortu(new Map([['a', porty[1]]])), [porty[1]], 'Chrome: a real Map');
   assert.deepEqual(seznamPortu(null), []);
+});
+
+test('sustain measures both repeated touches of the same key until the pedal is lifted', () => {
+  const mereni = Vstup.vytvorMereniDrzeni();
+  const a = { drzenoMs: null }, b = { drzenoMs: null }, dotyk = { drzenoMs: null };
+  mereni.pedal('klavir:0', true, 0);
+  mereni.stisk('klavir:0', 60, a, 0, 0.5);
+  mereni.pust('klavir:0', 60, 0.1);
+  mereni.stisk('klavir:0', 60, b, 0.2, 0.5);
+  mereni.pust('klavir:0', 60, 0.3);
+  mereni.stisk('dotyk', 60, dotyk, 0.2, 0.5);
+  mereni.pust('dotyk', 60, 0.4);
+  assert.deepEqual([a.drzenoMs, b.drzenoMs, dotyk.drzenoMs], [null, null, 100]);
+  mereni.pedal('klavir:1', false, 0.8);
+  assert.equal(a.drzenoMs, null);
+  mereni.pedal('klavir:0', false, 1);
+  assert.deepEqual([a.drzenoMs, b.drzenoMs], [500, 400]);
+});
+
+test('an interrupted attempt cannot be altered by subsequent pedal releases', () => {
+  const mereni = Vstup.vytvorMereniDrzeni(), zaznam = { drzenoMs: null };
+  mereni.pedal('klavir:0', true, 0);
+  mereni.stisk('klavir:0', 60, zaznam, 0, 1);
+  mereni.pust('klavir:0', 60, 0.1);
+  mereni.zrusPokus();
+  mereni.pedal('klavir:0', false, 1);
+  assert.equal(zaznam.drzenoMs, null);
 });

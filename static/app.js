@@ -2,6 +2,7 @@
 import { zMusicXml, naMusicXml, rozvin, tonyAkordu, kopie, metrum } from './lib/song.js';
 import * as Editor from './ui/editor.js';
 import * as Cviceni from './lib/practice.js';
+import { vytvorCasovace, vytvorVyberPisne, obnovAudio, lzePrekreslit } from './lib/game.js';
 import { vytvorMikrofon } from './ui/microphone.js';
 import { obtiznost } from './lib/difficulty.js';
 import * as MidiSoubor from './lib/midi_file.js';
@@ -29,7 +30,7 @@ import { zapnoutOffline } from './lib/offline.js';
 import { rukaPoKarte, stylPriOtevreni, souhrn, poslechCelePisne } from './lib/version.js';
 import { VZORKY, naMidi, nejblizsiVzorek } from './lib/piano.js';
 import { pokusyHrace, kalendar, presnostPoDnech, stavPisni, mistaKdeDrhne, zapisDoDeniku } from './lib/stats.js';
-import { nactiVstup, doprovodZapnuty, sDoprovodem, poZmeneKlaviru, prijimaZdroj, pripojeneVstupy, seznamPortu, klavesyViditelne } from './lib/input.js';
+import { nactiVstup, doprovodZapnuty, sDoprovodem, poZmeneKlaviru, prijimaZdroj, pripojeneVstupy, seznamPortu, klavesyViditelne, vytvorMereniDrzeni } from './lib/input.js';
 import { KROKY, RYCHLOSTI, stavKroku, umim, doporuceni, proMe, jeNova, akcePoVysledku } from './lib/recommend.js';
 import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny } from './lib/library.js';
 {
@@ -73,9 +74,9 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   let H = novyStav();
   const PREHLED = { polozky: [], i: 0 };              // Show mistakes: groups of ghosts and the current one
   function novyStav() {
-    return { idx: 0, chyby: 0, trefy: 0, rada: 0, stisk: new Set(), hotovo: new Set(), minul: new Set(),
-      aktivni: -1, kontrola: 0, xi: 0, bezi: false, timery: [], raf: 0, hlaska: '',
-      zaznam: new Map(), chybneStisky: [], chybaVKroku: false, chybyCasti: new Set(), drzene: new Map() };
+    return { idx: 0, chyby: 0, trefy: 0, rada: 0, stisk: new Set(), hotovo: new Set(),
+      aktivni: -1, kontrola: 0, xi: 0, bezi: false, spousti: false, ukoncen: false, kalibrace: null,
+      timery: vytvorCasovace(), raf: 0, hlaska: '', zaznam: new Map(), chybneStisky: [], chybneNoty: new Set() };
   }
   /** error text: translated if the error carries a key (e.klic), otherwise its message */
   const chybaText = e => (e?.klic ? t(e.klic) : e?.message || String(e));
@@ -98,6 +99,12 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   const OBRAZOVKY = ['kdo', 'domu', 'pred', 'hra', 'novy'];
   function ukaz(id) {
     const bylo = OBRAZOVKY.find(o => !$('#' + o)?.classList.contains('skryta'));
+    if (bylo === 'pred' && id !== 'pred') VYBER_PISNE.zrus();
+    if (bylo === 'hra' && id !== 'hra') {
+      stopVse(); konecPoslechu();
+      if (S.pruvodce) ukonciPruvodce();
+      $('#pauzaPrekryv').classList.add('skryta');
+    }
     for (const o of OBRAZOVKY) $('#' + o)?.classList.toggle('skryta', id !== o);
     if (id !== 'domu') jaMenu(false);
     window.scrollTo(0, 0);
@@ -636,8 +643,11 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
    * Verovio options are set again every time (the toolkit is shared with conversion and the editor).
    */
   async function zpracujModel(model) {
+    return vykresliModel(await verovioTk(), model);
+  }
+  function vykresliModel(tk, model) {
     const xml = naMusicXml(model).replace(/<part-name>[^<]*<\/part-name>/g, '<part-name print-object="no"></part-name>');
-    return zpracujVerovio(await verovioTk(), xml, model, volbyVykresleni());
+    return zpracujVerovio(tk, xml, model, volbyVykresleni());
   }
   /** a single line (scrolls sideways) or a whole page (lines stacked, scrolls down) */
   const volbyVykresleni = () => (S.nastaveni.stranka ? { stranka: true, sirka: $('#noty').clientWidth || 1200 } : {});
@@ -654,9 +664,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       MASTER.connect(comp); comp.connect(AC.destination);
       nactiNahravky(AC);
     }
-    if (AC.state === 'suspended') AC.resume();
     return AC;
   }
+  const zvukPripraven = () => obnovAudio(audio());
+  function odemkniZvuk() { zvukPripraven().catch(e => console.warn('AudioContext', e)); }
   // the recorded piano (static/lib/piano.js): loaded after the first sound, until then (or if it fails) the synthesised voice
   const NAHRAVKY = new Map();
   function nactiNahravky(ac) {
@@ -680,14 +691,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         pusteno = true; t = Math.max(t, kdy + 0.05);
         g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.setTargetAtTime(0, t, 0.12);
         try { src.stop(t + 1.2); } catch { /* already stopped */ }
-        setTimeout(() => NAPLANOVANE.delete(v), (t - ac.currentTime + 1.5) * 1000);
       },
       zrus() {
         try { g.gain.cancelScheduledValues(0); g.gain.setValueAtTime(0, ac.currentTime); src.stop(); g.disconnect(); } catch { /* */ }
         NAPLANOVANE.delete(v);
       },
     };
-    NAPLANOVANE.add(v);
+    NAPLANOVANE.add(v); src.onended = () => NAPLANOVANE.delete(v);
     if (delka != null) v.pust(kdy + delka);
     return v;
   }
@@ -724,7 +734,6 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         pusteno = true; t = Math.max(t, kdy + 0.03);
         g.gain.cancelScheduledValues(t); g.gain.setTargetAtTime(0, t, 0.08);
         osc.forEach(o => { try { o.stop(t + 0.7); } catch { /* already stopped */ } });
-        setTimeout(() => NAPLANOVANE.delete(v), (t - ac.currentTime + 1.5) * 1000);
       },
       zrus() {
         try { g.gain.cancelScheduledValues(0); g.gain.setValueAtTime(0, ac.currentTime); g.disconnect(); } catch { /* */ }
@@ -732,7 +741,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         NAPLANOVANE.delete(v);
       },
     };
-    NAPLANOVANE.add(v);
+    NAPLANOVANE.add(v); osc[0].onended = () => NAPLANOVANE.delete(v);
     if (delka != null) v.pust(kdy + delka);
     return v;
   }
@@ -768,26 +777,34 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const v = { naplanovany: true, zrus() { try { o.stop(); } catch { /* already finished */ } NAPLANOVANE.delete(v); } };
     NAPLANOVANE.add(v); o.onended = () => NAPLANOVANE.delete(v);
   }
-  ['pointerdown', 'touchend', 'click'].forEach(t => document.addEventListener(t, () => { if (AC) audio(); }, { passive: true }));
+  ['pointerdown', 'touchend', 'click'].forEach(t => document.addEventListener(t, () => { if (AC) odemkniZvuk(); }, { passive: true }));
 
   // ------------------------------------------------------------ MIDI: Web MIDI (Chrome, Edge); input from and output to the piano
   const Midi = { web: [], zname: false };
-  function midiZprava(d) {
-    if (VYSTUP.pouzivaSe && (d[0] & 0x0f) === KANAL_VYSTUPU) return;   // what the app plays is not the child's playing
+  const MERENI_DRZENI = vytvorMereniDrzeni();
+  function midiZprava(d, port) {
+    const kanal = d[0] & 0x0f;
+    if (VYSTUP.pouzivaSe && kanal === KANAL_VYSTUPU) return;   // what the app plays is not the child's playing
+    const zdroj = `${port}:${kanal}`;
     const st = d[0] & 0xf0;
-    if (st === 0x90 && d[2] > 0) vstupOn(d[1], d[2], 'midi');
-    else if (st === 0x80 || st === 0x90) vstupOff(d[1], 'midi');
+    if (st === 0x90 && d[2] > 0) vstupOn(d[1], d[2], 'midi', zdroj);
+    else if (st === 0x80 || st === 0x90) vstupOff(d[1], 'midi', zdroj);
+    else if (st === 0xb0 && d[1] === 64) MERENI_DRZENI.pedal(zdroj, d[2] >= 64, AC?.currentTime ?? 0);
   }
   async function midiStart() {
     midiStav();
     if (!navigator.requestMIDIAccess) return;
     try {
       const acc = await navigator.requestMIDIAccess();
-      const naZpravu = e => midiZprava(e.data);
+      const naZpravu = e => midiZprava(e.data, e.currentTarget?.id ?? e.target?.id ?? 'midi');
+      let pripojene = new Set();
       const napoj = () => {
         const vstupy = seznamPortu(acc.inputs);   // not .values(): in Web MIDI Browser (iPad) it is not iterable
         // set only once: in Web MIDI Browser setting the handler opens the port and fires statechange (napoj again)
         vstupy.forEach(i => { if (i.onmidimessage !== naZpravu) i.onmidimessage = naZpravu; });
+        const ted = new Set(vstupy.filter(i => i.state !== 'disconnected').map(i => i.id ?? 'midi'));
+        for (const id of pripojene) if (!ted.has(id)) for (let k = 0; k < 16; k++) MERENI_DRZENI.odpoj(`${id}:${k}`);
+        pripojene = ted;
         const n = pripojeneVstupy(vstupy);
         VYSTUP.pripoj(vyberVystup(seznamPortu(acc.outputs), n));
         noveVstupy(n); stavZvukuKlaviru();
@@ -891,24 +908,33 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   document.addEventListener('click', e => { if (vstupMenuOtevrene() && !e.target.closest('.vstup-obal')) vstupMenu(false); });
 
   // ------------------------------------------------------------ microphone (for players without MIDI)
+  const hraPozastavena = () => !$('#pauzaPrekryv').classList.contains('skryta');
   /** notes the game is currently waiting for (for microphone recognition); null = none */
   function ocekavaneTony() {
-    if (Editor.jeOtevreny() || !S.kroky?.length || $('#hra').classList.contains('skryta')) return null;
+    if (Editor.jeOtevreny() || !lzeHrat() || !S.kroky.length || H.kalibrace) return null;
     if (S.rezim === 'cekam') {
       const k = S.kroky[H.idx];
       return k ? [...k.vyska].filter(p => !H.stisk.has(p)) : null;
     }
     if ((S.rezim === 'tempo' || S.rezim === 'pockej') && H.bezi) {
-      const k = S.kroky.find(k => !k.noty.every(n => H.hotovo.has(n.id) || H.minul.has(n.id)));
-      return k ? k.noty.filter(n => !H.hotovo.has(n.id) && !H.minul.has(n.id)).map(n => n.pitch) : null;
+      const dok = casProZasah(cas()) + OKNO * H.sp;
+      for (let i = H.kontrola; S.kroky[i]?.ms <= dok; i++) {
+        const vysky = S.kroky[i].noty.filter(n => !H.hotovo.has(n.id)).map(n => n.pitch);
+        if (vysky.length) return vysky;
+      }
     }
     return null;
+  }
+  function tonZMikrofonu(m) {
+    vstupOn(m, 80, 'mikrofon');
+    const k = S.klavesy[m];
+    if (k) H.timery.pridej(() => k.classList.remove('stisk'), 150);
   }
   const MIKROFON = vytvorMikrofon({
     audio,
     ocekavane: ocekavaneTony,
-    trefa: m => { vstupOn(m, 80, 'mikrofon'); setTimeout(() => S.klavesy[m]?.classList.remove('stisk'), 150); },
-    vedle: m => { vstupOn(m, 80, 'mikrofon'); setTimeout(() => S.klavesy[m]?.classList.remove('stisk'), 150); },
+    trefa: tonZMikrofonu,
+    vedle: tonZMikrofonu,
     vlastni: () => VLASTNI_TONY,
     stav: text => {
       midiStav();
@@ -918,31 +944,33 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   // ------------------------------------------------------------ input (piano and touch)
   const zive = new Map();
-  function vstupOn(p, v, zdroj) {
+  const lzeHrat = () => !document.hidden && !hraPozastavena() && !H.ukoncen && S.data
+    && $('#hra').classList.contains('skryta') === false && $('#vysledek').classList.contains('skryta');
+  function vstupOn(p, v, zdroj, kanal = zdroj) {
     if (!prijimaZdroj(S.vstup.rezim, zdroj)) return;    // MIDI only in MIDI mode, the microphone only in microphone mode
     if (zdroj === 'dotyk') {
+      if (hraPozastavena()) return;
       const ac = audio();
       zive.get(p)?.pust(ac.currentTime);
       zive.set(p, hlas(p, ac.currentTime, null, 0.5 + v / 300));
     }
     S.klavesy[p]?.classList.add('stisk');
+    if (Doplnky.ozvenaAktivni()) { Doplnky.ozvenaTon(p); return; }
+    if (Editor.jeOtevreny()) { if (zdroj === 'midi') Editor.midi(p); return; }
+    if (!lzeHrat()) return;
+    if (H.kalibrace) { if (H.kalibrace.kliky.length) H.kalibrace.stisky.push(audio().currentTime); return; }
     H.posledniSila = v;
     if (zdroj === 'midi') H.silaZMidi = true;              // on-screen keys and the microphone have no key velocity
-    if (Doplnky.ozvenaAktivni()) { Doplnky.ozvenaTon(p); return; }
-    if (KALIBRACE.bezi) { KALIBRACE.stisky.push(audio().currentTime); return; }
-    if (Editor.jeOtevreny()) { if (zdroj === 'midi') Editor.midi(p); return; }
-    if ($('#hra').classList.contains('skryta') || !S.data || !$('#vysledek').classList.contains('skryta')) return;
     if (S.rezim === 'cekam') onCekam(p);
-    else if ((S.rezim === 'tempo' || S.rezim === 'pockej') && H.bezi) onTempo(p);
+    else if ((S.rezim === 'tempo' || S.rezim === 'pockej') && H.bezi) onTempo(p, kanal);
   }
-  function vstupOff(p, zdroj) {
+  function vstupOff(p, zdroj, kanal = zdroj) {
     if (zdroj === 'dotyk') {
       const z = zive.get(p);
       if (z) { z.pust(audio().currentTime); zive.delete(p); }
     }
     S.klavesy[p]?.classList.remove('stisk');
-    const d = H.drzene.get(p);
-    if (d) { d.zaznam.drzenoMs = Math.round((audio().currentTime - d.t0) * 1000 * (S.nastaveni.rychlost / 100)); H.drzene.delete(p); }
+    MERENI_DRZENI.pust(kanal, p, AC?.currentTime ?? 0);
   }
 
   // ------------------------------------------------------------ home screen
@@ -967,6 +995,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   }
   const PREPINACE = [];
   function nactiNastaveniHrace() {
+    VYBER_PISNE.zrus(); konecPoslechu();
     S.rukaVolba = null;                                 // a new player: the hand by their age again
     S.nastaveni = Object.assign({}, VYCHOZI_NASTAVENI, uloz.cti('kt-nastaveni', {}),
       S.profil ? S.nastaveniHracu?.[S.profil] || uloz.cti('kt-nastaveni-' + S.profil, {}) : {});
@@ -1526,10 +1555,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   // ------------------------------------------------------------ Before playing
   const PRED = { soubor: null, krok: 'cekam', rychlost: 60 };
+  const VYBER_PISNE = vytvorVyberPisne(pripravena => {
+    for (const sel of ['#predHrat', '#predPoslech', '#predZmenit', '#oPisni']) $(sel).disabled = !pripravena;
+  });
+  const pripravenaPisen = () => S.data && S.pisen === PRED.soubor && VYBER_PISNE.pripravena(S.pisen);
   /** Before playing; odkud = the screen its back button returns to (home, or the Library the song was picked in) */
   async function otevriPred(soubor, odkud = 'domu') {
-    konecPoslechu();
-    audio();
+    stopVse(); konecPoslechu(); odemkniZvuk();
     PRED.odkud = odkud;
     const p = pisenSouboru(soubor);
     const d = doporuceni(vysHrace()[soubor], statHrace(), soubor);
@@ -1544,8 +1576,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     vykresliPred();
     ukaz('pred');
     // the song loads right away (notes preview, More options); after Play the notes are rendered again in the visible game
-    await otevriPisen(soubor, { zobrazit: false, zpet: odkud });
-    if (!S.data || PRED.soubor !== soubor) return;
+    if (!await VYBER_PISNE.nacti(soubor, plati => otevriPisen(soubor, plati, odkud))) return;
     $('#predNoty').innerHTML = S.data.svg;
     vykresliOblibenou();
   }
@@ -1567,12 +1598,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (!o) $('#predCo [aria-pressed="true"]')?.focus();
   };
   /** game in the visible window: notes are rendered again (note positions cannot be measured on a hidden screen) */
-  async function zobrazHru() {
+  function zobrazHru() {
     ukaz('hra');
     $('#hraJak').textContent = '';
-    await pripravVerzi(); nastavRuku(); listaDvojice();
-    // nastavRuku defers measuring the notes and reset() to the next frame – wait so reset does not cancel the game just started
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    vykresliVerziHry(VTK); nastavRuku(); listaDvojice();
   }
   function zacniPoslech() {
     const v = poslechCelePisne({ osnovy: S.puvodni?.takty.some(t => (t.leva || []).length) ? 2 : 1 });
@@ -1588,16 +1617,17 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     POSLECH = null;
     Object.assign(S, z); S.nastaveni.rychlost = rychlost;
   }
-  async function hrajZPred(rezim, spustit) {
-    if (!S.data) return;
+  function hrajZPred(rezim) {
+    if (!pripravenaPisen()) return;
+    if (rezim !== 'poslech') zapniMikrofonPriHre();
     konecPoslechu();
     if (rezim === 'poslech' && !S.dvojice) zacniPoslech();
-    await zobrazHru();
+    zobrazHru();
     if (!POSLECH) nastavRychlost(PRED.rychlost);
     $(`[data-rezim="${rezim}"]`)?.click();
     const r = RYCHLOSTI.includes(PRED.rychlost) ? t('rychlost.' + PRED.rychlost).toLowerCase() : PRED.rychlost + ' %';
     $('#hraJak').textContent = rezim === 'poslech' ? t(POSLECH ? 'pred.poslechCela' : 'pred.poslech') : `${t('krok.' + rezim)}, ${r}`;
-    if (spustit && !$('#start').classList.contains('skryta')) $('#start').click();
+    if (!$('#start').classList.contains('skryta')) spust();
   }
   function vykresliPred() {
     const vys = vysHrace()[PRED.soubor] || {};
@@ -1616,8 +1646,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#predZpet').onclick = () => {
     vykresliPisne(); ukaz('domu');
   };
-  $('#predHrat').onclick = () => { zapniMikrofonPriHre(); hrajZPred(PRED.krok, true); };   // Find the notes has no start; the other steps begin with a count-in
-  $('#predPoslech').onclick = () => hrajZPred('poslech', true);
+  $('#predHrat').onclick = () => hrajZPred(PRED.krok);   // Find the notes has no start; the other steps begin with a count-in
+  $('#predPoslech').onclick = () => hrajZPred('poslech');
   if (vyberBezFiltru(navigator)) $('#soubor').removeAttribute('accept');   // iOS would grey out .musicxml
   $('#soubor').onchange = async e => {
     const f = e.target.files[0];
@@ -1650,27 +1680,34 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   // ------------------------------------------------------------ song preparation
   /** zpet = the screen to return to when the song cannot be loaded (home, or the Library it was picked in) */
-  async function otevriPisen(soubor, { zobrazit = true, zpet = 'domu' } = {}) {
-    audio();                                     // iPad plays sound only after a touch
-    if (zobrazit) ukaz('hra');
+  async function otevriPisen(soubor, plati, zpet) {
     $('#pas').innerHTML = `<div class="nacitam">${esc(t('app.nacitamNoty'))}</div>`;
     $('#klavesy').innerHTML = '';
     $('#hracAvatar').innerHTML = avatarSvg(aktualniProfil());
+    $('#predCo').innerHTML = '';
+    $('#predRuce').classList.add('skryta');
     try {
-      S.puvodniXml = await api.xml(soubor);
-      S.puvodni = zMusicXml(S.puvodniXml);
+      const [xml, tk] = await Promise.all([api.xml(soubor), verovioTk()]);
+      if (!plati()) return false;
+      const pisen = zMusicXml(xml);
+      S.puvodniXml = xml; S.puvodni = pisen;
       if (!S.puvodni.nazev) S.puvodni.nazev = soubor.replace(/\.[^.]+$/, '');
       S.pisen = soubor;
       const np = uloz.cti('kt-pisen-' + soubor, {});
       S.uroven = np.uroven || (S.puvodni.takty.some(t => (t.leva || []).length) ? 5 : 2);
-      S.tonina = np.tonina || 'ne'; S.prstoklad = !!np.prstoklad; S.styl = stylPriOtevreni(S.uroven, np.styl || ''); S.usek = null; S.smycka.zapnuto = false;
+      S.tonina = np.tonina || 'ne'; S.prstoklad = !!np.prstoklad; S.styl = stylPriOtevreni(S.uroven, np.styl || ''); S.usek = null;
+      S.smycka = { zapnuto: false, cisteVRade: 0 };
       S.dvojice = null;
-      await pripravVerzi();
-    } catch (e) { toast(t('app.notyChyba', { chyba: chybaText(e) }), 5000); S.data = null; ukaz(zpet); return; }
+      vykresliVerziHry(tk);
+    } catch (e) {
+      if (plati()) { toast(t('app.notyChyba', { chyba: chybaText(e) }), 5000); S.data = null; ukaz(zpet); }
+      return false;
+    }
     $('#hraNazev').textContent = S.data.nazev;
     ovladaniPisne();
     nastavRuku();
     listaDvojice();
+    return true;
   }
   /** choice of hand, level, key and sections for the current version of the song */
   function ovladaniPisne() {
@@ -1760,12 +1797,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   /** builds the playable version from the original model (chosen level and transposition, unrolled repeats) and renders it */
   /** Original level in the original key with no custom fingering or backing style → the original file is rendered */
   const hrajOriginal = () => !S.dvojice && Number(S.uroven) === 5 && (S.tonina || 'ne') === 'ne' && !S.prstoklad && !S.styl && !!S.puvodniXml;
-  async function pripravVerzi() {
+  async function pripravVerzi() { vykresliVerziHry(await verovioTk()); }
+  function vykresliVerziHry(tk) {
     if (hrajOriginal()) {
       try {
         const r = rozvin(kopie(S.puvodni));
         const xml = bezCeskehoH(doplnTempo(doplnPosuvky(pripravOriginal(S.puvodniXml, r.poradi)), S.puvodni.tempo), soustava());
-        S.data = zpracujVerovio(await verovioTk(), xml, r.pisen, volbyVykresleni());
+        S.data = zpracujVerovio(tk, xml, r.pisen, volbyVykresleni());
         S.model = r.pisen; S.poradi = r.poradi; S.original = true;
         nahledPred();
         return;
@@ -1779,7 +1817,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       { transpozice: S.tonina || 'ne', prstoklad: !!S.prstoklad, vek: aktualniProfil()?.vek || 'dite' });
     S.model = S.dvojice ? modelProDvojici(r.pisen) : S.styl ? doprovodVeStylu(r.pisen, S.styl) : r.pisen;
     S.poradi = r.poradi;
-    S.data = await zpracujModel(S.model);
+    S.data = vykresliModel(tk, S.model);
     nahledPred();
   }
   /** Before playing shows the notes of the current version (it may change there: More options, Settings → Display) */
@@ -1796,7 +1834,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       S.usek = null; nabidkaUseku(); pripravKroky();
     }
     pripravNoty(); pripravKlavesy();
-    requestAnimationFrame(() => { spocitejPozice(); reset(); });
+    spocitejPozice(); reset();
   }
 
   function qNaMs(q) {
@@ -1809,24 +1847,14 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     return t0 + (q - q0) * (dalsi[1] - t0) / (dalsi[0] - q0);
   }
   function pripravKroky() {
-    const kroky = [];
     const vUseku = t => !S.usek || (t >= S.usek.od && t <= S.usek.do);
-    for (const n of S.data.noty.filter(n => S.ruka.has(n.staff) && vUseku(n.takt))) {
-      const k = kroky[kroky.length - 1];
-      if (k && Math.abs(k.ms - n.ms) < 5) k.noty.push(n);
-      else kroky.push({ ms: n.ms, q: n.q, noty: [n] });
-    }
-    for (const k of kroky) {
-      k.vyska = new Set(k.noty.map(n => n.pitch));
-      k.konec = Math.max(...k.noty.map(n => n.ms + n.dur));
-    }
-    S.kroky = kroky;
+    const kroky = S.kroky = Cviceni.herniKroky(S.data.noty.filter(n => S.ruka.has(n.staff) && vUseku(n.takt)));
     const jine = S.data.noty.filter(n => !S.ruka.has(n.staff));
     S.doprovod = jine.length ? jine.map(n => ({ ms: n.ms, p: [n.pitch], dur: n.dur, sila: 0.45 })) : akordyNaUdalosti();
     S.doprovod.sort((a, b) => a.ms - b.ms);
     if (S.usek && kroky.length) {
-      const od = kroky[0].ms - 1, dok = Math.max(...kroky.map(k => k.konec));
-      S.doprovod = S.doprovod.filter(e => e.ms >= od && e.ms < dok);
+      const od = Cviceni.zacatekHry(kroky, S.data.takty, qNaMs, S.usek.od), dok = Math.max(...kroky.map(k => k.konec));
+      S.doprovod = Cviceni.doprovodUseku(S.doprovod, od, dok);
     }
   }
   /** a song without a written left hand: backing from chord symbols by time signature and tempo (lib/accompaniment.js) */
@@ -1980,6 +2008,11 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       if (stav) e.classList.add(stav);
     }
   }
+  function nastavStavNoty(n, stav) {
+    nastavStav(n.id, stav);
+    n.souzvuk?.forEach(x => nastavStav(x.id, stav));
+  }
+  const patriKNote = (n, id) => n.id === id || n.souzvuk?.some(x => x.id === id);
   function oznacCil(vysky) {
     Object.values(S.klavesy).forEach(k => k.classList.remove('cil', 'hrac-b'));
     if (vysky) for (const p of vysky) S.klavesy[p]?.classList.add('cil', ...(S.dvojice && p < S.hranice ? ['hrac-b'] : []));
@@ -1988,7 +2021,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const k = S.klavesy[p];
     if (!k) return;
     k.classList.remove(cls); void k.offsetWidth; k.classList.add(cls);
-    setTimeout(() => k.classList.remove(cls), 400);
+    H.timery.pridej(() => k.classList.remove(cls), 400);
   }
   function posunNa(x, hned) {
     const pas = $('#pas');
@@ -2006,13 +2039,20 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   }
   function prubeh(podil) { $('#prubeh').style.width = Math.max(0, Math.min(100, podil * 100)) + '%'; }
 
-  function stopVse() {
-    H.bezi = false;
+  function stopVse({ pozastavit = false } = {}) {
+    const kalibroval = !!H.kalibrace;
+    H.bezi = false; H.spousti = false; H.kalibrace = null;
     cancelAnimationFrame(H.raf);
-    H.timery.forEach(clearTimeout); H.timery = [];
+    if (pozastavit && !kalibroval) H.timery.pozastav(); else H.timery.zrus();
+    MERENI_DRZENI.zrusPokus();
+    if (kalibroval) hlaska(esc(t('app.hlaska.' + S.rezim)));
+    odpocet(0);
+    Object.values(S.klavesy).forEach(k => k.classList.remove('stisk', 'dobre', 'spatne'));
+    const ted = AC?.currentTime ?? 0;
+    for (const v of zive.values()) v.pust(ted);
+    zive.clear();
     [...NAPLANOVANE].filter(v => v.naplanovany).forEach(v => v.zrus());
     tichoVKlaviru();
-    const ted = AC ? AC.currentTime : 0;
     VLASTNI_TONY = VLASTNI_TONY.filter(v => v.od <= ted).map(v => ({ ...v, do: Math.min(v.do, ted) }));   // cancelled notes will not sound
   }
   function reset() {
@@ -2026,7 +2066,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#kalibrace').classList.toggle('skryta', S.rezim !== 'tempo');
     $('#hlaska').innerHTML = '';
     prubeh(0);
-    if (!S.kroky.length) return;
+    if (!S.kroky.length) { $('#start').classList.add('skryta'); return; }
     if (S.rezim === 'cekam') {
       $('#start').classList.add('skryta');
       oznacKrok(0);
@@ -2043,7 +2083,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   function oznacKrok(i) {
     const k = S.kroky[i];
     if (!k) return;
-    k.noty.forEach(n => nastavStav(n.id, 'aktivni'));
+    k.noty.forEach(n => nastavStavNoty(n, 'aktivni'));
     oznacCil(k.vyska);
     posunKrok(i, false);
     hlaska(esc(t('app.zahraj')) + ' ' + k.noty.map(jmenoHtml).join(' + '));
@@ -2057,42 +2097,48 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   function notaChyby(i, p) {
     const k = S.kroky[i], st = castKlavesy(p);
     if (st == null) return notaProChybu(k.noty, p);
-    const jeho = j => S.kroky[j].noty.filter(n => n.staff === st);
+    const jeho = j => S.kroky[j].noty.flatMap(n => [n, ...(n.souzvuk || [])]).filter(n => n.staff === st);
     for (let j = i; j >= 0; j--) if (jeho(j).length) return notaProChybu(jeho(j), p);
     for (let j = i + 1; j < S.kroky.length; j++) if (jeho(j).length) return notaProChybu(jeho(j), p);
     return null;
   }
-  /** found only after a wrong key in this step; in a duet only when the note's own part pressed it */
-  const vedleVKroku = n => H.chybaVKroku && (!S.dvojice || H.chybyCasti.has(n.staff));
+  function zaznamChyby(p, ms, index) {
+    const k = S.kroky[index], n = notaChyby(index, p);
+    H.chyby++; H.rada = 0;
+    H.chybneStisky.push({ pitch: p, ms: Math.round(ms), takt: n?.takt ?? k.noty[0].takt, index, nota: n?.id });
+    if (n && S.rezim !== 'tempo') {
+      const cil = k.noty.find(x => patriKNote(x, n.id));
+      if (cil) {
+        H.chybneNoty.add(cil.id);
+        if (H.zaznam.has(cil.id)) nastavStavNoty(cil, 'vedle');
+      }
+    }
+  }
+  function zaznamNoty(n, index, zahranoMs) {
+    return { takt: n.takt, index, pitch: n.pitch, ocekavanoMs: n.ms, zahranoMs, dynamika: n.dyn || null,
+      vysledek: 'ok', odchylkaMs: S.rezim === 'tempo' ? Math.round(zahranoMs - n.ms) : null,
+      drzenoMs: null, ocekavanaDelkaMs: n.dur, sila: H.posledniSila };
+  }
   function onCekam(p) {
     const k = S.kroky[H.idx];
     if (!k) return;
     if (k.vyska.has(p)) {
+      if (H.stisk.has(p)) return;
       H.stisk.add(p);
-      k.noty.filter(n => n.pitch === p).forEach(n => {
-        nastavStav(n.id, vedleVKroku(n) ? 'vedle' : 'ok');
-        const z = { takt: n.takt, index: H.idx, pitch: n.pitch, ocekavanoMs: n.ms, zahranoMs: null, dynamika: n.dyn || null,
-          vysledek: vedleVKroku(n) ? 'vedle' : 'ok', odchylkaMs: null, drzenoMs: null, ocekavanaDelkaMs: n.dur, sila: H.posledniSila };
-        H.zaznam.set(n.id, z);
-      });
-      if (![...k.vyska].every(x => H.stisk.has(x))) return;
-      k.noty.filter(vedleVKroku).forEach(n => {           // a wrong key after part of a chord was held
-        nastavStav(n.id, 'vedle');
-        const z = H.zaznam.get(n.id);
-        if (z) z.vysledek = 'vedle';
-      });
+      const n = k.noty.find(n => n.pitch === p);
+      nastavStavNoty(n, H.chybneNoty.has(n.id) ? 'vedle' : 'ok');
+      H.zaznam.set(n.id, zaznamNoty(n, H.idx, null));
+      if (H.stisk.size < k.vyska.size) return;
       H.trefy++; H.rada++;
       radost();
       if (H.rada > 0 && H.rada % 10 === 0) toast(t('app.radaBezChyby', { n: H.rada }));
       zahrajDoprovodKroku(H.idx);
-      H.stisk = new Set(); H.idx++; H.chybaVKroku = false; H.chybyCasti.clear();
+      H.stisk.clear(); H.idx++;
       prubeh(H.idx / S.kroky.length);
-      if (H.idx >= S.kroky.length) { oznacCil(null); H.timery.push(setTimeout(konec, 1200)); }
+      if (H.idx >= S.kroky.length) { oznacCil(null); H.timery.pridej(konec, 1200); }
       else oznacKrok(H.idx);
     } else {
-      H.chyby++; H.rada = 0; H.chybaVKroku = true;
-      if (S.dvojice) H.chybyCasti.add(castKlavesy(p));
-      H.chybneStisky.push({ pitch: p, ms: k.ms, takt: k.noty[0].takt, index: H.idx, nota: notaChyby(H.idx, p)?.id });
+      zaznamChyby(p, k.ms, H.idx);
       blikni(p, 'spatne');
       if (k.noty.some(n => n.pitch % 12 === p % 12)) toast(t('app.jinaOktava'));
     }
@@ -2111,18 +2157,28 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   // ------------------------------------------------------------ “In rhythm” and “Listen” modes
   $('#start').onclick = () => spust();
-  function spust() {
+  async function spust() {
+    if (!otevreno('#hra') || hraPozastavena() || document.hidden || H.bezi || H.spousti || !S.kroky.length) return;
     reset();
-    const ac = audio();
+    const stav = H;
+    H.spousti = true;
     $('#start').classList.add('skryta');
+    let ac;
+    try { ac = await zvukPripraven(); } catch (e) {
+      if (H === stav && H.spousti) reset();
+      console.warn('AudioContext', e);
+      return;
+    }
+    if (H !== stav || !H.spousti) return;
+    H.spousti = false;
     const sp = S.nastaveni.rychlost / 100;
     // count-in by time signature: x/4 in quarters, compound x/8 in dotted quarters; starts from the beginning of the bar
     const met = metrum(S.model.takt);
     const dobaQ = met.beatType === 8 && met.beats % 3 === 0 ? 1.5 : 4 / met.beatType;
     const doba = dobaQ * 60 / (S.data.tempo * sp);
-    const takt0 = S.kroky[0].noty[0].takt;
+    const takt0 = S.usek?.od ?? S.kroky[0].noty[0].takt;
     const zacatekQ = S.data.takty[takt0] ?? S.kroky[0].q;
-    const prvni = Math.min(S.kroky[0].ms, qNaMs(zacatekQ));
+    const prvni = Cviceni.zacatekHry(S.kroky, S.data.takty, qNaMs, takt0);
     const delkaTaktu = (S.data.takty[takt0 + 1] ?? S.data.konecQ) - zacatekQ;
     const chybi = takt0 === 0 && delkaTaktu < met.delka - 1e-6 ? Math.round((met.delka - delkaTaktu) / dobaQ) : 0;   // pickup bar
     const naTakt = Math.max(1, Math.round(met.delka / dobaQ));
@@ -2132,23 +2188,14 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       celkem: S.kroky.reduce((a, k) => a + k.noty.length, 0) });
     for (let i = 0; i < kliku; i++) {
       klik(t0 + i * doba, i % naTakt === 0);
-      H.timery.push(setTimeout(() => odpocet(kliku - i), (t0 + i * doba - ac.currentTime) * 1000));
+      H.timery.pridej(() => odpocet(kliku - i), (t0 + i * doba - ac.currentTime) * 1000);
     }
-    H.timery.push(setTimeout(() => odpocet(0), (H.start - ac.currentTime) * 1000));
-    if (S.nastaveni.metronom && S.rezim !== 'pockej') {           // metronome on every beat until the end
-      const dob = Math.ceil((H.konec - prvni) / 1000 / sp / doba) + 1;
-      for (let b = 0; b < dob; b++) klik(H.start + b * doba, b % naTakt === 0, 0.12);
+    H.timery.pridej(() => odpocet(0), (H.start - ac.currentTime) * 1000);
+    if (S.nastaveni.metronom && S.rezim !== 'pockej') H.metronom = { doba, naTakt, dalsi: 0 };
+    if (POSLECH ? POSLECH.doprovod : doprovodZapnuty(S.vstup)) {
+      H.doprovodPlan = Cviceni.vytvorPlanZvuku(S.doprovod.filter(e => e.ms >= prvni - 1 && e.ms < H.konec));
     }
-    if ((POSLECH ? POSLECH.doprovod : doprovodZapnuty(S.vstup)) && S.rezim !== 'pockej') {   // “With backing”: continuous; Listen: only to one staff
-      for (const e of S.doprovod) {
-        if (e.ms < prvni - 1) continue;
-        const kdy = H.start + (e.ms - prvni) / 1000 / sp;
-        e.p.forEach(p => hlas(p, kdy, e.dur / 1000 / sp, e.sila));
-      }
-    }
-    if (S.rezim === 'poslech') {
-      for (const k of S.kroky) for (const n of k.noty) hlas(n.pitch, H.start + (n.ms - prvni) / 1000 / sp, n.dur / 1000 / sp * 0.95, 0.8);
-    }
+    if (S.rezim === 'poslech') H.poslechPlan = Cviceni.vytvorPlanZvuku(S.kroky.flatMap(k => k.noty));
     H.bezi = true;
     H.raf = requestAnimationFrame(smycka);
   }
@@ -2157,7 +2204,23 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     el.textContent = n; el.classList.toggle('skryta', !n);
   }
   // song time in ms; in “With backing” it stops until the player plays the awaited note
-  const cas = () => (H.zastaveno != null ? H.zastaveno : H.prvni + (audio().currentTime - H.start) * 1000 * H.sp - (H.pauza || 0));
+  const cas = () => (H.zastaveno != null ? H.zastaveno : H.prvni + (AC.currentTime - H.start) * 1000 * H.sp - (H.pauza || 0));
+  const casProZasah = tc => S.rezim === 'tempo' ? tc - (S.nastaveni.kalibrace || 0) * H.sp : tc;
+  function naplanujZvuk(tc) {
+    const ceka = S.rezim === 'pockej', ted = AC.currentTime, mer = 1000 * H.sp;
+    const dopredu = ceka ? Math.min(tc + 120 * H.sp, S.kroky[H.kontrola]?.ms ?? H.konec) : tc + 2500 * H.sp;
+    const kdy = ms => Math.max(ted, H.start + (ms - H.prvni + (H.pauza || 0)) / mer);
+    H.doprovodPlan?.(dopredu, e => e.p.forEach(p => hlas(p, kdy(e.ms), e.dur / mer, e.sila)));
+    H.poslechPlan?.(dopredu, n => hlas(n.pitch, kdy(n.ms), n.dur / mer * 0.95, 0.8));
+    const m = H.metronom;
+    if (m) {
+      const doby = Math.ceil((H.konec - H.prvni) / mer / m.doba) + 1;
+      while (m.dalsi < doby && H.start + m.dalsi * m.doba <= ted + 2.5) {
+        klik(H.start + m.dalsi * m.doba, m.dalsi % m.naTakt === 0, 0.12);
+        m.dalsi++;
+      }
+    }
+  }
   function xVCase(t) {
     const K = S.kroky, posl = K[K.length - 1];
     const pxms = K.length > 1 && posl.ms > K[0].ms ? (posl.x - K[0].x) / (posl.ms - K[0].ms) : 0.2;
@@ -2170,25 +2233,25 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   function smycka() {
     if (!H.bezi) return;
     const tc = cas(), W = OKNO * H.sp, K = S.kroky;
+    naplanujZvuk(tc);
     if (S.data.stranka) kurzorStranky(tc); else posunNa(xVCase(tc), true);
     if (S.rezim === 'pockej') {
-      let a = 0;
-      while (a < K.length && K[a].noty.every(n => H.hotovo.has(n.id))) a++;
-      while ((H.doprovodDo ?? -1) + 1 < K.length && K[(H.doprovodDo ?? -1) + 1].ms <= tc && (H.doprovodDo ?? -1) + 1 <= a) {
-        H.doprovodDo = (H.doprovodDo ?? -1) + 1; zahrajDoprovodKroku(H.doprovodDo);
+      const a = H.kontrola;
+      if (H.zastaveno == null && K[a] && tc >= K[a].ms) {
+        H.zastaveno = K[a].ms; H.zastavenoOd = AC.currentTime - (tc - K[a].ms) / (1000 * H.sp);
       }
-      if (H.zastaveno == null && K[a] && tc >= K[a].ms) { H.zastaveno = K[a].ms; H.zastavenoOd = audio().currentTime; }
       if (a !== H.aktivni) {
         H.aktivni = a;
         const k = K[a];
-        if (k) { k.noty.forEach(n => { if (!H.hotovo.has(n.id)) nastavStav(n.id, 'aktivni'); }); oznacCil(new Set(k.noty.filter(n => !H.hotovo.has(n.id)).map(n => n.pitch))); }
+        if (k) { k.noty.forEach(n => { if (!H.hotovo.has(n.id)) nastavStavNoty(n, 'aktivni'); }); oznacCil(new Set(k.noty.filter(n => !H.hotovo.has(n.id)).map(n => n.pitch))); }
         else oznacCil(null);
       }
       hlaska(H.zastaveno != null && K[a] ? esc(t('app.cekamNa')) + ' ' + K[a].noty.filter(n => !H.hotovo.has(n.id)).map(jmenoHtml).join(' + ') : t('app.zahranoZ', { a: `<b>${H.trefy}</b>`, b: H.celkem }));
     } else if (S.rezim === 'tempo') {
-      while (H.kontrola < K.length && K[H.kontrola].ms + W < tc) {
+      const tZasahu = casProZasah(tc);
+      while (H.kontrola < K.length && K[H.kontrola].ms + W < tZasahu) {
         for (const n of K[H.kontrola].noty) {
-          if (!H.hotovo.has(n.id)) { H.minul.add(n.id); nastavStav(n.id, 'minul'); H.rada = 0; }
+          if (!H.hotovo.has(n.id)) { nastavStavNoty(n, 'minul'); H.rada = 0; }
         }
         H.kontrola++;
       }
@@ -2197,7 +2260,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       if (a !== H.aktivni) {
         H.aktivni = a;
         const k = K[a];
-        if (k) { k.noty.forEach(n => { if (!H.hotovo.has(n.id)) nastavStav(n.id, 'aktivni'); }); oznacCil(new Set(k.noty.filter(n => !H.hotovo.has(n.id)).map(n => n.pitch))); }
+        if (k) { k.noty.forEach(n => { if (!H.hotovo.has(n.id)) nastavStavNoty(n, 'aktivni'); }); oznacCil(new Set(k.noty.filter(n => !H.hotovo.has(n.id)).map(n => n.pitch))); }
         else oznacCil(null);
       }
       hlaska(t('app.vcasZ', { a: `<b>${H.trefy}</b>`, b: H.celkem }));
@@ -2205,81 +2268,78 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       let i = H.aktivni;
       while (i + 1 < K.length && K[i + 1].ms <= tc) i++;
       if (i !== H.aktivni) {
-        if (H.aktivni >= 0) K[H.aktivni].noty.forEach(n => nastavStav(n.id, 'ok'));
+        if (H.aktivni >= 0) K[H.aktivni].noty.forEach(n => nastavStavNoty(n, 'ok'));
         H.aktivni = i;
-        K[i].noty.forEach(n => nastavStav(n.id, 'aktivni'));
+        K[i].noty.forEach(n => nastavStavNoty(n, 'aktivni'));
         oznacCil(K[i].vyska);
         hlaska(K[i].noty.map(jmenoHtml).join(' + '));
       } else if (i >= 0 && tc > K[i].konec - 30 * H.sp) oznacCil(null);
     }
     prubeh((tc - H.prvni) / (H.konec - H.prvni));
-    if (tc > H.konec + 700 * H.sp) { H.bezi = false; konec(); return; }
+    if (tc > H.konec + 700 * H.sp && (S.rezim !== 'pockej' || H.kontrola === K.length)) { konec(); return; }
     H.raf = requestAnimationFrame(smycka);
   }
-  function onTempo(p) {
-    // calibration: how many ms of real time the player/sound systematically lags (Bluetooth, sound card latency)
-    const tc = cas() - (S.nastaveni.kalibrace || 0) * H.sp, W = OKNO * H.sp;
-    let nej = null, nejd = Infinity;
-    for (let i = Math.max(0, H.kontrola - 1); i < S.kroky.length && S.kroky[i].ms <= tc + W; i++) {
-      for (const n of S.kroky[i].noty) {
-        if (n.pitch !== p || H.hotovo.has(n.id) || H.minul.has(n.id)) continue;
-        const d = Math.abs(n.ms - tc);
-        if (d <= W && d < nejd) { nej = n; nejd = d; }
+  function onTempo(p, kanal) {
+    const tc = casProZasah(cas()), okno = OKNO * H.sp, pockej = S.rezim === 'pockej';
+    if (tc < H.prvni - okno) return;
+    const zasah = Cviceni.najdiZasah(S.kroky, { pitch: p, cas: tc, okno, hotovo: H.hotovo, od: H.kontrola, pockej });
+    if (zasah) {
+      const { nota: n, index } = zasah, z = zaznamNoty(n, index, Math.round(tc));
+      H.zaznam.set(n.id, z);
+      if (kanal !== 'mikrofon') MERENI_DRZENI.stisk(kanal, p, z, AC.currentTime, H.sp);
+      H.hotovo.add(n.id); H.trefy++; H.rada++;
+      if (pockej && S.kroky[index].noty.every(x => H.hotovo.has(x.id))) {
+        H.kontrola++;
+        if (H.zastaveno != null) {
+          H.pauza = (H.pauza || 0) + (AC.currentTime - H.zastavenoOd) * 1000 * H.sp;
+          H.zastaveno = null;
+        }
       }
-    }
-    if (!nej && S.rezim === 'pockej') {                  // “With backing”: the awaited note counts even if it comes early
-      const k = S.kroky.find(k => !k.noty.every(n => H.hotovo.has(n.id)));
-      nej = k?.noty.find(n => n.pitch === p && !H.hotovo.has(n.id)) || null;
-    }
-    if (nej) {
-      // “With backing”: a note found only after a wrong key while it was awaited is orange, and recorded so
-      const vedle = S.rezim === 'pockej' && H.chybneStisky.some(c => c.nota === nej.id);
-      const z = { takt: nej.takt, index: S.kroky.findIndex(k => k.noty.includes(nej)), pitch: p, ocekavanoMs: nej.ms, dynamika: nej.dyn || null,
-        zahranoMs: Math.round(tc), vysledek: vedle ? 'vedle' : 'ok', odchylkaMs: Math.round(tc - nej.ms), drzenoMs: null, ocekavanaDelkaMs: nej.dur,
-        sila: H.posledniSila };
-      H.zaznam.set(nej.id, z); H.drzene.set(p, { zaznam: z, t0: audio().currentTime });
-      H.hotovo.add(nej.id); H.trefy++; H.rada++;
-      if (S.rezim === 'pockej' && H.zastaveno != null && S.kroky.every(k => k.ms > H.zastaveno + 1 || k.noty.every(x => H.hotovo.has(x.id)))) {
-        H.pauza = (H.pauza || 0) + (audio().currentTime - H.zastavenoOd) * 1000 * H.sp;
-        H.zastaveno = null;
-      }
-      nastavStav(nej.id, vedle ? 'vedle' : 'ok'); blikni(p, 'dobre'); radost();
+      nastavStavNoty(n, H.chybneNoty.has(n.id) ? 'vedle' : 'ok'); blikni(p, 'dobre'); radost();
       if (H.rada % 10 === 0) toast(t('app.rada', { n: H.rada }));
-    } else {
-      H.chyby++; H.rada = 0; blikni(p, 'spatne');
-      // “With backing” waits for a step: a wrong key belongs to it (in a duet: the step the erring part waits for),
-      // even while the clock is still nearer the note just played. “In rhythm”: the step nearest in time.
-      let bi = -1;
-      if (S.rezim === 'pockej') {
-        const st = castKlavesy(p);
-        bi = S.kroky.findIndex(k => k.noty.some(n => (st == null || n.staff === st) && !H.hotovo.has(n.id)));
-      }
-      if (bi < 0) bi = S.kroky.reduce((b, k, i) => Math.abs(k.ms - tc) < Math.abs(S.kroky[b].ms - tc) ? i : b, 0);
-      H.chybneStisky.push({ pitch: p, ms: Math.round(tc), takt: S.kroky[bi].noty[0].takt, nota: notaChyby(bi, p)?.id });
+      return;
     }
+    // In a duet a wrong key belongs to the step the erring part waits for.
+    let bi = pockej && H.kontrola < S.kroky.length ? H.kontrola : -1;
+    if (bi >= 0 && S.dvojice) {
+      const st = castKlavesy(p);
+      const i = S.kroky.findIndex((k, i) => i >= bi && k.noty.some(n => !H.hotovo.has(n.id)
+        && (n.staff === st || n.souzvuk?.some(x => x.staff === st))));
+      if (i >= 0) bi = i;
+    }
+    if (bi < 0) bi = S.kroky.reduce((b, k, i) => Math.abs(k.ms - tc) < Math.abs(S.kroky[b].ms - tc) ? i : b, 0);
+    zaznamChyby(p, tc, bi); blikni(p, 'spatne');
   }
 
   // ------------------------------------------------------------ latency calibration (for In rhythm mode)
-  const KALIBRACE = { bezi: false, kliky: [], stisky: [] };
-  $('#kalibrace').onclick = () => {
-    if (KALIBRACE.bezi) return;
-    stopVse();
-    const ac = audio(), doba = 60 / 90, t0 = ac.currentTime + 0.4;
-    Object.assign(KALIBRACE, { bezi: true, kliky: [], stisky: [] });
+  $('#kalibrace').onclick = async () => {
+    if (document.hidden || S.rezim !== 'tempo' || !otevreno('#hra') || otevreno('#vysledek') || H.kalibrace) return;
+    // Calibration starts from Pause → Display. The player needs to see the instructions and reach the keys.
+    prekryv('#zobrazeni', false); prekryv('#pauzaPrekryv', false);
+    reset();
+    const k = H.kalibrace = { kliky: [], stisky: [] };
+    let ac;
+    try { ac = await zvukPripraven(); } catch (e) {
+      if (H.kalibrace === k) stopVse();
+      console.warn('AudioContext', e);
+      return;
+    }
+    if (H.kalibrace !== k) return;
+    const doba = 60 / 90, t0 = ac.currentTime + 0.4;
     hlaska(esc(t('app.kalibrace')));
-    for (let i = 0; i < 12; i++) { klik(t0 + i * doba, i % 4 === 0); if (i >= 4) KALIBRACE.kliky.push(t0 + i * doba); }
-    H.timery.push(setTimeout(() => {
-      KALIBRACE.bezi = false;
-      const odch = KALIBRACE.kliky.map(k => {
-        const s = KALIBRACE.stisky.reduce((b, x) => Math.abs(x - k) < Math.abs(b - k) ? x : b, Infinity);
-        return Math.abs(s - k) < doba / 2 ? (s - k) * 1000 : null;
+    for (let i = 0; i < 12; i++) { klik(t0 + i * doba, i % 4 === 0); if (i >= 4) k.kliky.push(t0 + i * doba); }
+    H.timery.pridej(() => {
+      H.kalibrace = null;
+      const odch = k.kliky.map(kdy => {
+        const s = k.stisky.reduce((b, x) => Math.abs(x - kdy) < Math.abs(b - kdy) ? x : b, Infinity);
+        return Math.abs(s - kdy) < doba / 2 ? (s - kdy) * 1000 : null;
       }).filter(x => x != null).sort((a, b) => a - b);
       if (odch.length < 5) { hlaska(esc(t('app.kalibraceChyba'))); return; }
       const median = Math.round(odch[Math.floor(odch.length / 2)]);
       S.nastaveni.kalibrace = Math.max(-150, Math.min(400, median));
       ulozNastaveni();
       hlaska(esc(t('app.kalibraceHotova', { ms: S.nastaveni.kalibrace })));
-    }, (t0 + 12 * doba - ac.currentTime + 0.6) * 1000));
+    }, (t0 + 12 * doba - ac.currentTime + 0.6) * 1000);
   };
 
   // ------------------------------------------------------------ as a pair: melody (staff 1) and bass (staff 2), one child each
@@ -2314,6 +2374,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     });
   }
   $('#dvojice').onclick = async () => {
+    if (!pripravenaPisen()) return;
+    const soubor = S.pisen;
     if (S.vstup.rezim === 'mikrofon') { toast(t('app.dvojiceMikrofonVypni'), 5000); return; }
     let a = aktualniProfil();
     if (!a) {
@@ -2322,7 +2384,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     }
     const b = await vyberHrace(t('app.ktoBas'), t('app.basVlevo', { jmeno: a.jmeno }),
       viditelni(S.profily).filter(p => p.id !== a.id));
-    if (!b) return;
+    if (!b || S.pisen !== soubor || !pripravenaPisen()) return;
     S.dvojice = { melodie: a.id, bas: b.id };
     zmenaDvojice();
   };
@@ -2381,7 +2443,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const veta = x => {
       const v = x.v;
       if (!v) return t('app.dvojice.nehrajes', { part: Part(x) });
-      if (S.rezim === 'cekam') return v.chyby ? t('app.dvojice.vedle', { part: Part(x), n: v.pocet, chyby: v.chyby }) : t('app.dvojice.bezChyby', { part: Part(x), n: v.pocet });
+      if (S.rezim !== 'tempo') return t(v.chyby ? 'app.dvojice.vedle' : 'app.dvojice.bezChyby', { part: Part(x), n: v.pocet, chyby: v.chyby });
       return t(v.chyby ? 'app.dvojice.vcasVedle' : 'app.dvojice.vcas', { part: Part(x), a: v.trefy, n: v.pocet, chyby: v.chyby });
     };
     $('#vysDvojice').innerHTML = hraci.map(x => `<div class="vys-hrac ${x.tr}">
@@ -2401,7 +2463,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   // ------------------------------------------------------------ result
   function konec() {
-    stopVse(); oznacCil(null); prubeh(1);
+    H.ukoncen = true; stopVse(); oznacCil(null); prubeh(1);
     const zv = ZVIRATA[aktualniProfil()?.zvire];
     if (S.rezim === 'poslech') {
       if (S.pruvodce) return pruvodceDalsi(null);
@@ -2421,37 +2483,29 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (S.smycka.zapnuto) {
       const r = Cviceni.dalsiTempo({ rychlost: S.nastaveni.rychlost, cisteVRade: S.smycka.cisteVRade }, souhrn);
       S.smycka.cisteVRade = r.cisteVRade;
-      if (S.rezim === 'cekam') {                          // without tempo: 3 clean runs = section works, next step is With backing
-        if (souhrn.cisty) S.smycka.cisteVRade = Math.min(3, (S.smycka.cisteVRade || 0));
-        r.hotovo = S.smycka.cisteVRade >= 3;
-        r.zprava = souhrn.cisty ? t('app.cisteZe3', { n: S.smycka.cisteVRade }) : t('app.jesteVKlidu');
-      } else nastavRychlost(r.rychlost);
+      if (r.zmena) nastavRychlost(r.rychlost);
       if (!r.hotovo) {
         toast(t('app.smyckaStav', { zprava: r.zprava || t('app.dalsiPruchod'), n: S.smycka.cisteVRade, r: S.nastaveni.rychlost }), 2500);
-        H.timery.push(setTimeout(() => (S.rezim === 'tempo' ? spust() : reset()), 1800));
+        H.timery.pridej(() => (S.rezim === 'cekam' ? reset() : spust()), 1800);
         return;
       }
       S.smycka.zapnuto = false; $('#prepSmycka').classList.remove('zap');
       toast(t(S.rezim === 'cekam' ? 'app.usekCisty' : 'app.usekPlneTempo'), 5000);
     }
-    let podil, text;
-    if (S.rezim === 'cekam') {
-      const n = S.kroky.length;
-      podil = n / (n + H.chyby);
+    const n = souhrn.pocetNot, podil = Cviceni.podilZasahu(souhrn.ok, n, H.chyby);
+    const hv = Cviceni.hvezdyZPodilu(podil, S.rezim);
+    let text;
+    if (S.rezim !== 'tempo') {
       text = H.chyby ? t('app.vsechVedle', { n, chyby: H.chyby }) : t('app.vsechBezChyby', { n });
     } else {
-      podil = H.trefy / H.celkem;
       text = t(H.chyby ? 'app.vcasTextVedle' : 'app.vcasText', { a: H.trefy, n: H.celkem, chyby: H.chyby, r: S.nastaveni.rychlost });
     }
-    let hv = podil >= 0.95 ? 3 : podil >= 0.8 ? 2 : podil >= 0.5 ? 1 : 0;
-    if (S.rezim === 'cekam') hv = Math.max(1, hv);
     if (S.usek) {                                        // section: stars for the section only, not for the whole song
-      const hvU = souhrn.cisty ? 3 : souhrn.presnost >= 0.8 ? 2 : 1;
       const vpU = ((S.vysledky[pid] ||= {})[S.pisen] ||= {});
       const kl = `${S.usek.od}-${S.usek.do}#${S.uroven}`;
-      (vpU.useky ||= {})[kl] = Math.max(vpU.useky[kl] || 0, hvU);
+      (vpU.useky ||= {})[kl] = Math.max(vpU.useky[kl] || 0, hv);
       data.pis('vysledky', S.vysledky); nabidkaUseku();
-      ukazVysledek(hvU, t(souhrn.cisty ? 'app.usekCiste' : 'app.usekDohran'), text, '');
+      ukazVysledek(hv, t(souhrn.cisty ? 'app.usekCiste' : 'app.usekDohran'), text, '');
       trener(souhrn, pS[klicStat]);
       return;
     }
@@ -2461,8 +2515,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const rekord = hv > r.hvezdy;
     r.hvezdy = Math.max(r.hvezdy, hv); r.procent = Math.max(r.procent, Math.round(podil * 100)); r.pocet++;
     data.pis('vysledky', S.vysledky);
-    const bezChyby = !H.chyby && (S.rezim === 'cekam' || H.trefy === H.celkem);
-    ukazVysledek(hv, t(['app.hv0', 'app.hv1', 'app.hv2', bezChyby ? 'app.hv3bezChyby' : 'app.hv3'][hv]),
+    ukazVysledek(hv, t(['app.hv0', 'app.hv1', 'app.hv2', souhrn.cisty ? 'app.hv3bezChyby' : 'app.hv3'][hv]),
       text + (rekord && r.pocet > 1 ? ' ' + t('app.rekord') : ''), zv ? zv.vety[hv] : '');
     trener(souhrn, pS[klicStat]);
   }
@@ -2470,10 +2523,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   function sestavZaznam() {
     const noty = [];
     S.kroky.forEach((k, i) => k.noty.forEach(n => noty.push(H.zaznam.get(n.id) || { takt: n.takt, index: i, pitch: n.pitch,
-      ocekavanoMs: n.ms, zahranoMs: null, vysledek: S.rezim === 'tempo' ? 'vynechana' : 'ok', odchylkaMs: null, drzenoMs: null,
+      ocekavanoMs: n.ms, zahranoMs: null, vysledek: 'vynechana', odchylkaMs: null, drzenoMs: null,
       ocekavanaDelkaMs: n.dur })));
     const ruka = S.ruka.has(1) && S.ruka.has(2) ? 'obe' : S.ruka.has(2) ? 'leva' : 'prava';
-    return { rezim: S.rezim === 'cekam' ? 'cekam' : 'tempo', krok: S.rezim, rychlost: S.nastaveni.rychlost, od: S.usek ? S.usek.od : 0,
+    return { rezim: S.rezim, krok: S.rezim, rychlost: S.nastaveni.rychlost, od: S.usek ? S.usek.od : 0,
       do: S.usek ? S.usek.do : S.model.takty.length - 1, ruka, dobaMs: 60000 / S.data.tempo,
       predznamenani: S.model.predznamenani, noty, chybneStisky: H.chybneStisky };
   }
@@ -2518,10 +2571,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       + (P.pokusu ? ` <span class="napoveda">${esc(t('app.pruvodce.pokus', { n: P.pokusu + 1 }))}</span>` : '');
     $('#pruvodceText').classList.remove('skryta');
     nastavRuku();
-    if (k.rezim === 'poslech') {                          // only after the reset in nastavRuku (it cancels the game timers)
-      const krok = P.i;
-      setTimeout(() => { if (S.pruvodce === P && P.i === krok && !H.bezi) spust(); }, 1200);
-    }
+    if (k.rezim === 'poslech') H.timery.pridej(spust, 1200);
   }
   /** after a step ends: move on after a clean run (listening always), or after 3 attempts with accuracy ≥ 85 % */
   function pruvodceDalsi(souhrn) {
@@ -2530,7 +2580,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const splneno = !souhrn || souhrn.cisty || (P.pokusu >= 3 && souhrn.presnost >= 0.85);
     if (!splneno) {
       toast(t(souhrn.presnost >= 0.85 ? 'app.skoro' : 'app.klidne'), 2500);
-      H.timery.push(setTimeout(spustKrokPruvodce, 1500));
+      H.timery.pridej(spustKrokPruvodce, 1500);
       return;
     }
     radost();
@@ -2539,13 +2589,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       ukazVysledek(3, t('app.pruvodce.umis'), t('app.pruvodce.umisText'), '');
       return;
     }
-    P.i++; P.pokusu = 0;
     toast(t(souhrn ? 'app.jdemeDal' : 'app.tedTy'), 2000);
-    H.timery.push(setTimeout(spustKrokPruvodce, 1500));
+    H.timery.pridej(() => { P.i++; P.pokusu = 0; spustKrokPruvodce(); }, 1500);
   }
-  $('#pruvodce').onclick = async () => {
-    if (S.pruvodce) { ukonciPruvodce(t('app.pruvodce.ukoncen')); return; }
-    await zobrazHru();
+  $('#pruvodce').onclick = () => {
+    if (S.pruvodce) { ukonciPruvodce(t('app.pruvodce.ukoncen')); reset(); return; }
+    if (!pripravenaPisen()) return;
+    zobrazHru();
     zacniPruvodce();
   };
   $('#prepMetronom').onclick = () => {
@@ -2645,7 +2695,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#toast').classList.add('skryta');
     hlavniTlacitko();
     $('#vysAvatar').innerHTML = avatarSvg(aktualniProfil());
-    setTimeout(() => radostZvirete($('#vysAvatar .zvire')), 150);   // joy after playing
+    H.timery.pridej(() => radostZvirete($('#vysAvatar .zvire')), 150);   // joy after playing
     $('#vysHvezdy').innerHTML = hv == null ? '' : [0, 1, 2].map(i => `<i class="${i < hv ? 'ano' : ''}"></i>`).join('');
     $('#vysNadpis').textContent = nadpis;
     $('#vysText').textContent = text;
@@ -2772,7 +2822,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const b = $('#chybaProcvicit');
     b.textContent = t('app.chyby.procvicit', { takty: Cviceni.cisloTaktu(S.model, c.takt) });
     b.title = Cviceni.nazevUseku(S.model, c.takt, c.takt);
-    const k = S.kroky.findIndex(k => k.noty.some(x => x.id === c.nota));
+    const k = S.kroky.findIndex(k => k.noty.some(x => patriKNote(x, c.nota)));
     if (k >= 0) posunKrok(k, false);
   }
   function zavriPrehled() {
@@ -2796,7 +2846,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#ozvena').onclick = () => { stopVse(); Doplnky.ozvena(); };
   // tapping a note (outside the game) → questions about it
   $('#pas').addEventListener('click', e => {
-    if (H.bezi || KALIBRACE.bezi) return;
+    if (H.bezi || H.spousti || H.kalibrace) return;
     const id = e.target.closest('g.note')?.id || e.target.closest('.ovl')?.getAttribute('data-nota');
     const n = id && S.data?.noty.find(x => x.id === id);
     const kde = n && Doplnky.notaModelu(n);
@@ -2829,12 +2879,18 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   // ------------------------------------------------------------ pause and display
   const prekryv = (sel, otevrit) => $(sel).classList.toggle('skryta', !otevrit);
-  $('#pauza').onclick = () => {
-    stopVse();
-    $('#pauzaPokracovat').classList.toggle('skryta', S.rezim !== 'cekam');   // in rhythm and listening only restart is possible
+  function pozastavHru() {
+    if (hraPozastavena()) return;
+    const navazat = !H.bezi && !H.spousti;        // active timed playback restarts; between runs the queued transition can resume
+    stopVse({ pozastavit: navazat });
+    $('#pauzaPokracovat').classList.toggle('skryta', !navazat);
     prekryv('#pauzaPrekryv', true);
+  }
+  $('#pauza').onclick = pozastavHru;
+  $('#pauzaPokracovat').onclick = () => {
+    prekryv('#pauzaPrekryv', false);
+    H.timery.pokracuj();
   };
-  $('#pauzaPokracovat').onclick = () => prekryv('#pauzaPrekryv', false);
   $('#pauzaZobrazeni').onclick = () => {                // the same toggles as Settings → Display, plus the accompaniment and calibration
     if (!$('#zobrazeni .prepinace')) $('#zobrazeni aside').append($('#nastaveniZobrazeni .prepinace'));
     prekryv('#zobrazeni', true);
@@ -2856,6 +2912,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   });
   $$('[data-rezim]').forEach(b => b.onclick = () => {
     if (S.pruvodce) ukonciPruvodce();
+    if (S.rezim !== b.dataset.rezim) S.smycka.cisteVRade = 0;
     S.rezim = b.dataset.rezim;
     $$('[data-rezim]').forEach(x => x.classList.toggle('zvoleno', x === b));
     reset();
@@ -2884,7 +2941,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     b.onclick = () => { S.nastaveni[klic] = !S.nastaveni[klic]; ulozNastaveni(); ukazStav(); };
     ukazStav();
   }
-  prepinac('#prepZvukKlavir', 'zvukKlavir', () => { stopVse(); stavZvukuKlaviru(); });
+  prepinac('#prepZvukKlavir', 'zvukKlavir', () => { if (!hraPozastavena()) stopVse(); stavZvukuKlaviru(); });
   function stavZvukuKlaviru() {
     const b = $('#prepZvukKlavir');
     b.classList.toggle('skryta', !MIDI_UMI);
@@ -2898,16 +2955,18 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $$('.prep-doprovod').forEach(b => b.onclick = () => {   // per device and mode (off with the microphone), not per player
     S.vstup = sDoprovodem(S.vstup, !doprovodZapnuty(S.vstup)); uloz.pis('kt-vstup', S.vstup); midiStav();
   });
-  let casovacStranky = 0;
+  let zrusPrekresleni = null;
   window.addEventListener('resize', () => {
     if ($('#hra').classList.contains('skryta') || !S.svg) return;
-    if (S.data?.stranka) {                              // the page reflows when the width changes (different number of bars per line)
-      clearTimeout(casovacStranky);
-      casovacStranky = setTimeout(async () => { if (H.bezi) return; await pripravVerzi(); nastavRuku(); }, 350);
-      return;
+    const lze = () => lzePrekreslit(H) && !S.pruvodce && !hraPozastavena();
+    zrusPrekresleni?.();
+    if (S.data?.stranka && lze()) {
+      zrusPrekresleni = H.timery.pridej(() => {
+        if (lze()) { vykresliVerziHry(VTK); nastavRuku(); }
+      }, 350);
     }
-    velikostNot(); spocitejPozice();
-    if (S.rezim === 'cekam' && S.kroky[H.idx]) posunNa(S.kroky[H.idx].x, true);
+    velikostNot(); spocitejPozice(); S.radek = null;
+    if (S.rezim === 'cekam') posunKrok(H.idx, true);
   });
   prepinac('#prepKlaviatura', 'klaviatura', () => {
     ukazKlavesy();                                     // without a working piano or microphone the keys stay
@@ -2927,6 +2986,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   // songs added to the folder meanwhile (AI agent, Finder) appear after returning to the window
   const obnovSeznam = () => { if (!$('#domu').classList.contains('skryta') && document.visibilityState === 'visible') nactiPisne(); };
   window.addEventListener('focus', obnovSeznam);
-  document.addEventListener('visibilitychange', obnovSeznam);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && otevreno('#hra') && !otevreno('#vysledek')
+      && (H.bezi || H.spousti || H.kalibrace || (H.timery.ceka && (S.pruvodce || H.ukoncen || H.idx >= S.kroky.length)))) pozastavHru();
+    obnovSeznam();
+  });
   midiStart();
 }

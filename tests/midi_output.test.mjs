@@ -44,6 +44,15 @@ test('sends at most 100 ms ahead', () => {
   assert.deepEqual(port.zpravy.map(z => z[1]), [60, 62]);
 });
 
+test('successive batches are interleaved by time; ties keep insertion order', () => {
+  const { V, port, posun } = prostredi();
+  V.pripoj(port);
+  V.hraj([{ ms: 500, p: 61, v: 40 }, { ms: 250, p: 62, v: 40 }]);
+  V.hraj([{ ms: 250, p: 63, v: 40 }, { ms: 150, p: 64, v: 40 }]);
+  posun(500);
+  assert.deepEqual(port.zpravy.map(z => [z[1], z[3]]), [[64, 150], [62, 250], [63, 250], [61, 500]]);
+});
+
 test('ticho: the rest of the queue is dropped, sounding notes are released at once even after the look-ahead was sent', () => {
   const { V, port, posun } = prostredi();
   V.pripoj(port);
