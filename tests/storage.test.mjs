@@ -1,8 +1,10 @@
 import './setup.mjs';
 import 'fake-indexeddb/auto';
+import { forceCloseDatabase, IDBFactory } from 'fake-indexeddb';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ProhlizecUloziste, SlozkaUloziste, kopiruj, zaloha, obnov, KLICE_DAT } from '../static/lib/storage.js';
+import { ProhlizecUloziste, SlozkaUloziste, kopiruj, zaloha, obnov, KLICE_DAT, _resetDb } from '../static/lib/storage.js';
+import { zabalZip, rozbalZip } from '../static/lib/zip.js';
 import { sluc } from '../static/lib/merge.js';
 import { FakeSlozka } from './fake_folder.mjs';
 import { fsSlozka } from './fs_folder.mjs';
@@ -121,4 +123,192 @@ test('restore accepts a zip of the Rusalka folder itself (one wrapping folder, a
   assert.equal((await s.ctiData('profily'))[0].jmeno, 'Ema');
   await assert.rejects(obnov(s, zabalZip(new Map([['A/pisne/x.musicxml', XML], ['B/data/profily.json', en.encode('[]')]]))), /není záloha/);
   await assert.rejects(obnov(s, zabalZip(new Map([['Rusalka/notes.txt', XML]]))), /není záloha/);
+});
+
+test('folder: repeated writes from a stale view keep external additions and tombstones', async () => {
+  const h = new FakeSlozka(), a = new SlozkaUloziste(h), b = new SlozkaUloziste(h);
+  const ema = { id: 'e', jmeno: 'Ema' }, ota = { id: 'o', jmeno: 'Ota' };
+  await a.zapisData('profily', [ema, ota]);
+  await b.zapisData('profily', [{ id: 'e', smazano: 10 }, ota, { id: 'a' }]);
+  await a.zapisData('profily', [ema, { ...ota, jmeno: 'Otík' }]);
+  const dalsi = await a.zapisData('profily', [ema, { ...ota, jmeno: 'Otíček' }]);
+  assert.deepEqual(dalsi, [{ id: 'e', smazano: 10 }, { id: 'o', jmeno: 'Otíček' }, { id: 'a' }]);
+});
+
+test('browser: concurrent tabs keep both changes and repeated writes preserve a removed favourite', async () => {
+  globalThis.indexedDB = new IDBFactory(); _resetDb();
+  const a = new ProhlizecUloziste(), { ProhlizecUloziste: DruhaZalozka } = await import('../static/lib/storage.js?druha-zalozka');
+  const b = new DruhaZalozka();
+  await a.zapisData('oblibene', { e: ['A'] });
+  await b.ctiData('oblibene');
+  await Promise.all([a.zapisData('oblibene', { e: [], f: ['B'] }), b.zapisData('oblibene', { e: ['A'], j: ['C'] })]);
+  assert.deepEqual(await a.zapisData('oblibene', { e: [], f: ['B', 'D'] }), { e: [], f: ['B', 'D'], j: ['C'] });
+  const c = new ProhlizecUloziste();
+  assert.deepEqual(await c.ctiData('oblibene'), { e: [], f: ['B', 'D'], j: ['C'] });
+});
+
+test('browser: a closed connection is reopened for the next read and write', async () => {
+  const skutecna = new IDBFactory(); let spojeni;
+  globalThis.indexedDB = { open(...args) {
+    const r = skutecna.open(...args);
+    r.addEventListener('success', () => { spojeni = r.result; });
+    return r;
+  } };
+  _resetDb();
+  const u = new ProhlizecUloziste();
+  await u.zapisData('profil', 'e');
+  spojeni.close();
+  assert.equal(await u.ctiData('profil'), 'e');
+  forceCloseDatabase(spojeni);
+  await u.zapisData('profil', 'f');
+  assert.equal(await u.ctiData('profil'), 'f');
+});
+
+test('folder: changes with an older mtime or the same mtime and size survive a write', async () => {
+  const h = new FakeSlozka(), a = new SlozkaUloziste(h), b = new SlozkaUloziste(h);
+  await a.zapisData('vysledky', { e: { a: 1 } });
+  const f = (await h.getDirectoryHandle('data')).deti.get('vysledky.json');
+  const cas = f.lastModified;
+  await b.zapisData('vysledky', { e: { b: 2 } }, { prepsat: true });
+  f.lastModified = cas - 1;
+  assert.deepEqual(await a.zapisData('vysledky', { e: { a: 3 } }), { e: { a: 3, b: 2 } });
+  await a.ctiData('vysledky');
+  const novyCas = f.lastModified, velikost = f.data.length;
+  await b.zapisData('vysledky', { e: { a: 3, c: 4 } }, { prepsat: true });
+  assert.equal(f.data.length, velikost);
+  f.lastModified = novyCas;
+  assert.deepEqual(await a.zapisData('vysledky', { e: { a: 5, b: 2 } }), { e: { a: 5, c: 4 } });
+});
+
+test('folder: corrupt JSON is copied and reported before replacement', async () => {
+  const h = new FakeSlozka(), hlaseni = [], u = new SlozkaUloziste(h, e => hlaseni.push(e.message));
+  const d = await h.getDirectoryHandle('data', { create: true });
+  const w = await (await d.getFileHandle('profily.json', { create: true })).createWritable();
+  await w.write('{broken'); await w.close();
+  await assert.rejects(u.ctiData('profily'), /poškozený/);
+  await u.zapisData('profily', [{ id: 'e' }]);
+  const kopie = [...d.deti.keys()].find(jm => jm.startsWith('profily.json.poskozeny-'));
+  assert.ok(kopie);
+  assert.equal(de.decode(d.deti.get(kopie).data), '{broken');
+  assert.equal(hlaseni.length, 1);
+  assert.deepEqual(await u.ctiData('profily'), [{ id: 'e' }]);
+});
+
+test('folder: a read failure is surfaced and the unreadable original is left alone', async () => {
+  const h = new FakeSlozka(), u = new SlozkaUloziste(h);
+  await u.zapisData('profil', 'e');
+  const f = (await h.getDirectoryHandle('data')).deti.get('profil.json');
+  f.getFile = async () => { throw new DOMException('permission lost', 'NotAllowedError'); };
+  await assert.rejects(u.ctiData('profil'), { name: 'NotAllowedError' });
+  await assert.rejects(u.zapisData('profil', 'f'), { name: 'NotAllowedError' });
+  assert.equal(de.decode(f.data), '"e"');
+  f.getFile = async () => { throw new DOMException('file was removed', 'NotFoundError'); };
+  assert.equal(await u.ctiData('profil'), null);
+});
+
+test('folder: a newer marker prevents creating, overwriting or deleting files', async () => {
+  const h = new FakeSlozka(), u = new SlozkaUloziste(h);
+  await u.pripravit();
+  await u.zapis('A.musicxml', XML);
+  const w = await (await h.getFileHandle('rusalka.json')).createWritable();
+  await w.write('{"verze":2}'); await w.close();
+  const chyba = /novější/;
+  await assert.rejects(u.pripravit(), chyba);
+  await assert.rejects(u.ctiData('profily'), chyba);
+  await assert.rejects(u.zapisData('profily', []), chyba);
+  await assert.rejects(u.zapis('A.musicxml', XML, { prepsat: true }), chyba);
+  await assert.rejects(u.smaz('A.musicxml'), chyba);
+});
+
+test('restore validates JSON before changing songs and replaces the keys present in the archive', async () => {
+  const u = new SlozkaUloziste(new FakeSlozka()); await u.pripravit();
+  await u.zapis('A.musicxml', XML); await u.zapisData('profily', [{ id: 'e' }]);
+  const jinde = new SlozkaUloziste(u.h);
+  for (const profily of ['{broken', '{}']) {
+    await assert.rejects(obnov(jinde, zabalZip({ 'pisne/A.musicxml': '<new/>', 'data/profily.json': profily })), /poškozený/);
+  }
+  assert.equal(de.decode(await u.cti('A.musicxml')), '<score-partwise/>');
+  await obnov(jinde, zabalZip({ 'data/profily.json': '[{"id":"f"}]' }));
+  assert.deepEqual(await u.ctiData('profily'), [{ id: 'f' }]);
+});
+
+test('ZIP rejects truncated payload, central and local records, and bad CRC', async () => {
+  for (const zmena of [
+    (v, cd) => v.setUint32(cd + 20, v.byteLength, true),
+    (v, cd) => v.setUint16(cd + 28, v.byteLength, true),
+    (v, cd) => v.setUint32(cd + 42, cd - 1, true),
+    (v, cd) => v.setUint8(cd - 1, 0),
+  ]) {
+    const z = zabalZip({ 'a.txt': 'hello' }), v = new DataView(z.buffer);
+    zmena(v, v.getUint32(z.length - 6, true));
+    await assert.rejects(rozbalZip(z), /poškozený ZIP/i);
+  }
+});
+
+test('ZIP bounds the total size and number of entries', async () => {
+  const velky = new Uint8Array(20 * 1024 * 1024);
+  assert.throws(() => zabalZip({ a: velky, b: velky, c: velky, d: velky, e: velky, f: velky }), /příliš/);
+  const z = zabalZip({ a: '' }), v = new DataView(z.buffer);
+  v.setUint16(z.length - 12, 10001, true);
+  await assert.rejects(rozbalZip(z), /příliš/);
+  assert.throws(() => zabalZip(new Map(Array.from({ length: 10001 }, (_, i) => [String(i), '']))), /příliš/);
+  const archiv = zabalZip({ a: '', b: '', c: '', d: '', e: '', f: '' }), adresar = new DataView(archiv.buffer);
+  const start = adresar.getUint32(archiv.length - 6, true);
+  for (let p = start; p < archiv.length - 22; p += 47) adresar.setUint32(p + 24, velky.length, true);
+  await assert.rejects(rozbalZip(archiv), /příliš/);
+});
+
+test('ZIP decodes CP437 names when the UTF-8 flag is clear', async () => {
+  const z = zabalZip({ 'X.txt': 'hello' }), v = new DataView(z.buffer), cd = v.getUint32(z.length - 6, true);
+  v.setUint16(6, 0, true); v.setUint16(cd + 8, 0, true);
+  z[30] = z[cd + 46] = 0x82;
+  assert.deepEqual([...await rozbalZip(z)].map(([jm]) => jm), ['é.txt']);
+});
+
+test('write queue flushes both edits and feeds the latest merged result back to the application', async () => {
+  const { datoveZapisy } = await import('../static/lib/storage.js');
+  const h = new FakeSlozka(), a = new SlozkaUloziste(h), b = new SlozkaUloziste(h);
+  let stav = { e: ['A'] };
+  await a.zapisData('oblibene', stav);
+  const fronta = datoveZapisy(a, (k, v) => { stav = v; }, (k, e) => { throw e; });
+  fronta.cteno('oblibene', stav);
+  await b.zapisData('oblibene', { e: ['A', 'B'] });
+  stav = { e: ['A', 'C'] }; fronta.pis('oblibene', stav);
+  stav = { e: ['C', 'D'] }; fronta.pis('oblibene', stav);
+  await fronta.dokonci();
+  assert.deepEqual(stav, { e: ['B', 'C', 'D'] });
+  assert.deepEqual(await a.ctiData('oblibene'), stav);
+});
+
+test('resuming folder storage transfers only changes made in the browser while permission was missing', async () => {
+  globalThis.indexedDB = new IDBFactory(); _resetDb();
+  const p = new ProhlizecUloziste(), s = new SlozkaUloziste(new FakeSlozka());
+  const zaklad = { profily: [{ id: 'e', jmeno: 'staré' }], vysledky: { e: { A: 1 } } };
+  await p.zapisData('profily', zaklad.profily);
+  await p.zapisData('vysledky', { e: { A: 1, B: 2 } });
+  await s.zapisData('profily', [{ id: 'e', jmeno: 'nové' }]);
+  await s.zapisData('vysledky', { e: { A: 3, C: 4 } });
+  await kopiruj(p, s, { zaklad });
+  assert.deepEqual(await s.ctiData('profily'), [{ id: 'e', jmeno: 'nové' }]);
+  assert.deepEqual(await s.ctiData('vysledky'), { e: { A: 3, B: 2, C: 4 } });
+});
+
+test('restore stops if saving the automatic backup fails', async () => {
+  const u = new SlozkaUloziste(new FakeSlozka());
+  await u.zapisData('profily', [{ id: 'e' }]);
+  await assert.rejects(obnov(u, zabalZip({ 'data/profily.json': '[{"id":"f"}]' }), { predObnovou: async zip => {
+    assert.equal(de.decode((await rozbalZip(zip)).get('data/profily.json')).includes('"e"'), true);
+    throw new Error('backup failed');
+  } }), /backup failed/);
+  assert.deepEqual(await u.ctiData('profily'), [{ id: 'e' }]);
+});
+
+test('browser: concurrent plays on the same day each count in the diary', async () => {
+  globalThis.indexedDB = new IDBFactory(); _resetDb();
+  const a = new ProhlizecUloziste(), b = new ProhlizecUloziste();
+  const den = '2026-11-22';
+  await a.zapisData('denik', { e: { [den]: [1, .5, 1] } });
+  await b.ctiData('denik');
+  await Promise.all([a.zapisData('denik', { e: { [den]: [2, 1, 2] } }), b.zapisData('denik', { e: { [den]: [2, 1, 2] } })]);
+  assert.deepEqual(await a.ctiData('denik'), { e: { [den]: [3, 1.5, 3] } });
 });

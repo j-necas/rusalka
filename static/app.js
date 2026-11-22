@@ -12,7 +12,9 @@ import { doprovodVeStylu, STYLY } from './lib/extras.js';
 import { doprovodZAkordu, VZORY_DOPROVODU } from './lib/accompaniment.js';
 import { maAkordyProDvojici, modelProDvojici, hraniceDvojice, vysledekHrace } from './lib/pair.js';
 import { seznamUrovni, vytvorUroven } from './lib/levels.js';
-import { ProhlizecUloziste, SlozkaUloziste, nastaveniProhlizece, kopiruj, zaloha as zalohaDat, obnov as obnovDat } from './lib/storage.js';
+import { ProhlizecUloziste, SlozkaUloziste, nastaveniProhlizece, datoveZapisy, snimekDat, kopiruj, zaloha as zalohaDat, obnov as obnovDat } from './lib/storage.js';
+import { MAX_ZIP } from './lib/zip.js';
+import { stejnaData } from './lib/merge.js';
 import { xmlZBajtu, nazevZXml, jmenoSouboru, vyberBezFiltru } from './lib/files.js';
 import { vytvorVystup, vyberVystup, KANAL as KANAL_VYSTUPU } from './lib/midi_output.js';
 import { obrazekHrace } from './ui/pictures.js';
@@ -138,48 +140,136 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   // offline: the website keeps itself in the browser (sw.js); after loading, so it does not slow down the start
   if (document.readyState === 'complete') zapnoutOffline({ serviceWorker: navigator.serviceWorker });
   else addEventListener('load', () => zapnoutOffline({ serviceWorker: navigator.serviceWorker }), { once: true });
-  const UL = { prohlizec: new ProhlizecUloziste(), slozka: null, aktivni: null, stavSlozky: null };
+  const UL = { prohlizec: new ProhlizecUloziste(), slozka: null, aktivni: null, trvale: false, chybaSlozky: '', predObnovou: null };
   UL.aktivni = UL.prohlizec;
   const LZE_SLOZKU = typeof window.showDirectoryPicker === 'function';
-  /** at startup: the folder if chosen and permitted; 'prompt' = waiting for permission (button) */
-  async function pripravUloziste() {
-    if (!LZE_SLOZKU) return;
-    const h = await nastaveniProhlizece.cti('slozka').catch(() => null);
-    if (!h) return;
-    UL.slozka = new SlozkaUloziste(h);
-    UL.stavSlozky = await UL.slozka.stav().catch(() => 'denied');
-    if (UL.stavSlozky === 'granted') UL.aktivni = UL.slozka;
+  const CEKA_SLOZKA = 'slozkaCeka';
+  const POLE_DAT = { profily: 'profily', profil: 'profil', vysledky: 'vysledky', statistiky: 'statistiky', oblibene: 'oblibene',
+    denik: 'denik', skryte: 'skryte', knihovnaSkryte: 'knihovnaSkryte', nastaveni: 'nastaveniHracu' };
+  const cteniChyby = new Map();
+  let zapisChyba = '';
+  const pruhyDat = ['#kdo .kdo-in', '#domu .obsah', '#novy .novy'].map(sel => {
+    const cil = $(sel), pruh = $('#ulozistePruh').content.firstElementChild.cloneNode(true);
+    if (sel.startsWith('#novy')) cil.before(pruh); else cil.prepend(pruh);
+    return pruh;
+  });
+  function hlasData(zprava) {
+    zapisChyba = zprava;
+    stavUloziste(); toast(zprava, 6000);
   }
-  const zapisy = {};                                 // writes to the same key run one after another (file in the folder)
+  const novaSlozka = h => new SlozkaUloziste(h, (e, k) => {
+    cteniChyby.delete(k); hlasData(chybaText(e));
+  });
+  /** Keep a browser snapshot while the chosen folder is unavailable, even across restarts. */
+  async function obnovSlozku(ul) {
+    const presun = async () => {
+      await ul.overVerzi();
+      let zaklad = await nastaveniProhlizece.cti(CEKA_SLOZKA);
+      if (zaklad) {
+        let revize;
+        do {
+          await frontaDat.dokonci();
+          revize = frontaDat.revize;
+          zaklad = await kopiruj(UL.prohlizec, ul, { zaklad });
+          await nastaveniProhlizece.zapis(CEKA_SLOZKA, zaklad);
+        } while (revize !== frontaDat.revize);
+      }
+    };
+    if (navigator.locks?.request) await navigator.locks.request('rusalka-prechod-uloziste', presun);
+    else await presun();
+  }
+  async function pripravUloziste() {
+    UL.predObnovou = await nastaveniProhlizece.cti('zaloha_pred_obnovou');
+    if (!LZE_SLOZKU) return;
+    const h = await nastaveniProhlizece.cti('slozka');
+    if (!h) return;
+    UL.slozka = novaSlozka(h);
+    try {
+      if (await UL.slozka.stav() === 'granted') {
+        await obnovSlozku(UL.slozka);
+        UL.aktivni = UL.slozka; frontaDat = novaFronta(UL.aktivni);
+        return;
+      }
+    } catch (e) { UL.chybaSlozky = chybaText(e); }
+    if (!(await nastaveniProhlizece.cti(CEKA_SLOZKA))) {
+      await nastaveniProhlizece.zapis(CEKA_SLOZKA, await snimekDat(UL.prohlizec));
+    }
+  }
+  async function pozadejTrvaleUloziste() {
+    try { UL.trvale = await navigator.storage?.persist?.(); } catch { /* The backup reminder still applies. */ }
+    stavUloziste();
+  }
+  function novaFronta(ul) {
+    return datoveZapisy(ul, (k, v) => {
+      if (UL.aktivni !== ul || !Object.hasOwn(POLE_DAT, k)) return;
+      S[POLE_DAT[k]] = k === 'profily' ? prevedProfily(v) : v ?? (k === 'profil' ? null : k === 'skryte' ? [] : {});
+      obnovDatoveUI([k]);
+    }, (k, e) => hlasData(t('app.ulozeniChyba', { chyba: chybaText(e) })));
+  }
+  let frontaDat = novaFronta(UL.aktivni);
   const data = {
     async cti(klic, vychozi) {
-      try { return (await UL.aktivni.ctiData(klic)) ?? vychozi; } catch (e) { toast(String(e.message || e), 6000); return vychozi; }
+      try { return (await UL.aktivni.ctiData(klic)) ?? vychozi; }
+      catch (e) { hlasData(t('app.dataCteni', { chyba: chybaText(e) })); return vychozi; }
     },
-    pis(klic, hodnota) {
-      const u = UL.aktivni;
-      zapisy[klic] = (zapisy[klic] || Promise.resolve()).then(() => u.zapisData(klic, hodnota))
-        .catch(e => toast(t('app.ulozeniChyba', { chyba: e.message || e }), 6000));
-    },
+    pis(klic, hodnota) { frontaDat.pis(klic, hodnota); },
   };
-  async function nactiTrvalaData() {
-    S.profily = (await data.cti('profily', null)) || [];
-    S.profily = S.profily.map(({ ai, ...p }) => ({ vek: 'dite', ...p }));
-    // fill in colour and picture for old profiles (written only if something changed)
-    const prevedene = S.profily.map(p => prevedProfil(p, S.profily));
-    if (JSON.stringify(prevedene) !== JSON.stringify(S.profily)) { S.profily = prevedene; data.pis('profily', S.profily); }
-    S.profil = await data.cti('profil', null);
-    S.vysledky = await data.cti('vysledky', {});
-    S.statistiky = await data.cti('statistiky', {});
-    S.oblibene = await data.cti('oblibene', {});
-    S.denik = await data.cti('denik', {});              // plays and accuracy per day (static/lib/stats.js)
-    S.knihovnaSkryte = await data.cti('knihovnaSkryte', {});
-    // each player's settings (display, keyboard, speed…); earlier only in this browser (localStorage): moved over once
-    S.nastaveniHracu = await data.cti('nastaveni', null);
-    if (!S.nastaveniHracu) {
-      S.nastaveniHracu = Object.fromEntries(S.profily.map(p => [p.id, uloz.cti('kt-nastaveni-' + p.id, null)]).filter(([, v]) => v));
-      if (Object.keys(S.nastaveniHracu).length) data.pis('nastaveni', S.nastaveniHracu);
+  function prevedProfily(profily) {
+    const vcetneStarych = (profily || []).map(({ ai, ...p }) => ({ vek: 'dite', ...p }));
+    return vcetneStarych.map(p => prevedProfil(p, vcetneStarych));
+  }
+  async function nactiTrvalaData({ noveUloziste = false, prvni = false, obnova = false } = {}) {
+    const ul = UL.aktivni, fronta = frontaDat;
+    await fronta.dokonci();
+    const revize = fronta.revize;
+    const prectene = await Promise.all(Object.keys(POLE_DAT).map(async k => {
+      try { return { k, v: await ul.ctiData(k) }; }
+      catch (chyba) { return { k, chyba }; }
+    }));
+    if (fronta !== frontaDat || revize !== fronta.revize) return false;
+    const zmeny = [];
+    for (const { k, v, chyba } of prectene) {
+      if (chyba) {
+        cteniChyby.set(k, chybaText(chyba));
+        if (!noveUloziste && !prvni) continue;
+      } else {
+        cteniChyby.delete(k);
+        fronta.cteno(k, v);
+      }
+      const pole = POLE_DAT[k], pred = S[pole];
+      if (k === 'profily') {
+        S.profily = prevedProfily(v);
+        if (v && (prvni || noveUloziste) && v.some(p => !p.smazano && (!p.obrazek || !p.barva || prevedProfil(p) !== p))) {
+          data.pis('profily', S.profily);
+        }
+      } else if (k === 'profil') {
+        if (prvni || noveUloziste || obnova) S.profil = v ?? null;
+      } else if (k === 'nastaveni' && v == null && !chyba) {
+        S.nastaveniHracu = Object.fromEntries(S.profily.map(p => [p.id, uloz.cti('kt-nastaveni-' + p.id, null)]).filter(([, hodnota]) => hodnota));
+        if (Object.keys(S.nastaveniHracu).length) data.pis('nastaveni', S.nastaveniHracu);
+      } else S[pole] = v ?? (k === 'skryte' ? [] : {});
+      if (!stejnaData(pred, S[pole])) zmeny.push(k);
     }
-    if (!viditelni(S.profily).some(p => p.id === S.profil)) S.profil = viditelni(S.profily)[0]?.id || null;
+    if (prvni || noveUloziste || obnova) {
+      const hraci = viditelni(S.profily);
+      if (!hraci.some(p => p.id === S.profil)) S.profil = hraci[0]?.id || null;
+    } else obnovDatoveUI(zmeny);
+    stavUloziste();
+    return true;
+  }
+  function obnovDatoveUI(zmeny) {
+    if (!zmeny.length) return;
+    const doma = !$('#domu').classList.contains('skryta');
+    if (zmeny.includes('profily')) {
+      if (S.profil && !viditelni(S.profily).some(p => p.id === S.profil) && doma) {
+        S.profil = null; uvodniObrazovka();
+      }
+      if (!$('#kdo').classList.contains('skryta')) vykresliKdo();
+      vykresliProfily();
+    }
+    if (doma && zmeny.includes('nastaveni')) nactiNastaveniHrace();
+    if (doma) vykresliPisne();
+    if (otevreno('#hraciOkno')) vykresliHrace();
   }
   let UKAZKY = null;
   /** the samples as library entries (Polozka[], see static/lib/library.js): their shelf, difficulty and composer */
@@ -301,64 +391,138 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
 
   // ------------------------------------------------------------ storage choice: browser / folder, backup and restore
   function stavUloziste() {
-    const el = $('#uloziste');
-    if (!el) return;
-    const slozka = UL.aktivni === UL.slozka && UL.slozka;
-    $('#ulozisteText').textContent = slozka ? t('app.dataSlozkaVybrana', { slozka: UL.slozka.nazev }) : t('app.dataProhlizec');
+    const slozka = UL.aktivni === UL.slozka;
+    const ceka = UL.slozka && !slozka;
+    const chybaCteni = cteniChyby.values().next().value;
+    const chyba = [UL.chybaSlozky, chybaCteni && t('app.dataCteni', { chyba: chybaCteni }), zapisChyba].filter(Boolean).join(' ');
+    const hlaska = ceka ? t('app.dataCeka', { slozka: UL.slozka.nazev }) : '';
+    for (const p of pruhyDat) {
+      p.classList.toggle('skryta', !hlaska && !chyba);
+      p.querySelector('.data-slozka').textContent = hlaska;
+      p.querySelector('.data-chyba').textContent = chyba;
+      p.querySelector('button').classList.toggle('skryta', !ceka);
+    }
+    $('#ulozisteText').textContent = [slozka ? t('app.dataSlozkaVybrana', { slozka: UL.slozka.nazev }) : t('app.dataProhlizec'), chyba].filter(Boolean).join(' · ');
     $('#ulozisteSlozka').textContent = t(slozka ? 'app.zmenitSlozku' : 'app.ukladatDoSlozky');
     $('#ulozisteSlozka').classList.toggle('skryta', !LZE_SLOZKU);
-    $('#ulozisteProhlizec').classList.toggle('skryta', !slozka);
-    $('#ulozistePovolit').classList.toggle('skryta', !(UL.slozka && UL.aktivni !== UL.slozka && UL.stavSlozky === 'prompt'));
+    $('#ulozisteProhlizec').classList.toggle('skryta', !UL.slozka);
+    $('#ulozistePovolit').classList.toggle('skryta', !ceka);
+    $('#ulozistePredObnovou').classList.toggle('skryta', !UL.predObnovou);
+    const pripominka = $('#ulozistePripominka'), kdy = uloz.cti('kt-zaloha', null);
+    pripominka.classList.toggle('skryta', slozka || UL.trvale);
+    pripominka.textContent = kdy ? t('app.dataPosledniZaloha', { datum: new Date(kdy).toLocaleDateString(JAZYK) }) : t('app.dataPripominka');
   }
-  async function prepniNa(ul) {
-    UL.aktivni = ul;
+  async function prepniNa(ul, { obnova = false } = {}) {
+    await frontaDat.dokonci();
+    const jina = UL.aktivni !== ul;
+    if (jina) {
+      UL.aktivni = ul; frontaDat = novaFronta(ul);
+      cteniChyby.clear(); zapisChyba = '';
+    }
+    stopVse();
     XML.clear(); NAZVY.clear(); ZDROJ.clear(); S.infoPisni = {};
-    await nactiTrvalaData();
-    vykresliProfily(); stavUloziste(); nactiPisne();
-    // other data (a restored backup, a chosen folder): start again from Who is playing, or New player if there is nobody
-    stopVse(); zavriOkno('settings');
+    await nactiTrvalaData({ noveUloziste: jina, obnova });
+    vykresliProfily(); nactiPisne();
     if (viditelni(S.profily).length) { vykresliKdo(); ukaz('kdo'); } else otevriProfil(null);
+    if (!obnova) zavriOkno('settings');
   }
-  $('#ulozistePovolit').onclick = async () => {
-    if ((await UL.slozka.povol().catch(() => 'denied')) === 'granted') { UL.stavSlozky = 'granted'; await prepniNa(UL.slozka); }
-    else toast(t('app.bezPovoleni'), 5000);
-  };
-  $('#ulozisteSlozka').onclick = async () => {
+  let meniData = false;
+  function priZmeneDat(fn) {
+    return async (...args) => {
+      if (meniData) return;
+      meniData = true;
+      try { await fn(...args); }
+      catch (e) { hlasData(t('app.ulozeniChyba', { chyba: chybaText(e) })); }
+      finally { meniData = false; }
+    };
+  }
+  async function povolSlozku() {
+    if (!UL.slozka || UL.aktivni === UL.slozka) return;
+    if (await UL.slozka.povol() !== 'granted') { toast(t('app.bezPovoleni'), 5000); return; }
+    await obnovSlozku(UL.slozka);
+    UL.chybaSlozky = '';
+    await prepniNa(UL.slozka);
+  }
+  $('#ulozistePovolit').onclick = priZmeneDat(povolSlozku);
+  for (const p of pruhyDat) p.querySelector('button').onclick = $('#ulozistePovolit').onclick;
+  $('#ulozisteSlozka').onclick = priZmeneDat(async () => {
     let h;
-    try { h = await window.showDirectoryPicker({ id: 'rusalka', mode: 'readwrite' }); } catch { return; }   // cancelled
-    const s = new SlozkaUloziste(h);
-    if ((await s.povol().catch(() => 'denied')) !== 'granted') { toast(t('app.slozkaNelze'), 5000); return; }
-    const maData = await s.maData();
-    await s.pripravit();
-    if (!maData && UL.aktivni !== s) {
-      if (confirm(t('app.slozkaPrazdna'))) await kopiruj(UL.aktivni, s);
+    try { h = await window.showDirectoryPicker({ id: 'rusalka', mode: 'readwrite' }); }
+    catch (e) { if (e.name === 'AbortError') return; throw e; }
+    const s = novaSlozka(h);
+    if (await s.povol() !== 'granted') { toast(t('app.slozkaNelze'), 5000); return; }
+    await s.overVerzi();
+    if (UL.slozka && await h.isSameEntry(UL.slozka.h)) {
+      await obnovSlozku(s);
+    } else {
+      let kopie = false;
+      if (!await s.maData()) {
+        kopie = await potvrd(t('app.slozkaPrazdna'), t('app.dataPrevzitAno'), t('app.dataBezPrevzeti'));
+        if (kopie === false) return;
+      }
+      await s.pripravit();
+      if (kopie) { await frontaDat.dokonci(); await kopiruj(UL.aktivni, s); }
+      await nastaveniProhlizece.smaz(CEKA_SLOZKA);
     }
     await nastaveniProhlizece.zapis('slozka', h);
-    UL.slozka = s; UL.stavSlozky = 'granted';
+    UL.slozka = s; UL.chybaSlozky = '';
     await prepniNa(s);
     toast(t('app.ukladaDo', { slozka: h.name }), 5000);
-  };
-  $('#ulozisteProhlizec').onclick = async () => {
+  });
+  $('#ulozisteProhlizec').onclick = priZmeneDat(async () => {
+    const kopie = await potvrd(t('app.dataPrevzit'), t('app.dataPrevzitAno'), t('app.dataBezPrevzeti'));
+    if (kopie === false) return;
+    if (kopie) {
+      if (await UL.slozka.povol() !== 'granted') { toast(t('app.bezPovoleni'), 5000); return; }
+      await frontaDat.dokonci();
+      if (UL.aktivni !== UL.slozka) await obnovSlozku(UL.slozka);
+      await kopiruj(UL.slozka, UL.prohlizec);
+    }
     await nastaveniProhlizece.smaz('slozka');
-    UL.slozka = null; UL.stavSlozky = null;
+    await nastaveniProhlizece.smaz(CEKA_SLOZKA);
+    UL.slozka = null; UL.chybaSlozky = ''; zapisChyba = '';
     await prepniNa(UL.prohlizec);
     toast(t('app.zpetProhlizec'), 5000);
-  };
-  $('#ulozisteZaloha').onclick = async () => {
-    const zip = await zalohaDat(UL.aktivni);
+  });
+  function stahniZalohu(zip, kdy, nazev) {
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([zip], { type: 'application/zip' }));
-    a.download = `${t('app.zalohaSoubor')} ${new Date().toISOString().slice(0, 10)}.zip`;
+    a.download = `${nazev} ${new Date(kdy).toISOString().slice(0, 10)}.zip`;
     a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-  };
-  $('#ulozisteObnova').onchange = async e => {
-    const f = e.target.files[0]; e.target.value = '';
-    if (!f) return;
+  }
+  $('#ulozisteZaloha').onclick = priZmeneDat(async () => {
     try {
-      const r = await obnovDat(UL.aktivni, new Uint8Array(await f.arrayBuffer()));
-      await prepniNa(UL.aktivni);
-      toast(t('app.obnoveno', { pisni: t('pisni', { n: r.pisni }), dat: r.dat }), 5000);
-    } catch (err) { toast(t('app.obnovaChyba', { chyba: chybaText(err) }), 6000); }
+      await frontaDat.dokonci();
+      const kdy = Date.now();
+      stahniZalohu(await zalohaDat(UL.aktivni), kdy, t('app.zalohaSoubor'));
+      uloz.pis('kt-zaloha', kdy); stavUloziste();
+    } catch (e) { hlasData(t('app.dataZalohaChyba', { chyba: chybaText(e) })); }
+  });
+  $('#ulozistePredObnovou').onclick = () => {
+    try { stahniZalohu(UL.predObnovou.zip, UL.predObnovou.kdy, t('app.dataPredObnovou')); }
+    catch (e) { hlasData(t('app.dataZalohaChyba', { chyba: chybaText(e) })); }
+  };
+  const obnovZeSouboru = priZmeneDat(async f => {
+    if (!await potvrd(t('app.dataPotvrditObnovu'), t('html.obnovit'))) return;
+    const ul = UL.aktivni;
+    let zprava, chyba;
+    try {
+      stopVse(); await frontaDat.dokonci();
+      if (f.size > MAX_ZIP) throw new Error(t('zip.limit'));
+      const r = await obnovDat(ul, new Uint8Array(await f.arrayBuffer()), { predObnovou: async zip => {
+        const zaloha = { kdy: Date.now(), zip };
+        await nastaveniProhlizece.zapis('zaloha_pred_obnovou', zaloha);
+        UL.predObnovou = zaloha;
+      } });
+      zprava = t('app.obnoveno', { pisni: t('pisni', { n: r.pisni }), dat: r.dat });
+    } catch (e) { chyba = t('app.obnovaChyba', { chyba: chybaText(e) }); }
+    finally { await prepniNa(ul, { obnova: true }); }
+    if (chyba) hlasData(chyba);
+    else { zapisChyba = ''; stavUloziste(); zavriOkno('settings'); toast(zprava, 5000); }
+  });
+  $('#ulozisteObnova').onchange = e => {
+    const f = e.target.files[0]; e.target.value = '';
+    if (f) obnovZeSouboru(f);
   };
 
   /** editor for a new song (from conversion or MIDI); the first save adds it to the library, later saves overwrite it */
@@ -1326,14 +1490,17 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#zmenitHrace').onclick = () => { jaMenu(false); vykresliKdo(); ukaz('kdo'); };
 
   /** in-app confirmation dialog instead of the system confirm (which some in-app browsers, e.g. Web MIDI Browser, do not show) */
-  function potvrd(text, ano) {
+  function potvrd(text, ano, preskocit) {
     return new Promise(hotovo => {
       $('#potvrzeniText').textContent = text; $('#potvrzeniAno').textContent = ano;
+      const dalsi = $('#potvrzeniPreskocit');
+      dalsi.textContent = preskocit || ''; dalsi.classList.toggle('skryta', !preskocit);
       const odkud = document.activeElement;
       $('#potvrzeni').classList.remove('skryta');
       $('#potvrzeniNe').focus();                         // the safe choice has the focus; Escape cancels
       const konec = v => { $('#potvrzeni').classList.add('skryta'); odkud?.focus?.(); hotovo(v); };
       $('#potvrzeniAno').onclick = () => konec(true);
+      dalsi.onclick = () => konec(null);
       $('#potvrzeniNe').onclick = () => konec(false);
     });
   }
@@ -2919,15 +3086,29 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   });
 
   prelozStranku();
-  pripravUloziste().then(nactiTrvalaData).finally(() => {
+  pozadejTrvaleUloziste();
+  let dataNactena = false, obnovujeData = false;
+  pripravUloziste().catch(e => hlasData(t('app.dataCteni', { chyba: chybaText(e) }))).then(() => nactiTrvalaData({ prvni: true })).finally(() => {
     // nobody plays here yet (no player, no folder): on rusalkapiano.com the introduction page first (static/prvni.js),
     // unless a song page sent them here to play its song
-    if (window.naUvodniStranku?.(jazyk(), viditelni(S.profily).length > 0 || !!UL.slozka || !!CEKA_PISEN)) return;
+    dataNactena = true;
+    if (window.naUvodniStranku?.(jazyk(), viditelni(S.profily).length > 0 || !!UL.slozka || !!CEKA_PISEN || !!zapisChyba || cteniChyby.size > 0)) return;
     vykresliProfily(); stavUloziste(); nactiPisne(); uvodniObrazovka(); oknoZAdresy();
   });
-  // songs added to the folder meanwhile (AI agent, Finder) appear after returning to the window
-  const obnovSeznam = () => { if (!$('#domu').classList.contains('skryta') && document.visibilityState === 'visible') nactiPisne(); };
-  window.addEventListener('focus', obnovSeznam);
-  document.addEventListener('visibilitychange', obnovSeznam);
+  // Refresh data and songs after a switch from another app, tab or window.
+  async function obnovDataPoNavratu() {
+    if (!dataNactena || obnovujeData || meniData || !$('#hra').classList.contains('skryta') || document.visibilityState !== 'visible') return;
+    obnovujeData = true;
+    try {
+      await nactiTrvalaData();
+      if (!$('#domu').classList.contains('skryta')) nactiPisne();
+    } finally { obnovujeData = false; }
+  }
+  window.addEventListener('focus', obnovDataPoNavratu);
+  window.addEventListener('pagehide', () => { void frontaDat.dokonci(); });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') void frontaDat.dokonci();
+    else obnovDataPoNavratu();
+  });
   midiStart();
 }

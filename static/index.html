@@ -34,6 +34,13 @@
 music via any AI chat) and play them on a MIDI piano or the on-screen keys. It needs JavaScript.
 <a href="en/">About Rusalka</a> · <a href="cs/" hreflang="cs">O Rusalce česky</a></p></noscript>
 
+<template id="ulozistePruh">
+  <aside class="data-pruh skryta">
+    <p class="data-slozka" role="status"></p>
+    <p class="data-chyba" role="alert"></p>
+    <button type="button" class="tlacitko data-povolit" data-t="html.povolit"></button>
+  </aside>
+</template>
 <main id="kdo" class="obrazovka nova skryta">
   <a class="logo-kdo logo-odkaz" href="en/"><img src="icons/logo.svg" alt="Rusalka"></a>
   <nav class="horni-menu"><label class="jazyk-pole"><span class="skryty-popis" data-t="rodice.jazykAplikace"></span><select class="jazyk-volba vyber-maly"></select></label><button class="text-tl menu-songs" data-t="menu.songs"></button><button class="text-tl menu-players" data-t="menu.players"></button><button class="text-tl menu-ai" data-t="menu.ai"></button><button class="text-tl menu-settings" data-t="menu.settings"></button><button id="oRusalce" class="text-tl menu-about" data-t="about.odkaz"></button><button class="text-tl menu-vse" data-t="menu.vse" aria-haspopup="dialog"></button></nav>
@@ -391,6 +398,8 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
       <p id="ulozisteText" class="okno-stav"></p>
       <div class="okno-krok"><button id="ulozistePovolit" class="tlacitko skryta" data-t="html.povolit"></button><p data-t="html.povolit.titul"></p></div>
       <div class="okno-krok"><button id="ulozisteZaloha" class="tlacitko sekundarni" data-t="html.zaloha"></button><p data-t="html.zaloha.titul"></p></div>
+      <p id="ulozistePripominka" class="okno-stav skryta"></p>
+      <div class="okno-krok"><button type="button" id="ulozistePredObnovou" class="tlacitko sekundarni skryta" data-t="app.dataPredObnovou"></button></div>
       <div class="okno-krok"><label id="ulozisteObnovit" class="tlacitko sekundarni" tabindex="0"><span data-t="html.obnovit"></span><input type="file" id="ulozisteObnova" accept=".zip" hidden></label><p data-t="html.obnovit.titul"></p></div>
       <div class="okno-krok"><button id="ulozisteSlozka" class="tlacitko sekundarni skryta"></button><p data-t="html.slozka.titul"></p></div>
       <div class="okno-krok"><button id="ulozisteProhlizec" class="tlacitko sekundarni skryta" data-t="html.jenProhlizec"></button><p data-t="html.jenProhlizec.popis"></p></div>
@@ -480,6 +489,7 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
   <div class="pauza-karta">
     <p id="potvrzeniText" class="potvrzeni-text"></p>
     <button id="potvrzeniAno" class="hrat-velke"></button>
+    <button type="button" id="potvrzeniPreskocit" class="polozka skryta"></button>
     <button id="potvrzeniNe" class="polozka" data-t="zrusit"></button>
   </div>
 </div>

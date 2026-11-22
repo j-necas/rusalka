@@ -87,3 +87,18 @@ test('this week means Monday to today, like the calendar column', () => {
   const k = kalendar([{ kdy: new Date(2026, 10, 12, 10).getTime() }, { kdy: new Date(2026, 10, 16, 10).getTime() }], ctvrtek);
   assert.deepEqual(k.tyden, { dny: 1, zahrani: 1 });
 });
+
+test('merging the diary keeps every player and day and prefers the fuller entry for a shared day', async () => {
+  const { sluc } = await import('../static/lib/merge.js');
+  assert.deepEqual(sluc('denik', { e: { '2026-11-20': [1, .8, 1], '2026-11-21': [2, 1.5, 2] }, f: { '2026-11-21': [1, .9, 1] } },
+    { e: { '2026-11-21': [1, .9, 1], '2026-11-22': [1, .6, 1] } }),
+    { e: { '2026-11-20': [1, .8, 1], '2026-11-21': [2, 1.5, 2], '2026-11-22': [1, .6, 1] }, f: { '2026-11-21': [1, .9, 1] } });
+});
+
+test('merging statistics preserves the newest 30 attempts across both histories', async () => {
+  const { sluc } = await import('../static/lib/merge.js');
+  const historie = (od, do_) => Array.from({ length: do_ - od + 1 }, (_, i) => ({ kdy: od + i }));
+  const st = sluc('statistiky', { e: { a: { posledni: 34, historie: historie(15, 34), takty: { 1: 2 } } } },
+    { e: { a: { posledni: 19, historie: historie(1, 19) } } });
+  assert.deepEqual(st.e.a, { posledni: 34, historie: historie(5, 34), takty: { 1: 2 } });
+});

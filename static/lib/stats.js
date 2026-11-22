@@ -2,6 +2,8 @@
 // and `vysledky` ({ file: { cekam|pockej|tempo: { hvezdy } } }). Three questions: practising regularly? improving? stuck where?
 import { umim, doporuceni, nejrychlejsiCisty } from './recommend.js';
 
+export const MAX_HISTORIE = 30;
+
 const pulnoc = t => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
 const denKlic = t => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 const denZpet = (t, n) => { const d = new Date(t); return new Date(d.getFullYear(), d.getMonth(), d.getDate() - n).getTime(); };   // midnight n days back (DST-safe)
