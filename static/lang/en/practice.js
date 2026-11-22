@@ -116,6 +116,10 @@ export default {
   'cviceni.kontrola.soucet': 'note lengths add up to {soucet} instead of {metrum}',
 
   // errors when reading and drawing notes (song.js, render.js)
+  "cviceni.chyba.mxlNeniZip": "the .mxl file is not a ZIP archive",
+  "cviceni.chyba.mxlBezNot": "there is no sheet music in the archive",
+  "cviceni.chyba.necitelneXml": "the file could not be read",
+  "cviceni.chyba.jenPartwise": "only partwise MusicXML is supported",
   'cviceni.chyba.zadneNoty': 'there are no notes in the file',
   'cviceni.chyba.vykresleni': 'the notes could not be drawn',
   'cviceni.chyba.prazdnaPisen': 'there are no notes in the song',

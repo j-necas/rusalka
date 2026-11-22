@@ -1,8 +1,10 @@
 import './setup.mjs';
 import { test } from 'node:test';
+import { nastavJazyk } from '../static/lib/texts.js';
+
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { zMusicXml, rozvin } from '../static/lib/song.js';
+import { naMusicXml, zMusicXml, rozvin } from '../static/lib/song.js';
 import { pripravOriginal, doplnTempo, doplnPosuvky } from '../static/lib/original.js';
 import { zpracujVerovio } from '../static/lib/render.js';
 
@@ -124,4 +126,37 @@ test('bezCeskehoH: in the English system text="H" on chord B disappears, in Czec
   const xml = '<harmony><root><root-step text="H">B</root-step></root><bass><bass-step text="H">B</bass-step></bass></harmony>';
   assert.equal(bezCeskehoH(xml, 'en'), '<harmony><root><root-step>B</root-step></root><bass><bass-step>B</bass-step></bass></harmony>');
   assert.equal(bezCeskehoH(xml, 'cs'), xml);
+});
+
+test('Original MusicXML errors use the active language', () => {
+  nastavJazyk('en');
+  try {
+    assert.throws(() => pripravOriginal('<broken>', []), /file could not be read/);
+    assert.throws(() => pripravOriginal('<score-timewise/>', []), /only partwise MusicXML/);
+    assert.throws(() => pripravOriginal('<score-partwise/>', []), /no notes in the file/);
+  } finally { nastavJazyk('cs'); }
+});
+
+test('generated quintuplets retain the playback timing in Verovio', async () => {
+  const noty = [...'CDEFGA'].map((k, i) => ({ t: k + '4', d: i < 5 ? '1/20' : '1/4' }));
+  const p = { takt: '2/4', klic: 'houslovy', tempo: 120, takty: [{ noty }] };
+  const { noty: hrano } = zpracujVerovio(await verovio(), naMusicXml(p), p);
+  assert.deepEqual(hrano.map(n => Math.round(n.q * 5)), [0, 1, 2, 3, 4, 5]);
+});
+
+test('generated gap rests keep the following note onset in Verovio', async () => {
+  const p = zMusicXml('<score-partwise><part id="P1"><measure number="1">'
+    + '<attributes><divisions>4</divisions></attributes><forward><duration>5</duration></forward>'
+    + '<note><pitch><step>C</step><octave>4</octave></pitch><duration>4</duration></note>'
+    + '</measure></part></score-partwise>');
+  const { noty } = zpracujVerovio(await verovio(), naMusicXml(p), p);
+  assert.equal(noty[0].q, 1.25);
+});
+
+test('isolated tuplet fragments preserve the next onset in generated sheet music', async () => {
+  const p = { takt: '2/4', tempo: 120, takty: [{ noty: [
+    { t: 'C4', d: '1/12', lig: true }, { t: 'C4', d: '1/48' }, { t: 'D4', d: '1/4' },
+  ] }] };
+  const { noty } = zpracujVerovio(await verovio(), naMusicXml(p), p);
+  assert.ok(Math.abs(noty.find(n => n.pitch === 62).q - 5 / 12) < 1e-6);
 });

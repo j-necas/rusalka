@@ -57,3 +57,7 @@ test('the default note names follow the language', () => {
   for (const j of ['en', 'ja', 'zh-CN', 'hi']) assert.equal(vychoziSoustava(j), 'en', j);
   for (const j of ['fr', 'es', 'it', 'pt', 'pt-BR', 'ru', 'uk', 'ar']) assert.equal(vychoziSoustava(j), 'do', j);
 });
+
+test('Czech double flats use Eses and Ases', () => {
+  assert.deepEqual(['e', 'a', 'b', 'g'].map(k => nazevKroku(k, -2, 'cs')), ['Eses', 'Ases', 'Heses', 'Geses']);
+});

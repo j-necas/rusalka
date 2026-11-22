@@ -12,7 +12,7 @@
 //     akordy: [{ doba: number, znacka: string }],   // doba = position in the bar in quarter beats from the bar start
 //     noty:  [Nota],                                  // melody (right hand)
 //     leva?: [Nota],                                  // left hand (optional)
-//     znacky?: { zacatekRepetice?, konecRepetice?, volta?: number[], segno?, coda?, doCody?, fine?, dc?, ds? }
+//     znacky?: { zacatekRepetice?, konecRepetice?, pocetPruchodu?, volta?: number[], segno?, coda?, doCody?, fine?, dc?, ds? }
 //   }],
 //   nejistoty?: string[]
 // }
@@ -37,16 +37,28 @@ export function naZlomek(q) {
   for (const den of [1, 2, 4, 8, 16, 32, 64, 3, 6, 12, 24, 48, 96]) {
     const num = q / 4 * den;
     if (Math.abs(num - Math.round(num)) < 1e-6 && Math.round(num) > 0) {
-      let a = Math.round(num), b = den;
-      const g = gcd(a, b);
-      return `${a / g}/${b / g}`;
+      return kracenyZlomek(Math.round(num), den);
     }
   }
   return null;
 }
 function gcd(a, b) { return b ? gcd(b, a % b) : a; }
+const kracenyZlomek = (a, b) => { const g = gcd(a, b); return `${a / g}/${b / g}`; };
+/** Recover a fraction from a MusicXML cursor, also when divisions change within a bar. */
+export function naPresnyZlomek(q) {
+  const cil = q / 4;
+  if (!(cil > 0) || !Number.isFinite(cil)) return null;
+  let a = 0, b = 1, c = 1, d = 0, x = cil;
+  while (true) {
+    const k = Math.floor(x), n = k * c + a, j = k * d + b;
+    if (j > 1000000 || !Number.isSafeInteger(n)) return c && d ? `${c}/${d}` : null;
+    if (n && Math.abs(n / j - cil) < 1e-10) return `${n}/${j}`;
+    [a, b, c, d] = [c, d, n, j];
+    x = 1 / (x - k);
+  }
+}
 
-const TYPY = [[4, 'whole'], [2, 'half'], [1, 'quarter'], [0.5, 'eighth'], [0.25, '16th'], [0.125, '32nd']];
+const TYPY = [[4, 'whole'], [2, 'half'], [1, 'quarter'], [0.5, 'eighth'], [0.25, '16th'], [0.125, '32nd'], [0.0625, '64th']];
 /** duration in quarter beats → { typ, tecky, trioly } for writing as a single note, otherwise null */
 export function typNoty(q) {
   for (const trioly of [false, true]) {
@@ -58,6 +70,32 @@ export function typNoty(q) {
     }
   }
   return null;
+}
+/** Recover common tuplets from a reduced sounding duration; the original score keeps its printed grouping. */
+function zapisDelky(d) {
+  const q = zlomek(d);
+  const typ = typNoty(q);
+  if (typ) return typ.trioly ? { ...typ, skutecne: 3, normalni: 2 } : typ;
+  let skutecne = Number(String(d).split('/')[1]);
+  while (skutecne > 0 && skutecne % 2 === 0) skutecne /= 2;
+  if (!(skutecne > 1)) return null;
+  const normalni = 2 ** Math.floor(Math.log2(skutecne));
+  const psany = typNoty(q * skutecne / normalni);
+  return psany && !psany.trioly ? { ...psany, skutecne, normalni } : null;
+}
+const DELKY_PO_CASTECH = [4, 3, 2, 1.5, 1, 0.75, 2 / 3, 0.5, 0.375, 1 / 3, 0.25, 1 / 6, 0.125, 1 / 12];
+/** Split a duration into writable notes, keeping any remainder outside the common grid. */
+export function rozlozDelku(q) {
+  const out = [];
+  if (!Number.isFinite(q)) return out;
+  let zbyva = q;
+  while (zbyva > 1e-8) {
+    // Every integer number of ticks >= 2 can be written with 2- and 3-tick notes.
+    const d = DELKY_PO_CASTECH.find(x => x <= zbyva + 1e-8 && Math.abs((zbyva - x) * DIV - 1) > 1e-8) || zbyva;
+    out.push(d);
+    zbyva -= d;
+  }
+  return out;
 }
 /** '3/4' → { beats, beatType, delka (in quarter beats), doba (beaming) } */
 export function metrum(takt) {
@@ -85,7 +123,24 @@ export function vysky(t) {
   return String(t).trim().split(/\s+/).map(vyska).filter(Boolean);
 }
 /** MIDI → pitch spelled according to the key signature ('F#4' in D major, 'Gb4' in D-flat major) */
-export function zMidi(midi, predznamenani = 0) {
+export function zMidi(midi, predznamenani = 0, moll) {
+  if (typeof moll === 'boolean') {
+    const pc = m => ((m % 12) + 12) % 12;
+    const nazev = (krok, alter) => krok + ({ '-2': 'bb', '-1': 'b', 1: '#', 2: '##' }[alter] || '')
+      + ((midi - KROK_PC[krok] - alter) / 12 - 1);
+    const diatonicky = [...KROKY].find(k => pc(KROK_PC[k] + alterVTonine(k, predznamenani)) === pc(midi));
+    if (diatonicky) return nazev(diatonicky, alterVTonine(diatonicky, predznamenani));
+    const dur = ((4 * predznamenani) % 7 + 7) % 7;
+    const tonika = KROKY[moll ? (dur + 5) % 7 : dur];
+    const odToniky = pc(midi - KROK_PC[tonika] - alterVTonine(tonika, predznamenani));
+    // Chromatic degrees relative to the tonic: borrowed thirds/sixths/sevenths in major and raised sixth/seventh in minor.
+    const stupen = (moll ? { 1: 1, 4: 2, 6: 3, 9: 5, 11: 6 } : { 1: 0, 3: 2, 6: 3, 8: 5, 10: 6 })[odToniky];
+    if (stupen != null) {
+      const krok = KROKY[(KROKY.indexOf(tonika) + stupen) % 7];
+      const alter = pc(midi - KROK_PC[krok] + 6) - 6;
+      if (Math.abs(alter) <= 2) return nazev(krok, alter);
+    }
+  }
   const pc = ((midi % 12) + 12) % 12, okt = Math.floor(midi / 12) - 1;
   const krizky = ['C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
   const becka = ['Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
@@ -129,7 +184,7 @@ export function kontrolaPolozky(pisen) {
       const takt = i + 1;
       for (const nota of noty) {
         if (zlomek(nota.d) == null) out.push({ takt, leva, druh: 'neznamaDelka', d: nota.d });
-        else if (!typNoty(zlomek(nota.d))) out.push({ takt, leva, druh: 'nezapisovatelna', d: nota.d });
+        else if (!zapisDelky(nota.d)) out.push({ takt, leva, druh: 'nezapisovatelna', d: nota.d });
         if (nota.t !== 'r' && !vysky(nota.t).length) out.push({ takt, leva, druh: 'neznamaVyska', t: nota.t });
       }
       const s = soucetTaktu(noty);
@@ -158,39 +213,47 @@ export function kontrola(pisen) {
 
 /**
  * Unrolls repeats, voltas, D.C./D.S. al Fine/Coda into a linear order. Returns { pisen, poradi }, where poradi[i] is
- * the index of the original bar (for mapping mistakes back and for the editor). Nested repeats are not supported
- * (the outer one is used).
+ * the index of the original bar (for mapping mistakes back and for the editor). Nested repeats are not supported.
  */
 export function rozvin(pisen) {
   const T = pisen.takty, poradi = [];
-  const z = i => T[i].znacky || {};
-  let i = 0, pruchod = 1, zacatek = 0, skok = false, poSkoku = false, ochrana = 0;
-  const hrano = new Set();                                   // pairs "end of repeat already repeated"
-  while (i < T.length && ochrana++ < 10000) {
-    const zi = z(i);
-    if (zi.zacatekRepetice && !hrano.has('start' + i)) { zacatek = i; hrano.add('start' + i); pruchod = 1; }
-    if (zi.volta && zi.volta.length && !zi.volta.includes(pruchod)) {   // skip a volta of a different pass
-      i++; continue;
-    }
-    if (poSkoku && zi.doCody) {                               // "To Coda" after D.S./D.C. → jump to the Coda
-      const c = T.findIndex(t => (t.znacky || {}).coda);
+  const znacky = T.map(t => t.znacky || {});
+  const repetice = [];
+  let zacatek = 0;
+  for (let i = 0; i < T.length; i++) {
+    if (znacky[i].zacatekRepetice) zacatek = i;
+    if (!znacky[i].konecRepetice) continue;
+    let konec = i;
+    while (znacky[konec + 1]?.volta?.length && !znacky[konec + 1].zacatekRepetice) konec++;
+    const usek = znacky.slice(zacatek, konec + 1);
+    const pocet = Math.max(0, ...usek.map(z => z.pocetPruchodu || 0))
+      || Math.max(2, ...usek.flatMap(z => z.volta || []));
+    const rep = { zacatek, konec, pocet, pruchod: 1 };
+    for (let j = zacatek; j <= konec; j++) repetice[j] = rep;
+    zacatek = konec + 1;
+    i = konec;
+  }
+  let i = 0, skok = false, poSkoku = false, ochrana = 0;
+  while (i < T.length && ochrana++ < Math.max(10000, T.length * 2)) {
+    const zi = znacky[i], rep = repetice[i];
+    const pruchod = rep ? (poSkoku ? rep.pocet : rep.pruchod) : 1;
+    const hraje = !zi.volta?.length || zi.volta.includes(pruchod);
+    if (hraje) {
       poradi.push(i);
-      if (c >= 0) { i = c; poSkoku = false; continue; }
-    } else poradi.push(i);
-    if (poSkoku && zi.fine) break;
-    if (zi.konecRepetice && hrano.has('konec' + i)) {         // repeat played → the next one without a start begins here
-      zacatek = i + 1; pruchod = 1;
+      if (poSkoku && zi.fine) break;
+      if (poSkoku && zi.doCody) {
+        const c = znacky.findIndex((z, j) => j > i && z.coda && !z.doCody);
+        if (c >= 0) { i = c; poSkoku = false; continue; }
+      }
     }
-    if (zi.konecRepetice && !hrano.has('konec' + i)) {
-      hrano.add('konec' + i);
-      pruchod++;
-      i = zacatek;
-      hrano.delete('start' + zacatek); hrano.add('start' + zacatek);   // a start does not reset the pass
+    if (rep && pruchod < rep.pocet && ((hraje && zi.konecRepetice) || i === rep.konec)) {
+      rep.pruchod++;
+      i = rep.zacatek;
       continue;
     }
-    if ((zi.dc || zi.ds) && !skok) {
-      skok = true; poSkoku = true; pruchod = 1;
-      i = zi.ds ? Math.max(0, T.findIndex(t => (t.znacky || {}).segno)) : 0;
+    if (hraje && (zi.dc || zi.ds) && !skok) {
+      skok = true; poSkoku = true;
+      i = zi.ds ? Math.max(0, znacky.findIndex(z => z.segno)) : 0;
       continue;
     }
     i++;
@@ -206,19 +269,24 @@ export function rozvin(pisen) {
 // ---------------------------------------------------------------- chord symbols
 /** 'Hmi' / 'Bm' / 'F#7/C#' → { koren: 'B', alter, druh (MusicXML kind), text, bas: {krok, alter} | null } */
 export function akordZnacky(znacka) {
-  const m = String(znacka ?? '').trim().match(/^([A-Ha-h])(#|b|is|es)?([^/]*)(?:\/([A-Ha-h])(#|b)?)?$/);
+  const m = String(znacka ?? '').trim().match(/^([A-Ha-h])(##|#|bb|b|isis|is|eses|ses|es|s(?!us))?([^/]*)(?:\/([A-Ha-h])(##|#|bb|b|isis|is|eses|ses|es|s)?)?$/i);
   if (!m) return null;
-  const koren = m[1].toUpperCase() === 'H' ? 'B' : m[1].toUpperCase();
-  const alter = { '#': 1, is: 1, b: -1, es: -1 }[m[2]] || 0;
+  const krok = s => s.toUpperCase().replace('H', 'B');
+  const posuvka = (k, s) => k.toUpperCase() === 'B' && s?.toLowerCase() === 'es' ? -2
+    : ({ '#': 1, is: 1, '##': 2, isis: 2, b: -1, es: -1, s: -1, bb: -2, eses: -2, ses: -2 }[s?.toLowerCase()] || 0);
+  const koren = krok(m[1]), alter = posuvka(m[1], m[2]);
   const q = (m[3] || '').trim();
-  const ql = q.toLowerCase().replace(/^mi(?=$|\d|n)/, 'm').replace(/^min/, 'm');
-  const druh = /^(maj7|Δ|ma7)/i.test(q) ? 'major-seventh' : /^m7b5|ø/.test(ql) ? 'half-diminished'
+  const ql = q.replace(/^min/i, 'm').replace(/^mi(?=$|\d)/i, 'm').toLowerCase();
+  const druh = /^(M9|maj9|ma9)/.test(q) || /^(maj9|ma9)/.test(ql) ? 'major-ninth'
+    : /^(M7|Δ)/.test(q) || /^(maj7|ma7)/.test(ql) ? 'major-seventh'
+    : q === 'M' ? 'major' : q === '5' ? 'power' : /^m7b5|ø/.test(ql) ? 'half-diminished'
     : /^(dim7|°7)/.test(ql) ? 'diminished-seventh' : /^(dim|°)/.test(ql) ? 'diminished'
-      : /^(aug|\+)/.test(ql) ? 'augmented' : /^m7/.test(ql) ? 'minor-seventh' : /^m6/.test(ql) ? 'minor-sixth'
+      : /^(aug7|\+7)/.test(ql) ? 'augmented-seventh' : /^(aug|\+)/.test(ql) ? 'augmented'
+      : /^mmaj7/.test(ql) ? 'major-minor' : /^m7/.test(ql) ? 'minor-seventh' : /^m6/.test(ql) ? 'minor-sixth'
         : /^m9/.test(ql) ? 'minor-ninth' : /^m(?!aj)/.test(ql) ? 'minor' : /^sus2/.test(ql) ? 'suspended-second'
           : /^sus/.test(ql) ? 'suspended-fourth' : /^9/.test(ql) ? 'dominant-ninth' : /^7/.test(ql) ? 'dominant'
             : /^6/.test(ql) ? 'major-sixth' : 'major';
-  const bas = m[4] ? { krok: m[4].toUpperCase() === 'H' ? 'B' : m[4].toUpperCase(), alter: m[5] === '#' ? 1 : m[5] === 'b' ? -1 : 0 } : null;
+  const bas = m[4] ? { krok: krok(m[4]), alter: posuvka(m[4], m[5]) } : null;
   return { koren, alter, druh, text: q, bas };
 }
 export const DRUHY = {
@@ -281,12 +349,35 @@ function tramce(noty, doba) {
 
 const POSUVKY = { '-2': 'flat-flat', '-1': 'flat', 0: 'natural', 1: 'sharp', 2: 'double-sharp' };
 
-/** one staff of a bar → note XML; stav = { lig: Set midi, slovo, trioly } carried across bars */
-function notyXml(noty, staff, stav, sAkordy, doba, predznamenani = 0) {
+/** A mixed tuplet is complete when its lengths add up to a full group of the shortest written unit. */
+function skupinyTuplet(noty, typy) {
+  let prvni = 0, soucet = 0, jednotka = Infinity;
+  const uzavri = i => {
+    if (soucet) typy[prvni].zacatek = typy[i].konec = true;
+    soucet = 0;
+  };
+  for (let i = 0; i < noty.length; i++) {
+    const ty = typy[i];
+    if (soucet && typy[prvni].skutecne !== ty?.skutecne) uzavri(i - 1);
+    if (!ty?.skutecne) continue;
+    if (!soucet) { prvni = i; jednotka = Infinity; }
+    const q = zlomek(noty[i].d);
+    soucet += q;
+    jednotka = Math.min(jednotka, q / (2 - 1 / 2 ** ty.tecky));
+    const skupin = soucet / (jednotka * ty.skutecne);
+    if (Math.round(skupin) > 0 && Math.abs(skupin - Math.round(skupin)) < 1e-6) uzavri(i);
+  }
+  uzavri(noty.length - 1);
+}
+
+/** one staff of a bar → note XML; stav = { lig: Set midi, slovo } carried across bars */
+function notyXml(noty, staff, stav, sAkordy, doba, predznamenani, div) {
   const x = [];
   // accidentals valid in this bar and staff: step+octave → alter (otherwise the key signature applies)
   const platne = new Map();
   const tram = tramce(noty, doba);
+  const typy = noty.map(n => zapisDelky(n.d));
+  skupinyTuplet(noty, typy);
   let pos = 0;
   const akordy = [...(sAkordy || [])];
   noty.forEach((n, i) => {
@@ -295,20 +386,19 @@ function notyXml(noty, staff, stav, sAkordy, doba, predznamenani = 0) {
     const tady = akordy.filter(a => { const dd = Number(a.doba) || 0; return dd >= pos - 1e-6 && (dd < dalsi - 1e-6 || i === noty.length - 1); })
       .sort((a, b) => (Number(a.doba) || 0) - (Number(b.doba) || 0));
     for (const a of tady) {
-      x.push(harmonyXml(a.znacka, Math.round(((Number(a.doba) || 0) - pos) * DIV)));
+      x.push(harmonyXml(a.znacka, Math.round(((Number(a.doba) || 0) - pos) * div)));
       akordy.splice(akordy.indexOf(a), 1);
     }
-    const ty = typNoty(q) || { typ: 'quarter', tecky: 0, trioly: false };
-    const dur = Math.max(1, Math.round(q * DIV));
+    const ty = typy[i] || { typ: 'quarter', tecky: 0 };
+    const dur = Math.max(1, Math.round(q * div));
     const vs = vysky(n.t);
     const notations = [];
     let tupl = '';
-    if (ty.trioly) {
-      stav.trioly = (stav.trioly + 1) % 3;
-      if (stav.trioly === 1) notations.push('<tuplet type="start" bracket="yes"/>');
-      if (stav.trioly === 0) notations.push('<tuplet type="stop"/>');
-      tupl = '<time-modification><actual-notes>3</actual-notes><normal-notes>2</normal-notes></time-modification>';
-    } else stav.trioly = 0;
+    if (ty.skutecne) {
+      if (ty.zacatek) notations.push('<tuplet type="start" bracket="yes"/>');
+      if (ty.konec) notations.push('<tuplet type="stop"/>');
+      tupl = `<time-modification><actual-notes>${ty.skutecne}</actual-notes><normal-notes>${ty.normalni}</normal-notes></time-modification>`;
+    }
     if (!vs.length) {
       x.push(`<note><rest/><duration>${dur}</duration><voice>${staff}</voice><type>${ty.typ}</type>${'<dot/>'.repeat(ty.tecky)}${tupl}`
         + `${staff > 1 ? `<staff>${staff}</staff>` : ''}${notations.length ? `<notations>${notations.join('')}</notations>` : ''}</note>`);
@@ -353,18 +443,30 @@ export function naMusicXml(pisen) {
   const met = metrum(pisen.takt);
   const fifths = Math.max(-7, Math.min(7, Number(pisen.predznamenani) || 0));
   const dveOsnovy = pisen.takty.some(t => t.leva && t.leva.length);
-  const stavP = { lig: new Set(), slovo: false, trioly: 0 }, stavL = { lig: new Set(), slovo: false, trioly: 0 };
+  let div = DIV;
+  for (const t of pisen.takty) for (const n of [...(t.noty || []), ...(t.leva || [])]) {
+    const [, a, b] = /^(\d+)\/(\d+)$/.exec(String(n.d).trim()) || [];
+    if (!Number.isSafeInteger(+b) || !Number.isSafeInteger(+a * 4) || +b === 0) continue;
+    const d = +b / gcd(+a * 4, +b);
+    const nove = div / gcd(div, d) * d;
+    if (nove <= 1000000) div = nove;
+  }
+  const stavP = { lig: new Set(), slovo: false }, stavL = { lig: new Set(), slovo: false };
   const takty = pisen.takty.map((t, ti) => {
     const x = [`<measure number="${ti + 1}">`];
     const z = t.znacky || {};
-    if (z.zacatekRepetice || (z.volta && z.volta.length) || z.segno || z.coda) {
+    const pred = pisen.takty[ti - 1]?.znacky || {}, dalsi = pisen.takty[ti + 1]?.znacky || {};
+    const volta = z.volta?.join(',') || '';
+    const voltaZac = volta && (volta !== pred.volta?.join(',') || pred.konecRepetice || z.zacatekRepetice);
+    const voltaKon = volta && (volta !== dalsi.volta?.join(',') || z.konecRepetice || dalsi.zacatekRepetice);
+    if (z.zacatekRepetice || voltaZac || z.segno || z.coda) {
       x.push('<barline location="left">' + (z.zacatekRepetice ? '<bar-style>heavy-light</bar-style><repeat direction="forward"/>' : '')
-        + (z.volta && z.volta.length ? `<ending number="${z.volta.join(',')}" type="start">${z.volta.join('., ')}.</ending>` : '')
+        + (voltaZac ? `<ending number="${volta}" type="start">${z.volta.join('., ')}.</ending>` : '')
         + (z.segno ? '<segno/>' : '') + (z.coda ? '<coda/>' : '') + '</barline>');
     }
     if (ti === 0) {
       const klic = pisen.klic === 'basovy' ? '<sign>F</sign><line>4</line>' : '<sign>G</sign><line>2</line>';
-      x.push(`<attributes><divisions>${DIV}</divisions><key><fifths>${fifths}</fifths></key>`
+      x.push(`<attributes><divisions>${div}</divisions><key><fifths>${fifths}</fifths></key>`
         + `<time><beats>${met.beats}</beats><beat-type>${met.beatType}</beat-type></time>`
         + (dveOsnovy ? `<staves>2</staves><clef number="1">${klic}</clef><clef number="2"><sign>F</sign><line>4</line></clef>`
           : `<clef>${klic}</clef>`) + '</attributes>');
@@ -375,20 +477,20 @@ export function naMusicXml(pisen) {
     if (z.dc) slova.push('D.C.');
     if (z.ds) slova.push('D.S.');
     if (z.doCody) slova.push('To Coda');
-    const prava = notyXml(t.noty || [], 1, stavP, t.akordy, met.doba, fifths);
+    const prava = notyXml(t.noty || [], 1, stavP, t.akordy, met.doba, fifths, div);
     x.push(prava.xml);
     if (dveOsnovy) {
-      x.push(`<backup><duration>${Math.round(prava.delka * DIV)}</duration></backup>`);
-      const lv = t.leva && t.leva.length ? t.leva : [{ t: 'r', d: naZlomek(prava.delka > 0 ? prava.delka : met.delka) || '1/1' }];
-      x.push(notyXml(lv, 2, stavL, [], met.doba, fifths).xml);
+      x.push(`<backup><duration>${Math.round(prava.delka * div)}</duration></backup>`);
+      const lv = t.leva && t.leva.length ? t.leva : [{ t: 'r', d: naPresnyZlomek(prava.delka || met.delka) || '1/1' }];
+      x.push(notyXml(lv, 2, stavL, [], met.doba, fifths, div).xml);
     }
     if (slova.length) x.push(`<direction placement="above"><direction-type><words>${slova.join(' ')}</words></direction-type></direction>`);
     const posledni = ti === pisen.takty.length - 1;
-    if (z.konecRepetice || (z.volta && z.volta.length) || posledni) {
+    if (z.konecRepetice || voltaKon || posledni) {
       x.push('<barline location="right">'
         + (z.konecRepetice ? '<bar-style>light-heavy</bar-style>' : posledni ? '<bar-style>light-heavy</bar-style>' : '')
-        + (z.volta && z.volta.length ? `<ending number="${z.volta.join(',')}" type="${z.konecRepetice ? 'stop' : 'discontinue'}"/>` : '')
-        + (z.konecRepetice ? '<repeat direction="backward"/>' : '') + '</barline>');
+        + (voltaKon ? `<ending number="${volta}" type="${z.konecRepetice ? 'stop' : 'discontinue'}"/>` : '')
+        + (z.konecRepetice ? `<repeat direction="backward"${z.pocetPruchodu ? ` times="${z.pocetPruchodu}"` : ''}/>` : '') + '</barline>');
     }
     x.push('</measure>');
     return x.join('');
@@ -405,6 +507,15 @@ export function naMusicXml(pisen) {
 const deti = (el, tag) => [...(el?.childNodes || [])].filter(c => c.nodeType === 1 && c.tagName === tag);
 const dite = (el, tag) => deti(el, tag)[0] || null;
 const text = (el, tag) => (dite(el, tag)?.textContent || '').trim();
+const ZKRATKY_AKORDU = {
+  major: '', minor: 'm', dominant: '7', 'major-seventh': 'maj7', 'minor-seventh': 'm7',
+  diminished: 'dim', 'diminished-seventh': 'dim7', augmented: 'aug', 'half-diminished': 'm7b5',
+  'augmented-seventh': 'aug7', 'major-minor': 'mMaj7', 'major-sixth': '6', 'minor-sixth': 'm6',
+  'dominant-ninth': '9', 'minor-ninth': 'm9', 'major-ninth': 'maj9', 'suspended-fourth': 'sus4',
+  'suspended-second': 'sus2', power: '5',
+};
+const znackaKroku = (el, tag) => text(el, tag + '-step')
+  + ({ 1: '#', 2: '##', '-1': 'b', '-2': 'bb' }[Math.round(Number(text(el, tag + '-alter')))] || '');
 
 /** "no notes in the file" error; klic = text in the app language (t(e.klic) from texts.js), message stays Czech */
 const bezNot = () => Object.assign(new Error('v souboru nejsou noty'), { klic: 'cviceni.chyba.zadneNoty' });
@@ -421,33 +532,62 @@ export function zMusicXml(xml) {
   const part = deti(koren, 'part')[0];
   if (!part) throw bezNot();
   const pisen = { nazev, autor, klic: 'houslovy', predznamenani: 0, takt: '4/4', tempo: 0, takty: [], nejistoty: [] };
-  let div = 1, prvniAttr = true;
-  const lig = { 1: new Set(), 2: new Set() };
+  let div = 1, volta = null;
+  let maToninu = false, maTakt = false, maKlic = false;
+  const minulyHlas = {};
   for (const m of deti(part, 'measure')) {
-    const takt = { akordy: [], noty: [], znacky: {} };
+    const takt = { akordy: [], noty: [], znacky: volta ? { volta } : {} };
     const leva = [];
-    let pos = 0;
-    const hlas = {};                                      // the first voice that appears on the staff
-    let posledniNota = { 1: null, 2: null };
+    let pos = 0, posledniOsnova = 1;
+    const hlas = {};                                      // the first regular voice on each staff
+    for (const el of deti(m, 'note')) {
+      if (dite(el, 'grace') || dite(el, 'cue')) continue;
+      hlas[Number(text(el, 'staff') || 1)] ??= text(el, 'voice') || '1';
+    }
+    const posledniNota = {}, konecHlasu = { 1: 0, 2: 0 }, vyplnitDo = { 1: 0, 2: 0 };
+    const doplnPauzu = (staff, konec) => {
+      const mezera = konec - konecHlasu[staff];
+      if (mezera <= 1e-8) return;
+      const d = naPresnyZlomek(mezera);
+      const cil = staff === 1 ? takt.noty : leva;
+      for (const delka of zapisDelky(d) ? [d] : rozlozDelku(mezera).map(naPresnyZlomek)) {
+        if (delka) cil.push({ t: 'r', d: delka, lig: false, s: '' });
+      }
+      konecHlasu[staff] = konec;
+      posledniNota[staff] = null;
+    };
+    const patriDoHlasu = (staff, v) => (staff === 1 || staff === 2)
+      && (hlas[staff] || minulyHlas[staff] || '1') === v;
+    const nactiZvuk = snd => {
+      if (!snd) return;
+      if (snd.getAttribute('tempo') && !pisen.tempo) pisen.tempo = Math.round(Number(snd.getAttribute('tempo')));
+      if (snd.getAttribute('dacapo') === 'yes') takt.znacky.dc = true;
+      for (const [attr, klic] of [['dalsegno', 'ds'], ['segno', 'segno'], ['coda', 'coda'], ['tocoda', 'doCody'], ['fine', 'fine']]) {
+        if (snd.getAttribute(attr)) takt.znacky[klic] = true;
+      }
+    };
     for (const el of [...m.childNodes].filter(c => c.nodeType === 1)) {
       const tag = el.tagName;
       if (tag === 'attributes') {
-        if (text(el, 'divisions')) div = Number(text(el, 'divisions'));
+        const deleni = Number(text(el, 'divisions'));
+        if (deleni > 0) div = deleni;
         const key = dite(el, 'key');
-        if (key && text(key, 'fifths') !== '' && prvniAttr) pisen.predznamenani = Number(text(key, 'fifths'));
+        if (!maToninu && text(key, 'fifths') !== '') { pisen.predznamenani = Number(text(key, 'fifths')); maToninu = true; }
         const time = dite(el, 'time');
-        if (time && text(time, 'beats') && prvniAttr) pisen.takt = `${text(time, 'beats')}/${text(time, 'beat-type')}`;
+        if (!maTakt && text(time, 'beats') && text(time, 'beat-type')) {
+          pisen.takt = `${text(time, 'beats')}/${text(time, 'beat-type')}`; maTakt = true;
+        }
         for (const clef of deti(el, 'clef')) {
           const num = clef.getAttribute('number') || '1';
-          if (num === '1' && prvniAttr) pisen.klic = text(clef, 'sign') === 'F' ? 'basovy' : 'houslovy';
+          if (!maKlic && num === '1' && text(clef, 'sign')) {
+            pisen.klic = text(clef, 'sign') === 'F' ? 'basovy' : 'houslovy'; maKlic = true;
+          }
         }
-        prvniAttr = false;
-      } else if (tag === 'sound' && el.getAttribute('tempo') && !pisen.tempo) {
-        pisen.tempo = Math.round(Number(el.getAttribute('tempo')));
+      } else if (tag === 'sound') {
+        nactiZvuk(el);
       } else if (tag === 'direction') {
-        const snd = dite(el, 'sound');
-        if (snd && snd.getAttribute('tempo') && !pisen.tempo) pisen.tempo = Math.round(Number(snd.getAttribute('tempo')));
-        const w = (el.getElementsByTagName('words')[0]?.textContent || '').trim().toLowerCase();
+        nactiZvuk(dite(el, 'sound'));
+        const w = [...el.getElementsByTagName('words')].map(w => w.textContent.trim()).join(' ').toLowerCase();
         if (/^fine/.test(w)) takt.znacky.fine = true;
         if (/d\.\s*c\./.test(w)) takt.znacky.dc = true;
         if (/d\.\s*s\./.test(w)) takt.znacky.ds = true;
@@ -457,48 +597,64 @@ export function zMusicXml(xml) {
       } else if (tag === 'harmony') {
         const r = dite(el, 'root');
         if (r) {
-          const krok = text(r, 'root-step'), alt = Number(text(r, 'root-alter') || 0);
+          const koren = znackaKroku(r, 'root');
           const k = dite(el, 'kind');
           const druh = k?.textContent?.trim() || 'major';
-          const zkratky = { major: '', minor: 'm', dominant: '7', 'major-seventh': 'maj7', 'minor-seventh': 'm7',
-            diminished: 'dim', 'diminished-seventh': 'dim7', augmented: 'aug', 'half-diminished': 'm7b5',
-            'major-sixth': '6', 'minor-sixth': 'm6', 'dominant-ninth': '9', 'minor-ninth': 'm9',
-            'suspended-fourth': 'sus4', 'suspended-second': 'sus2' };
-          const zk = k && k.getAttribute('text') != null ? k.getAttribute('text') : (zkratky[druh] ?? '');
+          const popisek = k?.getAttribute('text') || '';
+          const zk = akordZnacky(koren + popisek)?.druh === druh ? popisek : (ZKRATKY_AKORDU[druh] ?? popisek);
           const b = dite(el, 'bass');
-          const bas = b ? '/' + text(b, 'bass-step') + (Number(text(b, 'bass-alter') || 0) > 0 ? '#' : Number(text(b, 'bass-alter') || 0) < 0 ? 'b' : '') : '';
-          const znacka = krok + (alt > 0 ? '#' : alt < 0 ? 'b' : '') + zk + bas;
-          takt.akordy.push({ doba: (pos + Number(text(el, 'offset') || 0)) / div, znacka });
+          const znacka = koren + zk + (b ? '/' + znackaKroku(b, 'bass') : '');
+          takt.akordy.push({ doba: pos + Number(text(el, 'offset') || 0) / div, znacka });
         }
-      } else if (tag === 'backup') pos -= Number(text(el, 'duration') || 0);
-      else if (tag === 'forward') pos += Number(text(el, 'duration') || 0);
-      else if (tag === 'barline') {
+      } else if (tag === 'backup') {
+        pos -= Number(text(el, 'duration') || 0) / div;
+        posledniOsnova = null;
+      } else if (tag === 'forward') {
+        pos += Number(text(el, 'duration') || 0) / div;
+        const staff = Number(text(el, 'staff')) || posledniOsnova;
+        const v = text(el, 'voice') || hlas[staff] || minulyHlas[staff] || '1';
+        if (patriDoHlasu(staff, v)) vyplnitDo[staff] = Math.max(vyplnitDo[staff], pos);
+      } else if (tag === 'barline') {
         const rep = dite(el, 'repeat');
         if (rep?.getAttribute('direction') === 'forward') takt.znacky.zacatekRepetice = true;
-        if (rep?.getAttribute('direction') === 'backward') takt.znacky.konecRepetice = true;
+        if (rep?.getAttribute('direction') === 'backward') {
+          takt.znacky.konecRepetice = true;
+          const times = Number(rep.getAttribute('times'));
+          if (Number.isSafeInteger(times) && times > 0) takt.znacky.pocetPruchodu = times;
+        }
         const end = dite(el, 'ending');
-        if (end && end.getAttribute('type') === 'start') {
-          takt.znacky.volta = String(end.getAttribute('number') || '1').split(/[,\s]+/).map(Number).filter(Boolean);
+        const typ = end?.getAttribute('type'), poloha = el.getAttribute('location');
+        if (typ === 'start') {
+          volta = (end.getAttribute('number') || '1').split(/[,\s]+/).map(Number).filter(n => Number.isSafeInteger(n) && n > 0);
+          if (poloha !== 'right') takt.znacky.volta = volta;
+        } else if (typ === 'stop' || typ === 'discontinue') {
+          volta = null;
+          if (poloha === 'left') delete takt.znacky.volta;
         }
         if (dite(el, 'segno')) takt.znacky.segno = true;
         if (dite(el, 'coda')) takt.znacky.coda = true;
       } else if (tag === 'note') {
-        if (dite(el, 'grace') || dite(el, 'cue')) continue;
+        if (dite(el, 'grace')) continue;
         const staff = Number(text(el, 'staff') || 1);
         const v = text(el, 'voice') || '1';
         const jeAkord = !!dite(el, 'chord');
-        const dur = Number(text(el, 'duration') || 0);
-        if (staff > 2) { if (!jeAkord) pos += dur; continue; }
-        if (!(staff in hlas)) hlas[staff] = v;
-        if (hlas[staff] !== v) { if (!jeAkord) pos += dur; continue; }
-        const cil = staff === 1 ? takt.noty : leva;
+        const dur = Number(text(el, 'duration') || 0) / div;
+        const zacatek = pos;
+        if (!jeAkord) pos += dur;
+        posledniOsnova = staff;
+        if (!patriDoHlasu(staff, v)) continue;
+        if (dite(el, 'cue')) {
+          if (!jeAkord) {
+            vyplnitDo[staff] = Math.max(vyplnitDo[staff], pos);
+            posledniNota[staff] = null;
+          }
+          continue;
+        }
         const p = dite(el, 'pitch');
         let t = 'r';
-        let midi = null;
         if (p) {
           const krok = text(p, 'step'), alt = Math.round(Number(text(p, 'alter') || 0)), okt = text(p, 'octave');
           t = krok + (alt === 1 ? '#' : alt === 2 ? '##' : alt === -1 ? 'b' : alt === -2 ? 'bb' : '') + okt;
-          midi = vyska(t)?.midi ?? null;
         }
         const ties = deti(el, 'tie').map(x => x.getAttribute('type'));
         if (jeAkord && posledniNota[staff]) {
@@ -506,7 +662,8 @@ export function zMusicXml(xml) {
           if (ties.includes('start')) posledniNota[staff].lig = true;
           continue;
         }
-        const d = naZlomek(dur / div) || '1/4';
+        doplnPauzu(staff, zacatek);
+        const d = naPresnyZlomek(dur) || '1/4';
         const nota = { t, d, lig: ties.includes('start'), s: '' };
         // a tie continuation without a new attack is kept as a separate note with the same pitch (the model supports that)
         const lyr = deti(el, 'lyric').find(l => (l.getAttribute('number') || '1') === '1') || deti(el, 'lyric')[0];
@@ -516,12 +673,13 @@ export function zMusicXml(xml) {
         }
         const fing = el.getElementsByTagName('fingering')[0]?.textContent?.trim();
         if (fing && /^[1-5]$/.test(fing)) nota.prst = Number(fing);
-        cil.push(nota);
+        (staff === 1 ? takt.noty : leva).push(nota);
         posledniNota[staff] = nota;
-        if (midi != null) lig[staff] = new Set(ties.includes('start') ? [midi] : []);
-        pos += dur;
+        konecHlasu[staff] = Math.max(konecHlasu[staff], pos);
       }
     }
+    for (const staff of [1, 2]) doplnPauzu(staff, vyplnitDo[staff]);
+    Object.assign(minulyHlas, hlas);
     if (leva.length) takt.leva = leva;
     if (!Object.keys(takt.znacky).length) delete takt.znacky;
     pisen.takty.push(takt);

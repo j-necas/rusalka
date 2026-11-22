@@ -51,3 +51,10 @@ test('chords only: original behaviour (chord at the start of the bar and halfway
 test('no chords, no accompaniment', () => {
   assert.deepEqual(doprovodZAkordu({ akordy: [], takty: [0], konecQ: 4 }), []);
 });
+
+test('duet mode omits alternating fifths and octaves even when they reach the chord register', () => {
+  const vstup = { akordy: [{ q: 0, ...G }], takty: [0, 4], konecQ: 8, bezBasu: true };
+  assert.deepEqual(doprovodZAkordu({ ...vstup, styl: 'polka' }).map(e => e.q), [1, 3, 4]);
+  assert.deepEqual(doprovodZAkordu({ ...vstup, styl: 'ukolebavka' }).map(e => e.q), [4]);
+  assert.ok(doprovodZAkordu({ ...vstup, styl: 'jenAkordy' }).every(e => e.p.length === 3));
+});

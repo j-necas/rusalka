@@ -11,7 +11,7 @@ import * as Doplnky from './ui/extras.js';
 import { doprovodVeStylu, STYLY } from './lib/extras.js';
 import { doprovodZAkordu, VZORY_DOPROVODU } from './lib/accompaniment.js';
 import { maAkordyProDvojici, modelProDvojici, hraniceDvojice, vysledekHrace } from './lib/pair.js';
-import { seznamUrovni, vytvorUroven } from './lib/levels.js';
+import { seznamUrovni, vytvorHranouUroven } from './lib/levels.js';
 import { ProhlizecUloziste, SlozkaUloziste, nastaveniProhlizece, kopiruj, zaloha as zalohaDat, obnov as obnovDat } from './lib/storage.js';
 import { xmlZBajtu, nazevZXml, jmenoSouboru, vyberBezFiltru } from './lib/files.js';
 import { vytvorVystup, vyberVystup, KANAL as KANAL_VYSTUPU } from './lib/midi_output.js';
@@ -1775,11 +1775,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (!S.dvojice && Number(S.uroven) === 5 && S.puvodniXml && ((S.tonina || 'ne') !== 'ne' || S.prstoklad || S.styl)) {
       toast(t('app.zjednoduseno'), 5000);
     }
-    let verze = vytvorUroven(kopie(S.puvodni), S.uroven || 2, { transpozice: S.tonina || 'ne', prstoklad: !!S.prstoklad });
-    if (S.dvojice) verze = modelProDvojici(verze);         // in a pair: the lower staff is the bass for the second child
-    else if (S.styl) verze = doprovodVeStylu(verze, S.styl);
-    const r = rozvin(verze);
-    S.model = r.pisen; S.poradi = r.poradi;
+    const r = vytvorHranouUroven(S.puvodni, S.uroven || 2,
+      { transpozice: S.tonina || 'ne', prstoklad: !!S.prstoklad, vek: aktualniProfil()?.vek || 'dite' });
+    S.model = S.dvojice ? modelProDvojici(r.pisen) : S.styl ? doprovodVeStylu(r.pisen, S.styl) : r.pisen;
+    S.poradi = r.poradi;
     S.data = await zpracujModel(S.model);
     nahledPred();
   }

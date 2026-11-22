@@ -1,9 +1,10 @@
 // Reading MIDI files (Standard MIDI File, format 0 and 1) and converting selected tracks to the song model (see song.js).
 // Pure functions without DOM. The conversion is deterministic: quantisation to a grid, the top voice as the melody,
 // splitting into bars with ties, guessing the key signature, the pickup bar and lyric syllables (karaoke files).
-import { naZlomek, metrum, zMidi } from './song.js';
+import { naZlomek, naPresnyZlomek, metrum, rozlozDelku, zMidi } from './song.js';
 import { t as tx } from './texts.js';
 import { nazevTonu } from './note_names.js';
+import { jakaTonina } from './levels.js';
 
 // General MIDI instrument families, eight programs each (text keys editor.midi.rodina.*)
 const RODINY = ['klavir', 'zvonkohra', 'varhany', 'kytara', 'baskytara', 'smycce', 'soubor', 'zeste', 'saxofon',
@@ -11,15 +12,28 @@ const RODINY = ['klavir', 'zvonkohra', 'varhany', 'kytara', 'baskytara', 'smycce
 const NAZVY_MELODIE = /melod|lead|vocal|voice|zp[eě]v|sing|solo|right|prav|r\.?\s*h\b|melody/i;
 const NAZVY_LEVE = /left|lev[aá]|l\.?\s*h\b|bass|bas[ay]?\b|doprovod|accomp/i;
 
-/** decoding texts (track names, syllables): UTF-8, else Windows-1250 (Czech files), else Latin-1 */
-function text(bajty) {
-  try { return new TextDecoder('utf-8', { fatal: true }).decode(bajty); } catch { /* */ }
-  try { return new TextDecoder('windows-1250').decode(bajty); } catch { /* */ }
-  return String.fromCharCode(...bajty);
+/** Use one encoding for all the file's text events. For ambiguous legacy bytes prefer Windows-1252. */
+function dekoderTextu(bajty) {
+  const utf8 = new TextDecoder('utf-8', { fatal: true });
+  try {
+    for (const b of bajty) utf8.decode(b);
+    return utf8;
+  } catch { /* compare the same bytes in both legacy encodings */ }
+  const stredni = new TextDecoder('windows-1250'), zapadni = new TextDecoder('windows-1252');
+  const cetnost = (s, vzor) => (s.match(vzor) || []).length;
+  let skore = 0;
+  for (const b of bajty) {
+    const a = stredni.decode(b), z = zapadni.decode(b);
+    if (a === z) continue;
+    skore += 3 * cetnost(a, /[ěščřžůďťňĺľąłńźśżęćűő]/gi) - 2 * cetnost(a, /[čšž]/gi)
+      - 3 * cetnost(z, /[œæñßðþ]/gi) - cetnost(z, /[èàùòì]/gi)
+      + 4 * (cetnost(z, /[\u0080-\u009f\ufffd]/g) - cetnost(a, /[\u0080-\u009f\ufffd]/g));
+  }
+  return skore > 0 ? stredni : zapadni;
 }
 
 /**
- * MIDI file bytes → { format, ppq, tempo (quarters per minute), takt: '3/4', predznamenani: int|null,
+ * MIDI file bytes → { format, ppq, tempo (quarters per minute), takt: '3/4', predznamenani: int|null, moll: bool|null,
  *   zmenyTaktu: bool, zmenyTempa: bool, nazev, stopy: [{ id, nazev, kanal, program, bici, noty: [{ midi, zac, kon, sila }] }],
  *   slova: [{ tick, text }] }. Times are in ticks (ppq ticks = a quarter).
  */
@@ -38,12 +52,12 @@ export function ctiMidi(data) {
   if (ppq & 0x8000) throw new Error(tx('editor.midi.smpte'));
   if (!ppq) throw new Error(tx('editor.midi.poskozeny'));
   let i = 8 + u32(4);
-  const tempa = [], takty = [], toniny = [], slova = [], texty = [], nazvy = [];
+  const tempa = [], takty = [], toniny = [], slova = [], texty = [], nazvy = [], textoveUdalosti = [];
   const stopy = new Map();                         // `${stopa}:${kanal}` → track
   for (let s = 0; s < pocet && i + 8 <= b.length; i += 8 + u32(i + 4)) {
     if (tag(i) !== 'MTrk') continue;               // skip unknown chunks
     const konecBloku = Math.min(b.length, i + 8 + u32(i + 4));
-    let p = i + 8, tick = 0, status = 0, nazevStopy = '';
+    let p = i + 8, tick = 0, status = 0;
     const programy = {}, zapnute = new Map();
     const vlq = () => { let v = 0, c; do { c = b[p++]; v = v * 128 + (c & 0x7f); } while (c & 0x80 && p < konecBloku); return v; };
     const stopa = kanal => {
@@ -67,10 +81,8 @@ export function ctiMidi(data) {
         if (typ === 0x2f) break;
         if (typ === 0x51 && delka >= 3) tempa.push({ tick, bpm: 60e6 / ((d[0] << 16) | (d[1] << 8) | d[2]) });
         else if (typ === 0x58 && delka >= 2) takty.push({ tick, takt: `${d[0]}/${2 ** d[1]}` });
-        else if (typ === 0x59 && delka >= 2) toniny.push({ tick, sf: d[0] > 127 ? d[0] - 256 : d[0] });
-        else if (typ === 0x03 && !nazevStopy) nazevStopy = text(d).trim();
-        else if (typ === 0x05) slova.push({ tick, text: text(d) });
-        else if (typ === 0x01) texty.push({ tick, text: text(d) });
+        else if (typ === 0x59 && delka >= 2) toniny.push({ tick, sf: d[0] > 127 ? d[0] - 256 : d[0], moll: d[1] <= 1 ? !!d[1] : null });
+        else if (typ >= 0x01 && typ <= 0x09) textoveUdalosti.push({ s, tick, typ, d });
         continue;
       }
       if (st === 0xf0 || st === 0xf7) { p += vlq(); continue; }
@@ -85,8 +97,13 @@ export function ctiMidi(data) {
       else if (druh === 0xc0) { programy[kanal] = d1; if (stopy.has(`${s}:${kanal}`) && !stopy.get(`${s}:${kanal}`).noty.length) stopy.get(`${s}:${kanal}`).program = d1; }
     }
     for (const [k, fronta] of zapnute) while (fronta.length) vypni(Math.floor(k / 128), k % 128, tick);
-    nazvy[s] = nazevStopy;
     s++;
+  }
+  const dekoder = dekoderTextu(textoveUdalosti.map(u => u.d));
+  for (const { s, tick, typ, d } of textoveUdalosti) {
+    if (typ === 0x03 && !nazvy[s]) nazvy[s] = dekoder.decode(d).trim();
+    else if (typ === 0x05) slova.push({ tick, text: dekoder.decode(d) });
+    else if (typ === 0x01) texty.push({ tick, text: dekoder.decode(d) });
   }
   const seznam = [...stopy.values()].filter(x => x.noty.length).map((x, id) => ({
     id, nazev: nazvy[x.stopa] || '', kanal: x.kanal, program: x.program, bici: x.kanal === 9,
@@ -98,22 +115,30 @@ export function ctiMidi(data) {
   const slabiky = slova.length ? slova : texty.filter(t => !t.text.startsWith('@'));
   const prvni = arr => arr.sort((a, c) => a.tick - c.tick)[0];
   // pickup written as a short first bar (MuseScore: 1/4 and then 3/4) → the time signature is the second one
-  takty.sort((a, c) => a.tick - c.tick);
+  const casyTaktu = new Set();
+  const jedinecneTakty = takty.sort((a, c) => a.tick - c.tick).filter(t => {
+    if (casyTaktu.has(t.tick)) return false;
+    casyTaktu.add(t.tick);
+    return true;
+  });
   let predtakti = 0;
-  if (takty.length >= 2 && takty[0].tick === 0 && takty[1].takt !== takty[0].takt) {
-    const q = takty[1].tick / ppq;
-    if (q > 0 && Math.abs(q - metrum(takty[0].takt).delka) < 1e-6 && q < metrum(takty[1].takt).delka - 1e-6) {
-      predtakti = q; takty.shift();
+  const [prvniTakt, druhyTakt] = jedinecneTakty;
+  if (prvniTakt?.tick === 0 && druhyTakt && druhyTakt.takt !== prvniTakt.takt) {
+    const q = druhyTakt.tick / ppq;
+    if (Math.abs(q - metrum(prvniTakt.takt).delka) < 1e-6 && q < metrum(druhyTakt.takt).delka - 1e-6) {
+      predtakti = q; jedinecneTakty.shift();
     }
   }
+  const tonina = prvni(toniny);
   return {
     format, ppq,
     tempo: prvni(tempa)?.bpm || 120,
     zmenyTempa: new Set(tempa.map(t => Math.round(t.bpm))).size > 1,
-    takt: prvni(takty)?.takt || '4/4',
-    zmenyTaktu: new Set(takty.map(t => t.takt)).size > 1,
+    takt: jedinecneTakty[0]?.takt || '4/4',
+    zmenyTaktu: new Set(jedinecneTakty.map(t => t.takt)).size > 1,
     predtakti,                                     // pickup length in quarters (0 = bar lines from the start)
-    predznamenani: toniny.length ? prvni(toniny).sf : null,
+    predznamenani: tonina?.sf ?? null,
+    moll: tonina?.moll ?? null,
     nazev, stopy: seznam,
     slova: slabiky.sort((a, c) => a.tick - c.tick),
   };
@@ -172,8 +197,6 @@ export function navrhniStopy(midi) {
 
 // ---------------------------------------------------------------- conversion to the song model
 const MRIZKY = [0.5, 1 / 3, 0.25, 1 / 6, 1 / 12, 0.125];
-// durations writable as a single note (in quarter beats), longest first
-const DELKY = [4, 3, 2, 1.5, 1, 0.75, 2 / 3, 0.5, 0.375, 1 / 3, 0.25, 1 / 6, 0.125, 1 / 12].sort((a, c) => c - a);
 
 /** coarsest grid that at least 90 % of onsets fit (otherwise 1/16 for loosely played recordings) */
 function zvolMrizku(nastupy) {
@@ -195,17 +218,6 @@ function odhadPredznamenani(noty) {
     if (chyba < nejChyba - 1e-9) { nej = sf; nejChyba = chyba; }
   }
   return nej;
-}
-/** duration → parts writable as a single note (longest first) */
-function rozloz(q) {
-  const out = [];
-  let zbyva = q;
-  while (zbyva > 1e-6) {
-    const d = DELKY.find(x => x <= zbyva + 1e-6);
-    if (!d) break;                                         // a remainder below 1/32 is dropped
-    out.push(d); zbyva -= d;
-  }
-  return out;
 }
 
 /**
@@ -236,7 +248,7 @@ function hlas(noty, ppq, g, { jenHorni, maxTonu = 4 }) {
 }
 
 /** voice → notes per bar (rests in gaps, splitting across bar lines with a tie) */
-function doTaktu(udalosti, { start, delkaTaktu, prvniTakt, pocetTaktu, predzn }) {
+function doTaktu(udalosti, { start, delkaTaktu, prvniTakt, pocetTaktu, predzn, moll }) {
   const takty = Array.from({ length: pocetTaktu }, () => []);
   const hranice = k => k === 0 ? start : start + prvniTakt + (k - 1) * delkaTaktu;   // start of bar k
   const konecVsech = hranice(pocetTaktu);
@@ -245,11 +257,11 @@ function doTaktu(udalosti, { start, delkaTaktu, prvniTakt, pocetTaktu, predzn })
       const z = hranice(k + 1);
       if (od >= z - 1e-9) continue;
       const kus = Math.min(doo, z) - od;
-      const casti = rozloz(kus);
+      const casti = rozlozDelku(kus);
       casti.forEach((d, j) => {
         const posledni = j === casti.length - 1 && doo <= z + 1e-9;
         takty[k].push({
-          t: u ? u.vysky.map(m => zMidi(m, predzn)).join(' ') : 'r', d: naZlomek(d),
+          t: u ? u.vysky.map(m => zMidi(m, predzn, moll)).join(' ') : 'r', d: naZlomek(d) || naPresnyZlomek(d),
           lig: !!u && !posledni, s: '', _zdroj: u && od === u.zac && j === 0 ? u : null,
         });
       });
@@ -314,7 +326,9 @@ export function midiNaPisen(midi, { melodie, leva = null, nazev = '' } = {}) {
   const konec = Math.max(...hM.map(u => u.kon), ...hL.map(u => u.kon));
   const pocetTaktu = 1 + Math.max(0, Math.ceil((konec - start - prvniTakt) / L - 1e-9));
   const predzn = midi.predznamenani ?? odhadPredznamenani([...notyM, ...notyL]);
-  const opt = { start, delkaTaktu: L, prvniTakt, pocetTaktu, predzn };
+  const moll = midi.moll ?? !jakaTonina({ predznamenani: predzn,
+    takty: [{ noty: hM.map(u => ({ t: zMidi(u.vysky[0]), d: '1/4' })) }] }).dur;
+  const opt = { start, delkaTaktu: L, prvniTakt, pocetTaktu, predzn, moll };
   const taktyM = doTaktu(hM, opt);
   const taktyL = hL.length ? doTaktu(hL, opt) : null;
   for (const t of taktyM) for (const n of t) { if (n._zdroj?.slabika) n.s = n._zdroj.slabika; delete n._zdroj; }

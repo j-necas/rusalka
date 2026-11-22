@@ -2,6 +2,7 @@
 // dynamics, slurs, pedal, grace notes, key, time and clef changes), not from the simplified model. Repeats are unrolled
 // the same way as in the model (order from rozvin() in song.js) so that bars match the statistics and sections.
 // Needs globalThis.DOMParser and XMLSerializer (the browser has them, tests supply them from @xmldom/xmldom).
+import { t } from './texts.js';
 
 const deti = (el, jmeno) => [...el.childNodes].filter(n => n.nodeType === 1 && n.nodeName === jmeno);
 const dite = (el, jmeno) => deti(el, jmeno)[0] || null;
@@ -28,12 +29,14 @@ const stejne = (a, b) => a.divisions === b.divisions && podpis(a.key) === podpis
  * clef, divisions), the attributes valid there are inserted at the start of the bar. Part names are not drawn.
  */
 export function pripravOriginal(xml, poradi) {
-  const doc = new DOMParser().parseFromString(xml, 'application/xml');
+  let doc;
+  try { doc = new DOMParser().parseFromString(xml, 'application/xml'); }
+  catch (e) { throw new Error(t('cviceni.chyba.necitelneXml'), { cause: e }); }
   const koren = doc.documentElement;
-  if (!koren || koren.nodeName === 'parsererror' || doc.getElementsByTagName('parsererror').length) throw new Error('soubor nejde přečíst');
-  if (koren.nodeName !== 'score-partwise') throw new Error('umím jen MusicXML „score-partwise“');
+  if (!koren || koren.nodeName === 'parsererror' || doc.getElementsByTagName('parsererror').length) throw new Error(t('cviceni.chyba.necitelneXml'));
+  if (koren.nodeName !== 'score-partwise') throw new Error(t('cviceni.chyba.jenPartwise'));
   const party = deti(koren, 'part');
-  if (!party.length) throw new Error('v souboru nejsou noty');
+  if (!party.length) throw new Error(t('cviceni.chyba.zadneNoty'));
   const part = party[0], id = part.getAttribute('id');
   party.slice(1).forEach(p => koren.removeChild(p));
   const seznam = dite(koren, 'part-list');

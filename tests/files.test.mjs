@@ -1,5 +1,7 @@
 import './setup.mjs';
 import { test } from 'node:test';
+import { nastavJazyk } from '../static/lib/texts.js';
+
 import assert from 'node:assert/strict';
 import { deflateRawSync } from 'node:zlib';
 import { rozbalZip, zabalZip } from '../static/lib/zip.js';
@@ -75,4 +77,26 @@ test('iPhone and iPad (also an iPad that says it is a Mac) grey out .musicxml in
   assert.equal(vyberBezFiltru({ userAgent: mac, maxTouchPoints: 5 }), true, 'iPadOS Safari reports a Mac');
   assert.equal(vyberBezFiltru({ userAgent: mac, maxTouchPoints: 0 }), false, 'a real Mac keeps the filter');
   assert.equal(vyberBezFiltru({ userAgent: android, maxTouchPoints: 5 }), false);
+});
+
+test('MusicXML honors Windows-1250, ISO-8859-1 and UTF-16 without a BOM', async () => {
+  const xml = k => `<?xml version="1.0" encoding="${k}"?><score-partwise><work><work-title>`;
+  const konec = '</work-title></work></score-partwise>';
+  const okna = Buffer.concat([Buffer.from(xml('windows-1250')), Buffer.from([0x8e, 0x6c, 0x75, 0x9d, 0x6f, 0x75, 0xe8, 0x6b, 0xfd]), Buffer.from(konec)]);
+  assert.equal(nazevZXml(await xmlZBajtu('a.xml', okna), 'a.xml'), 'Žluťoučký');
+  const latin = Buffer.from(xml('ISO-8859-1') + 'Noël' + konec, 'latin1');
+  const archiv = zabalZip(new Map([['a.musicxml', latin]]));
+  assert.equal(nazevZXml(await xmlZBajtu('a.mxl', archiv), 'a.mxl'), 'Noël');
+  const utf16 = Buffer.from(xml('UTF-16') + 'Píseň' + konec, 'utf16le');
+  assert.equal(nazevZXml(await xmlZBajtu('a.xml', utf16), 'a.xml'), 'Píseň');
+  assert.equal(nazevZXml(await xmlZBajtu('a.xml', Buffer.from(utf16).swap16()), 'a.xml'), 'Píseň');
+});
+
+test('MusicXML file errors are translated in the active language', async () => {
+  nastavJazyk('en');
+  try {
+    await assert.rejects(xmlZBajtu('a.mxl', en.encode('x')), /not a ZIP archive/);
+    const archiv = zabalZip(new Map([['readme.txt', en.encode('x')]]));
+    await assert.rejects(xmlZBajtu('a.mxl', archiv), /no sheet music in the archive/);
+  } finally { nastavJazyk('cs'); }
 });
