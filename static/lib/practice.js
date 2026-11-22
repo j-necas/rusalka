@@ -216,11 +216,14 @@ export function herniKroky(noty) {
   return kroky;
 }
 
-/** With backing only the current step is eligible. In rhythm use the oldest note still in the window. */
+/**
+ * With backing only the current step is eligible, early or late (the backing waits; the count-in is guarded by the caller).
+ * In rhythm use the oldest note still in the window.
+ */
 export function najdiZasah(kroky, { pitch, cas, okno, hotovo, od, pockej = false }) {
   for (let i = od; i < kroky.length; i++) {
     const k = kroky[i];
-    if (k.ms > cas + okno) break;
+    if (!pockej && k.ms > cas + okno) break;
     if (pockej || k.ms >= cas - okno) {
       const nota = k.noty.find(n => n.pitch === pitch && !hotovo.has(n.id));
       if (nota) return { nota, index: i };

@@ -525,7 +525,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     catch (e) { hlasData(t('app.dataZalohaChyba', { chyba: chybaText(e) })); }
   };
   const obnovZeSouboru = priZmeneDat(async f => {
-    if (!await potvrd(t('app.dataPotvrditObnovu'), t('html.obnovit'))) return;
+    // nothing to lose on a first visit (no players yet): no question then
+    if (viditelni(S.profily).length && !await potvrd(t('app.dataPotvrditObnovu'), t('html.obnovit'))) return;
     const ul = UL.aktivni;
     let zprava, chyba;
     try {

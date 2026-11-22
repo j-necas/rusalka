@@ -44,13 +44,19 @@ try {
   let page = await ctx.newPage();
   await page.goto(URL0);
   await page.waitForSelector('main:not(.skryta)');
-  const pocet = await page.evaluate(async () => {
+  await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
     if (!navigator.serviceWorker.controller) await new Promise(r => navigator.serviceWorker.addEventListener('controllerchange', r, { once: true }));
-    return (await (await caches.open('rusalka')).keys()).length;
   });
   const sw = await readFile(join(WEB, 'sw.js'), 'utf8');
   const vSW = Object.keys(JSON.parse(sw.match(/const SOUBORY = (\{.*\});/)[1])).length;
+  // the shell is installed first, the rest (scores, samples, Verovio) follows in the background: wait for it
+  const pocet = await page.evaluate(async cil => {
+    const soubory = async () => (await (await caches.open('rusalka-v2')).keys()).filter(r => !r.url.endsWith('/.offline-verze')).length;
+    let n = 0;
+    for (let i = 0; i < 300 && (n = await soubory()) < cil; i++) await new Promise(r => setTimeout(r, 100));
+    return n;
+  }, vSW);
   kontrola(`the first visit keeps every file of the website (${pocet} of ${vSW})`, pocet === vSW);
 
   await ctx.setOffline(true);
@@ -59,11 +65,8 @@ try {
   kontrola('without the internet a reload opens Rusalka', await page.locator('main:not(.skryta)').count() > 0);
   kontrola('… with no startup error', await page.locator('#chybaStartu').count() === 0);
   const offline = await page.evaluate(async () => {
-    // like verovioTk() in app.js: WASM may be ready before VEROVIO_PRIPRAVENO is set up, so try until it works
-    let verovioOk = false;
-    for (let i = 0; i < 100 && !verovioOk; i++) {
-      try { new verovio.toolkit(); verovioOk = true; } catch { await new Promise(r => setTimeout(r, 100)); }
-    }
+    // like verovioTk() in app.js: Verovio is loaded when the first score needs it
+    const verovioOk = await window.nactiVerovio().then(tk => !!tk, () => false);
     const r = await Promise.all(['songs/index.json', 'songs/Ode%20to%20Joy.musicxml', 'sounds/piano/C4.mp3', 'library/index.json']
       .map(u => fetch(u).then(x => x.ok, () => false)));
     return { verovio: verovioOk, soubory: r };

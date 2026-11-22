@@ -234,11 +234,11 @@ test('overlapping windows give the first repeat the first key, while expired not
   assert.equal(zasah(221), 'b');
 });
 
-test('With backing accepts the awaited chord within its early window or as late as needed', () => {
+test('With backing accepts the awaited chord early or as late as needed, never a later step', () => {
   const K = Hra.herniKroky([herniNota('a', 60, 500), herniNota('b', 62, 680)]);
-  const zasah = (pitch, cas) => Hra.najdiZasah(K, { pitch, cas, okno: 220, hotovo: new Set(), od: 0, pockej: true })?.nota.id;
-  assert.equal(zasah(60, 279), undefined, 'a press during the count-in, far ahead of the note');
-  assert.equal(zasah(60, 300), 'a');
+  const zasah = (pitch, cas, od = 0) => Hra.najdiZasah(K, { pitch, cas, okno: 220, hotovo: new Set(), od, pockej: true })?.nota.id;
+  assert.equal(zasah(60, 100), 'a', 'played early, the backing waits for the child anyway');
+  assert.equal(zasah(62, 520, 1), 'b', 'the next awaited note right after the previous one');
   assert.equal(zasah(62, 500), undefined, 'the second step cannot jump ahead of the first');
   assert.equal(zasah(60, 1500), 'a');
 });
