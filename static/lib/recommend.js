@@ -2,14 +2,16 @@
 // offer after finishing. vys = vysledky[player][file] ({ cekam, pockej, tempo: { hvezdy } }); stat = statistiky[player]
 // ({ 'file#level': { posledni, historie: [{ kdy, rezim, rychlost, cisty }] } }).
 
-export const KROKY = ['cekam', 'pockej', 'tempo'];
+import { REZIM } from './game.js';
+
+export const KROKY = [REZIM.CEKAM, REZIM.POCKEJ, REZIM.TEMPO];
 export const RYCHLOSTI = [60, 80, 100];
 
 export const hotovy = (vys, k) => (vys?.[k]?.hvezdy || 0) >= 3;
 const zaznamy = (stat, soubor) => Object.entries(stat || {}).filter(([k]) => k.startsWith(soubor + '#')).map(([, v]) => v);
 const historie = (stat, soubor) => zaznamy(stat, soubor).flatMap(z => z?.historie || []);
 // step of a history record: new records have "krok"; an old "tempo" record without a step may be either With backing or In rhythm
-const krokZaznamu = h => h.krok || (h.rezim === 'cekam' ? 'cekam' : null);
+const krokZaznamu = h => h.krok || (h.rezim === REZIM.CEKAM ? REZIM.CEKAM : null);
 const dolu = r => [...RYCHLOSTI].reverse().find(x => x <= r) ?? RYCHLOSTI[0];
 
 /** state of the three steps: hotovo (3 stars), ted (first unfinished), nezacato */
@@ -20,7 +22,7 @@ export function stavKroku(vys) {
 
 /** highest speed (%) at which the player played the song In rhythm cleanly; 0 = never */
 export function nejrychlejsiCisty(stat, soubor) {
-  return Math.max(0, ...historie(stat, soubor).filter(h => krokZaznamu(h) === 'tempo' && h.cisty).map(h => Number(h.rychlost) || 0));
+  return Math.max(0, ...historie(stat, soubor).filter(h => krokZaznamu(h) === REZIM.TEMPO && h.cisty).map(h => Number(h.rychlost) || 0));
 }
 
 export function umim(vys, stat, soubor) {
@@ -35,7 +37,7 @@ export function doporuceni(vys, stat, soubor) {
     return { krok, rychlost: posledni ? dolu(Number(posledni.rychlost) || 0) : RYCHLOSTI[0], umim: false };
   }
   const n = nejrychlejsiCisty(stat, soubor);
-  return n >= 100 ? { krok: 'tempo', rychlost: 100, umim: true } : { krok: 'tempo', rychlost: RYCHLOSTI.find(r => r > n), umim: false };
+  return n >= 100 ? { krok: REZIM.TEMPO, rychlost: 100, umim: true } : { krok: REZIM.TEMPO, rychlost: RYCHLOSTI.find(r => r > n), umim: false };
 }
 
 const posledniHrani = (stat, soubor) => Math.max(0, ...zaznamy(stat, soubor).map(z => z?.posledni || 0));
@@ -75,7 +77,7 @@ export function akcePoVysledku({ hvezdy, vys, stat, soubor, dalsi, mistoSlabe, t
     if (!d.umim) {
       // 3 stars is not a clean run: offer at least one notch more than what was just played; at 100 % try cleanly again
       const r = Math.max(d.rychlost, RYCHLOSTI.find(x => x > rychlost) ?? 0);
-      return r > rychlost ? { druh: 'rychleji', krok: 'tempo', rychlost: r } : { druh: 'znovu' };
+      return r > rychlost ? { druh: 'rychleji', krok: REZIM.TEMPO, rychlost: r } : { druh: 'znovu' };
     }
     return dalsi ? { druh: 'dalsi', pisen: dalsi } : { druh: 'znovu' };
   }

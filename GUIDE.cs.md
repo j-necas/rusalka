@@ -167,7 +167,9 @@ v nastavení repozitáře: Pages → Source: GitHub Actions).
 - **`static/lib/`** – čisté moduly bez DOM, pokryté testy:
   - `song.js` – model písničky, MusicXML ↔ model, kontrola taktů, rozvinutí repetic;
   - `levels.js` – úrovně, transpozice, harmonizace, prstoklad;
-  - `practice.js` – fráze, souhrn pokusu, statistiky, plán tempa, trenér;
+  - `practice.js` – fráze, souhrn a hodnocení pokusu (hvězdy, nejlepší výsledky), statistiky, plán tempa a smyčka
+    úseku, plán průvodce, trenér;
+  - `game.js` – režimy hry (`REZIM`), časovače hry, jeden snímek běžící hry, stisky v Najdi noty, kroky průvodce;
   - `editor.js` – operace editoru a historie;
   - `compare.js` – porovnání přepisu s ověřenou písničkou (přesnost převodu);
   - `microphone.js` – rozpoznání tónů z mikrofonu (MPM, spektrum, nástupy);

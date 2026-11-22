@@ -14,6 +14,7 @@ import { zlomek, metrum, rozvin, soucetTaktu, kontrolaPolozky } from './song.js'
 import { nazevTonu } from './note_names.js';
 import { t, jazyk } from './texts.js';
 import { MAX_HISTORIE } from './stats.js';
+import { REZIM, zlepsiVysledek, zapisUseku } from './game.js';
 
 // ---------------------------------------------------------------- constants
 const UTLUM_POKUS = 0.8;                 // weight of older data in bars the new attempt played
@@ -252,7 +253,7 @@ export const podilZasahu = (trefy, celkem, chyby) => celkem + chyby ? trefy / (c
 /** In Find the notes completing the song earns at least one star. */
 export function hvezdyZPodilu(podil, rezim) {
   const hv = podil >= 0.95 ? 3 : podil >= 0.8 ? 2 : podil >= 0.5 ? 1 : 0;
-  return rezim === 'cekam' ? Math.max(1, hv) : hv;
+  return rezim === REZIM.CEKAM ? Math.max(1, hv) : hv;
 }
 
 // ---------------------------------------------------------------- attempt record and summary
@@ -323,7 +324,7 @@ export function souhrnPokusu(zaznam) {
   });
   const stisky = zaznam.chybneStisky || [];
   const sp = Math.max(0.05, (Number(zaznam.rychlost) || 100) / 100);
-  const rezim = rezimPokusu(zaznam), vRytmu = rezim === 'tempo';
+  const rezim = rezimPokusu(zaznam), vRytmu = rezim === REZIM.TEMPO;
   const becka = (zaznam.predznamenani ?? 0) < 0;
   const ok = noty.filter(n => n.vysledek === 'ok').length;
   const vedle = noty.filter(n => n.vysledek === 'vedle').length;
@@ -376,7 +377,7 @@ export function souhrnPokusu(zaznam) {
 }
 
 const unikatni = a => [...new Set(a)].sort((x, y) => x - y);
-const rezimPokusu = z => z.krok === 'pockej' ? 'pockej' : z.rezim;
+const rezimPokusu = z => z.krok === REZIM.POCKEJ ? REZIM.POCKEJ : z.rezim;
 
 function najdiVzorce(noty, stisky, { sp, vRytmu, becka, doba }) {
   const out = [];
@@ -535,7 +536,7 @@ export function tezkaMista(statistika, pisen, n = 3) {
 export function dalsiTempo(stavSmycky, souhrn) {
   const r0 = Number(stavSmycky?.rychlost ?? souhrn?.rychlost ?? 70);
   let cisteVRade = (souhrn?.cisty ? (stavSmycky?.cisteVRade || 0) + 1 : 0);
-  if (souhrn?.rezim === 'cekam') {
+  if (souhrn?.rezim === REZIM.CEKAM) {
     cisteVRade = Math.min(3, cisteVRade);
     return { rychlost: r0, cisteVRade, zmena: 0, hotovo: cisteVRade === 3,
       zprava: souhrn.cisty ? t('app.cisteZe3', { n: cisteVRade }) : t('app.jesteVKlidu') };
@@ -552,6 +553,68 @@ export function dalsiTempo(stavSmycky, souhrn) {
     zprava = t('cviceni.tempo.cisty', { n: cisteVRade });
   } else zprava = t('cviceni.tempo.znovu', { r: rychlost });
   return { rychlost, cisteVRade, zmena, zprava, hotovo };
+}
+
+/**
+ * Section loop after an attempt at speed rychlost (tempo plan of dalsiTempo). → { smycka: the new loop state
+ * (off when done), rychlost, zmena, hotovo, zprava: the loop status for the next pass, or the success when it is done }
+ */
+export function dalsiPruchod(smycka, souhrn, rychlost = souhrn.rychlost) {
+  const r = dalsiTempo({ rychlost, cisteVRade: smycka.cisteVRade }, souhrn);
+  const zprava = r.hotovo ? t(souhrn.rezim === REZIM.CEKAM ? 'app.usekCisty' : 'app.usekPlneTempo')
+    : t('app.smyckaStav', { zprava: r.zprava || t('app.dalsiPruchod'), n: r.cisteVRade, r: r.rychlost });
+  return { smycka: { ...smycka, zapnuto: !r.hotovo, cisteVRade: r.cisteVRade }, rychlost: r.rychlost, zmena: r.zmena, hotovo: r.hotovo, zprava };
+}
+
+// ---------------------------------------------------------------- scoring an attempt
+/**
+ * Scoring of a finished solo attempt and what follows it; the app stores and shows the result.
+ * zaznam = ZaznamPokusu; usek = the practised section { od, do } or null (whole song); uroven = level (key of the
+ * section stars); vysPisne = the player's results for the song ({ cekam|pockej|tempo: { hvezdy, procent, pocet },
+ * useky, dvojice }); smycka = section loop { zapnuto, cisteVRade }; pruvodce = the Learn bit by bit guide is on.
+ * → { souhrn, dalsi: 'pruvodce' (the guide decides) | 'smycka' (another pass, see pruchod) | 'vysledek', pruchod
+ *   (dalsiPruchod when the loop is on), and for 'vysledek': podil, hvezdy, rekord, vysPisne (new results), nadpis, text }
+ * Stars: share of hits among the notes and wrong presses (hvezdyZPodilu); a section keeps only its own best stars.
+ */
+export function vyhodnotPokus({ zaznam, usek = null, uroven, vysPisne = {}, smycka = null, pruvodce = false }) {
+  const souhrn = souhrnPokusu(zaznam);
+  if (pruvodce) return { souhrn, dalsi: 'pruvodce' };
+  const pruchod = smycka?.zapnuto ? dalsiPruchod(smycka, souhrn, zaznam.rychlost) : null;
+  if (pruchod && !pruchod.hotovo) return { souhrn, dalsi: 'smycka', pruchod };
+  const { rezim, ok, pocetNot: n } = souhrn, chyby = (zaznam.chybneStisky || []).length;
+  const podil = podilZasahu(ok, n, chyby), hvezdy = hvezdyZPodilu(podil, rezim);
+  const text = rezim !== REZIM.TEMPO ? (chyby ? t('app.vsechVedle', { n, chyby }) : t('app.vsechBezChyby', { n }))
+    : t(chyby ? 'app.vcasTextVedle' : 'app.vcasText', { a: ok, n, chyby, r: pruchod?.rychlost ?? zaznam.rychlost });
+  const vysledek = { souhrn, dalsi: 'vysledek', pruchod, podil, hvezdy };
+  if (usek) {
+    return { ...vysledek, rekord: false, vysPisne: zapisUseku(vysPisne, usek, uroven, hvezdy),
+      nadpis: t(souhrn.cisty ? 'app.usekCiste' : 'app.usekDohran'), text };
+  }
+  const z = zlepsiVysledek(vysPisne?.[rezim], hvezdy, podil);
+  return { ...vysledek, rekord: z.rekord, vysPisne: { ...vysPisne, [rezim]: z.vysledek },
+    nadpis: t(['app.hv0', 'app.hv1', 'app.hv2', souhrn.cisty ? 'app.hv3bezChyby' : 'app.hv3'][hvezdy]),
+    text: text + (z.rekord && z.vysledek.pocet > 1 ? ' ' + t('app.rekord') : '') };
+}
+
+// ---------------------------------------------------------------- Learn bit by bit guide
+/**
+ * The guide's plan, phrase by phrase: listen → find the notes → with backing at 70 %; every two phrases joined with
+ * backing; finally the whole song with backing and in rhythm (posledni). Step = { rezim, od, do (null = whole song),
+ * rychlost?, text, posledni? }.
+ */
+export function planPruvodce(pisen) {
+  const fr = fraze(pisen), plan = [], kratce = nazev => nazev.split(':')[0];
+  fr.forEach((f, i) => {
+    const usek = kratce(f.nazev);
+    plan.push({ rezim: REZIM.POSLECH, od: f.od, do: f.do, text: t('app.pruvodce.poslechni', { usek }) });
+    plan.push({ rezim: REZIM.CEKAM, od: f.od, do: f.do, text: t('app.pruvodce.najdi', { usek }) });
+    plan.push({ rezim: REZIM.POCKEJ, od: f.od, do: f.do, rychlost: 70, text: t('app.pruvodce.sDoprovodem', { usek }) });
+    if (i % 2 === 1) plan.push({ rezim: REZIM.POCKEJ, od: fr[i - 1].od, do: f.do, rychlost: 70,
+      text: t('app.pruvodce.spoj', { usek: kratce(nazevUseku(pisen, fr[i - 1].od, f.do)) }) });
+  });
+  plan.push({ rezim: REZIM.POCKEJ, od: null, rychlost: 70, text: t('app.pruvodce.celaSDoprovodem') });
+  plan.push({ rezim: REZIM.TEMPO, od: null, rychlost: 70, text: t('app.pruvodce.celaVRytmu'), posledni: true });
+  return plan;
 }
 
 // ---------------------------------------------------------------- facts for the coach
