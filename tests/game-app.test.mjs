@@ -19,6 +19,9 @@ async function prohlizec(t) {
         toggle(x, zap = !tridy.has(x)) { if (zap) tridy.add(x); else tridy.delete(x); return zap; } },
       setAttribute: (k, v) => atributy.set(k, v), getAttribute: k => atributy.get(k), removeAttribute: k => atributy.delete(k),
       appendChild(dite) { this.children.push(dite); }, focus() {}, scrollTo() {}, insertAdjacentHTML() {},
+      before() {}, prepend() {}, append() {}, cloneNode: () => prvek(),
+      ownerDocument: dok, hasAttribute: k => atributy.has(k), contains: () => false, closest: () => null, isConnected: true,
+      content: { get firstElementChild() { return prvek(); } },
       querySelector(s) {
         if (s.includes('.zvire')) return null;
         if (!vnitrni.has(s)) vnitrni.set(s, prvek());
@@ -33,9 +36,10 @@ async function prohlizec(t) {
   const $ = s => { if (!tagy.has(s)) tagy.set(s, prvek()); return tagy.get(s); };
   const rezimy = ['cekam', 'pockej', 'tempo', 'poslech'].map(rezim => Object.assign($(`[data-rezim="${rezim}"]`), { dataset: { rezim } }));
   Object.assign(dok, { querySelector: $, querySelectorAll: s => s === '[data-rezim]' ? rezimy : [], getElementById: () => null,
-    createElement: prvek, documentElement: prvek(), body: prvek(), readyState: 'complete', hidden: false, visibilityState: 'visible' });
-  Object.assign(okno, { scrollTo() {} });
+    createElement: prvek, documentElement: prvek(), body: prvek(), activeElement: null, readyState: 'complete', hidden: false, visibilityState: 'visible' });
   const modul = await createVerovioModule();
+  let tk;
+  Object.assign(okno, { scrollTo() {}, nactiVerovio: async () => (tk ??= new VerovioToolkit(modul)), prednactiVerovio() {} });
   let ted = 0, id = 0;
   const casovace = new Map(), snimky = new Map();
   const hlasitost = { setValueAtTime() {}, linearRampToValueAtTime() {}, exponentialRampToValueAtTime() {}, cancelScheduledValues() {}, setTargetAtTime() {} };

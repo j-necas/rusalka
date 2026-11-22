@@ -791,8 +791,9 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#spravaSmazat').onclick = () => SPRAVA && smazSoubor(SPRAVA);
 
   // ------------------------------------------------------------ notes: model → Verovio (single-line SVG, note times, chords)
+  let VTK = null;                                     // the loaded toolkit, for synchronous re-rendering once a song is open
   async function verovioTk() {
-    try { return await window.nactiVerovio(); }
+    try { return (VTK = await window.nactiVerovio()); }
     catch { throw new Error(t('app.verovioChyba')); }
   }
   /**
