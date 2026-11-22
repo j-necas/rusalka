@@ -2,10 +2,11 @@
 // weekly summary and the Echo game. The code composes the texts from facts about the song and the practice.
 import * as D from '../lib/extras.js';
 import { jakaTonina } from '../lib/levels.js';
+import { otevriDialog, zavriDialog } from './dialog.js';
 import { t } from '../lib/texts.js';
 import { nazevKroku } from '../lib/note_names.js';
 
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 let CTX = null;
 /** ctx: { S, audio, hlas, toast, profil(), pridejPisen(pisen) } */
 export function nastav(ctx) { CTX = ctx; }
@@ -15,13 +16,20 @@ function okno(nadpis) {
   zavri();
   const el = document.createElement('div');
   el.className = 'modal doplnek';
-  el.innerHTML = `<div class="karta siroka"><h2>${esc(nadpis)}</h2><div class="obsah"></div>
+  el.setAttribute('role', 'dialog');
+  el.setAttribute('aria-modal', 'true');
+  el.setAttribute('aria-labelledby', 'doplnekNadpis');
+  el.innerHTML = `<div class="karta siroka"><h2 id="doplnekNadpis">${esc(nadpis)}</h2><div class="obsah"></div>
     <div class="tlacitka"><button class="tlacitko sekundarni" data-zavrit>${esc(t('doplnky.ui.zavrit'))}</button></div></div>`;
   el.addEventListener('click', e => { if (e.target === el || e.target.closest('[data-zavrit]')) zavri(); });
   document.body.appendChild(el);
+  otevriDialog(el, { zavrit: zavri });
   return el;
 }
-export function zavri() { document.querySelector('.modal.doplnek')?.remove(); }
+export function zavri() {
+  const el = document.querySelector('.modal.doplnek');
+  if (el) { zavriDialog(el); el.remove(); }
+}
 
 /** text from a template/model result (string, {odstavce, tipy}, {veta}, {odpoved}) */
 function html(v) {

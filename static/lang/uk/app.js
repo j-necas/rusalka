@@ -475,4 +475,8 @@ export default {
 'menu.spravaHledat':'Знайти пісню',
 'menu.mojeNic': 'Тут з’являться пісні, які ви додасте.',
 'menu.vse':'Меню',
+  "app.midiInfo": "Розмір {takt}, темп {tempo}, {stopy}",
+  "app.novaVerze": "Доступна нова версія.",
+  "app.obnovitVerzi": "Оновити",
+  "app.jazykChyba": "Не вдалося завантажити мову.",
 };

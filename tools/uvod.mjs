@@ -53,6 +53,7 @@ export function stranka(kod) {
 <html lang="${kod}"${kod === 'ar' ? ' dir="rtl"' : ''}>
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${x('title')}</title>
 <meta name="description" content="${x('description')}">

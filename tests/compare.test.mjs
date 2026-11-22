@@ -269,3 +269,17 @@ test('real song: 100 % against itself, against a damaged copy only the damaged s
   assert.equal(souhrnText(w).split('\n').length, 3);
   assert.deepEqual(rozdilyCteni(p, t).map(r => r.takt), [k, 30]);
 });
+
+test('the editor comparison renders both details and summary in English', async () => {
+  const { nastavJazyk } = await import('../static/lib/texts.js');
+  nastavJazyk('en');
+  try {
+    const p = zaklad([{ noty: [n('C4', '1/4'), n('D4', '1/4'), n('E4', '1/4')] }]);
+    const q = kopie(p); q.takty[0].noty[0].t = 'D4';
+    const s = souhrnText(porovnej(p, q));
+    assert.match(s, /^Bars 0\/1/);
+    assert.match(s, /bar 1: D4 instead of C4 on beat 1/);
+  } finally {
+    nastavJazyk('cs');
+  }
+});

@@ -183,6 +183,7 @@ const hlava = ({ kod, titulek, popis, url, koren, data }) => `<!doctype html>
 <html lang="${kod}">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(titulek)}</title>
 <meta name="description" content="${esc(popis)}">
@@ -211,7 +212,7 @@ const pata = (u, uvod) => `<footer class="pata sirka">
 `;
 
 /** the page of one song: { cesta (from the web root), html } */
-export async function strankaPisne(p) {
+export async function strankaPisne(p, { externe = false } = {}) {
   const kod = p.stranka, t = texty(kod), u = json(`tools/uvod/${kod}.json`);
   nastavSoustavu(vychoziSoustava(kod), slabiky(kod));
   const { model, xml } = nacti(p);
@@ -226,6 +227,8 @@ export async function strankaPisne(p) {
   const autor = autorText(model.autor, kod, t);
   const popisNot = r(t.sheetAlt);
   const [siroke, uzke] = [await notySvg(xml, model, 900, 75, popisNot), await notySvg(xml, model, 340, 50, popisNot)];
+  const noty = `<div class="noty-siroke">${siroke}</div>
+    <div class="noty-uzke">${uzke}</div>`;
   const vsechny = pisne().filter(q => q.stranka === kod && q !== p);
   const dalsi = [...vsechny.filter(q => q.police === p.police), ...vsechny.filter(q => q.police !== p.police)].slice(0, 8);
   const popis = r(t.description).replace('{chords}', akordy.length ? t.withChords : '').replace('{lyrics}', text.length ? t.withLyrics : '');
@@ -261,8 +264,7 @@ ${hlavicka(u, '../../../', '../../')}
 <section class="sirka" aria-labelledby="noty">
   <h2 id="noty">${esc(t.sheetH2)}</h2>
   <figure class="list-not"${jakoPisen}>
-    <div class="noty-siroke">${siroke}</div>
-    <div class="noty-uzke">${uzke}</div>
+    ${noty}
   </figure>
 </section>
 
@@ -303,7 +305,21 @@ ${dalsi.map(q => `    <li><a href="../${q.jmeno}/"${q.jazyk !== kod ? ` hreflang
 </main>
 
 ${pata(u, '../../')}`;
-  return { cesta: p.cesta, html };
+  if (!externe || Buffer.byteLength(html) <= 150000) return { cesta: p.cesta, html };
+  // An SVG image cannot inherit the page CSS. The circles keep their colours and the text uses a system font.
+  const styl = '<style>.pismeno { fill: white; font-family: sans-serif; font-weight: 800; } .pismeno.tmave { fill: #3A2E00; } .harm text { font-family: sans-serif; font-weight: 700; }</style>';
+  const soubory = {};
+  const rozmer = (jmeno, svg) => {
+    soubory[jmeno] = svg.replace(/^(<svg[^>]*>)/, '$1' + styl);
+    const [, w, h] = svg.match(/^<svg viewBox="0 0 (\d+) (\d+)"/);
+    return `width="${w}" height="${h}"`;
+  };
+  const velky = rozmer('noty-siroke.svg', siroke), maly = rozmer('noty-uzke.svg', uzke);
+  const obrazek = `<picture>
+      <source media="(max-width: 600px)" srcset="noty-uzke.svg" ${maly}>
+      <img src="noty-siroke.svg" loading="lazy" ${velky} alt="${esc(popisNot)}" style="display:block;width:100%;height:auto">
+    </picture>`;
+  return { cesta: p.cesta, html: html.replace(noty, () => obrazek), soubory };
 }
 
 /** the list of the songs of a page language, by shelf: { cesta, html } */

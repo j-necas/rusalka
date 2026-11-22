@@ -1,5 +1,6 @@
 // हिन्दी – area doplnky; keys start with 'doplnky.'
 // Word lists (numerals, interval names, topics…) are strings separated by '|'; the code picks from them by index.
+import { TEMATA_JAZYKU } from '../temata.js';
 export default {
   // ---------------------------------------------------------------- small things
   'doplnky.a': ' और ',
@@ -243,7 +244,7 @@ export default {
   'doplnky.styl.popBalada.popis': 'फिफ्थ और देर तक बजने वाले कॉर्ड के साथ लंबा बास स्वर।',
 
   // ---------------------------------------------------------------- new song
-  'doplnky.temata': 'जानवर|बिल्ली का बच्चा|पिल्ला|जंगल|घास का मैदान|सर्दी|वसंत|गर्मी|पतझड़|समुद्र|छोटी रेलगाड़ी|धूप|बारिश|तारे|क्रिसमस|जन्मदिन|दोस्त|परी कथा',
+  'doplnky.temata': TEMATA_JAZYKU["hi"],
   'doplnky.nova.nazev': 'मेरा गीत',
   'doplnky.nova.nazevTema': 'मेरा गीत – {tema}',
 

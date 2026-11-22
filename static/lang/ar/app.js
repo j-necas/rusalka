@@ -499,4 +499,8 @@ export default {
   "menu.spravaHledat": "ابحث عن أغنية",
   "menu.mojeNic": "ستظهر هنا الأغاني التي تضيفها.",
   "menu.vse": "القائمة",
+  "app.midiInfo": "الميزان {takt}، السرعة {tempo}، {stopy}",
+  "app.novaVerze": "يتوفر إصدار جديد.",
+  "app.obnovitVerzi": "إعادة التحميل",
+  "app.jazykChyba": "تعذّر تحميل اللغة.",
 };

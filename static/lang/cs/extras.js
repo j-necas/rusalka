@@ -1,5 +1,6 @@
 // Čeština – oblast doplnky; klíče začínají 'doplnky.'
 // Seznamy slov (číslovky, názvy intervalů, témata…) jsou řetězce oddělené '|'; kód z nich vybírá podle indexu.
+import { TEMATA_JAZYKU } from '../temata.js';
 export default {
   // ---------------------------------------------------------------- drobnosti
   'doplnky.a': ' a ',
@@ -98,7 +99,7 @@ export default {
   'doplnky.pruvodce.kroky': 'Melodie postupuje hlavně po krocích.',
   'doplnky.pruvodce.vraceji': 'Takty {takty} se vracejí v taktech {znovu}.',
   'doplnky.pruvodce.stavba': 'Stavba podle frází: {schema} – {odhad}.',
-  'doplnky.pruvodce.akordy': 'Akordů je {n}, nejčastěji {akordy}.',
+  'doplnky.pruvodce.akordy': { one: "V písničce je {n} akord: {akordy}.", few: "V písničce jsou {n} akordy, nejčastěji {akordy}.", many: "Počet akordů: {n}, nejčastěji {akordy}.", other: "V písničce je {n} akordů, nejčastěji {akordy}." },
   'doplnky.pruvodce.tip.tezkyDite': 'Takt {takt} je těžší ({duvody}). Hraj ho nejdřív pomalu.',
   'doplnky.pruvodce.tip.tezky': 'Takt {takt}: {duvody} – nacvič ho zvlášť a pomalu.',
   'doplnky.pruvodce.tip.naucDite': 'Nauč se nejdřív takty {takty}.',
@@ -211,7 +212,7 @@ export default {
   'doplnky.styl.popBalada.popis': 'Dlouhý bas s kvintou a držený akord.',
 
   // ---------------------------------------------------------------- nová písnička
-  'doplnky.temata': 'zvířátka|kočička|pejsek|les|louka|zima|jaro|léto|podzim|moře|vláček|sluníčko|déšť|hvězdy|Vánoce|narozeniny|kamarádi|pohádka',
+  'doplnky.temata': TEMATA_JAZYKU["cs"],
   'doplnky.nova.nazev': 'Moje písnička',
   'doplnky.nova.nazevTema': 'Moje písnička – {tema}',
 

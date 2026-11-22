@@ -2,43 +2,38 @@
 // plurals an object { one, few, many, other } chosen by params.n (Intl.PluralRules of the language).
 import cs from '../lang/cs.js';
 import en from '../lang/en.js';
-import de from '../lang/de.js';
-import fr from '../lang/fr.js';
-import es from '../lang/es.js';
-import sk from '../lang/sk.js';
-import pl from '../lang/pl.js';
-import it from '../lang/it.js';
-import pt from '../lang/pt.js';
-import ptBR from '../lang/pt-BR.js';
-import uk from '../lang/uk.js';
-import ru from '../lang/ru.js';
-import zhCN from '../lang/zh-CN.js';
-import ja from '../lang/ja.js';
-import hi from '../lang/hi.js';
-import ar from '../lang/ar.js';
-
 /** the languages in their own names, in the order of the selects: European by number of speakers, then Russian and
  * the Asian ones (Arabic with them) */
 export const NAZVY_JAZYKU = {
   en: 'English', es: 'Español', fr: 'Français', pt: 'Português', 'pt-BR': 'Português (Brasil)', de: 'Deutsch', it: 'Italiano',
   pl: 'Polski', uk: 'Українська', cs: 'Čeština', sk: 'Slovenčina', ru: 'Русский', 'zh-CN': '中文', hi: 'हिन्दी', ar: 'العربية', ja: '日本語',
 };
-export const JAZYKY = { cs, en, de, fr, es, sk, pl, it, pt, uk, ru, "zh-CN": zhCN, ja, "pt-BR": ptBR, hi, ar };
+const slovniky = new Map([['cs', cs], ['en', en]]);
+
+export async function nactiSlovnik(kod) {
+  if (!Object.hasOwn(NAZVY_JAZYKU, kod)) return en;
+  if (!slovniky.has(kod)) {
+    const url = new URL(`../lang/${kod}.js`, import.meta.url);
+    url.search = new URL(import.meta.url).search;    // keep the build version when loading a language on demand
+    slovniky.set(kod, (await import(url.href)).default);
+  }
+  return slovniky.get(kod);
+}
 let JAZYK = 'cs', SLOVNIK = cs, PRAVIDLA = new Intl.PluralRules('cs');
 const chybi = new Set();
 
 export function nastavJazyk(kod, slovnik) {
   JAZYK = kod;
-  SLOVNIK = slovnik || JAZYKY[kod] || cs;
+  SLOVNIK = slovnik || slovniky.get(kod) || cs;
   PRAVIDLA = new Intl.PluralRules(kod);
 }
 /** a browser language tag → a language Rusalka speaks (pt-BR exactly, zh-* → zh-CN, else the base language), or null */
 function podporovany(tag) {
   const t = String(tag || '').toLowerCase(), zaklad = t.split('-')[0];
-  const presne = Object.keys(JAZYKY).find(k => k.toLowerCase() === t);
+  const presne = Object.keys(NAZVY_JAZYKU).find(k => k.toLowerCase() === t);
   if (presne) return presne;
   if (zaklad === 'zh') return 'zh-CN';
-  return JAZYKY[zaklad] ? zaklad : null;
+  return Object.hasOwn(NAZVY_JAZYKU, zaklad) ? zaklad : null;
 }
 /**
  * default language of a new install: the first of the browser's languages (navigator.languages) Rusalka speaks,
