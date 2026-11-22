@@ -1603,7 +1603,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   function statPisne(stat, vys) {
     const pisne = stavPisni(stat, vys), jmeno = s => pisenSouboru(s)?.nazev || s.replace(/\.(musicxml|xml|mxl)$/i, '');
     $('#statNauceno').textContent = pisne.length ? t('stat.nauceno', { n: pisne.filter(p => p.stav.druh === 'naucena').length, z: pisne.length }) : '';
-    const stav = s => (s.druh === 'naucena' ? t('stat.naucena') : s.krok === 'tempo' && s.rychlost ? t('stat.cisteNa', { v: s.rychlost }) : t('stat.ted', { krok: t('krok.' + s.krok) }));
+    const stav = s => (s.druh === 'naucena' ? t('stat.naucena') : s.krok === REZIM.TEMPO && s.rychlost ? t('stat.cisteNa', { v: s.rychlost }) : t('stat.ted', { krok: t('krok.' + s.krok) }));
     const radky = pisne.map(p => `<div class="stat-pisen"><b>${esc(jmeno(p.soubor))}</b>
       <span class="kroky3" role="img" aria-label="${esc(KROKY.map((k, i) => `${t('krok.' + k)} ${p.hvezdy[i]}/3`).join(', '))}">${p.hvezdy.map(h => `<i><span style="width:${h / 3 * 100}%"></span></i>`).join('')}</span>
       <small>${esc(stav(p.stav))}</small></div>`);
@@ -1631,13 +1631,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (STAT.hrac && STAT.hrac !== S.profil) zvolHrace(STAT.hrac);
     await otevriPred(m.soubor);
     if (!S.data || PRED.soubor !== m.soubor) return;
-    Object.assign(PRED, { krok: 'cekam', rychlost: 60 });
+    Object.assign(PRED, { krok: REZIM.CEKAM, rychlost: 60 });
     if (m.uroven && Number(S.uroven) !== m.uroven) { S.uroven = m.uroven; S.styl = ''; }   // the version the mistakes were made in
     if (S.data.osnovy.length > 1 || m.uroven >= 3) S.rukaVolba = 'vse';
     S.usek = { od: m.od, do: m.do };
     nabidkaUseku();
     S.smycka.zapnuto = true; S.smycka.cisteVRade = 0; $('#prepSmycka').classList.add('zap');
-    await hrajZPred('cekam', true);
+    await hrajZPred(REZIM.CEKAM, true);
   };
   /** delete a player after a confirmation; their data are backed up first (last 5 deletions) */
   async function smazHraceSPotvrzenim(id) {
@@ -1729,7 +1729,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#pokracujHrat').onclick = () => S.pokracuj && otevriPred(S.pokracuj);
 
   // ------------------------------------------------------------ Before playing
-  const PRED = { soubor: null, krok: 'cekam', rychlost: 60 };
+  const PRED = { soubor: null, krok: REZIM.CEKAM, rychlost: 60 };
   const VYBER_PISNE = vytvorVyberPisne(pripravena => {
     for (const sel of ['#predHrat', '#predPoslech', '#predZmenit', '#oPisni']) $(sel).disabled = !pripravena;
   });
@@ -1794,14 +1794,14 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   }
   function hrajZPred(rezim) {
     if (!pripravenaPisen()) return;
-    if (rezim !== 'poslech') zapniMikrofonPriHre();
+    if (rezim !== REZIM.POSLECH) zapniMikrofonPriHre();
     konecPoslechu();
-    if (rezim === 'poslech' && !S.dvojice) zacniPoslech();
+    if (rezim === REZIM.POSLECH && !S.dvojice) zacniPoslech();
     zobrazHru();
     if (!POSLECH) nastavRychlost(PRED.rychlost);
     $(`[data-rezim="${rezim}"]`)?.click();
     const r = RYCHLOSTI.includes(PRED.rychlost) ? t('rychlost.' + PRED.rychlost).toLowerCase() : PRED.rychlost + ' %';
-    $('#hraJak').textContent = rezim === 'poslech' ? t(POSLECH ? 'pred.poslechCela' : 'pred.poslech') : `${t('krok.' + rezim)}, ${r}`;
+    $('#hraJak').textContent = rezim === REZIM.POSLECH ? t(POSLECH ? 'pred.poslechCela' : 'pred.poslech') : `${t('krok.' + rezim)}, ${r}`;
     if (!$('#start').classList.contains('skryta')) spust();
   }
   function vykresliPred() {
@@ -1822,7 +1822,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     vykresliPisne(); ukaz('domu');
   };
   $('#predHrat').onclick = () => hrajZPred(PRED.krok);   // Find the notes has no start; the other steps begin with a count-in
-  $('#predPoslech').onclick = () => hrajZPred('poslech');
+  $('#predPoslech').onclick = () => hrajZPred(REZIM.POSLECH);
   if (vyberBezFiltru(navigator)) $('#soubor').removeAttribute('accept');   // iOS would grey out .musicxml
   $('#soubor').onchange = async e => {
     const f = e.target.files[0];
@@ -3029,7 +3029,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     S.nastaveni.rychlost = Number(e.target.value);
     $('#rychlostText').textContent = rychlostText(S.nastaveni.rychlost);
     ulozNastaveni();
-    if (S.rezim !== 'cekam' && H.bezi) reset();
+    if (S.rezim !== REZIM.CEKAM && H.bezi) reset();
   };
   // the toggles are switches for assistive tech too: aria-checked follows the 'zap' class (set in several places)
   for (const b of $$('.prepinac:not(#kalibrace)')) {
@@ -3053,7 +3053,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   prepinac('#prepPismena', 'pismena', () => document.body.classList.toggle('bez-pismen', !S.nastaveni.pismena));
   prepinac('#prepBarvy', 'barvy', () => {
     document.body.classList.toggle('bez-barev', !S.nastaveni.barvy);
-    if (S.rezim === 'cekam' && S.kroky[H.idx] && !$('#hra').classList.contains('skryta')) oznacKrok(H.idx);
+    if (S.rezim === REZIM.CEKAM && S.kroky[H.idx] && !$('#hra').classList.contains('skryta')) oznacKrok(H.idx);
   });
   $$('.prep-doprovod').forEach(b => b.onclick = () => {   // per device and mode (off with the microphone), not per player
     S.vstup = sDoprovodem(S.vstup, !doprovodZapnuty(S.vstup)); uloz.pis('kt-vstup', S.vstup); midiStav();
