@@ -379,8 +379,8 @@ export class DetektorNastupu {
 /**
  * Stateful recogniser: replaces MIDI input. The UI calls `ocekavej(tony)` for the next note/chord and `zpracuj(ramec, cas)`
  * for each frame from the microphone; on the 'trefa' event it calls the same vstupOn(midi) as with MIDI.
- *  - 'trefa' (hit) { midi[] }: all expected notes sound (in `potvrzeni` consecutive frames), the new energy in the spectrum
- *    (difference from frame t−2) belongs to them AND either a new onset came, or the notes started sounding from silence
+ *  - 'trefa' (hit) { midi[] }: all expected notes sound (in `potvrzeni` consecutive frames) and each has fresh spectral energy.
+ *    Chord attacks can arrive in separate frames within `oknoTrefy`. A new onset must have come, or the notes started from silence
  *    without a clear onset (softly attacked flute). A note ringing on from earlier (repeated note) does not count until a
  *    new keystroke comes; neither does a different note played over a ringing expected one.
  *  - 'vedle' (wrong note) { midi }: after an onset, a different note than expected sounds confidently (monophonic, in two consecutive frames).
@@ -412,6 +412,7 @@ export class Rozpoznavac {
     this.spektra = [];
     this.nastupCas = null; this.vyrizeno = true; this.novota = false; this.kandidatVedle = null;
     this.zni = null; this.neOk = 0; this.okPocet = 0; this.zTicha = false; this.behVyrizen = false;
+    this.noveTony = new Map(); this.vedleAkordu = null;
   }
   /** silence calibration for the onset detector (frames without playing) */
   kalibruj(ramce) { return this.detektor.kalibruj(ramce); }
@@ -419,6 +420,7 @@ export class Rozpoznavac {
   ocekavej(midiTony) {
     this.ocekavane = [...new Set((Array.isArray(midiTony) ? midiTony : midiTony == null ? [] : [midiTony]).map(Number))];
     this.zni = null; this.neOk = 0; this.novota = false; this.okPocet = 0; this.zTicha = false; this.behVyrizen = false;
+    this.noveTony.clear(); this.vedleAkordu = null; this.kandidatVedle = null;
   }
   /**
    * @param {Float32Array|number[]} ramec frame of samples (recommended 4096, hop 1024)
@@ -429,29 +431,46 @@ export class Rozpoznavac {
     const { vzorkovani, ladeni, tolerance, prah, oknoTrefy, jistotaVedle, potvrzeni } = this.volby;
     const fMax = Math.min(5000, vzorkovani * 0.45);
     const n = this.detektor.zpracuj(ramec, cas);
-    if (n.nastup) { this.nastupCas = cas; this.vyrizeno = false; this.novota = false; this.behVyrizen = false; this.kandidatVedle = null; }
+    if (n.nastup) {
+      this.nastupCas = cas; this.vyrizeno = false; this.novota = false; this.behVyrizen = false;
+      this.kandidatVedle = null; this.vedleAkordu = null;
+    }
     const vOkne = !this.vyrizeno && this.nastupCas !== null && cas - this.nastupCas <= oknoTrefy;
 
-    // spectrum of the whole frame + spectrum of the "new energy" (positive difference from frame t−2)
+    const tony = this.ocekavane, akord = tony.length > 1;
+    // Give weaker chord notes more time to emerge above the preceding spectrum.
     const ticho = energie(ramec) < -65;
     const { mag, krok, zvetseni } = spektrum(ramec, vzorkovani);
-    const stare = this.spektra.length === 2 && this.spektra[1].length === mag.length ? this.spektra[1] : null;
+    const prvniRamec = this.spektra.length === 0;
+    if (!prvniRamec && this.spektra[0].length !== mag.length) this.spektra.length = 0;
+    const stare = this.spektra[Math.min(akord ? 3 : 1, this.spektra.length - 1)];
     this.spektra.unshift(mag);
-    if (this.spektra.length > 2) this.spektra.pop();
-    const tony = this.ocekavane;
+    if (this.spektra.length > 4) this.spektra.pop();
+    const volbyTonu = { ladeni, tolerance, prah, fMax };
     let ok = false;
     if (tony.length && !ticho) {
-      // whole frame: do they sound? (without the octave-lower check – ringing previous notes would confuse it; the new energy guards it)
+      // Ringing earlier notes may overlap the full frame, so check for lower octaves on the new energy.
       const { seznam } = vrcholy(naDb(mag), krok, zvetseni, { fMax });
-      ok = hodnot(seznam, tony, { ladeni, tolerance, prah, fMax, oktavaNiz: false }).ok;
-      if (ok && !stare) this.novota = hodnot(seznam, tony, { ladeni, tolerance, prah, fMax }).ok;
-      else if (ok) {
-        const nove = new Float64Array(mag.length);
-        for (let i = 0; i < mag.length; i++) nove[i] = Math.max(0, mag[i] - stare[i]);
-        const nv = vrcholy(naDb(nove), krok, zvetseni, { fMax }).seznam;
-        if (hodnot(nv, tony, { ladeni, tolerance, prah, fMax }).ok) this.novota = true;
+      const zni = hodnot(seznam, tony, { ...volbyTonu, oktavaNiz: false });
+      ok = zni.ok;
+      if ((ok || akord) && (stare || prvniRamec)) {
+        let nove = seznam;
+        if (stare && akord) {
+          // Only existing peaks that grew qualify: subtracting whole spectra can create peaks between notes.
+          nove = seznam.filter(p => mag[p.k] >= 1.2 * stare[p.k]);
+        } else if (stare) {
+          const rozdil = new Float64Array(mag.length);
+          for (let i = 0; i < mag.length; i++) rozdil[i] = Math.max(0, mag[i] - stare[i]);
+          nove = vrcholy(naDb(rozdil), krok, zvetseni, { fMax }).seznam;
+        }
+        const novota = hodnot(nove, tony, volbyTonu);
+        if (akord) {
+          for (const m of tony) if (novota.skore[m] >= prah && zni.skore[m] >= prah) this.noveTony.set(m, cas);
+        } else if (novota.ok) this.novota = true;
       }
     }
+    const cerstve = m => cas - (this.noveTony.get(m) ?? -Infinity) <= oknoTrefy;
+    const vsechnyNove = akord ? tony.every(cerstve) : this.novota;
     // continuous run of "ok" frames: how many there are and whether it started in silence (the note began sounding), not from a decay
     if (ok) {
       if (this.okPocet === 0) { this.zTicha = this.zni === false; this.behVyrizen = false; }
@@ -461,21 +480,31 @@ export class Rozpoznavac {
       this.okPocet = 0;
       if (this.zni === null || ++this.neOk >= 3) { this.zni = false; this.novota = false; }
     }
-    if (ok && this.okPocet >= potvrzeni && this.novota && !this.behVyrizen && (vOkne || this.zTicha)) {
-      this.vyrizeno = true; this.behVyrizen = true; this.novota = false;
+    if (ok && this.okPocet >= potvrzeni && vsechnyNove && !this.behVyrizen && (vOkne || this.zTicha)) {
+      this.vyrizeno = true; this.behVyrizen = true; this.novota = false; this.noveTony.clear();
+      // The next attack must grow beyond the spectrum that already counted.
+      this.spektra.length = 1;
       return { typ: 'trefa', midi: [...tony] };
     }
     // wrong note: only a confident different note after an onset (monophonic), confirmed in two frames
     if (vOkne && !ticho) {
       const posledni = ramec.length > 2048 ? (ramec.subarray ? ramec.subarray(ramec.length - 2048) : ramec.slice(-2048)) : ramec;
       const v = vyska(posledni, vzorkovani, { ladeni, prah: jistotaVedle, min: 40 });
-      if (v && !tony.includes(v.midi) && !(this.novota && ok)) {
+      if (v && !tony.includes(v.midi) && !(vsechnyNove && ok)) {
         if (this.kandidatVedle === v.midi) {
-          this.vyrizeno = true; this.behVyrizen = true;      // no hit will come later from the same sounding either
-          return { typ: 'vedle', midi: v.midi };
+          if (akord) this.vedleAkordu = v.midi;
+          else {
+            this.vyrizeno = true; this.behVyrizen = true;
+            return { typ: 'vedle', midi: v.midi };
+          }
         }
         this.kandidatVedle = v.midi;
       } else this.kandidatVedle = null;
+    }
+    // A loud first note can dominate the pitch estimate before the rest of a chord arrives.
+    if (akord && !vOkne && !this.vyrizeno) {
+      this.vyrizeno = true;
+      if (this.vedleAkordu != null && !tony.some(cerstve)) return { typ: 'vedle', midi: this.vedleAkordu };
     }
     return null;
   }

@@ -337,7 +337,7 @@ export default {
   "app.stylPodleUrovne": "Podle písničky",
   "app.rychlostPomala": "{v} % · jako lenochod",
   "app.rychlostRychla": "{v} % · jako králík",
-  "app.zvukKlavir": "Doprovod, poslech a klávesy na obrazovce zní z klavíru ({nazev}), ne z počítače. Metronom klepe dál v počítači.",
+  "app.zvukKlavir": "Zapněte pro zvuk doprovodu, poslechu a kláves na obrazovce z klavíru ({nazev}). Po vypnutí hraje toto zařízení.",
   "app.zvukKlavirNe": "Až bude klavír připojený, doprovod a poslech můžou znít z něj místo z počítače.",
   "app.klaviaturaSchovana": "Klaviatura je schovaná – hraj na připojeném klavíru (zapneš ji v Zobrazení).",
   "app.pisenSmazana": "Písnička je smazaná.",

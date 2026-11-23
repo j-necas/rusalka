@@ -5,6 +5,8 @@ import {
   fft, midiNaHz, hzNaMidi, energie, vyska, obsahujeTony, DetektorNastupu, Rozpoznavac, kalibraceLadeni, zVlastnichTonu,
 } from '../static/lib/microphone.js';
 
+import { vytvorMikrofon } from '../static/ui/microphone.js';
+
 const VZ = 48000;
 
 // ---------------------------------------------------------------- signal generators
@@ -339,6 +341,71 @@ test('Rozpoznavac: miss on another tone, triad hit, nothing in silence and noise
   assert.deepEqual(prehraj(sum(n, 0.01, 5), [[0, [C4]]]), []);
   // with no expectation: every confident tone is a miss
   assert.deepEqual(prehraj(d4, [[0, []]]).map(e => [e.typ, e.midi]), [['vedle', 62]]);
+});
+
+test('Rozpoznavac: a chord with a louder first note and slightly staggered attacks counts once', () => {
+  for (const [tony, amp] of [[[48, 52, 55], 0.0875], [[C4, E4, G4], 0.35]]) {
+    const x = smichej(...tony.map((m, i) => klavir(midiNaHz(m), sekund(1), {
+      od: sekund(0.25 + 0.05 * i), amp: i === 0 ? 0.35 : amp,
+    })));
+    const u = prehraj(x, [[0, tony]]);
+    assert.deepEqual(u.map(e => [e.typ, e.midi]), [['trefa', tony]], JSON.stringify(u));
+    assert.ok(u[0].cas >= 0.35 && u[0].cas < 0.48);
+  }
+});
+
+test('Rozpoznavac: two successive chords can share a note that is struck again', () => {
+  const a = [C4, E4, G4], b = [C4, 65, 69];
+  const x = smichej(...[a, b].flatMap((tony, i) => tony.map(m => klavir(midiNaHz(m), sekund(1), {
+    od: sekund(0.25 + i * 0.20), amp: 0.2, utlum: 0.4,
+  }))));
+  const u = prehraj(x, [[0, a], [0.39, b]]);
+  assert.deepEqual(u.map(e => [e.typ, e.midi]), [['trefa', a], ['trefa', b]], JSON.stringify(u));
+  assert.ok(u[1].cas >= 0.45 && u[1].cas - u[0].cas < 0.25);
+});
+
+test('the microphone forwards every pitch of the next chord, including a quickly repeated pitch', async test => {
+  let tik;
+  test.mock.method(globalThis, 'setInterval', f => { tik = f; return 1; });
+  test.mock.method(globalThis, 'clearInterval', () => {});
+  const a = [C4, E4, G4], b = [C4, 65, 69];
+  const x = smichej(...[a, b].flatMap((tony, i) => tony.map(m => klavir(midiNaHz(m), sekund(1.5), {
+    od: sekund(0.7 + i * 0.20), amp: 0.2, utlum: 0.4,
+  }))));
+  let cas = 0, cil = a;
+  const analyzer = { getFloatTimeDomainData(ramec) {
+    const konec = sekund(cas), od = konec - ramec.length;
+    ramec.fill(0);
+    ramec.set(x.subarray(Math.max(0, od), konec), Math.max(0, -od));
+  } };
+  const ac = { sampleRate: VZ, get currentTime() { return cas; },
+    createAnalyser: () => analyzer, createMediaStreamSource: () => ({ connect() {}, disconnect() {} }) };
+  const navigator = Object.getOwnPropertyDescriptor(globalThis, 'navigator');
+  Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { mediaDevices: {
+    getUserMedia: async () => ({ getTracks: () => [] }),
+  } } });
+  test.after(() => {
+    if (navigator) Object.defineProperty(globalThis, 'navigator', navigator);
+    else delete globalThis.navigator;
+  });
+  const noty = [];
+  const mic = vytvorMikrofon({ audio: () => ac, ocekavane: () => cil,
+    trefa(m) { noty.push(m); if (noty.length === a.length) cil = b; }, vedle() {}, stav() {} });
+  await mic.zapni();
+  try {
+    for (let ms = 20; ms <= 1200; ms += 20) {
+      cas = ms / 1000;
+      tik();
+    }
+    assert.deepEqual(noty, [...a, ...b]);
+  } finally { mic.vypni(); }
+});
+
+test('Rozpoznavac: ringing notes from an earlier attack do not complete a chord', () => {
+  const n = sekund(1.5);
+  const x = smichej(...[[C4, 0.25], [E4, 0.8], [G4, 0.84]]
+    .map(([m, od]) => klavir(midiNaHz(m), n, { od: sekund(od), amp: 0.2 })));
+  assert.ok(!prehraj(x, [[0, [C4, E4, G4]]]).some(e => e.typ === 'trefa'));
 });
 
 test('Rozpoznavac: softly attacked flute (no clear onset) and a detuned piano with calibrated tuning', () => {

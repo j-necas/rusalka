@@ -3,7 +3,8 @@
 import { Rozpoznavac, zVlastnichTonu } from '../lib/microphone.js';
 import { t } from '../lib/texts.js';
 
-const RAMEC = 4096;              // ~85 ms – needed for bass notes below C3
+const RAMEC = 4096;              // ~85 ms
+const RAMEC_BAS = 8192;          // resolve nearby fundamentals in low chords
 const KROK_MS = 20;              // how often a frame is processed (~75 % overlap)
 const KALIBRACE_RAMCU = 25;      // ~0.5 s of silence to estimate the noise
 
@@ -15,7 +16,7 @@ const KALIBRACE_RAMCU = 25;      // ~0.5 s of silence to estimate the noise
 export function vytvorMikrofon(volby) {
   let proud = null, zdroj = null, analyzer = null, casovac = 0, rozpoznavac = null;
   const kalibrace = [];
-  let posledniOcekavane = '', posledniTrefa = { midi: [], cas: -1 };
+  let posledniOcekavane = '';
 
   async function zapni() {
     if (proud) return;
@@ -26,18 +27,19 @@ export function vytvorMikrofon(volby) {
     const ac = volby.audio();
     zdroj = ac.createMediaStreamSource(proud);
     analyzer = ac.createAnalyser();
-    analyzer.fftSize = RAMEC;
+    analyzer.fftSize = RAMEC_BAS;
     analyzer.smoothingTimeConstant = 0;
     zdroj.connect(analyzer);                              // not sent to the speakers
     rozpoznavac = new Rozpoznavac();
     rozpoznavac.nastav({ vzorkovani: ac.sampleRate, ladeni: 440 });
     kalibrace.length = 0; posledniOcekavane = '';
     volby.stav(t('editor.mikrofon.kalibrace'), true);
-    const ramec = new Float32Array(RAMEC);
+    const dlouhy = new Float32Array(RAMEC_BAS);
+    const kratky = dlouhy.subarray(RAMEC_BAS - RAMEC);
     casovac = setInterval(() => {
-      analyzer.getFloatTimeDomainData(ramec);
+      analyzer.getFloatTimeDomainData(dlouhy);
       if (kalibrace.length < KALIBRACE_RAMCU) {
-        kalibrace.push(ramec.slice());
+        kalibrace.push(kratky.slice());
         if (kalibrace.length === KALIBRACE_RAMCU) {
           rozpoznavac.kalibruj(kalibrace);
           volby.stav(t('editor.mikrofon.posloucha'), true);
@@ -48,12 +50,9 @@ export function vytvorMikrofon(volby) {
       const klic = cile.join(',');
       if (klic !== posledniOcekavane) { rozpoznavac.ocekavej(cile); posledniOcekavane = klic; }
       if (!cile.length) return;
-      const u = rozpoznavac.zpracuj(ramec, ac.currentTime);
-      if (u?.typ === 'trefa') {
-        // safeguard: the same note within 250 ms is the decay of the same keystroke, not a new one (otherwise repeated notes would be skipped)
-        const nove = u.midi.filter(m => !(posledniTrefa.midi.includes(m) && ac.currentTime - posledniTrefa.cas < 0.25));
-        if (nove.length) { posledniTrefa = { midi: u.midi, cas: ac.currentTime }; nove.forEach(m => volby.trefa(m)); }
-      }
+      const basovyAkord = cile.filter(m => m < 48).length >= 2;
+      const u = rozpoznavac.zpracuj(basovyAkord ? dlouhy : kratky, ac.currentTime);
+      if (u?.typ === 'trefa') u.midi.forEach(m => volby.trefa(m));
       // the accompaniment from the speakers is not the player's wrong key
       else if (u?.typ === 'vedle' && !zVlastnichTonu(u.midi, volby.vlastni?.() || [], ac.currentTime)) volby.vedle(u.midi);
     }, KROK_MS);

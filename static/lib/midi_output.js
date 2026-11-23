@@ -9,7 +9,7 @@ export const KANAL = 1;                               // 0 = channel 1; the pian
 /** the output belonging to the connected piano: same name as the input (or one contains the other); not other ports */
 export function vyberVystup(vystupy, nazvyVstupu) {
   const patri = n => !!n && nazvyVstupu.some(v => v && (v === n || v.includes(n) || n.includes(v)));
-  return [...vystupy].find(o => patri(o.name)) || null;
+  return [...vystupy].find(o => o.state !== 'disconnected' && patri(o.name)) || null;
 }
 
 export function vytvorVystup({ ted = () => performance.now(), interval = (f, ms) => setInterval(f, ms),

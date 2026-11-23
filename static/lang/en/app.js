@@ -337,7 +337,7 @@ export default {
   "app.stylPodleUrovne": "By the song",
   "app.rychlostPomala": "{v} % · like a sloth",
   "app.rychlostRychla": "{v} % · like a rabbit",
-  "app.zvukKlavir": "Backing, listening and on-screen keys sound from the piano ({nazev}), not the computer. The metronome still clicks on the computer.",
+  "app.zvukKlavir": "Turn on to hear the backing, playback and on-screen keys through the piano ({nazev}). Turn off to hear them through this device.",
   "app.zvukKlavirNe": "Once a piano is connected, backing and listening can sound from it instead of the computer.",
   "app.klaviaturaSchovana": "The keyboard is hidden – play on the connected piano (turn it on under Display).",
   "app.pisenSmazana": "The song is deleted.",

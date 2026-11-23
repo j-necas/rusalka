@@ -71,9 +71,12 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   nastavSoustavu(uloz.cti('kt-soustava', null) || vychoziSoustava(JAZYK), t('tony.solmizace').split('|'));
   document.documentElement.lang = JAZYK;
   document.documentElement.dir = smerJazyka(JAZYK);
+  const JE_IOS = vyberBezFiltru(navigator);
+  // On iOS, use local audio by default so a Web MIDI bridge with a silent output can still supply the input.
+  const VYCHOZI_NASTAVENI = { rychlost: 70, pismena: true, barvy: true, doprovod: true, kalibrace: 0, klaviatura: true, zvukKlavir: !JE_IOS };
   const S = {
     profily: [], profil: null, vysledky: {}, knihovna: [], knihovnaSkryte: {}, nastaveniHracu: {},
-    nastaveni: Object.assign({ rychlost: 70, pismena: true, barvy: true, doprovod: true, kalibrace: 0, klaviatura: true, zvukKlavir: true }, uloz.cti('kt-nastaveni', {})),
+    nastaveni: { ...VYCHOZI_NASTAVENI, ...uloz.cti('kt-nastaveni', {}) },
     seznam: [], pisen: null, data: null, rezim: REZIM.CEKAM, ruka: new Set([1]),
     uroven: 2, tonina: 'ne', prstoklad: false, usek: null, smycka: { zapnuto: false, cisteVRade: 0 },
     kroky: [], doprovod: [], el: {}, klavesy: {}, svg: null, vb: null,
@@ -662,6 +665,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     ai: () => $('#pomocnikKopie').classList.add('skryta'),
     settings: () => {
       $('#nastaveniStav').textContent = $('.midi-stav .text')?.textContent || ''; stavUloziste();
+      $('#nastaveniZvuk').append($('#prepZvukKlavir'));
       const p = $('#kdo').classList.contains('skryta') ? aktualniProfil() : null;   // Display only for a chosen player
       $('#nastaveniZobrazeni').classList.toggle('skryta', !p);
       if (p) {
@@ -1154,7 +1158,6 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     st.setProperty('--akcent', pal.tmava); st.setProperty('--akcent-svetla', pal.stredni); st.setProperty('--pozadi', pal.svetla);
   }
   // each player has their own display and sound settings (the formerly shared “kt-nastaveni” is the default)
-  const VYCHOZI_NASTAVENI = { rychlost: 70, pismena: true, barvy: true, doprovod: true, kalibrace: 0, klaviatura: true, zvukKlavir: true };
   /** Listen plays the whole song at full speed (poslechCelePisne); the player's own choices wait here until it ends */
   let POSLECH = null;
   /** a player's settings go to the data (the folder, the backup); without a player to this browser */
@@ -1794,6 +1797,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   }
   function hrajZPred(rezim) {
     if (!pripravenaPisen()) return;
+    if (rezim === REZIM.CEKAM) odemkniZvuk();   // a MIDI keystroke is not a browser gesture
     if (rezim !== REZIM.POSLECH) zapniMikrofonPriHre();
     konecPoslechu();
     if (rezim === REZIM.POSLECH && !S.dvojice) zacniPoslech();
@@ -1823,7 +1827,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   };
   $('#predHrat').onclick = () => hrajZPred(PRED.krok);   // Find the notes has no start; the other steps begin with a count-in
   $('#predPoslech').onclick = () => hrajZPred(REZIM.POSLECH);
-  if (vyberBezFiltru(navigator)) $('#soubor').removeAttribute('accept');   // iOS would grey out .musicxml
+  if (JE_IOS) $('#soubor').removeAttribute('accept');   // iOS would grey out .musicxml
   $('#soubor').onchange = async e => {
     const f = e.target.files[0];
     if (!f) return;
@@ -3000,6 +3004,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   };
   $('#pauzaZobrazeni').onclick = () => {                // the same toggles as Settings → Display, plus the accompaniment and calibration
     if (!$('#zobrazeni .prepinace')) $('#zobrazeni aside').append($('#nastaveniZobrazeni .prepinace'));
+    $('#prepSmycka').before($('#prepZvukKlavir'));
     prekryv('#zobrazeni', true);
   };
   $('#zobrazeniZavrit').onclick = () => prekryv('#zobrazeni', false);

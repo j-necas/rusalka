@@ -597,15 +597,22 @@ try {
   await ios.close();
   // iPad in the Web MIDI Browser app: its port lists have forEach, but values() is not iterable, and setting
   // onmidimessage opens the port and fires statechange; Rusalka must still see the piano and hear its notes
-  const wmb = await b.newPage({ viewport: { width: 1024, height: 768 }, hasTouch: true });
+  const wmb = await b.newPage({ viewport: { width: 1024, height: 768 }, hasTouch: true,
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 Version/18.0 Safari/605.1.15' });
   await wmb.addInitScript(() => {
+    Object.defineProperty(navigator, 'maxTouchPoints', { value: 5 });
     delete Navigator.prototype.requestMIDIAccess;
     const mapa = porty => ({ size: porty.length, forEach: cb => porty.forEach(x => cb(x)), values: () => ({ next: () => ({ done: true }) }) });
     const acc = { onstatechange: null };
     const vstup = { name: 'FP-10', state: 'connected', connection: 'closed', _h: null,
       get onmidimessage() { return this._h; },
       set onmidimessage(f) { this._h = f; if (this.connection === 'closed') { this.connection = 'open'; acc.onstatechange?.({ port: this }); } } };
-    acc.inputs = mapa([vstup]); acc.outputs = mapa([{ name: 'FP-10', state: 'connected', send() {} }]);
+    window.__wmbVystup = [];
+    acc.inputs = mapa([vstup]); acc.outputs = mapa([{ name: 'FP-10', state: 'connected',
+      send(bajty) { if ((bajty[0] & 0xf0) === 0x90) window.__wmbVystup.push(bajty); } }]);
+    window.__wmbNahravky = 0;
+    const puvodni = AudioContext.prototype.createBufferSource;
+    AudioContext.prototype.createBufferSource = function () { window.__wmbNahravky++; return puvodni.call(this); };
     window.__wmbNota = p => (vstup._h ? (vstup._h({ data: [0x90, p, 90] }), vstup._h({ data: [0x80, p, 0] }), true) : null);
     navigator.requestMIDIAccess = () => ({ then: ok => setTimeout(() => ok(acc), 30) });   // the app's own thenable
   });
@@ -615,6 +622,39 @@ try {
     await wmb.locator('#vstupTlacitko').innerText());
   kontrola('Web MIDI Browser (iPad): the piano input has a note handler and a note goes through without an error',
     await wmb.evaluate(() => { try { return window.__wmbNota(60) !== null && (window.__wmbNota(60), true); } catch { return false; } }));
+  await zkus('iPad sound with Web MIDI input', async () => {
+    await menu(wmb, 'domu', 'settings');
+    const vystup = wmb.locator('#nastaveniZvuk #prepZvukKlavir');
+    kontrola('iPad: the sound switch is under Piano, with device audio by default',
+      await vystup.isVisible() && await vystup.getAttribute('aria-checked') === 'false');
+    await wmb.keyboard.press('Escape');
+    await wmb.locator('#pokracujHrat').click();
+    await wmb.locator('#predKroky [data-krok="cekam"]').click();
+    await wmb.locator('#predHrat').click();
+    const zahrano = await wmb.evaluate(() => {
+      const cile = [...document.querySelectorAll('#klavesy .klavesa.cil')];
+      if (!cile.length) return false;
+      cile.forEach(k => window.__wmbNota(Number(k.dataset.p)));
+      return parseFloat(document.querySelector('#prubeh').style.width) > 0;
+    });
+    kontrola('iPad: the MIDI input advances the exercise with device audio selected', zahrano);
+    await wmb.locator('#zpet').click();
+    await wmb.evaluate(() => { window.__wmbNahravky = 0; });
+    await wmb.locator('#predPoslech').click();
+    await wmb.waitForFunction(() => window.__wmbNahravky > 0, null, { timeout: 10000 });
+    kontrola('iPad: listening uses the device audio with the MIDI piano still connected',
+      await wmb.evaluate(() => window.__wmbVystup.length === 0 && window.__wmbNota(60)));
+    await wmb.locator('#pauza').click();
+    await wmb.locator('#pauzaZobrazeni').click();
+    const vPauze = wmb.locator('#zobrazeni #prepZvukKlavir');
+    kontrola('iPad: the same output switch is available during pause', await vPauze.isVisible());
+    await vPauze.click();
+    await wmb.locator('#zobrazeniZavrit').click();
+    await wmb.locator('#pauzaKonec').click();
+    await wmb.locator('#predPoslech').click();
+    await wmb.waitForFunction(() => window.__wmbVystup.length > 0, null, { timeout: 10000 });
+    kontrola('iPad: enabling piano sound sends playback through MIDI', true);
+  });
   await wmb.close();
   await vs.close();
 

@@ -18,6 +18,13 @@ test('output only to the connected piano', () => {
   assert.equal(vyberVystup([{ name: 'Network Session 1' }], ['FP-10']), null);
 });
 
+test('a disconnected matching output cannot take over sound from the device', () => {
+  const odpojeny = { name: 'FP-10', state: 'disconnected' };
+  const pripojeny = { name: 'FP-10 Bluetooth', state: 'connected' };
+  assert.equal(vyberVystup([odpojeny], ['FP-10']), null);
+  assert.equal(vyberVystup([odpojeny, pripojeny], ['FP-10']), pripojeny);
+});
+
 test('no piano, nothing; with a piano notes on time on channel 2; an overlap of the same pitch does not mute the newer keystroke', () => {
   const { V, port, posun } = prostredi();
   assert.equal(V.hraj([{ ms: 0, p: 60, v: 50 }]), false);
