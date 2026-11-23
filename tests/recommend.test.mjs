@@ -1,7 +1,7 @@
 // What the app recommends to a player: next step, speed, "I can play it", the For me order, actions after a result.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { KROKY, RYCHLOSTI, stavKroku, nejrychlejsiCisty, umim, doporuceni, proMe, jeNova, akcePoVysledku } from '../static/lib/recommend.js';
+import { KROKY, RYCHLOSTI, stavKroku, rozehraneKroky, nejrychlejsiCisty, umim, doporuceni, proMe, jeNova, akcePoVysledku } from '../static/lib/recommend.js';
 
 const hotovo = { cekam: { hvezdy: 3 }, pockej: { hvezdy: 3 }, tempo: { hvezdy: 3 } };
 const DEN = 864e5;
@@ -101,4 +101,11 @@ test('faster: at least one notch above the speed just played; at 100 % without a
   const zaklad = { soubor: 'A.musicxml', stat: {}, dalsi: null, krok: 'tempo', hvezdy: 3, vys: hotovo };
   assert.deepEqual(akcePoVysledku({ ...zaklad, rychlost: 80 }), { druh: 'rychleji', krok: 'tempo', rychlost: 100 });
   assert.deepEqual(akcePoVysledku({ ...zaklad, rychlost: 100 }), { druh: 'znovu' });
+});
+
+test('rozehraneKroky: a step played but without three stars yet; a finished or untouched one is not', () => {
+  assert.deepEqual(rozehraneKroky(undefined), [false, false, false]);
+  assert.deepEqual(rozehraneKroky({ cekam: { hvezdy: 1, procent: 40, pocet: 1 } }), [true, false, false]);
+  assert.deepEqual(rozehraneKroky({ cekam: { hvezdy: 3, procent: 100, pocet: 2 }, pockej: { hvezdy: 0, procent: 20, pocet: 1 } }), [false, true, false]);
+  assert.deepEqual(rozehraneKroky({ cekam: { hvezdy: 3 }, pockej: { hvezdy: 3 }, tempo: { hvezdy: 3 } }), [false, false, false]);
 });

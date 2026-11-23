@@ -20,6 +20,9 @@ export function stavKroku(vys) {
   return KROKY.map((k, i) => (hotovy(vys, k) ? 'hotovo' : i === prvni ? 'ted' : 'nezacato'));
 }
 
+/** steps played at least once but without three stars yet (the tile shows them hatched) */
+export const rozehraneKroky = vys => KROKY.map(k => !!vys?.[k] && !hotovy(vys, k));
+
 /** highest speed (%) at which the player played the song In rhythm cleanly; 0 = never */
 export function nejrychlejsiCisty(stat, soubor) {
   return Math.max(0, ...historie(stat, soubor).filter(h => krokZaznamu(h) === REZIM.TEMPO && h.cisty).map(h => Number(h.rychlost) || 0));

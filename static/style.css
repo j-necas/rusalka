@@ -446,6 +446,8 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .dl .kroky3 { margin-top: auto; padding-top: 14px; display: flex; gap: 5px; }
 .dl .kroky3 i { flex: 1; height: 7px; border-radius: 4px; background: #fff; }
 .dl .kroky3 i.ano { background: var(--hl); }
+/* a step played but without three stars yet: hatched */
+.dl .kroky3 i.rozehrano { background: repeating-linear-gradient(-45deg, var(--hl) 0 2px, #fff 2px 5px); }
 .stitek-nova, .stitek-umim { font-size: 13px; color: var(--hl); font-weight: 700; vertical-align: 3px; }
 .dl-vymysli { background: #fff; border: 3px dashed var(--sv-2); }
 .dl-vymysli:hover { background: var(--sv); }

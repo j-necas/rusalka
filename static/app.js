@@ -34,7 +34,7 @@ import { rukaPoKarte, stylPriOtevreni, souhrn, poslechCelePisne } from './lib/ve
 import { VZORKY, naMidi, nejblizsiVzorek } from './lib/piano.js';
 import { pokusyHrace, kalendar, presnostPoDnech, stavPisni, mistaKdeDrhne, zapisDoDeniku, prvniHrani, pripomenoutZalohu } from './lib/stats.js';
 import { nactiVstup, doprovodZapnuty, sDoprovodem, poZmeneKlaviru, prijimaZdroj, pripojeneVstupy, seznamPortu, klavesyViditelne, vytvorMereniDrzeni } from './lib/input.js';
-import { KROKY, RYCHLOSTI, stavKroku, umim, doporuceni, proMe, jeNova, akcePoVysledku } from './lib/recommend.js';
+import { KROKY, RYCHLOSTI, stavKroku, rozehraneKroky, umim, doporuceni, proMe, jeNova, akcePoVysledku } from './lib/recommend.js';
 import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny, slucPisne } from './lib/library.js';
 {
   const $ = s => document.querySelector(s);
@@ -1565,7 +1565,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   /** a song tile: title (and its translation for a library song in another language), author, difficulty, steps, star */
   function dlazdicePisne(p, { tezsi = false, nova = false } = {}) {
     const vys = vysHrace(), stat = statHrace(), info = S.infoPisni || {};
-    const b = document.createElement('div'), stav = stavKroku(vys[p.soubor]);
+    const b = document.createElement('div'), stav = stavKroku(vys[p.soubor]), rozehrane = rozehraneKroky(vys[p.soubor]);
     b.tabIndex = 0; b.setAttribute('role', 'button');                 // a div so it can hold its own star button
     b.className = 'dl' + (tezsi ? ' tezsi' : '');
     b.dataset.soubor = p.soubor;
@@ -1577,7 +1577,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       umi ? ` <span class="stitek-umim">${esc(t('domu.umim'))}</span>` : ''}</b>${preklad ? `<small class="preklad">${esc(preklad)}</small>` : ''}`
       + `<small>${esc(info[p.soubor]?.autor || '')}</small>`
       + `<span class="dl-spodek">${st ? `<span class="obtiznost" role="img" aria-label="${esc(nazevStupne)}">${klavesyObtiznosti(st)}</span>` : ''}`
-      + `<span class="kroky3">${stav.map(x => `<i class="${x === 'hotovo' ? 'ano' : ''}"></i>`).join('')}</span></span>` + tlacitkoOblibene();
+      + `<span class="kroky3">${stav.map((x, i) => `<i class="${x === 'hotovo' ? 'ano' : rozehrane[i] ? 'rozehrano' : ''}"></i>`).join('')}</span></span>` + tlacitkoOblibene();
     nastavHvezdu(b.querySelector('.oblibena'), p.soubor);
     b.querySelector('.oblibena').onclick = e => { e.stopPropagation(); prepniOblibenou(p.soubor); };
     b.onclick = () => otevriPred(p.soubor);
