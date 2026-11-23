@@ -5,20 +5,20 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | G4/16=There A4/16
+1) G | G4/16=There A4/16
 2) | B4/8=was B4/8=a B4/8=man G4/8=lived
-3) | C5/8=in C5/8=the C5/8=moon, A4/8=lived
-4) | B4/8=in B4/8=the B4/8=moon, G4/8=lived
-5) | A4/8=in A4/8=the A4/8=moon, G4/16=There A4/16
-6) | B4/8=was B4/8=a B4/8=man G4/8=lived
-7) | C5/8=in C5/8=the C5/8=moon, D5/16=And C5/16=his
-8) | B4/8=name G4/8=was A4/8=Ai- D4/8=ken
-9) | G4/4=Drum, r/8 G4/16=And A4/16=he
+3) D7/F# | C5/8=in C5/8=the C5/8=moon, A4/8=lived
+4) G | B4/8=in B4/8=the B4/8=moon, G4/8=lived
+5) D/F# | A4/8=in A4/8=the A4/8=moon, G4/16=There A4/16
+6) G | B4/8=was B4/8=a B4/8=man G4/8=lived
+7) D7/F# | C5/8=in C5/8=the C5/8=moon, D5/16=And C5/16=his
+8) G D7@1 | B4/8=name G4/8=was A4/8=Ai- D4/8=ken
+9) G | G4/4=Drum, r/8 G4/16=And A4/16=he
 10) | B4/8=played B4/8=up- B4/8=on G4/8=a
-11) | C5/4=la- C5/8=dle, A4/8=a
-12) | B4/4=la- B4/8=dle, G4/8=a
-13) | A4/4=la- A4/8=dle, G4/16=And A4/16=he
-14) | B4/8=played B4/8=up- B4/8=on G4/8=a
-15) | C5/4=la- C5/8=dle, D5/16=And C5/16=his
-16) | B4/8=name G4/8=was A4/8=Ai- D4/8=ken
-17) | G4/4=Drum. r/8
+11) D7/F# | C5/4=la- C5/8=dle, A4/8=a
+12) G | B4/4=la- B4/8=dle, G4/8=a
+13) D7/F# | A4/4=la- A4/8=dle, G4/16=And A4/16=he
+14) G | B4/8=played B4/8=up- B4/8=on G4/8=a
+15) C/G | C5/4=la- C5/8=dle, D5/16=And C5/16=his
+16) G D7@1 | B4/8=name G4/8=was A4/8=Ai- D4/8=ken
+17) G | G4/4=Drum. r/8

@@ -6,19 +6,19 @@ tempo: 88
 clef: treble
 ---
 1) | G4/8=My
-2) | E4/8=wife G4/8=and G4/8=I G4/8=lived
-3) | F4/8=all A4/8=a- A4/8=lone, A4/16=in A4/16=a
-4) | B4/16=lit- B4/16=tle B4/8=log A4/8=hut B4/8=we
-5) | C5/8=called D5/8=our E5/8=own; r/8
-6) | E4/8=She G4/8=loved G4/8=gin, G4/8=and
-7) | F4/8=I A4/8=loved A4/8=rum, A4/8=I
-8) | B4/8=tell B4/8=you A4/8=what, B4/8=we'd
-9) | C5/8=lots G4/8=of C5/8=fun. r/8
-10) | E4/8=Ha, G4/8=ha, G4/4=ha,
-11) | F4/8=you A4/8=and A4/4=me,
-12) | B4/16=lit- B4/16=tle B4/8=brown A4/8=jug, B4/8=don't
-13) | C5/8=I D5/8=love E5/4=thee;
-14) | E4/8=Ha, G4/8=ha, G4/4=ha,
-15) | F4/8=you A4/8=and A4/4=me,
-16) | B4/16=lit- B4/16=tle B4/8=brown A4/8=jug, B4/8=don't
-17) | C5/8=I G4/8=love C5/4=thee.
+2) C | E4/8=wife G4/8=and G4/8=I G4/8=lived
+3) F | F4/8=all A4/8=a- A4/8=lone, A4/16=in A4/16=a
+4) G7 | B4/16=lit- B4/16=tle B4/8=log A4/8=hut B4/8=we
+5) C | C5/8=called D5/8=our E5/8=own; r/8
+6) C | E4/8=She G4/8=loved G4/8=gin, G4/8=and
+7) F | F4/8=I A4/8=loved A4/8=rum, A4/8=I
+8) G7 | B4/8=tell B4/8=you A4/8=what, B4/8=we'd
+9) C | C5/8=lots G4/8=of C5/8=fun. r/8
+10) C | E4/8=Ha, G4/8=ha, G4/4=ha,
+11) F | F4/8=you A4/8=and A4/4=me,
+12) G7 | B4/16=lit- B4/16=tle B4/8=brown A4/8=jug, B4/8=don't
+13) C | C5/8=I D5/8=love E5/4=thee;
+14) C | E4/8=Ha, G4/8=ha, G4/4=ha,
+15) F | F4/8=you A4/8=and A4/4=me,
+16) G7 | B4/16=lit- B4/16=tle B4/8=brown A4/8=jug, B4/8=don't
+17) C | C5/8=I G4/8=love C5/4=thee.

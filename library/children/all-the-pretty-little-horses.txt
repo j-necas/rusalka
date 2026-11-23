@@ -5,23 +5,23 @@ key: -1
 tempo: 88
 clef: treble
 ---
-1) | E4/4=Hush- B4/4=a- B4/2=by,
-2) | A4/4=don't G4/4=you A4/2=cry,
-3) | D5/4.=Go C5/8=to B4/8=slee- A4/8=py G4/8=lit- F#4/8=tle
-4) | E4/2=ba- E4/2=by.
-5) | E4/4=When B4/4=you B4/2=wake
-6) | A4/4=you G4/4=shall A4/2=have
-7) | D5/4.=All C5/8=the B4/8=pret- A4/8=ty G4/8=lit- F#4/8=tle
-8) | E4/2=hor- E4/2=ses.
-9) | B3/4=Black D4/4=and D4/2=bays,
-10) | E4/8=dap- E4/8=ples G4/4=and G4/2=grays,
-11) | D5/4.=All C5/8=the B4/8=pret- A4/8=ty G4/8=lit- F#4/8=tle
-12) | E4/2=hor- E4/2=ses.
-13) | E4/4=Hush- B4/4=a- B4/2=by,
-14) | A4/4=don't G4/4=you A4/2=cry,
-15) | D5/4.=Go C5/8=to B4/8=sleep A4/8=my G4/8=lit- F#4/8=tle
-16) | E4/2=ba- E4/2=by.
-17) | E4/4=When B4/4=you B4/2=wake
-18) | A4/4=you G4/4=shall A4/2=have
-19) | D5/4.=All C5/8=the B4/8=pret- A4/8=ty G4/8=lit- F#4/8=tle
-20) | E4/2=hor- E4/2=ses.
+1) Em | E4/4=Hush- B4/4=a- B4/2=by,
+2) Am | A4/4=don't G4/4=you A4/2=cry,
+3) Bm | D5/4.=Go C5/8=to B4/8=slee- A4/8=py G4/8=lit- F#4/8=tle
+4) Em | E4/2=ba- E4/2=by.
+5) Em | E4/4=When B4/4=you B4/2=wake
+6) Am | A4/4=you G4/4=shall A4/2=have
+7) Bm | D5/4.=All C5/8=the B4/8=pret- A4/8=ty G4/8=lit- F#4/8=tle
+8) Em | E4/2=hor- E4/2=ses.
+9) Bm | B3/4=Black D4/4=and D4/2=bays,
+10) Em | E4/8=dap- E4/8=ples G4/4=and G4/2=grays,
+11) Bm | D5/4.=All C5/8=the B4/8=pret- A4/8=ty G4/8=lit- F#4/8=tle
+12) Em | E4/2=hor- E4/2=ses.
+13) Em | E4/4=Hush- B4/4=a- B4/2=by,
+14) Am | A4/4=don't G4/4=you A4/2=cry,
+15) Bm | D5/4.=Go C5/8=to B4/8=sleep A4/8=my G4/8=lit- F#4/8=tle
+16) Em | E4/2=ba- E4/2=by.
+17) Em | E4/4=When B4/4=you B4/2=wake
+18) Am | A4/4=you G4/4=shall A4/2=have
+19) Bm | D5/4.=All C5/8=the B4/8=pret- A4/8=ty G4/8=lit- F#4/8=tle
+20) Em | E4/2=hor- E4/2=ses.

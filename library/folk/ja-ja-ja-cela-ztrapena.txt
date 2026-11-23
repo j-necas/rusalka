@@ -5,13 +5,13 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | D5/4=Já, D5/4=já,
+1) G | D5/4=Já, D5/4=já,
 2) | B4/8=já D5/16=ce- D5/16=lá G5/8=ztrá- D5/16=pe- D5/16=ná,
-3) | E5/4=to, E5/4=to
+3) C | E5/4=to, E5/4=to
 4) | C5/8=pro E5/16=mé- E5/16=ho G5/8=Heř- E5/16=ma- E5/16=na,
-5) | D5/4=já, D5/4=já,
+5) G | D5/4=já, D5/4=já,
 6) | B4/8=já D5/16=ce- D5/16=lá G5/8=ztrá- D5/16=pe- D5/16=ná,
-7) | E5/8=já C5/16=ce- C5/16=lá D5/8=ztrá- B4/16=pe- B4/16=ná
-8) | C5/8=pro A4/16=mé- A4/16=ho G4/8=mi- B4/16=lé- D5/16=ho,
-9) | E5/8=já C5/16=ce- C5/16=lá D5/8=ztrá- B4/16=pe- B4/16=ná
-10) | C5/8=pro A4/16=mi- A4/16=lé- G4/8=ho! r/8
+7) C G@1 | E5/8=já C5/16=ce- C5/16=lá D5/8=ztrá- B4/16=pe- B4/16=ná
+8) D7 G@1 | C5/8=pro A4/16=mé- A4/16=ho G4/8=mi- B4/16=lé- D5/16=ho,
+9) C G@1 | E5/8=já C5/16=ce- C5/16=lá D5/8=ztrá- B4/16=pe- B4/16=ná
+10) D7 G@1 | C5/8=pro A4/16=mi- A4/16=lé- G4/8=ho! r/8

@@ -10,11 +10,11 @@ import { DOMParser } from '@xmldom/xmldom';
 import { zTextu } from '../static/lib/notation.js';
 import { kontrola, naMusicXml, zMusicXml, rozvin, vysky, zlomek, soucetTaktu, tonyAkordu, metrum } from '../static/lib/song.js';
 import { obtiznost } from '../static/lib/difficulty.js';
+import { POLICE } from '../static/lib/library.js';
 
-export const POLICE = ['children', 'czech', 'folk', 'christmas', 'classics'];
-/** a shelf whose songs live in another shelf's folder: Czech folk songs stay in folk/, so their address (and the players'
- *  results stored under it) did not change when they got their own shelf */
-const SLOZKA = { czech: 'folk' };
+export { POLICE };
+/** Keep the original song addresses (and the results stored under them) when a shelf is split from folk/. */
+const SLOZKA = { czech: 'folk', anthems: 'folk' };
 export const slozkaPolice = police => SLOZKA[police] || police;
 const POVINNE = ['txt', 'police', 'jazyk', 'zdroj', 'volne'];
 const JMENO = /^[a-z0-9]+(-[a-z0-9]+)*$/;

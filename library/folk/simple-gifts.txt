@@ -6,19 +6,19 @@ tempo: 88
 clef: treble
 ---
 1) | C4/8='Tis C4/8=the
-2) | F4/4=gift F4/8=to G4/8=be A4/8=sim- F4/8=ple, A4/8='Tis Bb4/8=the
+2) F | F4/4=gift F4/8=to G4/8=be A4/8=sim- F4/8=ple, A4/8='Tis Bb4/8=the
 3) | C5/4=gift C5/8=to Bb4/8=be A4/4=free, G4/8='Tis F4/8=the
-4) | G4/4=gift G4/4=to G4/4=come F4/4=down
+4) C | G4/4=gift G4/4=to G4/4=come F4/4=down
 5) | G4/8=where A4/8=we G4/8=ought E4/8=to C4/4=be, C4/4=and
-6) | F4/8=When E4/8=we F4/8=find G4/8=our- A4/4=selves G4/8=in G4/8=the
+6) F | F4/8=When E4/8=we F4/8=find G4/8=our- A4/4=selves G4/8=in G4/8=the
 7) | A4/4=place Bb4/4=just C5/4=right, C5/8=It C5/8=will
-8) | G4/4=be G4/8=in G4/8=the G4/4=val- A4/8=ley G4/8=of
-9) | F4/4=love F4/8=and F4/8=de- F4/2=light.
-10) | C5/2=When A4/4.=true G4/8=sim-
+8) C | G4/4=be G4/8=in G4/8=the G4/4=val- A4/8=ley G4/8=of
+9) F | F4/4=love F4/8=and F4/8=de- F4/2=light.
+10) F | C5/2=When A4/4.=true G4/8=sim-
 11) | A4/8=plic- Bb4/8=i- A4/8=ty G4/8=is F4/4.=gained, G4/8=to
 12) | A4/4=bow A4/8=and Bb4/8=to C5/4=bend Bb4/8=we A4/8
-13) | G4/4=shan't G4/8=be A4/8=a- G4/4=shamed. C4/4=To
-14) | F4/4=turn F4/8=and G4/8=to A4/8=turn F4/8 A4/8=will Bb4/8
+13) Bb C@2 | G4/4=shan't G4/8=be A4/8=a- G4/4=shamed. C4/4=To
+14) F | F4/4=turn F4/8=and G4/8=to A4/8=turn F4/8 A4/8=will Bb4/8
 15) | C5/4=be C5/8=our Bb4/8=de- A4/4=light, G4/8=till F4/8=by
-16) | G4/4=turn- G4/4=ing, A4/4=turn- A4/8=ing, G4/8=we
-17) | F4/4=come F4/4='round F4/4=right.
+16) C | G4/4=turn- G4/4=ing, A4/4=turn- A4/8=ing, G4/8=we
+17) Bb F@2 | F4/4=come F4/4='round F4/4=right.

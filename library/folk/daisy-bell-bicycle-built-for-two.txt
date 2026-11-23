@@ -5,35 +5,35 @@ key: 1
 tempo: 88
 clef: treble
 ---
-1) | D5/2.=Dai-
+1) G | D5/2.=Dai-
 2) | B4/2.=sy,
 3) | G4/2.=Dai-
 4) | D4/2.=sy,
-5) | E4/4=Give F#4/4=me G4/4=your
+5) C | E4/4=Give F#4/4=me G4/4=your
 6) | E4/2=an- G4/4=swer,
-7) | D4/2.~=do!
+7) G | D4/2.~=do!
 8) | D4/2.
-9) | A4/2.=I'm
+9) D7 | A4/2.=I'm
 10) | D5/2.=half
 11) | B4/2.=cra-
 12) | G4/2.=zy,
-13) | E4/4=All F#4/4=for G4/4=the
+13) A7 | E4/4=All F#4/4=for G4/4=the
 14) | A4/2=love B4/4=of
-15) | A4/2.~=you!
+15) D | A4/2.~=you!
 16) | A4/2 B4/4=It
-17) | C5/4=won't B4/4=be A4/4=a
+17) D7 | C5/4=won't B4/4=be A4/4=a
 18) | D5/2=styl- B4/4=ish
-19) | A4/4=mar- G4/2~=riage,
+19) G | A4/4=mar- G4/2~=riage,
 20) | G4/2 A4/4=I
-21) | B4/2=can't G4/4=af-
-22) | E4/2=ford G4/4=a
-23) | E4/4=car- D4/2~=riage,
-24) | D4/2 D4/4=But
-25) | G4/2=you'll B4/4=look
-26) | A4/4=sweet r/4 r/4
-27) | G4/2=on B4/4=the
-28) | A4/4=seat r/4 B4/8=Of C5/8=a
-29) | D5/4=bi- B4/4=cy- G4/4=cle
-30) | A4/2=built D4/4=for
-31) | G4/2.=two!
+21) Em | B4/2=can't G4/4=af-
+22) C | E4/2=ford G4/4=a
+23) G | E4/4=car- D4/2~=riage,
+24) D7 | D4/2 D4/4=But
+25) G | G4/2=you'll B4/4=look
+26) D7 | A4/4=sweet r/4 r/4
+27) G | G4/2=on B4/4=the
+28) D7 | A4/4=seat r/4 B4/8=Of C5/8=a
+29) G | D5/4=bi- B4/4=cy- G4/4=cle
+30) D7 | A4/2=built D4/4=for
+31) G | G4/2.=two!
 32) | r/2.

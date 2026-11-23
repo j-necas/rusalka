@@ -5,20 +5,20 @@ key: 4
 tempo: 88
 clef: treble
 ---
-1) | r/4 B4/2=Kde C#5/8=do- B4/8=mov
-2) | F#4/4=můj, A4/2=kde G#4/8=do- F#4/8=mov
-3) | E4/2=můj? r/4 E4/8=Vo- E4/8=da
-4) | E4/8.=hu- A4/16 A4/2=čí B4/8=po C#5/8=lu-
-5) | B4/8=či- G#4/8 E4/4=nách, r/4 E4/8=bo- E4/8=ry
-6) | E4/8.=šu- A4/16 A4/8=mí C#5/8 E5/4=po D#5/8 C#5/8=ska-
-7) | C#5/4=li- B4/4=nách, r/4 B4/8=v_sa- B4/8=dě
-8) | B4/2~=skví B4/8 C#5/8=se B4/8=ja- A4/8=ra
-9) | G#4/2=květ, r/4 B4/8=zem- B4/8=ský
-10) | D#5/2~=ráj D#5/8 C#5/8=to B4/8=na A4/8=po-
-11) | G#4/2=hled! r/4 G#4/8=A G#4/8=to
-12) | G#4/4.=je G#4/8=ta G#4/4=krá- A#4/8 B#4/8=sná
-13) | B#4/8=ze- C#5/8 C#5/4=mě, r/4 C#5/8=ze- C#5/8=mě
-14) | C#5/8=če- B4/8 B4/2=ská A4/8=do- B4/8=mov
-15) | G#4/4=můj, E5/2 D#5/8=ze- C#5/8=mě
-16) | C#5/4=če- B4/2=ská F#4/8=do- G#4/8=mov
-17) | E4/2=můj!
+1) E@1 | r/4 B4/2=Kde C#5/8=do- B4/8=mov
+2) B7 | F#4/4=můj, A4/2=kde G#4/8=do- F#4/8=mov
+3) E | E4/2=můj? r/4 E4/8=Vo- E4/8=da
+4) A | E4/8.=hu- A4/16 A4/2=čí B4/8=po C#5/8=lu-
+5) E | B4/8=či- G#4/8 E4/4=nách, r/4 E4/8=bo- E4/8=ry
+6) A | E4/8.=šu- A4/16 A4/8=mí C#5/8 E5/4=po D#5/8 C#5/8=ska-
+7) E | C#5/4=li- B4/4=nách, r/4 B4/8=v_sa- B4/8=dě
+8) B7 | B4/2~=skví B4/8 C#5/8=se B4/8=ja- A4/8=ra
+9) E | G#4/2=květ, r/4 B4/8=zem- B4/8=ský
+10) B7 | D#5/2~=ráj D#5/8 C#5/8=to B4/8=na A4/8=po-
+11) E | G#4/2=hled! r/4 G#4/8=A G#4/8=to
+12) G#m G#7@2 | G#4/4.=je G#4/8=ta G#4/4=krá- A#4/8 B#4/8=sná
+13) C#m A@2 | B#4/8=ze- C#5/8 C#5/4=mě, r/4 C#5/8=ze- C#5/8=mě
+14) E A@2 | C#5/8=če- B4/8 B4/2=ská A4/8=do- B4/8=mov
+15) C#m F#7/A#@2 | G#4/4=můj, E5/2 D#5/8=ze- C#5/8=mě
+16) E/B B7@2 | C#5/4=če- B4/2=ská F#4/8=do- G#4/8=mov
+17) E | E4/2=můj!

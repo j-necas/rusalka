@@ -5,19 +5,19 @@ key: -2
 tempo: 88
 clef: treble
 ---
-1) | G4/8=Nad A4/8=Tat- Bb4/4=rou
+1) Gm | G4/8=Nad A4/8=Tat- Bb4/4=rou
 2) | Bb4/4=sa Bb4/8=blýs- Bb4/8=ka,
-3) | A4/8=hro- Bb4/8=my C5/8=di- Bb4/8=vo
-4) | A4/4=bi- G4/4=jú,
-5) | Bb4/8=nad C5/8=Tat- D5/4=rou
+3) F7 | A4/8=hro- Bb4/8=my C5/8=di- Bb4/8=vo
+4) D7 Gm@1 | A4/4=bi- G4/4=jú,
+5) Bb | Bb4/8=nad C5/8=Tat- D5/4=rou
 6) | D5/4=sa D5/8=blýs- D5/8=ka,
-7) | C5/8=hro- D5/8=my Eb5/8=di- D5/8=vo
-8) | C5/4=bi- Bb4/4=jú.
-9) {|:} | D5/8=Za- D5/8=stav- D5/4=me
-10) | C5/4=ich, C5/8=bra- C5/8=tia,
-11) | C5/8=veď D5/8=sa C5/4=o-
-12) | Bb4/4=ny Bb4/8=stra- Bb4/8=tia,
-13) {1.} | A4/8=Slo- Bb4/8=vá- C5/8=ci Bb4/8=o-
-14) {1. :|} | A4/4=ži- G4/4=jú.
-15) {2.} | A4/8=Slo- Bb4/8=vá- C5/8=ci Bb4/8=o-
-16) {2.} | A4/4=ži- G4/4=jú.
+7) Cm | C5/8=hro- D5/8=my Eb5/8=di- D5/8=vo
+8) F7 Bb@1 | C5/4=bi- Bb4/4=jú.
+9) {|:} Bb | D5/8=Za- D5/8=stav- D5/4=me
+10) F | C5/4=ich, C5/8=bra- C5/8=tia,
+11) F7 | C5/8=veď D5/8=sa C5/4=o-
+12) Gm | Bb4/4=ny Bb4/8=stra- Bb4/8=tia,
+13) {1.} F7 | A4/8=Slo- Bb4/8=vá- C5/8=ci Bb4/8=o-
+14) {1. :|} D7 Gm@1 | A4/4=ži- G4/4=jú.
+15) {2.} F7 | A4/8=Slo- Bb4/8=vá- C5/8=ci Bb4/8=o-
+16) {2.} D7 Gm@1 | A4/4=ži- G4/4=jú.

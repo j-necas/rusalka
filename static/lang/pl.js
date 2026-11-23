@@ -20,6 +20,7 @@ export default {
   "knihovna.police.children": "Dziecięce",
   "knihovna.police.czech": "Czeskie ludowe",
   "knihovna.police.folk": "Ludowe z całego świata",
+  "knihovna.police.anthems": "Hymny państwowe",
   "knihovna.police.christmas": "Świąteczne",
   "knihovna.police.classics": "Klasyka",
   "knihovna.vMenuPopis": "Gotowe piosenki z biblioteki Rusalki – wystarczy wybrać i grać.",

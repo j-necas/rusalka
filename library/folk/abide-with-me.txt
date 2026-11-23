@@ -5,19 +5,19 @@ key: -3
 tempo: 88
 clef: treble
 ---
-1) | G4/2=A- G4/4=bide F4/4=with
-2) | Eb4/2=me! Bb4/2=Fast
-3) | C5/4=falls Bb4/4=the Bb4/4=e- Ab4/4=ven-
-4) | G4/1=tide.
-5) | G4/2=The Ab4/4=dark- Bb4/4=ness
-6) | C5/2=deep- Bb4/2=ens,
-7) | Ab4/4=Lord, F4/4=with G4/4=me A4/4=a-
-8) | Bb4/1=bide!
-9) | G4/2=When G4/4=oth- F4/4=er
-10) | Eb4/2=hel- Bb4/2=pers
-11) | Bb4/4=fail, Ab4/4=and Ab4/4=com- G4/4=forts
-12) | F4/1=flee,
-13) | F4/2=Help G4/4=of Ab4/4=the
-14) | G4/4=help- F4/4=less, Eb4/4=oh, Ab4/4=a-
-15) | G4/2=bide F4/2=with
-16) | Eb4/1=me!
+1) Eb Bb@2 | G4/2=A- G4/4=bide F4/4=with
+2) Cm Eb/G@2 | Eb4/2=me! Bb4/2=Fast
+3) Ab Bb@1 Cm7@2 Bb7/D@3 | C5/4=falls Bb4/4=the Bb4/4=e- Ab4/4=ven-
+4) Eb | G4/1=tide.
+5) Eb Ab/C@2 Eb/Bb@3 | G4/2=The Ab4/4=dark- Bb4/4=ness
+6) Ab Eb@2 | C5/2=deep- Bb4/2=ens,
+7) Fm7 Bb/D@1 Cm7@2 F7@3 | Ab4/4=Lord, F4/4=with G4/4=me A4/4=a-
+8) Bb | Bb4/1=bide!
+9) Eb Bb@2 | G4/2=When G4/4=oth- F4/4=er
+10) Cm Eb/G@2 | Eb4/2=hel- Bb4/2=pers
+11) Ab Caug@2 C7@3 | Bb4/4=fail, Ab4/4=and Ab4/4=com- G4/4=forts
+12) Fm | F4/1=flee,
+13) Bb7 Eb/G@2 Bb7/F@3 | F4/2=Help G4/4=of Ab4/4=the
+14) Eb Bb7@1 Cm@2 Fm/Ab@3 | G4/4=help- F4/4=less, Eb4/4=oh, Ab4/4=a-
+15) Eb/Bb Bb7@2 | G4/2=bide F4/2=with
+16) Eb | Eb4/1=me!

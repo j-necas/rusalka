@@ -6,35 +6,35 @@ tempo: 88
 clef: treble
 ---
 1) | B4/8=Gon- A#4/8=na
-2) | B4/4=lay D4/2=down E4/4=my
+2) G | B4/4=lay D4/2=down E4/4=my
 3) | G4/8=sleep- G4/4=y B4/8~=head B4/4 r/4
 4) | r/4 B4/4=Down B4/4.=by A#4/8=the
 5) | B4/8=riv- A4/4=er, G4/8~=side, G4/2
-6) | r/4 A4/4=Down A4/4.=by G#4/8=the
+6) D7 | r/4 A4/4=Down A4/4.=by G#4/8=the
 7) | A4/8=riv- G4/4=er- F#4/8~=side, F#4/2
-8) | r/4 B4/4=Down B4/4.=by A#4/8=the
+8) G | r/4 B4/4=Down B4/4.=by A#4/8=the
 9) | B4/8=riv- A4/4=er- G4/8~=side. G4/4 B4/8=Gon- A#4/8=na
-10) | B4/4=lay D4/2=down E4/4=my
+10) G | B4/4=lay D4/2=down E4/4=my
 11) | G4/8=sleep- G4/4=y B4/8~=head B4/4 r/4
 12) | r/4 B4/4=Down B4/4.=by A#4/8=the
 13) | B4/8=riv- A4/4=er, G4/8~=side, G4/2
-14) | A4/4=Down A4/2=by C5/4=the
+14) D7 | A4/4=Down A4/2=by C5/4=the
 15) | B4/2=riv- A4/2=er-
-16) | G4/1=side.
-17) | r/4 G4/4=I A4/4=ain't B4/8=gon- B4/8=na
-18) | C5/8=stud- C5/4=y C5/8~=war C5/4 C5/4=no
+16) G | G4/1=side.
+17) G7 | r/4 G4/4=I A4/4=ain't B4/8=gon- B4/8=na
+18) C | C5/8=stud- C5/4=y C5/8~=war C5/4 C5/4=no
 19) | C5/4=more. C5/4=I G4/4=ain't A4/8=gon- A4/8=na
-20) | B4/8=stud- B4/4=y B4/8~=war B4/4 A4/4=no
+20) G | B4/8=stud- B4/4=y B4/8~=war B4/4 A4/4=no
 21) | G4/4=more. G4/4=I G4/4=ain't G4/8=gon- G4/8=na
-22) | A4/8=stud- A4/4.~=dy A4/2
-23) | G4/2=war A4/2=no
-24) | B4/1=more.
-25) | r/4 G4/4=I A4/4=ain't B4/8=gon- B4/8=na
-26) | C5/8=stud- C5/4=y C5/8~=war C5/4 C5/4=no
+22) D7 | A4/8=stud- A4/4.~=dy A4/2
+23) G/D D7@2 | G4/2=war A4/2=no
+24) G | B4/1=more.
+25) G7 | r/4 G4/4=I A4/4=ain't B4/8=gon- B4/8=na
+26) C | C5/8=stud- C5/4=y C5/8~=war C5/4 C5/4=no
 27) | C5/4=more. C5/4=I G4/4=ain't A4/8=gon- A4/8=na
-28) | B4/8=stud- B4/4=y B4/8~=war B4/4 A4/4=no
-29) | G4/4=more. G4/4=Ain't G4/4=gon- G4/4=na
-30) | A4/2=stud- C5/2=y
-31) | B4/2=war A4/2=no
-32) | G4/1~=more.
+28) G | B4/8=stud- B4/4=y B4/8~=war B4/4 A4/4=no
+29) G7@1 | G4/4=more. G4/4=Ain't G4/4=gon- G4/4=na
+30) D7 | A4/2=stud- C5/2=y
+31) G/D D7@2 | B4/2=war A4/2=no
+32) G | G4/1~=more.
 33) | G4/2 r/2

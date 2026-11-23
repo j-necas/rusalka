@@ -6,19 +6,19 @@ tempo: 88
 clef: treble
 ---
 1) | F4/8=Oh, G4/8=I
-2) | A4/4=went A4/4=down F4/4=South F4/8=for G4/8=to
+2) F | A4/4=went A4/4=down F4/4=South F4/8=for G4/8=to
 3) | A4/4=see A4/4=my F4/4=Sal, F4/4=Sing
 4) | A4/8=Pol- A4/8=ly A4/8=wol- A4/8=ly Bb4/8=doo- Bb4/8=dle A4/8=all A4/8=the
-5) | G4/2=day, r/4 E4/8=My F4/8
-6) | G4/4=Sal, G4/4=she E4/4=is E4/4=a
+5) C7 | G4/2=day, r/4 E4/8=My F4/8
+6) C7 | G4/4=Sal, G4/4=she E4/4=is E4/4=a
 7) | G4/4=spunk- G4/4=y E4/4=gal, G4/4=Sing
 8) | C5/8=Pol- C5/8=ly C5/8=wol- C5/8=ly Bb4/8=doo- Bb4/8=dle G4/8=all G4/8=the
-9) | F4/2=day. r/4 F4/8=Fare G4/8=thee
-10) | A4/2.=well, F4/8=fare G4/8=thee
+9) F | F4/2=day. r/4 F4/8=Fare G4/8=thee
+10) F | A4/2.=well, F4/8=fare G4/8=thee
 11) | A4/2.=well, F4/8=Fare G4/8=thee
 12) | A4/4=well A4/4=my Bb4/4=fair- A4/4=y
-13) | G4/2.=fay, E4/8=For F4/8=I'm
-14) | G4/8=goin' G4/8=to G4/8=Lou'- G4/8=si- E4/8=an- E4/8=a E4/8=for E4/8=to
+13) C7 | G4/2.=fay, E4/8=For F4/8=I'm
+14) C7 | G4/8=goin' G4/8=to G4/8=Lou'- G4/8=si- E4/8=an- E4/8=a E4/8=for E4/8=to
 15) | G4/8=see G4/8=my G4/8=Su- G4/8=sy- E4/8=an- E4/8=na, G4/4=Sing
 16) | C5/8=Pol- C5/8=ly C5/8=wol- C5/8=ly Bb4/8=doo- Bb4/8=dle G4/8=all G4/8=the
-17) | F4/2.=day.
+17) F | F4/2.=day.

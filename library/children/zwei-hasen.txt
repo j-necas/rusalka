@@ -5,15 +5,15 @@ key: -1
 tempo: 90
 clef: treble
 ---
-1) | C4/8.=Zwi- C4/16=schen F4/4=Berg A4/4=und
-2) | A4/8=tie- G4/8=fen, G4/8=tie- F4/8=fen G4/4=Thal,
-3) | C4/8.=Sas- E4/16=sen G4/4=einst G4/4=zwei
-4) {:|} | Bb4/4=Ha- A4/4=sen, r/4
-5) | C5/8=Fras- C5/8=sen A4/4=ab C5/4=das
-6) | C5/8=grü- Bb4/8=ne, Bb4/8=grü- A4/8=ne Bb4/4=Gras,
-7) | Bb4/8=Fras- Bb4/8=sen G4/4=ab Bb4/4=das
-8) | Bb4/8=grü- A4/8=ne, A4/8=grü- G4/8=ne A4/4=Gras
-9) | F4/8=Bis A4/8 C5/4=auf A4/8=den F4/8
-10) | G4/4=Ra- F4/4=sen, r/4
-11) | F4/16=Bis A4/16 C5/16 F5/16 C5/4=auf C5/8t=den A4/8t F4/8t
-12) | G4/4=Ra- F4/4=sen. r/4
+1) F F/A@1 | C4/8.=Zwi- C4/16=schen F4/4=Berg A4/4=und
+2) A7/E C7/Bb@1 | A4/8=tie- G4/8=fen, G4/8=tie- F4/8=fen G4/4=Thal,
+3) C C/E@1 | C4/8.=Sas- E4/16=sen G4/4=einst G4/4=zwei
+4) {:|} Bb/F F/A@1 | Bb4/4=Ha- A4/4=sen, r/4
+5) F F/A@1 | C5/8=Fras- C5/8=sen A4/4=ab C5/4=das
+6) C7/E C7/G@1 | C5/8=grü- Bb4/8=ne, Bb4/8=grü- A4/8=ne Bb4/4=Gras,
+7) C7/E C7/G@1 | Bb4/8=Fras- Bb4/8=sen G4/4=ab Bb4/4=das
+8) Bbmaj7/F Am7@1 | Bb4/8=grü- A4/8=ne, A4/8=grü- G4/8=ne A4/4=Gras
+9) F F/A@1 | F4/8=Bis A4/8 C5/4=auf A4/8=den F4/8
+10) C7/Bb F/A@1 | G4/4=Ra- F4/4=sen, r/4
+11) Fmaj7/E@1 F@2 | F4/16=Bis A4/16 C5/16 F5/16 C5/4=auf C5/8t=den A4/8t F4/8t
+12) C7/E F@1 | G4/4=Ra- F4/4=sen. r/4

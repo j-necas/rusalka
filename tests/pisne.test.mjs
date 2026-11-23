@@ -101,6 +101,23 @@ test('carol variants appear in the carol lists and lead back to their existing s
   assert.equal(adresyPisni().filter(url => /greensleeves|what-child-is-this/.test(url)).length, 1);
 });
 
+test('every sheet music list has one link to each national anthem on its existing page', () => {
+  const jmena = ['deutschlandlied', 'god-save-the-king', 'kde-domov-muj', 'la-marseillaise', 'nad-tatrou-sa-blyska', 'o-canada', 'the-star-spangled-banner'];
+  const hymny = pisne().filter(p => p.police === 'anthems');
+  assert.deepEqual(hymny.map(p => p.jmeno).sort(), jmena);
+  for (const jazyk of JAZYKY_PISNI) {
+    const html = seznamPisni(jazyk).html;
+    const oddil = html.match(/<section[^>]+aria-labelledby="anthems">([\s\S]*?)<\/section>/)?.[1];
+    assert.ok(oddil, jazyk);
+    for (const p of hymny) {
+      const cesta = p.stranka === jazyk ? `${p.jmeno}/` : `/${p.cesta}`;
+      assert.equal(oddil.split(`href="${cesta}`).length - 1, 1, `${jazyk}: ${cesta}`);
+    }
+    assert.equal(oddil.match(/<li>/g).length, jmena.length, jazyk);
+  }
+  assert.match(seznamPisni('fr').html, /href="\/en\/sheet-music\/o-canada\/#text-o-canada"/);
+});
+
 test('introduction and song pages set CSP before scripts and preserve structured data', () => {
   for (const html of [stranka('cs'), seznamPisni('cs').html]) {
     const csp = html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1];
@@ -109,4 +126,15 @@ test('introduction and song pages set CSP before scripts and preserve structured
     assert.match(csp, /script-src 'self';/);
     assert.match(html, /<script type="application\/ld\+json">/);
   }
+});
+
+test('the app and sheet music pages allow Verovio’s embedded font for chord accidentals', async () => {
+  const song = pisne().find(p => p.jmeno === 'kde-domov-muj');
+  const { html } = await strankaPisne(song);
+  const app = readFileSync(new URL('../static/index.html', import.meta.url), 'utf8');
+  for (const page of [html, app]) {
+    const csp = page.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1];
+    assert.match(csp, /font-src 'self' data:;/);
+  }
+  assert.match(html, /font-family="Leipzig"/);
 });

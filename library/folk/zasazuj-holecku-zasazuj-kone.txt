@@ -5,19 +5,19 @@ key: 0
 tempo: 90
 clef: treble
 ---
-1) | E4/4=Za- E4/4=sa- B3/4=zuj,
-2) | C4/4=ho- D4/4=leč- F4/4=ku,
-3) | E4/4=za- E4/4=sa- B3/4=zuj
-4) | C4/4=ko- D4/2=ně,
-5) | E4/4=po- E4/4=je- B3/4=de-
-6) | C4/4=me D4/4=s_ni- F4/4=ma
-7) | E4/4=k_Zla- E4/4=tej F4/4=Ko-
-8) | D4/4=ru- C4/2=ně;
-9) | E4/4=v_Zla- D4/4=tej C4/4=Ko-
-10) | D4/8=ru- E4/8=ně F4/2
-11) | E4/4=ve- D4/4=se- C4/4=le
-12) | B3/8=hra- C4/8=jou, D4/2
-13) | E4/4=mlá- E4/4=den- B3/4=ci
-14) | C4/4=s_děv- D4/4=ča- F4/4=ty
-15) | E4/4=pě- E4/4=kně F4/4=tan-
-16) | D4/4=cu- C4/2=jou.
+1) C G@2 | E4/4=Za- E4/4=sa- B3/4=zuj,
+2) C Dm@1 | C4/4=ho- D4/4=leč- F4/4=ku,
+3) Em | E4/4=za- E4/4=sa- B3/4=zuj
+4) C G@1 | C4/4=ko- D4/2=ně,
+5) C G@2 | E4/4=po- E4/4=je- B3/4=de-
+6) C G7@1 | C4/4=me D4/4=s_ni- F4/4=ma
+7) C G7@2 | E4/4=k_Zla- E4/4=tej F4/4=Ko-
+8) G C@1 | D4/4=ru- C4/2=ně;
+9) G@1 C@2 | E4/4=v_Zla- D4/4=tej C4/4=Ko-
+10) Dm | D4/8=ru- E4/8=ně F4/2
+11) C G@1 C@2 | E4/4=ve- D4/4=se- C4/4=le
+12) G | B3/8=hra- C4/8=jou, D4/2
+13) C G@2 | E4/4=mlá- E4/4=den- B3/4=ci
+14) C G7@1 | C4/4=s_děv- D4/4=ča- F4/4=ty
+15) C G7@2 | E4/4=pě- E4/4=kně F4/4=tan-
+16) G C@1 | D4/4=cu- C4/2=jou.

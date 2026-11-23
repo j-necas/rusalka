@@ -11,6 +11,7 @@ import { naMusicXml, zMusicXml, vysky } from '../static/lib/song.js';
 import { zpracujVerovio } from '../static/lib/render.js';
 import { nastavSoustavu, vychoziSoustava, nazevTonu } from '../static/lib/note_names.js';
 import { obtiznost } from '../static/lib/difficulty.js';
+import { POLICE } from '../static/lib/library.js';
 
 globalThis.DOMParser ??= DOMParser;
 const WEB = 'https://rusalkapiano.com/';
@@ -19,7 +20,6 @@ const SVG = 'http://www.w3.org/2000/svg';
 // the note colours of the app (BARVY in static/app.js, by pitch class); E's yellow takes a dark letter
 const BARVY = ['#E53935', '#E53935', '#F57C00', '#F57C00', '#F2C200', '#43A047', '#43A047', '#00A3B8', '#00A3B8', '#3F51B5', '#3F51B5', '#8E24AA'];
 const TMAVE = new Set([4]);
-const POLICE = ['children', 'czech', 'folk', 'christmas', 'classics'];
 /** the languages with song pages; a song in another language is listed on the page of its neighbour */
 export const JAZYKY_PISNI = ['cs', 'en', 'de', 'fr', 'it'];
 const JAZYK_STRANKY = { sk: 'cs' };   // Slovak songs with the Czech ones; the rest of the few (es, ru, ja, no …) in English
@@ -184,7 +184,7 @@ const hlava = ({ kod, titulek, popis, url, koren, data }) => `<!doctype html>
 <html lang="${kod}">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(titulek)}</title>
 <meta name="description" content="${esc(popis)}">
@@ -329,14 +329,18 @@ ${pata(u, '../../')}`;
   return { cesta: p.cesta, html: html.replace(noty, () => obrazek), soubory };
 }
 
+/** National anthems are linked from every language while each score keeps its own page. */
+export const pisneProSeznam = kod => pisne().filter(p => p.stranka === kod || p.police === 'anthems');
+
 /** the list of the songs of a page language, by shelf: { cesta, html } */
 export function seznamPisni(kod) {
-  const t = texty(kod), u = json(`tools/uvod/${kod}.json`), vsechny = pisne().filter(p => p.stranka === kod);
+  const t = texty(kod), u = json(`tools/uvod/${kod}.json`), vsechny = pisneProSeznam(kod);
   const varianty = pisne().flatMap(p => (p.variantyTextu || [])
     .filter(v => v.jazyk === kod && (p.stranka !== kod || (v.police && v.police !== p.police)))
-    .map(v => ({ nazev: v.nazev, police: v.police || p.police, stranka: p.stranka, odkaz: `/${p.cesta}#${idTextu(v)}` })));
-  const polozky = [...vsechny.map(p => ({ ...p, odkaz: `${p.jmeno}/` })), ...varianty]
-    .sort((a, b) => a.nazev.localeCompare(b.nazev, kod));
+    .map(v => ({ nazev: v.nazev, police: v.police || p.police, stranka: p.stranka, cesta: p.cesta, odkaz: `/${p.cesta}#${idTextu(v)}` })));
+  const zakladni = vsechny.filter(p => !varianty.some(v => v.cesta === p.cesta && v.police === p.police))
+    .map(p => ({ ...p, odkaz: p.stranka === kod ? `${p.jmeno}/` : `/${p.cesta}` }));
+  const polozky = [...zakladni, ...varianty].sort((a, b) => a.nazev.localeCompare(b.nazev, kod));
   const cesta = `${kod}/${t.folder}/`, url = WEB + cesta;
   const r = s => String(s).replace(/\{count\}/g, vsechny.length);
   const data = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: t.indexH1, url, inLanguage: kod,

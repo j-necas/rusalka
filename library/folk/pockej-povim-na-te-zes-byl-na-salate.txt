@@ -5,11 +5,11 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | D5/4=Poč- D5/4=kej,
+1) G | D5/4=Poč- D5/4=kej,
 2) | D5/8=po- B4/8=vím E5/8=na D5/8=tě,
 3) | D5/4=žes D5/4=byl
-4) | C5/8=na A4/8=sa- F#4/8=lá- D4/8=tě,
-5) | G4/8=na A4/8=sa- D5/8=lá- E5/8=tě
+4) D7 | C5/8=na A4/8=sa- F#4/8=lá- D4/8=tě,
+5) G | G4/8=na A4/8=sa- D5/8=lá- E5/8=tě
 6) | D5/8=šen- B4/8=ký- E5/8=řo- D5/8=vým,
 7) | G4/8=poč- A4/8=kej, B4/8=já D5/8=to
-8) | C5/8=na A4/8=tě F#4/8=po- G4/8=vím.
+8) F#dim | C5/8=na A4/8=tě F#4/8=po- G4/8=vím.

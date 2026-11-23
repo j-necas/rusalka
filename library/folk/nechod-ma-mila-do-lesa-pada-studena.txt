@@ -5,16 +5,16 @@ key: 0
 tempo: 90
 clef: treble
 ---
-1) | C5/4=Ne- G4/2=choď,
-2) | C5/4=má C5/4=mi- B4/4=lá,
-3) | A4/4=do A4/4=le- G4/4=sa,
-4) | A4/4=pa- F4/2=dá
-5) | A4/4=stu- A4/4=de- G4/4=ná
-6) | F4/4=ro- E4/4=sa; r/4
-7) | G4/4=stře- G4/4=víč- A4/4=ky
-8) | G4/4=máš G4/4=sta- E4/4=rý,
-9) | F4/4=ce- A4/4=ly A4/4=roz-
-10) | B4/4=tr- C5/4=ha- G4/4=ny,
+1) C | C5/4=Ne- G4/2=choď,
+2) G@2 | C5/4=má C5/4=mi- B4/4=lá,
+3) F C@2 | A4/4=do A4/4=le- G4/4=sa,
+4) F | A4/4=pa- F4/2=dá
+5) G@2 | A4/4=stu- A4/4=de- G4/4=ná
+6) G7 C@1 | F4/4=ro- E4/4=sa; r/4
+7) F@2 | G4/4=stře- G4/4=víč- A4/4=ky
+8) C | G4/4=máš G4/4=sta- E4/4=rý,
+9) F | F4/4=ce- A4/4=ly A4/4=roz-
+10) G C@1 | B4/4=tr- C5/4=ha- G4/4=ny,
 11) | C5/4=mu- G4/2=se-
-12) | C5/4=la C5/4=bys D5/4=jít
-13) | B4/4=bo- C5/2=sa.
+12) G@2 | C5/4=la C5/4=bys D5/4=jít
+13) C@1 | B4/4=bo- C5/2=sa.

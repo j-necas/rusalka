@@ -6,19 +6,19 @@ tempo: 88
 clef: treble
 ---
 1) | D5/4=I
-2) | C5/4.=dream A4/8=of Bb4/8=Jean- A4/8=ie G4/8=with F4/8=the
+2) F | C5/4.=dream A4/8=of Bb4/8=Jean- A4/8=ie G4/8=with F4/8=the
 3) | A4/4=light C4/8=brown D4/8 F4/2=hair,
-4) | F4/4=Borne G4/8=like A4/8=a F5/4=va- D5/4=por,
-5) | C5/8.=on A4/16=the G4/8=sum- F4/8=mer G4/4=air; r/8 D5/8=I
-6) | C5/4.=see A4/8=her Bb4/8=trip- A4/8=ping G4/8=where F4/8=the
+4) Dm Bb@2 | F4/4=Borne G4/8=like A4/8=a F5/4=va- D5/4=por,
+5) F G7@1 C@2 | C5/8.=on A4/16=the G4/8=sum- F4/8=mer G4/4=air; r/8 D5/8=I
+6) F | C5/4.=see A4/8=her Bb4/8=trip- A4/8=ping G4/8=where F4/8=the
 7) | A4/4=bright C4/8=streams D4/8 F4/2=play,
-8) | G4/8=Hap- B4/8=py C5/8=as D5/8=the E5/8=dais- F5/8 A4/8=ies D5/8=that
-9) | C5/4=dance B4/8=on B4/8=her C5/2=way.
-10) | G4/8=Man- A4/8=y G4/8=were F4/8=the G4/4=wild A4/8.=notes G4/16=her
-11) | F4/8=mer- E4/8=ry F4/8=voice A4/8=would C5/2=pour,
-12) | D5/8=Man- C5/8=y D5/8.=were F5/16=the C5/4=blithe A4/8.=birds G4/16=that
-13) | F4/4=war- D4/8.=bled C4/16=them C4/4=o'er: C4/8=Oh! D5/8=I
-14) | C5/4.=dream A4/8=of Bb4/8=Jean- A4/8=ie G4/8=with F4/8=the
+8) C Dm/F@2 | G4/8=Hap- B4/8=py C5/8=as D5/8=the E5/8=dais- F5/8 A4/8=ies D5/8=that
+9) C/G G7@1 C@2 | C5/4=dance B4/8=on B4/8=her C5/2=way.
+10) C7 | G4/8=Man- A4/8=y G4/8=were F4/8=the G4/4=wild A4/8.=notes G4/16=her
+11) F | F4/8=mer- E4/8=ry F4/8=voice A4/8=would C5/2=pour,
+12) Bb F@2 A7@3 | D5/8=Man- C5/8=y D5/8.=were F5/16=the C5/4=blithe A4/8.=birds G4/16=that
+13) Dm G7@1 C@2 | F4/4=war- D4/8.=bled C4/16=them C4/4=o'er: C4/8=Oh! D5/8=I
+14) F | C5/4.=dream A4/8=of Bb4/8=Jean- A4/8=ie G4/8=with F4/8=the
 15) | A4/4=light C4/8=brown D4/8 F4/2=hair,
-16) | G4/8=Float- A4/8=ing F5/8.=like D5/16=a C5/8=va- D5/8=por F4/8=on G4/8=the
-17) | A4/4=soft A4/8=sum- G4/8=mer F4/2=air.
+16) Dm Bb@1 F/A@2 Bb@3 | G4/8=Float- A4/8=ing F5/8.=like D5/16=a C5/8=va- D5/8=por F4/8=on G4/8=the
+17) F/C C7@1 F@2 | A4/4=soft A4/8=sum- G4/8=mer F4/2=air.

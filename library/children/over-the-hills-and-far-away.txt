@@ -5,15 +5,15 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | G4/8=Tom A4/8 B4/8=he A4/8 G4/8=was A4/8 B4/8=a A4/8
-2) | G4/4=pi- E4/4=per's E4/4.=son, D4/8=He
-3) | G4/8=learnt A4/8 B4/8=to A4/8 G4/8=play A4/8 B4/8=when A4/8
-4) | C5/4=he A4/4=was A4/4.=young; G4/8=But
-5) | G4/8=all A4/8 B4/8=the A4/8 G4/8=tunes A4/8 B4/8=that A4/8
-6) | G4/4=he E4/4=could C5/4.=play E4/8=Was
-7) | E4/4="O- D4/8=ver C4/8=the D4/4=hills G4/8=and A4/8
-8) | B4/4=far G4/4=a- G4/2=way."
-9) | D5/4=O- D5/8=ver C5/8=the B4/4=hills B4/8=and A4/8=a
-10) | G4/4=great E4/4=way C5/4.=off, E4/8=The
-11) | E4/4=wind C4/4=shall D4/4=blow G4/8=my A4/8
-12) | B4/4=top- G4/4=knot G4/2=off.
+1) A7/G Bm7@1 A7/G@2 Bm7@3 | G4/8=Tom A4/8 B4/8=he A4/8 G4/8=was A4/8 B4/8=a A4/8
+2) C/G Cmaj7/G@3 | G4/4=pi- E4/4=per's E4/4.=son, D4/8=He
+3) A7/G Bm7@1 A7/G@2 Bm7@3 | G4/8=learnt A4/8 B4/8=to A4/8 G4/8=play A4/8 B4/8=when A4/8
+4) D7/A D@1 | C5/4=he A4/4=was A4/4.=young; G4/8=But
+5) A7/G Bm7@1 A7/G@2 Bm7@3 | G4/8=all A4/8 B4/8=the A4/8 G4/8=tunes A4/8 B4/8=that A4/8
+6) C/E C/G@1 | G4/4=he E4/4=could C5/4.=play E4/8=Was
+7) C Bm7@1 Bm/F#@2 A7/E@3 | E4/4="O- D4/8=ver C4/8=the D4/4=hills G4/8=and A4/8
+8) G G/B@1 | B4/4=far G4/4=a- G4/2=way."
+9) Bm7 G@2 Gmaj7@3 | D5/4=O- D5/8=ver C5/8=the B4/4=hills B4/8=and A4/8=a
+10) C/E C/G@1 | G4/4=great E4/4=way C5/4.=off, E4/8=The
+11) Am G/B@2 Am7/C@3 | E4/4=wind C4/4=shall D4/4=blow G4/8=my A4/8
+12) G | B4/4=top- G4/4=knot G4/2=off.

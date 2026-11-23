@@ -5,27 +5,27 @@ key: 3
 tempo: 90
 clef: treble
 ---
-1) {dc} | E5/4=Oran- C#5/4=ges E5/4=and
+1) {dc} A | E5/4=Oran- C#5/4=ges E5/4=and
 2) | C#5/4=le- A4/4=mons, B4/8=says C#5/8=the
-3) | D5/4=bells B4/4=of E5/4=St.
-4) | C#5/4=Cle- A4/2=men's;
+3) E7/B E@1 | D5/4=bells B4/4=of E5/4=St.
+4) A | C#5/4=Cle- A4/2=men's;
 5) | E5/8=You E5/8=owe C#5/4=me E5/4=five
-6) | C#5/4=far- A4/4=things B4/8=says C#5/8=the
-7) | D5/4=bells B4/4=of E5/4=St.
-8) {tocoda coda} | C#5/4=Mar- A4/2=tin's;
-9) | B4/4=When G#4/4=will B4/4=you
-10) | G#4/4=pay E4/4=me, F#4/8=says G#4/8=the
-11) | A4/4=bells F#4/4=of B4/4=Old
-12) | G#4/4=Bai- E4/2=ley;
+6) C#7@2 | C#5/4=far- A4/4=things B4/8=says C#5/8=the
+7) E7 E/G#@1 E/B@2 | D5/4=bells B4/4=of E5/4=St.
+8) {tocoda coda} A | C#5/4=Mar- A4/2=tin's;
+9) E | B4/4=When G#4/4=will B4/4=you
+10) G#m7/B@2 | G#4/4=pay E4/4=me, F#4/8=says G#4/8=the
+11) B7/D# Bm@1 | A4/4=bells F#4/4=of B4/4=Old
+12) E | G#4/4=Bai- E4/2=ley;
 13) | B4/4=When G#4/4=I B4/4=grow
-14) | E4/2=rich, F#4/8=says G#4/8=the
-15) | A4/4=bells F#4/4=of B4/4=Shore-
-16) {dc} | E4/2.=ditch;
-17) | C#5/4=Here A4/4=comes E5/4=a
+14) G#m7/B@2 | E4/2=rich, F#4/8=says G#4/8=the
+15) B7/F# B/D#@1 Bm@2 | A4/4=bells F#4/4=of B4/4=Shore-
+16) {dc} E E7/D@1 E/B@2 | E4/2.=ditch;
+17) A | C#5/4=Here A4/4=comes E5/4=a
 18) | C#5/4=can- A4/4=dle B4/8=to C#5/8
-19) | B4/4=light D5/4=you G#4/4=to
-20) | A4/2=bed, B4/4=And
-21) | C#5/4=here A4/4=comes E5/4=a
+19) E/B E7@1 E/G#@2 | B4/4=light D5/4=you G#4/4=to
+20) A B7/A@2 | A4/2=bed, B4/4=And
+21) A | C#5/4=here A4/4=comes E5/4=a
 22) | C#5/4=chop- A4/4=per B4/8=to C#5/8
-23) | D5/4=chop C#5/4=off B4/4=your
-24) | A4/2.=head.
+23) E7/B Edim7/C#@1 E7/G#@2 | D5/4=chop C#5/4=off B4/4=your
+24) A | A4/2.=head.

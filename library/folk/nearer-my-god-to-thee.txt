@@ -5,19 +5,19 @@ key: -1
 tempo: 88
 clef: treble
 ---
-1) | A4/2.=Near- G4/2=er, F4/4=my
-2) | F4/2=God, D4/4=to D4/2.=Thee,
-3) | C4/2.=near- F4/2=er A4/4=to
-4) | G4/2.~=Thee. G4/2 r/4
-5) | A4/2.=E'en G4/2=though F4/4=it
-6) | F4/2=be D4/4=a D4/2.=cross
-7) | C4/2=that F4/4 E4/2=rais- G4/4=eth
-8) | F4/2.~=me, F4/2 r/4
-9) | C5/2.=Still D5/2=all C5/4=my
+1) F C7/F@3 F@5 | A4/2.=Near- G4/2=er, F4/4=my
+2) Bb | F4/2=God, D4/4=to D4/2.=Thee,
+3) F | C4/2.=near- F4/2=er A4/4=to
+4) C | G4/2.~=Thee. G4/2 r/4
+5) F C7/F@3 F@5 | A4/2.=E'en G4/2=though F4/4=it
+6) Bb | F4/2=be D4/4=a D4/2.=cross
+7) F/C C7@3 | C4/2=that F4/4 E4/2=rais- G4/4=eth
+8) F | F4/2.~=me, F4/2 r/4
+9) F Bb@3 F@5 | C5/2.=Still D5/2=all C5/4=my
 10) | C5/2=song A4/4=shall C5/2.=be,
-11) | C5/2.=Near- D5/2=er, C5/4=my
-12) | C5/2=God, A4/4=to G4/2.=Thee,
-13) | A4/2.=Near- G4/2=er, F4/4=my
-14) | F4/2=God, D4/4=to D4/2.=Thee,
-15) | C4/2=Near- F4/4 E4/2=er G4/4=to
-16) | F4/2.~=Thee. F4/2 r/4
+11) Bb@3 F@5 | C5/2.=Near- D5/2=er, C5/4=my
+12) C7@3 | C5/2=God, A4/4=to G4/2.=Thee,
+13) F C7/F@3 F@5 | A4/2.=Near- G4/2=er, F4/4=my
+14) Bb | F4/2=God, D4/4=to D4/2.=Thee,
+15) F/C C7@3 | C4/2=Near- F4/4 E4/2=er G4/4=to
+16) F | F4/2.~=Thee. F4/2 r/4

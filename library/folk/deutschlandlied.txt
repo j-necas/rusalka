@@ -5,24 +5,24 @@ key: -3
 tempo: 0
 clef: treble
 ---
-1) | Eb4/4.=Ei- F4/8=nig-
-2) | G4/4=keit F4/4=und Ab4/4=Recht G4/4=und
-3) | F4/8=Frei- D4/8 Eb4/4=heit C5/4=für Bb4/4=das
-4) | Ab4/4=deut- G4/4=sche F4/4=Va- G4/8=ter- Eb4/8
-5) | Bb4/2=land! Eb4/4.=Da- F4/8=nach
-6) | G4/4=lasst F4/4=uns Ab4/4=al- G4/4=le
-7) | F4/8=stre- D4/8 Eb4/4=ben, C5/4=brü- Bb4/4=der-
-8) | Ab4/4=lich G4/4=mit F4/4=Herz G4/8=und Eb4/8
-9) | Bb4/2=Hand! F4/4=Ei- G4/4=nig-
-10) | F4/8=keit D4/8 Bb3/4=und Ab4/4=Recht G4/4=und
-11) | F4/8=Frei- D4/8 Bb3/4=heit Bb4/4=sind Ab4/4=des
-12) | G4/4.=Glü- G4/8=ckes A4/4=Un- A4/8=ter- Bb4/8
-13) | Bb4/2=pfand: Eb5/4.=Blüh D5/8=im
-14) | D5/8=Glan- C5/8 Bb4/4=ze C5/4.=die- Bb4/8=ses
-15) | Bb4/8=Glü- Ab4/8 G4/4=ckes, F4/4.=blü- G4/16=he, Ab4/16
-16) | Bb4/8=deut- C5/8 Ab4/8=sches F4/8 Eb4/4=Va- G4/8=ter- F4/8
-17) | Eb4/2=land! Eb5/4.=Blüh D5/8=im
-18) | D5/8=Glan- C5/8 Bb4/4=ze C5/4.=die- Bb4/8=ses
-19) | Bb4/8=Glü- Ab4/8 G4/4=ckes, F4/4.=blü- G4/16=he, Ab4/16
-20) | Bb4/8=deut- C5/8 Ab4/8=sches F4/8 Eb4/4=Va- G4/8=ter- F4/8
-21) | Eb4/2=land!
+1) Eb | Eb4/4.=Ei- F4/8=nig-
+2) Bb@1 Bb7@2 Eb/Bb@3 | G4/4=keit F4/4=und Ab4/4=Recht G4/4=und
+3) Bb7 Eb@1 Ab@2 Eb@3 | F4/8=Frei- D4/8 Eb4/4=heit C5/4=für Bb4/4=das
+4) Bb7 Eb/G@1 Bb7@2 F7/A@3 | Ab4/4=deut- G4/4=sche F4/4=Va- G4/8=ter- Eb4/8
+5) Bb Eb@2 | Bb4/2=land! Eb4/4.=Da- F4/8=nach
+6) Bb@1 Bb7@2 Eb/Bb@3 | G4/4=lasst F4/4=uns Ab4/4=al- G4/4=le
+7) Bb7 Eb@1 Ab@2 Eb@3 | F4/8=stre- D4/8 Eb4/4=ben, C5/4=brü- Bb4/4=der-
+8) Bb7 Eb/G@1 Bb7@2 F7/A@3 | Ab4/4=lich G4/4=mit F4/4=Herz G4/8=und Eb4/8
+9) Bb | Bb4/2=Hand! F4/4=Ei- G4/4=nig-
+10) Bb7@2 Eb/Bb@3 | F4/8=keit D4/8 Bb3/4=und Ab4/4=Recht G4/4=und
+11) Bb Eb/G@2 Fm/Ab@3 | F4/8=Frei- D4/8 Bb3/4=heit Bb4/4=sind Ab4/4=des
+12) Cm F7@2 | G4/4.=Glü- G4/8=ckes A4/4=Un- A4/8=ter- Bb4/8
+13) Bb Eb/G@2 | Bb4/2=pfand: Eb5/4.=Blüh D5/8=im
+14) Ab Eb@1 Ab@2 | D5/8=Glan- C5/8 Bb4/4=ze C5/4.=die- Bb4/8=ses
+15) Bb7 Eb@1 Bb7@2 | Bb4/8=Glü- Ab4/8 G4/4=ckes, F4/4.=blü- G4/16=he, Ab4/16
+16) Eb/G Fm/Ab@1 Eb/Bb@2 Bb7@3 | Bb4/8=deut- C5/8 Ab4/8=sches F4/8 Eb4/4=Va- G4/8=ter- F4/8
+17) Eb Eb/G@2 | Eb4/2=land! Eb5/4.=Blüh D5/8=im
+18) Ab Eb@1 Ab@2 | D5/8=Glan- C5/8 Bb4/4=ze C5/4.=die- Bb4/8=ses
+19) Bb7 Eb@1 Bb7@2 | Bb4/8=Glü- Ab4/8 G4/4=ckes, F4/4.=blü- G4/16=he, Ab4/16
+20) Eb/G Fm/Ab@1 Eb/Bb@2 Bb7@3 | Bb4/8=deut- C5/8 Ab4/8=sches F4/8 Eb4/4=Va- G4/8=ter- F4/8
+21) Eb | Eb4/2=land!

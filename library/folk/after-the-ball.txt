@@ -5,35 +5,35 @@ key: 3
 tempo: 88
 clef: treble
 ---
-1) | C#6/4=Af- E6/4.=ter C#6/8=the
-2) | A5/2=ball F#5/4=is
-3) | A5/2.=o-
+1) A | C#6/4=Af- E6/4.=ter C#6/8=the
+2) D | A5/2=ball F#5/4=is
+3) A | A5/2.=o-
 4) | E5/2.=ver,
-5) | C#6/4=af- E6/4.=ter C#6/8=the
-6) | A5/2=break F#5/4=of
-7) | G#5/2.~=morn,
+5) A | C#6/4=af- E6/4.=ter C#6/8=the
+6) Cdim@2 | A5/2=break F#5/4=of
+7) E7 | G#5/2.~=morn,
 8) | G#5/2.
-9) | D6/4=af- F#6/4.=ter D6/8=the
+9) Bm | D6/4=af- F#6/4.=ter D6/8=the
 10) | C#6/2=dan- B5/4=cers'
-11) | A#5/2.=leav-
-12) | B5/2.=ing,
-13) | B5/4=af- C#6/4.=ter B5/8=the
+11) F#7 | A#5/2.=leav-
+12) Bm | B5/2.=ing,
+13) E7 | B5/4=af- C#6/4.=ter B5/8=the
 14) | G#5/2=stars E5/4=are
-15) | E6/2.~=gone,
-16) | E6/2.
-17) | C#6/4=Man- E6/4.=y C#6/8=a
-18) | A5/2=heart F#5/4=is
-19) | A5/2.=ach-
+15) A Am@2 | E6/2.~=gone,
+16) E7 | E6/2.
+17) A | C#6/4=Man- E6/4.=y C#6/8=a
+18) D | A5/2=heart F#5/4=is
+19) A | A5/2.=ach-
 20) | E5/2.=ing,
-21) | F#5/4=if A#5/4.=you C#6/8=could
+21) F#7 | F#5/4=if A#5/4.=you C#6/8=could
 22) | F#6/2=read E6/4=them
-23) | D#6/2.~=all,
+23) B7 | D#6/2.~=all,
 24) | D#6/2.
-25) | E6/4=man- B5/4=y B5/4=the
+25) E7 | E6/4=man- B5/4=y B5/4=the
 26) | B5/4=hopes C#6/4=that D6/4=have
-27) | C#6/2.=van-
-28) | E5/2.=ished,
-29) | F#5/2.=af-
-30) | G#5/2=ter E5/4=the
-31) | A5/2.~=ball.
+27) A | C#6/2.=van-
+28) F#7 | E5/2.=ished,
+29) B7 | F#5/2.=af-
+30) E7 | G#5/2=ter E5/4=the
+31) A | A5/2.~=ball.
 32) | A5/4 r/4 r/4

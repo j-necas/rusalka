@@ -5,21 +5,21 @@ key: 2
 tempo: 110
 clef: treble
 ---
-1) | D5/8=Beau- C#5/8=ti- D5/8=ful A4/4.=Dream- F#4/4.=er
-2) | E4/8=wake D#4/8=un- E4/8=to B4/2.=me,
-3) | A4/8=Star- C#5/8=light B4/8=and B4/8=dew- A4/8=drop G4/8=are G4/8=wait- F#4/8=ing E4/8=for
-4) | F#4/2.~=Thee, F#4/4.
-5) | D5/8=Sounds C#5/8=of D5/8=the A4/4.=rude F#4/4.=world
-6) | E4/8=heard D#4/8=in E4/8=the B4/2.=day,
-7) | A4/8=Lulled C#5/8=by B4/8=the B4/8=moon- A4/8=light G4/8=have G4/8=all F#4/8=passed E4/8=a-
-8) | D4/2.~=way! D4/4.
-9) | A4/8=Beau- G4/8=ti- E4/8=ful C#4/4.=Dream- B4/4.=er
-10) | B4/8=queen A4/8=of F#4/8=my D4/4.=song. D5/4.
-11) | D5/8=List C#5/8=while D5/8=I B4/4.=woo E5/4=Thee, D5/8=with
-12) | C#5/8=soft D5/8=me- B4/8=lo- A4/2.=dy;
-13) | D5/8=Gone C#5/8=are D5/8=the A4/4.=cares F#4/4.=of
-14) | E4/8=life's D#4/8=bu- E4/8=sy B4/2.=throng,
-15) | A4/8=Beau- C#5/8=ti- B4/8=ful B4/8=Dream- A4/8=er G4/8=a- G4/8=wake F#4/8=un- E4/8=to
-16) | F#4/2.~=me! F#4/4.
-17) | B4/8=Beau- C#5/8=ti- D5/8=ful D5/8=Dream- A4/8=er F#4/8=a- G4/8=wake F#4/8=un- E4/8=to
-18) | D4/2.=me! r/4.
+1) D B7@3 | D5/8=Beau- C#5/8=ti- D5/8=ful A4/4.=Dream- F#4/4.=er
+2) Em E7@3 | E4/8=wake D#4/8=un- E4/8=to B4/2.=me,
+3) A7 | A4/8=Star- C#5/8=light B4/8=and B4/8=dew- A4/8=drop G4/8=are G4/8=wait- F#4/8=ing E4/8=for
+4) D | F#4/2.~=Thee, F#4/4.
+5) D B7@3 | D5/8=Sounds C#5/8=of D5/8=the A4/4.=rude F#4/4.=world
+6) Em E7@3 | E4/8=heard D#4/8=in E4/8=the B4/2.=day,
+7) A7 | A4/8=Lulled C#5/8=by B4/8=the B4/8=moon- A4/8=light G4/8=have G4/8=all F#4/8=passed E4/8=a-
+8) D G@1.5 D@3 | D4/2.~=way! D4/4.
+9) A7 | A4/8=Beau- G4/8=ti- E4/8=ful C#4/4.=Dream- B4/4.=er
+10) D Bm@3 | B4/8=queen A4/8=of F#4/8=my D4/4.=song. D5/4.
+11) G E7@3 | D5/8=List C#5/8=while D5/8=I B4/4.=woo E5/4=Thee, D5/8=with
+12) A A7@1.5 | C#5/8=soft D5/8=me- B4/8=lo- A4/2.=dy;
+13) D B7@3 | D5/8=Gone C#5/8=are D5/8=the A4/4.=cares F#4/4.=of
+14) Em E7@1.5 | E4/8=life's D#4/8=bu- E4/8=sy B4/2.=throng,
+15) A7 | A4/8=Beau- C#5/8=ti- B4/8=ful B4/8=Dream- A4/8=er G4/8=a- G4/8=wake F#4/8=un- E4/8=to
+16) D | F#4/2.~=me! F#4/4.
+17) G D/A@1.5 A7@3 | B4/8=Beau- C#5/8=ti- D5/8=ful D5/8=Dream- A4/8=er F#4/8=a- G4/8=wake F#4/8=un- E4/8=to
+18) D | D4/2.=me! r/4.

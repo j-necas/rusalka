@@ -5,12 +5,12 @@ key: -2
 tempo: 90
 clef: treble
 ---
-1) | F4/8=The
-2) | F4/8=north Bb4/8=wind Bb4/8=doth Bb4/8=blow A4/8 Bb4/8=And
-3) | C5/8=we C5/8=shall C5/8=have C5/4=snow, C5/8=And
-4) | D5/8=what Eb5/8=will D5/8=poor D5/8=Rob- C5/8=in Bb4/8=do
-5) | C5/4=then­­ F4/8=poor F4/4=thing? F4/8=He'll
-6) | F4/8=sit Bb4/8=in Bb4/8=a Bb4/8=barn A4/8 Bb4/8=To
-7) | D5/8=keep C5/8=him- C5/8=self C5/4=warm, C5/8=And
-8) | D5/8=hide Eb5/8=his D5/8=head C5/8=un- Bb4/8=der C5/8=his
-9) | Bb4/4=wing­­ Bb4/8=poor Bb4/4.=thing!
+1) Bb | F4/8=The
+2) Bbmaj7/D@1.5 | F4/8=north Bb4/8=wind Bb4/8=doth Bb4/8=blow A4/8 Bb4/8=And
+3) F F/A@1.5 | C5/8=we C5/8=shall C5/8=have C5/4=snow, C5/8=And
+4) Bb/F Bb@1.5 | D5/8=what Eb5/8=will D5/8=poor D5/8=Rob- C5/8=in Bb4/8=do
+5) F F/A@1.5 | C5/4=then­­ F4/8=poor F4/4=thing? F4/8=He'll
+6) Bb Bbmaj7/D@1.5 | F4/8=sit Bb4/8=in Bb4/8=a Bb4/8=barn A4/8 Bb4/8=To
+7) Dm7/F F/A@1.5 | D5/8=keep C5/8=him- C5/8=self C5/4=warm, C5/8=And
+8) Bb/F F7/A@1.5 | D5/8=hide Eb5/8=his D5/8=head C5/8=un- Bb4/8=der C5/8=his
+9) Bb | Bb4/4=wing­­ Bb4/8=poor Bb4/4.=thing!

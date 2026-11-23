@@ -20,6 +20,7 @@ export default {
   "knihovna.police.children": "Canciones infantiles",
   "knihovna.police.czech": "Canciones populares checas",
   "knihovna.police.folk": "Canciones populares del mundo",
+  "knihovna.police.anthems": "Himnos nacionales",
   "knihovna.police.christmas": "Navidad",
   "knihovna.police.classics": "Clásicos",
   "knihovna.vMenuPopis": "Canciones listas de la biblioteca de Rusalka: elige una y a tocar.",

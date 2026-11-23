@@ -5,13 +5,13 @@ key: 0
 tempo: 90
 clef: treble
 ---
-1) | C5/8=Čer- G4/8=né C5/8=o- D5/8=či,
-2) | E5/4=jdě- D5/4=te
-3) | C5/4=spat, r/4
+1) C | C5/8=Čer- G4/8=né C5/8=o- D5/8=či,
+2) G@1 | E5/4=jdě- D5/4=te
+3) C | C5/4=spat, r/4
 4) | E5/8=Čer- D5/8=né E5/8=o- F5/8=či,
 5) | G5/4=jdě- F5/8=te E5/8=spat,
-6) | D5/8=však C#5/8=mu- D5/8=sí- E5/8=te
-7) | F5/4=rá- E5/8=no D5/8=vstát.
-8) | C5/8=však B4/8=mu- C5/8=sí- D5/8=te
-9) | E5/4=rá- D5/4=no
-10) | C5/4=vstát. r/4
+6) G | D5/8=však C#5/8=mu- D5/8=sí- E5/8=te
+7) Dm | F5/4=rá- E5/8=no D5/8=vstát.
+8) C | C5/8=však B4/8=mu- C5/8=sí- D5/8=te
+9) G@1 | E5/4=rá- D5/4=no
+10) C | C5/4=vstát. r/4

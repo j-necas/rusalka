@@ -5,17 +5,17 @@ key: 1
 tempo: 0
 clef: treble
 ---
-1) | G4/4=God G4/4=save A4/4=our
-2) | F#4/4.=gra- G4/8=cious A4/4=King!
-3) | B4/4=Long B4/4=live C5/4=our
-4) | B4/4.=no- A4/8=ble G4/4=King!
-5) | A4/4=God G4/4=save F#4/4=the
-6) | G4/2.=King!
+1) G | G4/4=God G4/4=save A4/4=our
+2) D7 A7@1.5 D@2 | F#4/4.=gra- G4/8=cious A4/4=King!
+3) G C@2 | B4/4=Long B4/4=live C5/4=our
+4) G | B4/4.=no- A4/8=ble G4/4=King!
+5) D7 | A4/4=God G4/4=save F#4/4=the
+6) G | G4/2.=King!
 7) | D5/4=Send D5/4=him D5/4=vic-
-8) | D5/4.=to- C5/8=ri- B4/4=ous,
-9) | C5/4=Hap- C5/4=py C5/4=and
-10) | C5/4.=glo- B4/8=ri- A4/4=ous,
-11) | B4/4=Long C5/8=to B4/8 A4/8=reign G4/8
-12) | B4/4.=o- C5/8=ver D5/4=us,
-13) | E5/8=God C5/8 B4/4=save A4/4=the
-14) | G4/2.=King.
+8) D7@1.5 G@2 | D5/4.=to- C5/8=ri- B4/4=ous,
+9) D7 | C5/4=Hap- C5/4=py C5/4=and
+10) D@2 | C5/4.=glo- B4/8=ri- A4/4=ous,
+11) G D7@2 | B4/4=Long C5/8=to B4/8 A4/8=reign G4/8
+12) G D7@1.5 G@2 | B4/4.=o- C5/8=ver D5/4=us,
+13) C G@1 D7@2 | E5/8=God C5/8 B4/4=save A4/4=the
+14) G | G4/2.=King.

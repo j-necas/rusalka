@@ -36,6 +36,7 @@ export default {
   'knihovna.police.children': "Children's songs",
   'knihovna.police.czech': "Czech folk songs",
   'knihovna.police.folk': 'Folk songs of the world',
+  'knihovna.police.anthems': 'National anthems',
   'knihovna.police.christmas': 'Christmas',
   'knihovna.police.classics': 'Classics',
   'knihovna.vMenuPopis': 'Ready-made songs from the Rusalka library – just pick one and play.',

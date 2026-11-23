@@ -20,6 +20,7 @@ export default {
   "knihovna.police.children": "Detské",
   "knihovna.police.czech": "České ľudové",
   "knihovna.police.folk": "Ľudové zo sveta",
+  "knihovna.police.anthems": "Štátne hymny",
   "knihovna.police.christmas": "Vianočné",
   "knihovna.police.classics": "Klasika",
   "knihovna.vMenuPopis": "Hotové pesničky z knižnice Rusalky – stačí si vybrať a hrať.",

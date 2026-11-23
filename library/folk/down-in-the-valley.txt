@@ -6,26 +6,26 @@ tempo: 88
 clef: treble
 ---
 1) | D4/4=Down G4/4=in A4/4=the
-2) | B4/2.=val-
+2) G | B4/2.=val-
 3) | G4/2.=ley,
 4) | B4/4=val- A4/4=ley G4/4=so
-5) | A4/2.~=low.
+5) D7 | A4/2.~=low.
 6) | A4/2.
 7) | D4/4=Hang F#4/4=your A4/4=head
-8) | C5/2.=o-
+8) D7 | C5/2.=o-
 9) | A4/2.=ver,
 10) | C5/4=hear B4/4=the A4/4=wind
-11) | B4/2.~=blow.
+11) G | B4/2.~=blow.
 12) | B4/2.
 13) | D4/4=Hear G4/4=the A4/4=wind
-14) | B4/2.=blow
+14) G | B4/2.=blow
 15) | G4/2.=dear,
 16) | B4/4=hear A4/4=the G4/4=wind
-17) | A4/2.~=blow.
+17) D7 | A4/2.~=blow.
 18) | A4/2.
 19) | D4/4=Hang F#4/4=your A4/4=head
-20) | D5/2.=o-
+20) D7 | D5/2.=o-
 21) | D5/2.=ver,
 22) | C5/4=hear B4/4=the A4/4=wind
-23) | G4/2.~=blow.
+23) G | G4/2.~=blow.
 24) | G4/2.

@@ -5,17 +5,17 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | G4/8=Pod A4/8=na- B4/8=ši- C5/8=ma
+1) G | G4/8=Pod A4/8=na- B4/8=ši- C5/8=ma
 2) | D5/4=o- B4/4=kny
-3) | E5/8=te- D#5/8=če E5/8=vo- C5/8=dič-
-4) | D5/4=ka r/4
+3) C | E5/8=te- D#5/8=če E5/8=vo- C5/8=dič-
+4) G | D5/4=ka r/4
 5) | D5/8=na- G5/8=poj D5/8=mně, B4/8=má
 6) | D5/4=mi- C5/8=lá, B4/8
-7) | B4/8=mé- G4/8=ho A4/8=ko- F#4/8=níč-
-8) | G4/4=ka r/4
-9) | B4/4=Nech- C5/4=ci,
-10) | D5/8=ne- G5/8=na- D5/8=po- C5/8=jím,
-11) | B4/4=já C5/4=se
-12) | D5/8=ko- G5/8=ně D5/8=bo- C5/8=jím,
-13) | B4/8=že G4/8=jsem A4/8=ma- F#4/8=lič-
-14) | G4/4=ká. r/4
+7) D@1 | B4/8=mé- G4/8=ho A4/8=ko- F#4/8=níč-
+8) G | G4/4=ka r/4
+9) D7@1 | B4/4=Nech- C5/4=ci,
+10) G | D5/8=ne- G5/8=na- D5/8=po- C5/8=jím,
+11) D7@1 | B4/4=já C5/4=se
+12) G | D5/8=ko- G5/8=ně D5/8=bo- C5/8=jím,
+13) D@1 | B4/8=že G4/8=jsem A4/8=ma- F#4/8=lič-
+14) G | G4/4=ká. r/4

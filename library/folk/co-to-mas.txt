@@ -5,14 +5,14 @@ key: 0
 tempo: 90
 clef: treble
 ---
-1) | E4/8=Co G4/8=to G4/4=máš,
-2) | F4/4=má A4/8=mi- G4/8=lá,
-3) | G4/8=co C5/8=to C5/4=máš
+1) C | E4/8=Co G4/8=to G4/4=máš,
+2) F | F4/4=má A4/8=mi- G4/8=lá,
+3) C | G4/8=co C5/8=to C5/4=máš
 4) | E5/4=za D5/8=če- C5/8=lo:
-5) | C5/8=jak B4/8=jsem B4/4=tě
-6) | D5/4=po- C5/8=lí- A4/8=bil,
+5) G | C5/8=jak B4/8=jsem B4/4=tě
+6) F@1 | D5/4=po- C5/8=lí- A4/8=bil,
 7) | A4/8=ce- G4/8=lé F4/4=se
-8) | E4/4=zar- A4/8=dě- G4/8=lo.
-9) | E4/8=ce- G4/8=lé C5/4=se
-10) | E5/4=zar- D5/4=dě-
-11) | C5/4=lo. r/4
+8) Am | E4/4=zar- A4/8=dě- G4/8=lo.
+9) C | E4/8=ce- G4/8=lé C5/4=se
+10) G@1 | E5/4=zar- D5/4=dě-
+11) C | C5/4=lo. r/4

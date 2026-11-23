@@ -5,35 +5,35 @@ key: 2
 tempo: 110
 clef: treble
 ---
-1) | A4/4=Once A4/8=a A4/4=jol- A4/8=ly
-2) | G4/4.=swag- G4/4.=man
-3) | F4/4=camped G4/8 A4/4=by F4/8=a
-4) | D4/8=bil- E4/8=la- F4/8~=bong F4/4.
-5) | C4/4.=Un- F4/4=der A4/8=the
+1) F | A4/4=Once A4/8=a A4/4=jol- A4/8=ly
+2) C7 | G4/4.=swag- G4/4.=man
+3) F | F4/4=camped G4/8 A4/4=by F4/8=a
+4) Bb | D4/8=bil- E4/8=la- F4/8~=bong F4/4.
+5) F | C4/4.=Un- F4/4=der A4/8=the
 6) | C5/4.=shade C5/4=of C5/8=a
 7) | C5/4.=cool- Bb4/4=i- A4/8=bah
-8) | G4/4.=tree, F4/4=And G4/8=he
-9) | A4/4.=sang A4/4=as A4/8=he
-10) | G4/4.=watched G4/4.=and
-11) | F4/4=wait- G4/8=ed A4/4=till F4/8=his
-12) | D4/8="Bil- E4/8=ly" F4/8~=boiled, F4/4.
-13) | C4/4.="You'll F4/4=come A4/8=a-
+8) C7 | G4/4.=tree, F4/4=And G4/8=he
+9) F | A4/4.=sang A4/4=as A4/8=he
+10) C7 | G4/4.=watched G4/4.=and
+11) F | F4/4=wait- G4/8=ed A4/4=till F4/8=his
+12) Bb | D4/8="Bil- E4/8=ly" F4/8~=boiled, F4/4.
+13) F | C4/4.="You'll F4/4=come A4/8=a-
 14) | C5/4.=waltz- Bb4/4=ing A4/8=Ma-
-15) | G4/4.=til- G4/4=da G4/8=with
-16) | F4/2.=me."
-17) | C5/4.="Waltz- C5/4=ing C5/8=Ma-
+15) C7 | G4/4.=til- G4/4=da G4/8=with
+16) F | F4/2.=me."
+17) F | C5/4.="Waltz- C5/4=ing C5/8=Ma-
 18) | C5/4.=til- A4/4.=da,
-19) | F5/4.=waltz- F5/4=ing F5/8=Ma-
+19) Bb | F5/4.=waltz- F5/4=ing F5/8=Ma-
 20) | E5/4.=til- D5/4.=da,
-21) | C5/4.=You'll C5/4=come C5/8=a-
+21) F | C5/4.=You'll C5/4=come C5/8=a-
 22) | D5/4.=waltz- C5/4=ing C5/8=Ma-
 23) | C5/4.=til- Bb4/4=da A4/8=with
-24) | G4/4.=me." F4/4=And G4/8=he
-25) | A4/4.=sang A4/4=as A4/8=he
-26) | G4/4.=watched G4/4.=and
-27) | F4/4=wait- G4/8=ed A4/4=till F4/8=his
-28) | D4/8="Bil- E4/8=ly" F4/8~=boiled, F4/4.
-29) | C4/4.="You'll F4/4=come A4/8=a-
+24) C7 | G4/4.=me." F4/4=And G4/8=he
+25) F | A4/4.=sang A4/4=as A4/8=he
+26) C7 | G4/4.=watched G4/4.=and
+27) F | F4/4=wait- G4/8=ed A4/4=till F4/8=his
+28) Bb | D4/8="Bil- E4/8=ly" F4/8~=boiled, F4/4.
+29) F | C4/4.="You'll F4/4=come A4/8=a-
 30) | C5/4.=waltz- Bb4/4=ing A4/8=Ma-
-31) | G4/4.=til- G4/4=da G4/8=with
-32) | F4/2.=me."
+31) C7 | G4/4.=til- G4/4=da G4/8=with
+32) F | F4/2.=me."

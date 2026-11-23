@@ -5,11 +5,11 @@ key: 0
 tempo: 90
 clef: treble
 ---
-1) | C5/8=Lu- C5/8=cy D5/8=Lock- E5/8=et
-2) | C5/8=lost C5/8=her B4/8=pock- G4/8=et,
-3) | C5/8=Kit- C5/8=ty D5/8=Fish- E5/8=er
-4) | C5/4=found B4/8=it; G4/8=But
-5) | C5/8=ne'er C5/8=a D5/8=pen- E5/8=ny
-6) | F5/8=was E5/8=there D5/8=in't, C5/8=Ex-
-7) | B4/8=cept G4/8=the A4/8=bind- B4/8=ing
-8) | C5/4=round C5/4=it.
+1) C | C5/8=Lu- C5/8=cy D5/8=Lock- E5/8=et
+2) G@1 | C5/8=lost C5/8=her B4/8=pock- G4/8=et,
+3) C | C5/8=Kit- C5/8=ty D5/8=Fish- E5/8=er
+4) G@1 | C5/4=found B4/8=it; G4/8=But
+5) C E7@1 | C5/8=ne'er C5/8=a D5/8=pen- E5/8=ny
+6) Fmaj7 Dm7/F@1 | F5/8=was E5/8=there D5/8=in't, C5/8=Ex-
+7) G | B4/8=cept G4/8=the A4/8=bind- B4/8=ing
+8) C | C5/4=round C5/4=it.

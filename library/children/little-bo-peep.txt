@@ -5,11 +5,11 @@ key: -1
 tempo: 90
 clef: treble
 ---
-1) | F4/8=Lit- F4/8=tle F4/8=Bo- F4/4=Peep, F4/8=she
-2) | G4/4=lost G4/8=her G4/4=sheep, G4/8=And
-3) | A4/8=did- Bb4/8=n't C5/8=know C5/8=where Bb4/8 A4/8=to
-4) | A4/4.=find G4/4=them; r/8
-5) | C5/8=Let A4/8=them A4/8=a- A4/4=lone, A4/8=they'll
-6) | Bb4/8=all G4/8 G4/8=come G4/4=home G4/8=And
-7) | A4/8=bring Bb4/8 A4/8=their G4/8=tails F4/8 G4/8=be-
-8) | F4/4.=hind F4/4=them. r/8
+1) F | F4/8=Lit- F4/8=tle F4/8=Bo- F4/4=Peep, F4/8=she
+2) C | G4/4=lost G4/8=her G4/4=sheep, G4/8=And
+3) F F/A@1.5 | A4/8=did- Bb4/8=n't C5/8=know C5/8=where Bb4/8 A4/8=to
+4) F/C C@1.5 | A4/4.=find G4/4=them; r/8
+5) F/A Dm@1.5 | C5/8=Let A4/8=them A4/8=a- A4/4=lone, A4/8=they'll
+6) Gm Gm/Bb@1.5 | Bb4/8=all G4/8 G4/8=come G4/4=home G4/8=And
+7) F/C C@1.5 | A4/8=bring Bb4/8 A4/8=their G4/8=tails F4/8 G4/8=be-
+8) F | F4/4.=hind F4/4=them. r/8

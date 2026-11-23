@@ -5,13 +5,13 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | G4/8.="Where A4/16=are G4/8=you B4/4=going B4/8=to,
-2) | A4/8.=my G4/16=pret- A4/8=ty G4/4.=maid?
+1) G | G4/8.="Where A4/16=are G4/8=you B4/4=going B4/8=to,
+2) D/F# G@1.5 | A4/8.=my G4/16=pret- A4/8=ty G4/4.=maid?
 3) | B4/8.=Where C5/16=are B4/8=you D5/4=going D5/8=to,
-4) | C5/8.=my B4/16=pret- C5/8=ty B4/4=maid?" G4/8="I'm
+4) D7/F# G@1.5 | C5/8.=my B4/16=pret- C5/8=ty B4/4=maid?" G4/8="I'm
 5) | G4/8.=go- F#4/16=ing G4/8=a- B4/4=milk- G4/8=ing,
-6) | F#4/4=Sir," G4/8=she A4/4.=said,
-7) | G4/4="Sir," A4/8=she B4/4.=said,
-8) | A4/4="Sir," B4/8=she C5/4=said, C5/8="I'm
-9) | D5/8=go- G4/8=ing A4/8=a- B4/8=milk- D5/8. C5/16=ing,
-10) | B4/4=Sir," A4/8=she G4/4.=said.
+6) D7/A | F#4/4=Sir," G4/8=she A4/4.=said,
+7) G | G4/4="Sir," A4/8=she B4/4.=said,
+8) D7/F# | A4/4="Sir," B4/8=she C5/4=said, C5/8="I'm
+9) G Bm7/D@1.5 | D5/8=go- G4/8=ing A4/8=a- B4/8=milk- D5/8. C5/16=ing,
+10) Gmaj7 G@1.5 | B4/4=Sir," A4/8=she G4/4.=said.

@@ -5,11 +5,11 @@ key: 2
 tempo: 88
 clef: treble
 ---
-1) | F#4/4=Go F#4/8=tell E4/8=Aunt
+1) D | F#4/4=Go F#4/8=tell E4/8=Aunt
 2) | D4/4=Rho- D4/4=dy,
-3) | E4/4=Go E4/8=tell G4/8=Aunt
-4) | F#4/8=Rho- E4/8 D4/4=dy,
-5) | A4/4=Go A4/8=tell G4/8=Aunt
+3) A7 | E4/4=Go E4/8=tell G4/8=Aunt
+4) D | F#4/8=Rho- E4/8 D4/4=dy,
+5) D | A4/4=Go A4/8=tell G4/8=Aunt
 6) | F#4/4=Rho- D4/8=dy D4/8=the
-7) | E4/8=old G4/8=grey F#4/8=goose E4/8=is
-8) | D4/2=dead.
+7) A7 | E4/8=old G4/8=grey F#4/8=goose E4/8=is
+8) D | D4/2=dead.

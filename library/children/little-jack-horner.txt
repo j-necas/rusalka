@@ -5,11 +5,11 @@ key: 4
 tempo: 90
 clef: treble
 ---
-1) | A4/8=Lit- G#4/8=tle A4/8=Jack F#4/4=Hor- F#4/8=ner
-2) | G#4/8=sat F#4/8=in G#4/8=a E4/4=cor- E4/8=ner,
-3) | A4/8=Eat- G#4/8=ing A4/8=a F#4/4=Christ- F#4/8=mas
-4) | B4/4.~=pie; B4/4 G#4/8=He
-5) | A4/8=put G#4/8=in A4/8=his F#4/4=thumb, F#4/8=and
-6) | G#4/8=pulled F#4/8=out G#4/8=a E4/4=plum, E4/8=And
-7) | F#4/8=said, A4/8="What G#4/8=a F#4/8=good E4/8=boy D#4/8=am
-8) | E4/4.~=I!" E4/4 r/8
+1) B7 B/D#@1.5 | A4/8=Lit- G#4/8=tle A4/8=Jack F#4/4=Hor- F#4/8=ner
+2) E | G#4/8=sat F#4/8=in G#4/8=a E4/4=cor- E4/8=ner,
+3) B7 B/D#@1.5 | A4/8=Eat- G#4/8=ing A4/8=a F#4/4=Christ- F#4/8=mas
+4) E | B4/4.~=pie; B4/4 G#4/8=He
+5) B7/D# | A4/8=put G#4/8=in A4/8=his F#4/4=thumb, F#4/8=and
+6) E | G#4/8=pulled F#4/8=out G#4/8=a E4/4=plum, E4/8=And
+7) B7 | F#4/8=said, A4/8="What G#4/8=a F#4/8=good E4/8=boy D#4/8=am
+8) E | E4/4.~=I!" E4/4 r/8

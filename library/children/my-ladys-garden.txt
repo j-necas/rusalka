@@ -5,11 +5,11 @@ key: -1
 tempo: 90
 clef: treble
 ---
-1) | F4/8=How G4/8=does A4/8=my G4/4=la- Bb4/8=dy's
-2) | A4/4=gar- F4/8=den F4/4.=grow?
-3) | A4/8=How Bb4/8=does C5/8=my Bb4/4=la- D5/8=dy's
-4) | C5/4=gar- A4/8=den A4/4=grow? Bb4/8=With
-5) | C5/4=sil- D5/8=ver C5/4=bells, F5/8=and
+1) F C7/E@1.5 | F4/8=How G4/8=does A4/8=my G4/4=la- Bb4/8=dy's
+2) F | A4/4=gar- F4/8=den F4/4.=grow?
+3) Bb/F@1.5 | A4/8=How Bb4/8=does C5/8=my Bb4/4=la- D5/8=dy's
+4) F | C5/4=gar- A4/8=den A4/4=grow? Bb4/8=With
+5) F/A | C5/4=sil- D5/8=ver C5/4=bells, F5/8=and
 6) | C5/4=cock- Bb4/8=le A4/4=shells, Bb4/8=And
-7) | C5/8=pret- D5/8=ty C5/8=maids Bb4/8=all A4/8=in G4/8=a
-8) | F4/4.~=row! F4/4 r/8
+7) Dm7/F C7@1.5 | C5/8=pret- D5/8=ty C5/8=maids Bb4/8=all A4/8=in G4/8=a
+8) F | F4/4.~=row! F4/4 r/8

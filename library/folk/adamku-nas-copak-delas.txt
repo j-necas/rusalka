@@ -5,15 +5,15 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | D5/4=A- D5/4=dám- B4/8=ku C5/8=náš!
+1) G | D5/4=A- D5/4=dám- B4/8=ku C5/8=náš!
 2) | D5/2 r/4
 3) | D5/4=co D5/4=pak B4/8=dě- C5/8=láš?
 4) | D5/2 r/4
-5) {|:} | C5/4=na E5/4=lou- E5/4=ce
-6) | E5/4=ti D5/4=pa- D5/4=sou,
-7) | D5/4=ty C5/4=jsi C5/4=me-
-8) | C5/4=zi B4/4=cha- B4/4=sou,
-9) | B4/4=ty A4/4=nic A4/4=ned-
-10) | D5/2=báš. r/4
-11) | B4/4=ty A4/4=nic A4/4=ned-
-12) {:|} | G4/2=báš. r/4
+5) {|:} C | C5/4=na E5/4=lou- E5/4=ce
+6) G@1 | E5/4=ti D5/4=pa- D5/4=sou,
+7) D7 | D5/4=ty C5/4=jsi C5/4=me-
+8) G@1 | C5/4=zi B4/4=cha- B4/4=sou,
+9) D@1 | B4/4=ty A4/4=nic A4/4=ned-
+10) G | D5/2=báš. r/4
+11) D@1 | B4/4=ty A4/4=nic A4/4=ned-
+12) {:|} G | G4/2=báš. r/4

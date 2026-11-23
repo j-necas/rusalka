@@ -5,27 +5,27 @@ key: -1
 tempo: 88
 clef: treble
 ---
-1) | A4/8=Shoo, F4/4=fly, G4/8=don't
-2) | A4/8.=both- Bb4/16=er G4/4=me,
+1) F | A4/8=Shoo, F4/4=fly, G4/8=don't
+2) C7@1 | A4/8.=both- Bb4/16=er G4/4=me,
 3) | G4/8=Shoo, E4/4=fly, F4/8=don't
-4) | G4/8.=both- A4/16=er F4/4=me,
-5) | A4/8=Shoo, F4/4=fly, G4/8=don't
-6) | A4/8.=both- Bb4/16=er G4/8=me, G4/8=For
+4) F@1 | G4/8.=both- A4/16=er F4/4=me,
+5) F | A4/8=Shoo, F4/4=fly, G4/8=don't
+6) C7@1 | A4/8.=both- Bb4/16=er G4/8=me, G4/8=For
 7) | C5/8=I C5/8=be- C5/8=long Bb4/8=to
-8) | A4/8=some- F4/8=bod- F4/8=y. C4/8=I
-9) | A4/4=feel, r/8 C4/8=I
+8) F | A4/8=some- F4/8=bod- F4/8=y. C4/8=I
+9) F | A4/4=feel, r/8 C4/8=I
 10) | A4/4=feel, r/8 C4/8=I
 11) | A4/8=feel A4/16=like A4/16=a Bb4/8=morn- A4/8=ing
-12) | G4/4=star, r/8 C4/8=I
-13) | G4/4=feel, r/8 C4/8=I
+12) C7 | G4/4=star, r/8 C4/8=I
+13) C7 | G4/4=feel, r/8 C4/8=I
 14) | G4/4=feel, r/8 C4/8=I
 15) | C5/8=feel C5/16=like C5/16=a Bb4/8=morn- G4/8=ing
-16) | F4/4=star. C4/4=Oh,
-17) | A4/8=Shoo, F4/4=fly, G4/8=don't
-18) | A4/8.=both- Bb4/16=er G4/4=me,
+16) F | F4/4=star. C4/4=Oh,
+17) F | A4/8=Shoo, F4/4=fly, G4/8=don't
+18) C7@1 | A4/8.=both- Bb4/16=er G4/4=me,
 19) | G4/8=Shoo, E4/4=fly, F4/8=don't
-20) | G4/8.=both- A4/16=er F4/4=me,
-21) | A4/8=Shoo, F4/4=fly, G4/8=don't
-22) | A4/8.=both- Bb4/16=er G4/8=me, G4/8=For
+20) F@1 | G4/8.=both- A4/16=er F4/4=me,
+21) F | A4/8=Shoo, F4/4=fly, G4/8=don't
+22) C7@1 | A4/8.=both- Bb4/16=er G4/8=me, G4/8=For
 23) | C5/8=I C5/8=be- C5/8=long Bb4/8=to
-24) | A4/8=some- F4/8=bod- F4/4=y.
+24) F | A4/8=some- F4/8=bod- F4/4=y.

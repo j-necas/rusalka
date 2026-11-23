@@ -115,13 +115,14 @@ test('a duplicate title, or a title of a starter song, is an error', async t => 
   assert.ok(chyby.some(c => c.includes('christmas/c.txt') && /starter/i.test(c)), chyby.join('\n'));
 });
 
-test('Czech folk songs stay in folk/ (their address keeps the players\' results) but stand on their own shelf', async t => {
-  const { zdroj, cil } = knihovna(t, { 'folk/kacenky.txt': PISEN('Kačenky'), 'folk/ducks.txt': PISEN('Ducks') },
-    [ZAZNAM('folk/kacenky.txt', { police: 'czech' }), ZAZNAM('folk/ducks.txt', { jazyk: 'en' })]);
+test('Czech folk songs and national anthems get their own shelves with the same file addresses', async t => {
+  const soubory = { 'folk/kacenky.txt': PISEN('Kačenky'), 'folk/ducks.txt': PISEN('Ducks'), 'folk/hymna.txt': PISEN('Hymna') };
+  const { zdroj, cil } = knihovna(t, soubory, [ZAZNAM('folk/kacenky.txt', { police: 'czech' }),
+    ZAZNAM('folk/ducks.txt', { jazyk: 'en' }), ZAZNAM('folk/hymna.txt', { police: 'anthems' })]);
   const { index, chyby } = await postavKnihovnu({ zdroj, cil });
   assert.deepEqual(chyby, []);
   assert.deepEqual(index.map(p => [p.soubor, p.police]),
-    [['library/folk/kacenky.musicxml', 'czech'], ['library/folk/ducks.musicxml', 'folk']]);
+    [['library/folk/kacenky.musicxml', 'czech'], ['library/folk/ducks.musicxml', 'folk'], ['library/folk/hymna.musicxml', 'anthems']]);
   const spatne = knihovna(t, { 'children/a.txt': PISEN('A') }, [ZAZNAM('children/a.txt', { police: 'czech' })]);
   assert.ok((await postavKnihovnu(spatne)).chyby.some(c => /czech/.test(c) && /folk\//.test(c)), 'czech belongs in folk/');
 });

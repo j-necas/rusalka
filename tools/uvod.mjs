@@ -3,7 +3,7 @@
 // Czech and Slovak show the Czech recordings and the Czech folk song, the others the English ones and Twinkle, Twinkle.
 import { readFileSync } from 'node:fs';
 import { NAZVY_JAZYKU } from '../static/lib/texts.js';
-import { JAZYKY_PISNI, pisne, adresyPisni } from './pisne.mjs';
+import { JAZYKY_PISNI, pisneProSeznam, adresyPisni } from './pisne.mjs';
 
 const WEB = 'https://rusalkapiano.com/';
 const OG = { en: 'en_GB', es: 'es_ES', fr: 'fr_FR', pt: 'pt_PT', 'pt-BR': 'pt_BR', de: 'de_DE', it: 'it_IT', pl: 'pl_PL', uk: 'uk_UA',
@@ -31,7 +31,7 @@ const SIPKA = '<svg viewBox="0 0 48 24" width="48" height="24" aria-hidden="true
 function odkazNaNoty(kod) {
   if (!JAZYKY_PISNI.includes(kod)) return '';
   const t = JSON.parse(readFileSync(new URL(`uvod/pisne-${kod}.json`, import.meta.url), 'utf8'));
-  const pocet = pisne().filter(p => p.stranka === kod).length;
+  const pocet = pisneProSeznam(kod).length;
   return `  <p><a href="${t.folder}/">${esc(t.landingLink.replace('{count}', pocet))}</a></p>\n`;
 }
 

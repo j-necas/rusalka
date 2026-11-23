@@ -5,16 +5,16 @@ key: -1
 tempo: 90
 clef: treble
 ---
-1) | F4/4=Ši- A4/4=ro- A4/4=ky,
-2) | Bb4/4=hlu- G4/2=bo-
-3) | F4/2=ky r/4
+1) F | F4/4=Ši- A4/4=ro- A4/4=ky,
+2) Gm | Bb4/4=hlu- G4/2=bo-
+3) F | F4/2=ky r/4
 4) | A4/4=ty C5/4=Vl- C5/4=tav-
-5) | D5/4=sky Bb4/2=tů-
-6) | A4/2=ně: r/4
-7) | C5/4=měl F5/4=jsem E5/4=já
-8) | E5/4=pa- D5/4=nen- D5/4=ku,
-9) | C5/4=měl D5/4=jsem C5/4=já
-10) | Bb4/4=pa- A4/4=nen- A4/4=ku,
+5) Bb | D5/4=sky Bb4/2=tů-
+6) F | A4/2=ně: r/4
+7) C@2 | C5/4=měl F5/4=jsem E5/4=já
+8) Bb@1 | E5/4=pa- D5/4=nen- D5/4=ku,
+9) F Bb@1 F@2 | C5/4=měl D5/4=jsem C5/4=já
+10) C7 F@1 | Bb4/4=pa- A4/4=nen- A4/4=ku,
 11) | F4/4=teď A4/4=mi A4/4=srd-
-12) | Bb4/4=ce G4/2=stů-
-13) | F4/2=ně. r/4
+12) Gm | Bb4/4=ce G4/2=stů-
+13) F | F4/2=ně. r/4

@@ -5,22 +5,22 @@ key: -1
 tempo: 90
 clef: treble
 ---
-1) | A4/8=En Bb4/8=pas-
+1) F | A4/8=En Bb4/8=pas-
 2) | C5/8=sant C5/8=dans C5/8=un C5/8=p'tit
 3) | C5/8=bois, A4/8=Où A4/8=le Bb4/8=cou-
-4) | C5/4=cou D5/4=chan-
-5) | C5/8=tait, A4/8=Où A4/8=le Bb4/8=cou-
-6) | C5/4=cou D5/4=chan-
-7) | C5/8=tait; C5/8=Dans C5/8=son C5/8=jo-
-8) | C5/8=li C5/8=chant C5/8=il C5/8=di-
-9) | C5/8=sait: F5/8=Cou- C5/8=cou, C5/8=cou-
-10) | C5/8=cou, F5/8=cou- C5/8=cou, C5/8=cou-
-11) | C5/8=cou, A4/8=Et A4/8=moi Bb4/8=qui
-12) | C5/8=croy- C5/8=ais C5/8=qu'il C5/8=di-
-13) | C5/8=sait; F5/8=Cass'- C5/8=lui C5/8=le
-14) | C5/8=cou, F5/8=cass'- C5/8=lui C5/8=le
-15) | C5/8=cou! A4/8=Et A4/8=moi Bb4/8=de
-16) | A4/4=m'en G4/8=cour', G4/8=cour',
-17) | F4/8=cour', A4/8=Et A4/8=moi Bb4/8=de
-18) | A4/4=m'en G4/4=cou-
-19) | F4/4=rir!
+4) Bb@1 | C5/4=cou D5/4=chan-
+5) F | C5/8=tait, A4/8=Où A4/8=le Bb4/8=cou-
+6) Bb@1 | C5/4=cou D5/4=chan-
+7) F | C5/8=tait; C5/8=Dans C5/8=son C5/8=jo-
+8) C@1 | C5/8=li C5/8=chant C5/8=il C5/8=di-
+9) F C@1 | C5/8=sait: F5/8=Cou- C5/8=cou, C5/8=cou-
+10) F C@1 | C5/8=cou, F5/8=cou- C5/8=cou, C5/8=cou-
+11) F Bbmaj7/F@1 | C5/8=cou, A4/8=Et A4/8=moi Bb4/8=qui
+12) C/E D7@1 | C5/8=croy- C5/8=ais C5/8=qu'il C5/8=di-
+13) F Am7@1 | C5/8=sait; F5/8=Cass'- C5/8=lui C5/8=le
+14) F Am7@1 | C5/8=cou, F5/8=cass'- C5/8=lui C5/8=le
+15) F Bbmaj7/D@1 | C5/8=cou! A4/8=Et A4/8=moi Bb4/8=de
+16) Am/C A7/Db@1 | A4/4=m'en G4/8=cour', G4/8=cour',
+17) Bbmaj7/D | F4/8=cour', A4/8=Et A4/8=moi Bb4/8=de
+18) Cdim7 C@1 | A4/4=m'en G4/4=cou-
+19) F | F4/4=rir!

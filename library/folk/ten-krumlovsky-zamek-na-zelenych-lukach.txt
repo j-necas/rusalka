@@ -5,24 +5,24 @@ key: 0
 tempo: 90
 clef: treble
 ---
-1) | G5/4=Ten F5/4=Kru- E5/4=mlov-
-2) | F5/4=ský E5/8=zá- D5/8=mek D5/4
-3) | B4/4=na C5/2=ze-
-4) | D5/2=le- E5/4=ných
-5) | F5/4=lu- D5/2=kách,
-6) | G5/4=se- F5/4=dí E5/4=tam
-7) | F5/4=můj E5/8=mi- D5/8=lej, D5/4
-8) | B4/4=má C5/2=no-
-9) | D5/2=žič- E5/4=ky
-10) | D5/4=v_pu- C5/2=tách.
+1) G7 C@2 | G5/4=Ten F5/4=Kru- E5/4=mlov-
+2) Dm | F5/4=ský E5/8=zá- D5/8=mek D5/4
+3) G C@1 | B4/4=na C5/2=ze-
+4) G C@2 | D5/2=le- E5/4=ných
+5) Dm | F5/4=lu- D5/2=kách,
+6) G7 C@2 | G5/4=se- F5/4=dí E5/4=tam
+7) Dm | F5/4=můj E5/8=mi- D5/8=lej, D5/4
+8) G C@1 | B4/4=má C5/2=no-
+9) G C@2 | D5/2=žič- E5/4=ky
+10) G C@1 | D5/4=v_pu- C5/2=tách.
 11) | G4/4=Já C5/2=jsem
-12) | D5/2=je- E5/4=ho
-13) | F5/4=mi- D5/2=lá,
-14) | G4/4=my C5/2=se
-15) | D5/2=spo- E5/4=lu
-16) | F5/4=zná- D5/2=me,
-17) | G5/4=pusť- F5/4=te E5/4=mne
-18) | F5/4=tam E5/8=k_ně- D5/8=mu, D5/4
-19) | B4/4=ať C5/2=se
-20) | D5/2=roz- E5/4=že-
-21) | D5/4=hná- C5/2=me.
+12) G C@2 | D5/2=je- E5/4=ho
+13) Dm | F5/4=mi- D5/2=lá,
+14) C | G4/4=my C5/2=se
+15) G C@2 | D5/2=spo- E5/4=lu
+16) Dm | F5/4=zná- D5/2=me,
+17) G7 C@2 | G5/4=pusť- F5/4=te E5/4=mne
+18) Dm | F5/4=tam E5/8=k_ně- D5/8=mu, D5/4
+19) G C@1 | B4/4=ať C5/2=se
+20) G C@2 | D5/2=roz- E5/4=že-
+21) G C@1 | D5/4=hná- C5/2=me.

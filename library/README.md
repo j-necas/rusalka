@@ -1,12 +1,12 @@
 # Song library
 
-Songs offered on the website's Home, on the shelf tabs (Children's songs, Folk songs of the world, Christmas, Classics). Each song is a small text file in Rusalka's text notation
+Songs offered on the website's Home, on the library shelf tabs. Each song is a small text file in Rusalka's text notation
 (one bar per line, see [the format](../plugin/skills/rusalka-sheet-music/references/format.md)) in a shelf folder:
 
 | Folder | Shelf |
 |---|---|
 | `children/` | Children's songs |
-| `folk/` | Folk songs of the world |
+| `folk/` | Folk songs of the world, Czech folk songs, National anthems |
 | `christmas/` | Christmas |
 | `classics/` | Classics |
 
@@ -25,8 +25,9 @@ copies the library into the website.
      public domain. For example, use Písňovna's CC0 notations or a Mutopia edition marked Public Domain.
      Check the rights to the composition, lyrics and the particular edition or arrangement you use.
    - Folk songs: the version commonly sung today wins when it differs from an old print; say so in `zdroj`.
-   - Chord symbols are our own and simple. Lyrics only in the original language or in a free translation;
-     otherwise no lyrics. A left hand only where it belongs to the piece (mainly classics).
+   - Use a simple original harmonization or chord symbols based on a public-domain or CC0 score. Record the
+     source or the nature of the harmonization in `zdroj`. Lyrics only in the original language or in a free
+     translation; otherwise no lyrics. A left hand only where it belongs to the piece (mainly classics).
    - No `?` (uncertain bars): a library song is checked before it goes in.
 3. Add an entry to `catalog.json`:
    ```json

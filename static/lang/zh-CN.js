@@ -250,6 +250,7 @@ export default {
   "knihovna.police.children": "儿歌",
   "knihovna.police.czech": "捷克民歌",
   "knihovna.police.folk": "世界民歌",
+  "knihovna.police.anthems": "国歌",
   "knihovna.police.christmas": "圣诞歌曲",
   "knihovna.police.classics": "古典",
   "knihovna.vMenuPopis": "Rusalka 曲库里的现成歌曲——选一首就能弹。",

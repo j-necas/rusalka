@@ -6,19 +6,19 @@ tempo: 88
 clef: treble
 ---
 1) | G4/8=As
-2) | B4/8=I B4/8=went C5/8=lum- C5/8=b'ring
-3) | E5/8=down D5/8=the B4/4=street,
-4) | D5/8=Down C5/8=the A4/4=street,
-5) | C5/8=Down B4/8=the G4/8.=street, G4/16=A
-6) | B4/8=hand- B4/8=some C5/8=gal C5/8=I
-7) | E5/8=chanced D5/8=to D5/8=meet, G5/8=Oh,
-8) | F#5/8=she D5/8=was C5/8=fair F#4/8=to
-9) | G4/4.=view. r/8
-10) | B4/16=Buf- B4/16=fa- B4/8=lo C5/8=gals C5/16=can't C5/16=you
-11) | E5/16=come D5/8=out D5/16=to- B4/8=night, B4/16=can't B4/16=you
-12) | D5/16=come C5/8=out C5/16=to- A4/8=night, A4/16=can't A4/16=you
-13) | C5/16=come B4/8=out B4/16=to- G4/4=night?
-14) | B4/16=Buf- B4/16=fa- B4/8=lo C5/8=gals C5/16=can't C5/16=you
-15) | E5/16=come D5/8=out D5/16=to- B4/8=night, G5/8=And
-16) | F#5/8=dance D5/16=by D5/16=the C5/8=light A4/16=of A4/16=the
-17) | G4/4=moon? r/8
+2) G D7@1 | B4/8=I B4/8=went C5/8=lum- C5/8=b'ring
+3) G | E5/8=down D5/8=the B4/4=street,
+4) D7 | D5/8=Down C5/8=the A4/4=street,
+5) G | C5/8=Down B4/8=the G4/8.=street, G4/16=A
+6) G D7@1 | B4/8=hand- B4/8=some C5/8=gal C5/8=I
+7) G | E5/8=chanced D5/8=to D5/8=meet, G5/8=Oh,
+8) D7 | F#5/8=she D5/8=was C5/8=fair F#4/8=to
+9) G | G4/4.=view. r/8
+10) G D7@1 | B4/16=Buf- B4/16=fa- B4/8=lo C5/8=gals C5/16=can't C5/16=you
+11) G | E5/16=come D5/8=out D5/16=to- B4/8=night, B4/16=can't B4/16=you
+12) D7 | D5/16=come C5/8=out C5/16=to- A4/8=night, A4/16=can't A4/16=you
+13) G | C5/16=come B4/8=out B4/16=to- G4/4=night?
+14) G D7@1 | B4/16=Buf- B4/16=fa- B4/8=lo C5/8=gals C5/16=can't C5/16=you
+15) G | E5/16=come D5/8=out D5/16=to- B4/8=night, G5/8=And
+16) D7 | F#5/8=dance D5/16=by D5/16=the C5/8=light A4/16=of A4/16=the
+17) G | G4/4=moon? r/8

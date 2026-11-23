@@ -6,27 +6,27 @@ tempo: 88
 clef: treble
 ---
 1) | B3/4=I've
-2) | E4/8=got E4/8=an E4/4=old G4/4=mule G4/8=and G4/8=her
-3) | A4/4=name A4/4=is B4/2=Sal,
-4) | E4/4=Fif- E4/4=teen G4/4=years E4/8=on F#4/8=the
-5) | G4/8=E- E4/8=rie F#4/8=Ca- E4/8~=nal. E4/4 B3/8=She's B3/8=a
-6) | E4/4=good E4/4=old G4/8=work- G4/8=er G4/8=and G4/8=a
-7) | A4/8=good A4/4=old B4/8~=pal, B4/2
-8) | E4/4=Fif- E4/4=teen G4/4=years E4/8=on F#4/8=the
-9) | G4/8=E- E4/8=rie F#4/8=Ca- E4/8~=nal. E4/4. B4/8=We've
-10) | D5/4=hauled B4/4=some D5/4=bar- B4/4=ges
-11) | D5/4=in B4/4=our A4/2=day,
-12) | B4/4=Filled A#4/4=with B4/4=lum- G4/4=ber,
-13) | A4/4=coal F#4/8=and D#4/8~=hay, D#4/4 B3/4=And
-14) | E4/4=ev- E4/4='ry G4/4=inch G4/8=of G4/8=the
-15) | A4/4=way A4/4=I B4/4.=know, B4/8=From
-16) | E4/4=Al- E4/4=ban- G4/4=y E4/4=to
-17) | G4/8=Buf- F#4/4=fa- E4/8~=lo. E4/2
-18) | B4/2=Low B4/2=bridge,
-19) | B4/8.=Ev- A#4/16='ry- B4/8.=bod- G4/16=y A4/2=down,
-20) | B4/2=Low B4/8.=bridge, A4/16=we G4/8.=must A4/16=be
-21) | B4/8.=get- G4/16=ting A4/8.=near A4/16=a G4/4=town, G4/8.=You G4/16=can
-22) | D5/8=al- D5/8=ways D5/8=tell B4/8=your C5/8=neigh- C5/8=bor, C5/8=You A4/8=can
-23) | D5/8=al- D5/8=ways D5/8=tell B4/8=your C5/4=pal, A4/8.=If A4/16=he's
-24) | B4/8=ev- B4/8=er B4/8=nav- B4/8=i- C5/8=gat- C5/8=ted C5/8=on A4/8=the
-25) | B4/8=E- G4/8=rie A4/8=Ca- G4/8~=nal. G4/4 r/4
+2) Em | E4/8=got E4/8=an E4/4=old G4/4=mule G4/8=and G4/8=her
+3) Am/C B@2 | A4/4=name A4/4=is B4/2=Sal,
+4) Em | E4/4=Fif- E4/4=teen G4/4=years E4/8=on F#4/8=the
+5) Em/B B7@1 Em@2 | G4/8=E- E4/8=rie F#4/8=Ca- E4/8~=nal. E4/4 B3/8=She's B3/8=a
+6) Em | E4/4=good E4/4=old G4/8=work- G4/8=er G4/8=and G4/8=a
+7) Am/C B@2 | A4/8=good A4/4=old B4/8~=pal, B4/2
+8) Em | E4/4=Fif- E4/4=teen G4/4=years E4/8=on F#4/8=the
+9) Em/B B7@1 Em@2 | G4/8=E- E4/8=rie F#4/8=Ca- E4/8~=nal. E4/4. B4/8=We've
+10) G | D5/4=hauled B4/4=some D5/4=bar- B4/4=ges
+11) D7 | D5/4=in B4/4=our A4/2=day,
+12) Em | B4/4=Filled A#4/4=with B4/4=lum- G4/4=ber,
+13) B7 | A4/4=coal F#4/8=and D#4/8~=hay, D#4/4 B3/4=And
+14) Em | E4/4=ev- E4/4='ry G4/4=inch G4/8=of G4/8=the
+15) Am/C B@2 | A4/4=way A4/4=I B4/4.=know, B4/8=From
+16) Em | E4/4=Al- E4/4=ban- G4/4=y E4/4=to
+17) Em/B B7@1 Em@2 | G4/8=Buf- F#4/4=fa- E4/8~=lo. E4/2
+18) G | B4/2=Low B4/2=bridge,
+19) C#m7b5@1 D7@2 | B4/8.=Ev- A#4/16='ry- B4/8.=bod- G4/16=y A4/2=down,
+20) G C/E@2 Eb7@3 | B4/2=Low B4/8.=bridge, A4/16=we G4/8.=must A4/16=be
+21) G/D D7@1 G@2 | B4/8.=get- G4/16=ting A4/8.=near A4/16=a G4/4=town, G4/8.=You G4/16=can
+22) G G#dim@1 D/A@2 D7@3 | D5/8=al- D5/8=ways D5/8=tell B4/8=your C5/8=neigh- C5/8=bor, C5/8=You A4/8=can
+23) G G#dim@1 D/A@2 D7@3 | D5/8=al- D5/8=ways D5/8=tell B4/8=your C5/4=pal, A4/8.=If A4/16=he's
+24) G Fdim@1 Am/E@2 Cm/Eb@3 | B4/8=ev- B4/8=er B4/8=nav- B4/8=i- C5/8=gat- C5/8=ted C5/8=on A4/8=the
+25) G/D D7@1 G@2 | B4/8=E- G4/8=rie A4/8=Ca- G4/8~=nal. G4/4 r/4

@@ -5,17 +5,17 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | G4/8=Ro- A4/8=stou, G4/8=ro- A4/8=stou,
-2) | G4/4=ro- A4/4=stou
-3) | B4/8=ko- C5/8=no- B4/8=pě C5/8=za
-4) | B4/4=ce- C5/4=stou,
-5) | D5/8=a D5/8=jsou E5/8=pě- E5/8=kné
-6) | D5/4=ze- C5/8=le- B4/8=né;
-7) | A4/4 r/4
-8) | D5/8=me- B4/8=zi D5/8=ni- B4/8=mi
+1) G | G4/8=Ro- A4/8=stou, G4/8=ro- A4/8=stou,
+2) D@1 | G4/4=ro- A4/4=stou
+3) G | B4/8=ko- C5/8=no- B4/8=pě C5/8=za
+4) D7@1 | B4/4=ce- C5/4=stou,
+5) G C@1 | D5/8=a D5/8=jsou E5/8=pě- E5/8=kné
+6) G | D5/4=ze- C5/8=le- B4/8=né;
+7) D | A4/4 r/4
+8) G | D5/8=me- B4/8=zi D5/8=ni- B4/8=mi
 9) | D5/4=ro- C5/8=ste B4/8
-10) | C5/8=čer- A4/8=no- C5/8=o- A4/8=ké
+10) Am | C5/8=čer- A4/8=no- C5/8=o- A4/8=ké
 11) | C5/4=děv- B4/8=če, A4/8
-12) | G4/8=až A4/8=vy- B4/8=ro- C5/8=ste,
-13) | B4/4=bu- A4/4=de
-14) | G4/4=mé. r/4
+12) G | G4/8=až A4/8=vy- B4/8=ro- C5/8=ste,
+13) D@1 | B4/4=bu- A4/4=de
+14) G | G4/4=mé. r/4

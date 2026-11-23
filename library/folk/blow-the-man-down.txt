@@ -6,19 +6,19 @@ tempo: 88
 clef: treble
 ---
 1) | C4/8=Come E4/8
-2) | G4/4.=all A4/8=ye G4/4=young
+2) C | G4/4.=all A4/8=ye G4/4=young
 3) | E4/4=fel- C4/4=lows E4/4=that
 4) | G4/4.=fol- A4/8=lows G4/4=the
 5) | E4/2=sea, C4/8=to E4/8=me,
-6) | G4/2.=way
-7) | A4/2.=hey,
-8) | F4/4.=blow E4/8=the F4/4=man
+6) C | G4/2.=way
+7) A7 | A4/2.=hey,
+8) Dm | F4/4.=blow E4/8=the F4/4=man
 9) | D4/2=down. E4/4=Now,
-10) | F4/4=please F4/4=pay F4/4=at-
+10) G7 | F4/4=please F4/4=pay F4/4=at-
 11) | D4/4=ten- D4/4=tion D4/4=and
 12) | F4/4=lis- F4/4=ten F4/4=to
 13) | D4/2.=me.
-14) | G4/4=Give G4/4=me G4/4=some
+14) G7 | G4/4=Give G4/4=me G4/4=some
 15) | G4/2=time F4/4=to
-16) | E4/4.=blow D4/8=the E4/4=man
-17) | C4/2=down.
+16) C G7@2 | E4/4.=blow D4/8=the E4/4=man
+17) C | C4/2=down.

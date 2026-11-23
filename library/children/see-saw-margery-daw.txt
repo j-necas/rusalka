@@ -5,11 +5,11 @@ key: -1
 tempo: 90
 clef: treble
 ---
-1) | F4/4.=See- C5/4.=saw,
-2) | A4/8=Mar- G4/8=ge- A4/8=ry F4/4.=Daw
-3) | F4/4=Sold F4/8=her C5/4=bed C5/8=to
-4) | A4/8=lie G4/8=up- A4/8=on F4/4.=straw;
-5) | A4/4=Was- F4/8=n't C5/4=she C5/8=a
-6) | A4/4=nas- F4/8=ty G4/4=slut C5/8=To
-7) | C5/4=sell A4/8=her D5/4=bed Bb4/8=and
-8) | A4/8=lie Bb4/8=up- G4/8=on F4/4.=dirt?
+1) F C/E@1.5 | F4/4.=See- C5/4.=saw,
+2) F | A4/8=Mar- G4/8=ge- A4/8=ry F4/4.=Daw
+3) C/E@1.5 | F4/4=Sold F4/8=her C5/4=bed C5/8=to
+4) F | A4/8=lie G4/8=up- A4/8=on F4/4.=straw;
+5) C/E@1.5 | A4/4=Was- F4/8=n't C5/4=she C5/8=a
+6) F C/E@1.5 | A4/4=nas- F4/8=ty G4/4=slut C5/8=To
+7) F Gm/Bb@1.5 | C5/4=sell A4/8=her D5/4=bed Bb4/8=and
+8) F F/A@1.5 | A4/8=lie Bb4/8=up- G4/8=on F4/4.=dirt?

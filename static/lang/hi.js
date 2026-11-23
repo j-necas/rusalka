@@ -21,6 +21,7 @@ export default {
   "knihovna.police.children": "बच्चों के गीत",
   "knihovna.police.czech": "चेक लोकगीत",
   "knihovna.police.folk": "दुनिया के लोकगीत",
+  "knihovna.police.anthems": "राष्ट्रगान",
   "knihovna.police.christmas": "क्रिसमस",
   "knihovna.police.classics": "शास्त्रीय",
   "knihovna.vMenuPopis": "Rusalka लाइब्रेरी के तैयार गीत – बस एक चुनें और बजाएँ।",

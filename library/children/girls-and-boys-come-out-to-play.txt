@@ -5,11 +5,11 @@ key: 3
 tempo: 90
 clef: treble
 ---
-1) | E5/4=Girls C#5/8=and D5/8=boys D5/8=per, B4/8=come
-2) | E5/4=out C#5/8=to A4/4=play, A4/8=The
-3) | B4/8=moon B4/8=to C#5/8=doth D5/8=shine C#5/8=fel- B4/8=as
-4) {:|} | E5/4=bright C#5/8=as A4/4.=day;
-5) {|:} | B4/8=Come B4/8=with G#4/8=a A4/8=whoop A4/8=der F#4/8=and
-6) | B4/8=come B4/8=with G#4/8=a E4/4=call, E4/8=A
-7) | F#4/8=Come F#4/8=with G#4/8=a A4/8=good G#4/8=will F#4/8=or
-8) {:|} | B4/4=not G#4/8=at E4/4.=all.
+1) A E7/G#@1.5 | E5/4=Girls C#5/8=and D5/8=boys D5/8=per, B4/8=come
+2) A | E5/4=out C#5/8=to A4/4=play, A4/8=The
+3) C#m7/G# E7/G#@1.5 | B4/8=moon B4/8=to C#5/8=doth D5/8=shine C#5/8=fel- B4/8=as
+4) {:|} A | E5/4=bright C#5/8=as A4/4.=day;
+5) {|:} E B7/F#@1.5 | B4/8=Come B4/8=with G#4/8=a A4/8=whoop A4/8=der F#4/8=and
+6) E | B4/8=come B4/8=with G#4/8=a E4/4=call, E4/8=A
+7) B7/F# | F#4/8=Come F#4/8=with G#4/8=a A4/8=good G#4/8=will F#4/8=or
+8) {:|} E | B4/4=not G#4/8=at E4/4.=all.

@@ -5,7 +5,7 @@ key: 0
 tempo: 90
 clef: treble
 ---
-1) | G4/4=Warm C5/4=hands, C5/4.=warm, C5/8=the
-2) | G4/8.=men C5/16=are C5/8.=gone C5/16=to C5/2=plough;
-3) | G4/8.=If C5/16=you C5/8.=want C5/16=to C5/8.=warm C5/16=your C5/4=hands,
-4) | E5/8.=warm C5/16=your C5/4=hands C5/2=now.
+1) C C/E@1 | G4/4=Warm C5/4=hands, C5/4.=warm, C5/8=the
+2) C/G@1 | G4/8.=men C5/16=are C5/8.=gone C5/16=to C5/2=plough;
+3) C/E C/G@1 | G4/8.=If C5/16=you C5/8.=want C5/16=to C5/8.=warm C5/16=your C5/4=hands,
+4) C@1 | E5/8.=warm C5/16=your C5/4=hands C5/2=now.

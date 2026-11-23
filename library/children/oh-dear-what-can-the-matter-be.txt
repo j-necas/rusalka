@@ -5,19 +5,19 @@ key: 0
 tempo: 110
 clef: treble
 ---
-1) | G4/4.=Oh, G4/4.=dear!
+1) C | G4/4.=Oh, G4/4.=dear!
 2) | G4/8=What E4/8=can C5/8=the G4/8=mat- E4/8=ter C4/8=be?
-3) | F4/4.=Oh, F4/4.=dear!
+3) G7 | F4/4.=Oh, F4/4.=dear!
 4) | F4/8=What D4/8=can E4/8=the F4/8=mat- E4/8=ter D4/8=be?
-5) | G4/4.=Oh, G4/4.=dear!
+5) C | G4/4.=Oh, G4/4.=dear!
 6) | G4/8=What E4/8=can C5/8=the G4/8=mat- E4/8=ter C4/8=be?
-7) | D4/8=John- E4/8=ny's F4/8=so E4/8=long F4/8=at D4/8=the
-8) | C4/4.~=fair. C4/4 G4/8=He
-9) | G4/8=pro- E4/8=mised F4/8=to G4/8=buy E4/8=me F4/8=a
+7) G7 | D4/8=John- E4/8=ny's F4/8=so E4/8=long F4/8=at D4/8=the
+8) C | C4/4.~=fair. C4/4 G4/8=He
+9) C | G4/8=pro- E4/8=mised F4/8=to G4/8=buy E4/8=me F4/8=a
 10) | G4/8=trin- E4/8=ket C5/8=to G4/8=please E4/8=me, C4/8=And
-11) | F4/8=then D4/8=for E4/8=a F4/8=smile, D4/8=Oh, E4/8=He
+11) G7 | F4/8=then D4/8=for E4/8=a F4/8=smile, D4/8=Oh, E4/8=He
 12) | F4/8=vowed D4/8=he E4/8=would F4/8=tease E4/8=me, D4/8=He
-13) | G4/8=Pro- E4/8=mised F4/8=to G4/8=bring E4/8=me F4/8=a
+13) C | G4/8=Pro- E4/8=mised F4/8=to G4/8=bring E4/8=me F4/8=a
 14) | G4/8=bunch E4/8=of C5/8=red G4/8=ro- E4/8=ses C4/8=to
-15) | D4/8=tie E4/8=up F4/8=my E4/8=bon- F4/8=nie D4/8=brown
-16) | C4/4.~=hair. C4/4 r/8
+15) G7 | D4/8=tie E4/8=up F4/8=my E4/8=bon- F4/8=nie D4/8=brown
+16) C | C4/4.~=hair. C4/4 r/8

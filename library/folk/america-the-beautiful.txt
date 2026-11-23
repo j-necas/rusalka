@@ -6,19 +6,19 @@ tempo: 88
 clef: treble
 ---
 1) | G4/4=O
-2) | G4/4.=beau- E4/8=ti- E4/4=ful G4/4=for
-3) | G4/4.=spa- D4/8=cious D4/4=skies, E4/4=For
-4) | F4/4=am- G4/4=ber A4/4=waves B4/4=of
-5) | G4/2.=grain, G4/4=For
-6) | G4/4.=pur- E4/8=ple E4/4=moun- G4/4=tain
-7) | G4/4.=maj- D4/8=es- D4/4=ties D5/4=A-
-8) | C#5/4=bove D5/4=the E5/4=fuit- A4/4=ed
-9) | D5/2.=plain. G4/4=A-
-10) | E5/4.=mer- E5/8=i- D5/4=ca! C5/4=A-
-11) | C5/4.=mer- B4/8=i- B4/4=ca! C5/4=God
-12) | D5/4=shed B4/4=his A4/4=grace G4/4=on
-13) | C5/2.=thee, C5/4=And
-14) | C5/4.=crown A4/8=thy A4/4=good C5/4=with
-15) | C5/4.=broth- G4/8=er- G4/4=hood G4/4=From
-16) | A4/4=sea C5/4=to G4/4=shin- D5/4=ing
-17) | C5/2.=sea.
+2) C | G4/4.=beau- E4/8=ti- E4/4=ful G4/4=for
+3) G | G4/4.=spa- D4/8=cious D4/4=skies, E4/4=For
+4) G7 | F4/4=am- G4/4=ber A4/4=waves B4/4=of
+5) C G7@2 | G4/2.=grain, G4/4=For
+6) C | G4/4.=pur- E4/8=ple E4/4=moun- G4/4=tain
+7) G | G4/4.=maj- D4/8=es- D4/4=ties D5/4=A-
+8) Gdim/D G/D@1 D7@2 | C#5/4=bove D5/4=the E5/4=fuit- A4/4=ed
+9) G D7@1 G7@2 | D5/2.=plain. G4/4=A-
+10) C | E5/4.=mer- E5/8=i- D5/4=ca! C5/4=A-
+11) G7 Dm7@3 | C5/4.=mer- B4/8=i- B4/4=ca! C5/4=God
+12) G7 F@2 G7@3 | D5/4=shed B4/4=his A4/4=grace G4/4=on
+13) C C7@3 | C5/2.=thee, C5/4=And
+14) F | C5/4.=crown A4/8=thy A4/4=good C5/4=with
+15) C | C5/4.=broth- G4/8=er- G4/4=hood G4/4=From
+16) F F#dim@1 C/G@2 G7@3 | A4/4=sea C5/4=to G4/4=shin- D5/4=ing
+17) C | C5/2.=sea.

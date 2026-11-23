@@ -5,11 +5,11 @@ key: 1
 tempo: 90
 clef: treble
 ---
-1) | G4/4.=Pus- A4/8=sy- G4/4=cat
+1) G/D | G4/4.=Pus- A4/8=sy- G4/4=cat
 2) | B4/2.=high,
-3) | A4/4.=Pus- G4/8=sy- A4/4=cat
-4) | G4/2.=low,
-5) | D5/4=Pus- F#4/4=sy- F#4/4=cat
-6) | F#4/4.=was G4/8=a A4/4=fine
-7) | A4/4=tea- G4/4=zer G4/4=of
+3) D7/C | A4/4.=Pus- G4/8=sy- A4/4=cat
+4) G/B | G4/2.=low,
+5) D7/C | D5/4=Pus- F#4/4=sy- F#4/4=cat
+6) D/A D7/C@2 | F#4/4.=was G4/8=a A4/4=fine
+7) G/B@1 | A4/4=tea- G4/4=zer G4/4=of
 8) | G4/2.=tow.

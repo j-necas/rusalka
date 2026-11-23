@@ -249,6 +249,7 @@ export default {
   "knihovna.police.children": "童謡",
   "knihovna.police.czech": "チェコの民謡",
   "knihovna.police.folk": "世界の民謡",
+  "knihovna.police.anthems": "国歌",
   "knihovna.police.christmas": "クリスマス",
   "knihovna.police.classics": "クラシック",
   "knihovna.vMenuPopis": "Rusalkaライブラリーの曲。選んですぐ弾けます。",

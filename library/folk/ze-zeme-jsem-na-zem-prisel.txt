@@ -5,15 +5,15 @@ key: 0
 tempo: 90
 clef: treble
 ---
-1) | A4/8=Ze G#4/8=ze- A4/8=mě B4/8=jsem
+1) Am | A4/8=Ze G#4/8=ze- A4/8=mě B4/8=jsem
 2) | C5/8=na C5/8=zem B4/8=při- A4/8=šel,
 3) | C5/8=na B4/8=ze- C5/8=mi D5/8=jsem
 4) | E5/8=ro- E5/8=zum D5/8=na- C5/8=šel:
-5) | B4/2
-6) | E5/8=po E5/8=ní E5/8=cho- E5/8=dím
-7) | D5/8=ja- C5/8=ko B4/4=pán,
+5) E | B4/2
+6) Am | E5/8=po E5/8=ní E5/8=cho- E5/8=dím
+7) G | D5/8=ja- C5/8=ko B4/4=pán,
 8) | D5/8=do C5/8=ní B4/8=bu- A4/8=du
-9) | G#4/8=za- B4/8=ko- E4/4=pán
-10) | C5/4=po- B4/8=těš D5/8=mne
-11) | C5/4=pán B4/4=Bůh
-12) | A4/2=sám!
+9) E | G#4/8=za- B4/8=ko- E4/4=pán
+10) Am E7@1 | C5/4=po- B4/8=těš D5/8=mne
+11) Am E@1 | C5/4=pán B4/4=Bůh
+12) Am | A4/2=sám!

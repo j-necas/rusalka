@@ -5,31 +5,31 @@ key: 0
 tempo: 88
 clef: treble
 ---
-1) {|:} | C5/4.~=Land C5/8=of
-2) | B4/8=Hope C5/8 D5/4=and
-3) | A4/2=Glor-
+1) {|:} C | C5/4.~=Land C5/8=of
+2) G7/B | B4/8=Hope C5/8 D5/4=and
+3) C/E | A4/2=Glor-
 4) | G4/2=y,
-5) | F4/4.~=Moth- F4/8=er
-6) | E4/8=of F4/8 G4/4=the
-7) | D4/2~=Free,
-8) | D4/4 r/4
-9) | E4/2=How
-10) | F#4/8=shall G4/4=we A4/8=ex-
-11) | D5/2=tol
-12) | G4/2=thee,
-13) {1.} | C5/4~=who C5/4=are
-14) {1.} | C5/8=born B4/4 A4/8=of
-15) {1.} | G4/2~=thee?
+5) F | F4/4.~=Moth- F4/8=er
+6) C/G | E4/8=of F4/8 G4/4=the
+7) Am | D4/2~=Free,
+8) G | D4/4 r/4
+9) C | E4/2=How
+10) D/C | F#4/8=shall G4/4=we A4/8=ex-
+11) G/B | D5/2=tol
+12) Em | G4/2=thee,
+13) {1.} Am | C5/4~=who C5/4=are
+14) {1.} D7 | C5/8=born B4/4 A4/8=of
+15) {1.} G7 | G4/2~=thee?
 16) {1. :|} | G4/4 r/4
-17) {2.} | F5/4~=make F5/4=thee
-18) {2.} | F5/8=might- E5/4 D5/8=ier
-19) {2.} | E5/2~=yet!
-20) {2.} | E5/2
-21) | A4/2=God,
-22) | B4/8=who C5/4=made D5/8=thee
-23) | G4/2=might-
-24) | C5/2=y,
-25) | C4/4~=make C4/4=thee
-26) | F4/8=might E4/4 D4/8=ier
-27) | C4/2~=yet!
+17) {2.} F/A | F5/4~=make F5/4=thee
+18) {2.} G7 | F5/8=might- E5/4 D5/8=ier
+19) {2.} C | E5/2~=yet!
+20) {2.} Cmaj7 C7@1 | E5/2
+21) F | A4/2=God,
+22) G7/F | B4/8=who C5/4=made D5/8=thee
+23) C/E | G4/2=might-
+24) Am | C5/2=y,
+25) D7 | C4/4~=make C4/4=thee
+26) G7 | F4/8=might E4/4 D4/8=ier
+27) C | C4/2~=yet!
 28) | C4/2

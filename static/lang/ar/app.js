@@ -19,6 +19,7 @@ export default {
   "knihovna.police.children": "أغاني الأطفال",
   "knihovna.police.czech": "أغانٍ شعبية تشيكية",
   "knihovna.police.folk": "أغانٍ شعبية من العالم",
+  "knihovna.police.anthems": "الأناشيد الوطنية",
   "knihovna.police.christmas": "عيد الميلاد",
   "knihovna.police.classics": "كلاسيكيات",
   "knihovna.vMenuPopis": "أغانٍ جاهزة من مكتبة رسالكا – اختر واحدة واعزف.",

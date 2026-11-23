@@ -5,11 +5,11 @@ key: -1
 tempo: 90
 clef: treble
 ---
-1) | F4/4=Dance C5/8=a C5/4=ba- Bb4/8=by
-2) | A4/8=did- C5/4~=dy! C5/4 r/8
-3) | F4/4=What C5/8=can C5/8=mam- C5/8=my Bb4/8=do
-4) | A4/8=wid- C5/4~='e? C5/4 r/8
-5) | A4/8=Sit G4/8=in A4/8=her F4/4.=lap,
-6) | C5/8=Give Bb4/8=it C5/8=some A4/4=pap, C5/8=And
-7) | D5/4=dance C5/8=a C5/4=ba- Bb4/8=by
-8) | A4/8=did- F4/4~=dy! F4/4 r/8
+1) Bbmaj7 Am7@1.5 | F4/4=Dance C5/8=a C5/4=ba- Bb4/8=by
+2) F F/A@1.5 | A4/8=did- C5/4~=dy! C5/4 r/8
+3) Bbmaj7 Am7@1.5 | F4/4=What C5/8=can C5/8=mam- C5/8=my Bb4/8=do
+4) F F/A@1.5 | A4/8=wid- C5/4~='e? C5/4 r/8
+5) Am7/C Aaug@1.5 | A4/8=Sit G4/8=in A4/8=her F4/4.=lap,
+6) Am7 F@1.5 | C5/8=Give Bb4/8=it C5/8=some A4/4=pap, C5/8=And
+7) G7/F F/A@1.5 | D5/4=dance C5/8=a C5/4=ba- Bb4/8=by
+8) F/C | A4/8=did- F4/4~=dy! F4/4 r/8

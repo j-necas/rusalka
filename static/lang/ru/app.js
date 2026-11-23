@@ -19,6 +19,7 @@ export default {
 "knihovna.police.children": "Детские",
 "knihovna.police.czech": "Чешские народные песни",
 "knihovna.police.folk": "Народные песни мира",
+"knihovna.police.anthems": "Государственные гимны",
 "knihovna.police.christmas": "Рождественские",
 "knihovna.police.classics": "Классика",
 "knihovna.vMenuPopis": "Готовые песни из библиотеки Русалки – просто выбери и играй.",

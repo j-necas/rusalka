@@ -5,12 +5,12 @@ key: 4
 tempo: 90
 clef: treble
 ---
-1) | E4/8=My
+1) E | E4/8=My
 2) | E4/16=dad- E4/16=dy E5/8=is B4/8=dead, B4/16=but G#4/16=I
-3) | F#4/16=can't G#4/16 F#4/16=tell E4/16=you D#4/8=how; B3/8=He
-4) | E4/8=left E4/16=me E4/16=six F#4/8=hor- F#4/16=ses F#4/16=to
-5) | G#4/8=fol- F#4/16=low E4/16=the D#4/8=plough: C#4/16=With B3/16=my
-6) | E4/8=whim E4/8=wham E4/16=wad- D#4/16=dle D#4/8=ho!
-7) | E4/8=Strim E5/8=stram E5/16=strad- B4/16=dle B4/8=ho!
-8) | C#5/16=Bub- B4/16=ble A4/8=ho! G#4/16=pret- A4/16=ty B4/8=boy,
-9) | C#4/8=o- F#4/16=ver D#4/16=the E4/8=brow.
+3) F#m7/A B@1 | F#4/16=can't G#4/16 F#4/16=tell E4/16=you D#4/8=how; B3/8=He
+4) E B/D#@1 | E4/8=left E4/16=me E4/16=six F#4/8=hor- F#4/16=ses F#4/16=to
+5) E B7@1 | G#4/8=fol- F#4/16=low E4/16=the D#4/8=plough: C#4/16=With B3/16=my
+6) E B7/F#@1 | E4/8=whim E4/8=wham E4/16=wad- D#4/16=dle D#4/8=ho!
+7) E | E4/8=Strim E5/8=stram E5/16=strad- B4/16=dle B4/8=ho!
+8) A E/G#@1 | C#5/16=Bub- B4/16=ble A4/8=ho! G#4/16=pret- A4/16=ty B4/8=boy,
+9) B7/A E@1 | C#4/8=o- F#4/16=ver D#4/16=the E4/8=brow.
