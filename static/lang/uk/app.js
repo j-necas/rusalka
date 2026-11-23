@@ -62,6 +62,8 @@ export default {
 'vic.tonina':'Тональність',
 'vic.styl':'Партія лівої руки',
 'verze.nadpis':'Версія нот',
+'verze.nejsnazsi':'найлегша',
+'verze.nejtezsi':'найскладніша',
 'verze.hrajes':'Ви граєте:',
 'verze.zmenit':'Версія, руки й уривок',
 'verze.ktera':'Якою рукою ви граєте',

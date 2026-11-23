@@ -294,6 +294,8 @@ export default {
   'vic.tonina': '调性',
   'vic.styl': '左手编配',
   'verze.nadpis': '乐谱版本',
+  'verze.nejsnazsi': '最简单',
+  'verze.nejtezsi': '最难',
   'verze.hrajes': '你弹：',
   'verze.zmenit': '版本、用手和练习片段',
   'verze.ktera': '选择弹奏的手',

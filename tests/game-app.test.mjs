@@ -229,10 +229,9 @@ test('game controls survive loading, calibration, pausing, rotation, and a chang
   assert.equal(druhyVysledek.hvezdy, 1);
   $('#zpet').click();
   await cekejNa(() => !$('#predHrat').disabled);
-  $('#predCo').value = '4';
-  await $('#predCo').onchange();
-  assert.equal($('#predCo').value, '4');
-  assert.match($('#predCoPopis').textContent, /akord/);
+  await $('#predCo').onchange({ target: { value: '4' } });
+  assert.match($('#predCoVolby').innerHTML, /value="4" checked/);
+  assert.match($('#predCoVolby').innerHTML, /nejsnazší/);
 });
 
 test('a song link lets a guest play and saves the result without creating a profile', async t => {

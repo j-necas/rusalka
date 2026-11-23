@@ -870,6 +870,8 @@ export default {
   'doplnky.prednes.obecneDite': 'Skús jednu frázu potichu a ďalšiu nahlas.',
   'doplnky.prednes.obecne': 'Skúste frázy odlíšiť dynamikou – jednu potichu, ďalšiu silnejšie.',
   'verze.nadpis': 'Verzia nôt',
+  'verze.nejsnazsi': 'najľahšia',
+  'verze.nejtezsi': 'najťažšia',
   'verze.hrajes': 'Hráte:',
   'verze.zmenit': 'Verzia, ruky a úsek',
   'verze.ktera': 'Ktorou rukou hráte',

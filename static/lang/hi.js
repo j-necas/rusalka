@@ -65,6 +65,8 @@ export default {
   'vic.tonina': 'टोनैलिटी (की)',
   'vic.styl': 'बाएँ हाथ की स्वरलिपि',
   'verze.nadpis': 'स्वरलिपि का संस्करण',
+  'verze.nejsnazsi': 'सबसे आसान',
+  'verze.nejtezsi': 'सबसे कठिन',
   'verze.hrajes': 'आपका भाग:',
   'verze.zmenit': 'संस्करण, हाथ और अंश',
   'verze.ktera': 'किस हाथ से बजाना है?',

@@ -701,7 +701,7 @@ try {
     kontrola('change, exactly and About the song are 44 px targets', (await vyska('#predZmenit')) >= 44 && (await vyska('#predPresne')) >= 44 && (await vyska('#oPisni')) >= 44,
       `${await vyska('#predZmenit')} ${await vyska('#predPresne')} ${await vyska('#oPisni')}`);
     await r2.locator('#predZmenit').click();
-    await r2.locator('#predCo').selectOption('4');
+    await r2.locator('#predCo input[value="4"]').check();
     await r2.waitForTimeout(500);
     kontrola('the hand buttons are 44 px; with Both the line "Rusalka plays the other hand" is hidden', (await vyska('#predRuce [data-ruka]')) >= 44
       && !(await r2.locator('#predRuce small').isVisible()));
@@ -730,11 +730,11 @@ try {
     kontrola('Before playing: a summary of what you play with a change button, closed', /Hrajete: Celá melodie/.test(await souhrnText())
       && (await h.locator('#predZmenit').getAttribute('aria-expanded')) === 'false' && !(await h.locator('#vicPanel').isVisible()), await souhrnText());
     await h.locator('#predZmenit').click();
-    const volby = await h.locator('#predCo option').allTextContents();
-    kontrola('the version picker has five options, a short description of the selected one, and extra options closed',
-      await h.locator('#vicPanel').isVisible() && await h.locator('#predCo').inputValue() === '2'
-      && volby.join('|') === 'Melodie, snadný rytmus|Celá melodie|Melodie a basy|Melodie a akordy|Všechny noty'
-      && /Melodie přesně v rytmu/.test(await h.locator('#predCoPopis').textContent())
+    const volby = (await h.locator('#predCo .stupen-text b').allInnerTexts()).map(x => x.trim());
+    kontrola('the version picker is a ladder of five, easiest first, each with its description, and extra options closed',
+      await h.locator('#vicPanel').isVisible() && await h.locator('#predCo input:checked').inputValue() === '2'
+      && volby.join('|') === 'Melodie, snadný rytmus nejsnazší|Celá melodie|Melodie a basy|Melodie a akordy|Všechny noty nejtěžší'
+      && /Melodie přesně v rytmu/.test(await h.locator('#predCo .stupen:has(input:checked) small').textContent())
       && !(await h.locator('#tonina').isVisible()), volby.join(' | '));
     kontrola('the left-hand arrangement only shows with Melody and chords', !(await h.locator('#styl').isVisible()));
     const ma = async sel => (await h.locator('#vicPanel ' + sel).count()) === 1;
@@ -761,8 +761,8 @@ try {
       && await viditelna(h, '#nastaveniZobrazeni #prepPismena') && await viditelna(h, '#pred'));
     await h.keyboard.press('Escape');
     // Copy for the helper: an easier version sends the song as written, not the played version (here: generated left hand)
-    if (await h.locator('#predCo option[value="4"]:not([disabled])').count()) {
-      await h.locator('#predCo').selectOption('4');
+    if (await h.locator('#predCo input[value="4"]:not([disabled])').count()) {
+      await h.locator('#predCo input[value="4"]').check();
       await h.waitForTimeout(500);
       kontrola('a score version with a left hand (Melody and chords) sets both hands and shows the style', (await h.locator('#predRuce [data-ruka="vse"]').getAttribute('aria-pressed')) === 'true'
         && await h.locator('#styl').isVisible() && /Melodie a akordy, oběma rukama/.test(await souhrnText()), await souhrnText());
@@ -792,7 +792,7 @@ try {
       await h.keyboard.press('Escape');
       const blok = (kopie.match(/```\n(title: Frère Jacques[\s\S]*?)```/) || [])[1] || '';
       kontrola('easier version: the song as written (no generated left hand at level 4)', blok.includes('---') && !/\|\|/.test(blok), blok.slice(0, 200) || kopie.slice(0, 120));
-      await h.locator('#predCo').selectOption('2');
+      await h.locator('#predCo input[value="2"]').check();
       await h.waitForTimeout(400);
       kontrola('a one-staff version hides the hand choice and hides the hand choice for one staff', /Hrajete: Celá melodie/.test(await souhrnText()) && !(await h.locator('#predRuce').isVisible())
         && !(await h.locator('#styl').isVisible()), await souhrnText());
@@ -801,13 +801,13 @@ try {
         await h.locator('#klavirOkno #vzorPole').isVisible() && /Styl akordového doprovodu/.test(await h.locator('#vzorPole').innerText())
         && /pro všechny písničky/.test(await h.locator('#vzorPole').innerText()));
       await h.keyboard.press('Escape');
-      await h.locator('#predCo').selectOption('5');
+      await h.locator('#predCo input[value="5"]').check();
       await h.waitForTimeout(400);
       await h.selectOption('#tonina', 'C');
       await h.waitForTimeout(500);
       kontrola('All the notes in another key says the notes get simplified', /zjednoduš/.test(await h.locator('#predCoPopis').innerText()), await h.locator('#predCoPopis').innerText());
       await h.selectOption('#tonina', 'ne');
-      await h.locator('#predCo').selectOption('2');
+      await h.locator('#predCo input[value="2"]').check();
       await h.waitForTimeout(400);
     } else kontrola('level 4 offered for Frère Jacques', false);
     // exact speed under How fast
@@ -844,7 +844,7 @@ try {
     kontrola('speeds: Slow, A bit slower, Normal (100 % is the song\'s own tempo)', rychlosti === 'Pomalu 60 %|Trochu pomaleji 80 %|Normálně 100 %', rychlosti);
     await h.locator('#predRychlost [data-rychlost="60"]').click();
     const predVolby = () => h.evaluate(() => [document.querySelector('#predRychlost .ted')?.dataset.rychlost,
-      document.querySelector('#predCo')?.value].join());
+      document.querySelector('#predCo input:checked')?.value].join());
     const predPoslechem = await predVolby();
     await h.locator('#predPoslech').click();
     await h.waitForTimeout(800);

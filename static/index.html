@@ -170,10 +170,11 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
         <button id="predHrat" class="velke-hrat"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M8 5v20l17-10z" fill="currentColor"/></svg><span data-t="hrat"></span></button>
       </div>
       <div id="vicPanel" class="vic-panel skryta">
-        <div class="verze-volba">
-          <label class="volba-not"><span data-t="verze.nadpis"></span><select id="predCo" class="vyber" aria-describedby="predCoPopis"></select></label>
-          <p id="predCoPopis" class="verze-popis" aria-live="polite"></p>
-        </div>
+        <fieldset id="predCo" class="verze-volba zebricek" aria-describedby="predCoPopis">
+          <legend data-t="verze.nadpis"></legend>
+          <div id="predCoVolby" class="stupne"></div>
+          <p id="predCoPopis" class="verze-popis skryta" aria-live="polite"></p>
+        </fieldset>
         <label id="stylPole" class="volba-not"><span data-t="vic.styl"></span><select id="styl" class="vyber"></select></label>
         <div id="predRuce" class="ruce" role="group" aria-labelledby="ruceNadpis">
           <span id="ruceNadpis" data-t="verze.ktera"></span>

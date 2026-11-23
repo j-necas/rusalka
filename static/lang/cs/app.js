@@ -59,6 +59,8 @@ export default {
   'vic.tonina': 'Tónina',
   "vic.styl": "Zápis levé ruky",
   "verze.nadpis": "Verze not",
+  "verze.nejsnazsi": "nejsnazší",
+  "verze.nejtezsi": "nejtěžší",
   "verze.hrajes": "Hrajete:",
   "verze.zmenit": "Verze, ruce a úsek",
   "verze.ktera": "Kterou rukou hrajete",

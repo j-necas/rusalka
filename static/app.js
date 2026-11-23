@@ -1840,7 +1840,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#predZmenit').onclick = () => {
     const o = $('#vicPanel').classList.toggle('skryta');
     $('#predZmenit').setAttribute('aria-expanded', String(!o));
-    if (!o) $('#predCo').focus();
+    if (!o) ($('#predCo input:checked') || $('#predCo input'))?.focus();
   };
   /** game in the visible window: notes are rendered again (note positions cannot be measured on a hidden screen) */
   function zobrazHru() {
@@ -1930,7 +1930,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#pas').innerHTML = `<div class="nacitam">${esc(t('app.nacitamNoty'))}</div>`;
     $('#klavesy').innerHTML = '';
     $('#hracAvatar').innerHTML = avatarAktualnihoHrace();
-    $('#predCo').innerHTML = '';
+    $('#predCoVolby').innerHTML = '';
     $('#predRuce').classList.add('skryta');
     try {
       const [xml, tk] = await Promise.all([api.xml(soubor), verovioTk()]);
@@ -1972,12 +1972,16 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (!S.puvodni || !S.data) return;
     const dve = S.data.osnovy.length > 1 && !S.dvojice;
     const urovne = seznamUrovni(S.puvodni);
-    const vyber = $('#predCo');
-    vyber.innerHTML = urovne.map(u => `<option value="${u.id}" ${u.dostupna ? '' : 'disabled'}>${esc(u.nazev)}</option>`).join('');
-    vyber.value = String(S.uroven);
-    const vybrana = urovne.find(u => u.id === Number(S.uroven));
-    const zjednodusi = vybrana?.id === 5 && ((S.tonina || 'ne') !== 'ne' || S.prstoklad);
-    $('#predCoPopis').textContent = zjednodusi ? t('verze.zjednodusi') : (vybrana?.popis || '');
+    // a ladder from the easiest to the hardest: bars rising with the level, the name and one sentence of what it is
+    const posledni = urovne.length - 1;
+    $('#predCoVolby').innerHTML = urovne.map((u, i) => `<label class="stupen${u.dostupna ? '' : ' nedostupna'}">
+      <input type="radio" name="uroven" value="${u.id}"${u.id === Number(S.uroven) ? ' checked' : ''}${u.dostupna ? '' : ' disabled'}>
+      <span class="schod n${i + 1}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="stupen-text"><b>${esc(u.nazev)}${i === 0 ? ` <em>${esc(t('verze.nejsnazsi'))}</em>` : i === posledni ? ` <em>${esc(t('verze.nejtezsi'))}</em>` : ''}</b>
+      <small>${esc(u.popis)}</small></span></label>`).join('');
+    const zjednodusi = Number(S.uroven) === 5 && ((S.tonina || 'ne') !== 'ne' || S.prstoklad);
+    $('#predCoPopis').textContent = zjednodusi ? t('verze.zjednodusi') : '';
+    $('#predCoPopis').classList.toggle('skryta', !zjednodusi);
     $('#stylPole').classList.toggle('skryta', Number(S.uroven) !== 4 || !!S.dvojice);
     $('#predRuce').classList.toggle('skryta', !dve);
     for (const b of $$('#predRuce [data-ruka]')) b.setAttribute('aria-pressed', String(dve && b.dataset.ruka === S.rukaVolba));
@@ -1988,9 +1992,9 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const s = souhrn({ uroven: S.uroven, ruka: S.rukaVolba, osnovy: S.data.osnovy.length, dvojice: !!S.dvojice });
     $('#predSouhrnText').innerHTML = `${esc(t('verze.hrajes'))} <b>${esc(t(s.verze))}</b>${s.ruka ? ', ' + esc(t(s.ruka)) : ''}${S.dvojice ? ', ' + esc(t('verze.veDvou')) : ''}`;
   }
-  $('#predCo').onchange = async () => {
-    if (!pripravenaPisen()) return;
-    S.uroven = Number($('#predCo').value);
+  $('#predCo').onchange = async e => {
+    if (!pripravenaPisen() || !e?.target?.value) return;
+    S.uroven = Number(e.target.value);
     if (S.uroven !== 4) S.styl = '';
     await zmenVerzi();
     if (S.data.osnovy.length > 1) S.rukaVolba = rukaPoKarte(S.uroven, S.data.osnovy.length);

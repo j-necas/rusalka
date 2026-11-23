@@ -530,9 +530,29 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .volba-not { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); align-items: center;
   gap: 6px 12px; color: var(--slaby2); font-size: 16px; }
 .volba-not select { width: 100%; min-width: 0; min-height: 44px; }
-.verze-volba .volba-not > span { font-weight: 800; color: var(--ink); }
 .verze-popis { margin: 4px 0 0; color: var(--slaby2); font-size: 14px; line-height: 1.4; }
-.verze-volba .verze-popis { margin-inline-start: 162px; }
+/* the version of the notes: a ladder from the easiest to the hardest, bars rising with the level */
+.zebricek { border: 0; margin: 0; padding: 0; min-width: 0; }
+.zebricek legend { padding: 0; margin-bottom: 6px; font-weight: 800; color: var(--ink); font-size: 16px; }
+.stupne { display: grid; gap: 4px; }
+.stupen { position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr); align-items: center; gap: 12px;
+  padding: 8px 12px; border: 2px solid transparent; border-radius: 12px; cursor: pointer; }
+.stupen:hover { background: var(--sv); }
+.stupen:has(input:checked) { background: var(--sv); border-color: var(--hl); }
+.stupen:has(input:focus-visible) { outline: 3px solid var(--hl); outline-offset: 2px; }
+.stupen input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.stupen.nedostupna { opacity: .45; cursor: default; }
+.stupen.nedostupna:hover { background: none; }
+.schod { display: flex; align-items: flex-end; gap: 2px; height: 20px; }
+.schod i { width: 5px; border-radius: 2px; background: var(--hrana); }
+.schod i:nth-child(1) { height: 6px; } .schod i:nth-child(2) { height: 9px; } .schod i:nth-child(3) { height: 12px; }
+.schod i:nth-child(4) { height: 16px; } .schod i:nth-child(5) { height: 20px; }
+.schod.n1 i:nth-child(-n+1), .schod.n2 i:nth-child(-n+2), .schod.n3 i:nth-child(-n+3), .schod.n4 i:nth-child(-n+4),
+.schod.n5 i { background: var(--hl); }
+.stupen-text { display: grid; gap: 1px; min-width: 0; }
+.stupen-text b { font-size: 16px; color: var(--ink); }
+.stupen-text em { font-style: normal; font-weight: 700; font-size: 13px; color: var(--hl); margin-inline-start: 4px; white-space: nowrap; }
+.stupen-text small { color: var(--slaby2); font-size: 14px; line-height: 1.35; }
 .ruce { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 6px 12px; color: var(--slaby2); font-size: 16px; }
 .ruce-volby { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-radius: 12px; background: var(--sv); padding: 3px; gap: 3px; }
 .ruce-volby button { border: 0; background: none; padding: 8px; min-height: 44px; border-radius: 10px; font: inherit; font-weight: 700; color: var(--ink);
@@ -576,7 +596,6 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 @media (max-width: 600px) {
   .ruce, .volba-not { grid-template-columns: minmax(0, 1fr); }
   .ruce small, #vzorPlatnost { grid-column: 1; }
-  .verze-volba .verze-popis { margin-inline-start: 0; }
 }
 .vic-panel .rychlost-presna { display: flex; align-items: center; gap: 10px; color: var(--ink); }
 #rukaPole:has(select[hidden]) { display: none; }

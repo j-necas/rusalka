@@ -64,6 +64,8 @@ export default {
   "vic.tonina": "Tonart",
   "vic.styl": "Arrangement der linken Hand",
   "verze.nadpis": "Notenfassung",
+  "verze.nejsnazsi": "am leichtesten",
+  "verze.nejtezsi": "am schwersten",
   "verze.hrajes": "Sie spielen:",
   "verze.zmenit": "Version, Hände und Abschnitt",
   "verze.ktera": "Mit welcher Hand spielen Sie?",

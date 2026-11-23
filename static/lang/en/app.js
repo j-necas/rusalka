@@ -59,6 +59,8 @@ export default {
   'vic.tonina': 'Key',
   "vic.styl": "Left-hand arrangement",
   "verze.nadpis": "Score version",
+  "verze.nejsnazsi": "easiest",
+  "verze.nejtezsi": "hardest",
   "verze.hrajes": "You play:",
   "verze.zmenit": "Version, hands and section",
   "verze.ktera": "Which hand you play",

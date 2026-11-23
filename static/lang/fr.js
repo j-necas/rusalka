@@ -1090,6 +1090,8 @@ export default {
   "editor.midi.rodina.perkuse": "Percussions",
   "editor.midi.rodina.efekty": "Effets",
   "verze.nadpis": "Version de la partition",
+  "verze.nejsnazsi": "la plus facile",
+  "verze.nejtezsi": "la plus difficile",
   "verze.hrajes": "Vous jouez :",
   "verze.zmenit": "Version, mains et passage",
   "verze.ktera": "Avec quelle main jouez-vous ?",

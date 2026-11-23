@@ -63,6 +63,8 @@ export default {
   "vic.tonina": "السلم الموسيقي",
   "vic.styl": "توزيع اليد اليسرى",
   "verze.nadpis": "نسخة النوتة",
+  "verze.nejsnazsi": "الأسهل",
+  "verze.nejtezsi": "الأصعب",
   "verze.hrajes": "تعزف:",
   "verze.zmenit": "النسخة واليدان والمقطع",
   "verze.ktera": "أي يد تعزف بها",

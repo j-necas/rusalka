@@ -626,6 +626,8 @@ export default {
   'doplnky.prednes.obecneDite': 'Spróbuj zagrać jedną frazę cicho, a następną głośno.',
   'doplnky.prednes.obecne': 'Warto zróżnicować dynamikę fraz – jedną zagrać cicho, a następną mocniej.',
   'verze.nadpis': 'Wersja nut',
+  'verze.nejsnazsi': 'najłatwiejsza',
+  'verze.nejtezsi': 'najtrudniejsza',
   'verze.hrajes': 'Gra się:',
   'verze.zmenit': 'Wersja, ręce i fragment',
   'verze.ktera': 'Którą ręką grać',

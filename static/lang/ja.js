@@ -293,6 +293,8 @@ export default {
   'vic.tonina': '調',
   'vic.styl': '左手の楽譜',
   'verze.nadpis': '楽譜のバージョン',
+  'verze.nejsnazsi': 'いちばんやさしい',
+  'verze.nejtezsi': 'いちばん難しい',
   'verze.hrajes': 'あなたが弾くパート:',
   'verze.zmenit': 'バージョン・弾く手・練習範囲',
   'verze.ktera': '弾く手',

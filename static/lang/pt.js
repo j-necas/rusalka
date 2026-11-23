@@ -723,6 +723,8 @@ export default {
   "menu.mojeNic": "As músicas que adicionar aparecem aqui.",
   "menu.vse": "Menu",
   "verze.nadpis": "Versão da partitura",
+  "verze.nejsnazsi": "a mais fácil",
+  "verze.nejtezsi": "a mais difícil",
   "verze.hrajes": "Vai tocar:",
   "verze.zmenit": "Versão, mãos e excerto",
   "verze.ktera": "Com que mão vai tocar",
