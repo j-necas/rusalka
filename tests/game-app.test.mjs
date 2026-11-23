@@ -8,7 +8,7 @@ import createVerovioModule from 'verovio/wasm';
 import { VerovioToolkit } from 'verovio/esm';
 
 // The app runs with the real score renderer and storage. Only browser I/O and the clock are substituted.
-async function prohlizec(t, { kotva, knihovna = [], vlastni } = {}) {
+async function prohlizec(t, { kotva, knihovna = [], vlastni, profily = [{ id: 'p', jmeno: 'Anna', vek: 'dite' }, { id: 'd', jmeno: 'Petr', vek: 'dospely' }] } = {}) {
   const prvek = () => {
     const e = new EventTarget(), tridy = new Set(['skryta']), vnitrni = new Map(), atributy = new Map();
     let html = '';
@@ -88,7 +88,7 @@ async function prohlizec(t, { kotva, knihovna = [], vlastni } = {}) {
       if (vlastnost) Object.defineProperty(globalThis, k, vlastnost); else delete globalThis[k];
     }
   });
-  await uloziste.zapisData('profily', [{ id: 'p', jmeno: 'Anna', vek: 'dite' }, { id: 'd', jmeno: 'Petr', vek: 'dospely' }]);
+  if (profily.length) await uloziste.zapisData('profily', profily);
   if (vlastni) await uloziste.zapis(vlastni, new TextEncoder().encode(xml));
   await import('../static/app.js?' + encodeURIComponent(t.name));
   function posun(ms) {
@@ -223,4 +223,46 @@ test('game controls survive loading, calibration, pausing, rotation, and a chang
   assert.equal(druhyVysledek.hvezdy, 1);
   $('#zpet').click();
   await cekejNa(() => !$('#predHrat').disabled);
+});
+
+test('a song link lets a guest play and saves the result without creating a profile', async t => {
+  const { $, posun, cekejNa, videt, stisk, nacti, uloziste } = await prohlizec(t, { profily: [] });
+  await cekejNa(() => videt('#pred'));
+  assert.equal(videt('#novy'), false);
+  nacti();
+  await cekejNa(() => !$('#predHrat').disabled);
+  $('#predHrat').click();
+  assert.equal($('#hraNazev').textContent, 'Cvičení');
+  stisk(60);
+  posun(1200);
+  assert.equal(videt('#vysledek'), true);
+  const vysledky = await cekejNa(() => uloziste.ctiData('vysledky'));
+  assert.equal(vysledky.host['Cviceni.musicxml'].cekam.hvezdy, 3);
+  assert.equal(await uloziste.ctiData('profily'), null);
+  assert.match($('#vysAvatar').innerHTML, /data-zvire="rusalka"/);
+  $('#vysDomu').click();
+  assert.equal(videt('#domu'), true);
+  assert.match($('#mujProfilOtevrit').innerHTML, /data-zvire="rusalka".*<b>Host<\/b>/);
+  $('#mujProfilOtevrit').click();
+  assert.equal(videt('#jaMenu'), true);
+  assert.equal(videt('#pridatHrace'), true);
+  assert.equal(videt('#zmenitHrace'), false);
+});
+
+test('the guest link opens Home even with saved players and lets the guest choose a player later', async t => {
+  const { $, cekejNa, videt, uloziste } = await prohlizec(t, { kotva: '#guest' });
+  await cekejNa(() => videt('#domu') || videt('#kdo'));
+  assert.equal(videt('#domu'), true);
+  assert.match($('#mujProfilOtevrit').innerHTML, /<b>Host<\/b>/);
+  assert.equal(await uloziste.ctiData('profil'), null);
+  $('#mujProfilOtevrit').click();
+  assert.equal(videt('#jaMenu'), true);
+  assert.equal(videt('#upravitHrace'), false);
+  assert.equal(videt('#zmenitHrace'), true);
+  $('#zmenitHrace').click();
+  assert.equal(videt('#kdo'), true);
+  $('#kdoHraci').children[0].children[0].click();
+  assert.match($('#mujProfilOtevrit').innerHTML, /Anna/);
+  assert.equal(await cekejNa(() => uloziste.ctiData('profil')), 'p');
+  assert.equal(location.hash, '');
 });

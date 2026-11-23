@@ -6,6 +6,7 @@ export default {
   'hrat': 'Hrát',
   'domu.upravit': 'Upravit',
   'domu.zmenitHrace': 'Změnit hráče',
+  'domu.host': 'Host',
   'domu.pokracuj': 'Pokračuj',
   'domu.zacni': 'Začni třeba tady',
   'domu.tedTy': 'teď ty',

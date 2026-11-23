@@ -95,7 +95,7 @@ ${UVODY.map(v => `        <li><a href="../${v.slug}/" hreflang="${v.kod}" lang="
 <div class="uvod sirka">
   <h1>${x('h1')}</h1>
   <p class="perex">${x('lead')}</p>
-  <a class="hrat" href="../">${x('start')}</a>
+  <a class="hrat" href="../#guest">${x('startGuest')}</a>
   <p class="drobne">${x('small')}</p>
   <figure class="pred-po">
     <div class="pred"><img src="../uvod/noty-${m}.webp" width="1100" height="${m === 'cs' ? 557 : 833}" alt="${esc(h('sheetAlt').replace('{song}', PISEN[m]))}">
@@ -162,7 +162,7 @@ ${sekce('otazky', x('faqH2'), dvojice('faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'f
 <div class="zaver sirka">
   <h2>${x('endH2')}</h2>
   <p>${x('endP')}</p>
-  <a class="hrat" href="../">${x('start')}</a>
+  <a class="hrat" href="../#guest">${x('startGuest')}</a>
 </div>
 </main>
 

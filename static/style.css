@@ -407,12 +407,13 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .ja { display: flex; align-items: center; gap: 10px; border: 0; background: none; padding: 6px 14px 6px 6px; border-radius: 16px; font-weight: 800; font-size: 22px; color: var(--ink); min-height: 44px; }
 .ja:hover { background: var(--sv); }
 .ja svg, .ja .zvire { width: 46px; height: 46px; }
-/* the player's menu on Home: Edit, Change player */
+/* the profile menu on Home */
 .ja-obal { position: relative; }
 .ja svg.sipka { width: 14px; height: 14px; color: var(--slaby); transition: transform .15s; }
 .ja[aria-expanded="true"] .sipka { transform: rotate(180deg); }
 .ja-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 30; min-width: 200px; padding: 6px; display: grid;
   background: var(--karta); border: 1px solid var(--linka); border-radius: var(--radius); }
+#jaMenu { left: auto; inset-inline-start: 0; }
 .ja-menu button { background: none; border: 0; text-align: left; font: inherit; font-size: 17px; font-weight: 600; color: var(--text);
   padding: 10px 14px; min-height: 44px; border-radius: 10px; }
 .ja-menu button:hover, .ja-menu button:focus-visible { background: var(--sv); }
@@ -606,7 +607,6 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .logo-kdo { position: absolute; top: 28px; left: 40px; }
 .logo-odkaz { display: block; flex: none; border-radius: 8px; }
 .logo-odkaz img { display: block; width: auto; height: 54px; }
-.logo-novy img { height: 44px; }
 #profilZobrazeni { margin-top: 22px; }
 .volba-radek { display: grid; grid-template-columns: 130px minmax(0, 1fr); align-items: center; gap: 10px; margin: 6px 0; color: var(--slaby2); }
 .volba-radek select { min-height: 44px; min-width: 0; width: 100%; }
@@ -642,6 +642,7 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .zvire[data-zvire="koala"] { background-image: url("animals/koala.webp"); }
 .zvire[data-zvire="zabka"] { background-image: url("animals/zabka.webp"); }
 .zvire[data-zvire="ovecka"] { background-image: url("animals/ovecka.webp"); }
+.zvire[data-zvire="rusalka"] { background-image: url("pictures/rusalka.webp"); }
 .zvire { transform-origin: 50% 90%; }        /* the motion (static/ui/animals.js) pivots at the feet */
 /* the drawing in motion (V13): a canvas over the picture, larger by the margin (OKRAJ in lib/natural.js) so turned ears aren't cut off */
 .zvire { position: relative; }

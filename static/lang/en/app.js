@@ -6,6 +6,7 @@ export default {
   'hrat': 'Play',
   'domu.upravit': 'Edit',
   'domu.zmenitHrace': 'Change player',
+  'domu.host': 'Guest',
   'domu.pokracuj': 'Keep going',
   'domu.zacni': 'Why not start here',
   'domu.tedTy': 'your turn',

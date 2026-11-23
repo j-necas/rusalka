@@ -260,8 +260,9 @@ try {
     await q.waitForTimeout(300);
     kontrola('#about in the address opens About', await viditelna(q, '#oRusalceOkno'));
     await q.close();
-    const n = await stranka(DATA([]));                     // first visit: no players → New player
-    kontrola('top menu on New player (first visit): AI, Songs, Settings, About', await viditelna(n, '#novy') && await vMenu(n, 'novy', 'about')
+    const n = await stranka(DATA([]));
+    await hrac(n, '#pridatHrace');
+    kontrola('top menu when adding the first player: AI, Songs, Settings, About', await viditelna(n, '#novy') && await vMenu(n, 'novy', 'about')
       && await viditelna(n, '#novy .menu-ai') && await vMenu(n, 'novy', 'songs') && await vMenu(n, 'novy', 'settings'));
     kontrola('first visit: the promise is right under the New player heading, above the name, and not twice', await pata(n, '#novyUvod')
       && await n.evaluate(() => {
@@ -298,9 +299,12 @@ try {
     await snimek(p, 'novy-dite');
     await p.locator('#novy [data-vek="dospely"]').click();
     const po = await poradi();
-    kontrola('one picture choice for everybody: 18 animals, then 6 pictures for adults; Child / Adult keeps it', pred.length === 24
+    kontrola('one picture choice for everybody: 18 animals, then Rusalka and five instruments and symbols; Child / Adult keeps it', pred.length === 24
       && pred.slice(18).join() === 'rusalka,klic,klavir,metronom,lyra,ladicka' && po.join() === pred.join(), pred.slice(16).join());
-    kontrola('the pictures for adults are illustrations', await p.locator('#novyObrazky [data-obrazek="lyra"] image').getAttribute('href') === 'pictures/lyra.webp'
+    await p.locator('#novyObrazky [data-obrazek="rusalka"]').click();
+    kontrola('Rusalka in the picker and profile preview is the animated avatar', await viditelna(p, '#novyObrazky [data-obrazek="rusalka"] [data-zvire="rusalka"]')
+      && await viditelna(p, '#novyObr [data-zvire="rusalka"]'));
+    kontrola('the musical pictures are illustrations', await p.locator('#novyObrazky [data-obrazek="lyra"] image').getAttribute('href') === 'pictures/lyra.webp'
       && await p.evaluate(() => new Promise(ok => { const i = new Image(); i.onload = () => ok(i.naturalWidth > 100); i.onerror = () => ok(false); i.src = 'pictures/lyra.webp'; })));
     await p.locator('#novyObrazky [data-obrazek="metronom"]').click();
     await p.locator('#novyBarvy [data-barva="malina"]').click();
@@ -564,11 +568,11 @@ try {
   });
   kontrola('no page errors (backup reminder)', zp.chyby.length === 0, zp.chyby.join(' | '));
   await zp.close();
-  // restoring a backup on the first visit (New player): Settings close and Who is playing shows the restored players
+  // restoring a backup from guest Home: Settings close and Who is playing shows the restored players
   const ob = await stranka(DATA([]), undefined, undefined, 'cs', false);
   await zkus('Restore from a backup', async () => {
-    kontrola('a new browser starts on New player', await viditelna(ob, '#novy'));
-    await menu(ob, 'novy', 'settings');
+    kontrola('a new browser starts on Home', await viditelna(ob, '#domu'));
+    await menu(ob, 'domu', 'settings');
     const en = new TextEncoder(), zip = zabalZip(new Map([['rusalka.json', en.encode('{ "verze": 1 }')],
       ['data/profily.json', en.encode(JSON.stringify(PROFILY.slice(0, 2)))]]));
     await ob.locator('#ulozisteObnova').setInputFiles({ name: 'zaloha.zip', mimeType: 'application/zip', buffer: Buffer.from(zip) });
@@ -590,7 +594,6 @@ try {
   await ios.goto(`http://127.0.0.1:${PORT}/#about`); await ios.waitForTimeout(1000);
   kontrola('About links Web MIDI Browser to the App Store', (await ios.locator(`#oRusalceOkno a[href="${APP_STORE}"]`).textContent().catch(() => '')) === 'Web MIDI Browser');
   await ios.keyboard.press('Escape');
-  await ios.fill('#novyJmeno', 'Iva'); await ios.locator('#novyHotovo').click(); await ios.waitForTimeout(600);
   await ios.locator('#vstupTlacitko').click();
   kontrola('without Web MIDI the input menu links Web MIDI Browser on the App Store', await viditelna(ios, `#vstupMenu a[href="${APP_STORE}"]`)
     && (await ios.locator('#vstupMenu [data-vstup="midi"]').isDisabled()));
@@ -617,7 +620,6 @@ try {
     navigator.requestMIDIAccess = () => ({ then: ok => setTimeout(() => ok(acc), 30) });   // the app's own thenable
   });
   await wmb.goto(`http://127.0.0.1:${PORT}/`); await wmb.waitForTimeout(1200);
-  await wmb.fill('#novyJmeno', 'Iva'); await wmb.locator('#novyHotovo').click(); await wmb.waitForTimeout(600);
   kontrola('Web MIDI Browser (iPad): Home says it plays on the connected piano', /Hraje se na: klavír FP-10/.test(await wmb.locator('#vstupTlacitko').innerText()),
     await wmb.locator('#vstupTlacitko').innerText());
   kontrola('Web MIDI Browser (iPad): the piano input has a note handler and a note goes through without an error',
@@ -1279,7 +1281,7 @@ try {
     const urovne = () => m.evaluate(() => Object.keys(localStorage).filter(k => k.startsWith('kt-pisen-')).map(k => k + localStorage.getItem(k)).sort().join());
     const pred = await urovne();
     kontrola('the old selected-song actions are gone', (await m.locator('#rodicePisen, #upravit, #smazatPisen, #pomocnikJednodussi').count()) === 0);
-    await menu(m, 'novy', 'songs');
+    await menu(m, 'domu', 'songs');
     await m.waitForTimeout(300);
     kontrola('My songs without own songs: no samples, no search, a line on where added songs appear', (await m.locator('#spravaNadpis').textContent()) === 'Moje písničky'
       && (await m.locator('#spravaSeznam [data-soubor]').count()) === 0 && /Písničky, které přidáte, najdete tady/.test(await m.locator('#spravaSeznam').innerText())
@@ -1288,7 +1290,7 @@ try {
     await ulozPisne(m, { 'Tichá noc.musicxml': pisen('Silent Night.musicxml'), 'Óda.musicxml': pisen('Ode to Joy.musicxml') });
     await m.reload();
     await m.waitForTimeout(1500);
-    await menu(m, 'novy', 'songs');
+    await menu(m, 'domu', 'songs');
     await m.locator('#spravaHledat').fill('silent');
     await m.waitForTimeout(200);
     const polozky = await m.locator('#spravaSeznam [data-soubor]').allInnerTexts();
@@ -1333,7 +1335,7 @@ try {
     kontrola('managing songs changes no player\'s song settings', (await urovne()) === pred);
     await m.locator('#spravaHledat').fill('ode');
     await m.keyboard.press('Escape');
-    await menu(m, 'novy', 'songs');
+    await menu(m, 'domu', 'songs');
     kontrola('reopening Songs starts with an empty search and no chosen song', (await m.locator('#spravaHledat').inputValue()) === '' && !(await viditelna(m, '#spravaAkce')));
     await m.keyboard.press('Escape');
     await m.evaluate(() => { location.hash = '#songs'; });
@@ -1341,7 +1343,7 @@ try {
     await m.goBack();
     await m.waitForTimeout(400);
     kontrola('the browser Back button closes a window opened from its address', !(await viditelna(m, '#pisnickyOkno')));
-    await menu(m, 'novy', 'settings');
+    await menu(m, 'domu', 'settings');
     kontrola('on the web Settings offer backup, restore and the folder', await viditelna(m, '#ulozisteZaloha') && await viditelna(m, '#ulozisteSlozka'));
     kontrola('on the web backup, restore and the folder are buttons with a line each', await radek(m, '#ulozisteZaloha') && await radek(m, '#ulozisteObnovit')
       && await radek(m, '#ulozisteSlozka') && !(await viditelna(m, '#ulozisteOtevrit')));
@@ -1363,6 +1365,7 @@ try {
     await w.keyboard.press('Escape');
   });
   await zkus('reduced motion', async () => {
+    await hrac(w, '#pridatHrace');
     await w.emulateMedia({ reducedMotion: 'reduce' });
     await w.evaluate(() => { window.__mrkl = false; new MutationObserver(z => { if (z.some(x => x.target.dataset?.vyraz === 'blink')) window.__mrkl = true; })
       .observe(document.body, { subtree: true, attributes: true, attributeFilter: ['data-vyraz'] }); });
@@ -1739,9 +1742,21 @@ try {
   });
   await jeden.close();
   const nikdo = await stranka(DATA([]));
-  await zkus('no player', async () => {
-    kontrola('with no players straight to New player', await viditelna(nikdo, '#novy'));
-    kontrola('first visit: no Back (there is nowhere to go), the Rusalka logo instead', !(await viditelna(nikdo, '#novyZpet')) && await viditelna(nikdo, '#novy .logo-novy'));
+  await zkus('optional player profile', async () => {
+    kontrola('with no players straight to Home', await viditelna(nikdo, '#domu') && !(await viditelna(nikdo, '#novy')));
+    const avatar = nikdo.locator('#mujProfilOtevrit [data-zvire="rusalka"]');
+    await avatar.evaluate(el => {
+      const img = new Image();
+      img.src = getComputedStyle(el).backgroundImage.slice(5, -2);
+      return img.decode();
+    });
+    kontrola('Home shows the Guest name and water spirit', (await nikdo.locator('#mujProfilOtevrit b').textContent()) === 'Host'
+      && await avatar.isVisible());
+    await hrac(nikdo, '#pridatHrace');
+    kontrola('the first player form has a Back button', await viditelna(nikdo, '#novyZpet'));
+    await nikdo.locator('#novyZpet').click();
+    kontrola('Back returns to Home with focus on Guest, without creating a player', await viditelna(nikdo, '#domu')
+      && await aktivni(nikdo) === 'mujProfilOtevrit' && (await ulozeno(nikdo, 'profily')).length === 0);
   });
   await nikdo.close();
   // a file of the app that fails to download (a dropped connection, a server error): one automatic reload, then the

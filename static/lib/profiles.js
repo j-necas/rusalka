@@ -1,4 +1,4 @@
-// Player profiles: colour (palette) and picture (18 animals, then 6 illustrations for adults), migration of old profiles
+// Player profiles: colour (palette) and picture (18 animals, Rusalka and five musical illustrations), migration of old profiles
 // (only "zvire") and deletion that merging writes won't undo (the profile stays as { id, smazano }).
 
 export const PALETY = [
@@ -13,7 +13,7 @@ export const OBRAZKY = {
   dite: ['lenochod', 'kralik', 'liska', 'sova', 'jezek', 'kocka', 'pejsek', 'panda-cervena', 'vydra', 'tucnak', 'kapybara', 'axolotl', 'veverka', 'myval', 'medvidek', 'koala', 'zabka', 'ovecka'],
   dospely: ['rusalka', 'klic', 'klavir', 'metronom', 'lyra', 'ladicka'],
 };
-/** one choice for everybody (child or adult): the animals, then the pictures for adults */
+/** one choice for everybody (child or adult): the animals, then Rusalka and the musical illustrations */
 export const VSECHNY_OBRAZKY = [...OBRAZKY.dite, ...OBRAZKY.dospely];
 /** symbols of the first adult set (until November 2026) → the illustration with the same motif */
 const STARE_OBRAZKY = { inicial: 'rusalka', nota: 'lyra', klavesy: 'klavir' };

@@ -7,6 +7,7 @@ export default {
   "hrat": "Tocar",
   "domu.upravit": "Editar",
   "domu.zmenitHrace": "Mudar de músico",
+  "domu.host": "Convidado",
   "domu.pokracuj": "Continuar",
   "domu.zacni": "Que tal começar por aqui?",
   "domu.tedTy": "sua vez",

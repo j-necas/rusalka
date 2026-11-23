@@ -8,7 +8,8 @@ kde vzít noty, vymyslet písničku a seznam vašich vlastních písniček: upra
 (týden, úprava, smazání, přidání), **AI** (AI nástroje), **Nastavení** (jazyk, názvy tónů, klavír, data a zálohy)
 a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
 
-1. **Hráč:** na úvodní obrazovce vyber nebo přidej hráče (zvířátko, dítě/dospělý).
+1. **Hráč:** začni hrát rovnou. Profil si můžeš vytvořit na Domů přes **Host → + Nový hráč** (zvířátko, dítě/dospělý).
+   Pokud Rusalka zná víc hráčů, při spuštění si jednoho vybereš.
 2. **Písnička:** klepni na písničku. Novou přidáš tlačítkem **Přidat písničku**:
    - MusicXML (`.musicxml`, `.xml`, `.mxl`) se načte přímo,
    - MIDI (`.mid`, `.midi`, `.kar`) převede aplikace sama: vybereš stopu s melodií (a případně levou ruku),

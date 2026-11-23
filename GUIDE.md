@@ -8,7 +8,8 @@ where to get sheet music, make up a song, and the list of your own songs: edit n
 (the week, edit, delete, add), **AI** (AI tools), **Settings** (language, note names, the
 piano, data and backups) and **About**. Where the links don't fit, the bar shows **AI** and **Menu**.
 
-1. **Player:** on the start screen, pick a player or add a new one (an animal picture, child or adult).
+1. **Player:** start playing right away. You can create a profile on Home under **Guest → + New player** (an animal picture, child or adult).
+   If Rusalka has several players, choose one when you open the app.
 2. **Song:** tap a song. To add a new one, use **Add a song**:
    - MusicXML (`.musicxml`, `.xml`, `.mxl`) loads directly,
    - MIDI (`.mid`, `.midi`, `.kar`) is converted by the app itself: you choose the track with the melody (and

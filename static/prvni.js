@@ -1,8 +1,8 @@
 // A visitor of rusalkapiano.com who does not play yet goes to the introduction page in their language (/cs/, /de/ …,
 // tools/uvod.mjs); its "Start playing" button comes back here and lets this tab stay in the app (sessionStorage
-// "rusalka-uvod"), so the New player form follows. Without a player a new visit shows the introduction again.
+// "rusalka-uvod"), so Home follows. A new visit shows the introduction again until the browser has player or guest data.
 // Checked twice: here before the app loads (nothing of Rusalka in this browser = a brand new visitor), and by the app
-// once its data is read (window.naUvodniStranku: no player yet, e.g. someone who once looked and left).
+// once its data is read (window.naUvodniStranku: e.g. someone who once looked and left).
 // An installed app, a link with a hash or query, Tauri and the dev server are never redirected.
 // A separate file because of the security policy (CSP without inline scripts).
 (() => {
@@ -15,7 +15,7 @@
     if (zaklad === 'pt') return t === 'pt-br' || t.startsWith('pt-br') ? 'pt-br' : 'pt';
     return UVODY.includes(zaklad) ? zaklad : 'en';
   }
-  /** kod: the language; uzHraje: this browser already has players (or a folder with data) → stay in the app */
+  /** kod: the language; uzHraje: this browser already has data or a link to a song → stay in the app */
   function naUvodniStranku(kod, uzHraje) {
     try {
       if (uzHraje || !/^(www\.)?rusalkapiano\.com$/.test(location.hostname) || location.pathname !== '/' || location.search || location.hash) return false;

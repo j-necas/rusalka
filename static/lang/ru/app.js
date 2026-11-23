@@ -6,6 +6,7 @@ export default {
 'hrat':'Играть',
 'domu.upravit':'Изменить',
 'domu.zmenitHrace':'Сменить игрока',
+'domu.host':'Гость',
 'domu.pokracuj':'Продолжить',
 'domu.zacni':'Можно начать отсюда',
 'domu.tedTy':'твой черёд',

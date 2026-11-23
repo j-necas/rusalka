@@ -13,6 +13,7 @@ export default {
   'hotovo': 'Fatto',
   'domu.upravit': 'Modifica',
   'domu.zmenitHrace': 'Cambia musicista',
+  'domu.host': 'Ospite',
   'domu.pokracuj': 'Continua',
   'domu.zacni': 'Inizia da qui',
   'domu.tedTy': 'tocca a te',

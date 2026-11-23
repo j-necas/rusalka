@@ -6,6 +6,7 @@ export default {
   "hrat": "اعزف",
   "domu.upravit": "تعديل",
   "domu.zmenitHrace": "تغيير العازف",
+  "domu.host": "ضيف",
   "domu.pokracuj": "تابع",
   "domu.zacni": "ما رأيك أن تبدأ من هنا؟",
   "domu.tedTy": "دورك",

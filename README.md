@@ -60,7 +60,7 @@ pieces.
 2. Connect the piano with a USB cable or over Bluetooth (on a Mac: Audio MIDI Setup → Window → Show MIDI Studio →
    Bluetooth icon → **Connect**) and allow MIDI when the browser asks. Without a digital piano, choose **Microphone**
    or **On-screen keys** with the button at the top of Home.
-3. Add a player and pick a song. The data stay in the browser; **Settings → Data and backups** downloads a backup or
+3. Pick a song and play. You can create a profile under **Guest → + New player** on Home. The data stay in the browser; **Settings → Data and backups** downloads a backup or
    restores one, and in Chrome and Edge on a computer it can keep everything in a folder instead (**Save to a
    folder…**).
 

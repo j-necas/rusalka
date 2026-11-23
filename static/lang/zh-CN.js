@@ -237,6 +237,7 @@ export default {
   'hrat': '开始弹奏',
   'domu.upravit': '编辑',
   'domu.zmenitHrace': '切换玩家',
+  'domu.host': '访客',
   'domu.pokracuj': '继续练习',
   'domu.zacni': '从这里开始吧',
   'domu.tedTy': '轮到你了',

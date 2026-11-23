@@ -7,6 +7,7 @@ export default {
   "hrat": "Tocar",
   "domu.upravit": "Editar",
   "domu.zmenitHrace": "Cambiar jugador",
+  "domu.host": "Invitado",
   "domu.pokracuj": "Sigue adelante",
   "domu.zacni": "¿Por qué no empezar aquí?",
   "domu.tedTy": "Tu turno",

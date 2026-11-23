@@ -236,6 +236,7 @@ export default {
   'hrat': '弾く',
   'domu.upravit': '編集',
   'domu.zmenitHrace': 'プレイヤーを変更',
+  'domu.host': 'ゲスト',
   'domu.pokracuj': '続きを弾こう',
   'domu.zacni': 'ここから始めよう',
   'domu.tedTy': 'きみの番',

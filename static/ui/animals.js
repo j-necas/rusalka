@@ -10,6 +10,7 @@
 // still; nothing moves on a hidden page or with reduced motion.
 import { dalsiMrknuti, delkaRadosti, vzorek, DELKA_POHYBU } from '../lib/animals.js';
 import { kreslic, nacti, sample, smichej, duration, OKRAJ } from '../lib/natural.js';
+import { RIG } from '../animals/v13.js';
 
 const ZIVE = '#kdo, #novy, #vysledek';                  // where the animals live in a loop
 const LOUTKA_MIN = 64;                                  // smaller pictures (lists, the top bar) move by CSS
@@ -61,7 +62,7 @@ function podklad(id) {
 /** can this element show the moving drawing now? (starts loading it if needed) */
 function muzeLoutka(el) {
   const id = el.dataset.zvire;
-  if (!id || el.clientWidth < LOUTKA_MIN) return false;
+  if (!RIG[id] || el.clientWidth < LOUTKA_MIN) return false;
   return !!(renderer() && podklad(id));
 }
 

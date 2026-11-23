@@ -20,7 +20,7 @@ test('18 animals: the first twelve in the same place and six new ones at the end
   }
 });
 
-test('an animal picture is an expression atlas with the idle expression; pictures for adults stay SVG', () => {
+test('an animal picture is an expression atlas with the idle expression; musical illustrations stay SVG', () => {
   const h = obrazekHrace({ obrazek: 'panda-cervena', jmeno: 'Ema' }, { tmava: '#000' });
   assert.match(h, /class="zvire"/);
   assert.match(h, /data-zvire="panda-cervena"/);
@@ -83,6 +83,9 @@ test('happy: crouch, jump up with a happy face, settle back still', () => {
 test('greeting winks, curiosity tilts; intensity scales the motion', () => {
   assert.equal(vzorek('liska', 'wink', 0.5).state, 'wink');
   assert.ok(vzorek('liska', 'curious', 0.8).rotation > 5);
+  assert.equal(vzorek('rusalka', 'wink', 0.5).state, 'wink');
+  assert.equal(vzorek('rusalka', 'blink', 0.1).state, 'blink');
+  assert.equal(vzorek('rusalka', 'happy', 0.5).state, 'happy');
   const a = vzorek('pejsek', 'happy', 0.46, 1), b = vzorek('pejsek', 'happy', 0.46, 0.55);
   assert.ok(Math.abs(b.y) < Math.abs(a.y));
   assert.deepEqual(Object.keys(DELKA_POHYBU).sort(), ['blink', 'curious', 'happy', 'wink']);

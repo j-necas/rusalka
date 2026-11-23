@@ -7,6 +7,7 @@ export default {
   "hrat": "Spielen",
   "domu.upravit": "Bearbeiten",
   "domu.zmenitHrace": "Spieler wechseln",
+  "domu.host": "Gast",
   "domu.pokracuj": "Mach weiter",
   "domu.zacni": "Warum nicht hier anfangen?",
   "domu.tedTy": "Du bist dran",

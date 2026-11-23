@@ -8,6 +8,7 @@ export default {
   'hrat': 'बजाएँ',
   'domu.upravit': 'संपादित करें',
   'domu.zmenitHrace': 'वादक बदलें',
+  'domu.host': 'अतिथि',
   'domu.pokracuj': 'आगे बढ़ें',
   'domu.zacni': 'यहीं से शुरू करें',
   'domu.tedTy': 'अब आपकी बारी',

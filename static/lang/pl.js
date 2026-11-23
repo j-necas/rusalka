@@ -7,6 +7,7 @@ export default {
   'hrat': 'Graj',
   'domu.upravit': 'Edytuj',
   'domu.zmenitHrace': 'Zmień gracza',
+  'domu.host': 'Gość',
   'domu.pokracuj': 'Graj dalej',
   'domu.zacni': 'Może zacznij tutaj?',
   'domu.tedTy': 'Teraz twoja kolej',

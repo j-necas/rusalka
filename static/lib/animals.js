@@ -4,15 +4,17 @@ import { POHYB } from '../animals/motion.js';
 /** position of an expression in the atlas (background-position with background-size 200 %) */
 export const VYRAZY = { idle: '0% 0%', blink: '100% 0%', happy: '0% 100%', wink: '100% 100%' };
 
+const pohyb = id => POHYB[id === 'rusalka' ? 'axolotl' : id];
+
 /** in how many ms the animal should blink again (random 0–1 within an interval by temperament; sloth and capybara slower) */
 export function dalsiMrknuti(id, nahoda = Math.random()) {
-  const [od, do_] = POHYB[id]?.interval || [5000, 5000];
+  const [od, do_] = pohyb(id)?.interval || [5000, 5000];
   return Math.round(od + (do_ - od) * nahoda);
 }
 
 /** how long it keeps its eyes closed and the joy expression */
-export const delkaMrknuti = id => POHYB[id]?.mrknuti || 160;
-export const delkaRadosti = id => POHYB[id]?.radost || 1100;
+export const delkaMrknuti = id => pohyb(id)?.mrknuti || 160;
+export const delkaRadosti = id => pohyb(id)?.radost || 1100;
 
 // ---------------------------------------------------------------- livelier motion (set v2)
 // Port of the set's motion.js: for a species, a kind of motion and a time it returns the shift (px on a 512 px
@@ -37,7 +39,7 @@ function krivka(body, t) {
 
 /** pose of the animal: druh 'alive' | 'blink' | 'wink' | 'curious' | 'happy' | anything else = still */
 export function vzorek(id, druh, cas, intenzita = 1) {
-  const p = POHYB[id]?.v2;
+  const p = pohyb(id)?.v2;
   let x = 0, y = 0, r = 0, sx = 1, sy = 1, state = 'idle';
   if (p && druh === 'alive') {
     const t = ((cas % p.cycle) + p.cycle) % p.cycle, w = 2 * Math.PI * t / p.cycle;

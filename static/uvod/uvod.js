@@ -17,8 +17,7 @@ if (!klid && 'IntersectionObserver' in window) {
   }, { threshold: .35 });
   videa.forEach(v => io.observe(v));
 } else if (!klid) videa.forEach(v => { nacti(v); v.play().catch(() => {}); });
-// links into the app (Start playing, Open Rusalka): this tab opens the app (New player); without a player
-// a later visit to rusalkapiano.com shows the introduction again (static/prvni.js)
+// Open Rusalka stays in the app in this tab. The guest links use #guest, which already skips the introduction.
 for (const a of document.querySelectorAll('a[href="../"]')) {
   a.addEventListener('click', () => { try { sessionStorage.setItem('rusalka-uvod', '1'); } catch { /* private window */ } });
 }

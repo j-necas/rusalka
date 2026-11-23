@@ -5,6 +5,7 @@ export default {
 'hrat':'Грати',
 'domu.upravit':'Редагувати',
 'domu.zmenitHrace':'Змінити гравця',
+'domu.host':'Гість',
 'domu.pokracuj':'Продовжуй',
 'domu.zacni':'Спробуй почати тут',
 'domu.tedTy':'твоя черга',

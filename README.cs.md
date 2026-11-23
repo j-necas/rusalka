@@ -58,8 +58,9 @@ po klasiku.
 2. Připojte klavír kabelem USB nebo přes Bluetooth (na Macu: Nastavení Audio MIDI → Okno → Zobrazit MIDI studio →
    ikona Bluetooth → **Připojit**) a až se prohlížeč zeptá, povolte MIDI. Bez digitálního klavíru zvolte tlačítkem
    nahoře na Domů **Mikrofon** nebo **Klávesy na obrazovce**.
-3. Přidejte hráče a vyberte písničku. Data zůstávají v prohlížeči; **Nastavení → Data a zálohy** stáhne zálohu nebo
-   z ní data obnoví, a v Chromu a Edge na počítači můžete místo toho vše ukládat do složky (**Ukládat do složky…**).
+3. Vyberte písničku a hrajte. Profil si můžete založit přes **Host → + Nový hráč** na Domů. Data zůstávají v prohlížeči.
+   V **Nastavení → Data a zálohy** můžete zálohu stáhnout nebo z ní data obnovit. V Chromu a Edge na počítači můžete
+   vše ukládat do složky (**Ukládat do složky…**).
 
 ## AI nástroje: jakýkoli AI chat
 Rusalka sama AI nepoužívá a vaše data nikam neodesílá. Práci udělá AI chat, který už používáte (Claude, ChatGPT nebo
