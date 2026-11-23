@@ -98,6 +98,8 @@ export default {
   'editor.midi.zmenyTempa': 'У файлі змінюється темп; використано перший ({tempo}).',
   'editor.midi.odhadPredznamenani': 'У файлі немає даних про ключові знаки; їх приблизно визначено за нотами.',
   'editor.midi.souzvuky': 'Там, де в мелодії одночасно звучало кілька нот, залишено лише найвищу.',
+  'editor.midi.slito': 'Деякі ноти починалися надто близько одна до одної й злилися на сітці (кількість: {n}). Перевір їх у редакторі.',
+  'editor.midi.dlouhy': 'Файл MIDI задовгий (понад {n} тактів), імовірно, він пошкоджений.',
   'editor.midi.nazevPisne': 'Пісня з MIDI',
   'editor.midi.stopaKanal': '{nastroj}, канал {kanal}',
   'editor.midi.bici': 'Ударні',

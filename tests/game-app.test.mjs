@@ -372,3 +372,21 @@ test('the piano samples are decoded only around the keys the song uses, not all 
   for (let i = 0; i < 20; i++) await new Promise(r => setImmediate(r));
   assert.ok(mikrofon.dekodovano < 15, `decoded ${mikrofon.dekodovano} samples`);
 });
+
+test('after adding a MusicXML file with bars to check, the app says which ones and offers the editor', async t => {
+  const { $, cekejNa, videt } = await prohlizec(t, { kotva: '#guest' });
+  await cekejNa(() => videt('#domu'));
+  const xml = `<?xml version="1.0"?><score-partwise><part-list><score-part id="P1"><part-name>x</part-name></score-part></part-list><part id="P1">`
+    + `<measure number="1"><attributes><divisions>1</divisions><time><beats>4</beats><beat-type>4</beat-type></time></attributes>`
+    + `<note><pitch><step>C</step><octave>4</octave></pitch><duration>4</duration><voice>1</voice><type>whole</type></note></measure>`
+    + `<measure number="2"><attributes><time><beats>3</beats><beat-type>4</beat-type></time></attributes>`
+    + `<note><pitch><step>D</step><octave>4</octave></pitch><duration>3</duration><voice>1</voice><type>half</type><dot/></note></measure>`
+    + `<measure number="3"><note><pitch><step>E</step><octave>4</octave></pitch><duration>3</duration><voice>1</voice><type>half</type><dot/></note></measure></part></score-partwise>`;
+  const cil = { files: [new File([xml], 'Změna.musicxml')], value: 'x' };
+  const pridani = $('#soubor').onchange({ target: cil });   // it waits for the answer in the dialog
+  await cekejNa(() => /2/.test($('#potvrzeniText').textContent) && $('#potvrzeniText').textContent.includes('Změna'));
+  assert.match($('#potvrzeniAno').textContent, /editor/i);
+  $('#potvrzeniPreskocit').onclick();
+  await pridani;
+  for (let i = 0; i < 20; i++) await new Promise(r => setImmediate(r));
+});

@@ -3,6 +3,7 @@
 // the same way as in the model (order from rozvin() in song.js) so that bars match the statistics and sections.
 // Needs globalThis.DOMParser and XMLSerializer (the browser has them, tests supply them from @xmldom/xmldom).
 import { t } from './texts.js';
+import { skokySlovy } from './song.js';
 
 const deti = (el, jmeno) => [...el.childNodes].filter(n => n.nodeType === 1 && n.nodeName === jmeno);
 const dite = (el, jmeno) => deti(el, jmeno)[0] || null;
@@ -79,7 +80,7 @@ export function pripravOriginal(xml, poradi) {
       const typ = dite(d, 'direction-type');
       const slova = typ ? deti(typ, 'words').map(w => w.textContent.trim().toLowerCase()) : [];
       const skok = typ && (deti(typ, 'segno').length || deti(typ, 'coda').length
-        || slova.some(w => /^(d\.?\s?c\.?|d\.?\s?s\.?|da capo|dal segno|fine|to coda|al coda|al fine)/.test(w)));
+        || slova.some(w => Object.keys(skokySlovy(w)).length || /^(al coda|al fine)/.test(w)));
       if (skok) m.removeChild(d);
     }
     for (const s of [...m.getElementsByTagName('sound')]) {

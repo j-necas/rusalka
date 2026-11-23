@@ -59,7 +59,12 @@ export function ctiMidi(data) {
     const konecBloku = Math.min(b.length, i + 8 + u32(i + 4));
     let p = i + 8, tick = 0, status = 0;
     const programy = {}, zapnute = new Map();
-    const vlq = () => { let v = 0, c; do { c = b[p++]; v = v * 128 + (c & 0x7f); } while (c & 0x80 && p < konecBloku); return v; };
+    // a variable-length number has at most 4 bytes (SMF); a longer one is a damaged file, not 2^35 ticks of silence
+    const vlq = () => {
+      let v = 0, c, n = 0;
+      do { c = b[p++]; v = v * 128 + (c & 0x7f); if (++n > 4) throw new Error(tx('editor.midi.poskozeny')); } while (c & 0x80 && p < konecBloku);
+      return v;
+    };
     const stopa = kanal => {
       const k = `${s}:${kanal}`;
       if (!stopy.has(k)) stopy.set(k, { stopa: s, kanal, program: programy[kanal] ?? 0, noty: [] });
@@ -80,7 +85,10 @@ export function ctiMidi(data) {
         p += delka;
         if (typ === 0x2f) break;
         if (typ === 0x51 && delka >= 3) tempa.push({ tick, bpm: 60e6 / ((d[0] << 16) | (d[1] << 8) | d[2]) });
-        else if (typ === 0x58 && delka >= 2) takty.push({ tick, takt: `${d[0]}/${2 ** d[1]}` });
+        else if (typ === 0x58 && delka >= 2) {
+          if (!d[0] || d[1] > 6) throw new Error(tx('editor.midi.poskozeny'));   // 0/4 or a note value below 1/64
+          takty.push({ tick, takt: `${d[0]}/${2 ** d[1]}` });
+        }
         else if (typ === 0x59 && delka >= 2) toniny.push({ tick, sf: d[0] > 127 ? d[0] - 256 : d[0], moll: d[1] <= 1 ? !!d[1] : null });
         else if (typ >= 0x01 && typ <= 0x09) textoveUdalosti.push({ s, tick, typ, d });
         continue;
@@ -197,16 +205,39 @@ export function navrhniStopy(midi) {
 
 // ---------------------------------------------------------------- conversion to the song model
 const MRIZKY = [0.5, 1 / 3, 0.25, 1 / 6, 1 / 12, 0.125];
+const MAX_TAKTU = 2000;
 
-/** coarsest grid that at least 90 % of onsets fit (otherwise 1/16 for loosely played recordings) */
-function zvolMrizku(nastupy) {
-  if (!nastupy.length) return 0.25;
+/** how many different onsets (more than a little apart: not one chord played unevenly) land on one point of grid g */
+function slite(nastupy, g) {
+  const body = new Map();
+  for (const x of [...nastupy].sort((a, c) => a - c)) {
+    const k = Math.round(x / g);
+    if (!body.has(k)) body.set(k, []);
+    body.get(k).push(x);
+  }
+  let n = 0;
+  for (const xs of body.values()) for (let i = 1; i < xs.length; i++) if (xs[i] - xs[i - 1] > 0.06) n++;
+  return n;
+}
+/**
+ * The grid for the onsets (in quarters). A file written from a score has every onset exactly on some grid: the
+ * coarsest such grid is used, so a few sixteenths or one triplet are kept. A played recording: the coarsest grid that
+ * at least 90 % of onsets fit and on which no two different onsets merge; if every grid merges some, the one that
+ * merges the fewest. → { g, slito: onsets merged into another }
+ */
+function zvolMrizku(nastupy, ppq = 480) {
+  if (!nastupy.length) return { g: 0.25, slito: 0 };
+  const presne = Math.max(1 / ppq, 1e-3) + 1e-9;
+  for (const g of MRIZKY) if (nastupy.every(x => Math.abs(x - Math.round(x / g) * g) <= presne)) return { g, slito: 0 };
+  let nej = null;
   for (const g of MRIZKY) {
     const tol = Math.min(0.06, g * 0.2);
     const sedi = nastupy.filter(x => Math.abs(x - Math.round(x / g) * g) <= tol).length;
-    if (sedi >= 0.9 * nastupy.length) return g;
+    const s = slite(nastupy, g);
+    if (sedi >= 0.9 * nastupy.length && !s) return { g, slito: 0 };
+    if (!nej || s < nej.slito) nej = { g, slito: s };
   }
-  return 0.25;
+  return nej;
 }
 /** key signature with the smallest total duration of out-of-scale notes (on a tie, fewer sharps/flats) */
 function odhadPredznamenani(noty) {
@@ -309,9 +340,11 @@ export function midiNaPisen(midi, { melodie, leva = null, nazev = '' } = {}) {
   if (!notyM.length) throw new Error(tx('editor.midi.stopaBezNot'));
   const ppq = midi.ppq;
   const poznamky = [];
-  const g = zvolMrizku(notyM.map(n => n.zac / ppq));
+  const mM = zvolMrizku(notyM.map(n => n.zac / ppq), ppq), g = mM.g;
+  const mL = notyL.length ? zvolMrizku(notyL.map(n => n.zac / ppq), ppq) : { g, slito: 0 };
   const hM = hlas(notyM, ppq, g, { jenHorni: true });
-  const hL = notyL.length ? hlas(notyL, ppq, zvolMrizku(notyL.map(n => n.zac / ppq)), { jenHorni: false, maxTonu: 3 }) : [];
+  const hL = notyL.length ? hlas(notyL, ppq, mL.g, { jenHorni: false, maxTonu: 3 }) : [];
+  if (mM.slito + mL.slito) poznamky.push(tx('editor.midi.slito', { n: mM.slito + mL.slito }));
   if (midi.slova.length) prirad(midi.slova, hM, ppq);
 
   const met = metrum(midi.takt);
@@ -325,6 +358,7 @@ export function midiNaPisen(midi, { melodie, leva = null, nazev = '' } = {}) {
   const prvniTakt = predtakti ? L - posun : L;
   const konec = Math.max(...hM.map(u => u.kon), ...hL.map(u => u.kon));
   const pocetTaktu = 1 + Math.max(0, Math.ceil((konec - start - prvniTakt) / L - 1e-9));
+  if (pocetTaktu > MAX_TAKTU) throw new Error(tx('editor.midi.dlouhy', { n: MAX_TAKTU }));
   const predzn = midi.predznamenani ?? odhadPredznamenani([...notyM, ...notyL]);
   const moll = midi.moll ?? !jakaTonina({ predznamenani: predzn,
     takty: [{ noty: hM.map(u => ({ t: zMidi(u.vysky[0]), d: '1/4' })) }] }).dur;

@@ -319,8 +319,9 @@ function harmonyXml(znacka, offset) {
     + `<kind text="${esc(a.text)}">${a.druh}</kind>${bas}${offset ? `<offset>${offset}</offset>` : ''}</harmony>`;
 }
 
-/** beams by beats: for each note a list of [number, type] */
-function tramce(noty, doba) {
+/** beams by beats: for each note a list of [number, type]; a beam starts and ends with a tuplet (typy from
+ *  skupinyTuplet), otherwise Verovio would read the bar shorter */
+function tramce(noty, doba, typy = []) {
   const tram = noty.map(() => []);
   let skupina = [], pos = 0;
   const q = noty.map(n => zlomek(n.d) || 0);
@@ -339,8 +340,10 @@ function tramce(noty, doba) {
     skupina = [];
   };
   noty.forEach((n, i) => {
-    if (Math.abs(pos / doba - Math.round(pos / doba)) < 1e-6) uzavri();
+    const tuplet = !!typy[i]?.skutecne, predtim = !!typy[i - 1]?.skutecne;
+    if (Math.abs(pos / doba - Math.round(pos / doba)) < 1e-6 || typy[i]?.zacatek || tuplet !== predtim) uzavri();
     if (n.t !== 'r' && q[i] && q[i] < 1 - 1e-6) skupina.push(i); else uzavri();
+    if (typy[i]?.konec) uzavri();
     pos += q[i];
   });
   uzavri();
@@ -375,9 +378,9 @@ function notyXml(noty, staff, stav, sAkordy, doba, predznamenani, div) {
   const x = [];
   // accidentals valid in this bar and staff: step+octave → alter (otherwise the key signature applies)
   const platne = new Map();
-  const tram = tramce(noty, doba);
   const typy = noty.map(n => zapisDelky(n.d));
   skupinyTuplet(noty, typy);
+  const tram = tramce(noty, doba, typy);
   let pos = 0;
   const akordy = [...(sAkordy || [])];
   noty.forEach((n, i) => {
@@ -481,7 +484,8 @@ export function naMusicXml(pisen) {
     x.push(prava.xml);
     if (dveOsnovy) {
       x.push(`<backup><duration>${Math.round(prava.delka * div)}</duration></backup>`);
-      const lv = t.leva && t.leva.length ? t.leva : [{ t: 'r', d: naPresnyZlomek(prava.delka || met.delka) || '1/1' }];
+      const lv = t.leva && t.leva.length ? t.leva
+        : rozlozDelku(prava.delka || met.delka).map(q => ({ t: 'r', d: naPresnyZlomek(q) || '1/1' }));   // 5/4: no single rest
       x.push(notyXml(lv, 2, stavL, [], met.doba, fifths, div).xml);
     }
     if (slova.length) x.push(`<direction placement="above"><direction-type><words>${slova.join(' ')}</words></direction-type></direction>`);
@@ -539,10 +543,23 @@ export function zMusicXml(xml) {
     const takt = { akordy: [], noty: [], znacky: volta ? { volta } : {} };
     const leva = [];
     let pos = 0, posledniOsnova = 1;
-    const hlas = {};                                      // the first regular voice on each staff
+    // the voice read for each staff: of the voices living on that staff (a cross-staff note stays with its own voice's
+    // staff), the one sounding longest in this bar; a dropped voice with notes is reported
+    const hlas = {}, domov = {}, zni = {}, pocty = {};
     for (const el of deti(m, 'note')) {
       if (dite(el, 'grace') || dite(el, 'cue')) continue;
-      hlas[Number(text(el, 'staff') || 1)] ??= text(el, 'voice') || '1';
+      const v = text(el, 'voice') || '1', st = Number(text(el, 'staff') || 1);
+      ((pocty[v] ||= {})[st] = (pocty[v][st] || 0) + 1);
+      if (!dite(el, 'chord') && dite(el, 'pitch')) zni[v] = (zni[v] || 0) + Number(text(el, 'duration') || 0);
+      zni[v] ||= 0;
+    }
+    for (const [v, po] of Object.entries(pocty)) domov[v] = Number(Object.entries(po).sort((a, b) => b[1] - a[1] || a[0] - b[0])[0][0]);
+    for (const v of Object.keys(pocty)) {
+      const st = domov[v];
+      if (hlas[st] == null || zni[v] > zni[hlas[st]]) hlas[st] = v;
+    }
+    for (const v of Object.keys(pocty)) {
+      if ((domov[v] === 1 || domov[v] === 2) && hlas[domov[v]] !== v && zni[v] > 0) pisen.nejistoty.push(`takt ${pisen.takty.length + 1}: vynechán hlas ${v}`);
     }
     const posledniNota = {}, konecHlasu = { 1: 0, 2: 0 }, vyplnitDo = { 1: 0, 2: 0 };
     const doplnPauzu = (staff, konec) => {
@@ -556,6 +573,7 @@ export function zMusicXml(xml) {
       konecHlasu[staff] = konec;
       posledniNota[staff] = null;
     };
+    const osnovaHlasu = (staff, v) => domov[v] ?? staff;
     const patriDoHlasu = (staff, v) => (staff === 1 || staff === 2)
       && (hlas[staff] || minulyHlas[staff] || '1') === v;
     const nactiZvuk = snd => {
@@ -571,27 +589,32 @@ export function zMusicXml(xml) {
       if (tag === 'attributes') {
         const deleni = Number(text(el, 'divisions'));
         if (deleni > 0) div = deleni;
+        // the model has one time, key and clef: the first ones are used, a later change is reported
+        const cislo = pisen.takty.length + 1, nejiste = co => { if (!pisen.nejistoty.includes(`takt ${cislo}: ${co}`)) pisen.nejistoty.push(`takt ${cislo}: ${co}`); };
         const key = dite(el, 'key');
-        if (!maToninu && text(key, 'fifths') !== '') { pisen.predznamenani = Number(text(key, 'fifths')); maToninu = true; }
+        if (text(key, 'fifths') !== '') {
+          const f = Number(text(key, 'fifths'));
+          if (!maToninu) { pisen.predznamenani = f; maToninu = true; } else if (f !== pisen.predznamenani) nejiste(`změna tóniny (${f})`);
+        }
         const time = dite(el, 'time');
-        if (!maTakt && text(time, 'beats') && text(time, 'beat-type')) {
-          pisen.takt = `${text(time, 'beats')}/${text(time, 'beat-type')}`; maTakt = true;
+        if (text(time, 'beats') && text(time, 'beat-type')) {
+          const beats = text(time, 'beats').split('+').reduce((a, x) => a + (Number(x) || 0), 0);   // 3+2 → 5
+          const tk = `${beats}/${text(time, 'beat-type')}`;
+          if (!maTakt) { pisen.takt = tk; maTakt = true; } else if (tk !== pisen.takt) nejiste(`změna taktu na ${tk}`);
         }
         for (const clef of deti(el, 'clef')) {
           const num = clef.getAttribute('number') || '1';
-          if (!maKlic && num === '1' && text(clef, 'sign')) {
-            pisen.klic = text(clef, 'sign') === 'F' ? 'basovy' : 'houslovy'; maKlic = true;
-          }
+          if (num !== '1' || !text(clef, 'sign')) continue;
+          const klic = text(clef, 'sign') === 'F' ? 'basovy' : 'houslovy';
+          if (!maKlic) { pisen.klic = klic; maKlic = true; } else if (klic !== pisen.klic) nejiste('změna klíče');
         }
+        const tr = dite(el, 'transpose');
+        if (tr && Number(text(tr, 'chromatic') || 0)) nejiste(`transponující nástroj (${text(tr, 'chromatic')} půltónů), noty jsou v zapsané výšce`);
       } else if (tag === 'sound') {
         nactiZvuk(el);
       } else if (tag === 'direction') {
         nactiZvuk(dite(el, 'sound'));
-        const w = [...el.getElementsByTagName('words')].map(w => w.textContent.trim()).join(' ').toLowerCase();
-        if (/^fine/.test(w)) takt.znacky.fine = true;
-        if (/d\.\s*c\./.test(w)) takt.znacky.dc = true;
-        if (/d\.\s*s\./.test(w)) takt.znacky.ds = true;
-        if (/to coda/.test(w)) takt.znacky.doCody = true;
+        for (const w of el.getElementsByTagName('words')) Object.assign(takt.znacky, skokySlovy(w.textContent.trim().toLowerCase()));
         if (el.getElementsByTagName('segno').length) takt.znacky.segno = true;
         if (el.getElementsByTagName('coda').length) takt.znacky.coda = true;
       } else if (tag === 'harmony') {
@@ -611,8 +634,9 @@ export function zMusicXml(xml) {
         posledniOsnova = null;
       } else if (tag === 'forward') {
         pos += Number(text(el, 'duration') || 0) / div;
-        const staff = Number(text(el, 'staff')) || posledniOsnova;
-        const v = text(el, 'voice') || hlas[staff] || minulyHlas[staff] || '1';
+        const v0 = text(el, 'voice');
+        const staff = v0 ? osnovaHlasu(Number(text(el, 'staff')) || posledniOsnova, v0) : Number(text(el, 'staff')) || posledniOsnova;
+        const v = v0 || hlas[staff] || minulyHlas[staff] || '1';
         if (patriDoHlasu(staff, v)) vyplnitDo[staff] = Math.max(vyplnitDo[staff], pos);
       } else if (tag === 'barline') {
         const rep = dite(el, 'repeat');
@@ -635,8 +659,8 @@ export function zMusicXml(xml) {
         if (dite(el, 'coda')) takt.znacky.coda = true;
       } else if (tag === 'note') {
         if (dite(el, 'grace')) continue;
-        const staff = Number(text(el, 'staff') || 1);
         const v = text(el, 'voice') || '1';
+        const staff = osnovaHlasu(Number(text(el, 'staff') || 1), v);
         const jeAkord = !!dite(el, 'chord');
         const dur = Number(text(el, 'duration') || 0) / div;
         const zacatek = pos;
@@ -658,8 +682,9 @@ export function zMusicXml(xml) {
         }
         const ties = deti(el, 'tie').map(x => x.getAttribute('type'));
         if (jeAkord && posledniNota[staff]) {
-          posledniNota[staff].t += ' ' + t;
-          if (ties.includes('start')) posledniNota[staff].lig = true;
+          const kusy = posledniNota[staff].kusy || [posledniNota[staff]];
+          for (const k of kusy) k.t += ' ' + t;
+          if (ties.includes('start')) kusy.at(-1).lig = true;
           continue;
         }
         doplnPauzu(staff, zacatek);
@@ -673,8 +698,19 @@ export function zMusicXml(xml) {
         }
         const fing = el.getElementsByTagName('fingering')[0]?.textContent?.trim();
         if (fing && /^[1-5]$/.test(fing)) nota.prst = Number(fing);
-        (staff === 1 ? takt.noty : leva).push(nota);
-        posledniNota[staff] = nota;
+        const cil = staff === 1 ? takt.noty : leva;
+        if (zapisDelky(d) || !(dur > 0)) {
+          cil.push(nota);
+          posledniNota[staff] = nota;
+        } else {
+          // a length no single note can show (a whole bar in 5/4, 9/8, 7/8…): writable pieces, a note tied across them
+          const kusy = rozlozDelku(dur).map(naPresnyZlomek).filter(Boolean)
+            .map((dd, k, a) => ({ ...nota, d: dd, lig: t !== 'r' && (k < a.length - 1 || nota.lig), s: k ? '' : nota.s }));
+          for (const k of kusy.slice(1)) delete k.prst;
+          cil.push(...kusy);
+          posledniNota[staff] = kusy[0];
+          Object.defineProperty(kusy[0], 'kusy', { value: kusy, enumerable: false });
+        }
         konecHlasu[staff] = Math.max(konecHlasu[staff], pos);
       }
     }
@@ -690,6 +726,15 @@ export function zMusicXml(xml) {
     pisen.klic = 'basovy';
   }
   return pisen;
+}
+
+/** jumps written only as words (also used by original.js): D.C., DC, Da Capo; D.S., Dal Segno; Fine (not the "al
+ *  Fine" of a D.C. instruction); To Coda. w = the words of one direction, lower case */
+export const SKOKY_SLOVY = { dc: /\bd\.?\s*c\.?(?![a-z])|da capo/, ds: /\bd\.?\s*s\.?(?![a-z])|dal segno/, doCody: /to coda/ };
+export function skokySlovy(w) {
+  const z = Object.fromEntries(Object.entries(SKOKY_SLOVY).filter(([, re]) => re.test(w)).map(([k]) => [k, true]));
+  if (/\bfine\b/.test(w.replace(/\bal\s+fine\b/g, ''))) z.fine = true;
+  return z;
 }
 
 /** deep copy of the model */

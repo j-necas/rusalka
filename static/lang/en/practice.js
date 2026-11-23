@@ -135,4 +135,8 @@ export default {
   "cviceni.zapis.zadneTakty": "there are no bars",
   "cviceni.zapis.levaRuka": " (left hand)",
   "cviceni.zapis.spatnaHodnota": "line {radek}: “{hodnota}” should be a number",
+  "cviceni.zapis.mimoMez": "line {radek}: “{hodnota}” should be from {od} to {do}",
+  "cviceni.zapis.mimoRozsah": "line {radek}{leva}: note “{nota}” is off the piano (A0–C8)",
+  "cviceni.zapis.vicLevych": "line {radek}: “||” may appear only once in a line",
+  "cviceni.zapis.spatnaLigatura": "line {radek}{leva}: the tie “{nota}” must lead to a next note of the same pitch",
 };

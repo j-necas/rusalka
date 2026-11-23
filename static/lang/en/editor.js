@@ -104,6 +104,8 @@ export default {
   'editor.midi.zmenyTempa': 'The tempo changes in the file; I used the first one ({tempo}).',
   'editor.midi.odhadPredznamenani': 'The file has no key signature; I guessed it from the notes.',
   'editor.midi.souzvuky': 'Where the melody had chords, I kept only the top note.',
+  'editor.midi.slito': 'Some notes started very close together and were merged on the grid (count: {n}). Check them in the editor.',
+  'editor.midi.dlouhy': 'The MIDI file is too long (more than {n} bars); it is probably damaged.',
   'editor.midi.nazevPisne': 'Song from MIDI',
   'editor.midi.stopaKanal': '{nastroj}, channel {kanal}',
   'editor.midi.bici': 'Drums',

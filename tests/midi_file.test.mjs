@@ -188,3 +188,49 @@ test('mixed MIDI grids preserve the entire duration when splitting notes', () =>
   assert.ok(prvni.slice(0, -1).every(n => n.lig));
   assert.deepEqual(kontrola(pisen), []);
 });
+
+test('grid: a few dotted-eighth + sixteenth figures or one triplet are kept (exact onsets pick the finer grid)', () => {
+  let t = 0;
+  const seq = [];
+  const pridej = (m, l) => { seq.push([m, t, l]); t += l; };
+  for (let b = 0; b < 8; b++) {
+    if (b % 4 === 0) { pridej(60, 0.75); pridej(62, 0.25); pridej(64, 1); pridej(65, 1); pridej(67, 1); }
+    else { pridej(60, 1); pridej(62, 1); pridej(64, 0.5); pridej(65, 0.5); pridej(67, 1); }
+  }
+  let r = midiNaPisen(ctiMidi(soubor([stopa([...hlavicka(), ...noty(seq)])])), { melodie: 0 });
+  assert.equal(r.mrizka, 0.25);
+  assert.equal(tony(r.pisen.takty[0]), 'C4/3/16 D4/1/16 E4/1/4 F4/1/4 G4/1/4');
+  t = 0; seq.length = 0;
+  for (let b = 0; b < 8; b++) {
+    if (b === 3) { pridej(60, 1 / 3); pridej(62, 1 / 3); pridej(64, 1 / 3); pridej(65, 1); pridej(67, 2); }
+    else { pridej(60, 0.5); pridej(62, 0.5); pridej(64, 0.5); pridej(65, 0.5); pridej(67, 2); }
+  }
+  r = midiNaPisen(ctiMidi(soubor([stopa([...hlavicka(), ...noty(seq)])])), { melodie: 0 });
+  assert.equal(r.pisen.takty[3].noty.filter(n => n.t !== 'r').length, 5, 'all five notes of the triplet bar');
+  assert.deepEqual(kontrola(r.pisen), []);
+});
+
+test('grid: when notes would still merge on the chosen grid, the loss is written into the notes', () => {
+  // a loosely played line with one quick grace-like pair: two onsets 0.1 beat apart
+  const seq = [];
+  for (let i = 0; i < 16; i++) seq.push([60 + (i % 5), i + (i % 3 === 1 ? 0.03 : 0), 0.9]);
+  seq.push([72, 16, 0.1], [74, 16.1, 0.9]);
+  const r = midiNaPisen(ctiMidi(soubor([stopa([...hlavicka(), ...noty(seq, { legato: 1 })])])), { melodie: 0 });
+  const nastupu = r.pisen.takty.flatMap(t => t.noty).filter((n, i, a) => n.t !== 'r' && !a[i - 1]?.lig).length;
+  assert.ok(nastupu === 18 || r.poznamky.some(p => /sloučil/.test(p)), `${nastupu} onsets; ${r.poznamky.join(' | ')}`);
+  assert.deepEqual(kontrola(r.pisen), []);
+});
+
+test('corrupt MIDI: an overlong delta, a zero numerator and an absurd length end with a friendly error', () => {
+  const s = [...hlavicka(), [0, [0x90, 60, 80]], [480, [0x80, 60, 0]]];
+  const b = soubor([stopa(s)]);
+  // a 6-byte variable-length delta before the end of track (only 4 bytes are allowed)
+  const delta = [0, 0x90, 62, 80, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f, 0x80, 62, 0, 0, 0xff, 0x2f, 0];
+  const spatna = new Uint8Array([...txt('MThd'), 0, 0, 0, 6, 0, 0, 0, 1, 1, 0xe0, ...txt('MTrk'), ...u32(delta.length), ...delta]);
+  assert.throws(() => midiNaPisen(ctiMidi(spatna), { melodie: 0 }), /poškoz|damaged|dlouh|long/i);
+  const nula = soubor([stopa([[0, meta(0x58, [0, 2, 24, 8])], [0, [0x90, 60, 80]], [480, [0x80, 60, 0]]])]);
+  assert.throws(() => ctiMidi(nula), /poškoz|damaged/i);
+  const dlouha = soubor([stopa([...hlavicka(), [0, [0x90, 60, 80]], [480, [0x80, 60, 0]], [480 * 4 * 3000, [0x90, 62, 80]], [480 * 4 * 3000 + 480, [0x80, 62, 0]]])]);
+  assert.throws(() => midiNaPisen(ctiMidi(dlouha), { melodie: 0 }), /dlouh|long/i);
+  assert.ok(b.length);
+});

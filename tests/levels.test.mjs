@@ -376,3 +376,27 @@ test('generated left hand ends on the barline after five sixteenth-note quintupl
     assert.ok(vysky(bar.leva[0].t).some(v => v.midi % 12 === 0), `level ${id}`);
   }
 });
+
+test('a melody low in the bass clef: the generated left hand goes an octave lower and never crosses it', async () => {
+  const { doprovodVeStylu, STYLY } = await import('../static/lib/extras.js');
+  const nn = (t, d = '1/4') => ({ t, d, lig: false, s: '' });
+  const p = { nazev: 'Bas', autor: '', klic: 'basovy', predznamenani: 0, takt: '4/4', tempo: 90, takty: [
+    { akordy: [{ doba: 0, znacka: 'C' }], noty: [nn('C3'), nn('E3'), nn('G3'), nn('E3')] },
+    { akordy: [{ doba: 0, znacka: 'G7' }], noty: [nn('D3'), nn('F3'), nn('G3'), nn('B2')] },
+    { akordy: [{ doba: 0, znacka: 'C' }], noty: [nn('C3', '1/1')] },
+  ] };
+  const krizi = (q, ruka = 'leva') => q.takty.some(t => {
+    const mel = []; let pos = 0;
+    for (const x of t.noty) { const d = zlomek(x.d); for (const v of vysky(x.t)) mel.push([pos, pos + d, v.midi]); pos += d; }
+    pos = 0;
+    return (t[ruka] || []).some(x => {
+      const d = zlomek(x.d), od = pos; pos += d;
+      return vysky(x.t).some(v => mel.some(([a, b, m]) => a < od + d - 1e-9 && b > od + 1e-9 && v.midi >= m));
+    });
+  });
+  for (const id of [3, 4]) {
+    const q = vytvorUroven(p, id);
+    assert.equal(krizi(q), false, `level ${id}: ${q.takty.map(t => t.leva.map(x => x.t).join(' ')).join(' | ')}`);
+  }
+  for (const s of STYLY) assert.equal(krizi(doprovodVeStylu(p, s.id)), false, s.id);
+});

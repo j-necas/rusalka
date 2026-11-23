@@ -506,6 +506,14 @@ const doRozsahu = (ton, dole) => vyskaZKroku(ton.krok, ton.alter, dole + mod(ton
 
 const BAS_DOLE = 40;          // E2 … D#3
 const SOUZVUK_DOLE = 43;      // G2 … F#3
+/** the melody's lowest pitch (every note of a chord counts); Infinity without notes */
+export const nejnizsiMelodie = p => Math.min(...p.takty.flatMap(t => (t.noty || []).flatMap(n => vysky(n.t).map(v => v.midi))));
+/** octaves the generated left hand goes down: a melody below G3 (in the bass clef) would cross the usual position;
+ *  null = the melody is too low for a left hand below it (below E2) */
+export function oktavyLeve(p) {
+  const m = nejnizsiMelodie(p);
+  return m >= 55 ? 0 : m >= 40 ? 1 : null;
+}
 
 /** accompaniment pattern by metre: [{ pos, delka (ticks), druh: 'bas' | 'kvinta' | 'souzvuk' }] across the whole bar */
 function vzorDoprovodu(takt) {
@@ -531,17 +539,17 @@ function znejiciMelodie(noty, delka = d => zlomek(d) * DIV) {
 }
 
 /** chord voicing in the G2–F#3 position with no semitone clash with the melody and no crossing it */
-function souzvuk(rozpis, melodie, od, doo) {
+function souzvuk(rozpis, melodie, od, doo, dolu = 0) {
   let tony = rozpis.tony.filter(x => x.interval < 12);
   if (tony.length > 3) tony = tony.filter(x => x.interval !== 7);
   const znejici = melodie.filter(x => x.od < doo && x.do > od).map(x => x.midi);
   const spatne = m => znejici.some(x => Math.abs(x - m) === 1 || m > x);
   const out = [];
   for (const ton of tony) {
-    let s = doRozsahu(ton, SOUZVUK_DOLE);
+    let s = doRozsahu(ton, SOUZVUK_DOLE - dolu);
     let m = vyska(s).midi;
-    if (spatne(m)) { s = doRozsahu(ton, SOUZVUK_DOLE - 12); m = vyska(s).midi; }
-    if (!spatne(m) && m >= 36) out.push({ s, m });
+    if (spatne(m)) { s = doRozsahu(ton, SOUZVUK_DOLE - dolu - 12); m = vyska(s).midi; }
+    if (!spatne(m) && m >= 36 - dolu) out.push({ s, m });
   }
   out.sort((a, b) => a.m - b.m);
   return [...new Set(out.map(x => x.s))].join(' ');
@@ -564,6 +572,7 @@ function levaRuka(p, druh) {
   const met = metrum(p.takt);
   const plna = Math.round(met.delka * DIV);
   const akordy = akordyPoTaktech(p);
+  const dolu = 12 * (oktavyLeve(p) ?? 1);
   p.takty.forEach((t, ti) => {
     const noty = t.noty || [];
     const delka = soucetTaktu(noty) * DIV, L = Math.round(delka);
@@ -594,13 +603,13 @@ function levaRuka(p, druh) {
       const r = znacka ? rozepisAkord(znacka) : null;
       if (!r) return { ...u, t: 'r' };
       if (u.druh === 'souzvuk' || u.druh === 'akord') {
-        const s = souzvuk(r, mel, u.od, u.do);
-        return { ...u, t: s || doRozsahu(r.bas, BAS_DOLE) };
+        const s = souzvuk(r, mel, u.od, u.do, dolu);
+        return { ...u, t: s || doRozsahu(r.bas, BAS_DOLE - dolu) };
       }
       // fifth only as an alternating bass within the same chord, otherwise the root
       const ton = u.druh === 'kvinta' && predBas === znacka && !akordZnacky(znacka).bas ? r.kvinta : r.bas;
       predBas = znacka;
-      return { ...u, t: doRozsahu(ton, BAS_DOLE) };
+      return { ...u, t: doRozsahu(ton, BAS_DOLE - dolu) };
     });
     let leva = Math.abs(delka - L) < EPS ? sestavLevou(udalosti) : null;
     if (!leva) leva = noty.map(n => ({ t: 'r', d: n.d, lig: false, s: '' }));   // fallback: rests in the melody's rhythm
@@ -734,15 +743,16 @@ function popisDoprovodu(takt) {
 /** ladder of levels for the given song: [{ id, nazev, popis, dostupna }] (texts in the app language) */
 export function seznamUrovni(pisen) {
   const mel = maMelodii(pisen), akordy = maAkordy(pisen);
+  const levaPod = mel && oktavyLeve(pisen) != null;              // a melody too low has no left hand under it
   const sAkordy = popis => (akordy ? popis : popis + ' ' + t('cviceni.uroven.doplnimeAkordy'));
   const u = (id, popis, dostupna) => ({ id, nazev: t(`cviceni.uroven.${id}.nazev`), popis, dostupna });
   return [
     u(1, t('cviceni.uroven.1.popis'), mel),
     u(2, t('cviceni.uroven.2.popis'), mel),
-    u(3, sAkordy(t('cviceni.uroven.3.popis')), mel),
-    u(4, sAkordy(t('cviceni.uroven.4.popis')), mel),
+    u(3, sAkordy(t('cviceni.uroven.3.popis')), levaPod),
+    u(4, sAkordy(t('cviceni.uroven.4.popis')), levaPod),
     maLevou(pisen) ? u(5, t('cviceni.uroven.5.popisObe'), true)
-      : { id: 5, nazev: t('cviceni.uroven.5.doprovod.nazev'), popis: sAkordy(t('cviceni.uroven.5.doprovod.popis', { doprovod: popisDoprovodu(pisen.takt) })), dostupna: mel },
+      : { id: 5, nazev: t('cviceni.uroven.5.doprovod.nazev'), popis: sAkordy(t('cviceni.uroven.5.doprovod.popis', { doprovod: popisDoprovodu(pisen.takt) })), dostupna: levaPod },
   ];
 }
 

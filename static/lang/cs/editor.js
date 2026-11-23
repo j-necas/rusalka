@@ -104,6 +104,8 @@ export default {
   'editor.midi.zmenyTempa': 'Tempo se v souboru mění, použil jsem první ({tempo}).',
   'editor.midi.odhadPredznamenani': 'Předznamenání v souboru chybí, odhadl jsem ho z not.',
   'editor.midi.souzvuky': 'Ze souzvuků v melodii jsem nechal jen horní tón.',
+  'editor.midi.slito': 'Některé noty začínaly těsně po sobě a na mřížce se sloučily (počet: {n}). Zkontroluj je v editoru.',
+  'editor.midi.dlouhy': 'Soubor MIDI je příliš dlouhý (víc než {n} taktů), nejspíš je poškozený.',
   'editor.midi.nazevPisne': 'Písnička z MIDI',
   'editor.midi.stopaKanal': '{nastroj}, kanál {kanal}',
   'editor.midi.bici': 'Bicí',

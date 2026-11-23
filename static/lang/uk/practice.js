@@ -116,4 +116,8 @@ export default {
   'cviceni.zapis.zadneTakty': 'немає тактів',
   'cviceni.zapis.levaRuka': ' (ліва рука)',
   'cviceni.zapis.spatnaHodnota': 'рядок {radek}: «{hodnota}» має бути числом',
+  'cviceni.zapis.mimoMez': 'рядок {radek}: «{hodnota}» має бути від {od} до {do}',
+  'cviceni.zapis.mimoRozsah': 'рядок {radek}{leva}: нота «{nota}» поза діапазоном фортепіано (A0–C8)',
+  'cviceni.zapis.vicLevych': 'рядок {radek}: «||» може бути в рядку лише один раз',
+  'cviceni.zapis.spatnaLigatura': 'рядок {radek}{leva}: ліга «{nota}» має вести до наступної ноти тієї ж висоти',
 };

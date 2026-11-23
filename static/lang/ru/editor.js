@@ -108,6 +108,8 @@ export default {
   "editor.midi.zmenyTempa": "В файле меняется темп; использован первый ({tempo}).",
   "editor.midi.odhadPredznamenani": "В файле не указаны ключевые знаки; они приблизительно определены по нотам.",
   "editor.midi.souzvuky": "Там, где в мелодии были аккорды, оставлена только верхняя нота.",
+  "editor.midi.slito": "Некоторые ноты начинались слишком близко друг к другу и слились на сетке (количество: {n}). Проверь их в редакторе.",
+  "editor.midi.dlouhy": "Файл MIDI слишком длинный (больше {n} тактов), вероятно, он повреждён.",
   "editor.midi.nazevPisne": "Песня из MIDI",
   "editor.midi.stopaKanal": "{nastroj}, канал {kanal}",
   "editor.midi.bici": "Ударные",

@@ -116,4 +116,8 @@ export default {
   "cviceni.zapis.zadneTakty": "لا توجد موازير",
   "cviceni.zapis.levaRuka": " (اليد اليسرى)",
   "cviceni.zapis.spatnaHodnota": "السطر {radek}: يجب أن تكون «{hodnota}» رقمًا",
+  "cviceni.zapis.mimoMez": "السطر {radek}: يجب أن تكون «{hodnota}» بين {od} و{do}",
+  "cviceni.zapis.mimoRozsah": "السطر {radek}{leva}: النغمة «{nota}» خارج نطاق البيانو (A0–C8)",
+  "cviceni.zapis.vicLevych": "السطر {radek}: يمكن أن تظهر «||» مرة واحدة فقط في السطر",
+  "cviceni.zapis.spatnaLigatura": "السطر {radek}{leva}: يجب أن يؤدي الربط «{nota}» إلى النغمة التالية بالارتفاع نفسه",
 };

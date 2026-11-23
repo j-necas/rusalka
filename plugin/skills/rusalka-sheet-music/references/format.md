@@ -24,9 +24,9 @@ Any other key is an error. (Older Czech keys are accepted too: `název`, `autor`
 - `author`: the composer, and the lyricist if there is one ("music by Karel Svoboda, lyrics by Jiří Štaidl").
   Someone who only wrote down or arranged the music doesn't belong here. If the score names no author, leave the
   field empty.
-- `time` (time signature): e.g. `3/4`, `4/4`, `6/8`, `2/2`.
+- `time` (time signature): e.g. `3/4`, `4/4`, `6/8`, `2/2` (at least one beat; the lower number 1, 2, 4, 8, 16, 32 or 64).
 - `key` (key signature): the number of sharps as a positive number (`2` = D major / B minor), the number of flats as
-  a negative one (`-1` = F major / D minor).
+  a negative one (`-1` = F major / D minor), from `-7` to `7`.
 - `tempo`: quarter-note beats per minute; `0` if the score doesn't give one.
 - `clef`: `treble` or `bass` – the clef of the melody.
 
@@ -53,7 +53,7 @@ Any other key is an error. (Older Czech keys are accepted too: `název`, `autor`
 | length | `1` `2` `4` `8` `16` `32` | whole, half, quarter, eighth, sixteenth, thirty-second |
 | dot | `4.` `8.` `2..` | one or two dots |
 | triplet | `8t` | eighth-note triplet (three `8t` = one quarter) |
-| tie | `~` | the note is tied to the next one (across the bar line too) |
+| tie | `~` | the note is tied to the next one of the same pitch (across the bar line too); never to a rest or another pitch |
 | fingering | `^3` | finger number above the note (1–5), only when printed in the score |
 | syllable | `=Hvěz-` | lyric syllable under the note; a trailing `-` = the word continues; write a space as `_` |
 
@@ -76,6 +76,7 @@ don't write them out – the app unrolls them.
 |---|---|
 | `\|:` | start of a repeat (the bar starts with a repeat bar line) |
 | `:\|` | end of a repeat (the bar ends with a repeat bar line) |
+| `:\|x3` | end of a repeat played three times (the score says "3×"; any number from 3) |
 | `1.` `2.` | the bar belongs to the 1st / 2nd ending (volta) – on every bar of the volta |
 | `segno` `coda` | segno sign / start of the coda in this bar |
 | `tocoda` `fine` `dc` `ds` | "To Coda", "Fine", "D.C.", "D.S." at the end of the bar |

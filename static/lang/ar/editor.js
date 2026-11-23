@@ -96,6 +96,8 @@ export default {
   "editor.midi.zmenyTempa": "تتغير السرعة في الملف؛ استُخدمت الأولى ({tempo}).",
   "editor.midi.odhadPredznamenani": "لا يحتوي الملف على دليل سلم؛ جرى تقديره من النغمات.",
   "editor.midi.souzvuky": "حيث احتوى اللحن على تآلفات، بقيت النغمة الأعلى فقط.",
+  "editor.midi.slito": "بعض النغمات بدأت متقاربة جدًا فدُمجت على الشبكة (العدد: {n}). راجعها في المحرر.",
+  "editor.midi.dlouhy": "ملف MIDI طويل جدًا (أكثر من {n} مازورة)، وربما يكون تالفًا.",
   "editor.midi.nazevPisne": "أغنية من MIDI",
   "editor.midi.stopaKanal": "{nastroj}، القناة {kanal}",
   "editor.midi.bici": "طبول",

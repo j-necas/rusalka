@@ -115,5 +115,9 @@ export default {
   "cviceni.zapis.spatnaNota": "строка {radek}{leva}: нота «{nota}» (например, G4/4, F#4/8., C4+E4/2, r/4)",
   "cviceni.zapis.zadneTakty": "нет тактов",
   "cviceni.zapis.levaRuka": " (левая рука)",
-  "cviceni.zapis.spatnaHodnota": "строка {radek}: «{hodnota}» должно быть числом"
+  "cviceni.zapis.spatnaHodnota": "строка {radek}: «{hodnota}» должно быть числом",
+  "cviceni.zapis.mimoMez": "строка {radek}: «{hodnota}» должно быть от {od} до {do}",
+  "cviceni.zapis.mimoRozsah": "строка {radek}{leva}: нота «{nota}» вне диапазона фортепиано (A0–C8)",
+  "cviceni.zapis.vicLevych": "строка {radek}: «||» может быть в строке только один раз",
+  "cviceni.zapis.spatnaLigatura": "строка {radek}{leva}: лига «{nota}» должна вести к следующей ноте той же высоты",
 };

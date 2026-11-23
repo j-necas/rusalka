@@ -135,4 +135,8 @@ export default {
   "cviceni.zapis.zadneTakty": "nejsou tu žádné takty",
   "cviceni.zapis.levaRuka": " (levá ruka)",
   "cviceni.zapis.spatnaHodnota": "řádek {radek}: „{hodnota}“ má být číslo",
+  "cviceni.zapis.mimoMez": "řádek {radek}: „{hodnota}“ má být od {od} do {do}",
+  "cviceni.zapis.mimoRozsah": "řádek {radek}{leva}: nota „{nota}“ je mimo klavír (A0–C8)",
+  "cviceni.zapis.vicLevych": "řádek {radek}: „||“ smí být na řádku jen jednou",
+  "cviceni.zapis.spatnaLigatura": "řádek {radek}{leva}: ligatura „{nota}“ musí vést do další noty stejné výšky",
 };

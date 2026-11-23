@@ -26,7 +26,7 @@ import { t, jazyk, nastavJazyk, nactiSlovnik, vychoziJazyk, smerJazyka, NAZVY_JA
 import { nastavSoustavu, soustava, jmenaKlaves, vychoziSoustava } from './lib/note_names.js';
 import { pokyny, vysledkyText, videoUkazky } from './lib/helper.js';
 import { notaProChybu, chybyKPrehledu, polohaDucha } from './lib/mistakes.js';
-import { zTextu, vyberZapis, nejisteTakty } from './lib/notation.js';
+import { zTextu, vyberZapis, nejisteTakty, taktyKOvereni } from './lib/notation.js';
 import { filtrujPisne } from './lib/songs.js';
 import { pocitatNavstevy, POCITADLO } from './lib/visits.js';
 import { zapnoutOffline } from './lib/offline.js';
@@ -418,7 +418,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       } catch (e) { throw new Error(t('app.necitelne', { chyba: chybaText(e) })); }
       const soubor = await UL.aktivni.zapis(jmenoSouboru(f.name), bajty);
       ZDROJ.set(soubor, 'vlastni');
-      return { soubor, nazev: p.nazev || soubor.replace(/\.[^.]+$/, '') };
+      return { soubor, nazev: p.nazev || soubor.replace(/\.[^.]+$/, ''), overit: taktyKOvereni(p) };
     },
     /** deletion of the user's own song */
     async smaz(soubor) {
@@ -639,7 +639,9 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       const v = MidiSoubor.midiNaPisen(MIDI.m, { melodie: Number($('#midiMelodie').value),
         leva: leva === '' ? null : Number(leva), nazev: $('#midiNazev').value.trim() });
       zavriDialog($('#midiOkno'));
-      editorNovePisne(v.pisen, { poznamky: v.poznamky });
+      const overit = taktyKOvereni(v.pisen);
+      editorNovePisne(v.pisen, { poznamky: v.poznamky, nejiste: nejisteTakty(v.pisen),
+        varovani: overit.length ? t('app.importOverit', { nazev: v.pisen.nazev, takty: overit.join(', ') }) : '' });
       toast(t('app.zkontrolujUloz'), 5000);
     } catch (err) { toast('MIDI: ' + chybaText(err), 6000); }
   };
@@ -784,7 +786,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const bohatsi = /<backup>|<dynamics>|<slur |<pedal |<grace|<wedge |<articulations>|<\/part>\s*<part /.test(xml);
     let aktualni = soubor, puvodni = pisen;
     Editor.otevriEditor({
-      pisen, verovioTk, zahraj: zahrajTony,
+      pisen, verovioTk, zahraj: zahrajTony, nejiste: nejisteTakty(pisen),
       varovani: bohatsi ? t('app.editorVarovani') : '',
       onUloz: async p => {
         const novy = await api.prepis(aktualni, naMusicXml(p));
@@ -1981,6 +1983,9 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     try {
       const d = await api.pridej(f);
       toast(t('app.pridano', { nazev: d.nazev })); nactiPisne();
+      // bars whose length does not add up or that the conversion was unsure about: say which, offer the editor
+      if (d.overit.length && await potvrd(t('app.importOverit', { nazev: d.nazev, takty: d.overit.join(', ') }),
+        t('app.importEditor'), t('app.importPozdeji'))) upravSoubor(d.soubor);
     } catch (err) { toast(t('app.nepovedlo', { chyba: chybaText(err) }), 5000); }
     e.target.value = '';
   };

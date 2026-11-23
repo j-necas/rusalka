@@ -284,3 +284,63 @@ test('first key, meter and clef can follow a divisions-only attributes block', (
     + notaXml('C'), '<attributes><key><fifths>3</fifths></key></attributes>' + notaXml('D')));
   assert.deepEqual([p.predznamenani, p.takt, p.klic], [-2, '3/8', 'basovy']);
 });
+
+// ---------------------------------------------------------------- MusicXML import edge cases (review C3–C5, C8)
+const X = (takty, { part2 = '' } = {}) => `<?xml version="1.0"?><score-partwise><part-list><score-part id="P1"><part-name>x</part-name></score-part></part-list><part id="P1">${takty.map((m, i) => `<measure number="${i + 1}">${m}</measure>`).join('')}</part>${part2}</score-partwise>`;
+const XN = (step, oct, dur, { voice = 1, staff = 0, extra = '', type = 'quarter' } = {}) => `<note><pitch><step>${step}</step><octave>${oct}</octave></pitch><duration>${dur}</duration><voice>${voice}</voice><type>${type}</type>${staff ? `<staff>${staff}</staff>` : ''}${extra}</note>`;
+const XA = (div = 1, beats = 4, bt = 4, { fifths = 0, staves = 0, extra = '' } = {}) => `<attributes><divisions>${div}</divisions><key><fifths>${fifths}</fifths></key><time><beats>${beats}</beats><beat-type>${bt}</beat-type></time>${staves ? `<staves>${staves}</staves>` : ''}<clef><sign>G</sign><line>2</line></clef>${extra}</attributes>`;
+const sled = (p, ruka = 'noty') => p.takty.map(t => (t[ruka] || []).map(x => `${x.t}/${x.d}${x.lig ? '~' : ''}`).join(' '));
+
+test('MusicXML: the melody in voice 2 while voice 1 rests is read, not a rest', () => {
+  const p = zMusicXml(X([XA() + '<note><rest/><duration>4</duration><voice>1</voice></note><backup><duration>4</duration></backup>'
+    + ['C', 'D', 'E', 'F'].map(s => XN(s, 4, 1, { voice: 2 })).join('')]));
+  assert.deepEqual(sled(p), ['C4/1/4 D4/1/4 E4/1/4 F4/1/4']);
+});
+
+test('MusicXML: a cross-staff note of the right hand does not push out the real left hand', () => {
+  const p = zMusicXml(X([XA(1, 4, 4, { staves: 2 }) + XN('C', 5, 1, { staff: 1 }) + XN('G', 3, 1, { staff: 2 }) + XN('E', 5, 1, { staff: 1 })
+    + XN('G', 5, 1, { staff: 1 }) + '<backup><duration>4</duration></backup>' + XN('C', 3, 2, { voice: 5, staff: 2 }) + XN('G', 2, 2, { voice: 5, staff: 2 })]));
+  assert.deepEqual(sled(p, 'leva'), ['C3/1/2 G2/1/2']);
+});
+
+test('MusicXML: a whole-bar rest or note in 5/4, 9/8, 7/8 is split into writable pieces, the bar keeps its length', async () => {
+  const { default: createVerovioModule } = await import('verovio/wasm');
+  const { VerovioToolkit } = await import('verovio/esm');
+  const { zpracujVerovio } = await import('../static/lib/render.js');
+  const tk = new VerovioToolkit(await createVerovioModule());
+  for (const [beats, bt, div] of [[5, 4, 1], [9, 8, 2], [7, 8, 2], [5, 8, 2], [7, 4, 1]]) {
+    const L = beats * 4 / bt * div;
+    const p = zMusicXml(X([XA(div, beats, bt) + XN('C', 4, L, { type: 'whole' }), `<note><rest measure="yes"/><duration>${L}</duration><voice>1</voice></note>`]));
+    assert.deepEqual(kontrola(p), [], `${beats}/${bt}`);
+    const xml = naMusicXml(p);
+    const d = zpracujVerovio(tk, xml, p);
+    assert.ok(Math.abs(d.takty[1] - beats * 4 / bt) < 1e-6, `${beats}/${bt}: bar 2 starts at ${d.takty[1]}`);
+    const zpet = zMusicXml(xml);
+    assert.deepEqual(kontrola(zpet), [], `${beats}/${bt} after export`);
+    assert.ok(p.takty[0].noty.slice(0, -1).every(x => x.lig), `${beats}/${bt}: the note's pieces are tied`);
+  }
+});
+
+test('MusicXML: jumps written only as words (Da Capo al Fine, DC al Fine, Fine as a second words element)', () => {
+  const words = (...w) => `<direction><direction-type>${w.map(x => `<words>${x}</words>`).join('')}</direction-type></direction>`;
+  let p = zMusicXml(X([XA() + XN('C', 4, 4), words('Fine') + XN('D', 4, 4), XN('E', 4, 4) + words('Da Capo al Fine')]));
+  assert.equal(p.takty[1].znacky?.fine, true);
+  assert.equal(p.takty[2].znacky?.dc, true);
+  p = zMusicXml(X([XA() + XN('C', 4, 4), XN('D', 4, 4) + words('rit.', 'Fine'), XN('E', 4, 4) + words('DC al Fine')]));
+  assert.equal(p.takty[1].znacky?.fine, true);
+  assert.equal(p.takty[2].znacky?.dc, true);
+  p = zMusicXml(X([XA() + XN('C', 4, 4), XN('E', 4, 4) + words('D.S. al Coda')]));
+  assert.equal(p.takty[1].znacky?.ds, true);
+  assert.equal(p.takty[1].znacky?.fine, undefined, '"Fine" in "al Fine" is not a Fine mark on its own bar');
+});
+
+test('MusicXML: a change of time, key or clef and a transposing part are reported; 3+2/8 is read as 5/8', () => {
+  let p = zMusicXml(X([XA() + XN('C', 4, 4), '<attributes><key><fifths>3</fifths></key><time><beats>3</beats><beat-type>4</beat-type></time></attributes>' + XN('C', 4, 3)]));
+  assert.ok(p.nejistoty.some(x => /takt|time/i.test(x)), p.nejistoty.join(' | '));
+  assert.ok(p.nejistoty.some(x => /tónin|key/i.test(x)), p.nejistoty.join(' | '));
+  p = zMusicXml(X([XA(1, 4, 4, { extra: '<transpose><diatonic>-1</diatonic><chromatic>-2</chromatic></transpose>' }) + XN('D', 4, 4)]));
+  assert.ok(p.nejistoty.some(x => /transpon/i.test(x)), p.nejistoty.join(' | '));
+  p = zMusicXml(X([XA(2, '3+2', 8) + XN('C', 4, 5, { type: 'half' })]));
+  assert.equal(p.takt, '5/8');
+  assert.deepEqual(kontrola(p), []);
+});
