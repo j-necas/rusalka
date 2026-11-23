@@ -17,6 +17,9 @@ test('a left-hand style survives only on "Melody and chords" (level 4)', () => {
   assert.equal(stylPriOtevreni(2, 'valcik'), '');
   assert.equal(stylPriOtevreni(5, 'polka'), '');
   assert.equal(stylPriOtevreni(4, ''), '');
+  // a song with only a melody: the style belongs to Melody with accompaniment (level 5)
+  assert.equal(stylPriOtevreni(5, 'polka', 5), 'polka');
+  assert.equal(stylPriOtevreni(4, 'polka', 5), '');
 });
 
 test('the summary names the version and the hand, and what Rusalka plays', () => {
@@ -24,6 +27,8 @@ test('the summary names the version and the hand, and what Rusalka plays', () =>
   assert.deepEqual(souhrn({ uroven: 5, ruka: '2', osnovy: 2 }), { verze: 'cviceni.uroven.5.nazev', ruka: 'verze.ruka.leva' });
   assert.deepEqual(souhrn({ uroven: 3, ruka: 'vse', osnovy: 2 }), { verze: 'cviceni.uroven.3.nazev', ruka: 'verze.ruka.obe' });
   assert.equal(souhrn({ uroven: 2, ruka: '1', osnovy: 1 }).ruka, null);
+  assert.equal(souhrn({ uroven: 5, ruka: '1', osnovy: 1, doprovod: true }).verze, 'cviceni.uroven.5.doprovod.nazev');
+  assert.equal(souhrn({ uroven: 5, ruka: 'vse', osnovy: 2 }).verze, 'cviceni.uroven.5.nazev');
   assert.equal(souhrn({ uroven: 4, ruka: 'vse', osnovy: 2, dvojice: true }).ruka, null);
 });
 
@@ -32,7 +37,7 @@ test('Listen plays the whole song as written: all notes, both hands, the origina
     { uroven: 5, tonina: 'ne', prstoklad: false, styl: '', usek: null, rukaVolba: 'vse', rychlost: 100, doprovod: false });
 });
 
-test('a song with one staff is heard in its hardest version shown in full: Melody and chords, the left hand on its own staff', () => {
+test('a song with one staff is heard in its hardest version shown in full: Melody with accompaniment, the left hand on its own staff', () => {
   assert.deepEqual(poslechCelePisne({ osnovy: 1 }),
-    { uroven: 4, tonina: 'ne', prstoklad: false, styl: '', usek: null, rukaVolba: 'vse', rychlost: 100, doprovod: false });
+    { uroven: 5, tonina: 'ne', prstoklad: false, styl: '', usek: null, rukaVolba: 'vse', rychlost: 100, doprovod: false });
 });

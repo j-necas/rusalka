@@ -61,8 +61,10 @@ a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
    1. Melodie, snadný rytmus,
    2. Celá melodie,
    3. Melodie a basy (levá ruka drží jeden tón),
-   4. Melodie a akordy (levá ruka hraje akordy; styl levé ruky jde zvolit jen tady),
-   5. Všechny noty: noty přesně podle souboru. Kreslí se a hrají z původního MusicXML, takže zůstanou všechny hlasy
+   4. Melodie a akordy (levá ruka drží celý akord, dokud platí),
+   5. u písničky jen s melodií **Melodie s doprovodem**: levá ruka hraje rozložený doprovod podle rytmu (bas – akord,
+      valčík…) a jde zvolit jeho styl. U skladby s vlastní levou rukou je krok 5 **Všechny noty** (styl levé ruky se
+      pak volí v kroku 4): noty přesně podle souboru. Kreslí se a hrají z původního MusicXML, takže zůstanou všechny hlasy
       v obou rukou, dynamika, obloučky, pedál, příraznice a změny tóniny, taktu i klíče. Z vícepartových souborů
       (zpěv s klavírem apod.) se bere první part. V jiné tónině, s vlastním prstokladem nebo stylem doprovodu se
       hraje zjednodušená verze (jeden hlas v ruce); karta to řekne.

@@ -558,7 +558,9 @@ function sestavLevou(udalosti) {
   return out;
 }
 
-function levaRuka(p, doprovod) {
+/** druh: 'bas' one long bass note, 'akord' one whole chord held, 'doprovod' the pattern of vzorDoprovodu; split by chord changes */
+function levaRuka(p, druh) {
+  const doprovod = druh === 'doprovod';
   const met = metrum(p.takt);
   const plna = Math.round(met.delka * DIV);
   const akordy = akordyPoTaktech(p);
@@ -575,13 +577,14 @@ function levaRuka(p, doprovod) {
       useky = vzorDoprovodu(p.takt)
         .map(u => ({ od: Math.max(0, u.pos - posun), do: Math.min(L, u.pos + u.delka - posun), druh: u.druh }))
         .filter(u => u.do > u.od);
-    } else useky = [{ od: 0, do: L, druh: 'bas' }];
+    } else useky = [{ od: 0, do: L, druh: druh === 'akord' ? 'akord' : 'bas' }];
     for (const z of zmeny) {
       const i = useky.findIndex(u => u.od < z && u.do > z);
-      if (i >= 0) useky.splice(i, 1, { ...useky[i], do: z }, { od: z, do: useky[i].do, druh: 'bas' });
+      const novy = druh === 'akord' ? 'akord' : 'bas';      // a new chord starts with its bass (its whole chord on level 4)
+      if (i >= 0) useky.splice(i, 1, { ...useky[i], do: z }, { od: z, do: useky[i].do, druh: novy });
       else {
         const j = useky.findIndex(u => u.od === z);
-        if (j >= 0) useky[j] = { ...useky[j], druh: 'bas' };
+        if (j >= 0) useky[j] = { ...useky[j], druh: novy };
       }
     }
     const mel = znejiciMelodie(noty);
@@ -590,7 +593,7 @@ function levaRuka(p, doprovod) {
       const znacka = akordV(seznam, u.od);
       const r = znacka ? rozepisAkord(znacka) : null;
       if (!r) return { ...u, t: 'r' };
-      if (u.druh === 'souzvuk') {
+      if (u.druh === 'souzvuk' || u.druh === 'akord') {
         const s = souzvuk(r, mel, u.od, u.do);
         return { ...u, t: s || doRozsahu(r.bas, BAS_DOLE) };
       }
@@ -715,6 +718,10 @@ function doplnPrstoklad(p, vek) {
 const maMelodii = p => p.takty.some(t => (t.noty || []).some(n => n.t !== 'r'));
 const maLevou = p => p.takty.some(t => (t.leva || []).some(n => n.t !== 'r'));
 const maAkordy = p => p.takty.some(t => (t.akordy || []).some(a => tonyAkordu(a.znacka)));
+/** does the score have its own left hand? Then level 5 is the original; otherwise the melody with a broken accompaniment */
+export const maVlastniLevou = maLevou;
+/** the level whose left hand a backing style (Before playing: Left-hand pattern) replaces */
+export const urovenStylu = pisen => (maLevou(pisen) ? 4 : 5);
 
 function popisDoprovodu(takt) {
   const m = metrum(takt);
@@ -733,8 +740,9 @@ export function seznamUrovni(pisen) {
     u(1, t('cviceni.uroven.1.popis'), mel),
     u(2, t('cviceni.uroven.2.popis'), mel),
     u(3, sAkordy(t('cviceni.uroven.3.popis')), mel),
-    u(4, sAkordy(t('cviceni.uroven.4.popis', { doprovod: popisDoprovodu(pisen.takt) })), mel),
-    u(5, t(maLevou(pisen) ? 'cviceni.uroven.5.popisObe' : 'cviceni.uroven.5.popis'), true),
+    u(4, sAkordy(t('cviceni.uroven.4.popis')), mel),
+    maLevou(pisen) ? u(5, t('cviceni.uroven.5.popisObe'), true)
+      : { id: 5, nazev: t('cviceni.uroven.5.doprovod.nazev'), popis: sAkordy(t('cviceni.uroven.5.doprovod.popis', { doprovod: popisDoprovodu(pisen.takt) })), dostupna: mel },
   ];
 }
 
@@ -755,12 +763,14 @@ export function vytvorHranouUroven(pisen, id, volby = {}) {
 function sestavUroven(pisen, id, volby, hrana) {
   const p = transponuj(pisen, volby.transpozice || 'ne');
   const u = Number(id);
-  if (u <= 4) for (const t of p.takty) delete t.leva;
+  // the left hand made from the chords: 3 one long bass note, 4 a whole chord held, 5 (a song without its own left
+  // hand) a broken accompaniment in the song's rhythm; level 5 of a song with its own left hand is the original
+  const leva = { 3: 'bas', 4: 'akord', 5: maLevou(pisen) ? null : 'doprovod' }[u] || null;
+  if (u <= 4 || leva) for (const t of p.takty) delete t.leva;
   if (u === 1) zjednodusRytmus(p);
-  const sDoprovodem = u === 3 || u === 4;
-  if (sDoprovodem && !maAkordy(p)) doplnAkordy(p);
+  if (leva && !maAkordy(p)) doplnAkordy(p);
   if (volby.prstoklad) doplnPrstoklad(p, volby.vek);
   const r = hrana ? rozvin(p) : { pisen: p };
-  if (sDoprovodem) levaRuka(r.pisen, u === 4);
+  if (leva) levaRuka(r.pisen, leva);
   return r;
 }

@@ -13,7 +13,7 @@ import * as Doplnky from './ui/extras.js';
 import { doprovodVeStylu, STYLY } from './lib/extras.js';
 import { doprovodZAkordu, VZORY_DOPROVODU } from './lib/accompaniment.js';
 import { maAkordyProDvojici, modelProDvojici, hraniceDvojice, vyhodnotDvojici } from './lib/pair.js';
-import { seznamUrovni, vytvorHranouUroven } from './lib/levels.js';
+import { seznamUrovni, vytvorHranouUroven, maVlastniLevou, urovenStylu } from './lib/levels.js';
 import { ProhlizecUloziste, SlozkaUloziste, nastaveniProhlizece, datoveZapisy, snimekDat, kopiruj, zaloha as zalohaDat, obnov as obnovDat } from './lib/storage.js';
 import { MAX_ZIP } from './lib/zip.js';
 import { stejnaData } from './lib/merge.js';
@@ -1855,7 +1855,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     vykresliVerziHry(VTK); nastavRuku(); listaDvojice();
   }
   function zacniPoslech() {
-    const v = poslechCelePisne({ osnovy: S.puvodni?.takty.some(t => (t.leva || []).length) ? 2 : 1 });
+    const v = poslechCelePisne();
     POSLECH = { doprovod: v.doprovod, zaloha: { uroven: S.uroven, tonina: S.tonina, prstoklad: S.prstoklad, styl: S.styl, usek: S.usek,
       rukaVolba: S.rukaVolba, rychlost: S.nastaveni.rychlost } };
     Object.assign(S, { uroven: v.uroven, tonina: v.tonina, prstoklad: v.prstoklad, styl: v.styl, usek: v.usek, rukaVolba: v.rukaVolba });
@@ -1947,7 +1947,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       S.pisen = soubor;
       const np = uloz.cti('kt-pisen-' + soubor, {});
       S.uroven = np.uroven || (S.puvodni.takty.some(t => (t.leva || []).length) ? 5 : 2);
-      S.tonina = np.tonina || 'ne'; S.prstoklad = !!np.prstoklad; S.styl = stylPriOtevreni(S.uroven, np.styl || ''); S.usek = null;
+      S.tonina = np.tonina || 'ne'; S.prstoklad = !!np.prstoklad; S.styl = stylPriOtevreni(S.uroven, np.styl || '', urovenStylu(S.puvodni)); S.usek = null;
       S.smycka = { zapnuto: false, cisteVRade: 0 };
       S.dvojice = null;
       vykresliVerziHry(tk);
@@ -1985,23 +1985,23 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       <span class="schod n${i + 1}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
       <span class="stupen-text"><b>${esc(u.nazev)}${i === 0 ? ` <em>${esc(t('verze.nejsnazsi'))}</em>` : i === posledni ? ` <em>${esc(t('verze.nejtezsi'))}</em>` : ''}</b>
       <small>${esc(u.popis)}</small></span></label>`).join('');
-    const zjednodusi = Number(S.uroven) === 5 && ((S.tonina || 'ne') !== 'ne' || S.prstoklad);
+    const zjednodusi = Number(S.uroven) === 5 && maVlastniLevou(S.puvodni) && ((S.tonina || 'ne') !== 'ne' || S.prstoklad);
     $('#predCoPopis').textContent = zjednodusi ? t('verze.zjednodusi') : '';
     $('#predCoPopis').classList.toggle('skryta', !zjednodusi);
-    $('#stylPole').classList.toggle('skryta', Number(S.uroven) !== 4 || !!S.dvojice);
+    $('#stylPole').classList.toggle('skryta', Number(S.uroven) !== urovenStylu(S.puvodni) || !!S.dvojice);
     $('#predRuce').classList.toggle('skryta', !dve);
     for (const b of $$('#predRuce [data-ruka]')) b.setAttribute('aria-pressed', String(dve && b.dataset.ruka === S.rukaVolba));
     const zbyvaRuka = dve && S.rukaVolba !== 'vse';
     $('#predDruhaRuka').classList.toggle('skryta', !zbyvaRuka);
     if (zbyvaRuka) $('#predRuce').setAttribute('aria-describedby', 'predDruhaRuka');
     else $('#predRuce').removeAttribute('aria-describedby');
-    const s = souhrn({ uroven: S.uroven, ruka: S.rukaVolba, osnovy: S.data.osnovy.length, dvojice: !!S.dvojice });
+    const s = souhrn({ uroven: S.uroven, ruka: S.rukaVolba, osnovy: S.data.osnovy.length, dvojice: !!S.dvojice, doprovod: !maVlastniLevou(S.puvodni) });
     $('#predSouhrnText').innerHTML = `${esc(t('verze.hrajes'))} <b>${esc(t(s.verze))}</b>${s.ruka ? ', ' + esc(t(s.ruka)) : ''}${S.dvojice ? ', ' + esc(t('verze.veDvou')) : ''}`;
   }
   $('#predCo').onchange = async e => {
     if (!pripravenaPisen() || !e?.target?.value) return;
     S.uroven = Number(e.target.value);
-    if (S.uroven !== 4) S.styl = '';
+    if (S.uroven !== urovenStylu(S.puvodni)) S.styl = '';
     await zmenVerzi();
     if (S.data.osnovy.length > 1) S.rukaVolba = rukaPoKarte(S.uroven, S.data.osnovy.length);
     nastavRuku(); vykresliVerzi();
@@ -2055,7 +2055,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   };
   /** builds the playable version from the original model (chosen level and transposition, unrolled repeats) and renders it */
   /** Original level in the original key with no custom fingering or backing style → the original file is rendered */
-  const hrajOriginal = () => !S.dvojice && Number(S.uroven) === 5 && (S.tonina || 'ne') === 'ne' && !S.prstoklad && !S.styl && !!S.puvodniXml;
+  const hrajOriginal = () => !S.dvojice && Number(S.uroven) === 5 && maVlastniLevou(S.puvodni) && (S.tonina || 'ne') === 'ne' && !S.prstoklad && !S.styl && !!S.puvodniXml;
   async function pripravVerzi() { vykresliVerziHry(await verovioTk()); }
   function vykresliVerziHry(tk) {
     if (hrajOriginal()) {
@@ -2069,7 +2069,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       } catch (e) { console.warn('originál nejde vykreslit, hraju zjednodušené noty', e); }
     }
     S.original = false;
-    if (!S.dvojice && Number(S.uroven) === 5 && S.puvodniXml && ((S.tonina || 'ne') !== 'ne' || S.prstoklad || S.styl)) {
+    if (!S.dvojice && Number(S.uroven) === 5 && maVlastniLevou(S.puvodni) && S.puvodniXml && ((S.tonina || 'ne') !== 'ne' || S.prstoklad || S.styl)) {
       toast(t('app.zjednoduseno'), 5000);
     }
     const r = vytvorHranouUroven(S.puvodni, S.uroven || 2,

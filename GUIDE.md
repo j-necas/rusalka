@@ -64,8 +64,10 @@ piano, data and backups) and **About**. Where the links don't fit, the bar shows
    1. Melody, easy rhythm,
    2. Whole melody,
    3. Melody and bass (the left hand holds one note),
-   4. Melody and chords (the left hand plays chords; the left-hand style is chosen only here),
-   5. All the notes: the notes exactly as written in the file. They are drawn and played from the original MusicXML,
+   4. Melody and chords (the left hand holds a whole chord while it lasts),
+   5. for a song with only a melody, **Melody with accompaniment**: the left hand plays a broken accompaniment in
+      the song's rhythm (bass – chord, waltz…) and its style can be chosen. For a piece with its own left hand
+      step 5 is **All the notes** (the left-hand style is then chosen on step 4): the notes exactly as written in the file. They are drawn and played from the original MusicXML,
       so every voice in both hands is kept, along with dynamics, slurs, pedal, grace notes and changes of key,
       time signature and clef. From files with several parts (voice and piano and so on) the first part is used.
       In a different key, with your own fingering or with a different accompaniment style, a simplified version

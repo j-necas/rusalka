@@ -76,7 +76,11 @@ test('level list: five levels, the original always', () => {
   const p = pisenD();
   p.takty[1].leva = [n('D3', '1')];
   assert.match(seznamUrovni(p)[4].popis, /Obě ruce/);
-  assert.match(seznamUrovni(pisenC())[3].popis, /valčík/);
+  assert.equal(seznamUrovni(p)[4].nazev, 'Všechny noty');
+  // a song with only a melody: the hardest is the melody with a broken accompaniment, not "all the notes" (= the melody)
+  assert.equal(seznamUrovni(pisenC())[4].nazev, 'Melodie s doprovodem');
+  assert.match(seznamUrovni(pisenC())[4].popis, /valčík/);
+  assert.match(seznamUrovni(pisenC())[3].popis, /celými akordy/);
 });
 
 test('every level passes the check and a MusicXML round trip, also with transposition and fingering', () => {
@@ -141,9 +145,22 @@ test('level 3 without chords: I/IV/V harmonisation from the melody is written in
   assert.ok(p.takty.every(t => !t.akordy.length), 'input without chords stays so');
 });
 
-test('level 4: waltz in 3/4, chord within G2–G3 without a semitone clash with the melody', () => {
+test('level 4: whole chords, each held while it lasts, without a semitone clash with the melody', () => {
+  for (const p of [pisenC(), pisenD()]) {
+    const q = vytvorUroven(p, 4);
+    for (const [i, t] of q.takty.entries()) {
+      const zmeny = new Set((p.takty[i].akordy || []).map(a => a.doba).filter(d => d > 0)).size;
+      const uhozy = t.leva.filter((x, j) => x.t !== 'r' && !(j > 0 && t.leva[j - 1].lig));
+      assert.ok(uhozy.length <= zmeny + 1, `bar ${i + 1}: ${t.leva.map(x => x.t + ':' + x.d).join(' ')}`);
+      for (const x of t.leva.filter(x => x.t !== 'r')) assert.ok(vysky(x.t).length >= 2, `bar ${i + 1}: a chord, not one note (${x.t})`);
+    }
+  }
+  assert.deepEqual(vytvorUroven(pisenC(), 4).takty[0].leva.filter(x => !x.lig).length, 1);
+});
+
+test('level 5 of a song with only a melody: waltz in 3/4, chord within G2–G3 without a semitone clash with the melody', () => {
   const p = pisenC();
-  const q = vytvorUroven(p, 4);
+  const q = vytvorUroven(p, 5);
   for (const [i, t] of q.takty.entries()) {
     assert.deepEqual(t.leva.map(x => x.d), ['1/4', '1/4', '1/4'], `bar ${i + 1}`);
     assert.equal(vysky(t.leva[0].t).length, 1);
@@ -170,12 +187,12 @@ test('level 4: waltz in 3/4, chord within G2–G3 without a semitone clash with 
   }
   assert.deepEqual(q.takty[0].leva.map(x => x.t), ['C3', 'G2 C3 E3', 'G2 C3 E3']);
   // 4/4: bass, chord, fifth, chord; a chord change on beat 3 → the bass of the new chord
-  const d = vytvorUroven(pisenD(), 4);
+  const d = vytvorUroven(pisenD(), 5);
   assert.deepEqual(d.takty[1].leva.map(x => x.t), ['D3', 'A2 D3 F#3', 'A2', 'A2 D3 F#3']);
   assert.deepEqual(d.takty[2].leva.map(x => x.t).slice(0, 3), ['G2', 'G2 B2 D3', 'A2']);
   // 6/8: bass, chord in dotted quarters
   const s = zaklad([{ akordy: [{ doba: 0, znacka: 'C' }], noty: [n('E4', '3/8', { s: 'hou' }), n('G4', '3/8', { s: 'pá' })] }], { takt: '6/8', predznamenani: 0 });
-  assert.deepEqual(vytvorUroven(s, 4).takty[0].leva.map(x => [x.t, x.d]), [['C3', '3/8'], ['G2 C3 E3', '3/8']]);
+  assert.deepEqual(vytvorUroven(s, 5).takty[0].leva.map(x => [x.t, x.d]), [['C3', '3/8'], ['G2 C3 E3', '3/8']]);
 });
 
 test('level 5: the original with the left hand', () => {
@@ -210,8 +227,9 @@ test('transposition D major → C major: notes, chords, key signature', () => {
   assert.deepEqual(q.takty[2].akordy.map(a => a.znacka), ['F', 'G7']);
   assert.equal(q.takty[3].akordy[0].znacka, 'Ami');
   assert.ok(q.takty.every(t => t.noty.every(x => !/[#b]\d/.test(x.t))), 'no accidentals in C major');
-  // level 4 in C: the left hand is transposed too
-  assert.equal(vytvorUroven(pisenD(), 4, { transpozice: 'C' }).takty[1].leva[0].t, 'C3');
+  // the accompaniment in C: the left hand is transposed too (level 5: bass first; level 4: the whole C chord)
+  assert.equal(vytvorUroven(pisenD(), 5, { transpozice: 'C' }).takty[1].leva[0].t, 'C3');
+  assert.deepEqual(vysky(vytvorUroven(pisenD(), 4, { transpozice: 'C' }).takty[1].leva[0].t).map(v => v.midi % 12).sort(), [0, 4, 7]);
   // B minor → A minor
   const h = pisenD();
   h.takty[4].akordy = [{ doba: 0, znacka: 'Bm' }];
@@ -342,19 +360,19 @@ test('accompaniment of the second ending inherits the chord from the played pred
     { noty: [n('D4', '3/4')], akordy: [{ doba: 0, znacka: 'G' }], znacky: { volta: [1], konecRepetice: true } },
     { noty: [n('E4', '3/4')], znacky: { volta: [2] } },
   ]);
-  for (const id of [3, 4]) {
+  for (const id of [3, 4, 5]) {
     const { pisen, poradi } = vytvorHranouUroven(p, id);
     assert.deepEqual(poradi, [0, 1, 0, 2]);
-    assert.equal(midi(pisen.takty.at(-1).leva[0].t) % 12, 0);
+    assert.ok(vysky(pisen.takty.at(-1).leva[0].t).some(v => v.midi % 12 === 0), `level ${id}`);
   }
 });
 
 test('generated left hand ends on the barline after five sixteenth-note quintuplets', () => {
   const p = zaklad([{ akordy: [{ doba: 0, znacka: 'C' }], noty: [...'CDEFG'].map(k => n(k + '4', '1/20')) }], { takt: '1/4' });
-  for (const id of [3, 4]) {
+  for (const id of [3, 4, 5]) {
     const { pisen } = vytvorHranouUroven(p, id);
     const bar = pisen.takty[0];
-    assert.equal(soucetTaktu(bar.noty), soucetTaktu(bar.leva));
-    assert.equal(bar.leva[0].t, 'C3');
+    assert.equal(soucetTaktu(bar.noty), soucetTaktu(bar.leva), `level ${id}`);
+    assert.ok(vysky(bar.leva[0].t).some(v => v.midi % 12 === 0), `level ${id}`);
   }
 });
