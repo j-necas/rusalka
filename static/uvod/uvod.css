@@ -51,6 +51,7 @@ img, video { display: block; max-width: 100%; height: auto; }
 .uvod { padding-top: 28px; padding-bottom: 8px; text-align: center; }
 h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.08; font-weight: 800; letter-spacing: -1px; margin: 0 auto; max-width: 15em; color: var(--ink-tmava); text-wrap: balance; }
 .uvod .perex { font-size: clamp(19px, 2.2vw, 22px); color: var(--slaby); max-width: 36em; margin: 20px auto 0; text-wrap: pretty; }
+.uvod .perex.knihovna { margin-top: 12px; }
 .hrat { display: inline-block; margin-top: 28px; padding: 16px 34px 18px; background: var(--ink); color: #fff; text-decoration: none;
         font-weight: 800; font-size: 21px; border-radius: var(--klavesa); box-shadow: inset 0 -5px 0 var(--ink-tmava); }
 .hrat:hover { background: #24578A; }

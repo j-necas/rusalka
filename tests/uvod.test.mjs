@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
-import { UVODY, stranka, mapaWebu } from '../tools/uvod.mjs';
+import { UVODY, stranka, mapaWebu, POCET_PISNI } from '../tools/uvod.mjs';
 import { NAZVY_JAZYKU } from '../static/lib/texts.js';
 
 const en = JSON.parse(readFileSync(new URL('../tools/uvod/en.json', import.meta.url), 'utf8'));
@@ -17,13 +17,15 @@ test('every app language has an introduction page with the same texts as English
     for (const [k, v] of Object.entries(t)) {
       if (typeof v !== 'string') continue;
       assert.ok(!v.includes('—'), `${kod}.${k}: no em dash`);
-      for (const z of ['{song}', '{webmidi}', '{app}', '{languages}', '<b>']) assert.equal(v.includes(z), en[k].includes(z), `${kod}.${k}: ${z}`);
+      for (const z of ['{song}', '{webmidi}', '{app}', '{languages}', '{count}', '<b>']) assert.equal(v.includes(z), en[k].includes(z), `${kod}.${k}: ${z}`);
     }
     const h = stranka(kod);
     assert.match(h, new RegExp(`<html lang="${kod}"`));
-    assert.deepEqual([...h.matchAll(/<a class="hrat" href="\.\.\/#guest">([^<]+)<\/a>/g)].map(m => m[1]),
-      [t.startGuest, t.startGuest], kod);
-    assert.ok(!/\{(song|webmidi|app|languages)\}/.test(h), kod);
+    // the buttons start the app (which lets them play without a profile); the songs ready without AI are counted
+    assert.deepEqual([...h.matchAll(/<a class="hrat" href="\.\.\/">([^<]+)<\/a>/g)].map(m => m[1]), [t.startApp, t.startApp], kod);
+    assert.match(h, new RegExp(`class="perex knihovna">[^\\n]*\\b${POCET_PISNI}\\b`), kod);
+    assert.ok(POCET_PISNI >= 300, `${POCET_PISNI} songs`);
+    assert.ok(!/\{(song|webmidi|app|languages|count)\}/.test(h), kod);
     for (const v of UVODY) assert.ok(h.includes(`hreflang="${v.kod}" href="https://rusalkapiano.com/${v.slug}/"`), `${kod} → ${v.kod}`);
   }
   assert.match(stranka('ar'), /dir="rtl"/);

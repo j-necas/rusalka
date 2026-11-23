@@ -13,6 +13,9 @@ export const UVODY = Object.keys(NAZVY_JAZYKU).map(kod => ({ kod, slug: kod.toLo
 const PISEN = { cs: 'Černé oči jděte spát', en: 'Twinkle, Twinkle, Little Star' };
 
 const texty = kod => JSON.parse(readFileSync(new URL(`uvod/${kod}.json`, import.meta.url), 'utf8'));
+/** songs ready to play without AI (the library and the starter songs), rounded down to fifty: "more than 350" */
+const json = cesta => JSON.parse(readFileSync(new URL('../' + cesta, import.meta.url), 'utf8'));
+export const POCET_PISNI = Math.floor((json('library/catalog.json').length + json('songs/index.json').length) / 50) * 50;
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 /** structured data of the app (schema.org), in the page's language; '<' escaped so the JSON cannot close the script */
 const strukturovana = (kod, t) => JSON.stringify({
@@ -95,7 +98,8 @@ ${UVODY.map(v => `        <li><a href="../${v.slug}/" hreflang="${v.kod}" lang="
 <div class="uvod sirka">
   <h1>${x('h1')}</h1>
   <p class="perex">${x('lead')}</p>
-  <a class="hrat" href="../#guest">${x('startGuest')}</a>
+  <p class="perex knihovna">${h('library').replace('{count}', POCET_PISNI)}</p>
+  <a class="hrat" href="../">${x('startApp')}</a>
   <p class="drobne">${x('small')}</p>
   <figure class="pred-po">
     <div class="pred"><img src="../uvod/noty-${m}.webp" width="1100" height="${m === 'cs' ? 557 : 833}" alt="${esc(h('sheetAlt').replace('{song}', PISEN[m]))}">
@@ -162,7 +166,7 @@ ${sekce('otazky', x('faqH2'), dvojice('faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'f
 <div class="zaver sirka">
   <h2>${x('endH2')}</h2>
   <p>${x('endP')}</p>
-  <a class="hrat" href="../#guest">${x('startGuest')}</a>
+  <a class="hrat" href="../">${x('startApp')}</a>
 </div>
 </main>
 
