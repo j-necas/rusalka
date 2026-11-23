@@ -2,13 +2,13 @@ import './setup.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { IDBFactory } from 'fake-indexeddb';
-import { ProhlizecUloziste } from '../static/lib/storage.js';
+import { ProhlizecUloziste, _resetDb } from '../static/lib/storage.js';
 import { naMusicXml } from '../static/lib/song.js';
 import createVerovioModule from 'verovio/wasm';
 import { VerovioToolkit } from 'verovio/esm';
 
 // The app runs with the real score renderer and storage. Only browser I/O and the clock are substituted.
-async function prohlizec(t) {
+async function prohlizec(t, { kotva, knihovna = [], vlastni } = {}) {
   const prvek = () => {
     const e = new EventTarget(), tridy = new Set(['skryta']), vnitrni = new Map(), atributy = new Map();
     let html = '';
@@ -66,18 +66,21 @@ async function prohlizec(t) {
   const globaly = {
     window: okno, document: dok, navigator: { language: 'cs', languages: ['cs'] }, indexedDB: new IDBFactory(),
     localStorage: { getItem: k => nastaveni.get(k), setItem: (k, v) => nastaveni.set(k, v) },
-    location: { protocol: 'http:', hostname: 'localhost', hash: '#pisen=' + soubor, pathname: '/', search: '' },
+    location: { protocol: 'http:', hostname: 'localhost', hash: kotva ?? '#pisen=' + soubor, pathname: '/', search: '' },
     history: { replaceState() { location.hash = ''; } }, verovio: { toolkit: function () { return new VerovioToolkit(modul); } },
     addEventListener: okno.addEventListener.bind(okno), MutationObserver: class { observe() {} },
     performance: { now: () => ted }, setInterval: () => 0,
     setTimeout: (fn, ms) => { casovace.set(++id, { fn, kdy: ted + ms }); return id; }, clearTimeout: id => casovace.delete(id),
     requestAnimationFrame: fn => { snimky.set(++id, fn); return id; }, cancelAnimationFrame: id => snimky.delete(id),
     fetch: async url => url === 'songs/index.json' ? { json: async () => [{ soubor, nazev: 'Cvičení', police: 'klasika', stupen: 1 }] }
+      : url === 'library/index.json' ? { ok: true, json: async () => knihovna }
+        : knihovna.some(p => p.soubor === url) ? { ok: true, arrayBuffer: async () => new TextEncoder().encode(xml).buffer }
       : url === 'songs/' + soubor ? (await zpozdeni, { ok: true, arrayBuffer: async () => new TextEncoder().encode(xml).buffer })
         : { ok: url.startsWith('sounds/'), arrayBuffer: async () => new ArrayBuffer(0) },
   };
   const pred = Object.fromEntries(Object.keys(globaly).map(k => [k, Object.getOwnPropertyDescriptor(globalThis, k)]));
   for (const [k, value] of Object.entries(globaly)) Object.defineProperty(globalThis, k, { configurable: true, value });
+  _resetDb();
   const uloziste = new ProhlizecUloziste();
   t.after(async () => {
     await uloziste.ctiData('profil');
@@ -86,7 +89,8 @@ async function prohlizec(t) {
     }
   });
   await uloziste.zapisData('profily', [{ id: 'p', jmeno: 'Anna', vek: 'dite' }, { id: 'd', jmeno: 'Petr', vek: 'dospely' }]);
-  await import('../static/app.js');
+  if (vlastni) await uloziste.zapis(vlastni, new TextEncoder().encode(xml));
+  await import('../static/app.js?' + encodeURIComponent(t.name));
   function posun(ms) {
     ted += ms;
     for (const [id, u] of [...casovace]) if (u.kdy <= ted && casovace.delete(id)) u.fn();
@@ -105,6 +109,25 @@ async function prohlizec(t) {
   const stisk = p => klavesa(p).dispatchEvent(new Event('pointerdown', { cancelable: true }));
   return { $, dok, okno, posun, cekejNa, videt, klavesa, stisk, nacti, uloziste };
 }
+
+test('public lyrics are shown from a direct link and the search keeps the own copy only', async t => {
+  const soubor = 'library/folk/cviceni.musicxml';
+  const vlastni = 'Moje cvičení.musicxml';
+  const knihovna = [{ soubor, nazev: 'CVIČENÍ', police: 'folk', stupen: 1, jazyk: 'cs', slova: ['První řádek', 'Druhý řádek'] }];
+  const { $, cekejNa, videt } = await prohlizec(t, { kotva: '#pisen=' + encodeURIComponent(soubor), vlastni, knihovna });
+  await cekejNa(() => videt('#kdo'));
+  $('#kdoHraci').children[0].children[0].click();
+  await cekejNa(() => videt('#pred') && !$('#predHrat').disabled);
+  assert.equal(videt('#predText'), true);
+  assert.equal($('#predTextPisne').textContent, 'První řádek\nDruhý řádek');
+  $('#predZpet').click();
+  await cekejNa(() => videt('#domu'));
+  $('#hledat').value = 'cvičení';
+  $('#hledat').oninput();
+  await cekejNa(() => $('#pisne').children.some(p => p.dataset.soubor === vlastni));
+  const ids = $('#pisne').children.map(p => p.dataset.soubor).filter(Boolean);
+  assert.deepEqual(ids, [vlastni]);
+});
 
 test('game controls survive loading, calibration, pausing, rotation, and a change of player', async t => {
   const { $, dok, okno, posun, cekejNa, videt, klavesa, stisk, nacti, uloziste } = await prohlizec(t);

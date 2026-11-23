@@ -1,0 +1,39 @@
+title: Torna a Surriento
+author: Ernesto De Curtis / Giambattista De Curtis
+time: 3/4
+key: 1
+tempo: 88
+clef: treble
+---
+1) | E4/8=Vi- F#4/8=de'o G4/8=ma- A4/8=re B4/8=quan- G4/8=t'è
+2) | B4/4=bel- B4/2=lo!
+3) | A4/8=spi- B4/8=ra C5/8=tan- A4/8=tu C5/8=sen- A4/8=ti-
+4) | E5/4=men- E5/2=to,
+5) | E5/8=com- F#5/8=me G5/16=tu G5/16=a F#5/8=chi E5/8=tie- F#5/8=ni
+6) | B4/4=men- B4/2=te,
+7) | A4/8=ca B4/8=sce- A4/8=ta- G4/16=to G4/16='o F#4/8=fai G4/8=sun-
+8) | E4/2=nà. r/4
+9) | E5/8=Guar- D#5/8=da, B4/8=guà C#5/8=chi D#5/8=stu B4/8=ciar-
+10) | C#5/4=di- C#5/2=no;
+11) | D#5/8=sien- C#5/8=te, B4/8=siè C#5/8=sti D#5/8=ciu- B4/8=r'a-
+12) | C#5/4=ran- C#5/2=ce:
+13) | G#4/8=nu A4/8=pru- B4/8=fu- G#4/16=mo G#4/16=ac- F#4/8=cus- E4/8=si
+14) | A4/4=fi- A4/2=no
+15) | B4/8=din- C#5/8=t'o D#5/8=co- C#5/8=re B4/8=se D#5/8=ne
+16) | G#4/2=va... r/4
+17) | E5/8=E D#5/8=tu B4/8=di- C#5/16=ce: C#5/16="Ì D#5/8=par- B4/16=to: B4/16=ad-
+18) | C#5/4=di- C#5/2=o!"
+19) | F#5/8=T'al- E5/8=lun- D#5/8=ta- E5/8=ne F#5/8=da D#5/8=stu
+20) | E5/4=co- E5/2=re,
+21) | E5/8=da F#5/8=sta G5/8=ter- F#5/8=ra E5/8=del- F#5/8=l'am-
+22) | B4/4=mo- B4/2=re...
+23) | A4/8=Tie- B4/16=ni B4/16='o A4/8=co- G4/16=re G4/16='e F#4/8=nun G4/8=tur-
+24) | E4/2=nà? r/4
+25) | E5/8=Ma F#5/8=nun D#5/4.=me C#5/8=las-
+26) | E5/2.=sà,
+27) | r/8 D#5/8=nin E5/8=dar- F#5/8=me D#5/8=stu C#5/8=tur-
+28) | B4/4=mien- B4/2=to!
+29) | A4/4=Tor- C5/8=na C5/8=a E5/8.=Sur- E5/16=ri-
+30) | G5/4.=en- F#5/8 E5/4~=to,
+31) | E5/8 F#5/8=fam- D#5/4.=me D#5/8=cam-
+32) | E5/2=pà! r/4

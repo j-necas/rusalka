@@ -1,0 +1,20 @@
+title: Šla Nanynka do zelí
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) {|:} G | B4/8=Šla B4/16=Na- A4/16 B4/8=nyn- B4/16=ka A4/16
+2) | B4/8=do B4/16 C5/16=ze- D5/4=lí,
+3) C | E5/8=do E5/16=ze- D5/16 C5/4=lí,
+4) {1. :|} G | D5/8=do D5/16=ze- C5/16 B4/4=lí,
+5) {2.} G | B4/4=čka. r/4
+6) | D5/8=Při- D5/8=šel E5/8=na D5/8=ni
+7) D | A4/8=Pe- A4/8=pí- A4/4=ček,
+8) | D5/8=roz- D5/8=šla- E5/8=pal D5/8=jí
+9) G | B4/8=ko- B4/8=ší- B4/4=ček.
+10) | G5/8=Ty G5/8=ty G5/4=ty
+11) C | E5/8=ty E5/8=ty E5/4=ty
+12) G | D5/8=ty B4/8=to C5/8=mu- A4/8=síš
+13) | G4/8=pla- G4/8=ti- G4/4=ti.

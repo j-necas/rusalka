@@ -1,0 +1,15 @@
+title: Můra na pavlači často naši Důru tlačí
+author: traditional (Czech)
+time: 2/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | C5/4=Mů- G4/4=ra
+2) | A4/8=na G4/8=pa- A4/8=vla- B4/8=či
+3) | C5/8=ča- B4/8=sto C5/8=na- G4/8=ši
+4) | A4/8=Dů- G4/8=ru A4/8=tla- B4/8=čí;
+5) | C5/8=při- B4/8=šel C5/8=tá- D5/8=ta,
+6) | E5/8=za- D5/8=hnal E5/8=mů- C5/8=ru,
+7) | F5/8=ne- E5/8=tla- D5/8=čí C5/8=už
+8) | B4/8=mů- A4/8=ra B4/8=Dů- G4/8=ru.

@@ -1,0 +1,23 @@
+title: Šla panenka do Vamberka
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) G | G4/8=Šla B4/8=pa- B4/8=nen- B4/8=ka
+2) | G4/8=do B4/8=Vam- B4/8=ber- B4/8=ka,
+3) | G4/8=ne- B4/8=sla B4/8=v_nů- D5/8=ši
+4) D | D5/8=ku- C5/8=řa- A4/4=ta;
+5) | F#4/8=po- A4/8=tkal A4/8=on A4/8=jí
+6) | F#4/8=je- A4/8=jí A4/8=mi- A4/8=lej,
+7) | F#4/8=že A4/8=jí A4/8=nů- C5/8=ši
+8) C | C5/8=roz- B4/8=šla- G4/4=pá.
+9) G | D5/8=Truc D5/8=na D5/4=truc,
+10) | D4/8=můj D4/8=mi- D4/4=lej!
+11) C | C5/8=ne- C5/8=buď C5/4=tak
+12) G | D4/8=zlo- D4/8=bí- D4/4=vej:
+13) D | D4/8=ku- F#4/8=řa- A4/8=ta C5/8=si
+14) G | B4/8=tře- D5/8=ba G4/8=po- B4/8=ber,
+15) D | A4/8=jen C5/8=mi F#4/8=nů- A4/8=ši
+16) G | G4/8=ne- B4/8=šla- G4/4=pej.

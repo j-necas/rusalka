@@ -68,6 +68,7 @@ export default {
   'vic.naucit': 'Naučiť sa po kúskoch',
   'vic.dvojice': 'Hrať vo dvojici',
   'vic.oPisni': 'O pesničke',
+  "pred.textPisne": "Text piesne",
   'vic.ozvena': 'Ozvena',
   'hra.konec': 'Koniec',
   'hra.pauza': 'Pauza',

@@ -221,7 +221,7 @@ export async function strankaPisne(p, { externe = false } = {}) {
   const melodie = model.takty.flatMap(x => x.noty || []).flatMap(n => vysky(n.t)).map(v => v.midi);
   const nazvyTonu = [...new Set([...new Set(melodie)].sort((a, b) => a - b).map(m => nazevTonu(m)))].join(', ');
   const akordy = [...new Set(model.takty.flatMap(x => (x.akordy || []).map(a => a.znacka)))];
-  const text = textPisne(model);
+  const text = p.slova || textPisne(model);
   const stupen = obtiznost(zMusicXml(xml)).stupen;               // as the app rates the song
   const obeRuce = model.takty.some(x => (x.leva || []).length) || /<staves>2<\/staves>/.test(xml);
   const autor = autorText(model.autor, kod, t);

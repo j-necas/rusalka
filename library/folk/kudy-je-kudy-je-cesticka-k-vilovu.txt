@@ -1,0 +1,23 @@
+title: Kudy je, kudy je cestička k Vílovu
+author: traditional (Czech)
+time: 3/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) Am | E5/4=Ku- C5/4=dy A4/4=je,
+2) G | D5/4=ku- B4/4=dy G4/4=je
+3) D | A4/4=ce- F#4/4=stič- D4/4=ka
+4) G | G4/4=k_Ví- B4/4=lo- D5/4=vu,
+5) Am | E5/4=ku- C5/4=dy A4/4=je,
+6) G | D5/4=ku- B4/4=dy G4/4=je
+7) D | A4/4=ce- F#4/4=stič- D4/4=ka
+8) G | G4/2=k_vám? r/4
+9) D | A4/4=ce- F#4/4=stič- D4/4=ka
+10) G | G4/4=da- B4/4=le- D5/4=ká,
+11) D | A4/4=ví- F#4/4=tr D4/4=ji
+12) G | G4/4=za- B4/4=fou- D5/4=ká:
+13) Am | E5/4=hol- C5/4=ka A4/4=čer-
+14) G | D5/4=no- B4/4=o- G4/4=ká,
+15) D | A4/4=ne- F#4/4=bu- D4/4=deš
+16) G | G4/2=má! r/4

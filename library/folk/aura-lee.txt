@@ -1,0 +1,23 @@
+title: Aura Lee
+author: George R. Poulton / W. W. Fosdick
+time: 4/4
+key: -2
+tempo: 88
+clef: treble
+---
+1) | F4/4=As Bb4/4=the A4/4=black- Bb4/4=bird
+2) | C5/4=in G4/4=the C5/4.=spring C5/8
+3) | Bb4/4='neath A4/4=the G4/4=wil- A4/4=low
+4) | Bb4/1=tree
+5) | F4/4=sat Bb4/4=and A4/4=piped, Bb4/4=I
+6) | C5/4=heard G4/4=him C5/4.=sing, C5/8
+7) | Bb4/4=prais- A4/4=ing G4/4=Au- A4/4=ra
+8) | Bb4/1=Lee.
+9) | D5/4.=Au- D5/8=ra D5/2=Lee!
+10) | D5/4.=Au- D5/8=ra D5/2=Lee!
+11) | D5/4=Maid C5/4=with Bb4/4=gold- C5/4=en
+12) | D5/1=hair;
+13) | D5/4=Sun- D5/4=shine Eb5/4=came D5/4=a-
+14) | C5/4=long G4/4=with C5/4.=thee, Bb4/8=and
+15) | Bb4/4=swal- A4/4=lows D5/4.=in C5/8=the
+16) | Bb4/1=air.

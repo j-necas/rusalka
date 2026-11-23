@@ -1,0 +1,21 @@
+title: Okolo Třeboně
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | E4/4=O- E4/4=ko- E4/4=lo
+2) | F4/2=Tře- B3/4=bo-
+3) | C4/2=ně r/4
+4) | G4/4=O- G4/4=ko- G4/4=lo
+5) | A4/4=Tře- A4/4=bo- G4/4=ně
+6) | F4/4=pa- F4/4=sou F4/4=se
+7) | G4/4=tam G4/4=ko- F4/4=ně.
+8) | E4/4=pa- E4/4=sou E4/4=se
+9) | F4/2=tam B3/4=ko-
+10) | C4/2=ně. r/4
+11) {|:} | G4/4=Dej E4/8=ko- E4/8=by- E4/4=lám,
+12) | D4/8=to C4/8=ti D4/8=po- F4/8=ví- E4/4=dám,
+13) | G4/4=dej E4/8=ko- E4/8=by- E4/4=lám
+14) {:|} | D4/4=ov- C4/4=sa. r/4

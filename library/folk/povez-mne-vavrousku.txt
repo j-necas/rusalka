@@ -1,0 +1,23 @@
+title: Pověz mně, Vavroušku
+author: traditional (Czech)
+time: 3/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) G | G4/4 G4/4 G4/4
+2) | B4/4 B4/4 B4/4
+3) D | B4/8 A4/8 A4/2
+4) | G4/8 F#4/8 F#4/2
+5) | A4/4 A4/4 A4/4
+6) Am | C5/4 C5/4 C5/8 A4/8
+7) G | A4/8 B4/8 B4/2
+8) | G4/4 G4/2
+9) | B4/4 B4/4 B4/4
+10) | D5/4 D5/4 D5/4
+11) C | D5/8 C5/8 C5/2
+12) D | B4/8 A4/8 A4/2
+13) | F#4/8 A4/8 A4/4 A4/4
+14) Am | C5/4 C5/4 C5/8 A4/8
+15) G | B4/4 B4/2
+16) | G4/4 G4/2

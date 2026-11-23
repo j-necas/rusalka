@@ -80,6 +80,7 @@ export default {
 'vic.naucit':'Учить по частям',
 'vic.dvojice':'Играть вдвоём',
 'vic.oPisni':'О песне',
+  "pred.textPisne": "Текст песни",
 'vic.ozvena':'Эхо',
 'vic.dalsi':'Ещё возможности',
 'vic.naucitPopis':'Русалка разделит песню на короткие отрывки и поможет их выучить.',

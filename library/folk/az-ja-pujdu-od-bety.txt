@@ -1,0 +1,15 @@
+title: Až já půjdu od Běty
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | G4/8=Až G4/8=já B4/8=půj- B4/8=du
+2) | A4/8=od A4/8=Bě- G4/4=ty,
+3) | B4/8=za- B4/8=sta- D5/8=vím D5/8=se
+4) | C5/8=u C5/8=te- B4/4=ty:
+5) | D5/8=vo- D5/8=na E5/4=má,
+6) | C5/8=vo- C5/8=na D5/4=dá
+7) | B4/8=kou- B4/8=sek C5/8=sá- C5/8=dla
+8) | A4/8=na A4/8=bo- G4/4=ty.

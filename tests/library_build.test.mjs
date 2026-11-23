@@ -67,6 +67,16 @@ test('a harder song gets a higher stupen than an easy one', async t => {
   assert.ok(st['Těžká'] > st['Lehká'], JSON.stringify(st));
 });
 
+test('a separate verse is kept in the index, while invalid lyric lines fail the build', async t => {
+  const slova = ['První řádek', 'Druhý řádek.'];
+  const data = knihovna(t, { 'children/a.txt': PISEN('A'), 'children/b.txt': PISEN('B') },
+    [ZAZNAM('children/a.txt', { slova }), ZAZNAM('children/b.txt', { slova: [' '] })]);
+  const { index, chyby } = await postavKnihovnu(data);
+  assert.deepEqual(index.map(p => p.slova), [slova]);
+  assert.equal(chyby.length, 1);
+  assert.match(chyby[0], /children\/b\.txt: slova/);
+});
+
 test('a bar-length error names the file and the bar', async t => {
   const { zdroj, cil, d } = knihovna(t, { 'children/spatna.txt': PISEN('Špatná', 'C4/4 D4/4 E4/4') }, [ZAZNAM('children/spatna.txt')]);
   const { chyby } = await postavKnihovnu({ zdroj, cil });

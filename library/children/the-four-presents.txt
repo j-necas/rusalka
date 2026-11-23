@@ -1,0 +1,18 @@
+title: The Four Presents
+author: traditional
+time: 2/4
+key: -1
+tempo: 90
+clef: treble
+---
+1) | C4/8=I
+2) | F4/8=had F4/8=four A4/8=bro- A4/8=thers
+3) | G4/8=o- G4/16.=ver A4/32=the F4/8=sea, r/8
+4) | F4/16=Per- E4/16=rie, F4/16=Mer- G4/16=rie, A4/8=Dix- A4/8=i,
+5) | G4/8=Do- G4/16.=mi- A4/32 F4/8=ne; C4/16=And C4/16=they
+6) | F4/8=each F4/16.=sent G4/32=a A4/8=pres- A4/8=ent
+7) | G4/8=un- G4/16.=to A4/32 F4/8=me. r/8
+8) | F5/8.=Pe- F4/16=trum, F4/8=Par- F4/8=trum,
+9) | F4/16=Pa- F4/16=ra- F4/16=di- F4/16=si, F4/16=Tem- F4/16=po- F4/8=re,
+10) | F4/16=Per- E4/16=rie, F4/16=Mer- G4/16=rie, A4/8=Dix- A4/8=i,
+11) | G4/8=Do- G4/16.=mi- A4/32 F4/8=ne.

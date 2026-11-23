@@ -66,6 +66,7 @@ export default {
   'vic.naucit': 'Nauka po kawałku',
   'vic.dvojice': 'Gra we dwoje',
   'vic.oPisni': 'O piosence',
+  "pred.textPisne": "Tekst piosenki",
   'vic.ozvena': 'Echo',
   'hra.konec': 'Zakończ',
   'hra.pauza': 'Pauza',

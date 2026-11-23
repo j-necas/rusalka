@@ -1,0 +1,15 @@
+title: U našeho chlíva vrabec sobě zpívá
+author: traditional (Czech)
+time: 2/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | G4/8=U B4/8=na- D5/8=še- D5/8=ho
+2) | E5/4=chlí- C5/4=va
+3) | G4/8=str- B4/8=nad D5/8=so- D5/8=bě
+4) | E5/4=zpí- C5/4=vá:
+5) | F5/8=že G5/8=z_vel- A5/8=ké- A5/8=ho
+6) | E5/8=mi- F5/8=lo- G5/8=vá- G5/8=ní
+7) | D5/8=má- E5/8=lok- F5/8=dy E5/8=co
+8) | D5/4=bý- C5/4=vá.

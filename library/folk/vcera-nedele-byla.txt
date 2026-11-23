@@ -1,0 +1,20 @@
+title: Včera neděle byla
+author: traditional (Czech)
+time: 2/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | C5/4=Vče- G4/4=ra
+2) | F4/8=ne- E4/8=dě- F4/8=le G4/8=by-
+3) | E4/4=la, r/4
+4) | C5/4=já C5/4=jsem
+5) | D5/8=do- C5/8=ma B4/8=ne- A4/8=by-
+6) | G4/4=la: r/4
+7) {|:} | G4/8=ža- C5/8=la C5/8=jsem C5/8=tra-
+8) | C5/4=vič- E5/4=ku
+9) | D5/8=v_ze- C5/8=le- B4/8=ném A4/8=há-
+10) | G4/4=ječ- E4/4=ku
+11) | C5/4=svá- G4/4=tek
+12) | F4/8=jsem E4/8=ne- F4/8=svě- G4/8=ti-
+13) {:|} | E4/4=la. r/4

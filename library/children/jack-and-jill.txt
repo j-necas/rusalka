@@ -1,0 +1,15 @@
+title: Jack and Jill
+author: traditional
+time: 6/8
+key: 0
+tempo: 90
+clef: treble
+---
+1) | G4/4=Jack G4/8=and G4/4=Jill G4/8=went
+2) | C5/4=up C5/8=the C5/4=hill C5/8=To
+3) | D5/4=fetch D5/8=a D5/4=pail D5/8=of
+4) | E5/4.=wa- C5/4=ter; r/8
+5) | G4/4=Jack G4/8=fell G4/4=down G4/8=and
+6) | A4/4=broke A4/8=his A4/4=crown, A4/8=and
+7) | G4/4=Jill F4/8=came E4/4=tum- D4/8=bling
+8) | C4/4.=af- C4/4=ter. r/8

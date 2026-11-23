@@ -82,6 +82,7 @@ export default {
 'vic.naucit':'Вчити поступово',
 'vic.dvojice':'Грати вдвох',
 'vic.oPisni':'Про пісню',
+  "pred.textPisne": "Текст пісні",
 'vic.ozvena':'Відлуння',
 'hra.konec':'Завершити',
 'hra.pauza':'Пауза',

@@ -1,0 +1,19 @@
+title: Proč vy sem k nám
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | D5/8 C5/8 C5/8 B4/8
+2) | B4/8 A4/8 A4/8 G4/8
+3) | B4/8 A4/8 A4/4
+4) | D5/8 C5/8 C5/8 B4/8
+5) | B4/8 A4/8 A4/8 G4/8
+6) | F#4/8 A4/8 G4/4
+7) | A4/4 A4/8 B4/8
+8) | C5/8 C5/8 C5/8 B4/8
+9) | A4/8 B4/8 A4/4
+10) | D5/8 C5/8 C5/8 B4/8
+11) | B4/8 A4/8 A4/8 G4/8
+12) | F#4/8 A4/8 G4/4

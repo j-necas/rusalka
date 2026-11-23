@@ -310,6 +310,7 @@ export default {
   'vic.naucit': '少しずつ覚える',
   'vic.dvojice': '二人で弾く',
   'vic.oPisni': '曲について',
+  "pred.textPisne": "歌詞",
   'vic.ozvena': 'まねっこ',
   'vic.dalsi': 'もっと楽しむ',
   'vic.naucitPopis': 'Rusalkaが曲を短い部分に分けて、一つずつ案内します。',

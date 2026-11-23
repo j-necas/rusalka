@@ -1,0 +1,17 @@
+title: Pod kopečkem tráva zelená
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | G4/4 A4/4
+2) | B4/4 A4/4
+3) | B4/8 D5/8 C5/8 B4/8
+4) | A4/4 r/4
+5) | B4/8 D5/8 C5/8 B4/8
+6) | A4/4 r/4
+7) {|:} | D5/8 C5/8 C5/8 C5/8
+8) | B4/8 D5/8 G4/4
+9) | B4/8 B4/8 A4/8 A4/8
+10) {:|} | G4/4 r/4

@@ -1,0 +1,20 @@
+title: V dobrém jsme se sešli
+author: traditional (Czech)
+time: 3/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | G4/4=V_do- A4/2=brém
+2) | B4/2=jsme G4/4=se
+3) | A4/4=se- G4/4=šli, r/4
+4) | B4/4=v_do- C5/2=brém
+5) | D5/2=se B4/4=ro-
+6) | C5/4=zej- B4/4=dem: r/4
+7) | D5/4=ne- B4/4=žli D5/4=se
+8) | C5/4=ro- E5/4=zej- A4/4=dem,
+9) | C5/4=je- A4/4=ště C5/4=se
+10) | B4/4=na- D5/4=pi- G4/4=jem,
+11) | G4/4=s_pá- A4/2=nem
+12) | B4/2=Bo- G4/4=hem
+13) | A4/4=půj- G4/4=dem. r/4

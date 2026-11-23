@@ -1,0 +1,15 @@
+title: Já jsem panna růže
+author: traditional (Czech)
+time: 2/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) C | C5/8 C5/8 B4/16 A4/16 B4/16 G4/16
+2) | C5/4 C5/4
+3) Dm | D5/8 D5/8 D5/16 E5/16 F5/16 D5/16
+4) C | E5/4 E5/4
+5) | E5/8 E5/8 E5/16 D5/16 C5/16 B4/16
+6) F | A4/4 A4/4
+7) C | C5/8 C5/8 B4/16 C5/16 D5/16 E5/16
+8) | C5/4 C5/4

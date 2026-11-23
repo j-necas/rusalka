@@ -1,0 +1,31 @@
+title: I’ve Been Working on the Railroad
+author: Traditional
+time: 4/4
+key: -1
+tempo: 88
+clef: treble
+---
+1) | F4/4.=I've C4/8=been F4/8.=wor- C4/16=king F4/8.=on G4/16=the
+2) | A4/2=rail- F4/2=road,
+3) | Bb4/4.=All Bb4/8=the F4/4=live- G4/4=long
+4) | A4/1=day.
+5) | F4/4.=I've C4/8=been F4/8.=wor- C4/16=king F4/8.=on G4/16=the
+6) | A4/2=rail- F4/4=road, A4/8.=Just A4/16=to
+7) | A4/4=pass G4/4=the G4/4=time A4/4=a-
+8) | G4/1=way.
+9) | G4/4.=Can't G4/8=you F#4/8.=hear G4/16=the A4/8.=whis- G4/16=tle
+10) | F4/2=blow- C4/2=ing,
+11) | Bb4/4=Rise Bb4/8.=up Bb4/16=so F4/8.=ear- F4/16=ly G4/8.=in G4/16=the
+12) | A4/1=morn;
+13) | D4/4.=Can't E4/8=you F4/8.=hear E4/16=the F4/8.=cap- D4/16=tain
+14) | C4/2=shout- F4/2=ing,
+15) | A4/4="Di- Bb4/4=nah A4/4=blow G4/4=your
+16) | F4/1=horn!"
+17) | C4/8.=Di- C4/16=nah, C4/8.=won't C4/16=you F4/2=blow,
+18) | D4/8.=Di- D4/16=nah, D4/8.=won't D4/16=you G4/2=blow,
+19) | E4/8.=Di- E4/16=nah, E4/8.=won't E4/16=you D4/4=blow E4/4=your
+20) | F4/4=horn, G4/4=your A4/2=horn?
+21) | C4/8.=Di- C4/16=nah, C4/8.=won't C4/16=you F4/2=blow,
+22) | D4/8.=Di- D4/16=nah, D4/8.=won't D4/16=you G4/2=blow,
+23) | E4/8.=Di- E4/16=nah, E4/8.=won't E4/16=you D4/4=blow E4/4=your
+24) | F4/1=horn?

@@ -1,0 +1,23 @@
+title: Jaký je to kořeníčko kapradí
+author: traditional (Czech)
+time: 2/4
+key: -1
+tempo: 90
+clef: treble
+---
+1) | F4/8 E4/8 F4/8 G4/8
+2) | A4/8 Bb4/8 A4/8 F4/8
+3) | A4/8 G4/8 G4/4
+4) | F4/4 r/4
+5) | A4/8 G4/8 A4/8 Bb4/8
+6) | C5/8 D5/8 C5/8 A4/8
+7) | C5/8 Bb4/8 Bb4/4
+8) | A4/4 r/4
+9) | C5/8 C5/8 F5/8 A4/8
+10) | C5/8 Bb4/8 G4/4
+11) | Bb4/8 Bb4/8 C5/8 G4/8
+12) | Bb4/8 A4/8 F4/4
+13) | F4/8 E4/8 F4/8 G4/8
+14) | A4/8 Bb4/8 A4/8 F4/8
+15) | A4/8 G4/8 G4/4
+16) | F4/4 r/4

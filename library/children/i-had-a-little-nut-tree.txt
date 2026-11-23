@@ -1,0 +1,16 @@
+title: I Had a Little Nut Tree
+author: traditional
+time: 4/4
+key: 4
+tempo: 90
+clef: treble
+---
+1) | E4/8=I
+2) | E4/8=had F#4/8=a E4/8=lit- G#4/8=tle B4/4=nut- B4/4=tree,
+3) | C#5/8=no- C#5/8=thing C#5/8=would E5/8=it B4/2=bear
+4) | A4/8=But A4/8=a A4/8=sil- B4/8=ver G#4/4=nut- G#4/4=meg
+5) | F#4/8=and A4/8=a F#4/8=gold- D#4/8=en E4/4.=pear; E4/8=The
+6) | E4/8=King F#4/8=of E4/8=Spain's G#4/8 B4/4=daugh- B4/4=ter
+7) | C#5/8=came B4/8=to C#5/8=vis- E5/8=it B4/4.=me, B4/8=And
+8) | C#5/8=all E5/8 B4/8=for G#4/8=the C#5/4=sake A4/8=of A4/8=my
+9) | G#4/16=lit- G#4/8.=tle F#4/4=nut- E4/4.=tree.

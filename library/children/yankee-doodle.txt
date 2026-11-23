@@ -1,0 +1,23 @@
+title: Yankee Doodle
+author: Traditional
+time: 2/2
+key: 1
+tempo: 88
+clef: treble
+---
+1) | G4/4=Yan- G4/4=kee A4/4=Doo- B4/4=dle
+2) | G4/4=went B4/4=to A4/4=town D4/4=a-
+3) | G4/4=rid- G4/4=ing A4/4=on B4/4=a
+4) | G4/2=po- F#4/2=ny,
+5) | G4/4=Stuck G4/4=a A4/4=fea- B4/4=ther
+6) | C5/4=in B4/4=his A4/4=hat G4/4=and
+7) | F#4/4=called D4/4=it E4/4=Mac- F#4/4=a-
+8) | G4/2=ro- G4/4=ni. r/4
+9) | E4/4.=Yan- F#4/8=kee E4/4=Doo- D4/4=dle
+10) | E4/4=keep F#4/4=it G4/2=up,
+11) | D4/4.=Yan- E4/8=kee D4/4=Doo- C4/4=dle
+12) | B3/2=dan- D4/2=dy,
+13) | E4/4.=Mind F#4/8=the E4/4=mu- D4/4=sic
+14) | E4/4=and F#4/4=the G4/4=step, E4/4=And
+15) | D4/4=with G4/4=the F#4/4=girls A4/4=be
+16) | G4/2=han- G4/4=dy r/4

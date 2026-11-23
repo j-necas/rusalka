@@ -1,0 +1,15 @@
+title: Když jsem husy pásala
+author: traditional (Czech)
+time: 2/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) C | C4/8=Když E4/8=jsem C4/8=hu- E4/8=sy
+2) | G4/4=pá- G4/8=sa- G4/8=la,
+3) | C4/8=zi- E4/8=mou C4/8=jsem E4/8=se
+4) G | D4/4=třá- D4/8=sa- D4/8=la;
+5) C | C4/8=nynč- E4/8=ko G4/8=když E4/8=hus
+6) Dm | D4/8=ne- F4/8=pa- E4/4=su,
+7) C | C4/8=už E4/8=se G4/8=zi- E4/8=mou
+8) G | D4/8=ne- D4/8=tře- C4/4=su.

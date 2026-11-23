@@ -1,0 +1,16 @@
+title: Three Little Kittens
+author: traditional
+time: 6/8
+key: -2
+tempo: 90
+clef: treble
+---
+1) | F4/16=There F4/16=were
+2) | Bb4/4=three Bb4/16=lit- Bb4/16=tle F4/8=kit- F4/8=tens F4/8=Put
+3) | D5/4=on D5/8=their Bb4/8=mit- Bb4/8=tens Bb4/8=To
+4) | C5/4=eat C5/8=some A4/4=Christ- A4/8=mas
+5) | Bb4/2.=pie.
+6) | Bb4/4.=Mew, F4/4.=mew,
+7) | D5/4.=Mew, Bb4/4.=mew,
+8) | C5/4.=Mew, A4/4.=mew,
+9) | Bb4/2=mew. r/8

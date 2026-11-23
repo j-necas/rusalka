@@ -1,0 +1,19 @@
+title: Charley Over the Water
+author: traditional
+time: 6/8
+key: 3
+tempo: 90
+clef: treble
+---
+1) | A4/16=O- A4/8.=ver C#5/8=the E4/16=wa- E4/8.=ter, E4/8=and
+2) | D5/16=o- D5/8.=ver C#5/8=the B4/4=lea, A4/8=And
+3) | A4/16=o- A4/8.=ver C#5/8=the E4/16=wa- E4/8.=ter E4/8=to
+4) | F#4/4.=Char- A4/4=ley; A4/8=And
+5) | A4/4=Char- C#5/8=ley E4/4=loves E4/8=good
+6) | D5/4=ale C#5/8=and B4/4=wine, A4/8=And
+7) | A4/4=Char- C#5/8=ley E4/4=loves E4/8=good
+8) | F#4/4.=bran- A4/4=dy, A4/8=And
+9) | D5/4=Char- C#5/8=ley B4/4=loves A4/8=a
+10) | A4/4=pret- C#5/8=ty E4/4=girl E4/8=As
+11) | F#4/4=sweet F#4/8=as G#4/4=su- G#4/8=gar
+12) | B4/8=can- A4/4=dy. r/4 r/8

@@ -1,0 +1,36 @@
+title: La Marseillaise
+author: Claude Joseph Rouget de Lisle
+time: 4/4
+key: -2
+tempo: 88
+clef: treble
+---
+1) | F4/16=Al- F4/8.=lons, F4/16=en-
+2) | Bb4/4=fants Bb4/4=de C5/4=la C5/4=pa-
+3) | F5/4.=tri- D5/8 Bb4/8.=e! Bb4/16=Le D5/8.=jour Bb4/16=de
+4) | G4/4=gloire Eb5/2=est C5/8.=ar- A4/16=ri-
+5) | Bb4/2=vé. r/4 Bb4/8.=Con- C5/16=tre
+6) | D5/4.=nous D5/8=de D5/4=la Eb5/8.=ty- D5/16=ran-
+7) | D5/4=ni- C5/4=e, r/4 C5/8.=l'é- D5/16=ten-
+8) | Eb5/4.=dard Eb5/8=sang- Eb5/4=lant F5/8.=est Eb5/16=le-
+9) | D5/2=vé, r/4 F5/8.=l'é- F5/16=ten-
+10) | F5/4=dard D5/8. Bb4/16=san- F5/4=glant D5/8.=est Bb4/16=le-
+11) | F4/2=vé. r/8. F4/16=En- F4/8.=ten- F4/16=dez-
+12) | C5/2=vous Eb5/4=dans C5/8.=les A4/16=cam-
+13) | C5/4=pa- Bb4/4=gnes, Ab4/2=Mu-
+14) | G4/4=gir Bb4/8.=ces Bb4/16=fé- Bb4/4=ro- A4/8.=ces Bb4/16=sol-
+15) | C5/2.=dats? r/8 C5/8=Ils
+16) | Db5/4.=vien- Db5/8=nent, Db5/8=jus- Db5/8=que Eb5/8.=dans Db5/16=nos
+17) | C5/2.=bras, Db5/8.=É- C5/16=gor-
+18) | Bb4/4.=ger Bb4/8=nos Db5/4=fils, C5/8.=nos Bb4/16=com-
+19) | Bb4/4=pa- A4/4=gnes! r/4 r/8. F5/16=Aux
+20) | F5/2~=ar- F5/8. F5/16=mes, D5/8.=Ci- Bb4/16=toy-
+21) | C5/2.=ens! r/8. F5/16=For-
+22) | F5/2~=mez F5/8. F5/16=vos D5/8.=ba- Bb4/16=tail-
+23) | C5/2=lons: r/4 F4/4=Mar-
+24) | Bb4/2=chons, r/4 C5/4=mar-
+25) | D5/2=chons, r/2
+26) | Eb5/2=qu'un F5/4=sang G5/4=im-
+27) | C5/2.=pur G5/4=a-
+28) | F5/2~=breu F5/8. D5/16=ve Eb5/8.=nos C5/16=sil-
+29) | Bb4/2=lons. r/2

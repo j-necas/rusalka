@@ -311,6 +311,7 @@ export default {
   'vic.naucit': '分段学习',
   'vic.dvojice': '双人合奏',
   'vic.oPisni': '关于这首歌',
+  "pred.textPisne": "歌词",
   'vic.ozvena': '回声',
   'vic.dalsi': '更多玩法',
   'vic.naucitPopis': 'Rusalka 把歌曲分成短片段，带你逐段学习。',

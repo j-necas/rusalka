@@ -1,0 +1,24 @@
+title: The Jolly Miller
+author: traditional
+time: 6/8
+key: 0
+tempo: 90
+clef: treble
+---
+1) | E4/8=There
+2) | A4/4=was A4/8=a G#4/4=jol- E4/8=ly
+3) | C5/4=mil- C5/8=ler B4/4=once D5/8=Lived
+4) | C5/4=on A4/8=the B4/4=ri- G#4/8=ver
+5) | A4/4.~=Dee; A4/4 E4/8=He
+6) | A4/4=worked A4/8=and G#4/4=sang E4/8=from
+7) | C5/4=morn C5/8=till B4/4=night, D5/8=No
+8) | C5/4=lark A4/8=more B4/4=blithe G#4/8=than
+9) | A4/4.~=he. A4/4 C5/16=And D5/16
+10) | E5/4=this E5/8=the E5/4=bur- C5/8=den
+11) | D5/4=of D5/8=his D5/4=song B4/8=For
+12) | C5/4=e- A4/8=ver D5/4=used C5/8=to
+13) | C5/4.=be, B4/4 E4/8="I
+14) | A4/4=care A4/8=for G#4/8.=no- F#4/16=bo- E4/8=dy,
+15) | C5/4=no, C5/8=not B4/4=I, D5/8=And
+16) | C5/8.=no- B4/16=bo- A4/8=dy B4/4=cares G#4/8=for
+17) | A4/4.~=me." A4/4

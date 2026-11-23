@@ -1,0 +1,40 @@
+title: Wayfaring Stranger
+author: Traditional
+time: 4/4
+key: 1
+tempo: 88
+clef: treble
+---
+1) | E4/4=I E4/4=am B4/4=a
+2) | B4/1~=poor
+3) | B4/4 A4/4=way- B4/4=far- A4/4=ing
+4) | G4/4=stran- E4/2.=ger
+5) | r/4 E4/4=While E4/4=journ'- B4/4=ying
+6) | A4/1~=through
+7) | A4/4 E4/4=this G4/4=world A4/4=of
+8) | B4/1=woe,
+9) | r/4 E4/4=Yet E4/4=there's B4/4=no
+10) | B4/1~=sick-
+11) | B4/4 A4/4=ness, B4/4=toil, A4/4=nor
+12) | G4/4=dan- E4/2.=ger
+13) | r/4 E4/4=In E4/4=that B4/4=bright
+14) | A4/1~=world
+15) | A4/4 G4/4=to E4/4=which E4/4=I
+16) | E4/1=go.
+17) | r/4 B4/4=I'm B4/4=go- D5/4=ing
+18) | E5/1~=there
+19) | E5/4 D5/4=to E5/4=see D5/4=my
+20) | B4/4=fath- G4/2.=er,
+21) | r/4 B4/4=I'm B4/4=go- D5/4=ing
+22) | E5/1~=there
+23) | E5/4 D5/4=no E5/4=more D5/4=to
+24) | B4/1=roam;
+25) | r/4 B4/4=I'm C5/4=just D5/4=a-
+26) | B4/1~=go-
+27) | B4/4 G4/4=ing A4/4=o- B4/4=ver
+28) | G4/4=Jor- E4/2.=dan.
+29) | r/4 E4/4=I'm E4/4=just B4/4=a-
+30) | A4/1~=go-
+31) | A4/4 G4/4=ing E4/4=o- D4/4=ver
+32) | E4/1=home.
+33) | r/4

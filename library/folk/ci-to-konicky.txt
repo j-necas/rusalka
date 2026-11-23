@@ -1,0 +1,19 @@
+title: Čí to koníčky
+author: traditional (Czech)
+time: 3/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | B4/8 C5/8 D5/4 D5/4
+2) | E5/4 D5/2
+3) | C5/4 A4/4 r/4
+4) | B4/8 C5/8 D5/4 D5/4
+5) | E5/4 D5/2
+6) | A4/8 B4/8 G4/4 r/4
+7) | G4/8 A4/8 B4/4 B4/4
+8) | B4/4 C5/2
+9) | A4/4 D5/4 r/4
+10) | G4/8 A4/8 B4/4 B4/4
+11) | D5/4 C5/2
+12) | A4/8 B4/8 G4/4 r/4

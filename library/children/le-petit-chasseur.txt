@@ -1,0 +1,20 @@
+title: Le Petit Chasseur
+author: traditional
+time: 2/4
+key: -1
+tempo: 90
+clef: treble
+---
+1) | F4/8=Il A4/8=é-
+2) | C5/8=tait F5/8=un C5/8=pe- D5/8=tit
+3) | C5/4=homm', F4/8=A A4/8=che-
+4) | C5/8=val F5/8=sur C5/8=un D5/8=bâ-
+5) | C5/4=ton; A4/8=Il A4/8=s'en
+6) | A4/8=al- C5/8=lait G4/8=à A4/8=la
+7) | F4/4=chass', A4/8=A A4/8=la
+8) | A4/8=chass' C5/8=aux G4/8=han- A4/8=ne-
+9) | F4/8=tons, A4/8=Et A4/8=ti A4/8=ton,
+10) | Bb4/8=tain', Bb4/8=et G4/8=ti G4/8=ton
+11) | C5/8=tain', A4/8=Et A4/8=ti A4/8=ton
+12) | Bb4/8=tain' Bb4/8=et C5/8=ti C5/8=ton
+13) | F4/4=ton.

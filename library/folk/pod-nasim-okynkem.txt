@@ -1,0 +1,23 @@
+title: Pod naším okýnkem
+author: traditional (Czech)
+time: 3/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | E5/4=Pod D5/4.=na- C5/8=ším
+2) | C5/4=o- B4/4=kýn- B4/4=kem
+3) | B4/4=ros- A4/4=tou A4/4=tam
+4) | E5/4=dvě D5/4=rů- D5/4=že
+5) | E5/4=pod D5/4.=na- C5/8=ším
+6) | C5/4=o- B4/4=kýn- B4/4=kem
+7) | B4/4=ros- A4/4=te A4/4=tam
+8) | G4/4=strom r/4 r/4
+9) | B4/4=na A4/4=stro- A4/4=mě
+10) | C5/4=o- B4/4=vo- B4/4=ce
+11) | D5/4=je C5/4=pěk- C5/4=né
+12) | E5/4=ve- D5/4=li- D5/4=ce
+13) | E5/4=je- D5/4.=nom C5/8=že
+14) | C5/4=ne- B4/4=zra- B4/4=lé
+15) | B4/4=je A4/4=chy- A4/4=ba
+16) | G4/4=v_tom. r/4 r/4

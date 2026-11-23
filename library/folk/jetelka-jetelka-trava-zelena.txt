@@ -1,0 +1,23 @@
+title: Jetelka, jetelka, tráva zelená
+author: traditional (Czech)
+time: 3/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | D5/4=Je- D5/4=tel- C5/4=ka,
+2) | C5/4=je- C5/4=tel- B4/4=ka,
+3) | B4/4=trá- B4/4=va A4/4=ze-
+4) | C5/4=le- B4/2=ná:
+5) | D5/4=Pu- D5/4=šper- C5/4=sky
+6) | C5/4=mlá- C5/4=den- B4/4=ce
+7) | B4/4=pej- B4/4=cha A4/4=pře-
+8) | A4/4=má- G4/2=há;
+9) | B4/4=a- B4/4=le A4/4=ne
+10) | C5/4=všec- B4/2=ky,
+11) | D5/4=je- D5/4=nom C5/4=ně-
+12) | E5/4=ke- D5/2=ry:
+13) | D5/4=kdy- D5/4=bych C5/4=chtě-
+14) | C5/4=la C5/4=mlu- B4/4=vit,
+15) | B4/4=vím B4/4=do- A4/4=bře
+16) | A4/4=ke- G4/2=ry.

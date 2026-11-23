@@ -1,0 +1,18 @@
+title: Náš kohoutek kokrhá
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) {|:} | G4/8 G4/8 D5/8 D5/8
+2) | E5/8 E5/8 D5/4
+3) | E5/8 E5/8 D5/4
+4) | C5/8 C5/8 B4/8 B4/8
+5) {:|} | A4/4 G4/4
+6) | B4/8 B4/8 C5/8 B4/8
+7) | A4/4 D5/4
+8) | B4/8 B4/8 C5/8 B4/8
+9) | A4/4 D5/4
+10) | B4/8 B4/8 A4/8 G4/16 A4/16
+11) | G4/4 r/4

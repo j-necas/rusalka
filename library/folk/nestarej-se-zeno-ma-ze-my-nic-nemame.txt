@@ -1,0 +1,15 @@
+title: Nestarej se, ženo má, že my nic nemáme
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | G4/8=Ne- B4/8=sta- A4/8=rej G4/8=se,
+2) | F#4/8=že- G4/8=no A4/4=má!
+3) | A4/8=že C5/8=my B4/8=nic A4/8=ne-
+4) | B4/4=má- B4/4=me:
+5) | G4/8=za- B4/8=bi- A4/8=je- G4/8=me
+6) | F#4/8=ko- G4/8=má- A4/4=ra,
+7) | A4/8=ma- C5/8=sa B4/8=na- A4/8=dě-
+8) | G4/4=lá- G4/4=me.

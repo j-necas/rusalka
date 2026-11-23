@@ -1,0 +1,15 @@
+title: Koulelo se, koulelo
+author: traditional (Czech)
+time: 2/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | A4/8=Kou- B4/8=le- C5/8=lo B4/8=se,
+2) | D5/8=kou- C5/8=le- B4/4=lo,
+3) | A4/8=čer- B4/8=ve- C5/8=né A4/8=ja-
+4) | G#4/8=blíč- F#4/8 E4/4=ko:
+5) | A4/8=jen G#4/8=se A4/8=na B4/8=mě
+6) | C5/8=ne- D5/8=hně- E5/4=vej,
+7) | A4/8=mé B4/8=zla- C5/8=té A4/8=sr-
+8) | G#4/4=díč- A4/4=ko!

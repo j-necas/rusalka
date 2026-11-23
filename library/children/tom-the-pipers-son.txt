@@ -1,0 +1,15 @@
+title: Tom, the Piper’s Son
+author: traditional
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | G4/4=Tom, G4/8.=Tom, A4/16=the
+2) | B4/8=pi- G4/8=per's G4/4=son,
+3) | D4/8=Stole E4/16=a F#4/16 G4/8=pig A4/16=and B4/16=a-
+4) | C5/8=way A4/8=did A4/8.=run; A4/16=The
+5) | A4/8=pig A4/8=was A4/8=eat, B4/8=and
+6) | C5/8=Tom A4/8=was A4/8=beat, D4/8=And
+7) | D4/8=Tom E4/16=went F#4/16 G4/8=roar- A4/8=ing
+8) | B4/8=down G4/8=the G4/4=street.

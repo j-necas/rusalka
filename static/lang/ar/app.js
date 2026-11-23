@@ -80,6 +80,7 @@ export default {
   "vic.naucit": "تعلّم جزءًا جزءًا",
   "vic.dvojice": "اعزفا معًا",
   "vic.oPisni": "عن الأغنية",
+  "pred.textPisne": "كلمات الأغنية",
   "vic.ozvena": "الصدى",
   "vic.dalsi": "المزيد",
   "vic.naucitPopis": "تقسم رسالكا الأغنية إلى أجزاء قصيرة وترشدك خلالها.",

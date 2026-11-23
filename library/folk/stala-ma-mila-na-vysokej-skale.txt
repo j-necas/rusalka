@@ -1,0 +1,23 @@
+title: Stála má milá na vysokej skále
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | G4/2 A4/8 B4/8
+2) | C5/4 E5/4 G5/4
+3) | F5/4 E5/4 G4/4
+4) | C5/4 E5/4 G5/4
+5) | G4/2 A4/8 B4/8
+6) | C5/4 E5/4 G5/4
+7) | F5/4 E5/4 D5/4
+8) | C5/2 r/4
+9) | E5/4 G5/4 G5/4
+10) | G5/4 E5/4 F5/4
+11) | E5/4 G5/4 G5/4
+12) | G5/4 E5/4 F5/4
+13) | G4/2 A4/8 B4/8
+14) | C5/4 E5/4 G5/4
+15) | F5/4 E5/4 D5/4
+16) | C5/2 r/4

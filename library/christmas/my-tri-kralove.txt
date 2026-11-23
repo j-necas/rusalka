@@ -1,0 +1,19 @@
+title: My tři králové
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) {|:} C | G4/4=My C5/4=tři C5/4=krá-
+2) | C5/2=lo- E5/4=vé
+3) G | D5/4=jde- C5/4 D5/4=me
+4) {:|} C | E5/2=k_vám, r/4
+5) G | D5/4=štěs- D5/4=tí D5/4=zdra-
+6) | D5/2=ví E5/4=pře-
+7) F | C5/4=je- B4/4 A4/4=me
+8) C | G4/2=vám, r/4
+9) G | D5/4=štěs- D5/4=tí D5/4=zdra-
+10) | D5/2=ví E5/4=pře-
+11) C | C5/2=je- B4/4=me
+12) | C5/2=vám. r/4

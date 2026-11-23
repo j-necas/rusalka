@@ -1,0 +1,16 @@
+title: Aloha ʻOe
+author: Liliʻuokalani
+time: 4/4
+key: -1
+tempo: 88
+clef: treble
+---
+1) | C4/8=A-
+2) | D4/4=lo- F4/4=ha Bb4/4='oe, r/8 D4/8=a-
+3) | C4/4=lo- F4/4=ha A4/4~='oe A4/8 F4/16=E F4/16=ke
+4) | E4/8.=o- D#4/16=na- E4/8=no F4/8=na G4/8=no- G4/8=ho Bb4/8=i- Bb4/8=ka
+5) | A4/2=li- F4/4=po r/8 C4/8=A
+6) | D4/4=fond F4/4=em- Bb4/4=brace, r/8 D4/8=A
+7) | C4/4=ho'i F4/4=a'e A4/4~=au A4/8 F4/8=Un-
+8) | E4/4.=til F4/8=we A4/8=meet G4/4 E4/8=a-
+9) | F4/2.=gain. r/4

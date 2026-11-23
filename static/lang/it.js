@@ -72,6 +72,7 @@ export default {
   'vic.naucit': 'Impara un pezzo alla volta',
   'vic.dvojice': 'Suona in coppia',
   'vic.oPisni': 'Informazioni sulla canzone',
+  "pred.textPisne": "Testo della canzone",
   'vic.ozvena': 'Eco',
   'vic.dalsi': 'Altre possibilità',
   'vic.naucitPopis': 'Rusalka divide la canzone in brevi sezioni e ti guida passo dopo passo.',

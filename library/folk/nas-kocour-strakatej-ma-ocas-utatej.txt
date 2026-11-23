@@ -1,0 +1,15 @@
+title: Náš kocour strakatej má ocas uťatej
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | D5/4 B4/8 B4/16 G4/16
+2) | A4/8 A4/16 F#4/16 G4/4
+3) | D5/4 B4/8 B4/16 G4/16
+4) | A4/8 A4/16 F#4/16 G4/4
+5) | A4/8 A4/8 B4/8 B4/8
+6) | C5/8 C5/8 D5/8 D5/8
+7) | A4/8 A4/8 B4/8 B4/8
+8) | D5/16 C5/16 A4/16 F#4/16 G4/4

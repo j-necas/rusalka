@@ -1,0 +1,24 @@
+title: Camptown Races
+author: Stephen Foster
+time: 4/4
+key: 0
+tempo: 88
+clef: treble
+---
+1) | E4/8=The
+2) | G4/4=Camp- G4/4=town E4/4=la- G4/4=dies
+3) | A4/4=sing G4/4=this E4/2=song,
+4) | E4/4=Doo- D4/2.=dah!
+5) | E4/4=Doo- D4/2=dah! r/8 E4/8=The
+6) | G4/4=Camp- G4/4=town E4/4=race- G4/4=track's
+7) | A4/4=five G4/4=miles E4/2=long,
+8) | D4/4.=Oh, D4/8=the E4/4=doo- D4/4=dah
+9) | C4/2.=day! r/4
+10) | C4/4.=Goin' C4/8=to E4/4=run G4/4=all
+11) | C5/2=night! r/2
+12) | A4/4.=Goin' A4/8=to C5/4=run A4/4=all
+13) | G4/2=day! r/4 r/8 E4/8=I
+14) | G4/4=bet G4/4=my E4/8=mon- E4/8=ey G4/8=on G4/8=the
+15) | A4/8=bob- G4/4=tail E4/8~=nag, E4/2
+16) | D4/4=Some- E4/8=bod- F4/8=y E4/8=bet D4/4=on D4/8=the
+17) | C4/2.=bay. r/4

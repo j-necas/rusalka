@@ -76,6 +76,7 @@ export default {
   'vic.naucit': 'Learn bit by bit',
   'vic.dvojice': 'Play as a pair',
   'vic.oPisni': 'About the song',
+  'pred.textPisne': 'Lyrics',
   'vic.ozvena': 'Echo',
   "vic.dalsi": "More to do",
   "vic.naucitPopis": "Rusalka splits the song into short pieces and leads you through them.",

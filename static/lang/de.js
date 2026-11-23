@@ -78,6 +78,7 @@ export default {
   "vic.naucit": "Stück für Stück lernen",
   "vic.dvojice": "Zu zweit spielen",
   "vic.oPisni": "Über das Lied",
+  "pred.textPisne": "Liedtext",
   "vic.ozvena": "Echo",
   "hra.konec": "Beenden",
   "hra.pauza": "Pause",

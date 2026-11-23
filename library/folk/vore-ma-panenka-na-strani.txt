@@ -1,0 +1,23 @@
+title: Voře má panenka na stráni
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | E4/4 A4/4 B4/4
+2) | C5/4 B4/4 C5/4
+3) | D5/2 C5/8 B4/8
+4) | A4/2 B4/8 C5/8
+5) | D5/2 B4/4
+6) | D5/4 C5/4 B4/8 A4/8
+7) | B4/2 G#4/4
+8) | E4/2 r/4
+9) | C5/4 B4/4 D5/4
+10) | C5/8 B4/8 A4/2
+11) | C5/4 B4/4 B4/4
+12) | G#4/4 E4/2
+13) | C5/4 E5/4 D5/4
+14) | C5/4 B4/4 A4/4
+15) | B4/8 C5/8 E4/4 F#4/8 G#4/8
+16) | A4/2 r/4

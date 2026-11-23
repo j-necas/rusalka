@@ -88,7 +88,8 @@ kterou zvolíte. Ven vedou jen odkazy v okně „Kde vzít noty“. Zveřejněn�
 GoatCounter (bez cookies a osobních údajů); místní kopie nepočítá nic.
 
 ## Písničky a autorská práva
-Repozitář obsahuje jen volná díla (`songs/`, generuje `tools/samples.mjs`). Noty, které si vložíte, zůstávají
+Ukázky ve složce `songs/` jsou volná díla. Podmínky jednotlivých skladeb uvádí [knihovna](library/README.md).
+Noty, které si vložíte, zůstávají
 u vás; nepublikujte prosím chráněné písně bez svolení autorů.
 
 ## Vývoj
@@ -108,6 +109,6 @@ Kontroly vzhledu a obrázky do README potřebují Chrome a playwright-core: `PLA
 k použití a architektura: [GUIDE.cs.md](GUIDE.cs.md).
 
 ## Licence
-MIT, © 2026 Jiří Nečas, viz [LICENSE](LICENSE). Přepisy písniček v knihovně (`library/`, viz
-[library/README.md](library/README.md)) a jejich seznam jsou CC0 ([LICENSES/CC0-1.0.txt](LICENSES/CC0-1.0.txt));
-kdo do knihovny přispěje písničkou, souhlasí s CC0. Knihovny třetích stran a nahrávka klavíru: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+MIT, © 2026 Jiří Nečas, viz [LICENSE](LICENSE). Přepisy volných předloh v knihovně a seznam skladeb jsou pod
+[CC0](LICENSES/CC0-1.0.txt). Původní skladba *Filípkova písnička* je zařazena se souhlasem pro Rusalku.
+Podrobnosti jsou v [licenci knihovny](library/README.md) a [licencích třetích stran](THIRD_PARTY_NOTICES.md).

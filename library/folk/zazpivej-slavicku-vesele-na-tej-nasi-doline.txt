@@ -1,0 +1,29 @@
+title: Zazpívej, slavíčku, vesele na tej naší dolině
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) {|:} C | C5/4 G4/4 C5/4
+2) | E5/4 C5/4 E5/4
+3) | G5/2 G5/4
+4) F | F5/2 r/4
+5) C | E5/4 F5/4 E5/4
+6) G | D5/4 C5/4 D5/4
+7) {:|} C | C5/2 r/4
+8) | G5/4 E5/4 G5/4
+9) | E5/4 G5/4 E5/4
+10) F | F5/2 A5/4
+11) G | D5/2.
+12) Dm | F5/4 D5/4 F5/4
+13) | D5/4 F5/4 D5/4
+14) F | F5/2 A5/4
+15) G | D5/2 r/4
+16) C | C5/4 G4/4 C5/4
+17) | E5/4 C5/4 E5/4
+18) | G5/2 G5/4
+19) F | F5/2 r/4
+20) C | E5/4 F5/4 E5/4
+21) G | D5/4 C5/4 D5/4
+22) C | C5/2 r/4

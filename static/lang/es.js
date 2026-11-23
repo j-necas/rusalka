@@ -66,6 +66,7 @@ export default {
   "vic.naucit": "Aprende poco a poco",
   "vic.dvojice": "Tocar en pareja",
   "vic.oPisni": "Sobre la canción",
+  "pred.textPisne": "Letra de la canción",
   "vic.ozvena": "Eco",
   "hra.konec": "Salir",
   "hra.pauza": "Pausa",

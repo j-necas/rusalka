@@ -1,0 +1,19 @@
+title: Co dělá má panenka o vánoci
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | D5/8=Co D5/8=dě- B4/4=lá
+2) | D5/8=má C5/8=pa- C5/8=nen- B4/8=ka
+3) | B4/8=o A4/8=vá- A4/8=no- A4/8=ci,
+4) | D5/8=co D5/8=dě- B4/4=lá
+5) | D5/8=má C5/8=pa- C5/8=nen- B4/8=ka
+6) | B4/4=v_lí- A4/4=tě?
+7) | C5/8=vy- C5/8=bí- A4/4=rá
+8) | A4/8=kou- F#4/8=ko- F#4/8=lí- F#4/8=ček
+9) | G4/8=ve B4/8=pše- B4/8=ni- D5/8=ci,
+10) | C5/8=vy- C5/8=bí- A4/4=rá
+11) | A4/8=kou- F#4/8=ko- F#4/8=lí- G4/8=ček
+12) | A4/4=v_ži- G4/4=tě.

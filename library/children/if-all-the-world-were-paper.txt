@@ -1,0 +1,16 @@
+title: If All the World Were Paper
+author: traditional
+time: 6/8
+key: 0
+tempo: 90
+clef: treble
+---
+1) | G4/8=If
+2) | A4/4=all G4/8=the A4/4=world B4/8=were
+3) | C5/4.=pa- C5/4=per, D4/8=And
+4) | E4/4=all D4/8=the E4/4=sea F4/8=were
+5) | G4/4.~=ink, G4/4 E4/8=And
+6) | F4/4=all E4/8=the F4/4=trees G4/8=were
+7) | A4/4=bread F4/8=and D4/4=cheese, D5/8=What
+8) | D5/4=should G4/8=we A4/4=do B4/8=for
+9) | C5/4.~=drink? C5/4

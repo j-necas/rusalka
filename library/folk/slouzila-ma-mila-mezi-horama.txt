@@ -1,0 +1,23 @@
+title: Sloužila má milá mezi horama
+author: traditional (Czech)
+time: 3/4
+key: -1
+tempo: 90
+clef: treble
+---
+1) | C5/4=Slou- D5/4=ži- C5/4=la
+2) | Bb4/4=má A4/4=mi- G4/4=lá
+3) | A4/4=me- Bb4/4=zi A4/4=ho-
+4) | Bb4/4=ra- C5/2=ma,
+5) | C5/4=na- D5/4=psa- C5/4=la
+6) | Bb4/4=psa- A4/4=níč- G4/4=ko,
+7) | A4/4=že Bb4/4=už A4/4=se
+8) | G4/4=vda- F4/2=la.
+9) | A4/4=Když Bb4/4=ty A4/4=jsi
+10) | G4/4=se F4/4=vda- G4/4=la,
+11) | A4/4=já Bb4/4=se A4/4=vo-
+12) | Bb4/4=že- C5/2=ním:
+13) | C5/4=te- D5/4=be, C5/4=má
+14) | Bb4/4=pa- A4/4=nen- G4/4=ko,
+15) | A4/4=sna- Bb4/4=dno A4/4=vo-
+16) | G4/4=že- F4/2=lím.

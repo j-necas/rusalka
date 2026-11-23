@@ -1,0 +1,17 @@
+title: Nad Pušperkem je vršeček
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) {|:} C | C5/4 E5/4 C5/4
+2) | G4/2 r/4
+3) | E5/4 G5/4 F5/4
+4) {:|} G | D5/2 r/4
+5) {|:} G | G5/4 G5/4 G5/4
+6) C | E5/2 G5/4
+7) F | F5/4 F5/4 F5/4
+8) Dm | D5/2 F5/4
+9) C | E5/4 E5/4 D5/4
+10) {:|} | C5/2 r/4

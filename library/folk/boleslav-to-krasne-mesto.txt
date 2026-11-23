@@ -1,0 +1,19 @@
+title: Boleslav to krásné město
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) {|:} G | G4/4=Bo- D4/8=le- G4/8=slav,
+2) | B4/4=Bo- G4/8=le- B4/8=slav!
+3) | D5/8=to D5/8=krá- C5/8=sné B4/8=mě-
+4) {:|} D | A4/4=sto; r/4
+5) C | C5/8=ne- C5/8=plač, E5/8=ne- E5/8=kvil,
+6) G | D5/8=ne- D5/8=na- B4/8=ří- B4/8=kej,
+7) Am | C5/8=mo- C5/8=je A4/8=ne- A4/8=vě-
+8) G | D5/4=sto, r/4
+9) C | C5/8=ne- C5/8=plač, E5/8=ne- E5/8=kvil,
+10) G | D5/8=ne- D5/8=na- B4/8=ří- B4/8=kej,
+11) Am | C5/8=mo- C5/8=je A4/8=ne- A4/8=vě-
+12) G | G4/4=sto! r/4

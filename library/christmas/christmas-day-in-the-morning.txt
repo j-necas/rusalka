@@ -1,0 +1,15 @@
+title: Christmas Day in the Morning
+author: traditional
+time: 6/8
+key: -2
+tempo: 90
+clef: treble
+---
+1) | Bb4/4=Dame, Bb4/8=get Bb4/8=up C5/8 D5/8=and
+2) | C5/4=bake A4/8=your A4/4=pies, r/8
+3) | Bb4/4=Bake G4/8=your G4/4=pies, r/8
+4) | F#4/4=bake D4/8=your D4/4=pies; r/8
+5) | Bb4/4=Dame, Bb4/8=get Bb4/8=up C5/8 D5/8=and
+6) | C5/4=bake A4/8=your A4/4=pies, C5/8=On
+7) | Bb4/4=Christ- G4/8=mas- A4/8=day G4/8=in F#4/8=the
+8) | G4/4.=morn- G4/4.=ing.

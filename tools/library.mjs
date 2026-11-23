@@ -71,6 +71,8 @@ export async function postavKnihovnu({ zdroj, cil, ukazky = UKAZKY }) {
     else if (z?.police && typeof z.txt === 'string' && z.txt.split('/')[0] !== z.police) chyby.push(`catalog.json: ${txt}: shelf "${z.police}" but the file is in ${z.txt.split('/')[0]}/`);
     if (z?.preklad != null && (typeof z.preklad !== 'object' || Object.entries(z.preklad).some(([k, v]) => !['en', 'cs'].includes(k) || typeof v !== 'string')))
       chyby.push(`catalog.json: ${txt}: preklad must be { en?, cs? } with text`);
+    if (z?.slova != null && (!Array.isArray(z.slova) || !z.slova.length || z.slova.some(r => typeof r !== 'string' || !r.trim())))
+      chyby.push(`catalog.json: ${txt}: slova must be a list of non-empty lyric lines`);
     if (typeof z?.txt === 'string' && !soubory.includes(z.txt)) chyby.push(`catalog.json: ${z.txt}: file missing`);
     if (chyby.length > pred) vadne.add(txt);
   }
@@ -108,6 +110,7 @@ export async function postavKnihovnu({ zdroj, cil, ukazky = UKAZKY }) {
     const polozka = { soubor: `library/${police}/${jmeno}.musicxml`, nazev: pisen.nazev, police, stupen: obtiznost(model).stupen,
       autor: pisen.autor || '', jazyk: z.jazyk };
     if (z.preklad && Object.keys(z.preklad).length) polozka.preklad = z.preklad;
+    if (z.slova) polozka.slova = z.slova;
     hotove.push({ polozka, xml, pisen, zaznam: z });
   }
 

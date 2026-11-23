@@ -6,6 +6,29 @@ export const POLICE = ['children', 'folk', 'christmas', 'classics'];
 const cs = (a, b) => String(a).localeCompare(String(b), 'cs');
 const klice = (stat, soubor) => Object.entries(stat || {}).filter(([k]) => k.startsWith(soubor + '#'));
 const bezDiakritiky = t => String(t ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const klicNazvu = t => String(t ?? '').normalize('NFC').toLowerCase().replace(/\s+/g, ' ').trim();
+
+/** Group public copies with their local song for display. Their file IDs and data stay separate. */
+export function slucPisne(soukrome, verejne) {
+  const podleSouboru = new Map(soukrome.map(p => [p.soubor, p]));
+  const podleNazvu = new Map();
+  for (const p of soukrome) {
+    const klic = klicNazvu(p.nazev);
+    if (!p.chyba && klic && !podleNazvu.has(klic)) podleNazvu.set(klic, p);
+  }
+  const kopie = new Map();
+  const knihovna = verejne.filter(p => {
+    const shoda = podleSouboru.get(p.soubor) || podleNazvu.get(klicNazvu(p.nazev));
+    if (!shoda) return true;
+    if (!kopie.has(shoda.soubor)) kopie.set(shoda.soubor, p);
+    return false;
+  });
+  const vlastni = soukrome.map(p => {
+    const verejna = kopie.get(p.soubor);
+    return verejna ? { ...p, police: verejna.police, verejna } : p;
+  });
+  return { vlastni, knihovna };
+}
 
 /**
  * highest difficulty among songs with a finished step (same rule as proMe) + 1, clamped to 1..3;

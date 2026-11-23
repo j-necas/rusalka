@@ -1,0 +1,15 @@
+title: Naše Anka pekla dolky
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | B4/8=Na- B4/8=še G4/8=An- B4/8=ka
+2) | B4/8=pe- A4/8=kla A4/8=dol- A4/8=ky,
+3) | A4/8=sy- B4/8=pa- C5/8=la D5/8=je
+4) | E5/8=per- D5/8=ní- D5/4=kem,
+5) | B4/8=dá- B4/8=va- G4/8=la B4/8=je
+6) | B4/8=Hon- A4/8=zíč- A4/8=ko- A4/8=vi
+7) | A4/8=o- C5/8=te- F#4/8=vře- A4/8=ným
+8) | A4/8=o- G4/8=kýn- G4/4=kem.

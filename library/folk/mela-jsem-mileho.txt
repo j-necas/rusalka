@@ -1,0 +1,17 @@
+title: Měla jsem milého
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | E4/8=Mě- E4/8=la G4/8=jsem E4/8=mi- G4/8=lé- C5/8=ho,
+2) | E5/8=už E5/8=ne- E5/4=mám D5/4=nic,
+3) | E5/8=dal E5/8=jest D5/8=mi C5/8=hu- B4/8=bi- A4/8=ček
+4) | G4/8=ko- G4/8=lik F4/4=ti- E4/4=síc;
+5) | G4/8=jin- B4/8=ší D5/8=ho C#5/8=lou- D5/8=di- B4/8=ly,
+6) | C5/8=až D5/8=ho E5/8=o- D#5/8=dlou- E5/8=di- C5/8=ly,
+7) | G4/8=jin- B4/8=ší D5/8=ho C#5/8=lou- D5/8=di- B4/8=ly,
+8) | C5/8=až D5/8=ho E5/8=o- D#5/8=dlou- E5/8=di- C5/8=ly,
+9) | E5/8=to E5/8=pro- D5/8=to C5/8=že B4/8=mi A4/8=ho
+10) | G4/8=zá- B4/8=vi- D5/4=dě- C5/4=ly.

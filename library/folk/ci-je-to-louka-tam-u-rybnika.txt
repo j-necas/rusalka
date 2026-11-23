@@ -1,0 +1,23 @@
+title: Čí je to louka tam u rybníka
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) C | C5/2 E5/4
+2) | E5/4 E5/8 D5/8 D5/4
+3) | E5/2 G5/4
+4) Dm | G5/8 E5/8 F5/4 D5/4
+5) C | C5/4 E5/4 B4/8 D5/8
+6) | G4/2 r/4
+7) | C5/4 E5/4 C5/8 E5/8
+8) G | D5/4 B4/8 D5/8 G4/4
+9) C | C5/4 E5/4 C5/8 E5/8
+10) G | D5/4 B4/8 D5/8 G4/4
+11) C | E5/2 G5/4
+12) Dm | G5/8 F5/8 F5/4 D5/4
+13) C | E5/2 G5/4
+14) Dm | G5/8 E5/8 F5/4 D5/4
+15) | F5/4 E5/4 B4/8 D5/8
+16) C | C5/2 r/4

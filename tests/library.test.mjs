@@ -1,9 +1,30 @@
 // Library selection logic: level, shelf order, At home, next song, search.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { urovenHrace, seradPolici, naDomove, dalsiZKnihovny, hledej, policeSouboru, navrhyZKnihovny } from '../static/lib/library.js';
+import { urovenHrace, seradPolici, naDomove, dalsiZKnihovny, hledej, policeSouboru, navrhyZKnihovny, slucPisne } from '../static/lib/library.js';
 
 const P = (soubor, stupen, police = 'children', nazev = soubor, extra = {}) => ({ soubor, nazev, police, stupen, autor: '', jazyk: 'cs', ...extra });
+
+test('slucPisne gives a matching own song the public shelf without showing a second tile', () => {
+  const soukroma = P('Pásli ovce valaši.musicxml', 2, null, 'Pásli ovce valaši');
+  const verejna = P('library/christmas/pasli-ovce-valasi.musicxml', 1, 'christmas', 'Pásli ovce Valaši');
+  const jina = P('library/christmas/jina.musicxml', 1, 'christmas', 'Jiná');
+  const { vlastni, knihovna } = slucPisne([soukroma], [verejna, jina]);
+  assert.deepEqual(vlastni, [{ ...soukroma, police: 'christmas', verejna }]);
+  assert.deepEqual(knihovna, [jina]);
+  assert.deepEqual(slucPisne([{ ...soukroma, chyba: true }], [verejna]).knihovna, [verejna]);
+  assert.deepEqual(slucPisne([], [verejna]).knihovna, [verejna]);
+});
+
+test('slucPisne still honours a same-file sample edit and preserves distinct own files', () => {
+  const ukazka = P('Silent Night.musicxml', 2, 'christmas', 'Silent Night');
+  const prepsana = P('Silent Night.musicxml', 2, null, 'Tichá noc');
+  const jina = P('own.musicxml', 1, null, 'Tichá noc');
+  const { vlastni, knihovna } = slucPisne([prepsana, jina], [ukazka]);
+  assert.deepEqual(vlastni.map(x => x.soubor), [prepsana.soubor, jina.soubor]);
+  assert.equal(vlastni[0].police, 'christmas');
+  assert.deepEqual(knihovna, []);
+});
 
 test('urovenHrace: no results -> 1; finished step of difficulty n -> n+1, clamped to 3', () => {
   const seznam = [{ soubor: 'A' }, { soubor: 'B' }];

@@ -1,0 +1,15 @@
+title: Když jsem já šel na procházku
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | G4/8=Když A4/8=jsem G4/8=já D4/8=šel
+2) | G4/8=na A4/8=pro- G4/8=cház- D4/8=ku
+3) | G4/8=skr- F#4/8=ze G4/8=dvě B4/8=u-
+4) | D5/4=lič- D5/4=ky,
+5) | D5/8=vzal C5/8=jsem C5/8=já A4/8=si
+6) | B4/8=no- D5/8=vej B4/8=klo- G4/8=bouk,
+7) | A4/8=bí- C5/8=lý A4/8=ru- F#4/8=ka-
+8) | G4/4=vič- G4/4=ky.

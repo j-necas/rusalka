@@ -1,0 +1,19 @@
+title: Dej Bůh štěstí tomu domu
+author: traditional (Czech)
+time: 2/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) {|:} | D5/4=Dej E5/4=Bůh
+2) | D5/4=štěs- B4/4=tí
+3) | D5/4=to- B4/4=mu
+4) {:|} | A4/4=do- G4/4=mu,
+5) | B4/8=ma- A4/8=lé- B4/8=mu C5/8=dě-
+6) | D5/4=ťát- G4/4=ku,
+7) | B4/8=Kris- A4/8=tu B4/8=Je- C5/8=zu-
+8) | D5/4=lát- G4/4=ku,
+9) | D5/4=dnes E5/4=v_Be-
+10) | D5/4=tlé- B4/4=mě
+11) | D5/4=na- C5/8=ro- B4/8=ze-
+12) | A4/4=né- G4/4=mu.

@@ -1,0 +1,23 @@
+title: Alou, alou, zahrajte mně
+author: traditional (Czech)
+time: 2/4
+key: -1
+tempo: 90
+clef: treble
+---
+1) | F5/8=A- F5/8=lou, C5/8=a- C5/8=lou!
+2) | A4/8=za- A4/8=hraj- F4/8=te F4/8=mně
+3) | G4/8=ho- Bb4/8=dně A4/8=z_ve- G4/8=se-
+4) | F4/4=la, r/4
+5) | G4/8=že C5/8=mně C5/8=mo- E5/8=je
+6) | E5/8=nej- D5/8=mi- D5/8=lej- F5/8=ši
+7) | E5/8=vod- D5/8=po- C5/8=vě- B4/8=dě-
+8) | C5/4=la: r/4
+9) {|:} | A4/8=z_to- C5/8=ho C5/8=si F5/8=nic
+10) | C5/8=ne- A4/8=dě- Bb4/4=lám,
+11) | G4/8=klo- Bb4/8=bouk Bb4/8=na D5/8=stra-
+12) | Bb4/8=nu G4/8=si A4/4=dám;
+13) | F5/8=pro- C5/8=to C5/8=že C5/8=jsem
+14) | C5/8=švár- A4/8=nej A4/8=jo- F4/8=nák,
+15) | G4/8=so- Bb4/8=bě A4/8=za- G4/8=zpí-
+16) {:|} | F4/4=vám! r/4

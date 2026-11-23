@@ -1,0 +1,19 @@
+title: Já jsem už jako muž
+author: traditional (Czech)
+time: 3/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) {|:} | B4/2=Já C5/4=jsem
+2) | D5/2=už r/4
+3) | E5/2=ja- C5/4=ko
+4) {:|} | A4/2=muž! r/4
+5) | D5/4=klo- D5/4=bouk C5/4=mám
+6) | B4/4=kle- B4/4=pou- A4/4=chej:
+7) | D5/4=že- D5/4=no C5/4=má,
+8) | B4/4=po- B4/4=slou- A4/4=chej,
+9) | B4/2=že- A4/4=no,
+10) | B4/2=že- A4/4=no,
+11) | B4/4=že- B4/4=nu- A4/4=ško
+12) | G4/2=má! r/4

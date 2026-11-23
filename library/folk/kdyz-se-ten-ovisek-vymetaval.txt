@@ -1,0 +1,23 @@
+title: Když se ten ovísek vymetával
+author: traditional (Czech)
+time: 3/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) {|:} | C5/4 G4/4 C5/4
+2) | E5/4 C5/4 E5/4
+3) | G5/4 F5/4 F5/4
+4) | F5/4 E5/4 G5/4
+5) | D5/4 C5/4 D5/4
+6) {:|} | C5/2 r/4
+7) | E5/4 D5/4 D5/4
+8) | D5/2 r/4
+9) | G5/4 F5/4 E5/4
+10) | D5/2 r/4
+11) | C5/4 G4/4 C5/4
+12) | E5/4 C5/4 E5/4
+13) | G5/4 F5/4 F5/4
+14) | F5/4 E5/4 G5/4
+15) | D5/4 C5/4 D5/4
+16) | C5/2 r/4

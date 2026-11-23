@@ -76,6 +76,7 @@ export default {
   'vic.naucit': 'Naučit se po kouscích',
   'vic.dvojice': 'Hrát ve dvou',
   'vic.oPisni': 'O písničce',
+  'pred.textPisne': 'Text písně',
   'vic.ozvena': 'Ozvěna',
   "vic.dalsi": "Další možnosti",
   "vic.naucitPopis": "Rusalka písničku rozdělí na krátké kousky a provede vás jimi.",

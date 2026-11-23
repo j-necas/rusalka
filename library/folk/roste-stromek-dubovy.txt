@@ -1,0 +1,22 @@
+title: Roste stromek dubový
+author: traditional (Czech)
+time: 2/4
+key: 0
+tempo: 90
+clef: treble
+---
+1) | A4/8 G#4/8 A4/8 B4/8
+2) | C5/8 B4/8 A4/8 B4/8
+3) | C5/8 B4/8 A4/4
+4) | C5/8 B4/8 C5/8 D#5/8
+5) | E5/4 D5/8 C5/8
+6) | B4/2
+7) | E5/4 C5/4
+8) | D5/8 C5/8 B4/4
+9) | A4/8 B4/8 C5/8 B4/16 A4/16
+10) | B4/8 G#4/8 E4/4
+11) | A4/8 G#4/8 A4/8 B4/8
+12) | C5/8 D5/16 C5/16 B4/4
+13) | A4/8 G#4/8 A4/8 B4/8
+14) | C5/4 B4/4
+15) | A4/2

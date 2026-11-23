@@ -1,0 +1,19 @@
+title: Hausegesinde
+author: traditional
+time: 3/8
+key: -1
+tempo: 90
+clef: treble
+---
+1) | F4/8.=Wi- G4/16=de- A4/16=wi- Bb4/16=de-
+2) | C5/8=wen- F5/8=ne A4/8=heisst
+3) | C5/8=mei- Bb4/8=ne G4/8=Trut-
+4) | G4/8=hen- F4/8=ne, r/8
+5) | C5/8=Kann- Bb4/8=nicht- G4/8=ruhn
+6) | D5/8=heisst C5/8=mein A4/8=Huhn,
+7) | C5/8=We- Bb4/8=del- G4/8=schwanz
+8) | D5/8=heisst C5/16=mei- C5/16=ne A4/8=Gans;
+9) | F4/8.=Wi- G4/16=de- A4/16=wi- Bb4/16=de-
+10) | C5/8=wen- F5/8=ne A4/8=heisst
+11) | C5/8=mei- Bb4/8=ne G4/8=Trut-
+12) | G4/8=hen- F4/8=ne. r/8

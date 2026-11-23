@@ -1,0 +1,18 @@
+title: Ding Dong Bell
+author: traditional
+time: 4/4
+key: 1
+tempo: 90
+clef: treble
+---
+1) | G4/4=Ding D4/4=dong G4/2=bell!
+2) | B4/8=Pus- C5/8=sy's A4/8=in B4/8=the G4/2=well!
+3) | G4/4=Who D4/8=put D4/8=her G4/2=in?
+4) | B4/8=Lit- C5/8=tle A4/8=Tom- B4/8=my G4/2=Lin.
+5) | B4/4=Who B4/8=pulled C5/8=her D5/2=out?
+6) | E5/8=Lit- D5/8=tle C5/8=Tom- E5/8=my D5/4=Stout. B4/8=What B4/8=a
+7) | B4/8=naugh- A4/8=ty B4/8=boy C5/8=was D5/4=that D5/4=To
+8) | E5/8=drown D5/8=poor C5/8=pus- E5/8=sy D5/4=cat, G4/4=Who
+9) | G4/8=ne'er F#4/8=did G4/8=a- A4/8=ny B4/4=harm, A4/4=But
+10) | B4/8=killed A4/8 B4/8=all C5/8=the D5/4=mice E5/8t=in D5/8t C5/8t
+11) | B4/4=fa- A4/4=ther's G4/2=barn.

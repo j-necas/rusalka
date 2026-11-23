@@ -82,6 +82,7 @@ export default {
   'vic.naucit': 'थोड़ा-थोड़ा सीखें',
   'vic.dvojice': 'जोड़ी में बजाएँ',
   'vic.oPisni': 'गीत के बारे में',
+  "pred.textPisne": "गीत के बोल",
   'vic.ozvena': 'प्रतिध्वनि',
   'vic.dalsi': 'और विकल्प',
   'vic.naucitPopis': 'Rusalka गीत को छोटे हिस्सों में बाँटकर आपको सिखाती है।',

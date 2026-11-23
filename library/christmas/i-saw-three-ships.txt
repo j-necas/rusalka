@@ -1,0 +1,16 @@
+title: I Saw Three Ships
+author: traditional
+time: 6/8
+key: -1
+tempo: 90
+clef: treble
+---
+1) | F4/8=I
+2) | F4/4=saw F4/8=three F4/4=ships D5/8=come
+3) | C5/4=sail- Bb4/8=ing A4/4.=by,
+4) | G4/8=Sail- A4/8 Bb4/8=ing A4/4.=by,
+5) | G4/8=sail- A4/8 Bb4/8=ing A4/4=by, F4/8=I
+6) | F4/4=saw F4/8=three F4/4=ships D5/8=come
+7) | C5/4=sail- Bb4/8=ing A4/4=by, C5/8=On
+8) | D5/8=New- C5/8 Bb4/8=year's A4/8=Day G4/8=in F4/8=the
+9) | G4/4.=morn- F4/4=ing.

@@ -1,0 +1,15 @@
+title: This Old Man
+author: Traditional
+time: 2/2
+key: 0
+tempo: 88
+clef: treble
+---
+1) | G4/4=This E4/4=old G4/2=man,
+2) | G4/4=he E4/4=played G4/2=one,
+3) | A4/4=He G4/4=played F4/4=knick- E4/4=knack
+4) | D4/4=on E4/4=my F4/4=drum, E4/8=With F4/8=a
+5) | G4/4=knick- C4/4=knack C4/8=pad- C4/8=dy C4/4=whack,
+6) | C4/8=give D4/8=a E4/8=dog F4/8=a G4/2=bone,
+7) | G4/4=This D4/4=old D4/4=man F4/4=came
+8) | E4/4=rol- D4/4=ling C4/2=home.

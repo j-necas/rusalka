@@ -35,7 +35,7 @@ import { VZORKY, naMidi, nejblizsiVzorek } from './lib/piano.js';
 import { pokusyHrace, kalendar, presnostPoDnech, stavPisni, mistaKdeDrhne, zapisDoDeniku, prvniHrani, pripomenoutZalohu } from './lib/stats.js';
 import { nactiVstup, doprovodZapnuty, sDoprovodem, poZmeneKlaviru, prijimaZdroj, pripojeneVstupy, seznamPortu, klavesyViditelne, vytvorMereniDrzeni } from './lib/input.js';
 import { KROKY, RYCHLOSTI, stavKroku, umim, doporuceni, proMe, jeNova, akcePoVysledku } from './lib/recommend.js';
-import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny } from './lib/library.js';
+import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny, slucPisne } from './lib/library.js';
 {
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
@@ -1371,23 +1371,20 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const doma = proMe(hratelne, vys, stat, info).find(p => !umim(vys[p.soubor], stat, p.soubor)
       && (zacata(p) || (info[p.soubor]?.obtiznost?.stupen ?? S.knihovna.find(k => k.soubor === p.soubor)?.stupen ?? 1) <= uroven));
     if (doma) return doma;
-    const k = dalsiZKnihovny(S.knihovna, uroven, vys, stat);
+    const k = dalsiZKnihovny(slucPisne(S.seznam, S.knihovna).knihovna, uroven, vys, stat);
     return k ? { soubor: k.soubor, nazev: k.nazev } : null;
   }
   /** this player's home: own songs, plus library songs (the samples too) they played or starred (and did not remove since) */
   function domaciPisne() {
-    const jmena = new Set(S.seznam.map(p => p.soubor));
-    return [...S.seznam, ...S.knihovna.filter(p => !jmena.has(p.soubor) && naDomoveHrace(p.soubor))
+    const { vlastni, knihovna } = slucPisne(S.seznam, S.knihovna);
+    return [...vlastni, ...knihovna.filter(p => naDomoveHrace(p.soubor))
       .map(p => ({ soubor: p.soubor, nazev: p.nazev, knihovna: true }))];
   }
   /** a library song is on the current player's home */
   const naDomoveHrace = soubor => naDomove({ soubor }, S.profil || 'host',
     { statistiky: S.statistiky, oblibene: S.oblibene, knihovnaSkryte: S.knihovnaSkryte });
   /** the title's translation for a library song in another language than the app's (shown under the title) */
-  const prekladNazvu = soubor => {
-    const p = S.knihovna.find(k => k.soubor === soubor);
-    return (p && p.jazyk !== JAZYK && p.preklad?.[JAZYK]) || '';
-  };
+  const prekladNazvu = p => (p && p.jazyk !== JAZYK && p.preklad?.[JAZYK]) || '';
   /** when the player last played the song (ms) – from practice statistics */
   function naposledyHrano(soubor) {
     const st = S.statistiky?.[S.profil || 'host'] || {};
@@ -1453,7 +1450,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         stav[i] === 'ted' ? ` <b>${esc(t('domu.tedTy'))}</b>` : ''}</span></div>`).join('');
     }
     // tiles: one list of every song – own, samples and the library; tabs For me, Favourites, the shelves, Mine
-    const vsechny = vsechnyPisne(), dotaz = $('#hledat').value.trim(), uroven = urovenTed();
+    const sloucene = slucPisne(S.seznam, S.knihovna);
+    const vsechny = vsechnyPisne(sloucene), dotaz = $('#hledat').value.trim(), uroven = urovenTed();
     for (const b of $$('#zalozky button')) {
       const z = b.dataset.zalozka;
       b.classList.toggle('skryta', POLICE.includes(z) ? !vsechny.some(p => p.police === z) : z === 'moje' ? !vsechny.some(p => p.moje) : false);
@@ -1464,12 +1462,18 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     let vybrane;                                            // [{ p, tezsi }]
     if (dotaz) {
       const q = bezDiakritiky(dotaz), zKnihovny = new Set(hledej(S.knihovna, dotaz).map(p => p.soubor));
-      vybrane = vsechny.filter(p => zKnihovny.has(p.soubor) || bezDiakritiky(p.nazev + ' ' + (info[p.soubor]?.autor || '')).includes(q)).map(p => ({ p }));
+      vybrane = vsechny.filter(p => zKnihovny.has(p.soubor) || zKnihovny.has(p.verejna?.soubor)
+        || bezDiakritiky(p.nazev + ' ' + (info[p.soubor]?.autor || '')).includes(q)).map(p => ({ p }));
     } else if (zal === 'pro-me') {
       const doma = new Set(poradi.map(p => p.soubor));
-      vybrane = [...poradi, ...navrhyZKnihovny(S.knihovna, uroven, vys, stat, 4).filter(p => !doma.has(p.soubor))]
+      vybrane = [...poradi, ...navrhyZKnihovny(sloucene.knihovna, uroven, vys, stat, 4).filter(p => !doma.has(p.soubor))]
         .map(p => ({ p: vsechny.find(x => x.soubor === p.soubor) || p }));
-    } else if (zal === 'oblibene') vybrane = vsechny.filter(p => jeOblibena(p.soubor)).sort(podleNazvu).map(p => ({ p }));
+    }
+    else if (zal === 'oblibene') {
+      const oblibena = p => jeOblibena(p.soubor);
+      const oblibene = slucPisne(S.seznam.filter(oblibena), S.knihovna.filter(oblibena));
+      vybrane = vsechnyPisne(oblibene).sort(podleNazvu).map(p => ({ p }));
+    }
     else if (zal === 'moje') vybrane = vsechny.filter(p => p.moje).sort(podleNazvu).map(p => ({ p }));
     else vybrane = seradPolici(vsechny.filter(p => p.police === zal), uroven).map(({ polozka, tezsi }) => ({ p: polozka, tezsi }));
     if (OBTIZNOST) vybrane = vybrane.filter(({ p }) => String(p.stupen || info[p.soubor]?.obtiznost?.stupen || '') === OBTIZNOST);
@@ -1492,13 +1496,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (!b) return;
     OBTIZNOST = b.dataset.obtiznost; vykresliPisne();
   };
-  /** every song once: own songs (one that replaced a sample keeps the sample's shelf), then the library with the samples
-   *  (its shelf, difficulty) */
-  function vsechnyPisne() {
-    const info = S.infoPisni || {}, vlastni = new Set(S.seznam.map(p => p.soubor));
+  /** Own songs followed by public songs the player has no copy of. */
+  function vsechnyPisne({ vlastni, knihovna }) {
+    const info = S.infoPisni || {};
     const stupen = soubor => info[soubor]?.obtiznost?.stupen || null;
-    return [...S.seznam.filter(p => !p.chyba).map(p => ({ ...p, police: policeSouboru(p.soubor), moje: !policeSouboru(p.soubor), stupen: stupen(p.soubor) })),
-      ...S.knihovna.filter(p => !vlastni.has(p.soubor)).map(p => ({ soubor: p.soubor, nazev: p.nazev, police: p.police, stupen: p.stupen, knihovna: true }))];
+    return [...vlastni.filter(p => !p.chyba).map(p => ({ ...p, police: p.police || policeSouboru(p.soubor),
+      moje: !policeSouboru(p.soubor), stupen: stupen(p.soubor) })),
+      ...knihovna.map(p => ({ ...p, knihovna: true }))];
   }
   /** a song tile: title (and its translation for a library song in another language), author, difficulty, steps, star */
   function dlazdicePisne(p, { tezsi = false, nova = false } = {}) {
@@ -1509,7 +1513,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     b.dataset.soubor = p.soubor;
     const st = p.stupen || info[p.soubor]?.obtiznost?.stupen;
     if (st) b.dataset.stupen = st;
-    const umi = umim(vys[p.soubor], stat, p.soubor), preklad = jeKnihovni(p.soubor) ? prekladNazvu(p.soubor) : '';
+    const umi = umim(vys[p.soubor], stat, p.soubor), preklad = prekladNazvu(p.verejna || (p.knihovna ? p : null));
     const nazevStupne = st ? t(['domu.snadne', 'domu.stredni', 'domu.tezsi'][st - 1]) : '';
     b.innerHTML = `<b>${esc(p.nazev)}${nova ? ` <span class="stitek-nova">${esc(t('domu.nova'))}</span>` : ''}${
       umi ? ` <span class="stitek-umim">${esc(t('domu.umim'))}</span>` : ''}</b>${preklad ? `<small class="preklad">${esc(preklad)}</small>` : ''}`
@@ -1746,6 +1750,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     Object.assign(PRED, { soubor, krok: d.krok, rychlost: d.rychlost, doporuceny: d.krok });
     $('#predNazev').textContent = p?.nazev || soubor;
     $('#predAutor').textContent = S.infoPisni?.[soubor]?.autor || '';
+    $('#predText').open = false;
+    $('#predText').classList.toggle('skryta', !p?.slova?.length);
+    $('#predTextPisne').textContent = p?.slova?.join('\n') || '';
+    $('#predTextPisne').lang = p?.jazyk || '';
     vykresliOblibenou();
     $('#predNoty').innerHTML = '';
     $('#vicPanel').classList.add('skryta'); $('#predZmenit').setAttribute('aria-expanded', 'false');

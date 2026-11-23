@@ -1,0 +1,19 @@
+title: Vyletěla holubička
+author: traditional (Czech)
+time: 2/4
+key: -1
+tempo: 90
+clef: treble
+---
+1) F | F4/8=Vy- G4/8=le- A4/8=tě- Bb4/8=la
+2) | C5/8=ho- B4/8=lu- C5/8=bič- A4/8=ka
+3) Bb | F5/4=ze F5/8=ská- D5/8=ly,
+4) F | C5/2
+5) Bb | F5/4=ze F5/8=ská- D5/8=ly,
+6) F | C5/2
+7) Gm | Bb4/8=pro- D5/8=bu- Bb4/8=di- G4/8=la
+8) F | A4/8=čer- C5/8=né A4/8=o- F4/8=či
+9) C | G4/4=ze G4/8=spa- E4/8=ní.
+10) F | F4/2
+11) C | G4/4=ze G4/8=spa- E4/8=ní.
+12) F | F4/2
