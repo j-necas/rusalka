@@ -65,7 +65,7 @@ export function stavPisni(stat, vys) {
   return soubory.map(soubor => {
     const v = vys?.[soubor] || {};
     const stav = umim(v, stat, soubor) ? { druh: 'naucena' }
-      : { druh: 'krok', krok: doporuceni(v, stat, soubor).krok, rychlost: nejrychlejsiCisty(stat, soubor) };
+      : { druh: 'krok', krok: doporuceni(v, stat, soubor).krok, rychlost: nejrychlejsiCisty(stat, soubor, v) };
     return { soubor, hvezdy: KROKY.map(k => v[k]?.hvezdy || 0), stav, posledni: posledni.get(soubor) || 0 };
   }).sort((a, b) => b.posledni - a.posledni);
 }

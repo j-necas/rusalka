@@ -11,19 +11,32 @@ const KALIBRACE_RAMCU = 25;      // ~0.5 s of silence to estimate the noise
 /**
  * @param {{ audio: () => AudioContext, ocekavane: () => number[]|null, trefa: (midi:number) => void,
  *           vedle: (midi:number) => void, stav: (text:string, aktivni:boolean) => void,
- *           vlastni?: () => {p:number, od:number, do:number}[] }} volby   vlastni = notes the app itself plays now
+ *           vlastni?: () => {p:number, od:number, do:number}[],
+ *           kalibrace?: () => boolean, nastup?: (cas:number) => void }} volby
+ *   vlastni = notes the app itself plays now; kalibrace = the app measures the latency: every onset is reported
+ *   through nastup (AudioContext time), whatever note it is
  */
 export function vytvorMikrofon(volby) {
   let proud = null, zdroj = null, analyzer = null, casovac = 0, rozpoznavac = null;
+  let zapinani = null, generace = 0;
   const kalibrace = [];
   let posledniOcekavane = '';
 
-  async function zapni() {
-    if (proud) return;
+  /** a second call while the permission prompt is open returns the same promise (one stream, one timer) */
+  function zapni() {
+    if (proud) return Promise.resolve();
+    if (zapinani) return zapinani;
+    const g = ++generace;
+    zapinani = spust(g).finally(() => { if (g === generace) zapinani = null; });
+    return zapinani;
+  }
+  async function spust(g) {
     if (!navigator.mediaDevices?.getUserMedia) throw new Error(t('editor.mikrofon.nepodporuje'));
-    proud = await navigator.mediaDevices.getUserMedia({
+    const novy = await navigator.mediaDevices.getUserMedia({
       audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false },
     });
+    if (g !== generace) { novy.getTracks().forEach(x => x.stop()); return; }   // switched off while the prompt was open
+    proud = novy;
     const ac = volby.audio();
     zdroj = ac.createMediaStreamSource(proud);
     analyzer = ac.createAnalyser();
@@ -46,6 +59,11 @@ export function vytvorMikrofon(volby) {
         }
         return;
       }
+      if (volby.kalibrace?.()) {                         // latency calibration: any onset counts
+        if (rozpoznavac.detektor.zpracuj(kratky, ac.currentTime).nastup) volby.nastup?.(ac.currentTime);
+        posledniOcekavane = null;
+        return;
+      }
       const cile = volby.ocekavane() || [];
       const klic = cile.join(',');
       if (klic !== posledniOcekavane) { rozpoznavac.ocekavej(cile); posledniOcekavane = klic; }
@@ -59,6 +77,7 @@ export function vytvorMikrofon(volby) {
   }
 
   function vypni() {
+    generace++; zapinani = null;
     clearInterval(casovac); casovac = 0;
     try { zdroj?.disconnect(); } catch { /* */ }
     proud?.getTracks().forEach(t => t.stop());

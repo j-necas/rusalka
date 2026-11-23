@@ -226,7 +226,7 @@ export function transponuj(pisen, cil = 'C') {
 const DELKY = [144, 96, 72, 48, 36, 24, 18, 12, 9, 6, 3];
 const DELKY_TRIOL = [32, 16, 8, 4];
 /** length in ticks → pieces writable as single notes (joined by ties); null if not possible */
-function rozdel(t) {
+export function rozdel(t) {
   if (t <= 0) return [];
   if (typNoty(t / DIV) && !(typNoty(t / DIV).tecky > 1)) return [t];
   const out = [];

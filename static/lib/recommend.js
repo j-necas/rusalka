@@ -23,13 +23,22 @@ export function stavKroku(vys) {
 /** steps played at least once but without three stars yet (the tile shows them hatched) */
 export const rozehraneKroky = vys => KROKY.map(k => !!vys?.[k] && !hotovy(vys, k));
 
-/** highest speed (%) at which the player played the song In rhythm cleanly; 0 = never */
-export function nejrychlejsiCisty(stat, soubor) {
-  return Math.max(0, ...historie(stat, soubor).filter(h => krokZaznamu(h) === REZIM.TEMPO && h.cisty).map(h => Number(h.rychlost) || 0));
+/** a history record of the whole song (not a section in the loop): older records without od/do count as whole */
+const celaPisen = z => {
+  const h = z?.historie || [], konec = Math.max(...h.map(x => x.do ?? -Infinity));
+  return h.filter(x => x.od == null || (x.od === 0 && x.do === konec));
+};
+/**
+ * highest speed (%) at which the player played the whole song In rhythm cleanly; 0 = never. It is kept in the results
+ * (vys.tempo.cistaRychlost); the history (last 30 attempts) is read as well for results saved before that.
+ */
+export function nejrychlejsiCisty(stat, soubor, vys = null) {
+  const zHistorie = zaznamy(stat, soubor).flatMap(celaPisen).filter(h => krokZaznamu(h) === REZIM.TEMPO && h.cisty).map(h => Number(h.rychlost) || 0);
+  return Math.max(0, Number(vys?.tempo?.cistaRychlost) || 0, ...zHistorie);
 }
 
 export function umim(vys, stat, soubor) {
-  return KROKY.every(k => hotovy(vys, k)) && nejrychlejsiCisty(stat, soubor) >= 100;
+  return KROKY.every(k => hotovy(vys, k)) && nejrychlejsiCisty(stat, soubor, vys) >= 100;
 }
 
 /** { krok, rychlost, umim }: the first unfinished step at the last used speed, otherwise In rhythm one notch faster */
@@ -39,7 +48,7 @@ export function doporuceni(vys, stat, soubor) {
     const posledni = historie(stat, soubor).filter(h => krokZaznamu(h) === krok).sort((a, b) => b.kdy - a.kdy)[0];
     return { krok, rychlost: posledni ? dolu(Number(posledni.rychlost) || 0) : RYCHLOSTI[0], umim: false };
   }
-  const n = nejrychlejsiCisty(stat, soubor);
+  const n = nejrychlejsiCisty(stat, soubor, vys);
   return n >= 100 ? { krok: REZIM.TEMPO, rychlost: 100, umim: true } : { krok: REZIM.TEMPO, rychlost: RYCHLOSTI.find(r => r > n), umim: false };
 }
 

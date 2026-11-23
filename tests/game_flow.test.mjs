@@ -73,15 +73,15 @@ test('a section keeps only its own best stars, per level', () => {
   assert.equal(zapisUseku(undefined, { od: 0, do: 1 }, 2, 1).useky['0-1#2'], 1);
 });
 
-test('the guide and a running section loop decide before anything is stored', () => {
+test('the guide and a running section loop decide what comes next, and the pass still keeps its stars', () => {
   const z = zaznam(REZIM.TEMPO, ok(8));
   const p = vyhodnotPokus({ zaznam: z, uroven: 2, pruvodce: true, smycka: { zapnuto: true, cisteVRade: 0 } });
-  assert.deepEqual(Object.keys(p), ['souhrn', 'dalsi']);
+  assert.deepEqual(Object.keys(p), ['souhrn', 'dalsi', 'podil', 'hvezdy', 'vysPisne']);
   assert.equal(p.dalsi, 'pruvodce');
   assert.deepEqual(p.souhrn, souhrnPokusu(z));
   const s = vyhodnotPokus({ zaznam: z, uroven: 2, smycka: { zapnuto: true, cisteVRade: 1 } });
   assert.equal(s.dalsi, 'smycka');
-  assert.equal(s.vysPisne, undefined);
+  assert.equal(s.vysPisne.tempo.hvezdy, 3);
   assert.deepEqual(s.pruchod.smycka, { zapnuto: true, cisteVRade: 2 });
   assert.match(s.pruchod.zprava, / · čistě 2\/3 · 80 %$/);
 });

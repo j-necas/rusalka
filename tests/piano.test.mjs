@@ -23,3 +23,10 @@ test('only loaded samples are used; none loaded → null', () => {
   assert.equal(nejblizsiVzorek(60, [48, 72]).vzorek, 48);
   assert.equal(nejblizsiVzorek(60, []), null);
 });
+
+test('only the samples a range of keys needs are loaded: the nearest one of every key', async () => {
+  const { vzorkyPro } = await import('../static/lib/piano.js');
+  assert.deepEqual(vzorkyPro(60, 72), ['C4', 'Ds4', 'Fs4', 'A4', 'C5']);
+  assert.deepEqual(vzorkyPro(58, 58), ['A3']);
+  assert.deepEqual(vzorkyPro(0, 200), VZORKY, 'beyond the piano: every sample');
+});

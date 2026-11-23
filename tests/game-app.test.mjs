@@ -8,7 +8,7 @@ import createVerovioModule from 'verovio/wasm';
 import { VerovioToolkit } from 'verovio/esm';
 
 // The app runs with the real score renderer and storage. Only browser I/O and the clock are substituted.
-async function prohlizec(t, { kotva, knihovna = [], vlastni, profily = [{ id: 'p', jmeno: 'Anna', vek: 'dite' }, { id: 'd', jmeno: 'Petr', vek: 'dospely' }] } = {}) {
+async function prohlizec(t, { kotva, knihovna = [], vlastni, ulozeno = {}, midi = null, profily = [{ id: 'p', jmeno: 'Anna', vek: 'dite' }, { id: 'd', jmeno: 'Petr', vek: 'dospely' }] } = {}) {
   const prvek = () => {
     const e = new EventTarget(), tridy = new Set(['skryta']), vnitrni = new Map(), atributy = new Map();
     let html = '';
@@ -35,7 +35,8 @@ async function prohlizec(t, { kotva, knihovna = [], vlastni, profily = [{ id: 'p
   const dok = new EventTarget(), okno = new EventTarget(), tagy = new Map();
   const $ = s => { if (!tagy.has(s)) tagy.set(s, prvek()); return tagy.get(s); };
   const rezimy = ['cekam', 'pockej', 'tempo', 'poslech'].map(rezim => Object.assign($(`[data-rezim="${rezim}"]`), { dataset: { rezim } }));
-  Object.assign(dok, { querySelector: $, querySelectorAll: s => s === '[data-rezim]' ? rezimy : [], getElementById: () => null,
+  const vstupy = ['midi', 'mikrofon', 'obrazovka'].map(vstup => Object.assign($(`[data-vstup="${vstup}"]`), { dataset: { vstup } }));
+  Object.assign(dok, { querySelector: $, querySelectorAll: s => s === '[data-rezim]' ? rezimy : s === '[data-vstup]' ? vstupy : [], getElementById: () => null,
     createElement: prvek, documentElement: prvek(), body: prvek(), activeElement: null, readyState: 'complete', hidden: false, visibilityState: 'visible' });
   const modul = await createVerovioModule();
   let tk;
@@ -45,6 +46,7 @@ async function prohlizec(t, { kotva, knihovna = [], vlastni, profily = [{ id: 'p
   const hlasitost = { setValueAtTime() {}, linearRampToValueAtTime() {}, exponentialRampToValueAtTime() {}, cancelScheduledValues() {}, setTargetAtTime() {} };
   const uzel = () => ({ gain: Object.create(hlasitost), frequency: Object.create(hlasitost), playbackRate: {},
     connect() {}, disconnect() {}, start() {}, stop() {} });
+  const mikrofon = { zapnuti: 0, dekodovano: 0 };
   class AudioContext {
     state = 'running';
     get currentTime() { return ted / 1000; }
@@ -53,7 +55,10 @@ async function prohlizec(t, { kotva, knihovna = [], vlastni, profily = [{ id: 'p
     createOscillator = uzel;
     createBufferSource = uzel;
     createBiquadFilter = uzel;
-    decodeAudioData(_, ok) { ok({}); }
+    decodeAudioData(_, ok) { mikrofon.dekodovano++; ok({}); }
+    createMediaStreamSource = uzel;
+    createAnalyser = () => ({ ...uzel(), getFloatTimeDomainData() {} });
+    sampleRate = 48000;
   }
   okno.AudioContext = AudioContext;
   const soubor = 'Cviceni.musicxml';
@@ -62,9 +67,12 @@ async function prohlizec(t, { kotva, knihovna = [], vlastni, profily = [{ id: 'p
   const nota = { t: 'C4', d: '1/1', lig: false, s: '' };
   const xml = naMusicXml({ nazev: 'Cvičení', takt: '4/4', tempo: 120, predznamenani: 0, klic: 'houslovy',
     takty: [{ noty: [nota], leva: [{ ...nota, t: 'C3' }], akordy: [] }] });
-  const nastaveni = new Map([['kt-jazyk', JSON.stringify('cs')], ['kt-nastaveni', JSON.stringify({ rychlost: 70, stranka: true })]]);
+  const nastaveni = new Map([['kt-jazyk', JSON.stringify('cs')], ['kt-nastaveni', JSON.stringify({ rychlost: 70, stranka: true })],
+    ...Object.entries(ulozeno).map(([k, v]) => [k, JSON.stringify(v)])]);
   const globaly = {
-    window: okno, document: dok, navigator: { language: 'cs', languages: ['cs'] }, indexedDB: new IDBFactory(),
+    window: okno, document: dok, indexedDB: new IDBFactory(),
+    navigator: { language: 'cs', languages: ['cs'], ...(midi ? { requestMIDIAccess: midi } : {}),
+      mediaDevices: { getUserMedia: async () => { mikrofon.zapnuti++; return { getTracks: () => [{ stop() {} }] }; } } },
     localStorage: { getItem: k => nastaveni.get(k), setItem: (k, v) => nastaveni.set(k, v) },
     location: { protocol: 'http:', hostname: 'localhost', hash: kotva ?? '#pisen=' + soubor, pathname: '/', search: '' },
     history: { replaceState() { location.hash = ''; } }, verovio: { toolkit: function () { return new VerovioToolkit(modul); } },
@@ -107,7 +115,7 @@ async function prohlizec(t, { kotva, knihovna = [], vlastni, profily = [{ id: 'p
   const videt = s => !$(s).classList.contains('skryta');
   const klavesa = p => $('#klavesy').children.find(k => k.dataset.p === p);
   const stisk = p => klavesa(p).dispatchEvent(new Event('pointerdown', { cancelable: true }));
-  return { $, dok, okno, posun, cekejNa, videt, klavesa, stisk, nacti, uloziste };
+  return { $, dok, okno, posun, cekejNa, videt, klavesa, stisk, nacti, uloziste, nastaveni, mikrofon };
 }
 
 test('public lyrics are shown from a direct link and the search keeps the own copy only', async t => {
@@ -276,4 +284,91 @@ test('the guest link opens Home even with saved players and lets the guest choos
   assert.match($('#mujProfilOtevrit').innerHTML, /Anna/);
   assert.equal(await cekejNa(() => uloziste.ctiData('profil')), 'p');
   assert.equal(location.hash, '');
+});
+
+test('a saved accompaniment style that cannot be drawn falls back to the default instead of blocking the song', async t => {
+  const { $, cekejNa, videt, nacti, nastaveni } = await prohlizec(t, { profily: [],
+    ulozeno: { 'kt-pisen-Cviceni.musicxml': { uroven: 4, tonina: 'ne', prstoklad: false, styl: 'neexistuje' } } });
+  await cekejNa(() => videt('#pred'));
+  nacti();
+  await cekejNa(() => !$('#predHrat').disabled);
+  assert.equal(JSON.parse(nastaveni.get('kt-pisen-Cviceni.musicxml')).styl, '');
+  // choosing a style that fails to draw keeps the last working version (and does not save the broken choice)
+  $('#styl').value = 'neexistuje';
+  await $('#styl').onchange();
+  assert.equal(JSON.parse(nastaveni.get('kt-pisen-Cviceni.musicxml')).styl, '');
+  assert.equal($('#styl').value, '');
+  assert.ok(!$('#predHrat').disabled);
+});
+
+test('Learn bit by bit switches the microphone on (the tap is when the browser allows it)', async t => {
+  const { $, cekejNa, videt, nacti, mikrofon } = await prohlizec(t, { profily: [], ulozeno: { 'kt-vstup': { rezim: 'mikrofon' } } });
+  await cekejNa(() => videt('#pred'));
+  nacti();
+  await cekejNa(() => !$('#predHrat').disabled);
+  $('#pruvodce').click();
+  await cekejNa(() => mikrofon.zapnuti === 1);
+});
+
+test('the result never shows the coach advice of an earlier attempt', async t => {
+  const { $, posun, cekejNa, videt, stisk, nacti } = await prohlizec(t, { profily: [] });
+  await cekejNa(() => videt('#pred'));
+  nacti();
+  await cekejNa(() => !$('#predHrat').disabled);
+  $('#predHrat').click();
+  stisk(62); stisk(64); stisk(60);
+  posun(1200);
+  await cekejNa(() => videt('#vysledek') && $('#vysTrener').textContent);
+  $('#zpet').click();
+  await cekejNa(() => !$('#predHrat').disabled);
+  $('#predPoslech').click();
+  await Promise.resolve(); await Promise.resolve();
+  posun(10000);
+  await cekejNa(() => videt('#vysledek'));
+  assert.equal($('#vysTrener').textContent, '');
+  assert.equal(videt('#vysUkol'), false);
+});
+
+test('MIDI: asked again after a closed prompt, the game pauses when the piano goes away, leaving the page silences it', async t => {
+  let dotazu = 0, povolit = false, zmena = null;
+  const vstup = { id: 'a', name: 'Piano', state: 'connected' };
+  const vstupy = new Map([['a', vstup]]);
+  const ticho = [];
+  const vystup = { id: 'o', name: 'Piano', state: 'connected', send: d => { if ((d[0] & 0xf0) === 0xb0 && d[1] === 123) ticho.push(d); } };
+  const midi = async () => {
+    dotazu++;
+    if (!povolit) throw new Error('NotAllowedError');
+    return { inputs: vstupy, outputs: new Map([['o', vystup]]), set onstatechange(f) { zmena = f; } };
+  };
+  const { $, okno, posun, cekejNa, videt, nacti } = await prohlizec(t, { profily: [], midi, ulozeno: { 'kt-vstup': { rezim: 'midi' } } });
+  await cekejNa(() => dotazu === 1);
+  povolit = true;
+  $('[data-vstup="midi"]').dispatchEvent(new Event('click'));
+  await cekejNa(() => dotazu === 2 && zmena);
+  await cekejNa(() => videt('#pred'));
+  nacti();
+  await cekejNa(() => !$('#predHrat').disabled);
+  $('#predHrat').click();
+  $('[data-rezim="tempo"]').click();
+  $('#start').click();
+  await Promise.resolve(); await Promise.resolve();
+  posun(100);
+  const pred = ticho.length;
+  okno.dispatchEvent(new Event('pagehide'));
+  assert.ok(ticho.length > pred, 'all notes off on the piano when the page goes away');
+  vstup.state = 'disconnected';
+  zmena();
+  assert.equal(videt('#pauzaPrekryv'), true, 'the game pauses when the piano disconnects');
+});
+
+test('the piano samples are decoded only around the keys the song uses, not all thirty at once', async t => {
+  const { $, cekejNa, videt, nacti, stisk, mikrofon } = await prohlizec(t, { profily: [] });
+  await cekejNa(() => videt('#pred'));
+  nacti();
+  await cekejNa(() => !$('#predHrat').disabled);
+  $('#predHrat').click();
+  stisk(60);
+  await cekejNa(() => mikrofon.dekodovano > 0);
+  for (let i = 0; i < 20; i++) await new Promise(r => setImmediate(r));
+  assert.ok(mikrofon.dekodovano < 15, `decoded ${mikrofon.dekodovano} samples`);
 });

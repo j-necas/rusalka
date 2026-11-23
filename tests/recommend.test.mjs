@@ -109,3 +109,26 @@ test('rozehraneKroky: a step played but without three stars yet; a finished or u
   assert.deepEqual(rozehraneKroky({ cekam: { hvezdy: 3, procent: 100, pocet: 2 }, pockej: { hvezdy: 0, procent: 20, pocet: 1 } }), [false, true, false]);
   assert.deepEqual(rozehraneKroky({ cekam: { hvezdy: 3 }, pockej: { hvezdy: 3 }, tempo: { hvezdy: 3 } }), [false, false, false]);
 });
+
+test('"I can play it" comes from the best clean whole-song speed kept in the results, not from the rolling history', async () => {
+  const { vyhodnotPokus, slucStatistiky, souhrnPokusu } = await import('../static/lib/practice.js');
+  const nota = i => ({ takt: i >> 2, index: i, pitch: 60 + i % 5, ocekavanoMs: i * 500, zahranoMs: i * 500, vysledek: 'ok',
+    odchylkaMs: 0, drzenoMs: null, ocekavanaDelkaMs: 500 });
+  const zaz = (extra = {}) => ({ rezim: 'tempo', krok: 'tempo', rychlost: 100, od: 0, do: 4, ruka: 'prava', dobaMs: 500,
+    noty: Array.from({ length: 20 }, (_, i) => nota(i)), chybneStisky: [], ...extra });
+  const tri = { cekam: { hvezdy: 3 }, pockej: { hvezdy: 3 }, tempo: { hvezdy: 3 } };
+  // a clean two-bar section at 100 % in the loop is not the whole song
+  let st = slucStatistiky(null, souhrnPokusu(zaz({ od: 4, do: 5 })), 1e12);
+  st = slucStatistiky(st, souhrnPokusu(zaz({ rychlost: 80 })), 1e12 + 1);
+  const usek = vyhodnotPokus({ zaznam: zaz({ od: 4, do: 5 }), usek: { od: 4, do: 5 }, uroven: 2, vysPisne: tri });
+  assert.equal(umim(usek.vysPisne, { 'a.musicxml#2': st }, 'a.musicxml'), false);
+  // a clean whole song at 100 % is kept in the results and stays after 30 more attempts roll the history over
+  const cela = vyhodnotPokus({ zaznam: zaz(), uroven: 2, vysPisne: tri });
+  assert.equal(cela.vysPisne.tempo.cistaRychlost, 100);
+  for (let i = 0; i < 30; i++) st = slucStatistiky(st, souhrnPokusu(zaz({ rezim: 'cekam', krok: 'cekam', rychlost: 60 })), 1e12 + 10 + i);
+  assert.equal(umim(cela.vysPisne, { 'a.musicxml#2': st }, 'a.musicxml'), true);
+  assert.equal(nejrychlejsiCisty({ 'a.musicxml#2': st }, 'a.musicxml', cela.vysPisne), 100);
+  // a slower clean run does not lower it
+  const pomaleji = vyhodnotPokus({ zaznam: zaz({ rychlost: 60 }), uroven: 2, vysPisne: cela.vysPisne });
+  assert.equal(pomaleji.vysPisne.tempo.cistaRychlost, 100);
+});

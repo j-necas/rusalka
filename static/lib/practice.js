@@ -234,6 +234,23 @@ export function najdiZasah(kroky, { pitch, cas, okno, hotovo, od, pockej = false
   return null;
 }
 
+/**
+ * In rhythm, a key outside the hit window: the nearest note of that pitch not played yet within two windows (a late
+ * or an early press). The app scores it on that note as late/early (mimoOkno), not as a wrong press with the note
+ * missed, so a late right key never costs more than skipping the note.
+ */
+export function najdiZasahMimoOkno(kroky, { pitch, cas, okno, hotovo }) {
+  let nej = null;
+  for (let i = 0; i < kroky.length; i++) {
+    const k = kroky[i];
+    if (k.ms > cas + 2 * okno) break;
+    if (k.ms < cas - 2 * okno) continue;
+    const nota = k.noty.find(n => n.pitch === pitch && !hotovo.has(n.id));
+    if (nota && (!nej || Math.abs(k.ms - cas) < Math.abs(kroky[nej.index].ms - cas))) nej = { nota, index: i };
+  }
+  return nej;
+}
+
 export function zacatekHry(kroky, takty, qNaMs, takt = kroky[0].noty[0].takt) {
   return Math.min(kroky[0].ms, qNaMs(takty[takt] ?? kroky[0].q));
 }
@@ -269,11 +286,12 @@ export function hvezdyZPodilu(podil, rezim) {
  * @property {number} [predznamenani]      for spelling note names (negative = flats)
  * @property {Array<{takt:number, index:number, pitch:number, ocekavanoMs:number, zahranoMs:(number|null),
  *   vysledek:('ok'|'vedle'|'vynechana'), odchylkaMs:(number|null), drzenoMs:(number|null),
- *   ocekavanaDelkaMs:number}>} noty
+ *   ocekavanaDelkaMs:number, mimoOkno?:boolean}>} noty
  *   index = game step order (notes with the same index sound together); odchylkaMs = zahranoMs − ocekavanoMs
  *   (negative = early; computed if missing); drzenoMs = how long the key was held (null = not measured);
  *   vysledek: 'ok' hit, 'vedle' = a wrong key was pressed while waiting for the note (Step by step) / a different
- *   pitch was played, 'vynechana' = not played in time (In rhythm)
+ *   pitch was played, 'vynechana' = not played in time (In rhythm); mimoOkno = the right key came outside the hit
+ *   window (In rhythm, late or early): the note counts as half a hit
  * @property {Array<{pitch:number, ms:number, takt:number, index?:number, nota?:string}>} chybneStisky
  *   presses that belonged to no note; index = the step being waited for (recommended for 'cekam',
  *   otherwise the nearest note by time in the given bar is looked up); nota = id of the note the press belongs to
@@ -330,7 +348,8 @@ export function souhrnPokusu(zaznam) {
   const vedle = noty.filter(n => n.vysledek === 'vedle').length;
   const vynechane = noty.filter(n => n.vysledek === 'vynechana').length;
   const navic = Math.max(0, stisky.length - vedle);
-  const presnost = podilZasahu(ok, noty.length, navic);
+  const mimoOkno = noty.filter(n => n.vysledek === 'ok' && n.mimoOkno).length;
+  const presnost = podilZasahu(ok - mimoOkno / 2, noty.length, navic);
 
   // timing (In rhythm only, hit notes only), real ms
   const posun = n => n.odchylkaMs / sp;
@@ -368,8 +387,8 @@ export function souhrnPokusu(zaznam) {
   return {
     rezim, ...(zaznam.krok ? { krok: zaznam.krok } : {}), rychlost: Number(zaznam.rychlost) || 100, od: zaznam.od, do: zaznam.do,
     ruka: zaznam.ruka || null,
-    pocetNot: noty.length, ok, vedle, vynechane, chybnychStisku: stisky.length,
-    presnost: zaokr(presnost, 3), cisty: noty.length > 0 && ok === noty.length && stisky.length === 0,
+    pocetNot: noty.length, ok, vedle, vynechane, chybnychStisku: stisky.length, mimoOkno,
+    presnost: zaokr(presnost, 3), cisty: noty.length > 0 && ok === noty.length && stisky.length === 0 && !mimoOkno,
     prumernaOdchylkaMs: zaokr(prumAbs), prumernyPosunMs: zaokr(prumPosun), spech,
     takty, nejhorsiTakty,
     vzorce: najdiVzorce(noty, stisky, { sp, vRytmu, becka, doba: odhadDoby({ ...zaznam, noty }) }),
@@ -573,25 +592,28 @@ export function dalsiPruchod(smycka, souhrn, rychlost = souhrn.rychlost) {
  * section stars); vysPisne = the player's results for the song ({ cekam|pockej|tempo: { hvezdy, procent, pocet },
  * useky, dvojice }); smycka = section loop { zapnuto, cisteVRade }; pruvodce = the Learn bit by bit guide is on.
  * → { souhrn, dalsi: 'pruvodce' (the guide decides) | 'smycka' (another pass, see pruchod) | 'vysledek', pruchod
- *   (dalsiPruchod when the loop is on), and for 'vysledek': podil, hvezdy, rekord, vysPisne (new results), nadpis, text }
+ *   (dalsiPruchod when the loop is on), podil, hvezdy, vysPisne (new results – every pass counts, also in the loop and
+ *   the guide), and for 'vysledek': rekord, nadpis, text }
  * Stars: share of hits among the notes and wrong presses (hvezdyZPodilu); a section keeps only its own best stars.
  */
 export function vyhodnotPokus({ zaznam, usek = null, uroven, vysPisne = {}, smycka = null, pruvodce = false }) {
   const souhrn = souhrnPokusu(zaznam);
-  if (pruvodce) return { souhrn, dalsi: 'pruvodce' };
-  const pruchod = smycka?.zapnuto ? dalsiPruchod(smycka, souhrn, zaznam.rychlost) : null;
-  if (pruchod && !pruchod.hotovo) return { souhrn, dalsi: 'smycka', pruchod };
   const { rezim, ok, pocetNot: n } = souhrn, chyby = (zaznam.chybneStisky || []).length;
-  const podil = podilZasahu(ok, n, chyby), hvezdy = hvezdyZPodilu(podil, rezim);
+  const podil = podilZasahu(ok - (souhrn.mimoOkno || 0) / 2, n, chyby), hvezdy = hvezdyZPodilu(podil, rezim);
+  // every pass keeps its stars, also in the loop and in the guide (the whole song, or the section's own stars)
+  const z = usek ? null : zlepsiVysledek(vysPisne?.[rezim], hvezdy, podil, rezim === REZIM.TEMPO && souhrn.cisty ? souhrn.rychlost : 0);
+  const noveVys = usek ? zapisUseku(vysPisne, usek, uroven, hvezdy) : { ...vysPisne, [rezim]: z.vysledek };
+  if (pruvodce) return { souhrn, dalsi: 'pruvodce', podil, hvezdy, vysPisne: noveVys };
+  const pruchod = smycka?.zapnuto ? dalsiPruchod(smycka, souhrn, zaznam.rychlost) : null;
+  if (pruchod && !pruchod.hotovo) return { souhrn, dalsi: 'smycka', pruchod, podil, hvezdy, vysPisne: noveVys };
   const text = rezim !== REZIM.TEMPO ? (chyby ? t('app.vsechVedle', { n, chyby }) : t('app.vsechBezChyby', { n }))
     : t(chyby ? 'app.vcasTextVedle' : 'app.vcasText', { a: ok, n, chyby, r: pruchod?.rychlost ?? zaznam.rychlost });
   const vysledek = { souhrn, dalsi: 'vysledek', pruchod, podil, hvezdy };
   if (usek) {
-    return { ...vysledek, rekord: false, vysPisne: zapisUseku(vysPisne, usek, uroven, hvezdy),
+    return { ...vysledek, rekord: false, vysPisne: noveVys,
       nadpis: t(souhrn.cisty ? 'app.usekCiste' : 'app.usekDohran'), text };
   }
-  const z = zlepsiVysledek(vysPisne?.[rezim], hvezdy, podil);
-  return { ...vysledek, rekord: z.rekord, vysPisne: { ...vysPisne, [rezim]: z.vysledek },
+  return { ...vysledek, rekord: z.rekord, vysPisne: noveVys,
     nadpis: t(['app.hv0', 'app.hv1', 'app.hv2', souhrn.cisty ? 'app.hv3bezChyby' : 'app.hv3'][hvezdy]),
     text: text + (z.rekord && z.vysledek.pocet > 1 ? ' ' + t('app.rekord') : '') };
 }

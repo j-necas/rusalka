@@ -16,7 +16,7 @@ import {
   tonyAkordu, kopie,
 } from './song.js';
 import { fraze, tezkaMista } from './practice.js';
-import { jakaTonina, harmonizuj } from './levels.js';
+import { jakaTonina, harmonizuj, rozdel } from './levels.js';
 import { t as preklad, jazyk } from './texts.js';
 import { TEMATA_JAZYKU } from '../lang/temata.js';
 import { nazevKroku, soustava } from './note_names.js';
@@ -987,16 +987,6 @@ export function vzorProTakt(styl, takt) {
     }
   }
   return { udalosti: Array.from({ length: dob }, (_, i) => u(i * g, g, i ? S : B)), delka: L, prizpusobeno: true };
-}
-
-function rozdel(t) {
-  if (t <= 0) return [];
-  const ty = typNoty(t / DIV);
-  if (ty && ty.tecky <= 1) return [t];
-  const out = [];
-  let zbyva = t;
-  for (const d of [...DELKY_DILKY, 32, 16, 8, 4]) while (zbyva >= d) { out.push(d); zbyva -= d; }
-  return zbyva === 0 ? out : null;
 }
 
 const BAS_DOLE = 40, SOUZVUK_DOLE = 43, NEJNIZ = 28;

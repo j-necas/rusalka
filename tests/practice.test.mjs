@@ -439,3 +439,41 @@ test('history preserves the step supplied by a legacy summary', () => {
   const st = slucStatistiky(null, { rezim: 'tempo', krok: 'pockej', rychlost: 80, od: 0, do: 3, presnost: 1, cisty: true, takty: {} }, 1000);
   assert.equal(st.historie[0].krok, 'pockej');
 });
+
+test('In rhythm: the right key just outside the hit window is scored on its note (late/early), not as a wrong press', () => {
+  const K = [0, 500, 1000].map((ms, i) => ({ ms, noty: [{ id: 'n' + i, pitch: 60 + i, ms }] }));
+  const najdi = (pitch, cas, hotovo = new Set()) => Hra.najdiZasahMimoOkno(K, { pitch, cas, okno: 220, hotovo })?.nota.id;
+  assert.equal(najdi(61, 500 + 250), 'n1', '250 ms late');
+  assert.equal(najdi(62, 1000 - 300), 'n2', '300 ms early');
+  assert.equal(najdi(61, 500 + 500), undefined, 'too far away');
+  assert.equal(najdi(61, 750, new Set(['n1'])), undefined, 'already played');
+  assert.equal(najdi(63, 750), undefined, 'a different pitch');
+
+  const nota = (i, v, extra = {}) => ({ takt: i >> 2, index: i, pitch: 60 + i % 5, ocekavanoMs: i * 500, zahranoMs: v === 'ok' ? i * 500 : null,
+    vysledek: v, odchylkaMs: v === 'ok' ? 0 : null, drzenoMs: null, ocekavanaDelkaMs: 500, ...extra });
+  const zaz = noty => ({ rezim: 'tempo', krok: 'tempo', rychlost: 100, od: 0, do: 4, ruka: 'prava', dobaMs: 500, noty, chybneStisky: [] });
+  const vynechane = Hra.vyhodnotPokus({ zaznam: zaz(Array.from({ length: 20 }, (_, i) => nota(i, i < 17 ? 'ok' : 'vynechana'))), uroven: 2 });
+  const pozde = Hra.vyhodnotPokus({ zaznam: zaz(Array.from({ length: 20 }, (_, i) => i < 17 ? nota(i, 'ok')
+    : nota(i, 'ok', { zahranoMs: i * 500 + 250, odchylkaMs: 250, mimoOkno: true }))), uroven: 2 });
+  assert.ok(pozde.podil > vynechane.podil, `late ${pozde.podil} vs skipped ${vynechane.podil}`);
+  assert.ok(pozde.hvezdy >= vynechane.hvezdy);
+  assert.ok(pozde.podil < 1, 'a late note still costs something');
+  assert.equal(pozde.souhrn.cisty, false);
+});
+
+test('a pass in the loop and an attempt in the Learn bit by bit guide also keep their stars', () => {
+  const nota = i => ({ takt: i >> 2, index: i, pitch: 60 + i % 5, ocekavanoMs: i * 500, zahranoMs: i * 500, vysledek: 'ok',
+    odchylkaMs: 0, drzenoMs: null, ocekavanaDelkaMs: 500 });
+  const zaz = { rezim: 'tempo', krok: 'tempo', rychlost: 70, od: 0, do: 4, ruka: 'prava', dobaMs: 500,
+    noty: Array.from({ length: 20 }, (_, i) => nota(i)), chybneStisky: [] };
+  const smycka = Hra.vyhodnotPokus({ zaznam: zaz, uroven: 2, smycka: { zapnuto: true, cisteVRade: 0 } });
+  assert.equal(smycka.dalsi, 'smycka');
+  assert.equal(smycka.vysPisne?.tempo?.hvezdy, 3, 'the whole song played in the loop');
+  const pruvodce = Hra.vyhodnotPokus({ zaznam: zaz, uroven: 2, pruvodce: true });
+  assert.equal(pruvodce.dalsi, 'pruvodce');
+  assert.equal(pruvodce.vysPisne?.tempo?.hvezdy, 3, 'the whole song in the guide');
+  assert.equal(pruvodce.hvezdy, 3);
+  const usek = Hra.vyhodnotPokus({ zaznam: zaz, usek: { od: 0, do: 1 }, uroven: 2, pruvodce: true, vysPisne: { tempo: { hvezdy: 1, procent: 50, pocet: 1 } } });
+  assert.equal(usek.vysPisne.useky['0-1#2'], 3, 'a section keeps its own stars');
+  assert.equal(usek.vysPisne.tempo.hvezdy, 1, 'and does not touch the whole song');
+});

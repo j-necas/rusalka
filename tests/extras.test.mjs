@@ -510,3 +510,28 @@ test('expression by the score dynamics: missing contrast, dynamics followed, not
   const bez = faktaPrednesu(zaznam(p, () => 60), p);
   assert.equal(bez.podleNot, null);
 });
+
+test('every accompaniment style works for every library song (no exception, bars still add up)', async () => {
+  const { zTextu } = await import('../static/lib/notation.js');
+  const koren = new URL('../library/', import.meta.url);
+  const chyby = [];
+  for (const police of readdirSync(koren, { withFileTypes: true }).filter(d => d.isDirectory())) {
+    for (const f of readdirSync(new URL(police.name + '/', koren)).filter(x => x.endsWith('.txt'))) {
+      const { pisen } = zTextu(readFileSync(new URL(`${police.name}/${f}`, koren), 'utf8'));
+      if (!pisen) continue;
+      for (const s of STYLY) {
+        try { doprovodVeStylu(pisen, s.id); } catch (e) { chyby.push(`${police.name}/${f} × ${s.id}: ${e.message}`); }
+      }
+    }
+  }
+  assert.deepEqual(chyby, []);
+});
+
+test('a chord lasting 3.5 beats in 4/4 is split into tied pieces, not a crash', () => {
+  const p = { nazev: 'x', autor: '', klic: 'houslovy', predznamenani: 0, takt: '4/4', tempo: 100, takty: [
+    { akordy: ak([0, 'C'], [3.5, 'G']), noty: [q('C4'), q('E4'), q('G4'), n('E4', '1/8'), n('D4', '1/8')] },
+  ] };
+  const z = doprovodVeStylu(p, 'basy');
+  assert.deepEqual(kontrola(z), []);
+  assert.ok(z.takty[0].leva.length >= 2);
+});

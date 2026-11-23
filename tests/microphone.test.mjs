@@ -522,3 +522,69 @@ test('performance: at 48 kHz, CPU time stays below 2 ms for 2048 samples and 4 m
   const r4 = new Rozpoznavac({ vzorkovani: VZ }); r4.ocekavej([C4, E4]);
   mer('Rozpoznavac 4096', (i, cas) => r4.zpracuj(x.subarray(i * 64, i * 64 + 4096), cas), 4);
 });
+
+test('switching the microphone on twice while the permission prompt is open opens one stream; off stops it', async test => {
+  const zive = new Set();
+  let id = 0, proudu = 0, zastaveno = 0, povol;
+  test.mock.method(globalThis, 'setInterval', () => { zive.add(++id); return id; });
+  test.mock.method(globalThis, 'clearInterval', x => { zive.delete(x); });
+  const povoleni = new Promise(r => { povol = r; });
+  const navigator = Object.getOwnPropertyDescriptor(globalThis, 'navigator');
+  Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { mediaDevices: { getUserMedia: async () => {
+    await povoleni; proudu++;
+    return { getTracks: () => [{ stop() { zastaveno++; } }] };
+  } } } });
+  test.after(() => {
+    if (navigator) Object.defineProperty(globalThis, 'navigator', navigator);
+    else delete globalThis.navigator;
+  });
+  const ac = { sampleRate: 48000, currentTime: 0, createMediaStreamSource: () => ({ connect() {}, disconnect() {} }),
+    createAnalyser: () => ({ getFloatTimeDomainData() {} }) };
+  const mic = vytvorMikrofon({ audio: () => ac, ocekavane: () => null, trefa() {}, vedle() {}, stav() {} });
+  const a = mic.zapni(), b = mic.zapni();
+  povol();
+  await a; await b;
+  assert.equal(proudu, 1);
+  assert.equal(zive.size, 1);
+  mic.vypni();
+  assert.equal(zastaveno, 1);
+  assert.equal(zive.size, 0);
+  // switched off while the prompt is still open: the stream that arrives later is stopped at once
+  const c = mic.zapni();
+  mic.vypni();
+  await c;
+  assert.equal(mic.aktivni, false);
+  assert.equal(zastaveno, 2);
+  assert.equal(zive.size, 0);
+});
+
+test('during latency calibration the microphone reports any onset, without waiting for a particular note', async test => {
+  let tik;
+  test.mock.method(globalThis, 'setInterval', f => { tik = f; return 1; });
+  test.mock.method(globalThis, 'clearInterval', () => {});
+  const x = smichej(...[0.7, 1.4].map(od => klavir(midiNaHz(67), sekund(2.2), { od: sekund(od), amp: 0.2, utlum: 0.3 })));
+  let cas = 0;
+  const analyzer = { getFloatTimeDomainData(ramec) {
+    const konec = sekund(cas), od = konec - ramec.length;
+    ramec.fill(0);
+    ramec.set(x.subarray(Math.max(0, od), konec), Math.max(0, -od));
+  } };
+  const ac = { sampleRate: VZ, get currentTime() { return cas; },
+    createAnalyser: () => analyzer, createMediaStreamSource: () => ({ connect() {}, disconnect() {} }) };
+  const navigator = Object.getOwnPropertyDescriptor(globalThis, 'navigator');
+  Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { mediaDevices: { getUserMedia: async () => ({ getTracks: () => [] }) } } });
+  test.after(() => {
+    if (navigator) Object.defineProperty(globalThis, 'navigator', navigator);
+    else delete globalThis.navigator;
+  });
+  const nastupy = [], trefy = [];
+  const mic = vytvorMikrofon({ audio: () => ac, ocekavane: () => null, kalibrace: () => true, nastup: kdy => nastupy.push(kdy),
+    trefa: m => trefy.push(m), vedle: m => trefy.push(m), stav() {} });
+  await mic.zapni();
+  try {
+    for (let ms = 20; ms <= 2000; ms += 20) { cas = ms / 1000; tik(); }
+  } finally { mic.vypni(); }
+  assert.equal(nastupy.length, 2, String(nastupy));
+  assert.ok(nastupy[0] >= 0.7 && nastupy[0] < 0.8 && nastupy[1] >= 1.4 && nastupy[1] < 1.5, String(nastupy));
+  assert.deepEqual(trefy, []);
+});
