@@ -1403,9 +1403,13 @@ try {
     const navrhy = await k.locator('#pisne .dl[data-soubor^="library/"]').evaluateAll(el => el.map(e => e.dataset.soubor));
     kontrola('For me also suggests a few library songs she has not played (up to 4)', navrhy.length >= 3 && navrhy.length <= 6, navrhy.join());
     const zal = await k.locator('#zalozky button:visible').allInnerTexts();
-    kontrola('tabs: For me, Favourites, the four shelves and Mine (there is an own song)',
-      zal.join() === 'Pro mě,Oblíbené,Dětské,Lidové ze světa,Vánoční,Klasika,Moje', zal.join());
+    kontrola('tabs: For me, All songs, Favourites, the four shelves and Mine',
+      zal.join() === 'Pro mě,Všechny písničky,Oblíbené,Dětské,Lidové ze světa,Vánoční,Klasika,Moje', zal.join());
     await snimek(k, 'domu-knihovna');
+    await zalozka(k, 'vsechny');
+    kontrola('All songs includes the library, the samples and the player’s own songs',
+      await viditelna(k, '#pisne [data-soubor^="library/"]')
+      && (await dlazdice(k, 'Twinkle, Twinkle').count()) === 1 && (await dlazdice(k, 'Moje písnička').count()) === 1);
     await zalozka(k, 'moje');
     kontrola('Mine: only the own song', (await k.locator('#pisne .dl[data-soubor]').allInnerTexts()).length === 1 && (await dlazdice(k, 'Moje písnička').count()) === 1);
     await zalozka(k, 'pro-me');
@@ -1584,10 +1588,10 @@ try {
       && deti.every(d => d.tezsi === d.stupen > 1) && (prvniTezsi < 0 || deti.slice(prvniTezsi).every(d => d.tezsi)),
       JSON.stringify(deti.map(d => d.stupen + (d.tezsi ? 't' : ''))));
     kontrola('library and sample songs side by side on the shelf', deti.some(d => d.soubor.startsWith('library/')) && deti.some(d => d.nazev === 'Frère Jacques'));
-    // difficulty filter under the tabs: for the chosen tab (and the search), Vše by default
+    // Difficulty applies to the current scope, including the complete catalogue.
     const obt = await kn.locator('#obtiznost button').allInnerTexts();
-    kontrola('difficulty filter: All, Easy, Medium, Hard; All chosen', obt.join() === 'Vše,Snadné,Střední,Těžší'
-      && (await kn.locator('#obtiznost [aria-pressed="true"]').textContent()) === 'Vše', obt.join());
+    kontrola('difficulty filter: Any, Easy, Medium, Hard; Any chosen', obt.join() === 'Jakákoli,Snadné,Střední,Těžší'
+      && (await kn.locator('#obtiznost [aria-pressed="true"]').textContent()) === 'Jakákoli', obt.join());
     await kn.locator('#obtiznost [data-obtiznost="2"]').click();
     await ukazVse(kn);
     const stredni = await naPolici(kn);
@@ -1596,7 +1600,15 @@ try {
     kontrola('the filter stays on another tab', (await naPolici(kn)).every(d => d.stupen === 2));
     await kn.locator('#obtiznost [data-obtiznost="1"]').click();
     await zalozka(kn, 'pro-me');
-    kontrola('For me with Easy: only easy songs', (await naPolici(kn)).every(d => d.stupen === 1));
+    const doporucene = await naPolici(kn);
+    kontrola('For me with Easy: only easy songs', doporucene.every(d => d.stupen === 1));
+    await zalozka(kn, 'vsechny');
+    const vsechnySnadne = await naPolici(kn);
+    const snadneZIndexu = INDEX.filter(p => p.stupen === 1).map(p => p.soubor).sort();
+    kontrola('All songs with Easy: every easy library song, across shelves',
+      vsechnySnadne.length > doporucene.length && vsechnySnadne.every(d => d.stupen === 1)
+      && vsechnySnadne.map(d => d.soubor).filter(s => s.startsWith('library/')).sort().join() === snadneZIndexu.join()
+      && (await kn.locator('#zalozky [aria-pressed="true"]').textContent()) === 'Všechny písničky');
     await kn.locator('#obtiznost [data-obtiznost=""]').click();
     await zalozka(kn, 'children');
     await zalozka(kn, sPrekladem.police); await ukazVse(kn);
@@ -1639,7 +1651,7 @@ try {
     await doProhlizece(kne, NOVACEK, MOJE);
     await vyberHrace(kne, 'Ela');
     const zal = await kne.locator('#zalozky button:visible').allInnerTexts();
-    kontrola('English tabs', zal.join() === "For me,Favourites,Children's songs,Folk songs of the world,Christmas,Classics,Mine", zal.join());
+    kontrola('English tabs', zal.join() === "For me,All songs,Favourites,Children's songs,Folk songs of the world,Christmas,Classics,Mine", zal.join());
     await zalozka(kne, sPrekladem.police); await ukazVse(kne);
     kontrola('English translation line', (await naPolici(kne)).find(d => d.soubor === sPrekladem.soubor)?.preklad === sPrekladem.preklad.en);
   });

@@ -24,8 +24,9 @@ piano, data and backups) and **About**. Where the links don't fit, the bar shows
    **The song library** (website only) is right on Home: the tabs Children's songs, Folk songs of the world,
    Christmas and Classics show the library songs (the samples are among them), the songs up to the player's level first
    and harder ones after them, dimmed. **For me** adds a few library
-   songs at the player's level to the songs in progress, **Mine** shows the songs you added yourself, and the search
-   covers everything. Every tile shows its difficulty (1–3 keys). My songs lists only the songs you added.
+   songs at the player's level to the songs in progress. Open **All songs** to filter by difficulty across the library,
+   samples and your own songs. **Mine** shows the songs you added yourself. Search covers everything. Every tile shows
+   its difficulty (1–3 keys). My songs lists only the songs you added.
 3. **Three learning steps** (plus listening on its own):
    1. *Find the notes*: no tempo, waits for the right key.
    2. *With backing*: the accompaniment keeps the tempo but waits at each note until it is played.

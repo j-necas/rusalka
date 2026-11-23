@@ -1467,15 +1467,20 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       $('#pokracujCesta').innerHTML = KROKY.map((k, i) => `<div class="${stav[i]}"><i></i><span>${esc(t('krok.' + k))}${
         stav[i] === 'ted' ? ` <b>${esc(t('domu.tedTy'))}</b>` : ''}</span></div>`).join('');
     }
-    // tiles: one list of every song – own, samples and the library; tabs For me, Favourites, the shelves, Mine
+    // The full catalogue is also a scope of its own, so difficulty can filter it without a shelf or recommendations.
     const sloucene = slucPisne(S.seznam, S.knihovna);
     const vsechny = vsechnyPisne(sloucene), dotaz = $('#hledat').value.trim(), uroven = urovenTed();
-    for (const b of $$('#zalozky button')) {
+    const zalozky = $$('#zalozky button');
+    for (const b of zalozky) {
       const z = b.dataset.zalozka;
       b.classList.toggle('skryta', POLICE.includes(z) ? !vsechny.some(p => p.police === z) : z === 'moje' ? !vsechny.some(p => p.moje) : false);
     }
-    if ($('#zalozky .ted')?.classList.contains('skryta')) $$('#zalozky button').forEach(x => x.classList.toggle('ted', x.dataset.zalozka === 'pro-me'));
-    const zal = $('#zalozky .ted')?.dataset.zalozka || 'pro-me';
+    const zal = zalozky.find(b => b.classList.contains('ted') && !b.classList.contains('skryta'))?.dataset.zalozka || 'pro-me';
+    for (const b of zalozky) {
+      const vybrana = b.dataset.zalozka === zal;
+      b.classList.toggle('ted', vybrana);
+      b.setAttribute('aria-pressed', String(vybrana));
+    }
     const podleNazvu = (a, b) => a.nazev.localeCompare(b.nazev, 'cs');
     let vybrane;                                            // [{ p, tezsi }]
     if (dotaz) {
@@ -1486,7 +1491,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       const doma = new Set(poradi.map(p => p.soubor));
       vybrane = [...poradi, ...navrhyZKnihovny(sloucene.knihovna, uroven, vys, stat, 4).filter(p => !doma.has(p.soubor))]
         .map(p => ({ p: vsechny.find(x => x.soubor === p.soubor) || p }));
-    }
+    } else if (zal === 'vsechny') vybrane = vsechny.sort(podleNazvu).map(p => ({ p }));
     else if (zal === 'oblibene') {
       const oblibena = p => jeOblibena(p.soubor);
       const oblibene = slucPisne(S.seznam.filter(oblibena), S.knihovna.filter(oblibena));

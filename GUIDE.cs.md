@@ -22,7 +22,8 @@ a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
 
    **Knihovna písniček** (jen na webu) je přímo na Domově: záložky Dětské, Lidové ze světa, Vánoční a Klasika ukazují
    písničky z knihovny (jsou mezi nimi i ukázkové), nejdřív ty do úrovně hráče, za nimi těžší, ztlumené. **Pro mě** k rozehraným písničkám přidá pár dalších z knihovny přiměřených úrovni
-   hráče, **Moje** ukáže písničky, které jste přidali sami, a hledání prohledá všechno. Každá dlaždice ukazuje
+   hráče. V záložce **Všechny písničky** použijte filtr obtížnosti napříč celou knihovnou, ukázkami i vlastními
+   písničkami. **Moje** ukáže písničky, které jste přidali sami. Hledání prohledá všechno. Každá dlaždice ukazuje
    obtížnost (1–3 klávesy). Moje písničky ukazují jen písničky, které jste přidali.
 3. **Tři kroky učení** (a poslech zvlášť):
    1. *Najdi noty*: bez tempa, čeká na správnou klávesu.

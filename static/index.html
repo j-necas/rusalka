@@ -116,15 +116,16 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
       <button id="pokracujHrat" class="velke-hrat"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M8 5v20l17-10z" fill="currentColor"/></svg><span data-t="hrat"></span></button>
     </section>
     <div class="vyber-pisne">
-      <h3 data-t="domu.jina"></h3>
-      <div id="zalozky" class="zalozky">
-        <button data-zalozka="pro-me" class="ted" data-t="domu.proMe"></button>
-        <button data-zalozka="oblibene" data-t="domu.oblibene"></button>
-        <button data-zalozka="children" data-t="knihovna.police.children"></button>
-        <button data-zalozka="folk" data-t="knihovna.police.folk"></button>
-        <button data-zalozka="christmas" data-t="knihovna.police.christmas"></button>
-        <button data-zalozka="classics" data-t="knihovna.police.classics"></button>
-        <button data-zalozka="moje" data-t="domu.moje"></button>
+      <h3 id="vyberPisneNadpis" data-t="domu.jina"></h3>
+      <div id="zalozky" class="zalozky" role="group" aria-labelledby="vyberPisneNadpis">
+        <button type="button" data-zalozka="pro-me" class="ted" aria-pressed="true" data-t="domu.proMe"></button>
+        <button type="button" data-zalozka="vsechny" aria-pressed="false" data-t="domu.vsechnyPisnicky"></button>
+        <button type="button" data-zalozka="oblibene" aria-pressed="false" data-t="domu.oblibene"></button>
+        <button type="button" data-zalozka="children" aria-pressed="false" data-t="knihovna.police.children"></button>
+        <button type="button" data-zalozka="folk" aria-pressed="false" data-t="knihovna.police.folk"></button>
+        <button type="button" data-zalozka="christmas" aria-pressed="false" data-t="knihovna.police.christmas"></button>
+        <button type="button" data-zalozka="classics" aria-pressed="false" data-t="knihovna.police.classics"></button>
+        <button type="button" data-zalozka="moje" aria-pressed="false" data-t="domu.moje"></button>
       </div>
       <div id="obtiznost" class="obtiznost-filtr" role="group" data-t-aria="domu.obtiznostSkupina"><span data-t="domu.obtiznost"></span>
         <button type="button" data-obtiznost="" aria-pressed="true" data-t="domu.vse"></button><button type="button" data-obtiznost="1" aria-pressed="false" data-t="domu.snadne"></button><button type="button" data-obtiznost="2" aria-pressed="false" data-t="domu.stredni"></button><button type="button" data-obtiznost="3" aria-pressed="false" data-t="domu.tezsi"></button>
