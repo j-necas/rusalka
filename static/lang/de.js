@@ -176,6 +176,7 @@ export default {
   "zvire.kralik.3": "Das Kaninchen springt vor Freude bis zur Decke!",
   "app.ulozeniChyba": "Speichern fehlgeschlagen: {chyba}",
   "app.dataPoskozeny": "Die Datei {soubor} ist beschädigt.",
+  "app.dataKopieNeuplna": "Die Kopie im Ordner ist unvollständig ({soubor}). Die Daten bleiben im Browser.",
   "app.dataVerze": "Dieser Ordner oder diese Sicherung verwendet ein neueres Rusalka-Format. Öffnen Sie ihn mit einer neueren Version der App.",
   "app.dataPisenChybi": "Das Stück {soubor} wurde nicht gefunden.",
   "app.dataVelky": "Die Datei ist zu groß.",

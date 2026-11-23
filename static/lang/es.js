@@ -162,6 +162,7 @@ export default {
   "zvire.kralik.3": "¡El conejo salta de alegría hasta el techo!",
   "app.ulozeniChyba": "Error al guardar: {chyba}",
   "app.dataPoskozeny": "El archivo {soubor} está dañado.",
+  "app.dataKopieNeuplna": "La copia en la carpeta está incompleta ({soubor}). Los datos se quedan en el navegador.",
   "app.dataVerze": "Esta carpeta o copia de seguridad usa un formato de Rusalka más reciente. Ábrela con una versión más reciente de la aplicación.",
   "app.dataPisenChybi": "No se encuentra la canción {soubor}.",
   "app.dataVelky": "El archivo es demasiado grande.",

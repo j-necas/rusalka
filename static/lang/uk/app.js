@@ -151,6 +151,7 @@ export default {
 'zvire.kralik.3':'Кролик підстрибує від радості аж до стелі!',
 'app.ulozeniChyba':'Не вдалося зберегти: {chyba}',
   "app.dataPoskozeny": "Файл {soubor} пошкоджено.",
+  "app.dataKopieNeuplna": "Копія в папці неповна ({soubor}). Дані залишаються в браузері.",
   "app.dataVerze": "Ця папка або резервна копія використовує новіший формат «Русалки». Відкрийте її в новішій версії застосунку.",
   "app.dataPisenChybi": "Твір {soubor} не знайдено.",
   "app.dataVelky": "Файл завеликий.",

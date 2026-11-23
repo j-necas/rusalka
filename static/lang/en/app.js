@@ -150,6 +150,7 @@ export default {
   "zvire.kralik.3": "The rabbit jumps for joy right up to the ceiling!",
   "app.ulozeniChyba": "Saving failed: {chyba}",
   "app.dataPoskozeny": "The file {soubor} is damaged.",
+  "app.dataKopieNeuplna": "The copy in the folder is incomplete ({soubor}). The data stay in the browser.",
   "app.dataVerze": "This folder or backup uses a newer Rusalka format. Open it with a newer version of the app.",
   "app.dataPisenChybi": "The song {soubor} could not be found.",
   "app.dataVelky": "The file is too large.",

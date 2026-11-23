@@ -490,6 +490,7 @@ export default {
   'verze.nejtezsi': 'la più difficile',
   'app.ulozeniChyba': 'Salvataggio non riuscito: {chyba}', 'app.necitelne': 'non riesco a leggere questo spartito ({chyba})',
   "app.dataPoskozeny": "Il file {soubor} è danneggiato.",
+  "app.dataKopieNeuplna": "La copia nella cartella è incompleta ({soubor}). I dati restano nel browser.",
   "app.dataVerze": "Questa cartella o questo backup usa un formato di Rusalka più recente. Aprilo con una versione più recente dell’app.",
   "app.dataPisenChybi": "Il brano {soubor} non è stato trovato.",
   "app.dataVelky": "Il file è troppo grande.",

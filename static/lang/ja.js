@@ -384,6 +384,7 @@ export default {
   'zvire.kralik.3': 'ウサギが天井まで飛び上がって喜んでいるよ！',
   'app.ulozeniChyba': '保存に失敗しました: {chyba}',
   "app.dataPoskozeny": "ファイル {soubor} が破損しています。",
+  "app.dataKopieNeuplna": "フォルダーへのコピーが不完全です（{soubor}）。データはブラウザーに残ります。",
   "app.dataVerze": "このフォルダーまたはバックアップは新しい形式で保存されています。最新版の Rusalka で開いてください。",
   "app.dataPisenChybi": "曲 {soubor} が見つかりません。",
   "app.dataVelky": "ファイルのサイズが大きすぎます。",

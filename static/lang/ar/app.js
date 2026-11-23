@@ -175,6 +175,7 @@ export default {
   "zvire.kralik.3": "يقفز الأرنب فرحًا حتى السقف!",
   "app.ulozeniChyba": "فشل الحفظ: {chyba}",
   "app.dataPoskozeny": "الملف {soubor} تالف.",
+  "app.dataKopieNeuplna": "النسخة في المجلد غير مكتملة ({soubor}). تبقى البيانات في المتصفح.",
   "app.dataVerze": "يستخدم هذا المجلد أو هذه النسخة الاحتياطية تنسيقًا أحدث من روسالكا. افتحه باستخدام إصدار أحدث من التطبيق.",
   "app.dataPisenChybi": "تعذّر العثور على المقطوعة {soubor}.",
   "app.dataVelky": "حجم الملف كبير جدًا.",

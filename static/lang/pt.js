@@ -156,6 +156,7 @@ export default {
   "zvire.kralik.3": "O coelho salta de alegria até ao teto!",
   "app.ulozeniChyba": "Não foi possível guardar: {chyba}",
   "app.dataPoskozeny": "O ficheiro {soubor} está danificado.",
+  "app.dataKopieNeuplna": "A cópia na pasta está incompleta ({soubor}). Os dados ficam no navegador.",
   "app.dataVerze": "Esta pasta ou cópia de segurança usa um formato mais recente do Rusalka. Abra-a com uma versão mais recente da aplicação.",
   "app.dataPisenChybi": "Não foi possível encontrar a música {soubor}.",
   "app.dataVelky": "O ficheiro é demasiado grande.",

@@ -23,7 +23,8 @@ test('the app has a CSP for its actual script, media and counter sources', () =>
   const csp = html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1];
   assert.ok(csp);
   assert.ok(html.indexOf(csp) < html.indexOf('<script'));
-  assert.match(csp, /script-src 'self' 'wasm-unsafe-eval' https:\/\/gc\.zgo\.at/);
+  assert.match(csp, /script-src 'self' 'wasm-unsafe-eval';/);
+  assert.doesNotMatch(csp, /gc\.zgo\.at/, 'the counter script comes from the website itself');
   assert.doesNotMatch(csp.match(/script-src [^;]+/)[0], /'unsafe-inline'|'unsafe-eval'/);
   assert.match(csp, /img-src [^;]*https:\/\/rusalka\.goatcounter\.com/);
   assert.match(csp, /connect-src [^;]*https:\/\/rusalka\.goatcounter\.com/);

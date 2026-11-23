@@ -100,3 +100,22 @@ test('MusicXML file errors are translated in the active language', async () => {
     await assert.rejects(xmlZBajtu('a.mxl', archiv), /no sheet music in the archive/);
   } finally { nastavJazyk('cs'); }
 });
+
+test('zip from the macOS Finder (ditto, no UTF-8 flag): accented names stay readable, CP437 only when not UTF-8', async () => {
+  const { readFileSync } = await import('node:fs');
+  const m = await rozbalZip(new Uint8Array(readFileSync(new URL('./data/finder-ditto.zip', import.meta.url))));
+  assert.ok(m.has('Rusalka/pisne/Skákal pes.musicxml'), [...m.keys()].join(', '));
+  // a real CP437 name (an old Windows zip): "é" is 0x82 there and not valid UTF-8 on its own
+  const jm = Uint8Array.from([0x63, 0x61, 0x66, 0x82, 0x2e, 0x74, 0x78, 0x74]);
+  const data = new TextEncoder().encode('x');
+  const zip = zabalZip({ 'cafe.txt': data });
+  const z = Uint8Array.from(zip);
+  const v = new DataView(z.buffer);
+  // rewrite the name in both headers and clear the UTF-8 flag
+  for (let p = 0; p < z.length - 4; p++) {
+    const sig = v.getUint32(p, true);
+    if (sig === 0x04034b50) { v.setUint16(p + 6, v.getUint16(p + 6, true) & ~0x0800, true); z.set(jm, p + 30); }
+    if (sig === 0x02014b50) { v.setUint16(p + 8, v.getUint16(p + 8, true) & ~0x0800, true); z.set(jm, p + 46); }
+  }
+  assert.deepEqual([...(await rozbalZip(z)).keys()], ['café.txt']);
+});

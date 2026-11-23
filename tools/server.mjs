@@ -4,7 +4,7 @@
 // ./run_dev.sh picks a free port, builds what is missing and opens the browser. Does nothing else; data live in the browser or in the chosen folder.
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
-import { extname, join, normalize } from 'node:path';
+import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { UVODY, stranka, mapaWebu } from './uvod.mjs';
 
@@ -15,8 +15,19 @@ const TYPY = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; cha
   '.mxl': 'application/vnd.recordare.musicxml', '.webmanifest': 'application/manifest+json', '.txt': 'text/plain; charset=utf-8', '.zip': 'application/zip', '.mp3': 'audio/mpeg', '.mp4': 'video/mp4', '.jpg': 'image/jpeg', '.webp': 'image/webp' };
 const port = Number(process.env.PORT || 8765);
 
-createServer(async (req, res) => {
+/** the URL path → a file in songs/, build/library/, build/ (/helper/) or static/; null outside those folders */
+export function cestaKSouboru(cesta) {
+  const [predpona, slozka] = [['/songs/', join(KOREN, 'songs')], ['/library/', join(KOREN, 'build', 'library')],
+    ['/helper/', join(KOREN, 'build')]].find(([p]) => cesta.startsWith(p)) || ['/', join(KOREN, 'static')];
+  const soubor = normalize(join(slozka, cesta.slice(predpona.length)));
+  return soubor.startsWith(slozka + sep) ? soubor : null;
+}
+/** only this computer: a page on another name pointing at 127.0.0.1 (DNS rebinding) must not read the files */
+export const povolenyHost = host => /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(host || '');
+
+const server = createServer(async (req, res) => {
   try {
+    if (!povolenyHost(req.headers.host)) { res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' }); res.end('forbidden'); return; }
     let cesta = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     // the introduction pages and the sitemap are generated (tools/uvod.mjs), fresh on every request
     const uvod = UVODY.find(u => cesta === `/${u.slug}/` || cesta === `/${u.slug}/index.html`);
@@ -38,10 +49,8 @@ createServer(async (req, res) => {
       }
     }
     if (cesta.endsWith('/')) cesta += 'index.html';
-    const helper = cesta.startsWith('/helper/');
-    const zaklad = cesta.startsWith('/songs/') ? KOREN : helper || cesta.startsWith('/library/') ? join(KOREN, 'build') : join(KOREN, 'static');
-    const soubor = normalize(join(zaklad, helper ? cesta.slice('/helper'.length) : cesta));
-    if (!soubor.startsWith(zaklad)) throw Object.assign(new Error('outside'), { code: 'ENOENT' });
+    const soubor = cestaKSouboru(cesta);
+    if (!soubor) throw Object.assign(new Error('outside'), { code: 'ENOENT' });
     if (!(await stat(soubor)).isFile()) throw Object.assign(new Error('not a file'), { code: 'ENOENT' });
     res.writeHead(200, { 'Content-Type': TYPY[extname(soubor).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'no-store' });
     res.end(await readFile(soubor));
@@ -49,4 +58,7 @@ createServer(async (req, res) => {
     res.writeHead(e.code === 'ENOENT' ? 404 : 500, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end(e.code === 'ENOENT' ? 'not found' : 'error');
   }
-}).listen(port, '127.0.0.1', () => console.log(`Rusalka: http://localhost:${port}`));
+});
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
+  server.listen(port, '127.0.0.1', () => console.log(`Rusalka: http://localhost:${port}`));
+}

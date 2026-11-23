@@ -154,6 +154,7 @@ export default {
   'zvire.kralik.3': 'खरगोश खुशी से छत तक उछलता है!',
   'app.ulozeniChyba': 'सहेजा नहीं जा सका: {chyba}',
   "app.dataPoskozeny": "फ़ाइल {soubor} खराब है।",
+  "app.dataKopieNeuplna": "फ़ोल्डर में प्रति अधूरी है ({soubor})। डेटा ब्राउज़र में ही रहता है।",
   "app.dataVerze": "इस फ़ोल्डर या बैकअप में Rusalka का नया फ़ॉर्मैट इस्तेमाल हुआ है। इसे ऐप के नए संस्करण में खोलें।",
   "app.dataPisenChybi": "गीत {soubor} नहीं मिला।",
   "app.dataVelky": "फ़ाइल बहुत बड़ी है।",

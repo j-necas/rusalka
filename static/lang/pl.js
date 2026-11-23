@@ -653,6 +653,7 @@ export default {
   'zvire.kralik.3': 'Królik skacze z radości aż pod sufit!',
   'app.ulozeniChyba': 'Nie udało się zapisać: {chyba}',
   "app.dataPoskozeny": "Plik {soubor} jest uszkodzony.",
+  "app.dataKopieNeuplna": "Kopia w folderze jest niepełna ({soubor}). Dane zostają w przeglądarce.",
   "app.dataVerze": "Ten folder lub kopia zapasowa używa nowszego formatu Rusałki. Otwórz go w nowszej wersji aplikacji.",
   "app.dataPisenChybi": "Nie znaleziono utworu {soubor}.",
   "app.dataVelky": "Plik jest za duży.",

@@ -247,6 +247,7 @@ export default {
   'cviceni.zapis.spatnaHodnota': 'riadok {radek}: „{hodnota}“ má byť číslo',
   'app.ulozeniChyba': 'Uloženie sa nepodarilo: {chyba}',
   "app.dataPoskozeny": "Súbor {soubor} je poškodený.",
+  "app.dataKopieNeuplna": "Kópia do priečinka nie je úplná ({soubor}). Údaje v prehliadači zostávajú.",
   "app.dataVerze": "Tento priečinok alebo záloha používa novší formát Rusalky. Otvorte ho v novšej verzii aplikácie.",
   "app.dataPisenChybi": "Pesnička {soubor} neexistuje.",
   "app.dataVelky": "Súbor je príliš veľký.",

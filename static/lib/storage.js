@@ -7,19 +7,24 @@
 import { slucZmeny, stejnaData } from './merge.js';
 import { t } from './texts.js';
 import { jeNota, volneJmeno, MAX_VELIKOST } from './files.js';
-import { zabalZip, rozbalZip } from './zip.js';
+import { zabalZip, rozbalZip, crc32 } from './zip.js';
 
 export const KLICE_DAT = ['profily', 'profil', 'vysledky', 'statistiky', 'oblibene', 'skryte', 'knihovnaSkryte', 'zaloha_pred_smazanim', 'denik', 'nastaveni'];
 const en = new TextEncoder(), de = new TextDecoder('utf-8', { fatal: true });
 const VERZE = 1;
 const znacka = () => en.encode(`{ "verze": ${VERZE} }\n`);
 const chybaDat = (klic, parametry, cause) => new Error(t(klic, parametry), { cause });
+const NEBEZPECNE = new Set(['__proto__', 'constructor', 'prototype']);
+const jeObjekt = v => !!v && typeof v === 'object' && !Array.isArray(v);
+const bezpecneKlice = o => Object.keys(o).every(k => !NEBEZPECNE.has(k));
+/** per player (the first level): a list for favourites, otherwise a plain object; its keys checked too */
+const hodnotaHrace = (klic, v) => (klic === 'oblibene' ? Array.isArray(v) : jeObjekt(v) && bezpecneKlice(v));
 function overData(klic, v) {
   let platne = v == null;
   if (klic === 'profil') platne ||= typeof v === 'string';
   else if (klic === 'profily') platne ||= Array.isArray(v) && v.every(p => typeof p?.id === 'string');
   else if (klic === 'skryte' || klic === 'zaloha_pred_smazanim') platne ||= Array.isArray(v);
-  else platne ||= typeof v === 'object' && !Array.isArray(v);
+  else platne ||= jeObjekt(v) && bezpecneKlice(v) && Object.values(v).every(x => hodnotaHrace(klic, x));
   if (!platne) throw chybaDat('app.dataPoskozeny', { soubor: `data/${klic}.json` });
   return v;
 }
@@ -27,8 +32,13 @@ function ctiJson(bajty, soubor) {
   try { return JSON.parse(de.decode(bajty)); }
   catch (e) { throw chybaDat('app.dataPoskozeny', { soubor }, e); }
 }
+/** the marker rusalka.json: only a readable newer version stops writing; an unreadable one is like no marker
+ *  (→ false, it gets rewritten) */
 function overVerzi(bajty) {
-  if (ctiJson(bajty, 'rusalka.json')?.verze > VERZE) throw chybaDat('app.dataVerze');
+  let znacka;
+  try { znacka = ctiJson(bajty, 'rusalka.json'); } catch { return false; }
+  if (znacka?.verze > VERZE) throw chybaDat('app.dataVerze');
+  return jeObjekt(znacka);
 }
 async function pokudExistuje(fn) {
   try { return await fn(); }
@@ -104,6 +114,12 @@ export class ProhlizecUloziste {
     return jm;
   }
   smaz(soubor) { return idb('pisne', 'readwrite', s => s.delete(soubor)); }
+  /** empties the songs and data (the folder holds them now); the editor's backups of originals (zalohy/) stay */
+  async vycisti() {
+    for (const { soubor } of await this.seznam()) await this.smaz(soubor);
+    await idb('data', 'readwrite', s => { for (const k of KLICE_DAT) s.delete(k); });
+    this.cteno.clear();
+  }
   /** before the first overwrite from the editor: the original file goes to zalohy/ (only once) */
   async zalohuj(soubor) {
     const k = `zalohy/${soubor}`;
@@ -138,7 +154,7 @@ export class SlozkaUloziste {
   constructor(handle, hlasit = console.warn) { this.h = handle; this.cteno = new Map(); this.hlasit = hlasit; }
   async overVerzi() {
     const b = await ctiSoubor(this.h, 'rusalka.json');
-    if (b) overVerzi(b);
+    if (b && !overVerzi(b)) await zapisSoubor(this.h, 'rusalka.json', znacka());   // unreadable: written again, not a lock
     return !!b;
   }
   get nazev() { return this.h.name; }
@@ -257,16 +273,70 @@ export function datoveZapisy(ul, ulozeno, chyba) {
 export async function snimekDat(ul) {
   return Object.fromEntries(await Promise.all(KLICE_DAT.map(async k => [k, await ul.ctiData(k)])));
 }
-/** Move changes made without folder access, or copy the full contents on request. */
-export async function kopiruj(z, kam, { zaklad } = {}) {
-  const snimek = await snimekDat(z);
-  if (!zaklad) for (const { soubor } of await z.seznam()) await kam.zapis(soubor, await z.cti(soubor), { prepsat: true });
+/** song file → CRC-32 of its bytes (to tell later which songs were added or changed) */
+async function otiskyPisni(ul) {
+  const out = {};
+  for (const { soubor } of await ul.seznam()) out[soubor] = crc32(await ul.cti(soubor));
+  return out;
+}
+/** the data and the songs' fingerprints (pisne) – the base when the folder starts waiting for permission */
+export async function snimekUloziste(ul) {
+  return { ...await snimekDat(ul), pisne: await otiskyPisni(ul) };
+}
+/**
+ * Move changes made without folder access (zaklad = snimekUloziste from when the waiting began): data that changed,
+ * and songs added or changed since (an older base without fingerprints: only songs the target does not have).
+ * Without zaklad, a full copy; prepsat = the target becomes the same as the source (data replaced, not merged, and
+ * songs missing in the source removed) – the way back from the folder to the browser. Returns the new base.
+ */
+export async function kopiruj(z, kam, { zaklad, prepsat = false } = {}) {
+  const snimek = await snimekDat(z), otisky = await otiskyPisni(z), zkopirovane = {};
+  const vCili = zaklad && !zaklad.pisne ? new Set((await kam.seznam()).map(x => x.soubor)) : null;
+  for (const soubor of Object.keys(otisky)) {
+    const zmena = !zaklad || (zaklad.pisne ? zaklad.pisne[soubor] !== otisky[soubor] : !vCili.has(soubor));
+    if (zmena) { await kam.zapis(soubor, await z.cti(soubor), { prepsat: true }); zkopirovane[soubor] = otisky[soubor]; }
+  }
+  if (prepsat) for (const { soubor } of await kam.seznam()) if (!(soubor in otisky)) await kam.smaz(soubor);
   for (const [k, v] of Object.entries(snimek)) {
-    if (zaklad ? !stejnaData(v, zaklad[k] ?? null) : v != null) {
+    if (prepsat) await kam.zapisData(k, v, { prepsat: true });
+    else if (zaklad ? !stejnaData(v, zaklad[k] ?? null) : v != null) {
       await kam.zapisData(k, v, { zaklad: zaklad?.[k] ?? null, prenos: true });
     }
   }
-  return snimek;
+  Object.defineProperty(snimek, 'zkopirovane', { value: zkopirovane });   // not stored with the base
+  return Object.assign(snimek, { pisne: otisky });
+}
+/** after a copy: every song of the source is in the target with the same bytes, every data key that has a value is
+ *  there too; otherwise an error (nothing may be deleted then) */
+async function overKopii(z, kam, otisky, snimek) {   // otisky = the songs copied, snimek = the data copied
+  const cil = new Set((await kam.seznam()).map(x => x.soubor));
+  for (const [soubor, crc] of Object.entries(otisky)) {
+    if (!cil.has(soubor) || crc32(await kam.cti(soubor)) !== crc) throw chybaDat('app.dataKopieNeuplna', { soubor });
+  }
+  for (const [k, v] of Object.entries(snimek)) {
+    if (k !== 'pisne' && v != null && (await kam.ctiData(k)) == null) throw chybaDat('app.dataKopieNeuplna', { soubor: `data/${k}.json` });
+  }
+}
+/**
+ * The browser's songs and data into the folder (zaklad: only the changes since then), checked afterwards: every song
+ * copied is there with the same bytes, every data key copied has a value. Returns the new base (snimekUloziste).
+ */
+export async function presunDoSlozky(z, kam, { zaklad } = {}) {
+  const novy = await kopiruj(z, kam, { zaklad });
+  const { pisne: _, ...snimek } = novy;
+  const zmenena = zaklad ? Object.fromEntries(Object.entries(snimek).filter(([k, v]) => !stejnaData(v, zaklad[k] ?? null))) : snimek;
+  await overKopii(z, kam, novy.zkopirovane, zmenena);
+  return novy;
+}
+/**
+ * Empties the browser copy after a checked move into the folder (call it once writes go to the folder): only when
+ * nothing changed in the browser since that move (its state is still the base), so nothing unsaved is lost. A stale
+ * copy then never comes back while the folder waits for permission, nor when going back to the browser.
+ */
+export async function vyprazdniPoPresunu(prohlizec, zaklad) {
+  if (!zaklad || !stejnaData(await snimekUloziste(prohlizec), zaklad)) return false;
+  await prohlizec.vycisti();
+  return true;
 }
 /** backup: a ZIP with the same layout as the folder */
 export async function zaloha(ul) {
@@ -290,7 +360,7 @@ export async function obnov(ul, zipBajty, { predObnovou } = {}) {
       m = new Map(klice.map(k => [k.slice(o.length), m.get(k)]));
     }
   }
-  if (m.has('rusalka.json')) overVerzi(m.get('rusalka.json'));
+  if (m.has('rusalka.json')) overVerzi(m.get('rusalka.json'));   // an unreadable marker in a backup is ignored
   const pisne = [], data = [];
   for (const [jm, b] of m) {
     const [slozka, soubor, dalsi] = jm.split('/');

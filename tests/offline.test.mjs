@@ -76,7 +76,7 @@ test('offline: which request is answered from the cache', () => {
   assert.equal(c('https://rusalkapiano.com/songs/Ode%20to%20Joy.musicxml'), 'songs/Ode to Joy.musicxml');
   assert.equal(c('https://rusalkapiano.com/songs/F%C3%BCr%20Elise%20(opening).musicxml'), 'songs/Für Elise (opening).musicxml');
   assert.equal(c('https://rusalkapiano.com/neni.js'), null, 'unknown files go to the network');
-  assert.equal(c('https://gc.zgo.at/count.js'), null, 'other websites (the visit counter) go to the network');
+  assert.equal(c('https://rusalka.goatcounter.com/count?p=%2F'), null, 'other websites (the visit counter) go to the network');
   // a project page under a path (github.io/rusalka/) works the same way
   const pod = nactiSW('const VERZE = "x"; const SOUBORY = { "index.html": "a", "app.js": "b" };\n' + sw, 'https://j-necas.github.io/rusalka/');
   assert.equal(pod.ctx.cestaVCache(new URL('https://j-necas.github.io/rusalka/app.js'), 'cors'), 'app.js');
@@ -144,4 +144,34 @@ test('offline: install caches dictionaries and the shell, rejects stale bytes, a
   assert.equal(await (await vyzadej()).text(), 'renderer');
   assert.equal(await (await vyzadej()).text(), 'renderer');
   assert.equal(pozadavky.filter(u => u.href === adresa).length, 1);
+});
+
+test('offline: the first visit (no worker in control yet) does not announce a new version', async () => {
+  const sw = new EventTarget(), registrace = new EventTarget(), worker = new EventTarget();
+  worker.postMessage = () => {};
+  sw.controller = null;
+  sw.register = async () => registrace;
+  let ohlaseno = 0;
+  await zapnoutOffline({ serviceWorker: sw, aktualizace: () => { ohlaseno++; }, obnovit: () => {} });
+  registrace.installing = worker;
+  registrace.dispatchEvent(new Event('updatefound'));
+  worker.state = 'installed'; registrace.waiting = worker;          // the spec sets waiting before the first activation
+  worker.dispatchEvent(new Event('statechange'));
+  sw.controller = worker;
+  sw.dispatchEvent(new Event('controllerchange'));                     // clients.claim() on the first install
+  assert.equal(ohlaseno, 0);
+});
+
+test('offline: a tab that did not start the update is offered a reload when another tab switches the worker', async () => {
+  const sw = new EventTarget(), registrace = new EventTarget();
+  sw.controller = {};
+  sw.register = async () => registrace;
+  let nabidnuto = null, obnoveno = 0;
+  await zapnoutOffline({ serviceWorker: sw, aktualizace: f => { nabidnuto = f; }, obnovit: () => obnoveno++ });
+  sw.controller = {};
+  sw.dispatchEvent(new Event('controllerchange'));
+  assert.equal(typeof nabidnuto, 'function', 'the bar is shown');
+  assert.equal(obnoveno, 0, 'but the tab does not reload by itself');
+  nabidnuto();
+  assert.equal(obnoveno, 1);
 });

@@ -162,6 +162,7 @@ export default {
   "zvire.kralik.3": "Le lapin saute de joie jusqu'au plafond !",
   "app.ulozeniChyba": "Échec de l'enregistrement : {chyba}",
   "app.dataPoskozeny": "Le fichier {soubor} est endommagé.",
+  "app.dataKopieNeuplna": "La copie dans le dossier est incomplète ({soubor}). Les données restent dans le navigateur.",
   "app.dataVerze": "Ce dossier ou cette sauvegarde utilise un format Rusalka plus récent. Ouvrez-le avec une version plus récente de l’application.",
   "app.dataPisenChybi": "Le morceau {soubor} est introuvable.",
   "app.dataVelky": "Le fichier est trop volumineux.",

@@ -9,7 +9,7 @@ const CP437 = 'ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒ
 const zipChyba = (klic, parametry) => new Error(t(klic, parametry));
 
 let TABULKA = null;
-function crc32(b) {
+export function crc32(b) {
   if (!TABULKA) {
     TABULKA = new Uint32Array(256);
     for (let n = 0; n < 256; n++) {
@@ -75,7 +75,7 @@ export async function rozbalZip(bytes) {
   for (const { priznaky, metoda, crc, velikost, jm, data } of polozky) {
     let jmeno, polozka;
     try {
-      jmeno = priznaky & 0x0800 ? dek.decode(jm) : Array.from(jm, x => x < 128 ? String.fromCharCode(x) : CP437[x - 128]).join('');
+      jmeno = priznaky & 0x0800 ? dek.decode(jm) : jmenoBezPriznaku(jm);
       if (metoda === 0) polozka = data;
       else if (metoda === 8) polozka = await inflateRaw(data, velikost);
     } catch { throw zipChyba('zip.poskozeny'); }
@@ -84,6 +84,13 @@ export async function rozbalZip(bytes) {
     if (!jmeno.endsWith('/')) out.set(jmeno, metoda === 0 ? polozka.slice() : polozka);
   }
   return out;
+}
+
+// A name without the UTF-8 flag (bit 11): the macOS Finder (ditto) writes UTF-8 without setting it, old Windows zips
+// write CP437. Valid UTF-8 is taken as UTF-8 (CP437 accented names are almost never valid UTF-8), otherwise CP437.
+const utf8Strikt = new TextDecoder('utf-8', { fatal: true });
+function jmenoBezPriznaku(jm) {
+  try { return utf8Strikt.decode(jm); } catch { return Array.from(jm, x => x < 128 ? String.fromCharCode(x) : CP437[x - 128]).join(''); }
 }
 
 /** Map/object (name → bytes) → ZIP without compression (names in UTF-8) */

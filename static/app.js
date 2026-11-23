@@ -14,7 +14,7 @@ import { doprovodVeStylu, STYLY } from './lib/extras.js';
 import { doprovodZAkordu, VZORY_DOPROVODU } from './lib/accompaniment.js';
 import { maAkordyProDvojici, modelProDvojici, hraniceDvojice, vyhodnotDvojici } from './lib/pair.js';
 import { seznamUrovni, vytvorHranouUroven, maVlastniLevou, urovenStylu } from './lib/levels.js';
-import { ProhlizecUloziste, SlozkaUloziste, nastaveniProhlizece, datoveZapisy, snimekDat, kopiruj, zaloha as zalohaDat, obnov as obnovDat } from './lib/storage.js';
+import { ProhlizecUloziste, SlozkaUloziste, nastaveniProhlizece, datoveZapisy, snimekUloziste, kopiruj, presunDoSlozky, vyprazdniPoPresunu, zaloha as zalohaDat, obnov as obnovDat } from './lib/storage.js';
 import { MAX_ZIP } from './lib/zip.js';
 import { stejnaData } from './lib/merge.js';
 import { xmlZBajtu, nazevZXml, jmenoSouboru, vyberBezFiltru } from './lib/files.js';
@@ -174,6 +174,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   UL.aktivni = UL.prohlizec;
   const LZE_SLOZKU = typeof window.showDirectoryPicker === 'function';
   const CEKA_SLOZKA = 'slozkaCeka';
+  const PROHLIZEC_PRESUNUT = 'prohlizecPresunut';     // the browser's data went to the folder: the browser only bridges waiting
   const POLE_DAT = { profily: 'profily', profil: 'profil', vysledky: 'vysledky', statistiky: 'statistiky', oblibene: 'oblibene',
     denik: 'denik', skryte: 'skryte', knihovnaSkryte: 'knihovnaSkryte', nastaveni: 'nastaveniHracu' };
   const cteniChyby = new Map();
@@ -200,13 +201,19 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         do {
           await frontaDat.dokonci();
           revize = frontaDat.revize;
-          zaklad = await kopiruj(UL.prohlizec, ul, { zaklad });
+          zaklad = await presunDoSlozky(UL.prohlizec, ul, { zaklad });   // songs too, checked afterwards
           await nastaveniProhlizece.zapis(CEKA_SLOZKA, zaklad);
         } while (revize !== frontaDat.revize);
       }
     };
     if (navigator.locks?.request) await navigator.locks.request('rusalka-prechod-uloziste', presun);
     else await presun();
+  }
+  /** once writes go to the folder: the browser copy moved there is emptied, so a stale one never comes back */
+  async function uklidProhlizece() {
+    if (UL.aktivni !== UL.slozka || !(await nastaveniProhlizece.cti(PROHLIZEC_PRESUNUT))) return;
+    const zaklad = await nastaveniProhlizece.cti(CEKA_SLOZKA);
+    if (zaklad && await vyprazdniPoPresunu(UL.prohlizec, zaklad)) await nastaveniProhlizece.smaz(CEKA_SLOZKA);
   }
   async function pripravUloziste() {
     UL.predObnovou = await nastaveniProhlizece.cti('zaloha_pred_obnovou');
@@ -218,11 +225,12 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       if (await UL.slozka.stav() === 'granted') {
         await obnovSlozku(UL.slozka);
         UL.aktivni = UL.slozka; frontaDat = novaFronta(UL.aktivni);
+        await uklidProhlizece().catch(e => console.warn('úklid prohlížeče', e));
         return;
       }
     } catch (e) { UL.chybaSlozky = chybaText(e); }
     if (!(await nastaveniProhlizece.cti(CEKA_SLOZKA))) {
-      await nastaveniProhlizece.zapis(CEKA_SLOZKA, await snimekDat(UL.prohlizec));
+      await nastaveniProhlizece.zapis(CEKA_SLOZKA, await snimekUloziste(UL.prohlizec));
     }
   }
   async function pozadejTrvaleUloziste() {
@@ -483,6 +491,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     await obnovSlozku(UL.slozka);
     UL.chybaSlozky = '';
     await prepniNa(UL.slozka);
+    await uklidProhlizece();
   }
   $('#ulozistePovolit').onclick = priZmeneDat(povolSlozku);
   for (const p of pruhyDat) p.querySelector('button').onclick = $('#ulozistePovolit').onclick;
@@ -502,12 +511,19 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         if (kopie === false) return;
       }
       await s.pripravit();
-      if (kopie) { await frontaDat.dokonci(); await kopiruj(UL.aktivni, s); }
-      await nastaveniProhlizece.smaz(CEKA_SLOZKA);
+      if (kopie) await frontaDat.dokonci();
+      if (kopie && UL.aktivni === UL.prohlizec) {        // checked, then the browser copy is emptied (uklidProhlizece)
+        await nastaveniProhlizece.zapis(CEKA_SLOZKA, await presunDoSlozky(UL.prohlizec, s));
+        await nastaveniProhlizece.zapis(PROHLIZEC_PRESUNUT, true);
+      } else {
+        if (kopie) await kopiruj(UL.aktivni, s);
+        await nastaveniProhlizece.smaz(CEKA_SLOZKA);
+      }
     }
     await nastaveniProhlizece.zapis('slozka', h);
     UL.slozka = s; UL.chybaSlozky = '';
     await prepniNa(s);
+    await uklidProhlizece();
     toast(t('app.ukladaDo', { slozka: h.name }), 5000);
   });
   $('#ulozisteProhlizec').onclick = priZmeneDat(async () => {
@@ -517,10 +533,11 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       if (await UL.slozka.povol() !== 'granted') { toast(t('app.bezPovoleni'), 5000); return; }
       await frontaDat.dokonci();
       if (UL.aktivni !== UL.slozka) await obnovSlozku(UL.slozka);
-      await kopiruj(UL.slozka, UL.prohlizec);
+      await kopiruj(UL.slozka, UL.prohlizec, { prepsat: true });   // the browser becomes the folder, nothing old revives
     }
     await nastaveniProhlizece.smaz('slozka');
     await nastaveniProhlizece.smaz(CEKA_SLOZKA);
+    await nastaveniProhlizece.smaz(PROHLIZEC_PRESUNUT);
     UL.slozka = null; UL.chybaSlozky = ''; zapisChyba = '';
     await prepniNa(UL.prohlizec);
     toast(t('app.zpetProhlizec'), 5000);

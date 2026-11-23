@@ -21,6 +21,9 @@
     "fake-indexeddb": "^6.2.8"
   },
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "description": "Rusalka – a piano trainer for kids in the browser: play songs from MusicXML or MIDI on a MIDI piano",
   "author": "Jiří Nečas",
   "license": "MIT"

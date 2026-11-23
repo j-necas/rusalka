@@ -385,6 +385,7 @@ export default {
   'zvire.kralik.3': '兔子高兴得跳到了天花板！',
   'app.ulozeniChyba': '保存失败：{chyba}',
   "app.dataPoskozeny": "文件 {soubor} 已损坏。",
+  "app.dataKopieNeuplna": "文件夹中的副本不完整（{soubor}）。数据仍保留在浏览器中。",
   "app.dataVerze": "此文件夹或备份使用了较新的 Rusalka 格式。请使用更新版本的应用打开。",
   "app.dataPisenChybi": "找不到曲目 {soubor}。",
   "app.dataVelky": "文件过大。",

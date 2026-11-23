@@ -150,6 +150,7 @@ export default {
   "zvire.kralik.3": "Králík radostí skáče až do stropu!",
   "app.ulozeniChyba": "Uložení se nepovedlo: {chyba}",
   "app.dataPoskozeny": "Soubor {soubor} je poškozený.",
+  "app.dataKopieNeuplna": "Kopie do složky není úplná ({soubor}). Data v prohlížeči zůstávají.",
   "app.dataVerze": "Tato složka nebo záloha používá novější formát Rusalky. Otevřete ji v novější verzi aplikace.",
   "app.dataPisenChybi": "Písnička {soubor} neexistuje.",
   "app.dataVelky": "Soubor je příliš velký.",

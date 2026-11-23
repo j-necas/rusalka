@@ -3,7 +3,7 @@ import 'fake-indexeddb/auto';
 import { forceCloseDatabase, IDBFactory } from 'fake-indexeddb';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ProhlizecUloziste, SlozkaUloziste, kopiruj, zaloha, obnov, KLICE_DAT, _resetDb } from '../static/lib/storage.js';
+import { ProhlizecUloziste, SlozkaUloziste, kopiruj, zaloha, obnov, KLICE_DAT, _resetDb, snimekUloziste, presunDoSlozky, vyprazdniPoPresunu } from '../static/lib/storage.js';
 import { zabalZip, rozbalZip } from '../static/lib/zip.js';
 import { sluc } from '../static/lib/merge.js';
 import { FakeSlozka } from './fake_folder.mjs';
@@ -311,4 +311,100 @@ test('browser: concurrent plays on the same day each count in the diary', async 
   await b.ctiData('denik');
   await Promise.all([a.zapisData('denik', { e: { [den]: [2, 1, 2] } }), b.zapisData('denik', { e: { [den]: [2, 1, 2] } })]);
   assert.deepEqual(await a.ctiData('denik'), { e: { [den]: [3, 1.5, 3] } });
+});
+
+test('resuming the folder also moves songs added or changed in the browser while permission was missing', async () => {
+  globalThis.indexedDB = new IDBFactory(); _resetDb();
+  const p = new ProhlizecUloziste(), s = new SlozkaUloziste(new FakeSlozka());
+  await s.pripravit();
+  await p.zapis('Stará.musicxml', XML, { prepsat: true });
+  await p.zapis('Upravená.musicxml', XML, { prepsat: true });
+  await s.zapis('Stará.musicxml', en.encode('<novejsi-ve-slozce/>'), { prepsat: true });
+  const zaklad = await snimekUloziste(p);                         // the snapshot when the folder started waiting
+  await p.zapis('Nová.musicxml', en.encode('<nova/>'), { prepsat: true });
+  await p.zapis('Upravená.musicxml', en.encode('<upravena/>'), { prepsat: true });
+  await kopiruj(p, s, { zaklad });
+  assert.deepEqual((await s.seznam()).map(x => x.soubor), ['Nová.musicxml', 'Stará.musicxml', 'Upravená.musicxml']);
+  assert.equal(de.decode(await s.cti('Nová.musicxml')), '<nova/>');
+  assert.equal(de.decode(await s.cti('Upravená.musicxml')), '<upravena/>');
+  assert.equal(de.decode(await s.cti('Stará.musicxml')), '<novejsi-ve-slozce/>', 'an unchanged browser song does not overwrite the folder');
+  // an older snapshot without the songs' fingerprints: only songs the folder does not have yet
+  const s2 = new SlozkaUloziste(new FakeSlozka());
+  await s2.pripravit();
+  await s2.zapis('Upravená.musicxml', XML, { prepsat: true });
+  const { pisne: _, ...stary } = zaklad;
+  await kopiruj(p, s2, { zaklad: stary });
+  assert.deepEqual((await s2.seznam()).map(x => x.soubor), ['Nová.musicxml', 'Stará.musicxml', 'Upravená.musicxml']);
+  assert.equal(de.decode(await s2.cti('Upravená.musicxml')), '<score-partwise/>');
+});
+
+test('after a full, checked copy into the folder the browser copy is emptied; back to the browser overwrites', async () => {
+  globalThis.indexedDB = new IDBFactory(); _resetDb();
+  const p = new ProhlizecUloziste(), s = new SlozkaUloziste(new FakeSlozka());
+  await s.pripravit();
+  await p.zapis('A.musicxml', XML, { prepsat: true });
+  await p.zapis('zalohy/A.musicxml', XML, { prepsat: true });
+  await p.zapisData('profily', [{ id: 'e', jmeno: 'Ema' }]);
+  await p.zapisData('oblibene', { e: ['A.musicxml'] });
+  const zaklad = await presunDoSlozky(p, s);
+  await p.zapisData('denik', { e: { '2026-11-23': [1, 1, 1] } });          // a write still landing in the browser
+  assert.equal(await vyprazdniPoPresunu(p, zaklad), false, 'not emptied: the browser changed after the copy');
+  await p.zapisData('denik', null, { prepsat: true });
+  assert.equal(await vyprazdniPoPresunu(p, zaklad), true);
+  assert.deepEqual((await s.seznam()).map(x => x.soubor), ['A.musicxml']);
+  assert.deepEqual(await s.ctiData('oblibene'), { e: ['A.musicxml'] });
+  assert.deepEqual(await p.seznam(), [], 'no stale copy left in the browser');
+  assert.equal(await p.ctiData('profily'), null);
+  assert.equal(de.decode(await p.cti('zalohy/A.musicxml')), '<score-partwise/>', 'editor backups stay');
+  // in the folder the song is deleted and the favourite removed; back to the browser nothing old comes back
+  await s.smaz('A.musicxml');
+  await s.zapisData('oblibene', { e: [] });
+  await p.zapis('B.musicxml', XML, { prepsat: true });               // left in the browser from a waiting period
+  await p.zapisData('oblibene', { e: ['A.musicxml'] }, { zaklad: null });
+  await kopiruj(s, p, { prepsat: true });
+  assert.deepEqual(await p.seznam(), []);
+  assert.deepEqual(await p.ctiData('oblibene'), { e: [] });
+});
+
+test('a copy that fails or does not check out leaves the browser data untouched', async () => {
+  globalThis.indexedDB = new IDBFactory(); _resetDb();
+  const p = new ProhlizecUloziste(), h = new FakeSlozka(), s = new SlozkaUloziste(h);
+  await s.pripravit();
+  await p.zapis('A.musicxml', XML, { prepsat: true });
+  await p.zapisData('profily', [{ id: 'e', jmeno: 'Ema' }]);
+  const pisne = await h.getDirectoryHandle('pisne');
+  const puvodni = pisne.getFileHandle.bind(pisne);
+  pisne.getFileHandle = async (n, o) => { const f = await puvodni(n, o); if (o?.create) f.createWritable = async () => ({ write: async () => {}, close: async () => {} }); return f; };
+  await assert.rejects(presunDoSlozky(p, s));
+  assert.deepEqual((await p.seznam()).map(x => x.soubor), ['A.musicxml']);
+  assert.deepEqual(await p.ctiData('profily'), [{ id: 'e', jmeno: 'Ema' }]);
+});
+
+test('folder: an unreadable marker is rewritten instead of locking the folder; a newer one still stops it', async () => {
+  const h = new FakeSlozka(), u = new SlozkaUloziste(h);
+  await u.pripravit();
+  await u.zapisData('profily', [{ id: 'e', jmeno: 'Ema' }]);
+  const w = await (await h.getFileHandle('rusalka.json')).createWritable();
+  await w.write('{"verze":'); await w.close();
+  assert.deepEqual(await u.ctiData('profily'), [{ id: 'e', jmeno: 'Ema' }]);
+  assert.deepEqual(JSON.parse(de.decode(new Uint8Array(await (await (await h.getFileHandle('rusalka.json')).getFile()).arrayBuffer()))), { verze: 1 });
+  const w2 = await (await h.getFileHandle('rusalka.json')).createWritable();
+  await w2.write('{"verze":2}'); await w2.close();
+  await assert.rejects(u.ctiData('profily'), /novější/);
+});
+
+test('stored data are checked one level deeper: per-player values and dangerous keys', async () => {
+  const s = new SlozkaUloziste(new FakeSlozka());
+  await s.pripravit();
+  const d = await s.h.getDirectoryHandle('data');
+  const zapis = async (klic, text) => { const w = await (await d.getFileHandle(klic + '.json', { create: true })).createWritable(); await w.write(text); await w.close(); };
+  for (const [klic, text] of [['vysledky', '{"p1": 5}'], ['statistiky', '{"p1": [1]}'], ['oblibene', '{"p1": {"a": 1}}'],
+    ['vysledky', '{"__proto__": {"x": 1}}'], ['denik', '{"p1": {"constructor": [1, 1, 1]}}'], ['nastaveni', '{"p1": null}']]) {
+    await zapis(klic, text);
+    await assert.rejects(s.ctiData(klic), /poškozen/, `${klic}: ${text}`);
+  }
+  await zapis('vysledky', '{"p1": {"A.musicxml": {"tempo": {"hvezdy": 3}}}}');
+  assert.deepEqual(await s.ctiData('vysledky'), { p1: { 'A.musicxml': { tempo: { hvezdy: 3 } } } });
+  await zapis('oblibene', '{"p1": ["A.musicxml"]}');
+  assert.deepEqual(await s.ctiData('oblibene'), { p1: ['A.musicxml'] });
 });
