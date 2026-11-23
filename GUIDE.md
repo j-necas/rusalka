@@ -36,10 +36,9 @@ piano, data and backups) and **About**. Where the links don't fit, the bar shows
 
    Each step has its own stars on the song's card.
 
-   **Sound from the piano** (Settings → Playing, in Chrome and Edge with a piano connected over MIDI): the
-   accompaniment, listening and on-screen keys are played by the connected piano instead of the computer. The
-   notes go to channel 2 so they don't get in the player's way; use the piano's volume knob. The metronome keeps
-   clicking on the computer. Without a connected piano, the computer plays as before.
+   Open **Piano and sound** next to **Play**, from **Settings**, or from **Pause**. Choose MIDI, the microphone,
+   or the on-screen keys and set the backing and metronome. **Sound from the piano** routes backing, playback and
+   on-screen notes to the connected MIDI piano on channel 2. The metronome plays through this device.
 
    **Play as a pair** (button in the second toolbar): two children at one piano, both using their right hand. One
    plays the melody (on the right, upper staff), the other a bass line built from the chords (on the left, lower
@@ -49,7 +48,7 @@ piano, data and backups) and **About**. Where the links don't fit, the bar shows
    and bass, **Play alone** goes back to playing solo. Pair mode has no Learn bit by bit, loop or microphone, and a
    song without chord symbols has no bass part. The accompaniment then plays only chords, without a bass.
 
-   **Rusalka plays along** (before playing: You play … · change; for all songs): when Rusalka doesn't play a written left hand, the accompaniment is built from
+   **Chord backing style** (under Piano and sound, for all songs): when Rusalka doesn't play a written left hand, the accompaniment is built from
    the chord symbols to fit the time signature and tempo – a waltz in 3/4 and 6/8, oom-pah in 2/4, a ballad or a
    polka in 4/4, broken chords for slow songs, and a held chord at the end. You can also choose a specific style,
    or "Chords only" (a chord on the strong beats). Songs with a written left hand use that as the accompaniment.
@@ -94,7 +93,7 @@ piano, data and backups) and **About**. Where the links don't fit, the bar shows
    room together with the full page). Adult players have both hands selected straight away for two-handed pieces.
 7. **Edit notes:** an editor for any song (tap a note; arrow keys change the pitch, ←→ next note, 1–6 length, `.`
    dot, `R` rest, `T` tie, Cmd+Z undo). A note played on the piano is written into the selected note.
-8. **Calibration** (in In rhythm mode): measures the delay of the piano or sound (Bluetooth) and subtracts it.
+8. **Calibration** (Pause → Piano and sound in In rhythm mode): measures the delay of the piano or sound (Bluetooth) and subtracts it.
 9. **Microphone:** playing without MIDI (acoustic piano, recorder, singing).
    - It needs a moment of silence at the start to measure the background noise.
    - The app knows which note it is waiting for and only listens for that one.

@@ -668,8 +668,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     players: () => { STAT.hrac = null; STAT.vse = false; vykresliHrace(); },
     ai: () => $('#pomocnikKopie').classList.add('skryta'),
     settings: () => {
-      $('#nastaveniStav').textContent = $('.midi-stav .text')?.textContent || ''; stavUloziste();
-      $('#nastaveniZvuk').append($('#prepZvukKlavir'));
+      stavUloziste();
       const p = $('#kdo').classList.contains('skryta') ? aktualniProfil() : null;
       const zobrazeni = !!p || !$('#domu').classList.contains('skryta') || !$('#pred').classList.contains('skryta');
       $('#nastaveniZobrazeni').classList.toggle('skryta', !zobrazeni);
@@ -688,6 +687,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     otevriDialog($(OKNA[klic]), { zavrit: () => zavriOkno(klic), navrat });
   }
   function zavriOkno(klic) {
+    if (klic === 'settings' && otevreno(OKNA.settings)) zavriKlavir();
     if (zavriDialog($(OKNA[klic])) && location.hash === '#' + klic) history.replaceState(null, '', location.pathname + location.search);
   }
   const otevreneOkno = () => Object.keys(OKNA).find(k => otevreno(OKNA[k]));
@@ -1028,30 +1028,41 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       if (S.kroky[H.idx]) posunKrok(H.idx, true);
     });
   }
+  function vykresliStavZvuku() {
+    const vstup = textVstupu();
+    $('#predVstupText').textContent = vstup;
+    $('#nastaveniStav').textContent = vstup;
+    const vystup = t(doKlaviru() ? 'vstup.zvukKlavir' : 'vstup.zvukZarizeni');
+    $('#klavirVystup').textContent = vystup;
+    const stav = doprovodZapnuty(S.vstup) ? vystup : t('vstup.doprovodVypnuty');
+    $('#predVystupText').textContent = stav;
+    $('#nastaveniVystupText').textContent = stav;
+  }
   function midiStav() {
-    const r = S.vstup.rezim, ok = vstupFunguje();
+    const r = S.vstup.rezim, ok = vstupFunguje(), vstup = textVstupu();
     $$('.midi-stav').forEach(el => {
       el.classList.toggle('ok', !!ok);
       el.classList.toggle('obrazovka', r === 'obrazovka');
-      el.title = textVstupu();
+      el.title = vstup;
       const tx = el.querySelector('.text');
-      if (tx) tx.textContent = textVstupu();
+      if (tx) tx.textContent = vstup;
     });
     $$('[data-vstup]').forEach(b => {
       const zvolen = b.dataset.vstup === r;
       b.setAttribute('aria-checked', String(zvolen));
       b.classList.toggle('ted', zvolen);
       if (b.dataset.vstup === 'midi') b.disabled = !MIDI_UMI;
+      if (b.getAttribute('role') === 'radio') b.tabIndex = zvolen ? 0 : -1;
     });
     const popisMidi = !MIDI_UMI ? t('vstup.midiNeumi') : Midi.web.length ? t('vstup.midiPripojeno', { nazev: Midi.web.join(', ') }) : t('vstup.midiNepripojen');
     $$('.vstup-midi-popis').forEach(p => { p.textContent = popisMidi; });
-    $$('.vstup-appstore').forEach(a => a.classList.toggle('skryta', MIDI_UMI));   // no Web MIDI here: the iPad/iPhone way
-    $('#predVstupText').textContent = t(r === 'midi' ? 'vstup.napovedaBezKlaviru' : 'vstup.napoveda');
-    // Before playing: no piano → under Play, what you play on and the microphone (not after choosing the on-screen keys)
-    const vybrano = uloz.cti('kt-vstup', null)?.rezim;
-    $('#predVstup')?.classList.toggle('skryta', !((r === 'midi' && !Midi.web.length) || (r === 'obrazovka' && vybrano !== 'obrazovka')));
-    $$('.prep-doprovod').forEach(b => b.classList.toggle('zap', doprovodZapnuty(S.vstup)));
-    $('#prepKlaviatura')?.classList.toggle('skryta', r === 'obrazovka');
+    $$('.vstup-appstore').forEach(a => a.classList.toggle('skryta', MIDI_UMI));
+    const doprovod = doprovodZapnuty(S.vstup);
+    $('#nastaveniDoprovod').classList.toggle('zap', doprovod);
+    $('#predDruhaRuka').textContent = t(doprovod ? 'verze.druhou' : 'vstup.doprovodVypnuty');
+    $('#napovedaDoprovodu').classList.toggle('skryta', r !== 'mikrofon');
+    $('#prepKlaviatura').classList.toggle('skryta', r === 'obrazovka');
+    vykresliStavZvuku();
     ukazKlavesy();
     prizpusobMenu();
   }
@@ -1073,7 +1084,6 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     else if (fokus) $('#vstupTlacitko').focus();
   }
   const vstupMenuOtevrene = () => !$('#vstupMenu').classList.contains('skryta');
-  $('#predMikrofon').onclick = () => { nastavVstup('mikrofon'); toast(t('vstup.mikrofonPriHre'), 5000); };
   $('#vstupTlacitko').onclick = () => vstupMenu(!vstupMenuOtevrene());
   $$('[data-vstup]').forEach(b => b.addEventListener('click', () => {
     nastavVstup(b.dataset.vstup);
@@ -1087,6 +1097,31 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     } else if (e.key === 'Tab') vstupMenu(false);
   });
   document.addEventListener('click', e => { if (vstupMenuOtevrene() && !e.target.closest('.vstup-obal')) vstupMenu(false); });
+
+  function zavriKlavir() { zavriDialog($('#klavirOkno')); }
+  function otevriKlavir(tlacitko) {
+    const vPauze = tlacitko === $('#pauzaZvuk'), veDvou = vPauze && !!S.dvojice;
+    $('#klavirOkno [data-vstup="mikrofon"]').disabled = veDvou;
+    $('#mikrofonVeDvou').classList.toggle('skryta', !veDvou);
+    $('#kalibrace').classList.toggle('skryta', !vPauze || S.rezim !== REZIM.TEMPO);
+    const maAkordy = !S.dvojice && S.data?.akordy?.length && (S.data.osnovy.length < 2 || S.rukaVolba === 'vse');
+    $('#vzorPole').classList.toggle('skryta', vPauze || (tlacitko === $('#predZvuk') && !maAkordy));
+    $('#klavirPripojeni').open = false;
+    otevriDialog($('#klavirOkno'), { zavrit: zavriKlavir, navrat: tlacitko });
+  }
+  for (const id of ['#predZvuk', '#nastaveniZvukOtevrit', '#pauzaZvuk']) $(id).onclick = () => otevriKlavir($(id));
+  $('#klavirZavrit').onclick = zavriKlavir;
+  $('#klavirOkno').onclick = e => { if (e.target === e.currentTarget) zavriKlavir(); };
+  $('#klavirOkno .vstup-volby').addEventListener('keydown', e => {
+    const smer = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+    if (!smer) return;
+    const volby = [...e.currentTarget.querySelectorAll('button:not(:disabled)')];
+    const i = volby.indexOf(e.target);
+    if (i < 0) return;
+    e.preventDefault();
+    const volba = volby[(i + smer + volby.length) % volby.length];
+    volba.click(); volba.focus();
+  });
 
   // ------------------------------------------------------------ microphone (for players without MIDI)
   const hraPozastavena = () => !$('#pauzaPrekryv').classList.contains('skryta');
@@ -1780,6 +1815,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     vykresliOblibenou();
     $('#predNoty').innerHTML = '';
     $('#vicPanel').classList.add('skryta'); $('#predZmenit').setAttribute('aria-expanded', 'false');
+    $('#vicDalsi').open = false;
     $('#presnePole').classList.add('skryta'); $('#predPresne').setAttribute('aria-expanded', 'false');
     $('#predSouhrnText').textContent = '';
     vykresliPred();
@@ -1804,7 +1840,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#predZmenit').onclick = () => {
     const o = $('#vicPanel').classList.toggle('skryta');
     $('#predZmenit').setAttribute('aria-expanded', String(!o));
-    if (!o) $('#predCo [aria-pressed="true"]')?.focus();
+    if (!o) $('#predCo').focus();
   };
   /** game in the visible window: notes are rendered again (note positions cannot be measured on a hidden screen) */
   function zobrazHru() {
@@ -1931,31 +1967,34 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $('#prepSmycka').classList.toggle('zap', S.smycka.zapnuto);
     nabidkaUseku();
   }
-  /** What will you play: the version cards (levels 1–5), the left-hand style, the hand choice and the summary line */
+  /** Show the selected score version and only the controls applicable to it. */
   function vykresliVerzi() {
     if (!S.puvodni || !S.data) return;
     const dve = S.data.osnovy.length > 1 && !S.dvojice;
-    const zjednodusi = (S.tonina || 'ne') !== 'ne' || !!S.prstoklad;  // the Original only in its own key, without fingering
-    $('#predCo').innerHTML = seznamUrovni(S.puvodni).map(u => `<button type="button" class="verze-karta" data-uroven="${u.id}" aria-pressed="${u.id === Number(S.uroven)}" ${u.dostupna ? '' : 'disabled'}>
-      <b>${esc(u.nazev)}</b><small>${esc(u.popis)}${u.id === 5 && zjednodusi ? ' ' + esc(t('verze.zjednodusi')) : ''}</small></button>`).join('');
-    const vsechny = S.data.osnovy.length < 2 || S.rukaVolba === 'vse';  // she has no written staff to play → backing from chords
-    $('#vzorPole').classList.toggle('skryta', !!S.dvojice || !vsechny || !(S.data.akordy || []).length);
+    const urovne = seznamUrovni(S.puvodni);
+    const vyber = $('#predCo');
+    vyber.innerHTML = urovne.map(u => `<option value="${u.id}" ${u.dostupna ? '' : 'disabled'}>${esc(u.nazev)}</option>`).join('');
+    vyber.value = String(S.uroven);
+    const vybrana = urovne.find(u => u.id === Number(S.uroven));
+    const zjednodusi = vybrana?.id === 5 && ((S.tonina || 'ne') !== 'ne' || S.prstoklad);
+    $('#predCoPopis').textContent = zjednodusi ? t('verze.zjednodusi') : (vybrana?.popis || '');
     $('#stylPole').classList.toggle('skryta', Number(S.uroven) !== 4 || !!S.dvojice);
     $('#predRuce').classList.toggle('skryta', !dve);
     for (const b of $$('#predRuce [data-ruka]')) b.setAttribute('aria-pressed', String(dve && b.dataset.ruka === S.rukaVolba));
-    $('#predRuce small').classList.toggle('skryta', S.rukaVolba === 'vse');   // with both hands Rusalka plays no hand
+    const zbyvaRuka = dve && S.rukaVolba !== 'vse';
+    $('#predDruhaRuka').classList.toggle('skryta', !zbyvaRuka);
+    if (zbyvaRuka) $('#predRuce').setAttribute('aria-describedby', 'predDruhaRuka');
+    else $('#predRuce').removeAttribute('aria-describedby');
     const s = souhrn({ uroven: S.uroven, ruka: S.rukaVolba, osnovy: S.data.osnovy.length, dvojice: !!S.dvojice });
     $('#predSouhrnText').innerHTML = `${esc(t('verze.hrajes'))} <b>${esc(t(s.verze))}</b>${s.ruka ? ', ' + esc(t(s.ruka)) : ''}${S.dvojice ? ', ' + esc(t('verze.veDvou')) : ''}`;
   }
-  $('#predCo').onclick = async e => {
-    const b = e.target.closest('[data-uroven]');
-    if (!b || b.disabled) return;
-    S.uroven = Number(b.dataset.uroven);
-    if (S.uroven !== 4) S.styl = '';                   // the left-hand style belongs to Melody and chords only
+  $('#predCo').onchange = async () => {
+    if (!pripravenaPisen()) return;
+    S.uroven = Number($('#predCo').value);
+    if (S.uroven !== 4) S.styl = '';
     await zmenVerzi();
     if (S.data.osnovy.length > 1) S.rukaVolba = rukaPoKarte(S.uroven, S.data.osnovy.length);
     nastavRuku(); vykresliVerzi();
-    $(`#predCo [data-uroven="${S.uroven}"]`)?.focus();
   };
   $('#predRuce').onclick = e => {
     const b = e.target.closest('[data-ruka]');
@@ -2273,7 +2312,6 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     zavriDialog($('#vysledek'));
     $('#odpocet').classList.add('skryta');
     $('.kurzor').classList.toggle('skryta', S.rezim === REZIM.CEKAM);
-    $('#kalibrace').classList.toggle('skryta', S.rezim !== REZIM.TEMPO);
     $('#hlaska').innerHTML = '';
     prubeh(0);
     if (!S.kroky.length) { $('#start').classList.add('skryta'); return; }
@@ -2504,8 +2542,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   // ------------------------------------------------------------ latency calibration (for In rhythm mode)
   $('#kalibrace').onclick = async () => {
     if (document.hidden || S.rezim !== REZIM.TEMPO || !otevreno('#hra') || otevreno('#vysledek') || H.kalibrace) return;
-    // Calibration starts from Pause → Display. The player needs to see the instructions and reach the keys.
-    prekryv('#zobrazeni', false); prekryv('#pauzaPrekryv', false);
+    zavriKlavir(); prekryv('#pauzaPrekryv', false);
     reset();
     const k = H.kalibrace = { kliky: [], stisky: [] };
     let ac;
@@ -3001,7 +3038,6 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#vzorDoprovodu').value = S.nastaveni.vzorDoprovodu || 'auto';
   $('#vzorDoprovodu').onchange = () => {
     S.nastaveni.vzorDoprovodu = $('#vzorDoprovodu').value; ulozNastaveni();
-    if (S.data && !$('#hra').classList.contains('skryta')) { stopVse(); nastavRuku(); }
   };
   $('#vysDomu').onclick = () => { reset(); ukaz('domu'); nactiPisne(); };
 
@@ -3031,11 +3067,11 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#pauza').onclick = pozastavHru;
   $('#pauzaPokracovat').onclick = () => {
     prekryv('#pauzaPrekryv', false);
+    if (S.rezim !== REZIM.POSLECH) zapniMikrofonPriHre();
     H.timery.pokracuj();
   };
-  $('#pauzaZobrazeni').onclick = () => {                // the same toggles as Settings → Display, plus the accompaniment and calibration
+  $('#pauzaZobrazeni').onclick = () => {                // the same display toggles as Settings
     if (!$('#zobrazeni .prepinace')) $('#zobrazeni aside').append($('#nastaveniZobrazeni .prepinace'));
-    $('#prepSmycka').before($('#prepZvukKlavir'));
     prekryv('#zobrazeni', true);
   };
   $('#zobrazeniZavrit').onclick = () => prekryv('#zobrazeni', false);
@@ -3083,17 +3119,20 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   prepinac('#prepZvukKlavir', 'zvukKlavir', () => { if (!hraPozastavena()) stopVse(); stavZvukuKlaviru(); });
   function stavZvukuKlaviru() {
     const b = $('#prepZvukKlavir');
-    b.classList.toggle('skryta', !MIDI_UMI);
-    b.title = VYSTUP.nazev ? t('app.zvukKlavir', { nazev: VYSTUP.nazev }) : t('app.zvukKlavirNe');
+    b.classList.toggle('skryta', !VYSTUP.nazev);
+    b.title = VYSTUP.nazev ? t('app.zvukKlavir', { nazev: VYSTUP.nazev }) : '';
+    vykresliStavZvuku();
   }
   prepinac('#prepPismena', 'pismena', () => document.body.classList.toggle('bez-pismen', !S.nastaveni.pismena));
   prepinac('#prepBarvy', 'barvy', () => {
     document.body.classList.toggle('bez-barev', !S.nastaveni.barvy);
     if (S.rezim === REZIM.CEKAM && S.kroky[H.idx] && !$('#hra').classList.contains('skryta')) oznacKrok(H.idx);
   });
-  $$('.prep-doprovod').forEach(b => b.onclick = () => {   // per device and mode (off with the microphone), not per player
-    S.vstup = sDoprovodem(S.vstup, !doprovodZapnuty(S.vstup)); uloz.pis('kt-vstup', S.vstup); midiStav();
-  });
+  $('#nastaveniDoprovod').onclick = () => {
+    S.vstup = sDoprovodem(S.vstup, !doprovodZapnuty(S.vstup));
+    uloz.pis('kt-vstup', S.vstup);
+    midiStav();
+  };
   let zrusPrekresleni = null;
   window.addEventListener('resize', () => {
     if ($('#hra').classList.contains('skryta') || !S.svg) return;

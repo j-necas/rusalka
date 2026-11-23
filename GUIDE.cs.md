@@ -34,9 +34,9 @@ a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
 
    Každý krok má na kartě písničky vlastní hvězdy.
 
-   **Zvuk z klavíru** (Nastavení → Hraní, v Chromu a Edge s klavírem přes MIDI): doprovod, poslech a klávesy na obrazovce
-   hraje připojený klavír přes MIDI, ne počítač. Noty jdou na kanál 2, aby nerušily hráče; hlasitost se řídí
-   knoflíkem na klavíru. Metronom klepe dál v počítači. Bez připojeného klavíru hraje počítač jako dřív.
+   **Klavír a zvuk** otevřete před hraním vedle tlačítka **Hrát**, v **Nastavení** nebo z **Pauzy**. Tady vyberete
+   MIDI, mikrofon nebo klávesy na obrazovce a nastavíte doprovod i metronom. Při zapnuté volbě **Zvuk z klavíru**
+   hraje doprovod, poslech i klávesy na obrazovce přes připojený MIDI klavír na kanálu 2. Metronom hraje ze zařízení.
 
    **Ve dvou** (tlačítko ve druhé liště): dvě děti u jednoho klavíru, obě pravou rukou. Jedno hraje melodii
    (vpravo, horní osnova), druhé basovou linku z akordů (vlevo, dolní osnova: základní tón akordu na celý takt).
@@ -45,7 +45,7 @@ a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
    prohodí melodii a bas, **Hrát sám** se vrátí ke hraní o samotě. Ve dvou není Naučit se, smyčka ani mikrofon
    a písnička bez akordových značek bas nemá. Doprovod hraje jen akordy bez basu.
 
-   **Rusalka hraje s tebou** (před hraním: Hraješ … · změnit; platí pro všechny písničky): když Rusalka nehraje zapsanou levou ruku, doprovod se hraje z akordových
+   **Styl akordového doprovodu** (v panelu Klavír a zvuk, platí pro všechny písničky): když Rusalka nehraje zapsanou levou ruku, doprovod se hraje z akordových
    značek podle taktu a tempa – valčík ve 3/4 a 6/8, um-pa ve 2/4, balada nebo polka ve 4/4, u pomalých písniček
    rozložený akord, na konci držený akord. Jde zvolit i konkrétní styl nebo „Jen akordy“ (akord na těžké doby).
    Písničky se zapsanou levou rukou hrají v doprovodu tu.
@@ -88,7 +88,7 @@ a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
    spolu s celou stránkou). Dospělý hráč má u dvouručních skladeb rovnou zvolené obě ruce.
 7. **Upravit noty:** editor kterékoli písničky (klepni na notu; šipky výška, ←→ další nota, 1–6 délka, `.` tečka,
    `R` pomlka, `T` ligatura, Cmd+Z zpět). Tón zahraný na klavíru se zapíše do vybrané noty.
-8. **Kalibrace** (v režimu V rytmu): změří zpoždění klavíru/zvuku (Bluetooth) a odečítá ho.
+8. **Kalibrace** (v režimu V rytmu přes Pauza → Klavír a zvuk): změří zpoždění klavíru/zvuku (Bluetooth) a odečítá ho.
 9. **Mikrofon:** hraní bez MIDI (akustické piano, flétna, zpěv).
    - Na začátku je potřeba chvilka ticha na změření šumu.
    - Aplikace ví, kterou notu čeká, a ověřuje jen ji.

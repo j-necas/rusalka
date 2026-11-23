@@ -35,8 +35,8 @@ const DATA = (profily = PROFILY) => ({
   data: {
     profily: JSON.stringify(profily), profil: JSON.stringify(profily[0]?.id ?? null),
     vysledky: JSON.stringify({ f: { 'Frère Jacques.musicxml': { cekam: { hvezdy: 3, procent: 100, pocet: 2 }, pockej: { hvezdy: 1, procent: 70, pocet: 1 } } } }),
-    statistiky: JSON.stringify({ f: { 'Frère Jacques.musicxml#2': { verze: 1, pokusu: 3, posledni: ted - DEN, takty: {},
-      historie: [{ kdy: ted - DEN, rezim: 'tempo', krok: 'pockej', rychlost: 80, presnost: 0.7 }] } } }),
+    statistiky: JSON.stringify({ f: { 'Frère Jacques.musicxml#2': { verze: 1, pokusu: 3, posledni: ted, takty: {},
+      historie: [{ kdy: ted, rezim: 'tempo', krok: 'pockej', rychlost: 80, presnost: 0.7 }] } } }),
   },
   pisne: Object.fromEntries(['Frère Jacques.musicxml', 'Happy Birthday.musicxml', 'Ode to Joy.musicxml', 'Silent Night.musicxml'].map(f => [f, pisen(f)])),
 });
@@ -343,7 +343,7 @@ try {
     await p.locator('#novyZpet').click();
     await menu(p, 'domu', 'settings');
     kontrola('Settings → Display for the chosen player', await viditelna(p, '#nastaveniZobrazeni #prepPismena')
-      && /Marta/.test(await p.locator('#nastaveniZobrazeni').innerText()) && !(await viditelna(p, '#nastaveniZobrazeni #prepDoprovod')));
+      && /Marta/.test(await p.locator('#nastaveniZobrazeni').innerText()) && !(await viditelna(p, '#nastaveniZobrazeni #nastaveniDoprovod')));
     const prepinac = () => p.evaluate(() => {
       const b = document.querySelector('#nastaveniZobrazeni #prepPismena'), z = getComputedStyle(b, '::after');
       return { role: b.getAttribute('role'), checked: b.getAttribute('aria-checked'), w: parseFloat(z.width), h: parseFloat(z.height), poloha: z.backgroundPosition, tucne: getComputedStyle(b).fontWeight };
@@ -467,14 +467,17 @@ try {
     await vs.waitForTimeout(600);
     kontrola('the piano recordings are not downloaded when the page opens', mp3.length === 0, mp3.join());
     const tl = '#domu #vstupTlacitko', text = () => vs.locator(tl).innerText();
-    // no piano: Before playing says what you play on and offers the microphone right under Play
+    // Before playing shows the actual input and opens the same options even without a piano.
     await vs.locator('#pokracujHrat').click();
     await vs.waitForTimeout(600);
-    kontrola('no piano: under Play a line says why (no piano connected), the on-screen keys, and offers the microphone', await viditelna(vs, '#predVstup')
-      && /Klavír není připojený, hrajete na klávesách na obrazovce/.test(await vs.locator('#predVstup').innerText()) && await viditelna(vs, '#predMikrofon'),
-      await vs.locator('#predVstup').innerText().catch(() => ''));
-    await vs.locator('#predMikrofon').click();
-    kontrola('Turn on the microphone switches the mode and the line goes away', !(await viditelna(vs, '#predVstup'))
+    kontrola('Before playing: the piano and sound button shows the on-screen fallback',
+      await viditelna(vs, '#predZvuk') && /klávesy na obrazovce .*klavír nepřipojen/.test(await vs.locator('#predZvuk').innerText()));
+    await vs.locator('#predZvuk').click();
+    await vs.locator('#klavirOkno [data-vstup="mikrofon"]').click();
+    await vs.keyboard.press('Escape');
+    kontrola('closing Piano and sound restores focus and shows the new input and backing status',
+      !await viditelna(vs, '#klavirOkno') && await vs.evaluate(() => document.activeElement?.id === 'predZvuk')
+      && /mikrofon/.test(await vs.locator('#predVstupText').textContent()) && /Doprovod vypnutý/.test(await vs.locator('#predVystupText').textContent())
       && await vs.evaluate(() => JSON.parse(localStorage.getItem('kt-vstup'))?.rezim === 'mikrofon'));
     await vs.evaluate(() => localStorage.removeItem('kt-vstup'));
     await vs.reload(); await vs.waitForTimeout(1500);
@@ -513,16 +516,20 @@ try {
     }));
     await snimek(vs, 'vstup');
     await menu(vs, 'domu', 'settings');
-    const volby = () => vs.locator('#nastaveniOkno [data-vstup]').evaluateAll(el => el.map(e => e.getAttribute('aria-checked')).join());
+    await vs.locator('#nastaveniZvukOtevrit').click();
+    const volby = () => vs.locator('#klavirOkno [data-vstup]').evaluateAll(el => el.map(e => e.getAttribute('aria-checked')).join());
     const dopr = () => vs.locator('#nastaveniDoprovod').evaluate(e => e.classList.contains('zap'));
     kontrola('Settings → Piano shows the same choice as Home (MIDI) with the accompaniment on', (await volby()) === 'true,false,false' && await dopr());
-    await vs.locator('#nastaveniOkno [data-vstup="mikrofon"]').click();
+    await vs.locator('#klavirOkno [data-vstup="mikrofon"]').click();
     kontrola('Microphone in Settings: accompaniment off, Home follows', (await volby()) === 'false,true,false' && !(await dopr())
       && /Hraje se na: mikrofon/.test(await text()));
     await vs.locator('#nastaveniDoprovod').click();
     kontrola('the accompaniment can be turned on with the microphone, MIDI keeps its own', await dopr()
       && (await vs.evaluate(() => JSON.parse(localStorage.getItem('kt-vstup')).doprovod)).midi === true);
-    await vs.locator('#nastaveniOkno [data-vstup="midi"]').click();
+    await vs.locator('#klavirOkno [data-vstup="midi"]').click();
+    await vs.keyboard.press('Escape');
+    kontrola('the sound dialog returns to Settings and focuses its button', await viditelna(vs, '#nastaveniOkno')
+      && await vs.evaluate(() => document.activeElement?.id === 'nastaveniZvukOtevrit'));
     kontrola('Settings → Display is there for Fík', /Fík/.test(await vs.locator('#nastaveniZobrazeni').innerText()));
     kontrola('Settings → Display has no Fingering or Loop (they belong to a song and to one game)', await viditelna(vs, '#nastaveniZobrazeni #prepPismena')
       && !(await viditelna(vs, '#nastaveniZobrazeni #prepPrstoklad')) && !(await viditelna(vs, '#nastaveniZobrazeni #prepSmycka')));
@@ -534,7 +541,9 @@ try {
   });
     // microphone refused and the on-screen keys turned off: the keys show anyway, so the player can still play
     await menu(vs, 'domu', 'settings');
-    await vs.locator('#nastaveniOkno [data-vstup="mikrofon"]').click();
+    await vs.locator('#nastaveniZvukOtevrit').click();
+    await vs.locator('#klavirOkno [data-vstup="mikrofon"]').click();
+    await vs.keyboard.press('Escape');
     if (await vs.locator('#nastaveniZobrazeni #prepKlaviatura').evaluate(e => e.classList.contains('zap'))) await vs.locator('#nastaveniZobrazeni #prepKlaviatura').click();
     await vs.keyboard.press('Escape');
     await vs.locator('#pokracujHrat').click();
@@ -625,12 +634,12 @@ try {
   kontrola('Web MIDI Browser (iPad): the piano input has a note handler and a note goes through without an error',
     await wmb.evaluate(() => { try { return window.__wmbNota(60) !== null && (window.__wmbNota(60), true); } catch { return false; } }));
   await zkus('iPad sound with Web MIDI input', async () => {
-    await menu(wmb, 'domu', 'settings');
+    await wmb.locator('#pokracujHrat').click();
+    await wmb.locator('#predZvuk').click();
     const vystup = wmb.locator('#nastaveniZvuk #prepZvukKlavir');
-    kontrola('iPad: the sound switch is under Piano, with device audio by default',
+    kontrola('iPad: the switch can be reached before playing, with device audio by default',
       await vystup.isVisible() && await vystup.getAttribute('aria-checked') === 'false');
     await wmb.keyboard.press('Escape');
-    await wmb.locator('#pokracujHrat').click();
     await wmb.locator('#predKroky [data-krok="cekam"]').click();
     await wmb.locator('#predHrat').click();
     const zahrano = await wmb.evaluate(() => {
@@ -647,11 +656,13 @@ try {
     kontrola('iPad: listening uses the device audio with the MIDI piano still connected',
       await wmb.evaluate(() => window.__wmbVystup.length === 0 && window.__wmbNota(60)));
     await wmb.locator('#pauza').click();
-    await wmb.locator('#pauzaZobrazeni').click();
-    const vPauze = wmb.locator('#zobrazeni #prepZvukKlavir');
+    await wmb.locator('#pauzaZvuk').click();
+    const vPauze = wmb.locator('#klavirOkno #prepZvukKlavir');
     kontrola('iPad: the same output switch is available during pause', await vPauze.isVisible());
     await vPauze.click();
-    await wmb.locator('#zobrazeniZavrit').click();
+    await wmb.locator('#klavirZavrit').click();
+    kontrola('iPad: closing sound settings keeps Pause open', await viditelna(wmb, '#pauzaPrekryv')
+      && await wmb.evaluate(() => document.activeElement?.id === 'pauzaZvuk'));
     await wmb.locator('#pauzaKonec').click();
     await wmb.locator('#predPoslech').click();
     await wmb.waitForFunction(() => window.__wmbVystup.length > 0, null, { timeout: 10000 });
@@ -690,7 +701,7 @@ try {
     kontrola('change, exactly and About the song are 44 px targets', (await vyska('#predZmenit')) >= 44 && (await vyska('#predPresne')) >= 44 && (await vyska('#oPisni')) >= 44,
       `${await vyska('#predZmenit')} ${await vyska('#predPresne')} ${await vyska('#oPisni')}`);
     await r2.locator('#predZmenit').click();
-    await r2.locator('#predCo [data-uroven="4"]').click();
+    await r2.locator('#predCo').selectOption('4');
     await r2.waitForTimeout(500);
     kontrola('the hand buttons are 44 px; with Both the line "Rusalka plays the other hand" is hidden', (await vyska('#predRuce [data-ruka]')) >= 44
       && !(await r2.locator('#predRuce small').isVisible()));
@@ -714,17 +725,18 @@ try {
     await h.locator('#pisne .dl', { hasText: 'Frère Jacques' }).click();
     await h.waitForSelector('#predNoty svg', { timeout: 15000 });
     kontrola('Before playing shows the start of the notes', true);
-    // What will you play: a summary line opens the version cards and the hand choice
+    // The summary opens a version picker with help for the selected option.
     const souhrnText = async () => (await h.locator('#predSouhrn').innerText()).replace(/\s+/g, ' ');
     kontrola('Before playing: a summary of what you play with a change button, closed', /Hrajete: Celá melodie/.test(await souhrnText())
       && (await h.locator('#predZmenit').getAttribute('aria-expanded')) === 'false' && !(await h.locator('#vicPanel').isVisible()), await souhrnText());
     await h.locator('#predZmenit').click();
-    const karty = await h.locator('#predCo [data-uroven]').evaluateAll(el => el.map(e => [e.dataset.uroven, e.querySelector('b')?.textContent, !!e.querySelector('small')?.textContent.trim(), e.getAttribute('aria-pressed')]));
-    kontrola('What will you play: five cards in order, one line each, the chosen one pressed', await h.locator('#vicPanel').isVisible()
-      && karty.map(k => k[1]).join('|') === 'Melodie, snadný rytmus|Celá melodie|Melodie a basy|Melodie a akordy|Všechny noty'
-      && karty.every(k => k[2]) && karty.find(k => k[3] === 'true')?.[0] === '2', JSON.stringify(karty));
-    kontrola('the old level and hand selects are gone; the style only with Melody and chords', (await h.locator('select#uroven, select#ruka').count()) === 0
-      && !(await h.locator('#styl').isVisible()));
+    const volby = await h.locator('#predCo option').allTextContents();
+    kontrola('the version picker has five options, a short description of the selected one, and extra options closed',
+      await h.locator('#vicPanel').isVisible() && await h.locator('#predCo').inputValue() === '2'
+      && volby.join('|') === 'Melodie, snadný rytmus|Celá melodie|Melodie a basy|Melodie a akordy|Všechny noty'
+      && /Melodie přesně v rytmu/.test(await h.locator('#predCoPopis').textContent())
+      && !(await h.locator('#tonina').isVisible()), volby.join(' | '));
+    kontrola('the left-hand arrangement only shows with Melody and chords', !(await h.locator('#styl').isVisible()));
     const ma = async sel => (await h.locator('#vicPanel ' + sel).count()) === 1;
     kontrola('the opened section keeps section, key, Learn in pieces, Together, About the song, Echo, favourite, exact speed',
       await ma('#usek') && await ma('#tonina') && await ma('#pruvodce') && await ma('#dvojice')
@@ -738,7 +750,8 @@ try {
     await h.locator('#predOblibena').click();
     kontrola('About the song is a link under the author, outside the section', await viditelna(h, '#pred .autor-radek #oPisni')
       && (await h.locator('#vicPanel #oPisni').count()) === 0);
-    kontrola('More to do: Learn in pieces, Play as a pair and Echo as a button with one line each', /Další možnosti/.test(await h.locator('#vicPanel').innerText())
+    await h.locator('#vicDalsi summary').click();
+    kontrola('More options opens the key, Learn in pieces, Play as a pair and Echo', await h.locator('#tonina').isVisible()
       && await radek(h, '#pruvodce') && await radek(h, '#dvojice') && await radek(h, '#ozvena'));
     kontrola('Before playing has no Edit or Delete', (await h.locator('#pred #upravit, #pred #smazatPisen').count()) === 0);
     // the top menu as on Home: Settings → Display for this player, without going back
@@ -748,15 +761,23 @@ try {
       && await viditelna(h, '#nastaveniZobrazeni #prepPismena') && await viditelna(h, '#pred'));
     await h.keyboard.press('Escape');
     // Copy for the helper: an easier version sends the song as written, not the played version (here: generated left hand)
-    if (await h.locator('#predCo [data-uroven="4"]:not([disabled])').count()) {
-      await h.locator('#predCo [data-uroven="4"]').click();
+    if (await h.locator('#predCo option[value="4"]:not([disabled])').count()) {
+      await h.locator('#predCo').selectOption('4');
       await h.waitForTimeout(500);
-      kontrola('a card with a left hand (Melody and chords) sets both hands and shows the style', (await h.locator('#predRuce [data-ruka="vse"]').getAttribute('aria-pressed')) === 'true'
+      kontrola('a score version with a left hand (Melody and chords) sets both hands and shows the style', (await h.locator('#predRuce [data-ruka="vse"]').getAttribute('aria-pressed')) === 'true'
         && await h.locator('#styl').isVisible() && /Melodie a akordy, oběma rukama/.test(await souhrnText()), await souhrnText());
       await h.locator('#predRuce [data-ruka="1"]').click();
       await h.waitForTimeout(300);
-      kontrola('the hand can be changed: right hand, Rusalka plays the left', /pravou rukou/.test(await souhrnText()) && /levou hraje Rusalka/.test(await souhrnText()), await souhrnText());
-      kontrola('Rusalka plays along is hidden while she plays the written left hand', (await h.locator('#vzorPole.skryta').count()) === 1);
+      kontrola('the hand can be changed, with help about the remaining part',
+        /pravou rukou/.test(await souhrnText()) && /Druhou ruku zahraje Rusalka/.test(await h.locator('#predDruhaRuka').textContent()), await souhrnText());
+      await h.locator('#predZvuk').click();
+      kontrola('with a written left hand, the chord backing style does not apply', !(await h.locator('#vzorPole').isVisible()));
+      await h.locator('#nastaveniDoprovod').click();
+      await h.keyboard.press('Escape');
+      kontrola('the hand note reflects accompaniment being disabled', /Doprovod vypnutý/.test(await h.locator('#predDruhaRuka').textContent()));
+      await h.locator('#predZvuk').click();
+      await h.locator('#nastaveniDoprovod').click();
+      await h.keyboard.press('Escape');
       const kopie = await h.evaluate(async () => {          // Songs → Manage → Frère Jacques → easier version
         let text = '';
         navigator.clipboard.writeText = async x => { text = x; };
@@ -771,19 +792,22 @@ try {
       await h.keyboard.press('Escape');
       const blok = (kopie.match(/```\n(title: Frère Jacques[\s\S]*?)```/) || [])[1] || '';
       kontrola('easier version: the song as written (no generated left hand at level 4)', blok.includes('---') && !/\|\|/.test(blok), blok.slice(0, 200) || kopie.slice(0, 120));
-      await h.locator('#predCo [data-uroven="2"]').click();
+      await h.locator('#predCo').selectOption('2');
       await h.waitForTimeout(400);
-      kontrola('a one-hand card sets the right hand and hides the hand choice for one staff', /Hrajete: Celá melodie/.test(await souhrnText()) && !(await h.locator('#predRuce').isVisible())
+      kontrola('a one-staff version hides the hand choice and hides the hand choice for one staff', /Hrajete: Celá melodie/.test(await souhrnText()) && !(await h.locator('#predRuce').isVisible())
         && !(await h.locator('#styl').isVisible()), await souhrnText());
-      kontrola('one staff with chords: "Rusalka plays along" for all songs is shown', await h.locator('#vzorPole').isVisible()
-        && /Rusalka hraje s vámi/.test(await h.locator('#vzorPole').innerText()) && /pro všechny písničky/.test(await h.locator('#vzorPole').innerText()));
-      await h.locator('#predCo [data-uroven="5"]').click();
+      await h.locator('#predZvuk').click();
+      kontrola('a one-staff score with chords offers the chord backing style under Piano and sound',
+        await h.locator('#klavirOkno #vzorPole').isVisible() && /Styl akordového doprovodu/.test(await h.locator('#vzorPole').innerText())
+        && /pro všechny písničky/.test(await h.locator('#vzorPole').innerText()));
+      await h.keyboard.press('Escape');
+      await h.locator('#predCo').selectOption('5');
       await h.waitForTimeout(400);
       await h.selectOption('#tonina', 'C');
       await h.waitForTimeout(500);
-      kontrola('All the notes in another key says the notes get simplified', /zjednoduš/.test(await h.locator('#predCo [data-uroven="5"]').innerText()), await h.locator('#predCo [data-uroven="5"]').innerText());
+      kontrola('All the notes in another key says the notes get simplified', /zjednoduš/.test(await h.locator('#predCoPopis').innerText()), await h.locator('#predCoPopis').innerText());
       await h.selectOption('#tonina', 'ne');
-      await h.locator('#predCo [data-uroven="2"]').click();
+      await h.locator('#predCo').selectOption('2');
       await h.waitForTimeout(400);
     } else kontrola('level 4 offered for Frère Jacques', false);
     // exact speed under How fast
@@ -803,12 +827,12 @@ try {
       && !(await h.locator('#rezimy').isVisible()) && (await h.locator('#hra #uroven').count()) === 0);
     await snimek(h, 'hra');
     await h.locator('#pauza').click();
-    kontrola('Pause: Continue, Again, Display, Quit', await viditelna(h, '#pauzaPrekryv') && await viditelna(h, '#znovu')
-      && await viditelna(h, '#pauzaZobrazeni') && await viditelna(h, '#pauzaKonec'));
+    kontrola('Pause offers Piano and sound, Display and Loop separately', await viditelna(h, '#pauzaPrekryv')
+      && await viditelna(h, '#pauzaZvuk') && await viditelna(h, '#pauzaZobrazeni') && await viditelna(h, '#prepSmycka'));
     await snimek(h, 'pauza');
     await h.locator('#pauzaZobrazeni').click();
-    kontrola('Display with toggles, the accompaniment, no microphone', await viditelna(h, '#zobrazeni') && await viditelna(h, '#zobrazeni #prepPismena')
-      && await viditelna(h, '#zobrazeni #prepZvukKlavir') && await viditelna(h, '#zobrazeni #prepDoprovod') && (await h.locator('#prepMikrofon').count()) === 0);
+    kontrola('Display contains only visual options', await viditelna(h, '#zobrazeni') && await viditelna(h, '#zobrazeni #prepPismena')
+      && (await h.locator('#zobrazeni :is(#prepZvukKlavir, #nastaveniDoprovod, #prepMetronom, #kalibrace)').count()) === 0);
     await h.locator('#zobrazeniZavrit').click();
     await h.locator('#pauzaKonec').click();
     await h.waitForTimeout(300);
@@ -820,7 +844,7 @@ try {
     kontrola('speeds: Slow, A bit slower, Normal (100 % is the song\'s own tempo)', rychlosti === 'Pomalu 60 %|Trochu pomaleji 80 %|Normálně 100 %', rychlosti);
     await h.locator('#predRychlost [data-rychlost="60"]').click();
     const predVolby = () => h.evaluate(() => [document.querySelector('#predRychlost .ted')?.dataset.rychlost,
-      document.querySelector('#predCo [aria-pressed="true"]')?.dataset.uroven].join());
+      document.querySelector('#predCo')?.value].join());
     const predPoslechem = await predVolby();
     await h.locator('#predPoslech').click();
     await h.waitForTimeout(800);
@@ -839,12 +863,13 @@ try {
     kontrola('after listening Before playing keeps the player\'s choice and speed', (await predVolby()) === predPoslechem, `${predPoslechem} → ${await predVolby()}`);
     await h.locator('#predKroky [data-krok="cekam"]').click();
     await h.locator('#predZmenit').click();
+    await h.locator('#vicDalsi summary').click();
     await h.locator('#vicPanel #dvojice').click();
     kontrola('partner list without the deleted player', !(await h.locator('#dvojiceHraci').textContent()).includes('undefined'));
     await h.locator('#dvojiceHraci .profil, #dvojiceHraci button', { hasText: 'Ela' }).first().click();
     await h.waitForTimeout(800);
-    kontrola('in a pair: no hand choice and no "Rusalka plays along"; the summary says the pair', (await h.locator('#vzorPole.skryta').count()) === 1
-      && (await h.locator('#predRuce.skryta').count()) === 1 && /ve dvou/.test(await h.locator('#predSouhrn').innerText()), await h.locator('#predSouhrn').innerText());
+    kontrola('in a pair the summary shows the pair and offers no hand choice',
+      (await h.locator('#predRuce.skryta').count()) === 1 && /ve dvou/.test(await h.locator('#predSouhrn').innerText()), await h.locator('#predSouhrn').innerText());
     await h.locator('#predHrat').click();
     await h.waitForSelector('#pas svg', { timeout: 15000 });
     kontrola('together: role bar in the game', await viditelna(h, '#dvojiceLista'));
@@ -1162,15 +1187,18 @@ try {
     const soustavy = await r.locator('#volbaSoustavy option').allInnerTexts();
     kontrola('three note-name systems named by how they look', soustavy.join('|') === 'C D E F G A H (Cis, Es, B)|C D E F G A B (C#, Eb, Bb)|Do Re Mi Fa Sol La Si (Do#, Sib)', soustavy.join('|'));
     kontrola('Settings: language, note names, the piano', await dialog('#nastaveniOkno') && await viditelna(r, '#volbaJazyka') && await viditelna(r, '#volbaSoustavy')
-      && /Bluetooth/.test(await r.locator('#nastaveniPiano').textContent()));
+      && await viditelna(r, '#nastaveniZvukOtevrit'));
     kontrola('Settings also hold data and backups: where data are kept', await viditelna(r, '#nastaveniOkno #uloziste #ulozisteText')
       && (await r.locator('#nastaveniOkno').textContent()).includes('Data a zálohy'));
     kontrola('data in the browser: Download a backup and Save to folder', await viditelna(r, '#ulozisteZaloha') && await viditelna(r, '#ulozisteSlozka'));
-    kontrola('Settings on Who is playing: no Display (no player chosen), the piano offers the three ways to play',
-      !(await viditelna(r, '#nastaveniZobrazeni')) && (await r.locator('#nastaveniOkno [role="radio"][data-vstup]').count()) === 3
-      && await viditelna(r, '#nastaveniDoprovod'));
+    await r.locator('#nastaveniZvukOtevrit').click();
+    kontrola('Piano and sound: three ways to play, accompaniment, and MIDI connection help', await dialog('#klavirOkno')
+      && (await r.locator('#klavirOkno [role="radio"][data-vstup]').count()) === 3 && await viditelna(r, '#nastaveniDoprovod')
+      && await viditelna(r, '#klavirPripojeni summary'));
+    await r.keyboard.press('Escape');
     const nb = await bloky(r, '#nastaveniOkno');
-    kontrola('Settings: three blocks; Download a backup is a button with a line, hidden options take no row', nb.join('|') === 'Jazyk a názvy tónů|Klavír|Data a zálohy'
+    kontrola('Settings: language and data sections, with Display only after choosing a player', nb.join('|') === 'Jazyk a názvy tónů|Data a zálohy'
+      && !(await viditelna(r, '#nastaveniZobrazeni'))
       && await radek(r, '#ulozisteZaloha') && !(await r.locator('#nastaveniOkno .okno-krok').evaluateAll(el => el.some(e => e.getClientRects().length && e.querySelector('.skryta')))), nb.join('|'));
     kontrola('no word about a desktop app anywhere in the page', !/desktop/i.test(await r.evaluate(() => document.body.textContent)));
     await snimek(r, 'nastaveni');

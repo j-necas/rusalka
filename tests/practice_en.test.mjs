@@ -86,7 +86,7 @@ test('en: levels – names and descriptions including accompaniment', () => {
   nastavJazyk('en');
   const u = seznamUrovni({ ...pisnicka(), takt: '3/4' });
   assert.deepEqual(u.map(x => x.nazev), ['Melody, easy rhythm', 'Whole melody', 'Melody and bass', 'Melody and chords', 'All the notes']);
-  assert.equal(u[3].popis, 'The right hand plays the melody, the left plays chords (waltz: bass – chord – chord). We’ll add chords to fit the melody.');
+  assert.equal(u[3].popis, 'The score adds chords for the left hand. Default pattern: waltz: bass – chord – chord. We’ll add chords to fit the melody.');
   for (const x of seznamUrovni(pisen([[q('C4')]], { takt: '4/4' }))) { anglicky(x.nazev); anglicky(x.popis); }
   nastavJazyk('cs');
   assert.equal(seznamUrovni(pisnicka())[4].nazev, 'Všechny noty');

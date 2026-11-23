@@ -147,40 +147,48 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
       <div class="autor-radek"><span id="predAutor" class="autor"></span><button id="oPisni" class="odkaz" data-t="vic.oPisni"></button></div>
       <h2 data-t="pred.jak"></h2>
       <div id="predKroky"></div>
-      <h2 data-t="pred.rychle"></h2>
-      <div id="predRychlost" class="rychlosti"></div>
-      <p class="presne"><button id="predPresne" class="odkaz" aria-controls="presnePole" aria-expanded="false"></button></p>
-      <label id="presnePole" class="rychlost-presna skryta"><input type="range" id="rychlost" data-t-aria="vic.presna" min="40" max="100" step="10" value="70"><span id="rychlostText"></span></label>
+      <div class="pred-tempo">
+        <h2 data-t="pred.rychle"></h2>
+        <div id="predRychlost" class="rychlosti"></div>
+        <p class="presne"><button id="predPresne" class="odkaz" aria-controls="presnePole" aria-expanded="false"></button></p>
+        <label id="presnePole" class="rychlost-presna skryta"><input type="range" id="rychlost" data-t-aria="vic.presna" min="40" max="100" step="10" value="70"><span id="rychlostText"></span></label>
+      </div>
     </div>
     <div class="prava">
       <div class="nahled-not"><div id="predNoty" class="nahled-noty"></div></div>
       <details id="predText" class="skryta"><summary data-t="pred.textPisne"></summary><p id="predTextPisne"></p></details>
+      <div class="pred-volby">
+        <button id="predZmenit" type="button" class="volba-hrani" aria-controls="vicPanel" aria-expanded="false">
+          <strong data-t="verze.zmenit"></strong><span id="predSouhrn"><span id="predSouhrnText"></span></span>
+        </button>
+        <button id="predZvuk" type="button" class="volba-hrani" aria-haspopup="dialog" aria-controls="klavirOkno">
+          <strong data-t="menu.piano"></strong><span id="predVstupText"></span><span id="predVystupText"></span>
+        </button>
+      </div>
       <div class="akce">
         <button id="predPoslech" class="text-tl ikonka"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3.5v13l10.5-6.5z" fill="currentColor"/></svg><span data-t="pred.poslech"></span></button>
         <button id="predHrat" class="velke-hrat"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M8 5v20l17-10z" fill="currentColor"/></svg><span data-t="hrat"></span></button>
       </div>
-      <p id="predVstup" class="pred-vstup skryta"><span id="predVstupText"></span> <button type="button" id="predMikrofon" class="odkaz" data-t="vstup.zapnoutMikrofon"></button></p>
-      <p id="predSouhrn" class="pred-souhrn"><span id="predSouhrnText"></span>
-        <button id="predZmenit" class="odkaz" data-t="verze.zmenit" aria-controls="vicPanel" aria-expanded="false"></button></p>
       <div id="vicPanel" class="vic-panel skryta">
-        <h3 id="coNadpis" data-t="verze.nadpis"></h3>
-        <div id="predCo" class="verze-karty" role="group" aria-labelledby="coNadpis"></div>
-        <label id="stylPole"><span data-t="vic.styl"></span><select id="styl" class="vyber"></select></label>
+        <div class="verze-volba">
+          <label class="volba-not"><span data-t="verze.nadpis"></span><select id="predCo" class="vyber" aria-describedby="predCoPopis"></select></label>
+          <p id="predCoPopis" class="verze-popis" aria-live="polite"></p>
+        </div>
+        <label id="stylPole" class="volba-not"><span data-t="vic.styl"></span><select id="styl" class="vyber"></select></label>
         <div id="predRuce" class="ruce" role="group" aria-labelledby="ruceNadpis">
           <span id="ruceNadpis" data-t="verze.ktera"></span>
           <span class="ruce-volby"><button type="button" data-ruka="1" data-t="verze.prava"></button><button type="button" data-ruka="2" data-t="verze.leva"></button><button type="button" data-ruka="vse" data-t="verze.obe"></button></span>
-          <small data-t="verze.druhou"></small>
+          <small id="predDruhaRuka" class="verze-popis"></small>
         </div>
-        <label><span data-t="vic.kus"></span><select id="usek" class="vyber"></select></label>
-        <label><span data-t="vic.tonina"></span><select id="tonina" class="vyber">
-          <option value="ne" data-t="html.toninaPuvodni"></option><option value="snadna" data-t="html.toninaSnadna"></option><option value="C" data-t="html.toninaC"></option></select></label>
-        <label id="vzorPole"><span><span data-t="vic.rytmus"></span><small data-t="vic.rytmusVsude"></small></span><select id="vzorDoprovodu" class="vyber"></select></label>
-        <section class="okno-blok vic-dalsi" aria-labelledby="dalsiNadpis">
-          <h3 id="dalsiNadpis" data-t="vic.dalsi"></h3>
+        <label class="volba-not"><span data-t="vic.kus"></span><select id="usek" class="vyber"></select></label>
+        <details id="vicDalsi" class="vic-dalsi">
+          <summary data-t="vic.dalsi"></summary>
+          <label class="volba-not"><span data-t="vic.tonina"></span><select id="tonina" class="vyber">
+            <option value="ne" data-t="html.toninaPuvodni"></option><option value="snadna" data-t="html.toninaSnadna"></option><option value="C" data-t="html.toninaC"></option></select></label>
           <div class="okno-krok"><button id="pruvodce" class="tlacitko sekundarni" data-t="vic.naucit"></button><p data-t="vic.naucitPopis"></p></div>
           <div class="okno-krok"><button id="dvojice" class="tlacitko sekundarni" data-t="vic.dvojice"></button><p data-t="vic.dvojicePopis"></p></div>
           <div class="okno-krok"><button id="ozvena" class="tlacitko sekundarni" data-t="vic.ozvena"></button><p data-t="doplnky.ui.ozvenaPopis"></p></div>
-        </section>
+        </details>
       </div>
     </div>
   </div>
@@ -191,7 +199,9 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
     <h2 data-t="hra.pauza"></h2>
     <button id="pauzaPokracovat" class="hrat-velke" data-t="pauza.pokracovat"></button>
     <button id="znovu" class="polozka" data-t="pauza.znovu"></button>
+    <button id="pauzaZvuk" class="polozka" data-t="menu.piano" aria-haspopup="dialog" aria-controls="klavirOkno"></button>
     <button id="pauzaZobrazeni" class="polozka" data-t="pauza.zobrazeni"></button>
+    <button id="prepSmycka" class="prepinac" data-t="html.prepSmycka" data-t-title="html.prepSmycka.titul"></button>
     <button id="pauzaKonec" class="polozka" data-t="hra.konec"></button>
   </div>
 </div>
@@ -206,11 +216,6 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
       <button id="prepPrstoklad" class="prepinac" data-t="html.prepPrstoklad" data-t-title="html.prepPrstoklad.titul"></button>
       <button id="prepStranka" class="prepinac" data-t="html.prepStranka" data-t-title="html.prepStranka.titul"></button>
       <button id="prepKlaviatura" class="prepinac" data-t="html.prepKlaviatura" data-t-title="html.prepKlaviatura.titul"></button>
-      <button id="prepDoprovod" class="prepinac prep-doprovod" data-t="html.prepDoprovod"></button>
-      <button id="prepMetronom" class="prepinac" data-t="html.prepMetronom" data-t-title="html.prepMetronom.titul"></button>
-      <button id="prepZvukKlavir" class="prepinac skryta" data-t="html.prepZvukKlavir"></button>
-      <button id="prepSmycka" class="prepinac" data-t="html.prepSmycka" data-t-title="html.prepSmycka.titul"></button>
-      <button id="kalibrace" class="prepinac skryta" data-t="html.kalibrace" data-t-title="html.kalibrace.titul"></button>
     </div>
   </aside>
 </div>
@@ -378,25 +383,17 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
 <div id="nastaveniOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="nastaveniNadpis">
   <div class="karta siroka menu-okno" tabindex="-1">
     <h2 id="nastaveniNadpis" data-t="menu.settings"></h2>
+    <section class="okno-blok" aria-labelledby="pianoNadpis">
+      <button id="nastaveniZvukOtevrit" type="button" class="volba-hrani" aria-haspopup="dialog" aria-controls="klavirOkno">
+        <strong id="pianoNadpis" data-t="menu.piano"></strong><span id="nastaveniStav"></span><span id="nastaveniVystupText"></span>
+      </button>
+    </section>
     <section class="okno-blok" aria-labelledby="jazykNadpis">
       <h3 id="jazykNadpis" data-t="menu.jazykNadpis"></h3>
       <label class="volba-radek"><span data-t="rodice.jazykAplikace"></span>
         <select id="volbaJazyka" class="vyber jazyk-volba"></select></label>
       <label class="volba-radek"><span data-t="rodice.nazvyTonu"></span>
         <select id="volbaSoustavy" class="vyber"><option value="cs" data-t="rodice.soustavaCs"></option><option value="en" data-t="rodice.soustavaEn"></option><option value="do" data-t="rodice.soustavaDo"></option></select></label>
-    </section>
-    <section class="okno-blok" aria-labelledby="pianoNadpis">
-      <h3 id="pianoNadpis" data-t="menu.piano"></h3>
-      <p id="nastaveniStav" class="okno-stav"></p>
-      <p id="nastaveniPiano" class="napoveda" data-t="menu.pianoText"></p>
-      <div class="vstup-volby" role="radiogroup" data-t-aria="vstup.nadpis">
-        <button type="button" role="radio" data-vstup="midi" aria-checked="false"><b data-t="vstup.midi"></b><small class="vstup-midi-popis"></small></button>
-        <button type="button" role="radio" data-vstup="mikrofon" aria-checked="false"><b data-t="vstup.mikrofon"></b><small data-t="vstup.mikrofonPopis"></small></button>
-        <button type="button" role="radio" data-vstup="obrazovka" aria-checked="false"><b data-t="vstup.obrazovka"></b><small data-t="vstup.obrazovkaPopis"></small></button>
-      </div>
-      <a class="vstup-appstore skryta" target="_blank" rel="noopener">Web MIDI Browser (App Store)</a>
-      <div id="nastaveniZvuk" class="prepinace"><button id="nastaveniDoprovod" type="button" class="prepinac prep-doprovod" data-t="html.prepDoprovod"></button></div>
-      <p class="napoveda" data-t="vstup.doprovodPopis"></p>
     </section>
     <section id="nastaveniZobrazeni" class="okno-blok skryta" aria-labelledby="zobrazeniNadpis">
       <h3 id="zobrazeniNadpis" data-t="pauza.zobrazeni"></h3>
@@ -414,6 +411,40 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
       <div class="okno-krok"><button id="ulozisteProhlizec" class="tlacitko sekundarni skryta" data-t="html.jenProhlizec"></button><p data-t="html.jenProhlizec.popis"></p></div>
     </section>
     <div class="tlacitka"><button type="button" class="tlacitko" data-zavrit data-t="html.zavrit"></button></div>
+  </div>
+</div>
+
+<div id="klavirOkno" class="modal skryta" role="dialog" aria-modal="true" aria-labelledby="klavirNadpis">
+  <div class="karta siroka" tabindex="-1">
+    <h2 id="klavirNadpis" data-t="menu.piano"></h2>
+    <h3 id="klavirVstup" data-t="vstup.nadpis"></h3>
+    <div class="vstup-volby" role="radiogroup" aria-labelledby="klavirVstup">
+      <button type="button" role="radio" data-vstup="midi" aria-checked="false"><b data-t="vstup.midi"></b><small class="vstup-midi-popis"></small></button>
+      <button type="button" role="radio" data-vstup="mikrofon" aria-checked="false"><b data-t="vstup.mikrofon"></b><small data-t="vstup.mikrofonPopis"></small></button>
+      <button type="button" role="radio" data-vstup="obrazovka" aria-checked="false"><b data-t="vstup.obrazovka"></b><small data-t="vstup.obrazovkaPopis"></small></button>
+    </div>
+    <a class="vstup-appstore skryta" target="_blank" rel="noopener">Web MIDI Browser (App Store)</a>
+    <p id="mikrofonVeDvou" class="napoveda skryta" data-t="app.dvojiceMikrofonVypni"></p>
+    <section class="okno-blok" aria-labelledby="klavirZvukNadpis">
+      <h3 id="klavirZvukNadpis" data-t="vstup.zvuk"></h3>
+      <p id="klavirVystup" class="okno-stav"></p>
+      <div id="nastaveniZvuk" class="prepinace">
+        <button id="nastaveniDoprovod" type="button" class="prepinac" data-t="html.prepDoprovod"></button>
+        <button id="prepZvukKlavir" class="prepinac skryta" data-t="html.prepZvukKlavir"></button>
+        <button id="prepMetronom" class="prepinac" data-t="html.prepMetronom" data-t-title="html.prepMetronom.titul"></button>
+        <button id="kalibrace" class="prepinac skryta" data-t="html.kalibrace" data-t-title="html.kalibrace.titul"></button>
+      </div>
+      <p id="napovedaDoprovodu" class="napoveda skryta" data-t="vstup.doprovodPopis"></p>
+      <label id="vzorPole" class="volba-not skryta">
+        <span data-t="vic.rytmus"></span><select id="vzorDoprovodu" class="vyber" aria-describedby="vzorPlatnost"></select>
+        <small id="vzorPlatnost" class="verze-popis" data-t="vic.rytmusVsude"></small>
+      </label>
+    </section>
+    <details id="klavirPripojeni" class="klavir-pripojeni">
+      <summary data-t="vstup.pripojeni"></summary>
+      <p class="napoveda" data-t="menu.pianoText"></p>
+    </details>
+    <div class="tlacitka"><button id="klavirZavrit" type="button" class="tlacitko" data-t="html.zavrit"></button></div>
   </div>
 </div>
 

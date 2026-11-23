@@ -97,22 +97,19 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 .vstup-tlacitko:hover, .vstup-tlacitko[aria-expanded="true"] { background: var(--sv); }
 .vstup-tlacitko .sipka { width: 14px; height: 14px; flex: none; transition: transform .15s; }
 .vstup-tlacitko[aria-expanded="true"] .sipka { transform: rotate(180deg); }
-/* Before playing without a piano: what you play on and the microphone, right under Play */
-.pred-vstup { margin: 10px 0 0; font-size: 15px; line-height: 1.45; color: var(--slaby2); }
-/* Settings → Piano: the same three ways as radio rows */
+/* The three ways to play, in the shared piano and sound dialog. */
 .vstup-volby { display: grid; gap: 6px; margin: 10px 0 12px; }
-.vstup-volby button { display: grid; gap: 2px; text-align: left; font: inherit; color: var(--text); background: none; cursor: pointer;
-  border: 2px solid var(--hrana); border-radius: 14px; padding: 10px 14px 10px 42px; min-height: 48px; position: relative; }
-.vstup-volby button::before { content: ''; position: absolute; left: 14px; top: 14px; width: 16px; height: 16px; box-sizing: border-box;
+.vstup-volby button { display: grid; gap: 2px; text-align: start; font: inherit; color: var(--text); background: none; cursor: pointer;
+  border: 2px solid var(--hrana); border-radius: 14px; padding: 10px 14px; padding-inline-start: 42px; min-height: 48px; position: relative; }
+.vstup-volby button::before { content: ''; position: absolute; inset-inline-start: 14px; top: 14px; width: 16px; height: 16px; box-sizing: border-box;
   border-radius: 50%; border: 2px solid var(--slaby); }
 .vstup-volby button[aria-checked="true"] { border-color: var(--hl); background: var(--sv); }
 .vstup-volby button[aria-checked="true"]::before { border: 5px solid var(--hl); }
 .vstup-volby small { font-size: 14px; color: var(--slaby2); line-height: 1.35; }
 .vstup-volby button:disabled { cursor: default; }
 .vstup-volby button:disabled b { color: var(--slaby); }
-/* in Settings the display toggles are per player; the accompaniment sits in Piano and calibration belongs to the game */
-/* Fingering belongs to a song and Loop to one game: they stay in Pause → Display */
-#nastaveniZobrazeni :is(#prepDoprovod, #kalibrace, #prepPrstoklad, #prepSmycka) { display: none; }
+/* Fingering belongs to a song. The other display options are per player. */
+#nastaveniZobrazeni #prepPrstoklad { display: none; }
 #vstupMenu { left: auto; right: 0; width: min(340px, calc(100vw - 32px)); }
 #vstupMenu button { display: grid; gap: 2px; padding: 10px 14px 10px 40px; position: relative; }
 #vstupMenu button::before { content: ''; position: absolute; left: 14px; top: 14px; width: 16px; height: 16px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--slaby); }
@@ -490,7 +487,7 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .nahled-noty svg { height: 200px !important; width: auto !important; max-width: none; display: block; }
 #predText summary { cursor: pointer; }
 #predTextPisne { white-space: pre-line; }
-.prava .akce { display: flex; align-items: center; gap: 24px; margin-top: 26px; justify-content: flex-end; }
+.prava .akce { display: flex; align-items: center; gap: 24px; margin-top: 18px; justify-content: flex-end; }
 .prava .velke-hrat { background: var(--hl); color: #fff; padding: 22px 60px; }
 
 /* side panel (Display) and list items (also in the menu windows) */
@@ -523,32 +520,27 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .ikonka svg { width: 18px; height: 18px; }
 .prekryv.stred { display: grid; place-items: center; }
 .prekryv.stred.skryta { display: none; }
-.pauza-karta { background: #fff; border-radius: 30px; padding: 30px 34px; width: min(380px, 92vw); display: flex; flex-direction: column; gap: 6px; color: var(--ink); }
+.pauza-karta { background: #fff; border-radius: 30px; padding: 30px 34px; width: min(380px, 92vw); max-height: calc(100% - 24px); overflow: auto; display: flex; flex-direction: column; gap: 6px; color: var(--ink); }
 .pauza-karta h2 { margin: 0 0 12px; font-size: 30px; }
 .pauza-karta .hrat-velke { margin-bottom: 8px; }
 #zobrazeni .prepinace { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; }
 
-/* More options */
-.vic-panel { margin-top: 18px; padding: 18px 20px; background: #FAF8F6; border-radius: 20px; display: grid; gap: 12px; }
-.vic-panel label { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 12px; color: var(--slaby2); font-size: 16px; }
-.vic-panel select { min-height: 44px; }
-.vic-panel h3 { margin: 0; font-size: 18px; }
-/* What will you play: version cards like the steps, the hand choice as three buttons, the summary line */
-.verze-karty { display: grid; gap: 6px; }
-.verze-karta { display: grid; gap: 2px; text-align: left; padding: 10px 14px; border: 2px solid transparent; border-radius: var(--radius);
-  background: none; color: var(--ink); cursor: pointer; min-height: 44px; font: inherit; }
-.verze-karta b { font-size: 17px; }
-.verze-karta small { color: var(--slaby2); font-size: 14px; line-height: 1.4; }
-.verze-karta:hover { background: var(--sv); }
-.verze-karta[aria-pressed="true"] { background: var(--sv); border-color: var(--hl); }
-.verze-karta:disabled { opacity: .5; cursor: default; }
+/* Song options. The score version and the extra fields share the same form alignment. */
+.vic-panel { margin-top: 18px; padding: 18px 20px; background: #FAF8F6; border-radius: 20px; display: grid; gap: 14px; }
+.volba-not { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); align-items: center;
+  gap: 6px 12px; color: var(--slaby2); font-size: 16px; }
+.volba-not select { width: 100%; min-width: 0; min-height: 44px; }
+.verze-volba .volba-not > span { font-weight: 800; color: var(--ink); }
+.verze-popis { margin: 4px 0 0; color: var(--slaby2); font-size: 14px; line-height: 1.4; }
+.verze-volba .verze-popis { margin-inline-start: 162px; }
 .ruce { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 6px 12px; color: var(--slaby2); font-size: 16px; }
-.ruce-volby { display: inline-flex; border-radius: 12px; background: var(--sv); padding: 3px; gap: 3px; justify-self: start; }
-.ruce-volby button { border: 0; background: none; padding: 8px 16px; min-height: 44px; border-radius: 10px; font: inherit; font-weight: 700; color: var(--ink); cursor: pointer; }
+.ruce-volby { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-radius: 12px; background: var(--sv); padding: 3px; gap: 3px; }
+.ruce-volby button { border: 0; background: none; padding: 8px; min-height: 44px; border-radius: 10px; font: inherit; font-weight: 700; color: var(--ink);
+  cursor: pointer; overflow-wrap: anywhere; }
 .ruce-volby button[aria-pressed="true"] { background: var(--karta); color: var(--hl); }
 .ruce small { grid-column: 2; font-size: 14px; }
-#vzorPole > span { display: grid; }
-#vzorPole small { font-size: 13px; color: var(--slaby); }
+#vzorPole { margin-top: 14px; }
+#vzorPlatnost { grid-column: 2; }
 .presne { margin: 10px 0 0; }
 #presnePole { display: flex; align-items: center; gap: 10px; margin-top: 8px; color: var(--ink); }
 .pred-titul { display: flex; align-items: flex-start; gap: 8px; }
@@ -559,15 +551,32 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .hvezda-tl[aria-pressed="true"] svg { fill: currentColor; }
 .autor-radek { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 20px; }
 .pred .autor-radek .autor { margin-bottom: 0; }
-.vic-dalsi { margin-top: 4px; }
-.pred-souhrn { margin: 12px 0 0; font-size: 16px; color: var(--slaby2); }
-.pred-souhrn b { color: var(--ink); }
-.pred-souhrn .odkaz { margin-left: 6px; }
-/* the text links on Before playing are 44 px touch targets */
-.pred-souhrn .odkaz, .presne .odkaz, .autor-radek .odkaz { min-height: 44px; display: inline-flex; align-items: center; padding: 0 4px; }
+.vic-dalsi { border-top: 1px solid var(--hrana); }
+.vic-dalsi summary { padding-block: 10px; min-height: 44px; color: var(--hl); font-weight: 700; cursor: pointer; }
+.vic-dalsi .volba-not { margin: 4px 0 10px; }
+.pred-volby { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.volba-hrani { display: grid; align-content: start; position: relative; gap: 2px; width: 100%; min-height: 48px;
+  padding: 10px 14px; padding-inline-end: 34px; border: 2px solid var(--hrana); border-radius: 14px;
+  color: var(--ink); background: transparent; text-align: start; font: inherit; line-height: 1.35; cursor: pointer; overflow-wrap: anywhere; }
+.volba-hrani:not(:disabled):hover, .volba-hrani[aria-expanded="true"] { background: var(--sv); border-color: var(--hl); }
+.volba-hrani:disabled { opacity: .55; cursor: default; }
+.volba-hrani > span { font-size: 14px; color: var(--slaby2); }
+.volba-hrani::after { content: ''; width: 8px; height: 8px; border: solid var(--hl); border-width: 0 2px 2px 0;
+  position: absolute; inset-inline-end: 15px; top: 16px; transform: rotate(-45deg); }
+[dir="rtl"] .volba-hrani::after { transform: rotate(135deg); }
+.volba-hrani[aria-expanded]::after { transform: rotate(45deg); }
+.volba-hrani[aria-expanded="true"]::after { transform: rotate(225deg); }
+#klavirOkno { z-index: 44; }
+#klavirOkno h3 { font-size: 18px; margin: 0; }
+#klavirOkno #klavirVstup { margin-top: 18px; }
+.klavir-pripojeni { margin-top: 10px; }
+.klavir-pripojeni summary { width: fit-content; min-height: 44px; padding-block: 10px; color: var(--hl); font-weight: 700; cursor: pointer; }
+#prepSmycka { margin-inline-start: 6px; }
+.presne .odkaz, .autor-radek .odkaz { min-height: 44px; display: inline-flex; align-items: center; padding: 0 4px; }
 @media (max-width: 600px) {
-  .ruce { grid-template-columns: 1fr; }
-  .ruce small { grid-column: 1; }
+  .ruce, .volba-not { grid-template-columns: minmax(0, 1fr); }
+  .ruce small, #vzorPlatnost { grid-column: 1; }
+  .verze-volba .verze-popis { margin-inline-start: 0; }
 }
 .vic-panel .rychlost-presna { display: flex; align-items: center; gap: 10px; color: var(--ink); }
 #rukaPole:has(select[hidden]) { display: none; }
@@ -760,15 +769,27 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 /* Arabic interface: music and machine-readable notation keep their natural left-to-right order. */
 html[dir="rtl"] :is(#noty, #predNoty, #klavesy, .editor-noty, #vlozitText) { direction: ltr; }
 html[dir="rtl"] :is(.pisen, .karta.siroka, .trener, .doplnek .obsah p, .doplnek .obsah ul,
-  .ja-menu button, .dl, .volba, .polozka, .verze-karta, .vlozit-chyby) { text-align: right; }
+  .ja-menu button, .dl, .volba, .polozka, .vlozit-chyby) { text-align: right; }
 html[dir="rtl"] .zdroje, html[dir="rtl"] .vlozit-chyby ul { padding-left: 0; padding-right: 18px; }
-/* phone: the notes, Play and the summary under the steps, one column */
+/* phone: the notes, settings and Play under the steps, one column */
 @media (max-width: 760px) {
   .pred { grid-template-columns: minmax(0, 1fr); padding: 0 16px 32px; gap: 8px; }
   .pred h1 { font-size: 34px; }
-  .vic-panel { grid-template-columns: minmax(0, 1fr); padding: 16px; }
-  .vic-panel label { grid-template-columns: minmax(0, 1fr); gap: 4px; }
-  .vic-panel select { min-width: 0; width: 100%; }
+  .pred h2 { margin-top: 16px; }
+  .pred .autor-radek { margin-bottom: 8px; }
+  .pred .volba { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 0 8px; padding: 8px 10px; }
+  .pred .volba .c { font-size: 30px; }
+  .pred .volba b { font-size: 18px; }
+  .pred .volba .popis { font-size: 14px; }
+  .pred .volba .hv i { width: 14px; height: 14px; }
+  .pred-tempo { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; }
+  .pred-tempo .presne { grid-area: 1 / 2; margin: 0; }
+  .pred-tempo .rychlosti, .pred-tempo #presnePole { grid-column: 1 / -1; }
+  .pred .rychlosti button { padding: 8px 4px; font-size: 15px; }
+  .pred .prava { display: flex; flex-direction: column; margin-top: 0; }
+  .pred .velke-hrat { padding-block: 14px; }
+  .pred .nahled-not { order: 1; margin-top: 16px; }
+  .vic-panel { grid-template-columns: minmax(0, 1fr); padding: 14px; gap: 10px; }
   /* New player / My profile: the form, then the preview and Done under it */
   .novy { grid-template-columns: minmax(0, 1fr); padding: 0 16px 32px; gap: 8px; }
   .novy h1 { font-size: 34px; margin-bottom: 20px; }

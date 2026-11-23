@@ -139,15 +139,21 @@ test('game controls survive loading, calibration, pausing, rotation, and a chang
   assert.equal(videt('#hra'), false);
   nacti();
   await cekejNa(() => !$('#predHrat').disabled);
+  $('#predZvuk').click();
+  assert.equal(videt('#klavirOkno'), true);
+  $('#klavirZavrit').click();
+  assert.equal(videt('#klavirOkno'), false);
+  assert.equal(videt('#pred'), true);
   $('#predHrat').click();
   assert.equal($('#hraNazev').textContent, 'Cvičení');
 
   $('[data-rezim="tempo"]').click();
   $('#pauza').click();
-  $('#pauzaZobrazeni').click();
+  $('#pauzaZvuk').click();
+  assert.equal(videt('#klavirOkno'), true);
   $('#kalibrace').click();
   await Promise.resolve();
-  assert.equal(videt('#zobrazeni'), false);
+  assert.equal(videt('#klavirOkno'), false);
   assert.equal(videt('#pauzaPrekryv'), false);
   assert.match($('#hlaska').innerHTML, /Kalibrace:/);
   $('#pauza').click();
@@ -223,6 +229,10 @@ test('game controls survive loading, calibration, pausing, rotation, and a chang
   assert.equal(druhyVysledek.hvezdy, 1);
   $('#zpet').click();
   await cekejNa(() => !$('#predHrat').disabled);
+  $('#predCo').value = '4';
+  await $('#predCo').onchange();
+  assert.equal($('#predCo').value, '4');
+  assert.match($('#predCoPopis').textContent, /akord/);
 });
 
 test('a song link lets a guest play and saves the result without creating a profile', async t => {
