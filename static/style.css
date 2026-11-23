@@ -31,6 +31,8 @@ button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 .skryta { display: none !important; }
 :focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
+/* on the player's colour (results, Continue on Home) the accent outline would vanish: a white one */
+#vysledek :focus-visible, .pokracuj :focus-visible { outline-color: #fff; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
 /* ---------------- home screen */
@@ -55,22 +57,9 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 .avatar.velky { width: 130px; height: 130px; margin: 0 auto; }
 .avatar.hop { animation: hop .4s ease; }
 @keyframes hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px) rotate(-6deg); } }
-.hledat { max-width: 320px; margin-top: 0; }
-.pisen { position: relative; }
-.pisen .oblibena { position: absolute; top: 10px; right: 10px; border: 0; background: transparent; font-size: 24px;
-  color: var(--hrana); line-height: 1; padding: 4px; }
-.pisen .oblibena.zap { color: #D99A00; }
 /* difficulty: 1–3 black keys */
 .obtiznost { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: var(--text); }
 .obtiznost svg { width: 22px; height: 14px; display: block; }
-.pisne { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-.pisen {
-  text-align: left; padding: 16px 18px; background: var(--karta); border: 1px solid var(--hrana);
-  border-radius: var(--klavesa); box-shadow: inset 0 -3px 0 var(--hrana); display: flex; flex-direction: column; gap: 8px;
-  min-height: 100px; cursor: pointer;
-}
-.pisen:hover { background: #fff; }
-.pisen .chyba { color: #A92A32; font-size: 14px; }
 
 /* buttons press like keys: the bottom edge shrinks when pressed */
 .tlacitko {
@@ -119,19 +108,23 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 #vstupMenu button:disabled b { color: var(--slaby); }
 
 /* ---------------- game */
-#hra { height: 100vh; height: 100dvh; display: flex; flex-direction: column;
+#hra { height: 100vh; height: 100dvh; display: flex; flex-direction: column; background: #fff;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
 .kulate { width: 44px; height: 44px; border-radius: var(--klavesa-mala); border: 0; background: var(--akcent-svetla); color: var(--akcent);
   box-shadow: inset 0 -4px 0 var(--hrana); font-size: 30px; line-height: 1; padding: 0 0 6px; }
 .kulate:active { box-shadow: inset 0 -1px 0 var(--hrana); }
 /* toggle: a row with a switch on the right – a track with a round knob, on = the player's colour, knob on the right */
 .prepinac { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 46px;
-  padding: 8px 12px; border: 0; border-radius: 8px; background: transparent; font-size: 17px; color: var(--text); text-align: left; }
+  padding: 8px 12px; border: 0; border-radius: 8px; background: transparent; font-size: 17px; color: var(--text); text-align: start; }
 .prepinac:hover { background: var(--akcent-svetla); }
 .prepinac::after { content: ''; flex: none; width: 46px; height: 28px; border-radius: 14px;
   background: radial-gradient(circle, #fff 10px, transparent 10.5px) no-repeat 0 50% / 28px 28px, #BDB8B0; transition: background-position .15s; }
 .prepinac.zap::after { background: radial-gradient(circle, #fff 10px, transparent 10.5px) no-repeat 100% 50% / 28px 28px, var(--akcent); }
 .prepinac:focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
+[dir=rtl] .prepinac::after { background-position: 100% 50%; }       /* right to left: off on the right, on on the left */
+[dir=rtl] .prepinac.zap::after { background-position: 0 50%; }
+.prepinac-text { display: grid; gap: 2px; }
+.prepinac-text small { font-size: 14px; color: var(--slaby2); font-weight: 400; }
 #kalibrace::after { content: none; }                  /* calibration is an action, not a switch */
 @media (prefers-reduced-motion: reduce) { .prepinac::after { transition: none; } }
 .vyber { min-height: 44px; border-radius: 8px; border: 1px solid var(--hrana); background: var(--karta); padding: 4px 10px; }
@@ -196,6 +189,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 #hra.prehled .hlaska { display: none; }
 .hlaska b { font-size: 30px; padding: 0 4px; }
 
+
 /* ---------------- keyboard */
 .klavesy { position: relative; flex: 0 0 auto; height: 30vh; min-height: 160px; max-height: 300px; margin: 0 14px 14px;
   touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
@@ -213,6 +207,14 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 @media (max-width: 580px) {
   .klavesa .jm { font-size: 12px; }
   .klavesa.cerna .jm { max-width: 150%; padding-inline: 1px; font-size: 9px; }
+}
+/* phone in landscape: notes, one line of message and the whole keyboard fit in ~390 px of height */
+@media (max-height: 480px) {
+  #hra .hra-hlava { padding-block: 4px; }
+  .noty { min-height: 110px; margin-block: 4px; }
+  .hlaska { min-height: 0; font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-block: 0; }
+  .hlaska b { font-size: 20px; }
+  .klavesy { flex: 1 1 40%; height: auto; min-height: 100px; max-height: none; margin-bottom: 6px; }
 }
 .bez-barev .klavesa .jm { background: #2B2B2B; }
 .bez-barev .klavesa .jm.tmave { color: #fff; }
@@ -237,7 +239,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 @keyframes trh { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 
 /* ---------------- modal dialogs */
-.zdroje { padding-left: 18px; line-height: 1.7; }
+.zdroje { padding-inline-start: 18px; line-height: 1.7; }
 .odkaz { border: 0; background: none; padding: 0; color: var(--akcent); font: inherit; font-weight: 700;
   text-decoration: underline; cursor: pointer; }
 .modal { position: fixed; inset: 0; background: rgba(20, 26, 40, .4); display: flex; align-items: center; justify-content: center; z-index: 10;
@@ -253,7 +255,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 .pole { width: 100%; min-height: 48px; border: 1px solid var(--hrana); border-radius: 8px; padding: 8px 14px; font-size: 20px; margin-top: 8px;
   background: #fff; }
 .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--text); color: #fff;
-  padding: 12px 20px; border-radius: 6px 6px 12px 12px; z-index: 20; font-size: 16px; max-width: 90vw; }
+  padding: 12px 20px; border-radius: 6px 6px 12px 12px; z-index: 70; font-size: 16px; max-width: 90vw; }   /* above every window (≤ 60) */
 
 .toast:empty { padding: 0; }
 .aktualizace { top: max(12px, env(safe-area-inset-top)); bottom: auto; z-index: 42; width: max-content;
@@ -265,7 +267,7 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 }
 
 /* ---------------- wider dialogs (MIDI, sheet music sources, extras) */
-.karta.siroka { max-width: 720px; text-align: left; max-height: 92vh; max-height: calc(100dvh - 40px); overflow: auto; }
+.karta.siroka { max-width: 720px; text-align: start; max-height: 92vh; max-height: calc(100dvh - 40px); overflow: auto; }
 /* a long window scrolls under its last row of buttons (Close…): they stay at the bottom edge, also on a phone where
    Safari's bars cover the bottom of the screen (dvh above counts only the visible part) */
 .karta.siroka > .tlacitka:last-child { position: sticky; bottom: -26px; margin: 18px -30px -26px; padding: 12px 30px 16px;
@@ -310,16 +312,15 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 }
 
 /* ---------------- coach */
-.trener { background: var(--akcent-svetla); border-radius: 8px; padding: 10px 14px; font-size: 17px; text-align: left; }
+.trener { background: var(--akcent-svetla); border-radius: 8px; padding: 10px 14px; font-size: 17px; text-align: start; }
 .trener:empty { display: none; }
 #vysUkol { margin-top: 6px; }
 .pruvodce { margin: 4px 14px 0; padding: 8px 14px; border-radius: 8px; background: var(--akcent-svetla); font-size: 17px; text-align: center; }
 
 /* ---------------- extras */
-.doplnek .obsah p { text-align: left; }
-.doplnek .obsah ul { text-align: left; }
+.doplnek .obsah p { text-align: start; }
+.doplnek .obsah ul { text-align: start; }
 .doplnek .otazky { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-@keyframes vysun { from { transform: translateX(40px); opacity: 0; } }
 
 /* as a pair: bar with players (bass on the left, melody on the right – as they sit at the piano) and results side by side */
 .dvojice-lista { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -343,9 +344,6 @@ h2 { font-size: 22px; font-weight: 800; margin: 28px 0 12px; }
 @media (max-width: 560px) { .vys-dvojice { grid-template-columns: 1fr; } }
 .tlacitko:disabled { opacity: .45; cursor: default; }
 
-/* data storage below the players: one quiet line of links */
-.uloziste { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin-top: 14px; color: var(--slaby); font-size: 15px; }
-.uloziste .odkaz { background: none; border: 0; padding: 0; color: var(--akcent); font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 
 /* ================================================================ new look (design 2026-11-15)
    White screens, the player's colour in three shades (--hl dark, --sv light, --sv-2 medium), no shadows,
@@ -358,6 +356,7 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
   padding: 8px 12px; border-radius: 12px; min-height: 44px; }
 .zpet:hover { background: var(--sv); }
 .zpet svg { width: 20px; height: 20px; }
+[dir=rtl] .zpet svg { transform: scaleX(-1); }                /* the Back arrow points the way back */
 .horni { display: flex; align-items: center; gap: 14px; padding: 18px 40px; max-width: 1280px; margin: 0 auto; }
 .hrat-velke { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: var(--hl); color: #fff; border: 0;
   border-radius: 22px; padding: 20px 46px; font-size: 24px; font-weight: 800; min-height: 64px; }
@@ -411,11 +410,11 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .ja-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 30; min-width: 200px; padding: 6px; display: grid;
   background: var(--karta); border: 1px solid var(--linka); border-radius: var(--radius); }
 #jaMenu { left: auto; inset-inline-start: 0; }
-.ja-menu button { background: none; border: 0; text-align: left; font: inherit; font-size: 17px; font-weight: 600; color: var(--text);
+.ja-menu button { background: none; border: 0; text-align: start; font: inherit; font-size: 17px; font-weight: 600; color: var(--text);
   padding: 10px 14px; min-height: 44px; border-radius: 10px; }
 .ja-menu button:hover, .ja-menu button:focus-visible { background: var(--sv); }
 .text-tl.maly { font-size: 15px; font-weight: 400; }
-.horni .vpravo { margin-left: auto; display: flex; gap: 18px; align-items: center; color: var(--slaby2); font-size: 15px; }
+.horni .vpravo { margin-inline-start: auto; display: flex; gap: 18px; align-items: center; color: var(--slaby2); font-size: 15px; }
 .obsah { max-width: 1280px; margin: 0 auto; padding: 6px 40px 60px; }
 .pokracuj { background: var(--hl); color: #fff; border-radius: 30px; padding: 34px 40px; display: grid; grid-template-columns: 1fr auto; gap: 8px 40px; align-items: center; }
 .pokracuj .maly { color: var(--sv-2); font-weight: 700; }
@@ -436,10 +435,10 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .zalozky { display: flex; gap: 4px; flex-wrap: wrap; }
 .zalozky button { padding: 10px 18px; border: 0; background: none; border-radius: 14px; font-weight: 700; color: var(--slaby2); min-height: 44px; }
 .zalozky button.ted { background: var(--sv); color: var(--ink); }
-.hledat { margin-left: auto; border: 0; background: var(--sv); border-radius: 14px; padding: 12px 18px; font-size: 17px; width: 260px; min-height: 44px; }
+.hledat { margin-inline-start: auto; margin-top: 0; border: 0; background: var(--sv); border-radius: 14px; padding: 12px 18px; font-size: 17px; width: 260px; max-width: 320px; min-height: 44px; }
 .hledat::placeholder { color: var(--slaby2); }
 .dlazdice { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.dl { background: var(--sv); border: 0; border-radius: 22px; padding: 20px 20px 18px; text-align: left; display: flex; flex-direction: column; min-height: 150px; color: var(--ink); }
+.dl { background: var(--sv); border: 0; border-radius: 22px; padding: 20px 20px 18px; text-align: start; display: flex; flex-direction: column; min-height: 150px; color: var(--ink); }
 .dl:hover { background: var(--sv-2); }
 .dl b { font-size: 21px; line-height: 1.2; }
 .dl small { color: var(--slaby2); font-size: 14px; margin-top: 4px; }
@@ -465,7 +464,7 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .pred h1 { font-size: 44px; letter-spacing: -1px; margin: 4px 0 2px; line-height: 1.05; }
 .pred .autor { color: var(--slaby2); margin-bottom: 20px; }
 .pred h2 { font-size: 22px; margin: 22px 0 12px; }
-.volba { width: 100%; text-align: left; display: grid; grid-template-columns: 54px 1fr auto; gap: 0 14px; align-items: center; padding: 12px 18px;
+.volba { width: 100%; text-align: start; display: grid; grid-template-columns: 54px 1fr auto; gap: 0 14px; align-items: center; padding: 12px 18px;
   border-radius: 20px; border: 3px solid transparent; background: none; color: var(--ink); }
 .volba + .volba { margin-top: 8px; }
 .volba .c { grid-column: 1; grid-row: 1 / span 2; font-size: 40px; font-weight: 800; color: var(--hl); text-align: center; }
@@ -476,7 +475,7 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
   clip-path: polygon(50% 4%, 63% 36%, 97% 38%, 70% 59%, 80% 93%, 50% 74%, 20% 93%, 30% 59%, 3% 38%, 37% 36%); }
 .volba .hv i.ano, .hvezdicky i.ano { background: #E3A21A; }
 .volba.ted { background: var(--sv); border-color: var(--hl); }
-.volba .tip { font-size: 13px; font-weight: 700; color: var(--hl); margin-left: 8px; }
+.volba .tip { font-size: 13px; font-weight: 700; color: var(--hl); margin-inline-start: 8px; }
 .rychlosti { display: flex; gap: 8px; }
 .rychlosti button { flex: 1; padding: 14px 10px; border-radius: 18px; background: var(--sv); font-weight: 700; display: flex; flex-direction: column;
   align-items: center; gap: 4px; border: 3px solid transparent; color: var(--ink); min-height: 64px; }
@@ -494,31 +493,32 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 
 /* side panel (Display) and list items (also in the menu windows) */
 .prekryv { position: fixed; inset: 0; z-index: 40; background: color-mix(in srgb, var(--hl) 45%, transparent); }
-.rodice-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(460px, 100%); background: #fff; padding: 28px 30px; overflow: auto; border-radius: 26px 0 0 26px; color: var(--ink); }
+.rodice-panel { position: absolute; top: 0; inset-inline-end: 0; bottom: 0; width: min(460px, 100%); background: #fff; padding: 28px 30px; overflow: auto; border-start-start-radius: 26px; border-end-start-radius: 26px; color: var(--ink); }
 .rodice-panel h2 { margin: 0 0 8px; font-size: 28px; font-weight: 800; }
 .rodice-panel h3 { margin: 24px 0 6px; font-size: 15px; color: var(--slaby2); }
-.rodice-panel .zavrit { position: absolute; top: 18px; right: 18px; font-size: 28px; width: 48px; }
-.polozka { display: block; width: 100%; text-align: left; padding: 12px 14px; border: 0; background: none; border-radius: 14px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.rodice-panel .zavrit { position: absolute; top: 18px; inset-inline-end: 18px; font-size: 28px; width: 48px; }
+.polozka { display: block; width: 100%; text-align: start; padding: 12px 14px; border: 0; background: none; border-radius: 14px; font-weight: 700; color: var(--ink); cursor: pointer; }
 .polozka small { display: block; font-weight: 400; color: var(--slaby2); font-size: 14px; }
 .polozka:hover { background: var(--sv); }
 
-/* AI helper window: plain text and items like the other windows */
-.pomocnik-pozor { margin: 6px 14px 10px; padding: 10px 12px; background: var(--sv); border-radius: 12px; font-size: 14px; display: grid; gap: 8px; justify-items: start; }
-#pomocnikPrikazy { margin: 0 14px 8px; display: grid; gap: 10px; }
-.prikaz { display: grid; gap: 4px; font-size: 14px; }
-.prikaz code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; background: #F4F2EF; padding: 8px 10px; border-radius: 10px; word-break: break-all; user-select: all; }
-.prikaz .text-tl { justify-self: start; }
 .pomocnik-kopie { margin: 6px 14px; display: grid; gap: 4px; font-size: 14px; }
 .pomocnik-kopie textarea { font: inherit; padding: 8px; border-radius: 10px; border: 2px solid var(--sv); resize: vertical; }
 
 /* Game: one row at the top, otherwise notes and keys */
-#hra { background: #fff; }
 .hra-hlava { display: flex; align-items: center; gap: 14px; padding: 10px 20px; }
-.hra-hlava .nazev { font-weight: 800; font-size: 20px; white-space: nowrap; }
+.hra-hlava .nazev { font-weight: 800; font-size: 20px; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .hra-jak { color: var(--slaby2); font-size: 16px; white-space: nowrap; }
 .hra-hlava .prubeh { flex: 1; height: 10px; border-radius: 5px; background: var(--sv); margin: 0 10px; overflow: hidden; }
 .hra-hlava .prubeh #prubeh { height: 100%; border-radius: 5px; background: var(--hl); }
 .ikonka { display: inline-flex; align-items: center; gap: 8px; }
+/* phone in portrait: the game's top row keeps Quit and Pause on screen – icons only (the text stays for screen readers) */
+@media (max-width: 600px) {
+  .hra-hlava { gap: 8px; padding: 8px 12px; }
+  .hra-hlava .hra-jak { display: none; }
+  .hra-hlava .ikonka { flex: none; min-width: 44px; min-height: 44px; justify-content: center; }
+  .hra-hlava .ikonka span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .hra-hlava .prubeh { min-width: 24px; margin: 0 4px; }
+}
 .ikonka svg { width: 18px; height: 18px; }
 .prekryv.stred { display: grid; place-items: center; }
 .prekryv.stred.skryta { display: none; }
@@ -600,9 +600,7 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
   .ruce small, #vzorPlatnost { grid-column: 1; }
 }
 .vic-panel .rychlost-presna { display: flex; align-items: center; gap: 10px; color: var(--ink); }
-#rukaPole:has(select[hidden]) { display: none; }
-.vic-akce { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-.prava .akce .text-tl { color: var(--hl); }
+.prava .akce .text-tl { color: var(--hl); white-space: nowrap; }
 
 /* Result: the whole screen in the player's dark colour, one main action */
 #vysledek.modal { background: var(--hl); padding: 30px; z-index: 30; }
@@ -620,30 +618,24 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 #vysledek .vedlejsi { margin-top: 18px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 #vysledek .vedlejsi .text-tl { color: var(--sv-2); }
 #vysledek .vedlejsi .text-tl:hover { background: color-mix(in srgb, #fff 12%, var(--hl)); }
-.rodic-hrac { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
-.rodic-hrac svg, .rodic-hrac .zvire { width: 40px; height: 40px; }
-.rodic-hrac b { flex: 1; }
-#rodiceTyden p { margin: 4px 0; }
 .potvrzeni-text { font-size: 19px; margin: 0 0 16px; color: var(--ink); }
 #potvrzeni { z-index: 60; }
-.prava .akce .text-tl { white-space: nowrap; }
 @media (max-width: 1150px) {
   .pred { grid-template-columns: minmax(380px, 1fr) minmax(0, 1fr); gap: 28px; }
   .prava .akce { flex-wrap: wrap; justify-content: flex-start; gap: 8px 12px; }
   .prava .velke-hrat { order: -1; width: 100%; justify-content: center; }
-  .hledat { margin-left: 0; }
+  .hledat { margin-inline-start: 0; }
 }
 #kdo { position: relative; }
-.logo-kdo { position: absolute; top: 28px; left: 40px; }
+.logo-kdo { position: absolute; top: 28px; inset-inline-start: 40px; }
 .logo-odkaz { display: block; flex: none; border-radius: 8px; }
 .logo-odkaz img { display: block; width: auto; height: 54px; }
-#profilZobrazeni { margin-top: 22px; }
 .volba-radek { display: grid; grid-template-columns: 130px minmax(0, 1fr); align-items: center; gap: 10px; margin: 6px 0; color: var(--slaby2); }
 .volba-radek select { min-height: 44px; min-width: 0; width: 100%; }
 /* favourite: a star in the tile corner (children like to click it right in the menu) */
 .dl { position: relative; cursor: pointer; }
-.dl > b { padding-right: 40px; }
-.dl .oblibena { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border: 0; background: none; border-radius: 12px; display: grid; place-items: center; padding: 0; }
+.dl > b { padding-inline-end: 40px; }
+.dl .oblibena { position: absolute; top: 10px; inset-inline-end: 10px; width: 44px; height: 44px; border: 0; background: none; border-radius: 12px; display: grid; place-items: center; padding: 0; }
 .dl .oblibena svg { width: 26px; height: 26px; fill: none; stroke: var(--hl); stroke-width: 1.8; stroke-linejoin: round; opacity: .45; }
 .dl .oblibena:hover svg { opacity: .8; }
 .dl .oblibena.ano svg { fill: #E3A21A; stroke: #C88B10; opacity: 1; }
@@ -680,28 +672,27 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .zvire > canvas.loutka { position: absolute; inset: -8%; width: 116%; height: 116%; pointer-events: none; }
 
 /* Helper: the optional skill and the window for pasting notes from the helper */
-.pomocnik-skill { margin: 10px 14px 4px; font-size: 14px; line-height: 1.45; }
+.pomocnik-skill { margin: 10px 14px 4px; font-size: 14px; line-height: 1.45; border-top: 1px solid var(--linka); padding-top: 12px; }
 .pomocnik-skill p { margin: 4px 0; }
 #vlozitOkno { z-index: 50; }                                  /* above the menu windows (45) */
 .vlozit-karta { width: min(720px, 94vw); }
 #vlozitText { width: 100%; box-sizing: border-box; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; padding: 10px 12px;
   border-radius: 12px; border: 2px solid var(--sv); resize: vertical; margin: 8px 0; }
-.vlozit-chyby { background: #FBE4E8; color: #5A1726; border-radius: 12px; padding: 8px 14px; font-size: 14px; max-height: 200px; overflow: auto; }
+.vlozit-chyby { background: #FBE4E8; color: #5A1726; border-radius: 12px; padding: 8px 14px; font-size: 14px; max-height: 200px; overflow: auto; text-align: start; }
 .vlozit-chyby p { margin: 4px 0; font-weight: 700; }
-.vlozit-chyby ul { margin: 4px 0; padding-left: 18px; }
+.vlozit-chyby ul { margin: 4px 0; padding-inline-start: 18px; }
 .pomocnik-skill a { color: var(--ink); font-weight: 700; text-underline-offset: 3px; }
-.vlozit-chyby { text-align: left; }
 
 /* About Rusalka: the link top right on Who is playing / New player and the window (readable line length) */
 /* top menu: Songs, Players, AI, Data and backups, Settings, About (Who is playing, Home, New player) */
-.horni-menu { display: flex; align-items: center; gap: 22px; margin-left: auto; }
-#kdo .horni-menu { position: absolute; top: 36px; right: 40px; }
+.horni-menu { display: flex; align-items: center; gap: 22px; margin-inline-start: auto; }
+#kdo .horni-menu { position: absolute; top: 36px; inset-inline-end: 40px; }
 #kdo:not(.skryta) { padding-top: 90px; box-sizing: border-box; }   /* room for the logo and the menu above the content */
 #oRusalceOkno { z-index: 50; }
 #aiOkno { z-index: 45; }                                   /* like the other menu windows, below the paste window (50) */
 .ai-okno { max-width: 640px; }
 .ai-okno:focus { outline: none; }
-.ai-okno .pomocnik-skill { margin-left: 0; margin-right: 0; }
+.ai-okno .pomocnik-skill { margin-inline: 0; }
 /* AI tools: one block per task, the button and what to do with it side by side */
 .ai-uvod { margin: 4px 0 4px; font-size: 15px; line-height: 1.5; color: var(--slaby); }
 /* windows (Songs, Settings, AI tools): blocks with a heading; an option is a button and one line on what it does */
@@ -717,7 +708,6 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .data-pruh p { margin: 0 0 8px; }
 .data-pruh p:empty { display: none; }
 .ai-okno .pomocnik-kopie { margin: 0 0 10px; }
-.pomocnik-skill { border-top: 1px solid var(--linka); padding-top: 12px; }
 .pomocnik-video { margin-top: 6px; font-size: 14px; }
 .pomocnik-video summary { cursor: pointer; font-weight: 700; color: var(--slaby2); min-height: 32px; }
 .pomocnik-video video { display: block; width: 100%; height: auto; margin-top: 6px; border-radius: 8px; background: var(--linka); }
@@ -765,7 +755,6 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 .menu-okno { max-width: 640px; }
 .menu-okno:focus { outline: none; }
 .menu-okno h3 { font-size: 16px; margin: 20px 0 6px; }
-.menu-okno .uloziste { flex-wrap: wrap; }
 /* My songs */
 .sprava-hledat { width: 100%; max-width: none; margin: 4px 0 8px; }
 .sprava-seznam { display: grid; gap: 2px; }
@@ -789,9 +778,6 @@ body { --hl: #24476B; --sv: #E4ECF5; --sv-2: #C9D8EA; --ink: #1D1A18; --slaby2: 
 
 /* Arabic interface: music and machine-readable notation keep their natural left-to-right order. */
 html[dir="rtl"] :is(#noty, #predNoty, #klavesy, .editor-noty, #vlozitText) { direction: ltr; }
-html[dir="rtl"] :is(.pisen, .karta.siroka, .trener, .doplnek .obsah p, .doplnek .obsah ul,
-  .ja-menu button, .dl, .volba, .polozka, .vlozit-chyby) { text-align: right; }
-html[dir="rtl"] .zdroje, html[dir="rtl"] .vlozit-chyby ul { padding-left: 0; padding-right: 18px; }
 /* phone: the notes, settings and Play under the steps, one column */
 @media (max-width: 760px) {
   .pred { grid-template-columns: minmax(0, 1fr); padding: 0 16px 32px; gap: 8px; }

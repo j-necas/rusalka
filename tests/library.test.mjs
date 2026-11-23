@@ -109,3 +109,18 @@ test('navrhyZKnihovny: up to n unplayed songs, the player\'s level first, then e
   assert.deepEqual(navrhyZKnihovny(ix, 1, {}, { 'a#2': { posledni: 1 } }, 4).map(p => p.soubor), ['e']);
   assert.deepEqual(navrhyZKnihovny([], 2, {}, {}, 4), []);
 });
+
+test('a traditional author is shown in the app\'s language', async () => {
+  const { autorTextem } = await import('../static/lib/library.js');
+  const { nastavJazyk, nactiSlovnik } = await import('../static/lib/texts.js');
+  nastavJazyk('cs', await nactiSlovnik('cs'));
+  assert.equal(autorTextem('traditional'), 'lidová');
+  assert.equal(autorTextem('Traditional'), 'lidová');
+  assert.equal(autorTextem('traditional (Czech)'), 'česká lidová');
+  assert.equal(autorTextem('traditional, lyrics by Ernst Anschütz'), 'lidová, slova Ernst Anschütz');
+  assert.equal(autorTextem('Wolfgang Amadeus Mozart'), 'Wolfgang Amadeus Mozart');
+  assert.equal(autorTextem(''), '');
+  nastavJazyk('en', await nactiSlovnik('en'));
+  assert.equal(autorTextem('traditional (Czech)'), 'Czech traditional');
+  nastavJazyk('cs', await nactiSlovnik('cs'));
+});

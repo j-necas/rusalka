@@ -83,6 +83,10 @@ export function odpocetHry(met, { delkaTaktu, odZacatku }) {
 /** beat k of the count-in (and of the metronome that goes on after it) is beat 1 of a bar */
 export const prizvuk = (o, k) => Math.round(k * o.dobaQ * 1e6) % Math.round(o.naTakt * o.dobaQ * 1e6) === 0;
 
+/** how many white keys the on-screen keyboard shows at least (more when the song needs them): on a phone (under
+ *  600 px) 8–10, so a key stays about a finger (44 px) wide; otherwise 15 */
+export const minBilychKlaves = sirka => (sirka > 0 && sirka < 600 ? Math.max(8, Math.min(10, Math.floor(sirka / 44))) : 15);
+
 // ---------------------------------------------------------------- latency compensation (In rhythm)
 /** the microphone's own delay: frames of 85 ms every 20 ms and two confirming frames; measured on synthetic piano
  *  tones (tests/microphone.test.mjs helpers) as 30–85 ms from the attack to the hit, median 60 ms */

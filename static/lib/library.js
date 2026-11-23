@@ -1,6 +1,17 @@
 // Song library selection logic: the player's level, shelf order, the "At home" rule, the next song to offer, search.
 // Polozka = { soubor, nazev, police, stupen: 1|2|3, autor, jazyk, preklad?: { en?, cs? } }.
 import { KROKY, hotovy } from './recommend.js';
+import { t } from './texts.js';
+
+/** the library's author line in the app's language for the common folk-song forms ("traditional", "traditional
+ *  (Czech)", "traditional, lyrics by …"); other authors stay as written */
+export function autorTextem(autor) {
+  const a = String(autor || '').trim();
+  if (/^traditional$/i.test(a)) return t('autor.lidova');
+  if (/^traditional \(czech\)$/i.test(a)) return t('autor.lidovaCeska');
+  const m = /^traditional, lyrics by (.+)$/i.exec(a);
+  return m ? t('autor.lidovaSlova', { jmeno: m[1] }) : a;
+}
 
 export const POLICE = ['children', 'czech', 'folk', 'anthems', 'christmas', 'classics'];
 const cs = (a, b) => String(a).localeCompare(String(b), 'cs');

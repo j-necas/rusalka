@@ -129,3 +129,11 @@ test('Find the notes: the backing of a step starts with that step; before the fi
   assert.deepEqual(plan(1), [[59, 0, 1000]]);
   assert.deepEqual(plan(2), []);
 });
+
+test('on-screen keys: a phone shows fewer white keys so each stays about a finger wide', () => {
+  assert.equal(Hra.minBilychKlaves(1200), 15);
+  assert.equal(Hra.minBilychKlaves(600), 15);
+  assert.equal(Hra.minBilychKlaves(390), 8);
+  assert.equal(Hra.minBilychKlaves(560), 10);
+  assert.ok(390 / Hra.minBilychKlaves(390) >= 44);
+});

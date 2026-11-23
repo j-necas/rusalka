@@ -20,7 +20,7 @@ a { color: var(--ink); text-underline-offset: 3px; }
 a:focus-visible, video:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 img, video { display: block; max-width: 100%; height: auto; }
 
-.sirka { max-width: 1080px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+.sirka { max-width: 1080px; margin-inline: auto; padding-inline: 20px; }
 
 /* header */
 .hlava { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 18px; padding-bottom: 18px; }
@@ -64,7 +64,7 @@ h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.08; font-weight: 800; let
 .zaber video, .zaber img { width: 100%; }
 .zaber video { cursor: pointer; aspect-ratio: 10 / 7; }
 .siroky { max-width: 46em; }
-figcaption { padding: 12px 18px 14px; font-size: 16px; color: var(--slaby); background: #fff; border-top: 2px solid var(--hrana); text-align: left; }
+figcaption { padding: 12px 18px 14px; font-size: 16px; color: var(--slaby); background: #fff; border-top: 2px solid var(--hrana); text-align: start; }
 
 /* sections */
 section { margin-top: 88px; }
@@ -92,7 +92,7 @@ p { margin: 0 0 14px; }
 
 .rodina { display: grid; gap: 22px; margin-top: 26px; }
 @media (min-width: 860px) { .rodina { grid-template-columns: 1fr 1fr; align-items: start; } }
-.seznam { margin: 10px 0 0; padding-left: 22px; }
+.seznam { margin: 10px 0 0; padding-inline-start: 22px; }
 .seznam li { margin-bottom: 8px; }
 
 .otazky { display: grid; gap: 4px 48px; margin-top: 20px; }

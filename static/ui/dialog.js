@@ -1,6 +1,7 @@
 // The dialogs are siblings in body. Make only the front dialog interactive and restore the previous focus on close.
 const okna = [];
 const inertni = new Set();
+const naslouchaji = new WeakSet();                     // documents with the Escape listener (it stays, it checks okna)
 
 function nastavPozadi(doc) {
   const vrchni = okna.at(-1)?.el;
@@ -15,7 +16,7 @@ function nastavPozadi(doc) {
 }
 
 function escape(e) {
-  if (e.key !== 'Escape' || e.defaultPrevented) return;
+  if (e.key !== 'Escape' || e.defaultPrevented || !okna.length) return;
   e.preventDefault();
   e.stopImmediatePropagation();
   okna.at(-1).zavrit();
@@ -30,7 +31,7 @@ function zaostri(okno) {
 export function otevriDialog(el, { zavrit = () => zavriDialog(el), fokus, navrat } = {}) {
   if (okna.some(o => o.el === el)) return false;
   const doc = el.ownerDocument;
-  if (!okna.length) doc.addEventListener('keydown', escape, true);
+  if (!naslouchaji.has(doc)) { doc.addEventListener('keydown', escape, true); naslouchaji.add(doc); }
   okna.push({ el, zavrit, fokus, navrat, odkud: doc.activeElement });
   el.classList.remove('skryta');
   nastavPozadi(doc);
@@ -46,7 +47,6 @@ export function zavriDialog(el) {
   const [okno] = okna.splice(i, 1);
   el.classList.add('skryta');
   nastavPozadi(doc);
-  if (!okna.length) doc.removeEventListener('keydown', escape, true);
   if (vrchni) {
     const dalsi = okna.at(-1);
     const odkud = okno.navrat || okno.odkud;

@@ -197,9 +197,9 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
   </div>
 </main>
 
-<div id="pauzaPrekryv" class="prekryv stred skryta">
+<div id="pauzaPrekryv" class="prekryv stred skryta" role="dialog" aria-modal="true" aria-labelledby="pauzaNadpis">
   <div class="pauza-karta">
-    <h2 data-t="hra.pauza"></h2>
+    <h2 id="pauzaNadpis" data-t="hra.pauza"></h2>
     <button id="pauzaPokracovat" class="hrat-velke" data-t="pauza.pokracovat"></button>
     <button id="znovu" class="polozka" data-t="pauza.znovu"></button>
     <button id="pauzaZvuk" class="polozka" data-t="menu.piano" aria-haspopup="dialog" aria-controls="klavirOkno"></button>
@@ -209,10 +209,10 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
   </div>
 </div>
 
-<div id="zobrazeni" class="prekryv skryta">
+<div id="zobrazeni" class="prekryv skryta" role="dialog" aria-modal="true" aria-labelledby="zobrazeniNadpis">
   <aside class="rodice-panel">
     <button id="zobrazeniZavrit" class="text-tl zavrit" data-t-aria="html.zavrit">×</button>
-    <h2 data-t="pauza.zobrazeni"></h2>
+    <h2 id="zobrazeniNadpis" data-t="pauza.zobrazeni"></h2>
     <div class="prepinace">
       <button id="prepPismena" class="prepinac" data-t="html.prepPismena"></button>
       <button id="prepBarvy" class="prepinac" data-t="html.prepBarvy"></button>
@@ -225,12 +225,12 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
 
 <main id="hra" class="obrazovka skryta">
   <header class="hra-hlava">
-    <button id="zpet" class="text-tl ikonka" aria-label="Konec"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4 4 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span data-t="hra.konec"></span></button>
+    <button id="zpet" class="text-tl ikonka"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4 4 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span data-t="hra.konec"></span></button>
     <div id="hracAvatar" class="avatar maly"></div>
     <div class="nazev" id="hraNazev"></div>
     <span id="hraJak" class="hra-jak"></span>
     <div class="prubeh"><div id="prubeh"></div></div>
-    <div class="midi-stav mini" data-t-title="html.klavir"><span class="tecka"></span></div>
+    <div class="midi-stav mini" role="img" data-t-title="html.klavir" data-t-aria="html.klavir"><span class="tecka"></span></div>
     <button id="pauza" class="text-tl ikonka"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3.5v11M13 3.5v11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><span data-t="hra.pauza"></span></button>
   </header>
   <div id="rezimy" class="skryta">
@@ -364,6 +364,7 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
     <section class="okno-blok" aria-labelledby="statH1">
       <div class="stat-hlava"><h3 id="statH1" data-t="stat.cviceni"></h3><small id="statTyden"></small></div>
       <div id="statKalendar" class="stat-kalendar"></div>
+      <p id="statKalInfo" class="napoveda" aria-live="polite"></p>
       <div class="stat-legenda" aria-hidden="true"><span data-t="stat.mene"></span><i data-n="0"></i><i data-n="1"></i><i data-n="2"></i><i data-n="3"></i><span data-t="stat.vice"></span></div>
     </section>
     <section class="okno-blok" aria-labelledby="statH2">
@@ -518,7 +519,7 @@ music via any AI chat) and play them on a MIDI piano or the on-screen keys. It n
       <li><button type="button" class="odkaz" data-url="https://openscore.cc/">OpenScore</button>: <span data-t="html.zdroje.openscore"></span></li>
       <li><button type="button" class="odkaz" data-url="https://musescore.com/">MuseScore.com</button>: <span data-t="html.zdroje.musescore"></span></li>
       <li><button type="button" class="odkaz" data-url="https://imslp.org/">IMSLP</button>: <span data-t="html.zdroje.imslp"></span></li>
-      <li><button type="button" class="odkaz" data-url="https://musescore.org/cs">MuseScore Studio</button>: <span data-t="html.zdroje.studio"></span></li>
+      <li><button type="button" class="odkaz" data-url="https://musescore.org/">MuseScore Studio</button>: <span data-t="html.zdroje.studio"></span></li>
       <li><button type="button" class="odkaz" data-url="https://audiveris.github.io/audiveris/">Audiveris</button>: <span data-t="html.zdroje.audiveris"></span></li>
     </ul>
     <p class="napoveda" data-t-html="html.zdroje.papir"></p>

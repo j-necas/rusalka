@@ -8,7 +8,7 @@ import createVerovioModule from 'verovio/wasm';
 import { VerovioToolkit } from 'verovio/esm';
 
 // The app runs with the real score renderer and storage. Only browser I/O and the clock are substituted.
-async function prohlizec(t, { kotva, knihovna = [], vlastni, ulozeno = {}, midi = null, profily = [{ id: 'p', jmeno: 'Anna', vek: 'dite' }, { id: 'd', jmeno: 'Petr', vek: 'dospely' }] } = {}) {
+async function prohlizec(t, { kotva, knihovna = [], vlastni, ulozeno = {}, midi = null, offline = false, profily = [{ id: 'p', jmeno: 'Anna', vek: 'dite' }, { id: 'd', jmeno: 'Petr', vek: 'dospely' }] } = {}) {
   const prvek = () => {
     const e = new EventTarget(), tridy = new Set(['skryta']), vnitrni = new Map(), atributy = new Map();
     let html = '';
@@ -80,7 +80,8 @@ async function prohlizec(t, { kotva, knihovna = [], vlastni, ulozeno = {}, midi 
     performance: { now: () => ted }, setInterval: () => 0,
     setTimeout: (fn, ms) => { casovace.set(++id, { fn, kdy: ted + ms }); return id; }, clearTimeout: id => casovace.delete(id),
     requestAnimationFrame: fn => { snimky.set(++id, fn); return id; }, cancelAnimationFrame: id => snimky.delete(id),
-    fetch: async url => url === 'songs/index.json' ? { json: async () => [{ soubor, nazev: 'Cvičení', police: 'klasika', stupen: 1 }] }
+    fetch: async url => offline && /index\.json$/.test(url) ? Promise.reject(new TypeError('Failed to fetch'))
+      : url === 'songs/index.json' ? { json: async () => [{ soubor, nazev: 'Cvičení', police: 'klasika', stupen: 1 }] }
       : url === 'library/index.json' ? { ok: true, json: async () => knihovna }
         : knihovna.some(p => p.soubor === url) ? { ok: true, arrayBuffer: async () => new TextEncoder().encode(xml).buffer }
       : url === 'songs/' + soubor ? (await zpozdeni, { ok: true, arrayBuffer: async () => new TextEncoder().encode(xml).buffer })
@@ -389,4 +390,29 @@ test('after adding a MusicXML file with bars to check, the app says which ones a
   $('#potvrzeniPreskocit').onclick();
   await pridani;
   for (let i = 0; i < 20; i++) await new Promise(r => setImmediate(r));
+});
+
+test('Pause is a dialog: the focus goes to Continue and Escape continues the game', async t => {
+  const { $, dok, cekejNa, videt, nacti } = await prohlizec(t, { profily: [] });
+  await cekejNa(() => videt('#pred'));
+  nacti();
+  await cekejNa(() => !$('#predHrat').disabled);
+  $('#predHrat').click();
+  let fokus = null;
+  $('#pauzaPokracovat').focus = () => { fokus = 'pokracovat'; };
+  $('#pauza').click();
+  assert.equal(videt('#pauzaPrekryv'), true);
+  assert.equal(fokus, 'pokracovat');
+  const esc = new Event('keydown', { cancelable: true });
+  esc.key = 'Escape';
+  dok.dispatchEvent(esc);
+  assert.equal(videt('#pauzaPrekryv'), false, 'Escape continues');
+});
+
+test('when the library cannot load and there are no own songs, Home says so and offers to try again', async t => {
+  const { $, cekejNa, videt } = await prohlizec(t, { kotva: '#guest', offline: true });
+  await cekejNa(() => videt('#domu'));
+  await cekejNa(() => /nepodařilo/.test($('#pisne').innerHTML));
+  assert.match($('#pisne').innerHTML, /data-znovu/);
+  assert.doesNotMatch($('#pisne').innerHTML, /Načítám/);
 });

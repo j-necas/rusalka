@@ -3,7 +3,7 @@ import { zMusicXml, naMusicXml, rozvin, tonyAkordu, kopie, metrum } from './lib/
 import * as Editor from './ui/editor.js';
 import { otevriDialog, zavriDialog } from './ui/dialog.js';
 import * as Cviceni from './lib/practice.js';
-import { vytvorCasovace, vytvorVyberPisne, obnovAudio, lzePrekreslit, REZIM, postupHry, stiskVKroku, dalsiKrokPruvodce, odpocetHry, prizvuk, kompenzace, ulozKalibraci, doprovodKroku } from './lib/game.js';
+import { vytvorCasovace, vytvorVyberPisne, obnovAudio, lzePrekreslit, REZIM, postupHry, stiskVKroku, dalsiKrokPruvodce, odpocetHry, prizvuk, kompenzace, ulozKalibraci, doprovodKroku, minBilychKlaves } from './lib/game.js';
 import { vytvorMikrofon } from './ui/microphone.js';
 import { obtiznost } from './lib/difficulty.js';
 import * as MidiSoubor from './lib/midi_file.js';
@@ -35,7 +35,7 @@ import { VZORKY, naMidi, nejblizsiVzorek, vzorkyPro } from './lib/piano.js';
 import { pokusyHrace, kalendar, presnostPoDnech, stavPisni, mistaKdeDrhne, zapisDoDeniku, prvniHrani, pripomenoutZalohu } from './lib/stats.js';
 import { nactiVstup, doprovodZapnuty, sDoprovodem, poZmeneKlaviru, prijimaZdroj, pripojeneVstupy, seznamPortu, klavesyViditelne, vytvorMereniDrzeni } from './lib/input.js';
 import { KROKY, RYCHLOSTI, stavKroku, rozehraneKroky, umim, doporuceni, proMe, jeNova, akcePoVysledku } from './lib/recommend.js';
-import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny, slucPisne, jeNaPolici } from './lib/library.js';
+import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny, slucPisne, jeNaPolici, autorTextem } from './lib/library.js';
 {
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
@@ -118,7 +118,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (bylo === 'hra' && id !== 'hra') {
       stopVse(); konecPoslechu();
       if (S.pruvodce) ukonciPruvodce();
-      $('#pauzaPrekryv').classList.add('skryta');
+      zavriDialog($('#zobrazeni')); zavriDialog($('#pauzaPrekryv'));
     }
     for (const o of OBRAZOVKY) $('#' + o)?.classList.toggle('skryta', id !== o);
     if (id !== 'domu') jaMenu(false);
@@ -138,6 +138,11 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     $$('[data-t]').forEach(e => { e.textContent = t(e.dataset.t); });
     $$('[data-t-placeholder]').forEach(e => { e.placeholder = t(e.dataset.tPlaceholder); });
     $$('[data-t-title]').forEach(e => { e.title = t(e.dataset.tTitle); });
+    // a switch shows its explanation under its label (a tooltip never appears on a touch screen)
+    $$('.prepinac[data-t][data-t-title]').forEach(e => {
+      e.innerHTML = `<span class="prepinac-text">${esc(t(e.dataset.t))}<small>${esc(t(e.dataset.tTitle))}</small></span>`;
+      e.removeAttribute('title');
+    });
     $$('[data-t-aria]').forEach(e => { e.setAttribute('aria-label', t(e.dataset.tAria)); });
     $$('[data-t-html]').forEach(e => { e.innerHTML = t(e.dataset.tHtml); });   // only texts from the dictionary (with <b>)
     document.title = t('html.titulek');                // the browser tab in the app's language
@@ -319,7 +324,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   }
   // The song library (website only, like samples): library/index.json lists the songs with their difficulty; a song file
   // (library/<shelf>/<name>.musicxml, which is also its id) is fetched only when opened. Own file names cannot contain '/'.
-  let KNIHOVNA = null;
+  let KNIHOVNA = null, KNIHOVNA_CHYBA = false;
   const jeKnihovni = soubor => String(soubor || '').startsWith('library/');
   /** library index (Polozka[]); [] when it cannot be loaded (tried again next time) */
   async function knihovna() {
@@ -329,6 +334,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
         const index = r.ok ? await r.json() : null;
         if (Array.isArray(index)) KNIHOVNA = [...index, ...await ukazky()];
       } catch { /* offline: no library this time */ }
+      KNIHOVNA_CHYBA = !KNIHOVNA;
     }
     return KNIHOVNA || ukazky();
   }
@@ -672,6 +678,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   /** a demo loop plays only while it can be seen: from now until its window is hidden again */
   function hrajUkazku(video, okno) {
     if (!video) return;
+    // reduced motion: the poster stays, the demo starts only on request (its own controls)
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { if (!video.hasAttribute('aria-hidden')) video.controls = true; return; }
     video.play().catch(() => {});
     const o = $(okno), sleduj = new MutationObserver(() => { if (o.classList.contains('skryta')) { video.pause(); sleduj.disconnect(); } });
     sleduj.observe(o, { attributes: true, attributeFilter: ['class'] });
@@ -729,8 +737,10 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       const radky = new Set(tlac.map(c => Math.round(c.getBoundingClientRect().top)));
       const sousede = [...document.querySelectorAll(SOUSEDE[scr.id] || '#_')].filter(e => e.getClientRects().length);
       const stav = scr.querySelector('.midi-stav .text');
-      const nevejde = r.right > innerWidth + 1 || r.left < -1 || radky.size > 1
-        || tlac.some(c => c.getBoundingClientRect().right > innerWidth + 1)
+      // the visible width: on a phone innerWidth can be the wider layout viewport once something overflows
+      const sirka = document.documentElement.clientWidth || innerWidth;
+      const nevejde = r.right > sirka + 1 || r.left < -1 || radky.size > 1
+        || tlac.some(c => c.getBoundingClientRect().right > sirka + 1)
         || sousede.some(e => pres(r, e.getBoundingClientRect()))
         || (stav && stav.getClientRects().length > 1);   // the piano status would have to wrap
       nav.classList.toggle('sbalene', nevejde);
@@ -748,7 +758,9 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   };
   addEventListener('hashchange', oknoZAdresy);
   $('#oRusalceKod .odkaz').onclick = () => window.open(ZDROJOVY_KOD, '_blank', 'noopener');
-  $$('#zdrojeOkno .odkaz').forEach(b => b.onclick = () => window.open(b.dataset.url, '_blank', 'noopener'));
+  // MuseScore's site in Czech for Czech and Slovak, otherwise its default (English, with its own language menu)
+  const odkazZdroje = url => (url === 'https://musescore.org/' && ['cs', 'sk'].includes(jazyk()) ? url + 'cs' : url);
+  $$('#zdrojeOkno .odkaz').forEach(b => b.onclick = () => window.open(odkazZdroje(b.dataset.url), '_blank', 'noopener'));
   function zahrajTony(midi, delka = 0.5) {
     const ac = audio();
     midi.forEach(p => hlas(p, ac.currentTime + 0.01, delka, 0.6));
@@ -779,7 +791,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   async function upravSoubor(soubor) {
     let xml;
     try { xml = await api.xml(soubor); } catch (e) { toast(chybaText(e), 5000); return; }
-    const pisen = zMusicXml(xml);
+    let pisen;
+    try { pisen = zMusicXml(xml); } catch (e) { toast(t('app.necitelne', { chyba: chybaText(e) }), 5000); return; }
     if (!pisen.nazev) pisen.nazev = soubor.replace(/\.[^.]+$/, '');
     zavriOkno('songs');
     if (soubor === S.pisen) stopVse();
@@ -1381,14 +1394,22 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (!VSECHNY_OBRAZKY.includes(NP.obrazek)) NP.obrazek = VSECHNY_OBRAZKY[0];   // child or adult: one choice of pictures
     const jmeno = $('#novyJmeno').value.trim();
     const obr = o => obrazekHrace({ jmeno: jmeno || '?', obrazek: o }, pal);
-    $('#novyObrazky').innerHTML = VSECHNY_OBRAZKY.map(o =>
-      `<button class="obrazek ${o === NP.obrazek ? 'ted' : ''}" data-obrazek="${o}" aria-label="${esc(t('obrazek.' + o))}">${obr(o)}</button>`).join('');
-    $('#novyBarvy').innerHTML = PALETY.map(x =>
-      `<button class="barva ${x.id === NP.barva ? 'ted' : ''}" data-barva="${x.id}" aria-label="${esc(t('barva.' + x.id))}" style="background:${x.tmava}"></button>`).join('');
+    // the buttons stay (the focus stays on the one tapped); only the pictures and the chosen state change
+    const obrazky = $('#novyObrazky'), barvy = $('#novyBarvy');
+    if (obrazky.querySelectorAll('[data-obrazek]').length !== VSECHNY_OBRAZKY.length) {
+      obrazky.innerHTML = VSECHNY_OBRAZKY.map(o => `<button class="obrazek ${o === NP.obrazek ? 'ted' : ''}" data-obrazek="${o}"
+        aria-pressed="${o === NP.obrazek}" aria-label="${esc(t('obrazek.' + o))}">${obr(o)}</button>`).join('');
+    }
+    for (const b of obrazky.querySelectorAll('[data-obrazek]')) { b.innerHTML = obr(b.dataset.obrazek); oznacVybrane(b, b.dataset.obrazek === NP.obrazek); }
+    if (barvy.querySelectorAll('[data-barva]').length !== PALETY.length) {
+      barvy.innerHTML = PALETY.map(x => `<button class="barva ${x.id === NP.barva ? 'ted' : ''}" data-barva="${x.id}" aria-pressed="${x.id === NP.barva}"
+        aria-label="${esc(t('barva.' + x.id))}" style="background:${x.tmava}"></button>`).join('');
+    }
+    for (const b of barvy.querySelectorAll('[data-barva]')) oznacVybrane(b, b.dataset.barva === NP.barva);
     $('#novyObr').innerHTML = obr(NP.obrazek);
     $('#novyNahled').style.background = pal.svetla;
     $('#novyNahledJmeno').textContent = jmeno || t('novy.jmeno');
-    $$('#novy [data-vek]').forEach(b => b.classList.toggle('ted', b.dataset.vek === NP.vek));
+    $$('#novy [data-vek]').forEach(b => oznacVybrane(b, b.dataset.vek === NP.vek));
   }
   $('#novy').addEventListener('click', e => {
     const o = e.target.closest('[data-obrazek]'), b = e.target.closest('[data-barva]'), v = e.target.closest('[data-vek]');
@@ -1521,8 +1542,21 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     sez.has(soubor) ? sez.delete(soubor) : sez.add(soubor);
     S.oblibene[pid] = [...sez];
     data.pis('oblibene', S.oblibene);
-    vykresliPisne();
+    // the star changes in place (the focus stays on it); only the Favourites tab needs its list again
+    const vOblibenych = $('#zalozky button.ted')?.dataset.zalozka === 'oblibene';
+    if (vOblibenych) obnovFokus($('#pisne'), 'data-soubor', vykresliPisne);
+    else for (const d of $$('#pisne [data-soubor]')) if (d.dataset.soubor === soubor) nastavHvezdu(d.querySelector('.oblibena'), soubor);
   }
+  /** redraws a list and puts the focus back on the item with the same key (a redraw must not lose the keyboard place) */
+  function obnovFokus(kontejner, atribut, prekresli) {
+    const a = document.activeElement, polozka = kontejner.contains(a) ? a.closest(`[${atribut}]`) : null;
+    const klic = polozka?.getAttribute(atribut), uvnitr = polozka && a !== polozka ? a.className : null;
+    prekresli();
+    if (klic == null) return;
+    const novy = [...kontejner.querySelectorAll(`[${atribut}]`)].find(e => e.getAttribute(atribut) === klic);
+    (uvnitr ? novy?.querySelector('.' + String(uvnitr).split(' ')[0]) : novy)?.focus();
+  }
+  const oznacVybrane = (b, ano) => { b.classList.toggle('ted', ano); b.setAttribute('aria-pressed', String(ano)); };
   const bezDiakritiky = t => String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   /** difficulty as 1–3 black keys out of three (the rest outlined only) */
   const klavesyObtiznosti = n => `<svg viewBox="0 0 22 14" aria-hidden="true">${[0, 1, 2].map(i =>
@@ -1576,7 +1610,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       b.classList.toggle('ted', vybrana);
       b.setAttribute('aria-pressed', String(vybrana));
     }
-    const podleNazvu = (a, b) => a.nazev.localeCompare(b.nazev, 'cs');
+    const podleNazvu = (a, b) => a.nazev.localeCompare(b.nazev, JAZYK);
     let vybrane;                                            // [{ p, tezsi }]
     if (dotaz) {
       const q = bezDiakritiky(dotaz), zKnihovny = new Set(hledej(S.knihovna, dotaz).map(p => p.soubor));
@@ -1597,7 +1631,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     if (OBTIZNOST) vybrane = vybrane.filter(({ p }) => String(p.stupen || info[p.soubor]?.obtiznost?.stupen || '') === OBTIZNOST);
     $$('#obtiznost button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.obtiznost === OBTIZNOST)));
     el.innerHTML = '';
-    if (!vsechny.length) { el.innerHTML = `<p class="napoveda">${esc(t('domu.nacitam'))}</p>`; return; }   // nothing yet: neither own songs nor the library
+    if (!vsechny.length) {                                // nothing yet: neither own songs nor the library
+      el.innerHTML = KNIHOVNA_CHYBA && !S.knihovna?.length
+        ? `<p class="napoveda">${esc(t('knihovna.nedostupna'))} <button type="button" class="text-tl" data-znovu>${esc(t('knihovna.znovu'))}</button></p>`
+        : `<p class="napoveda">${esc(t('domu.nacitam'))}</p>`;
+      el.querySelector('[data-znovu]')?.addEventListener('click', () => { el.innerHTML = `<p class="napoveda">${esc(t('domu.nacitam'))}</p>`; nactiPisne(); });
+      return;
+    }
     for (const { p, tezsi } of vybrane) el.appendChild(dlazdicePisne(p, { tezsi, nova: jeNova(prvni[p.soubor], naposledyHrano(p.soubor) > 0) }));
     if (!vybrane.length) el.insertAdjacentHTML('beforeend', `<p class="napoveda prazdne">${esc(t('domu.nic'))}</p>`);
     if (!dotaz) {
@@ -1635,7 +1675,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const nazevStupne = st ? t(['domu.snadne', 'domu.stredni', 'domu.tezsi'][st - 1]) : '';
     b.innerHTML = `<b>${esc(p.nazev)}${nova ? ` <span class="stitek-nova">${esc(t('domu.nova'))}</span>` : ''}${
       umi ? ` <span class="stitek-umim">${esc(t('domu.umim'))}</span>` : ''}</b>${preklad && preklad !== p.nazev ? `<small class="preklad">${esc(preklad)}</small>` : ''}`
-      + `<small>${esc(info[p.soubor]?.autor || '')}</small>`
+      + `<small>${esc(autorTextem(info[p.soubor]?.autor))}</small>`
       + `<span class="dl-spodek">${st ? `<span class="obtiznost" role="img" aria-label="${esc(nazevStupne)}">${klavesyObtiznosti(st)}</span>` : ''}`
       + `<span class="kroky3">${stav.map((x, i) => `<i class="${x === 'hotovo' ? 'ano' : rozehrane[i] ? 'rozehrano' : ''}"></i>`).join('')}</span></span>` + tlacitkoOblibene();
     nastavHvezdu(b.querySelector('.oblibena'), p.soubor);
@@ -1692,11 +1732,18 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       html += `<span class="den">${esc(nazev(r))}</span>`;
       for (const tyden of k.tydny) {
         const d = tyden[r], popis = d.n ? t('stat.kalDen', { datum: datum(d.t), zahrani: t('stat.zahrani', { n: d.n }) }) : t('stat.kalNic', { datum: datum(d.t) });
-        html += `<span class="c${d.budouci ? ' budouci' : ''}${d.dnes ? ' dnes' : ''}" data-n="${d.uroven}"${d.budouci ? '' : ` title="${esc(popis)}"`}></span>`;
+        // the day's text is its name for screen readers and shows under the calendar on a tap (no hover on a phone)
+        html += `<span class="c${d.budouci ? ' budouci' : ''}${d.dnes ? ' dnes' : ''}" data-n="${d.uroven}"${d.budouci ? ' aria-hidden="true"'
+          : ` role="img" aria-label="${esc(popis)}" title="${esc(popis)}" data-popis="${esc(popis)}"`}></span>`;
       }
     }
     $('#statKalendar').innerHTML = html;
+    $('#statKalInfo').textContent = '';
   }
+  $('#statKalendar').addEventListener('click', e => {
+    const c = e.target.closest('[data-popis]');
+    if (c) $('#statKalInfo').textContent = c.dataset.popis;
+  });
   function statGraf(pokusy, denik) {
     const el = $('#statGraf'), body = presnostPoDnech(pokusy, Date.now(), 30, denik);
     if (body.length < 2) { el.innerHTML = `<p class="prazdne">${esc(t('stat.grafPrazdny'))}</p>`; return; }
@@ -1865,7 +1912,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const d = doporuceni(vysHrace()[soubor], statHrace(), soubor);
     Object.assign(PRED, { soubor, krok: d.krok, rychlost: d.rychlost, doporuceny: d.krok });
     $('#predNazev').textContent = p?.nazev || soubor;
-    $('#predAutor').textContent = S.infoPisni?.[soubor]?.autor || '';
+    $('#predAutor').textContent = autorTextem(S.infoPisni?.[soubor]?.autor);
     const text = S.knihovna.find(p => p.soubor === soubor) || p;
     const varianty = text?.variantyTextu || [];
     $('#predText').open = false;
@@ -1941,13 +1988,13 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   function vykresliPred() {
     const vys = vysHrace()[PRED.soubor] || {};
     const hv = n => [0, 1, 2].map(i => `<i class="${i < n ? 'ano' : ''}"></i>`).join('');
-    $('#predKroky').innerHTML = KROKY.map((k, i) => `<button class="volba ${k === PRED.krok ? 'ted' : ''}" data-krok="${k}">
+    obnovFokus($('#predKroky'), 'data-krok', () => $('#predKroky').innerHTML = KROKY.map((k, i) => `<button class="volba ${k === PRED.krok ? 'ted' : ''}" data-krok="${k}" aria-pressed="${k === PRED.krok}">
       <span class="c">${i + 1}</span><b>${esc(t('krok.' + k))}${k === PRED.doporuceny ? ` <span class="tip">${esc(t('pred.doporucuju'))}</span>` : ''}</b>
-      <span class="popis">${esc(t('krok.popis.' + k))}</span><span class="hv">${hv(vys[k]?.hvezdy || 0)}</span></button>`).join('');
+      <span class="popis">${esc(t('krok.popis.' + k))}</span><span class="hv">${hv(vys[k]?.hvezdy || 0)}</span></button>`).join(''));
     $('#rychlost').value = PRED.rychlost; $('#rychlostText').textContent = rychlostText(PRED.rychlost);
     $('#predPresne').textContent = t('pred.presne', { v: PRED.rychlost });
-    $('#predRychlost').innerHTML = RYCHLOSTI.map(r => `<button class="${r === PRED.rychlost ? 'ted' : ''}" data-rychlost="${r}">
-      ${esc(t('rychlost.' + r))}<small>${r} %</small></button>`).join('');
+    obnovFokus($('#predRychlost'), 'data-rychlost', () => $('#predRychlost').innerHTML = RYCHLOSTI.map(r => `<button class="${r === PRED.rychlost ? 'ted' : ''}" data-rychlost="${r}" aria-pressed="${r === PRED.rychlost}">
+      ${esc(t('rychlost.' + r))}<small>${r} %</small></button>`).join(''));
   }
   $('#predKroky').onclick = e => { const b = e.target.closest('[data-krok]'); if (b) { PRED.krok = b.dataset.krok; vykresliPred(); } };
   $('#rychlost').addEventListener('input', e => { PRED.rychlost = Number(e.target.value); vykresliPred(); });
@@ -2292,13 +2339,18 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const vys = S.kroky.flatMap(k => [...k.vyska]);
     if (!vys.length) vys.push(60, 72);                     // no notes (empty section): at least an octave from middle C
     const cerna = p => CERNE.has(((p % 12) + 12) % 12);
-    let lo = Math.min(...vys) - 2, hi = Math.max(...vys) + 2;
+    // on a phone only the song's own range (no extra keys around it), so a key stays about a finger wide
+    const sirka = el.clientWidth || document.documentElement.clientWidth || innerWidth;
+    const minimum = minBilychKlaves(sirka), telefon = minimum < 15, okraj = telefon ? 0 : 2;
+    let lo = Math.min(...vys) - okraj, hi = Math.max(...vys) + okraj;
     while (cerna(lo)) lo--;
     while (cerna(hi)) hi++;
     const bile = () => { let c = 0; for (let p = lo; p <= hi; p++) if (!cerna(p)) c++; return c; };
-    for (let s = 0; bile() < 15; s++) {
+    for (let s = 0; bile() < minimum; s++) {
       if (s % 2) { lo--; while (cerna(lo)) lo--; } else { hi++; while (cerna(hi)) hi++; }
     }
+    // a wide song on a phone held upright: the keys get narrow, so suggest turning it (once per visit)
+    if (telefon && sirka / bile() < 36 && innerHeight > innerWidth && !S.radaOtocit) { S.radaOtocit = true; toast(t('app.otocTelefon'), 5000); }
     const jmena = {};
     S.data.noty.forEach(n => { if (!(n.pitch in jmena)) jmena[n.pitch] = n.jmeno; });
     const vysky = [lo, hi, ...S.data.noty.map(n => n.pitch), ...(S.doprovod || []).flatMap(e => e.p || [])];
@@ -3144,23 +3196,27 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   $('#znovu').onclick = hrajZnovu;
 
   // ------------------------------------------------------------ pause and display
-  const prekryv = (sel, otevrit) => $(sel).classList.toggle('skryta', !otevrit);
+  /** Pause and Display are dialogs (ui/dialog.js): the rest of the page is inert, Escape closes, the focus returns */
+  const prekryv = (sel, otevrit, volby) => (otevrit ? otevriDialog($(sel), volby) : zavriDialog($(sel)) || $(sel).classList.add('skryta'));
+  function pokracujPoPauze() {
+    if ($('#pauzaPokracovat').classList.contains('skryta')) { prekryv('#pauzaPrekryv', false); return; }
+    prekryv('#pauzaPrekryv', false);
+    zacniHru({ poslech: S.rezim === REZIM.POSLECH });
+    H.timery.pokracuj();
+  }
   function pozastavHru() {
     if (hraPozastavena()) return;
     const navazat = !H.bezi && !H.spousti;        // active timed playback restarts; between runs the queued transition can resume
     stopVse({ pozastavit: navazat });
     $('#pauzaPokracovat').classList.toggle('skryta', !navazat);
-    prekryv('#pauzaPrekryv', true);
+    prekryv('#pauzaPrekryv', true, { zavrit: pokracujPoPauze, navrat: $('#pauza'),
+      fokus: navazat ? $('#pauzaPokracovat') : $('#znovu') });           // Escape = Continue
   }
   $('#pauza').onclick = pozastavHru;
-  $('#pauzaPokracovat').onclick = () => {
-    prekryv('#pauzaPrekryv', false);
-    if (S.rezim !== REZIM.POSLECH) zapniMikrofonPriHre();
-    H.timery.pokracuj();
-  };
+  $('#pauzaPokracovat').onclick = pokracujPoPauze;
   $('#pauzaZobrazeni').onclick = () => {                // the same display toggles as Settings
     if (!$('#zobrazeni .prepinace')) $('#zobrazeni aside').append($('#nastaveniZobrazeni .prepinace'));
-    prekryv('#zobrazeni', true);
+    prekryv('#zobrazeni', true, { navrat: $('#pauzaZobrazeni') });
   };
   $('#zobrazeniZavrit').onclick = () => prekryv('#zobrazeni', false);
   $('#zobrazeni').onclick = e => { if (e.target.id === 'zobrazeni') prekryv('#zobrazeni', false); };

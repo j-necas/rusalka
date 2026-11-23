@@ -32,7 +32,7 @@ test('the app has a CSP for its actual script, media and counter sources', () =>
 
 test('dialogs have labelled headings and the toast has a persistent live region', () => {
   const html = staticky('index.html');
-  for (const id of ['vysledek', 'dvojiceOkno', 'midiOkno', 'zdrojeOkno']) {
+  for (const id of ['vysledek', 'dvojiceOkno', 'midiOkno', 'zdrojeOkno', 'pauzaPrekryv', 'zobrazeni']) {
     const tag = html.match(new RegExp('<div id="' + id + '"[^>]+>'))[0];
     assert.match(tag, /role="dialog"/);
     assert.match(tag, /aria-modal="true"/);
@@ -145,4 +145,35 @@ test('the lazy loader initializes the published Verovio bundle',
   vm.runInContext(staticky('vendor/verovio-toolkit-wasm.js'), ctx);
   skript.onload();
   assert.match((await nacteni).getVersion(), /^\d+\.\d+/);
+});
+
+test('the focus stays visible on the player-coloured surfaces (results, Continue)', () => {
+  assert.match(staticky('style.css'), /#vysledek :focus-visible, \.pokracuj :focus-visible \{ outline-color: #fff; \}/);
+});
+
+test('right-to-left (Arabic): the panels, the Back arrow and the switches use logical sides', () => {
+  const css = staticky('style.css');
+  assert.doesNotMatch(css, /text-align: left/);
+  assert.match(css, /\.rodice-panel \.zavrit \{[^}]*inset-inline-end/);
+  assert.match(css, /\[dir=rtl\] \.zpet svg \{ transform: scaleX\(-1\); \}/);
+  assert.doesNotMatch(staticky('uvod/uvod.css'), /text-align: left|padding-left/);
+});
+
+test('no fixed Czech in the page: no Czech aria-label on Quit, MuseScore not forced to its Czech site', () => {
+  const html = staticky('index.html');
+  assert.doesNotMatch(html, /aria-label="Konec"/);
+  assert.doesNotMatch(html, /musescore\.org\/cs/);
+  assert.doesNotMatch(staticky('app.js'), /localeCompare\([^)]*'cs'\)/);
+  assert.match(staticky('app.js'), /prefers-reduced-motion: reduce\)'\)\.matches\)/);
+});
+
+test('nothing is said only on hover: editor buttons have names, switches show their explanation, calendar days a label', async () => {
+  const ed = staticky('ui/editor.js');
+  for (const b of ed.match(/<button [^>]*>/g)) {
+    if (/title=/.test(b)) assert.match(b, /aria-label=/, b);
+  }
+  const app = staticky('app.js');
+  assert.match(app, /\.prepinac\[data-t\]\[data-t-title\]/);
+  assert.match(app, /role="img" aria-label="\$\{esc\(popis\)\}"/);
+  assert.match(staticky('index.html'), /id="statKalInfo"[^>]*aria-live="polite"/);
 });

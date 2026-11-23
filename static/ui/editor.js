@@ -5,6 +5,7 @@ import * as E from '../lib/editor.js';
 import { porovnej, souhrnText } from '../lib/compare.js';
 import { t } from '../lib/texts.js';
 import { nazevKroku, soustava } from '../lib/note_names.js';
+import { otevriDialog, zavriDialog } from './dialog.js';
 
 const $ = (s, el = document) => el.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -26,8 +27,8 @@ export function otevriEditor(volby) {
   el.innerHTML = `
     <header class="editor-lista">
       <input class="editor-nazev" value="${esc(volby.pisen.nazev)}" aria-label="${tt('editor.nazevPisne')}">
-      <button data-akce="zpet" class="kulate" title="${tt('editor.zpet')}">↶</button>
-      <button data-akce="znovu" class="kulate" title="${tt('editor.znovu')}">↷</button>
+      <button data-akce="zpet" class="kulate" aria-label="${tt('editor.zpet')}" title="${tt('editor.zpet')}">↶</button>
+      <button data-akce="znovu" class="kulate" aria-label="${tt('editor.znovu')}" title="${tt('editor.znovu')}">↷</button>
       <span class="editor-stav"></span>
       ${volby.vzory?.length ? `<select class="vyber editor-vzor" title="${tt('editor.vzorTitul')}">
         <option value="">${tt('editor.vzorVolba')}</option>${volby.vzory.map((v, i) => `<option value="${i}">${esc(v.nazev)}</option>`).join('')}</select>` : ''}
@@ -40,13 +41,13 @@ export function otevriEditor(volby) {
     </div>
     <div class="editor-info"></div>
     <footer class="editor-nastroje">
-      <div class="skupina">${E.DELKY.map((d, i) => `<button data-delka="${d}" title="${tt(`editor.delka.${DELKY_KLIC[d]}`)} (${i + 1})">${['𝅝', '𝅗𝅥', '♩', '♪', '𝅘𝅥𝅯', '𝅘𝅥𝅰'][i]}</button>`).join('')}
-        <button data-akce="tecka" title="${tt('editor.tecka')}">•</button><button data-akce="triola" title="${tt('editor.triola')}">3</button></div>
-      <div class="skupina"><button data-akce="vyskaNahoru" title="${tt('editor.vys')}">▲</button>
-        <button data-akce="vyskaDolu" title="${tt('editor.niz')}">▼</button><button data-akce="oktavaNahoru" title="${tt('editor.oktavaVys')}">8va</button>
-        <button data-akce="oktavaDolu" title="${tt('editor.oktavaNiz')}">8vb</button></div>
-      <div class="skupina"><button data-akce="pomlka" title="${tt('editor.pomlkaTitul')}">𝄽</button><button data-akce="ligatura" title="${tt('editor.ligaturaTitul')}">⁀</button>
-        <button data-akce="vlozit" title="${tt('editor.vlozitTitul')}">${tt('editor.vlozit')}</button></div>
+      <div class="skupina">${E.DELKY.map((d, i) => `<button data-delka="${d}" aria-label="${tt(`editor.delka.${DELKY_KLIC[d]}`)}" title="${tt(`editor.delka.${DELKY_KLIC[d]}`)} (${i + 1})">${['𝅝', '𝅗𝅥', '♩', '♪', '𝅘𝅥𝅯', '𝅘𝅥𝅰'][i]}</button>`).join('')}
+        <button data-akce="tecka" aria-label="${tt('editor.tecka')}" title="${tt('editor.tecka')}">•</button><button data-akce="triola" aria-label="${tt('editor.triola')}" title="${tt('editor.triola')}">3</button></div>
+      <div class="skupina"><button data-akce="vyskaNahoru" aria-label="${tt('editor.vys')}" title="${tt('editor.vys')}">▲</button>
+        <button data-akce="vyskaDolu" aria-label="${tt('editor.niz')}" title="${tt('editor.niz')}">▼</button><button data-akce="oktavaNahoru" aria-label="${tt('editor.oktavaVys')}" title="${tt('editor.oktavaVys')}">8va</button>
+        <button data-akce="oktavaDolu" aria-label="${tt('editor.oktavaNiz')}" title="${tt('editor.oktavaNiz')}">8vb</button></div>
+      <div class="skupina"><button data-akce="pomlka" aria-label="${tt('editor.pomlkaTitul')}" title="${tt('editor.pomlkaTitul')}">𝄽</button><button data-akce="ligatura" aria-label="${tt('editor.ligaturaTitul')}" title="${tt('editor.ligaturaTitul')}">⁀</button>
+        <button data-akce="vlozit" aria-label="${tt('editor.vlozitTitul')}" title="${tt('editor.vlozitTitul')}">${tt('editor.vlozit')}</button></div>
       <label class="skupina">${tt('editor.slabika')} <input class="editor-slabika" size="6"></label>
       <label class="skupina">${tt('editor.akord')} <input class="editor-akord" size="5" placeholder="C, Dm, G7"></label>
       <div class="skupina"><button data-akce="taktPridat">${tt('editor.taktPridat')}</button><button data-akce="taktSmazat">${tt('editor.taktSmazat')}</button>
@@ -63,6 +64,7 @@ export function otevriEditor(volby) {
       </div>
       <p class="napoveda">${tt('editor.napoveda')}</p>
     </footer>`;
+  el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', t('rodice.upravit'));
   document.body.appendChild(el);
   STAV = { el, volby, pisen: kopie(volby.pisen), historie: null, vyber: null, mapa: {}, nejiste: new Set(volby.nejiste || []),
     zmeneno: false, porovnani: '' };
@@ -71,6 +73,12 @@ export function otevriEditor(volby) {
   el.addEventListener('click', klik);
   el.querySelector('.editor-noty').addEventListener('click', klikNaNoty);
   document.addEventListener('keydown', klavesa, true);
+  // a dialog: the page behind is inert, the focus starts on the notes, Escape leaves a field or closes like Close
+  otevriDialog(el, { fokus: el.querySelector('.editor-noty'), zavrit: () => {
+    const a = document.activeElement;
+    if (a && el.contains(a) && a.matches('input, select, textarea')) { a.blur(); return; }
+    el.querySelector('[data-akce="zavrit"]').click();
+  } });
   el.querySelector('.editor-slabika').addEventListener('change', e => uprav(E.nastavSlabiku(STAV.pisen, STAV.vyber, e.target.value), 'slabika'));
   el.querySelector('.editor-akord').addEventListener('change', e => {
     const n = E.vybranaNota(STAV.pisen, STAV.vyber);
@@ -116,6 +124,7 @@ export function midi(p) {
 function zavri() {
   if (!STAV) return;
   document.removeEventListener('keydown', klavesa, true);
+  zavriDialog(STAV.el);
   STAV.el.remove();
   const z = STAV.volby.onZavrit;
   STAV = null;
