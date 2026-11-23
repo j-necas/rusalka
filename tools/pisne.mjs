@@ -27,6 +27,7 @@ const JAZYK_STRANKY = { sk: 'cs' };   // Slovak songs with the Czech ones; the r
 const json = cesta => JSON.parse(readFileSync(new URL(cesta, KOREN), 'utf8'));
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const idTextu = v => `text-${slug(v.nazev) || v.jazyk}`;
 const texty = kod => json(`tools/uvod/pisne-${kod}.json`);
 const ld = data => JSON.stringify(data).replace(/</g, '\\u003c');
 
@@ -60,7 +61,7 @@ let seznam = null;
 export function pisne() {
   if (seznam) return seznam;
   const knihovna = json('library/catalog.json').map(z => ({ ...z, jmeno: z.txt.split('/')[1].replace(/\.txt$/, '') }));
-  const ukazky = json('songs/index.json').map(u => ({ soubor: u.soubor, police: u.police, jazyk: 'en', jmeno: slug(u.nazev) }));
+  const ukazky = json('songs/index.json').map(u => ({ jazyk: 'en', ...u, jmeno: slug(u.nazev) }));
   seznam = [...knihovna, ...ukazky].map(p => {
     const stranka = JAZYK_STRANKY[p.jazyk] || (JAZYKY_PISNI.includes(p.jazyk) ? p.jazyk : 'en');
     return { ...p, stranka, nazev: nacti(p).model.nazev, cesta: `${stranka}/${texty(stranka).folder}/${p.jmeno}/` };
@@ -222,6 +223,7 @@ export async function strankaPisne(p, { externe = false } = {}) {
   const nazvyTonu = [...new Set([...new Set(melodie)].sort((a, b) => a - b).map(m => nazevTonu(m)))].join(', ');
   const akordy = [...new Set(model.takty.flatMap(x => (x.akordy || []).map(a => a.znacka)))];
   const text = p.slova || textPisne(model);
+  const varianty = p.variantyTextu || [];
   const stupen = obtiznost(zMusicXml(xml)).stupen;               // as the app rates the song
   const obeRuce = model.takty.some(x => (x.leva || []).length) || /<staves>2<\/staves>/.test(xml);
   const autor = autorText(model.autor, kod, t);
@@ -231,7 +233,7 @@ export async function strankaPisne(p, { externe = false } = {}) {
     <div class="noty-uzke">${uzke}</div>`;
   const vsechny = pisne().filter(q => q.stranka === kod && q !== p);
   const dalsi = [...vsechny.filter(q => q.police === p.police), ...vsechny.filter(q => q.police !== p.police)].slice(0, 8);
-  const popis = r(t.description).replace('{chords}', akordy.length ? t.withChords : '').replace('{lyrics}', text.length ? t.withLyrics : '');
+  const popis = r(t.description).replace('{chords}', akordy.length ? t.withChords : '').replace('{lyrics}', text.length || varianty.length ? t.withLyrics : '');
   const titulek = r(t.title), url = WEB + p.cesta, seznamUrl = `${WEB}${kod}/${t.folder}/`;
   // into the app straight to this song (static/app.js, #pisen=): the library file, or the starter song's
   const hrat = `../../../#pisen=${encodeURIComponent(p.txt ? `library/${p.txt.replace(/\.txt$/, '.musicxml')}` : p.soubor)}`;
@@ -286,6 +288,11 @@ ${text.length ? `
   <p class="text-pisne"${jakoPisen}>${text.map(esc).join('<br>\n')}</p>
 </section>
 ` : ''}
+${varianty.map(v => `
+<section class="sirka" id="${idTextu(v)}" lang="${esc(v.jazyk)}">
+  <h2>${esc(v.nazev)}</h2>
+  <p class="text-pisne">${v.slova.map(esc).join('<br>\n')}</p>
+</section>`).join('')}
 <section class="sirka" aria-labelledby="jak">
   <h2 id="jak">${esc(t.howH2)}</h2>
   <ol class="kroky">
@@ -325,6 +332,11 @@ ${pata(u, '../../')}`;
 /** the list of the songs of a page language, by shelf: { cesta, html } */
 export function seznamPisni(kod) {
   const t = texty(kod), u = json(`tools/uvod/${kod}.json`), vsechny = pisne().filter(p => p.stranka === kod);
+  const varianty = pisne().flatMap(p => (p.variantyTextu || [])
+    .filter(v => v.jazyk === kod && (p.stranka !== kod || (v.police && v.police !== p.police)))
+    .map(v => ({ nazev: v.nazev, police: v.police || p.police, stranka: p.stranka, odkaz: `/${p.cesta}#${idTextu(v)}` })));
+  const polozky = [...vsechny.map(p => ({ ...p, odkaz: `${p.jmeno}/` })), ...varianty]
+    .sort((a, b) => a.nazev.localeCompare(b.nazev, kod));
   const cesta = `${kod}/${t.folder}/`, url = WEB + cesta;
   const r = s => String(s).replace(/\{count\}/g, vsechny.length);
   const data = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: t.indexH1, url, inLanguage: kod,
@@ -340,11 +352,11 @@ ${hlavicka(u, '../../', '../')}
   <p class="perex">${esc(r(t.indexLead))}</p>
   <p class="akce"><a class="hrat" href="../../">${esc(u.start)}</a></p>
 </div>
-${POLICE.filter(pol => vsechny.some(p => p.police === pol)).map(pol => `
+${POLICE.filter(pol => polozky.some(p => p.police === pol)).map(pol => `
 <section class="sirka" aria-labelledby="${pol}">
   <h2 id="${pol}">${esc(t['shelf_' + pol])}</h2>
   <ul class="dalsi">
-${vsechny.filter(p => p.police === pol).map(p => `    <li><a href="${p.jmeno}/"${p.jazyk !== kod ? ` hreflang="${p.jazyk}"` : ''}>${esc(p.nazev)}</a></li>`).join('\n')}
+${polozky.filter(p => p.police === pol).map(p => `    <li><a href="${p.odkaz}"${p.stranka !== kod ? ` hreflang="${p.stranka}"` : ''}>${esc(p.nazev)}</a></li>`).join('\n')}
   </ul>
 </section>`).join('\n')}
 </main>

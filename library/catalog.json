@@ -768,11 +768,44 @@
   "txt": "folk/greensleeves.txt",
   "police": "folk",
   "jazyk": "en",
-  "zdroj": "Melody and lyrics compared note by note with the ABC score in the French Wikipedia article „Greensleeves“ (G minor, 6/8), the Mutopia Project hymn-tune edition (E minor) and the thesession.org setting 1598 (E minor); they agree, all with the minor sixth (F natural here) in the verse, as in the Wikipedia/Commons melody file; some modern copies (abcnotation: colinhume.com, chrisspen violin) raise it to F-sharp, not used. Transposed to A minor; verse and refrain once; syllables under the dotted figures placed by us; second line sung as „For I have loved you well and long“",
-  "volne": "traditional (English, 16th century; lyrics from A Handful of Pleasant Delights, 1584)",
+  "zdroj": "Melody and lyrics compared note by note with the ABC score in the French Wikipedia article „Greensleeves“ (G minor, 6/8), the Mutopia Project hymn-tune edition (E minor) and the thesession.org setting 1598 (E minor); they agree, all with the minor sixth (F natural here) in the verse, as in the Wikipedia/Commons melody file; some modern copies (abcnotation: colinhume.com, chrisspen violin) raise it to F-sharp, not used. Transposed to A minor; verse and refrain once; syllables under the dotted figures placed by us; second line sung as „For I have loved you well and long“. Words transcribed from W. C. Dix in Henry Ramsden Bramley and John Stainer, Christmas Carols, New and Old, illustrated edition (1871), no. XIV, pp. 32–33: https://static1.squarespace.com/static/5b11858da2772cf01402ee6e/t/5de97369d9a8b4440a6c2118/1575580541693/Stainer-ChristmasCarolsNewandOld-Illustrated-1871.pdf#page=45.",
+  "volne": "traditional (English, 16th century; lyrics from A Handful of Pleasant Delights, 1584); What Child Is This? text by William Chatterton Dix (d. 1898), published in 1871",
   "preklad": {
    "cs": "Zelené rukávy"
-  }
+  },
+  "variantyTextu": [
+   {
+    "nazev": "What Child Is This?",
+    "jazyk": "en",
+    "police": "christmas",
+    "slova": [
+     "What Child is this, who, laid to rest,",
+     "On Mary's lap is sleeping?",
+     "Whom Angels greet with anthems sweet,",
+     "While shepherds watch are keeping?",
+     "This, this is Christ the King;",
+     "Whom shepherds guard and Angels sing:",
+     "Haste, haste to bring Him laud,",
+     "The Babe, the Son of Mary.",
+     "Why lies He in such mean estate,",
+     "Where ox and ass are feeding?",
+     "Good Christian, fear: for sinners here",
+     "The silent Word is pleading:",
+     "Nails, spear, shall pierce Him through,",
+     "The Cross be borne, for me, for you:",
+     "Hail, hail, the Word made Flesh,",
+     "The Babe, the Son of Mary!",
+     "So bring Him incense, gold and myrrh,",
+     "Come peasant, king, to own Him:",
+     "The King of kings salvation brings,",
+     "Let loving hearts enthrone Him.",
+     "Raise, raise the song on high,",
+     "The Virgin sings her lullaby:",
+     "Joy, joy, for Christ is born,",
+     "The Babe, the Son of Mary!"
+    ]
+   }
+  ]
  },
  {
   "txt": "folk/scarborough-fair.txt",
@@ -3429,5 +3462,328 @@
   "jazyk": "en",
   "zdroj": "The Public Domain Song Anthology (David Berger and Chuck Israels), University of Virginia Dataverse, MusicXML: https://dataverse.lib.virginia.edu/api/access/datafile/3729. Melody and first available verse from the CC0 score; practice tempo.",
   "volne": "Joseph Eastburn Winner died 1918; published in 1869; digital score CC0 1.0 (https://doi.org/10.18130/V3/C4RD06)."
+ },
+ {
+  "txt": "folk/kde-domov-muj.txt",
+  "police": "folk",
+  "jazyk": "cs",
+  "zdroj": "Melodie a první sloka podle § 7 a přílohy č. 6 zákona č. 3/1993 Sb. ve znění zákona č. 154/1998 Sb., který přetiskuje autentický notový zápis z roku 1933. https://e-sbirka.gov.cz/sb/1993/3?odkazId=26415875&predmetneDatum=2000-06-30&zalozka=text",
+  "volne": "František Škroup († 1862) a Josef Kajetán Tyl († 1856), vlastní přepis melodie ze zákonné přílohy.",
+  "preklad": {
+   "en": "Where Is My Home"
+  },
+  "slova": [
+   "Kde domov můj, kde domov můj?",
+   "Voda hučí po lučinách,",
+   "bory šumí po skalinách,",
+   "v sadě skví se jara květ,",
+   "zemský ráj to na pohled!",
+   "A to je ta krásná země,",
+   "země česká, domov můj,",
+   "země česká, domov můj!"
+  ]
+ },
+ {
+  "txt": "folk/nad-tatrou-sa-blyska.txt",
+  "police": "folk",
+  "jazyk": "sk",
+  "zdroj": "Tradiční nápěv a dvě sloky podle § 13 a přílohy č. 5 zákona č. 63/1993 Z. z., s repeticí a dvěma závěry podle notové předlohy. https://static.slov-lex.sk/pdf/SK/ZZ/1993/63/ZZ_1993_63_20190524.pdf#page=15",
+  "volne": "Slovenský lidový nápěv a slova Janka Matúšky († 1877), vlastní přepis melodie ze zákonné přílohy.",
+  "preklad": {
+   "cs": "Nad Tatrou se blýská",
+   "en": "Lightning over the Tatras"
+  },
+  "slova": [
+   "Nad Tatrou sa blýska, hromy divo bijú,",
+   "nad Tatrou sa blýska, hromy divo bijú.",
+   "Zastavme ich, bratia,",
+   "veď sa ony stratia,",
+   "Slováci ožijú.",
+   "Zastavme ich, bratia,",
+   "veď sa ony stratia,",
+   "Slováci ožijú.",
+   "To Slovensko naše posiaľ tvrdo spalo,",
+   "to Slovensko naše posiaľ tvrdo spalo.",
+   "Ale blesky hromu",
+   "vzbudzujú ho k tomu,",
+   "aby sa prebralo.",
+   "Ale blesky hromu",
+   "vzbudzujú ho k tomu,",
+   "aby sa prebralo."
+  ]
+ },
+ {
+  "txt": "folk/deutschlandlied.txt",
+  "police": "folk",
+  "jazyk": "de",
+  "zdroj": "Haydnův nápěv podle jednohlasého zápisu třetí sloky vystaveného v Bundestagu. Repetice jsou rozepsané pro text pod notami. Pravopis podle spolkové vlády. https://www.bundestag.de/besuche/ausstellungen/verfassung/led_tafeln/tafel-7-9-654776 https://www.bundesregierung.de/breg-de/schwerpunkte/nationalhymne-deutschland-461412",
+  "volne": "Joseph Haydn († 1809) a August Heinrich Hoffmann von Fallersleben († 1874), vlastní přepis melodie z roku 1797 bez doprovodu.",
+  "preklad": {
+   "cs": "Píseň Němců",
+   "en": "Song of the Germans"
+  },
+  "slova": [
+   "Einigkeit und Recht und Freiheit",
+   "für das deutsche Vaterland!",
+   "Danach lasst uns alle streben,",
+   "brüderlich mit Herz und Hand!",
+   "Einigkeit und Recht und Freiheit",
+   "sind des Glückes Unterpfand:",
+   "Blüh im Glanze dieses Glückes,",
+   "blühe, deutsches Vaterland!",
+   "Blüh im Glanze dieses Glückes,",
+   "blühe, deutsches Vaterland!"
+  ]
+ },
+ {
+  "txt": "folk/god-save-the-king.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melodie podle The National Anthems of the Allies (G. Schirmer, 1917, s. 5). První sloka pod notami a občas zpívaná další sloka podle britské královské rodiny. https://imslp.org/wiki/National_Anthems_of_the_Allies_(Various) https://www.royal.uk/encyclopedia/national-anthem",
+  "volne": "Anonymní tradiční melodie a text doložené v 18. století, vlastní přepis melodie z vydání označeného Public Domain.",
+  "preklad": {
+   "cs": "Bože, chraň krále"
+  },
+  "slova": [
+   "God save our gracious King!",
+   "Long live our noble King!",
+   "God save the King!",
+   "Send him victorious,",
+   "Happy and glorious,",
+   "Long to reign over us,",
+   "God save the King.",
+   "Thy choicest gifts in store",
+   "On him be pleased to pour,",
+   "Long may he reign.",
+   "May he defend our laws,",
+   "And ever give us cause,",
+   "To sing with heart and voice,",
+   "God save the King."
+  ]
+ },
+ {
+  "txt": "folk/the-star-spangled-banner.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Zpívaná melodie první sloky podle vydání z roku 1918 (Service Version, Library of Congress). Dvoudobý závěr a následující jednodobé předtaktí před refrénem tvoří v přepisu jeden takt. https://www.loc.gov/item/ihas.100010134/",
+  "volne": "John Stafford Smith († 1836) a Francis Scott Key († 1843), vlastní přepis melodie z historického vydání bez doprovodu.",
+  "preklad": {
+   "cs": "Hvězdami posetý prapor"
+  },
+  "slova": [
+   "Oh, say, can you see by the dawn’s early light,",
+   "What so proudly we hailed at the twilight’s last gleaming,",
+   "Whose broad stripes and bright stars, thro’ the perilous fight,",
+   "O’er the ramparts we watched were so gallantly streaming?",
+   "And the rockets’ red glare, the bombs bursting in air,",
+   "Gave proof thro’ the night that our flag was still there.",
+   "Oh, say, does that star-spangled banner yet wave",
+   "O’er the land of the free and the home of the brave?"
+  ]
+ },
+ {
+  "txt": "folk/o-canada.txt",
+  "police": "folk",
+  "jazyk": "en",
+  "zdroj": "Melodie a oficiální anglická a francouzská slova podle přílohy kanadského National Anthem Act, ověřeno podle notového zápisu Canadian Heritage. https://laws-lois.justice.gc.ca/eng/acts/N-2/page-1.html https://www.canada.ca/en/canadian-heritage/services/anthem-canada.html",
+  "volne": "National Anthem Act, § 3 výslovně uvádí, že hudba i anglický a francouzský text jsou ve veřejné doméně. Vlastní jednohlasý přepis.",
+  "preklad": {
+   "cs": "Ó Kanado"
+  },
+  "slova": [
+   "O Canada!",
+   "Our home and native land!",
+   "True patriot love in all of us command.",
+   "With glowing hearts we see thee rise,",
+   "The True North strong and free!",
+   "From far and wide,",
+   "O Canada, we stand on guard for thee.",
+   "God keep our land glorious and free!",
+   "O Canada, we stand on guard for thee.",
+   "O Canada, we stand on guard for thee."
+  ],
+  "variantyTextu": [
+   {
+    "nazev": "Ô Canada",
+    "jazyk": "fr",
+    "slova": [
+     "Ô Canada!",
+     "Terre de nos aïeux,",
+     "Ton front est ceint de fleurons glorieux!",
+     "Car ton bras sait porter l’épée,",
+     "Il sait porter la croix!",
+     "Ton histoire est une épopée",
+     "Des plus brillants exploits.",
+     "Et ta valeur, de foi trempée,",
+     "Protégera nos foyers et nos droits.",
+     "Protégera nos foyers et nos droits."
+    ]
+   }
+  ]
+ },
+ {
+  "txt": "christmas/stedrej-vecer-nastal.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Traditional Czech carol. Melody compared with Vánoční Huťácký zpěvník, p. 14 (https://www.mesnice.cz/images/2018/V%C3%A1no%C4%8Dn%C3%AD%20Hu%C5%A5%C3%A1ck%C3%BD%20zp%C4%9Bvn%C3%ADk.pdf#page=14) and the familiar C-major version (https://www.pavelhokr.cz/soubory/noty/Stedrej%20vecer%20nastal.pdf). Traditional dialogue and repeated lines confirmed by Czech Radio (https://junior.rozhlas.cz/notovanicko-stedrej-vecer-nastal-8064575) and the songbook. Original simple chords and practice tempo.",
+  "volne": "Traditional Czech melody and words. Original reconstruction of the folk melody and simple chords.",
+  "preklad": {
+   "en": "Christmas Eve Has Come"
+  },
+  "slova": [
+   "Štědrej večer nastal, štědrej večer nastal,",
+   "koledy přichystal, koledy přichystal.",
+   "Panímámo, vstaňte, panímámo, vstaňte,",
+   "koledu nám dejte, koledu nám dejte.",
+   "Panímáma vstala, panímáma vstala,",
+   "koledu nám dala, koledu nám dala."
+  ]
+ },
+ {
+  "txt": "christmas/vesele-vanocni-hody.txt",
+  "police": "christmas",
+  "jazyk": "cs",
+  "zdroj": "Traditional sung version in C major compared with Vánoční Huťácký zpěvník, p. 16 (https://www.mesnice.cz/images/2018/V%C3%A1no%C4%8Dn%C3%AD%20Hu%C5%A5%C3%A1ck%C3%BD%20zp%C4%9Bvn%C3%ADk.pdf#page=16) and Kancionál no. 225 (https://kancional.cz/225). Orel's Český kancionál, p. 90 (https://librinostri.catholica.cz/download/CesKancPrVar1-r0.pdf#page=94), documents an older form of the tune and cites Šteyer, Kancionál český (1683), p. 98. The familiar 'zpívejte dítky' text is documented in Rosenmüller's Kancionálek (1705) and the Galli manuscript; see the comparison on p. 65 (https://dspace.cuni.cz/handle/20.500.11956/42217). The first melodic phrase is written twice for the two different lines, and the second phrase repeats like the folk songbook. Original simple chords and practice tempo.",
+  "volne": "Historic Czech carol. Words are documented in Bridel's Jesličky (1658) and period variants; the tune is documented in Šteyer's Kancionál český (1683). Only the traditional melody and words are transcribed, with original simple chords.",
+  "preklad": {
+   "en": "Merry Christmas Feast"
+  },
+  "slova": [
+   "Veselé vánoční hody,",
+   "zpívejte, dítky, koledy,",
+   "o tom, co se vskutku stalo,",
+   "že se lidem narodilo děťátko.",
+   "Potmě leží, nemá svíčičky,",
+   "na nebi svítí mu hvězdičky,",
+   "ty, jenž všechen oděv dáváš,",
+   "samo’s nahé a nic nemáš, děťátko.",
+   "Přišli chudí pastuškové,",
+   "zpívali jsou chvály nové,",
+   "vítej nám, andělský Králi,",
+   "tebe jsme zdávna žádali, děťátko."
+  ]
+ },
+ {
+  "txt": "christmas/cantique-de-noel.txt",
+  "police": "christmas",
+  "jazyk": "fr",
+  "zdroj": "Vocal melody and original first verse, Léon Grus sixth edition, Paris, ca. 1852, plate L.G.1365bis, pp. 2–3, Biblioteca Nacional de España via IMSLP no. 416408 (https://imslp.org/wiki/Special:ReverseLookup/416408). Piano introduction and postlude, grace notes and the turn are omitted; practice tempo and simple chord symbols. French verses 2–3 from the Schott edition, Bayerische Staatsbibliothek Mus.Schott.Ha 12397-6 (https://www.digitale-sammlungen.de/en/view/bsb00149248). Dwight's English verses from Gems of English Song, Oliver Ditson & Co., 1875, pp. 206–208 (https://archive.org/details/gemsofenglishson00bost/page/n209/mode/1up).",
+  "volne": "Music by Adolphe Adam (d. 1856), original lyrics by Placide Cappeau (d. 1877), historic English version by John Sullivan Dwight (d. 1893); the French and English editions used were published in the 19th century and are public domain.",
+  "preklad": {
+   "en": "O Holy Night",
+   "cs": "Vánoční chvalozpěv"
+  },
+  "slova": [
+   "Minuit, Chrétien, c’est l’heure solennelle",
+   "Où l’homme Dieu descendit jusqu’à nous,",
+   "Pour effacer la tache originelle,",
+   "Et de son père arrêter le courroux.",
+   "Le monde entier tressaille d’espérance,",
+   "À cette nuit qui lui donne un sauveur.",
+   "Peuple, à genoux, attends ta délivrance.",
+   "Noël ! Noël ! Voici le Rédempteur !",
+   "Noël ! Noël ! Voici le Rédempteur !",
+   "De notre foi que la lumière ardente",
+   "Nous guide tous au berceau de l’enfant,",
+   "Comme autrefois une étoile brillante",
+   "Y conduisit les chefs de l’Orient.",
+   "Le roi des rois naît dans une humble crèche,",
+   "Puissants du jour, fiers de votre grandeur,",
+   "À votre orgueil, c’est de là qu’un Dieu prêche.",
+   "Courbez vos fronts devant le Rédempteur !",
+   "Courbez vos fronts devant le Rédempteur !",
+   "Le Rédempteur a brisé toute entrave,",
+   "La terre est libre et le ciel est ouvert.",
+   "Il voit un frère où n’était qu’un esclave,",
+   "L’amour unit ceux qu’enchaînait le fer.",
+   "Qui lui dira notre reconnaissance ?",
+   "C’est pour nous tous qu’il naît, qu’il souffre et meurt.",
+   "Peuple, debout ! Chante ta délivrance.",
+   "Noël ! Noël ! Chantons le Rédempteur !",
+   "Noël ! Noël ! Chantons le Rédempteur !"
+  ],
+  "variantyTextu": [
+   {
+    "nazev": "O Holy Night",
+    "jazyk": "en",
+    "slova": [
+     "O holy night! The stars are brightly shining;",
+     "It is the night of the dear Saviour’s birth!",
+     "Long lay the world in sin and error pining,",
+     "’Till he appeared and the soul felt its worth.",
+     "A thrill of hope the weary world rejoices,",
+     "For yonder breaks a new and glorious morn;",
+     "Fall on your knees! O hear the angel voices!",
+     "O night divine! O night when Christ was born.",
+     "O night, O night divine.",
+     "Led by the light of Faith serenely beaming;",
+     "With glowing hearts by his cradle we stand:",
+     "So, led by light of a star sweetly gleaming,",
+     "Here came the wise men from the Orient land,",
+     "The King of Kings lay thus in lowly manger,",
+     "In all our trials born to be our friend;",
+     "He knows our need, to our weakness no stranger!",
+     "Behold your King! Before Him lowly bend!",
+     "Behold your King! your King! before him bend!",
+     "Truly He taught us to love one another;",
+     "His law is Love and His gospel is Peace;",
+     "Chains shall he break, for the slave is our brother,",
+     "And in his name all oppression shall cease,",
+     "Sweet hymns of joy in grateful chorus raise we;",
+     "Let all within us praise his holy name!",
+     "Christ is the Lord, then ever! ever praise we!",
+     "His pow’r and glory, evermore proclaim!",
+     "His pow’r and glory, evermore proclaim!"
+    ]
+   }
+  ]
+ },
+ {
+  "txt": "christmas/shchedryk.txt",
+  "police": "christmas",
+  "jazyk": "uk",
+  "zdroj": "Mykola Leontovych's mixed-choir setting, first printed ca. 1918 (https://www.nbuv.gov.ua/node/3286). Soprano and its Ukrainian text compared with the public-domain typesetting of Хорові твори, Kyiv, 1970 (https://commons.wikimedia.org/wiki/File:%D0%A9%D0%B5%D0%B4%D1%80%D0%B8%D0%BA.pdf). The opening repeat and endings follow this edition; the tenor melody in the second ending, bars 34–36, is raised an octave to keep the tune in the treble clef. Practice tempo.",
+  "volne": "Traditional Ukrainian lyrics; Mykola Leontovych (d. 1921), choral setting published ca. 1918. The referenced typesetting was dedicated to the public domain.",
+  "preklad": {
+   "en": "Shchedryk (Carol of the Bells)",
+   "cs": "Ščedryk"
+  },
+  "slova": [
+   "Щедрик, щедрик, щедрівочка,",
+   "прилетіла ластівочка,",
+   "стала собі щебетати,",
+   "господаря викликати:",
+   "«Вийди, вийди, господарю,",
+   "подивися на кошару,",
+   "там овечки покотились,",
+   "а ягнички народились.",
+   "В тебе товар весь хороший,",
+   "будеш мати мірку грошей.",
+   "Хоч не гроші, то полова,",
+   "в тебе жінка чорноброва».",
+   "Щедрик, щедрик, щедрівочка,",
+   "прилетіла ластівочка."
+  ]
+ },
+ {
+  "txt": "christmas/the-twelve-days-of-christmas.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Vocal melody and lyrics of the complete twelfth verse of Frederic Austin's first edition, Novello, 1909, plate 13056, pp. 10–11: https://imslp.org/wiki/12_Days_of_Christmas_(Austin,_Frederic). All twelve gifts are present. In the original F major, rebarred in 4/4. The grace note on the eleventh gift is played as the first of two sixteenths. Practice tempo and simple original chords.",
+  "volne": "Traditional English words and melody in the public-domain 1909 setting by Frederic Austin (1872–1952)."
+ },
+ {
+  "txt": "christmas/up-on-the-housetop.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Soprano melody and first stanza with chorus from Santa Claus in Chapel Gems for Sunday Schools, Root & Cady, 1866, pp. 108–109: https://www.hymnary.org/hymn/CGSS1866/page/108 and https://www.hymnary.org/hymn/CGSS1866/page/109. Two-page facsimile: https://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/Images/Santa_Claus-Chapel_Gems-1866-pp108-109.jpg. The chorus cadence in bar 12 is shortened from a dotted quarter to a quarter to fit 2/4. Practice tempo and simple original chords.",
+  "volne": "Public-domain 1866 tune by Benjamin Russell Hanby (1833–1867). Hymnary attributes the 1866 text to Sophia Taylor Griswold (1828–1903): https://www.hymnary.org/text/upon_the_house_no_delay_no_pause."
+ },
+ {
+  "txt": "christmas/o-little-town-of-bethlehem.txt",
+  "police": "christmas",
+  "jazyk": "en",
+  "zdroj": "Soprano melody of ST. LOUIS and first stanza from William R. Huntington's The Church Porch, E. P. Dutton, 1874, no. 43: https://www.hymnologyarchive.com/o-little-town-of-bethlehem (fig. 2). In the original G major and cut time. Pickups to internal phrases are included in the previous measures. The separate Amen cadence is omitted. Practice tempo and simple original chords.",
+  "volne": "Public domain: text by Phillips Brooks (1835–1893) and tune by Lewis H. Redner (1831–1908), published together in 1874."
  }
 ]

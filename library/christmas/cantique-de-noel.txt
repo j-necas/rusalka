@@ -1,0 +1,34 @@
+title: Cantique de Noël
+author: music by Adolphe Adam, lyrics by Placide Cappeau
+time: 4/4
+key: 0
+tempo: 60
+clef: treble
+---
+# Voice melody in C major from the Léon Grus edition. The piano introduction and postlude are omitted.
+1) C | r/4 r/8. E4/16=Mi- E4/4~=nuit, E4/8. G4/16=Chré-
+2) C F@2 | G4/4~=tien, G4/8. G4/16=c'est A4/8.=l'heu- A4/16=re F4/8.=so- A4/16=len-
+3) C | C5/2=nel- G4/8=le r/16 G4/16=où E4/8.=l'hom- D4/16=me
+4) C G7@2 | C4/4=Dieu E4/8.=des- F4/16=cen- G4/4=dit F4/8.=jus- D4/16=qu'à
+5) C | C4/2=nous, r/2
+6) C | r/2 E4/4=Pour E4/8.=ef- E4/16=fa-
+7) C F@2 | G4/4~=cer G4/8. G4/16=la A4/8.=tache A4/16=o- F4/8.=ri- A4/16=gi-
+8) C D7@2 | C5/2=nel- G4/8=le r/16 G4/16=et F#4/8.=de E4/16=son
+9) G G7@2 | B4/4=père G4/8.=ar- A4/16=rê- B4/4=ter C5/8.=le B4/16=cour-
+10) C | E4/2=roux. r/4 r/8. G4/16=Le
+11) G7 | G4/4=monde A4/4=en- D4/4=tier G4/4=tres-
+12) C F@2 C@3 | A4/8.=sail- G4/16=le C5/8.=d'es- E4/16=pé- A4/4=ran- G4/8=ce r/16 G4/16=À
+13) G7 | G4/4=cet- A4/4=te D4/4=nuit G4/4=qui
+14) C F@1 C@2 | A4/8.=lui G4/16=don- C5/8.=ne_un E4/16=sau- G4/4~=veur. G4/8 r/8
+15) Am | C5/2~=Peu- C5/4 B4/8.=ple_à A4/16=ge-
+16) Em | B4/2~=noux, B4/4~ B4/8 r/16 B4/16=at-
+17) Dm | D5/2~=tends D5/8. A4/16=ta A4/8.=dé- A4/16=li-
+18) Am | C5/2=vran- C5/4=ce, r/8. C5/16=No-
+19) C G@2 | E5/2=ël, D5/4.. G4/16=No-
+20) C G@2 | C5/2~=ël, C5/4 B4/8. A4/16=voi-
+21) C D7@2 | G4/2~=ci G4/8. G4/16=le A4/8.=Ré- G4/16=demp-
+22) G | G4/2.=teur; r/8. C5/16=No-
+23) E7 G7@2 | D5/2~=ël, D5/4.. G4/16=No-
+24) C G7@3 | E5/2~=ël, E5/4 D5/4=voi-
+25) C G7@2 | C5/2=ci B4/4=le C5/8.=Ré- D5/16=demp-
+26) C | C5/2=teur. r/2

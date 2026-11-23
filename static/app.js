@@ -35,7 +35,7 @@ import { VZORKY, naMidi, nejblizsiVzorek } from './lib/piano.js';
 import { pokusyHrace, kalendar, presnostPoDnech, stavPisni, mistaKdeDrhne, zapisDoDeniku, prvniHrani, pripomenoutZalohu } from './lib/stats.js';
 import { nactiVstup, doprovodZapnuty, sDoprovodem, poZmeneKlaviru, prijimaZdroj, pripojeneVstupy, seznamPortu, klavesyViditelne, vytvorMereniDrzeni } from './lib/input.js';
 import { KROKY, RYCHLOSTI, stavKroku, rozehraneKroky, umim, doporuceni, proMe, jeNova, akcePoVysledku } from './lib/recommend.js';
-import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny, slucPisne } from './lib/library.js';
+import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, policeSouboru, navrhyZKnihovny, slucPisne, jeNaPolici } from './lib/library.js';
 {
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
@@ -1437,7 +1437,8 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
   const naDomoveHrace = soubor => naDomove({ soubor }, S.profil || 'host',
     { statistiky: S.statistiky, oblibene: S.oblibene, knihovnaSkryte: S.knihovnaSkryte });
   /** the title's translation for a library song in another language than the app's (shown under the title) */
-  const prekladNazvu = p => (p && p.jazyk !== JAZYK && p.preklad?.[JAZYK]) || '';
+  const prekladNazvu = p => (p?.jazyk !== JAZYK && p?.preklad?.[JAZYK])
+    || p?.variantyTextu?.find(v => v.jazyk === JAZYK && v.nazev !== p.nazev)?.nazev || '';
   /** when the player last played the song (ms) – from practice statistics */
   function naposledyHrano(soubor) {
     const st = S.statistiky?.[S.profil || 'host'] || {};
@@ -1508,7 +1509,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const zalozky = $$('#zalozky button');
     for (const b of zalozky) {
       const z = b.dataset.zalozka;
-      b.classList.toggle('skryta', POLICE.includes(z) ? !vsechny.some(p => p.police === z) : z === 'moje' ? !vsechny.some(p => p.moje) : false);
+      b.classList.toggle('skryta', POLICE.includes(z) ? !vsechny.some(p => jeNaPolici(p, z)) : z === 'moje' ? !vsechny.some(p => p.moje) : false);
     }
     const zal = zalozky.find(b => b.classList.contains('ted') && !b.classList.contains('skryta'))?.dataset.zalozka || 'pro-me';
     for (const b of zalozky) {
@@ -1533,7 +1534,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       vybrane = vsechnyPisne(oblibene).sort(podleNazvu).map(p => ({ p }));
     }
     else if (zal === 'moje') vybrane = vsechny.filter(p => p.moje).sort(podleNazvu).map(p => ({ p }));
-    else vybrane = seradPolici(vsechny.filter(p => p.police === zal), uroven).map(({ polozka, tezsi }) => ({ p: polozka, tezsi }));
+    else vybrane = seradPolici(vsechny.filter(p => jeNaPolici(p, zal)), uroven).map(({ polozka, tezsi }) => ({ p: polozka, tezsi }));
     if (OBTIZNOST) vybrane = vybrane.filter(({ p }) => String(p.stupen || info[p.soubor]?.obtiznost?.stupen || '') === OBTIZNOST);
     $$('#obtiznost button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.obtiznost === OBTIZNOST)));
     el.innerHTML = '';
@@ -1574,7 +1575,7 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const umi = umim(vys[p.soubor], stat, p.soubor), preklad = prekladNazvu(p.verejna || (p.knihovna ? p : null));
     const nazevStupne = st ? t(['domu.snadne', 'domu.stredni', 'domu.tezsi'][st - 1]) : '';
     b.innerHTML = `<b>${esc(p.nazev)}${nova ? ` <span class="stitek-nova">${esc(t('domu.nova'))}</span>` : ''}${
-      umi ? ` <span class="stitek-umim">${esc(t('domu.umim'))}</span>` : ''}</b>${preklad ? `<small class="preklad">${esc(preklad)}</small>` : ''}`
+      umi ? ` <span class="stitek-umim">${esc(t('domu.umim'))}</span>` : ''}</b>${preklad && preklad !== p.nazev ? `<small class="preklad">${esc(preklad)}</small>` : ''}`
       + `<small>${esc(info[p.soubor]?.autor || '')}</small>`
       + `<span class="dl-spodek">${st ? `<span class="obtiznost" role="img" aria-label="${esc(nazevStupne)}">${klavesyObtiznosti(st)}</span>` : ''}`
       + `<span class="kroky3">${stav.map((x, i) => `<i class="${x === 'hotovo' ? 'ano' : rozehrane[i] ? 'rozehrano' : ''}"></i>`).join('')}</span></span>` + tlacitkoOblibene();
@@ -1808,10 +1809,15 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     Object.assign(PRED, { soubor, krok: d.krok, rychlost: d.rychlost, doporuceny: d.krok });
     $('#predNazev').textContent = p?.nazev || soubor;
     $('#predAutor').textContent = S.infoPisni?.[soubor]?.autor || '';
+    const text = S.knihovna.find(p => p.soubor === soubor) || p;
+    const varianty = text?.variantyTextu || [];
     $('#predText').open = false;
-    $('#predText').classList.toggle('skryta', !p?.slova?.length);
-    $('#predTextPisne').textContent = p?.slova?.join('\n') || '';
-    $('#predTextPisne').lang = p?.jazyk || '';
+    $('#predText').classList.toggle('skryta', !text?.slova?.length && !varianty.length);
+    $('#predTextPisne').hidden = !text?.slova?.length;
+    $('#predTextPisne').textContent = text?.slova?.join('\n') || '';
+    $('#predTextPisne').lang = text?.jazyk || '';
+    $('#predVariantyTextu').innerHTML = varianty.map(v =>
+      `<section lang="${esc(v.jazyk)}"><h3>${esc(v.nazev)}</h3><p>${esc(v.slova.join('\n'))}</p></section>`).join('');
     vykresliOblibenou();
     $('#predNoty').innerHTML = '';
     $('#vicPanel').classList.add('skryta'); $('#predZmenit').setAttribute('aria-expanded', 'false');

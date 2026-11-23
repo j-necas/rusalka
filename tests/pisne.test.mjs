@@ -91,6 +91,16 @@ test('the published page lazy-loads just one layout for a large score and preser
   }
 });
 
+test('carol variants appear in the carol lists and lead back to their existing scores', async () => {
+  const p = pisne().find(q => q.jmeno === 'silent-night');
+  const { html } = await strankaPisne(p);
+  assert.match(html, /<section[^>]+id="text-ticha-noc"[^>]* lang="cs">[\s\S]*Tichá noc/);
+  assert.match(seznamPisni('cs').html, /href="\/en\/sheet-music\/silent-night\/#text-ticha-noc"[^>]*>Tichá noc<\/a>/);
+  assert.equal(adresyPisni().filter(url => /silent-night|ticha-noc/.test(url)).length, 1);
+  assert.match(seznamPisni('en').html, /<h2 id="christmas">[\s\S]*<a href="\/en\/sheet-music\/greensleeves\/#text-what-child-is-this">What Child Is This\?<\/a>[\s\S]*?<\/section>/);
+  assert.equal(adresyPisni().filter(url => /greensleeves|what-child-is-this/.test(url)).length, 1);
+});
+
 test('introduction and song pages set CSP before scripts and preserve structured data', () => {
   for (const html of [stranka('cs'), seznamPisni('cs').html]) {
     const csp = html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1];

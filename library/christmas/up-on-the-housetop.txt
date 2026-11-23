@@ -1,0 +1,24 @@
+title: Up on the Housetop
+author: Benjamin Russell Hanby, lyrics attributed to Sophia Taylor Griswold
+time: 2/4
+key: -1
+tempo: 104
+clef: treble
+---
+# Melody and first stanza of Santa Claus in Chapel Gems (1866), pp. 108–109.
+1) F | C5/8=Up- C5/16=on C5/16=the C5/8=house, A4/16=no A4/16=de-
+2) F | F4/8=lay A4/8=no C5/4=pause,
+3) Bb F@1 | D5/8=Clat- D5/16=ter D5/16=the C5/8=steeds A4/8=of
+4) C7 | G4/8=San- C5/8=ta C5/4=Claus;
+5) F | C5/8=Down C5/16=thro’ C5/16=the C5/8=chim- A4/16=ney A4/16=with
+6) F | F4/8=loads A4/8=of C5/4=toys,
+7) Bb F@1 | D5/8=Ho D5/16=for D5/16=the C5/16=lit- A4/16=tle A4/8=ones,
+8) C7 F@1 | G4/8=Christ- C5/8=mas F4/4=joys.
+9) F | C5/8=O! C5/8=O! C5/4=O!
+10) C7 | Bb4/8=Who Bb4/16=would- D5/16=n’t G4/4=go,
+11) C7 | Bb4/8=O! Bb4/8=O! Bb4/4=O!
+12) F | A4/8=Who A4/16=would- C5/16=n’t F4/4=go,
+13) F | C5/8=Up- C5/16=on C5/16=the C5/8=house- A4/8=top,
+14) Bb F@1 | Bb4/8=click! D5/8=click! C5/4=click!
+15) Bb F@1 | D5/8=Down D5/16=thro’ D5/16=the C5/8=chim- A4/16=ney A4/16=with
+16) C7 F@1 | G4/8=good C5/8=St. F4/4=Nick.

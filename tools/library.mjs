@@ -16,6 +16,7 @@ const POVINNE = ['txt', 'police', 'jazyk', 'zdroj', 'volne'];
 const JMENO = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const UKAZKY = new URL('../songs/index.json', import.meta.url);
 const klic = t => String(t ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+const radkyTextu = s => Array.isArray(s) && s.length && s.every(r => typeof r === 'string' && r.trim());
 
 let verovio = null;                                      // one toolkit for the whole process (WASM start ~0.3 s)
 async function toolkit() {
@@ -71,8 +72,12 @@ export async function postavKnihovnu({ zdroj, cil, ukazky = UKAZKY }) {
     else if (z?.police && typeof z.txt === 'string' && z.txt.split('/')[0] !== z.police) chyby.push(`catalog.json: ${txt}: shelf "${z.police}" but the file is in ${z.txt.split('/')[0]}/`);
     if (z?.preklad != null && (typeof z.preklad !== 'object' || Object.entries(z.preklad).some(([k, v]) => !['en', 'cs'].includes(k) || typeof v !== 'string')))
       chyby.push(`catalog.json: ${txt}: preklad must be { en?, cs? } with text`);
-    if (z?.slova != null && (!Array.isArray(z.slova) || !z.slova.length || z.slova.some(r => typeof r !== 'string' || !r.trim())))
+    if (z?.slova != null && !radkyTextu(z.slova))
       chyby.push(`catalog.json: ${txt}: slova must be a list of non-empty lyric lines`);
+    if (z?.variantyTextu != null && (!Array.isArray(z.variantyTextu) || z.variantyTextu.some(v =>
+      typeof v?.nazev !== 'string' || !v.nazev.trim() || typeof v.jazyk !== 'string' || !/^[a-z]{2}$/.test(v.jazyk)
+      || !radkyTextu(v.slova) || (v.police != null && !POLICE.includes(v.police)))))
+      chyby.push(`catalog.json: ${txt}: variantyTextu must contain nazev, jazyk, slova and optionally a known police`);
     if (typeof z?.txt === 'string' && !soubory.includes(z.txt)) chyby.push(`catalog.json: ${z.txt}: file missing`);
     if (chyby.length > pred) vadne.add(txt);
   }
@@ -111,6 +116,7 @@ export async function postavKnihovnu({ zdroj, cil, ukazky = UKAZKY }) {
       autor: pisen.autor || '', jazyk: z.jazyk };
     if (z.preklad && Object.keys(z.preklad).length) polozka.preklad = z.preklad;
     if (z.slova) polozka.slova = z.slova;
+    if (z.variantyTextu?.length) polozka.variantyTextu = z.variantyTextu;
     hotove.push({ polozka, xml, pisen, zaznam: z });
   }
 

@@ -1,0 +1,22 @@
+title: Veselé vánoční hody
+author: tune from Matěj Václav Šteyer's hymnal, lyrics from Bedřich Bridel's songbook
+time: 2/4
+key: 0
+tempo: 96
+clef: treble
+---
+# Traditional sung version in C major. The opening phrase is written out with the next line of text.
+1) C | C4/8=Ve- E4/8 G4/8=se- G4/8=lé
+2) C F@1 | G4/4=vá- C5/8=noč- A4/8
+3) C G7@1 | G4/4=ní F4/4=ho-
+4) C | E4/2=dy,
+5) C | C4/8=zpí- E4/8 G4/8=vej- G4/8=te
+6) C F@1 | G4/4=dít- C5/8=ky A4/8
+7) C G7@1 | G4/4=ko- F4/4=le-
+8) C | E4/2=dy,
+9) {|:} C G7@1 | G4/8=o G4/8=tom, F4/8=co E4/8=se
+10) G7 | D4/8=vskut- E4/8=ku F4/8=sta- D4/8=lo,
+11) C G7@1 | G4/8=že G4/8=se F4/8=li- E4/8=dem
+12) G7 | D4/8=na- E4/8=ro- F4/8=di- D4/8=lo
+13) C G7@1 | E4/4=dě- D4/4=ťát-
+14) {:|} C | C4/2=ko.

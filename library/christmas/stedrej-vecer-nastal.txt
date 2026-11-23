@@ -1,0 +1,18 @@
+title: Štědrej večer nastal
+author: traditional
+time: 4/4
+key: 0
+tempo: 132
+clef: treble
+---
+# Traditional melody in C major, with both lines repeated as sung.
+1) C | C4/2=Ště- E4/2=drej
+2) G7 | F4/4=ve- E4/4=čer D4/2=na-
+3) C | C4/1=stal,
+4) C | E4/2=ště- G4/2=drej
+5) C G7@1 F@3 | G4/4=ve- F4/4=čer F4/4=na- A4/4=stal,
+6) G7 | D4/2=ko- F4/2=le-
+7) G7 C@1 | F4/4=dy E4/4=při- E4/4=chy- G4/4=stal,
+8) C | C4/2=ko- E4/2=le-
+9) G7 | F4/4=dy E4/4=při- D4/2=chy-
+10) C | C4/1=stal.

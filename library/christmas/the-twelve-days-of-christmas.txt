@@ -1,0 +1,24 @@
+title: The Twelve Days of Christmas
+author: traditional, melody as set by Frederic Austin
+time: 4/4
+key: -1
+tempo: 100
+clef: treble
+---
+# Final verse of the Novello first edition (1909), pp. 10–11, in F major.
+# Rebarred in 4/4, with the grace note on Eleven realized as an on-beat sixteenth.
+1) | C4/8=On C4/8=the
+2) F | C4/4=twelfth F4/8=day F4/8=of F4/4=Christ- E4/8=mas F4/8=my
+3) C7 F@2 | G4/8=true A4/8=love Bb4/8=sent G4/8=to A4/2=me
+4) F C7@3 | C5/4=Twelve G4/8=drum- A4/8=mers Bb4/8=drum- G4/8=ming, C5/16=e- C5/16=le- C5/8=ven
+5) F C7@2 | G4/8=pi- A4/8=pers Bb4/8=pi- G4/8=ping, C5/4=ten G4/8=lords A4/8=a-
+6) F C7@1 | Bb4/8=leap- G4/8=ing, C5/4=nine G4/8=la- A4/8=dies Bb4/8=danc- G4/8=ing,
+7) F C7@3 | C5/4=eight G4/8=maids A4/8=a- Bb4/8=milk- G4/8=ing, C5/4=seven
+8) F C7@2 | G4/8=swans A4/8=a- Bb4/8=swim- G4/8=ming, C5/4=six G4/8=geese A4/8=a-
+9) C7 F@1 Bb@3 | Bb4/8=lay- G4/8=ing, C5/2=five D5/4~=gold
+10) Bb F@1 | D5/16 C5/16 E5/16 D5/16 C5/2.~=rings,
+11) F | C5/4 C5/8=four Bb4/8 A4/8=call- G4/8=ing F4/4=birds,
+12) Bb C7@3 | Bb4/4=three D4/4=French F4/4=hens, G4/8=two F4/8
+13) F C7@2.5 F@3 | E4/8=tur- D4/8=tle C4/4=doves, F4/8=and G4/8=a C5/4=par-
+14) Bb C7@1.5 F@3 | D5/8=tridge Bb4/8 A4/8=in F4/8=a G4/4=pear F4/4~=tree.
+15) F | F4/2.

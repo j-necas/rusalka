@@ -9,13 +9,17 @@ import { policeSouboru } from '../static/lib/library.js';
 
 globalThis.DOMParser ??= DOMParser;                      // zMusicXml needs it (built into the browser)
 const D = new URL('../songs/', import.meta.url);
+const texty = JSON.parse(readFileSync(new URL('lyrics.json', D), 'utf8'));
 const seznam = [];
 for (const soubor of readdirSync(D).filter(jeNota).sort((a, b) => a.localeCompare(b, 'cs'))) {
   const xml = await xmlZBajtu(soubor, readFileSync(new URL(encodeURIComponent(soubor), D)));
   const police = policeSouboru(soubor);
   if (!police) throw new Error(`${soubor}: no shelf in POLICE_UKAZEK (static/lib/library.js)`);
   const model = zMusicXml(xml);
-  seznam.push({ soubor, nazev: nazevZXml(xml, soubor), police, stupen: obtiznost(model).stupen, autor: model.autor || '' });
+  const polozka = { soubor, nazev: nazevZXml(xml, soubor), police, stupen: obtiznost(model).stupen, autor: model.autor || '' };
+  const text = texty[soubor];
+  if (text) Object.assign(polozka, { jazyk: text.jazyk, slova: text.slova, variantyTextu: text.variantyTextu });
+  seznam.push(polozka);
 }
 writeFileSync(new URL('index.json', D), JSON.stringify(seznam, null, 1) + '\n');
 console.log(`songs/index.json: ${seznam.length} songs`);

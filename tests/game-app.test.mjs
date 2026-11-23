@@ -113,16 +113,18 @@ async function prohlizec(t, { kotva, knihovna = [], vlastni, profily = [{ id: 'p
 test('public lyrics are shown from a direct link and the search keeps the own copy only', async t => {
   const soubor = 'library/folk/cviceni.musicxml';
   const vlastni = 'Moje cvičení.musicxml';
-  const knihovna = [{ soubor, nazev: 'CVIČENÍ', police: 'folk', stupen: 1, jazyk: 'cs', slova: ['První řádek', 'Druhý řádek'] }];
+  const knihovna = [{ soubor, nazev: 'CVIČENÍ', police: 'folk', stupen: 1, jazyk: 'cs', slova: ['První řádek', 'Druhý řádek'],
+    variantyTextu: [{ nazev: 'Jiný název', jazyk: 'sk', slova: ['Ďalší verš'] }] }];
   const { $, cekejNa, videt } = await prohlizec(t, { kotva: '#pisen=' + encodeURIComponent(soubor), vlastni, knihovna });
   await cekejNa(() => videt('#kdo'));
   $('#kdoHraci').children[0].children[0].click();
   await cekejNa(() => videt('#pred') && !$('#predHrat').disabled);
   assert.equal(videt('#predText'), true);
   assert.equal($('#predTextPisne').textContent, 'První řádek\nDruhý řádek');
+  assert.match($('#predVariantyTextu').innerHTML, /lang="sk"[^>]*>[\s\S]*Jiný název[\s\S]*Ďalší verš/);
   $('#predZpet').click();
   await cekejNa(() => videt('#domu'));
-  $('#hledat').value = 'cvičení';
+  $('#hledat').value = 'jiny nazev';
   $('#hledat').oninput();
   await cekejNa(() => $('#pisne').children.some(p => p.dataset.soubor === vlastni));
   const ids = $('#pisne').children.map(p => p.dataset.soubor).filter(Boolean);

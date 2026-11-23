@@ -1,0 +1,35 @@
+title: O Canada
+author: Calixa Lavallée · Robert Stanley Weir · Adolphe-Basile Routhier
+time: 4/4
+key: -1
+tempo: 0
+clef: treble
+---
+1) | A4/2=O C5/4.=Can- C5/8=a-
+2) | F4/2.=da! G4/4=Our
+3) | A4/4=home Bb4/4=and C5/4=na- D5/4=tive
+4) | G4/2.=land! r/4
+5) | A4/2=True B4/4.=pa- B4/8=triot
+6) | C5/2.=love D5/4=in
+7) | E5/4=all E5/4=of D5/4=us D5/4=com-
+8) | C5/2.=mand. G4/8.=With A4/16
+9) | Bb4/4.=glow- A4/8=ing G4/4=hearts A4/8.=we Bb4/16
+10) | C5/4.=see Bb4/8=thee A4/4=rise, Bb4/8.=The C5/16
+11) | D5/4=True C5/4=North Bb4/4=strong A4/4=and
+12) | G4/2.=free! G4/8.=From A4/16
+13) | Bb4/4.=far A4/8=and G4/4=wide, A4/8.=O Bb4/16
+14) | C5/4.=Can- Bb4/8=a- A4/4=da, A4/4=we
+15) | G4/4=stand C5/4=on C5/8=guard B4/8 A4/8=for B4/8
+16) | C5/2=thee. r/2
+17) | A4/2=God C5/4.=keep C5/8=our
+18) | F4/2=land r/2
+19) | Bb4/2=glo- D5/4.=rious D5/8=and
+20) | G4/2=free! r/2
+21) | C5/2=O C#5/4.=Can- C#5/8=a-
+22) | D5/4=da, Bb4/4=we A4/4=stand G4/4=on
+23) | F4/2=guard G4/2=for
+24) | A4/2.=thee. r/4
+25) | C5/2=O F5/4.=Can- F5/8=a-
+26) | D5/4=da, Bb4/4=we A4/4=stand G4/4=on
+27) | C5/2=guard E4/2=for
+28) | F4/2.=thee. r/4

@@ -38,7 +38,9 @@ copies the library into the website.
    record used (include its link and any changes to the notes), `volne` why the song and edition are free,
    `preklad` an optional translation of the title. Use `slova` for a list of lyric lines displayed beside the
    score when the source supports the verse but its syllable placement cannot be verified. Include its source in
-   `zdroj`.
+   `zdroj`. If the same melody is sung with another text, use `variantyTextu: [{ nazev, jazyk, slova }]` on
+   the existing entry and cite that text's source and rights as well. A variant can have its own `police` for
+   browsing, for example a carol set to a folk melody. It links to the same score and keeps the same song ID.
 4. Run `npm run library` (it must report 0 errors). Compare the rendered notation with the source, or verify
    the pitches, durations and repeats against a digital source. Use `/library/review.html` for playback checks.
 

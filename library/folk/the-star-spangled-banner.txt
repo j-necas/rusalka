@@ -1,0 +1,40 @@
+title: The Star-Spangled Banner
+author: John Stafford Smith · Francis Scott Key
+time: 3/4
+key: -2
+tempo: 104
+clef: treble
+---
+1) | F4/8.=Oh, D4/16
+2) | Bb3/4=say, D4/4=can F4/4=you
+3) | Bb4/4~=see Bb4/4 D5/8.=by C5/16=the
+4) | Bb4/4=dawn’s D4/4=ear- E4/4=ly
+5) | F4/2=light, F4/8=What F4/8=so
+6) | D5/4.=proud- C5/8=ly Bb4/4=we
+7) | A4/2=hailed G4/8=at A4/8=the
+8) | Bb4/4=twi- Bb4/4=light’s F4/4=last
+9) | D4/4=gleam- Bb3/4=ing, F4/8.=Whose D4/16=broad
+10) | Bb3/4=stripes D4/4=and F4/4=bright
+11) | Bb4/2=stars, D5/8.=thro’ C5/16=the
+12) | Bb4/4=per- D4/4=il- E4/4=ous
+13) | F4/2=fight, F4/8=O’er F4/8=the
+14) | D5/4.=ram- C5/8=parts Bb4/4=we
+15) | A4/2=watched G4/8=were A4/8=so
+16) | Bb4/4=gal- Bb4/4=lant- F4/4=ly
+17) | D4/4=stream- Bb3/4=ing? D5/8=And D5/8=the
+18) | D5/4=rock- Eb5/4=ets’ F5/4=red
+19) | F5/2=glare, Eb5/8=the D5/8=bombs
+20) | C5/4=burst- D5/4=ing Eb5/4=in
+21) | Eb5/2=air, Eb5/8~=Gave Eb5/8
+22) | D5/4.=proof C5/8=thro’ Bb4/4=the
+23) | A4/4~=night A4/4 G4/8=that A4/8=our
+24) | Bb4/4=flag D4/4=was E4/4=still
+25) | F4/2=there. F4/8~=Oh, F4/8
+26) | Bb4/4=say, Bb4/4=does Bb4/8=that A4/8
+27) | G4/4=star- G4/4=span- G4/4=gled
+28) | C5/4=ban- Eb5/8=ner D5/8 C5/8=yet Bb4/8
+29) | Bb4/4=wave A4/4 F4/8=O’er F4/8=the
+30) | Bb4/4.=land C5/8 D5/8=of Eb5/8=the
+31) | F5/2=free Bb4/8=and C5/8=the
+32) | D5/4.=home Eb5/8=of C5/4=the
+33) | Bb4/2=brave?

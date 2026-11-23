@@ -69,12 +69,16 @@ test('a harder song gets a higher stupen than an easy one', async t => {
 
 test('a separate verse is kept in the index, while invalid lyric lines fail the build', async t => {
   const slova = ['První řádek', 'Druhý řádek.'];
-  const data = knihovna(t, { 'children/a.txt': PISEN('A'), 'children/b.txt': PISEN('B') },
-    [ZAZNAM('children/a.txt', { slova }), ZAZNAM('children/b.txt', { slova: [' '] })]);
+  const variantyTextu = [{ nazev: 'Druhá verze', jazyk: 'cs', slova, police: 'christmas' }];
+  const data = knihovna(t, { 'children/a.txt': PISEN('A'), 'children/b.txt': PISEN('B'), 'children/c.txt': PISEN('C') },
+    [ZAZNAM('children/a.txt', { slova, variantyTextu }), ZAZNAM('children/b.txt', { slova: [' '] }),
+      ZAZNAM('children/c.txt', { variantyTextu: [{ ...variantyTextu[0], jazyk: '"' }] })]);
   const { index, chyby } = await postavKnihovnu(data);
   assert.deepEqual(index.map(p => p.slova), [slova]);
-  assert.equal(chyby.length, 1);
+  assert.deepEqual(index.map(p => p.variantyTextu), [variantyTextu]);
+  assert.equal(chyby.length, 2);
   assert.match(chyby[0], /children\/b\.txt: slova/);
+  assert.match(chyby[1], /children\/c\.txt: variantyTextu/);
 });
 
 test('a bar-length error names the file and the bar', async t => {

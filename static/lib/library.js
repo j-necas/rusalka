@@ -18,7 +18,8 @@ export function slucPisne(soukrome, verejne) {
   }
   const kopie = new Map();
   const knihovna = verejne.filter(p => {
-    const shoda = podleSouboru.get(p.soubor) || podleNazvu.get(klicNazvu(p.nazev));
+    const shoda = podleSouboru.get(p.soubor) || podleNazvu.get(klicNazvu(p.nazev))
+      || p.variantyTextu?.map(v => podleNazvu.get(klicNazvu(v.nazev))).find(Boolean);
     if (!shoda) return true;
     if (!kopie.has(shoda.soubor)) kopie.set(shoda.soubor, p);
     return false;
@@ -72,12 +73,16 @@ export function dalsiZKnihovny(index, uroven, vysHrace, stat) {
     || [...nove].sort((a, b) => a.stupen - b.stupen || poradi(a, b))[0] || null;
 }
 
-/** diacritics- and case-insensitive search in title, author and translations */
+/** diacritics- and case-insensitive search in titles, authors and translations */
 export function hledej(index, dotaz) {
   const q = bezDiakritiky(dotaz).trim();
   if (!q) return [...(index || [])];
-  return (index || []).filter(p => [p.nazev, p.autor, p.preklad?.en, p.preklad?.cs].some(t => bezDiakritiky(t).includes(q)));
+  return (index || []).filter(p => [p.nazev, p.autor, p.preklad?.en, p.preklad?.cs, ...(p.variantyTextu || []).map(v => v.nazev)]
+    .some(t => bezDiakritiky(t).includes(q)));
 }
+
+/** A lyric variant can also place the same song on a second shelf. */
+export const jeNaPolici = (p, police) => p.police === police || (p.verejna || p).variantyTextu?.some(v => v.police === police) === true;
 
 /** shelves of the sample songs bundled with the app (songs/) */
 const POLICE_UKAZEK = {

@@ -1,0 +1,25 @@
+title: O Little Town of Bethlehem
+author: Lewis H. Redner, lyrics by Phillips Brooks
+time: 2/2
+key: 1
+tempo: 92
+clef: treble
+---
+# ST. LOUIS, from The Church Porch (1874). One verse, without the separate Amen cadence.
+1) G | B4/4=O
+2) G F#7@2 G@3 | B4/4=lit- B4/4=tle A#4/4=town B4/4=of
+3) G C@2 D7@3 | D5/4=Beth- C5/4=le- E4/4=hem! A4/4=How
+4) G D7@1 G@1.5 D7@2 | G4/4=still F#4/8=we G4/8 A4/4=see D4/4=thee
+5) G | B4/2.=lie, B4/4=A-
+6) G F#7@2 G@3 | B4/4=bove B4/4=thy E5/4=deep B4/4=and
+7) G C@2 D7@3 | D5/4=dream- C5/4=less E4/4=sleep, A4/4=The
+8) G D7@1 G@1.5 D7@3 | G4/4=si- F#4/8=lent G4/8 B4/4=stars A4/4=go
+9) G | G4/2.=by; B4/4=Yet
+10) G D7@2 C@3 | B4/4=in B4/4=thy A4/4=dark G4/4=streets
+11) B7 D@2 | F#4/2=shin- F#4/4=eth F#4/4=The
+12) C D7@1 C@2 D7@3 | E4/4=Ev- F#4/4=er- G4/4=last- A4/4=ing
+13) G | B4/2.=Light; B4/4=The
+14) G F#7@2 G@3 | B4/4=hopes B4/4=and A#4/4=fears B4/4=of
+15) G C@2 | D5/4=all C5/4=the E4/4=years E5/4=Are
+16) G D7@1 G@2 D7@3.5 | D5/4=met G4/4=in B4/4.=thee A4/8=to-
+17) G | G4/2.=night.

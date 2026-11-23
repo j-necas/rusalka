@@ -74,7 +74,54 @@
   "nazev": "Silent Night",
   "police": "christmas",
   "stupen": 2,
-  "autor": "Franz Xaver Gruber (1818)"
+  "autor": "Franz Xaver Gruber (1818)",
+  "jazyk": "en",
+  "slova": [
+   "Silent night! Holy night!",
+   "All is calm, all is bright,",
+   "Round yon Virgin Mother and Child!",
+   "Holy Infant, so tender and mild,",
+   "Sleep in heavenly peace!",
+   "Sleep in heavenly peace!",
+   "Silent night! Holy night!",
+   "Shepherds quake at the sight!",
+   "Glories stream from Heaven afar,",
+   "Heavenly Hosts sing Alleluia!",
+   "Christ, the Saviour, is born!",
+   "Christ, the Saviour, is born!",
+   "Silent night! Holy night!",
+   "Son of God, love’s pure light",
+   "Radiant beams from Thy Holy Face",
+   "With the dawn of redeeming grace,",
+   "Jesus, Lord, at Thy Birth!",
+   "Jesus, Lord, at Thy Birth!"
+  ],
+  "variantyTextu": [
+   {
+    "nazev": "Tichá noc",
+    "jazyk": "cs",
+    "slova": [
+     "Tichá noc, svatá noc",
+     "jala lid v blahý klid.",
+     "Dvé jen srdcí tu v Betlémě bdí,",
+     "hvězdy při svitu u jeslí dlí,",
+     "v nichž malé děťátko spí,",
+     "v nichž děťátko spí.",
+     "Tichá noc, svatá noc!",
+     "Co anjel vyprávěl",
+     "přišed s jasností v pastýřův stan,",
+     "zní již s výsosti, s všech země stran:",
+     "„Vám jest dnes Spasitel dán!",
+     "Přišel Kristus Pán.“",
+     "Tichá noc, svatá noc!",
+     "Ježíšku na líčku",
+     "si Boží láska s úsměvem hrá,",
+     "z pod zlaté řasy k nám vyzírá,",
+     "že nám až srdéčko plá,",
+     "vstříc mu vděčně plá."
+    ]
+   }
+  ]
  },
  {
   "soubor": "Twinkle, Twinkle, Little Star.musicxml",

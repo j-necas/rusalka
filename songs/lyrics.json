@@ -1,0 +1,53 @@
+{
+  "Silent Night.musicxml": {
+    "jazyk": "en",
+    "zdroj": "John Freeman Young, Carols for Christmas Tide (New York, 1859), no. 1, https://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/Images/JF_Young/C-Tide-03-High.jpg. Tichá noc: Církevní zpěvník pro evanjelické křesťany (Evanjelická matice, c. 1905), no. 85, p. 74, https://www.digitalniknihovna.cz/mzk/view/uuid:7fa15010-c72f-11ea-b7a2-005056827e51?page=uuid:f354804f-2763-45c4-b765-8a5598ba4470.",
+    "volne": "Music Franz Xaver Gruber (d. 1863), original words Joseph Mohr (d. 1848), English translation John Freeman Young (d. 1885); Czech translation published anonymously in 1893 and reprinted c. 1905.",
+    "slova": [
+      "Silent night! Holy night!",
+      "All is calm, all is bright,",
+      "Round yon Virgin Mother and Child!",
+      "Holy Infant, so tender and mild,",
+      "Sleep in heavenly peace!",
+      "Sleep in heavenly peace!",
+      "Silent night! Holy night!",
+      "Shepherds quake at the sight!",
+      "Glories stream from Heaven afar,",
+      "Heavenly Hosts sing Alleluia!",
+      "Christ, the Saviour, is born!",
+      "Christ, the Saviour, is born!",
+      "Silent night! Holy night!",
+      "Son of God, love’s pure light",
+      "Radiant beams from Thy Holy Face",
+      "With the dawn of redeeming grace,",
+      "Jesus, Lord, at Thy Birth!",
+      "Jesus, Lord, at Thy Birth!"
+    ],
+    "variantyTextu": [
+      {
+        "nazev": "Tichá noc",
+        "jazyk": "cs",
+        "slova": [
+          "Tichá noc, svatá noc",
+          "jala lid v blahý klid.",
+          "Dvé jen srdcí tu v Betlémě bdí,",
+          "hvězdy při svitu u jeslí dlí,",
+          "v nichž malé děťátko spí,",
+          "v nichž děťátko spí.",
+          "Tichá noc, svatá noc!",
+          "Co anjel vyprávěl",
+          "přišed s jasností v pastýřův stan,",
+          "zní již s výsosti, s všech země stran:",
+          "„Vám jest dnes Spasitel dán!",
+          "Přišel Kristus Pán.“",
+          "Tichá noc, svatá noc!",
+          "Ježíšku na líčku",
+          "si Boží láska s úsměvem hrá,",
+          "z pod zlaté řasy k nám vyzírá,",
+          "že nám až srdéčko plá,",
+          "vstříc mu vděčně plá."
+        ]
+      }
+    ]
+  }
+}

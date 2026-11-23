@@ -1,7 +1,7 @@
 // Library selection logic: level, shelf order, At home, next song, search.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { urovenHrace, seradPolici, naDomove, dalsiZKnihovny, hledej, policeSouboru, navrhyZKnihovny, slucPisne } from '../static/lib/library.js';
+import { urovenHrace, seradPolici, naDomove, dalsiZKnihovny, hledej, policeSouboru, navrhyZKnihovny, slucPisne, jeNaPolici } from '../static/lib/library.js';
 
 const P = (soubor, stupen, police = 'children', nazev = soubor, extra = {}) => ({ soubor, nazev, police, stupen, autor: '', jazyk: 'cs', ...extra });
 
@@ -24,6 +24,18 @@ test('slucPisne still honours a same-file sample edit and preserves distinct own
   assert.deepEqual(vlastni.map(x => x.soubor), [prepsana.soubor, jina.soubor]);
   assert.equal(vlastni[0].police, 'christmas');
   assert.deepEqual(knihovna, []);
+});
+
+test('a lyric variant matches an own song by title and can appear on a second shelf', () => {
+  const version = { nazev: 'What Child Is This?', jazyk: 'en', police: 'christmas', slova: ['A verse'] };
+  const original = P('library/folk/greensleeves.musicxml', 2, 'folk', 'Greensleeves', { variantyTextu: [version] });
+  const own = P('own.musicxml', 1, null, version.nazev);
+  const { vlastni, knihovna } = slucPisne([own], [original]);
+  assert.deepEqual(vlastni.map(p => p.soubor), [own.soubor]);
+  assert.deepEqual(knihovna, []);
+  assert.ok(jeNaPolici(vlastni[0], 'folk'));
+  assert.ok(jeNaPolici(vlastni[0], 'christmas'));
+  assert.ok(!jeNaPolici(vlastni[0], 'classics'));
 });
 
 test('urovenHrace: no results -> 1; finished step of difficulty n -> n+1, clamped to 3', () => {
