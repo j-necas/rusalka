@@ -48,8 +48,8 @@ const zkus = async (nazev, f) => { try { await f(); } catch (e) { kontrola(nazev
 const b = await chromium.launch({ executablePath: CHROME, headless: true });
 // vlastni: only the prepared songs and data (no samples, no library) and a fake Web MIDI; otherwise an empty browser
 // with the website's samples and library
-async function stranka(data, sirka = Number(process.env.SIRKA || 1280), vyska = Number(process.env.VYSKA || 860), jazyk = 'cs', vlastni = true, locale = 'en-US', predNactenim = null) {
-  const p = await b.newPage({ viewport: { width: sirka, height: vyska }, locale });
+async function stranka(data, sirka = Number(process.env.SIRKA || 1280), vyska = Number(process.env.VYSKA || 860), jazyk = 'cs', vlastni = true, locale = 'en-US', predNactenim = null, mobil = false) {
+  const p = await b.newPage({ viewport: { width: sirka, height: vyska }, locale, ...(mobil ? { isMobile: true, hasTouch: true } : {}) });
   p.setDefaultTimeout(5000);
   p.chyby = [];
   p.on('pageerror', e => p.chyby.push(e.message));
@@ -151,7 +151,9 @@ try {
       const c = e.cloneNode(false); c.classList.remove('s-loutkou'); document.body.append(c);
       const bg = getComputedStyle(c).backgroundImage; c.remove(); return bg;
     }));
-    kontrola('animals from the set C atlas', obr.length >= 2 && obr.every(b => /animals\/[a-z-]+\.webp/.test(b)), obr.join(' | ').slice(0, 160));
+    const zvirat = obr.filter(b => /animals\/[a-z-]+\.webp/.test(b)).length;   // a player without an animal has the Rusalka picture
+    kontrola('animals from the set C atlas (a player without an animal: the Rusalka picture)', zvirat >= 2
+      && obr.every(b => /animals\/[a-z-]+\.webp|pictures\/rusalka\.webp/.test(b)), obr.join(' | ').slice(0, 160));
     // a blink lasts only 120–200 ms: catch the attribute change, not the state at one moment
     await p.evaluate(() => { window.__mrkl = false; new MutationObserver(z => { if (z.some(x => x.target.dataset?.vyraz === 'blink')) window.__mrkl = true; })
       .observe(document.querySelector('#kdo'), { subtree: true, attributes: true, attributeFilter: ['data-vyraz'] }); });
@@ -169,7 +171,7 @@ try {
     await p.waitForTimeout(700);
     const druhy = await otisk();
     kontrola('animals on Who is playing are drawn in motion (one canvas each, drawing visible)',
-      prvni.length === (await p.locator('#kdo .zvire').count()) && prvni.every(x => x.n > x.w * x.w * 0.1), JSON.stringify(prvni).slice(0, 160));
+      prvni.length === zvirat && prvni.every(x => x.n > x.w * x.w * 0.1), JSON.stringify(prvni).slice(0, 160));
     kontrola('the drawings move in a loop (the drawing changes)', druhy.some((x, i) => x.h !== prvni[i]?.h), JSON.stringify(druhy).slice(0, 160));
     kontrola('the rabbit (Fík) is drawn in motion too, like the others', await p.evaluate(() => {
       const c = document.querySelector('#kdo .zvire[data-zvire="kralik"] canvas.loutka'); if (!c) return false;
@@ -388,15 +390,15 @@ try {
     await snimek(d, 'domu-pokracuj');
     kontrola('no song is „new“ after an update', (await d.locator('#pisne .stitek-nova').count()) === 0);
     const kubo = await d.locator('#pisne .dl', { hasText: 'Frère Jacques' }).locator('.kroky3 i').evaluateAll(el => el.map(e => e.className));
-    kontrola('tile has three step bars', kubo.join() === 'ano,,', kubo.join());
+    kontrola('tile has three step bars (a step played without three stars hatched)', kubo.join() === 'ano,rozehrano,', kubo.join());
     await snimek(d, 'domu');
     await d.fill('#hledat', 'frere');
     await d.waitForTimeout(200);
     kontrola('search ignores diacritics', (await d.locator('#pisne .dl:not(.dl-vymysli)').count()) === 1);
     await d.fill('#hledat', '');
     const zal = await d.locator('#zalozky button:visible').allInnerTexts();
-    kontrola('tabs: For me, Favourites and the shelves that have songs (no difficulty tabs, no Mine without own songs)',
-      zal.join() === 'Pro mě,Oblíbené,Dětské,Vánoční,Klasika', zal.join());
+    kontrola('tabs: For me, All songs, Favourites and the shelves that have songs (no difficulty tabs, no Mine without own songs)',
+      zal.join() === 'Pro mě,Všechny písničky,Oblíbené,Dětské,Vánoční,Klasika', zal.join());
     kontrola('every tile shows its difficulty', (await d.locator('#pisne .dl[data-soubor]').count()) > 0
       && (await d.locator('#pisne .dl[data-soubor]:not(:has(.obtiznost))').count()) === 0);
     await d.locator('#zalozky [data-zalozka="oblibene"]').click();
@@ -560,8 +562,9 @@ try {
     await vs.waitForTimeout(1500);
     await vs.locator('#klavesy .klavesa[data-p="60"]').click();
     await vs.waitForTimeout(300);
-    kontrola('the 30 piano recordings are loaded and an on-screen key plays one', new Set(mp3.filter(u => /\/sounds\/piano\//.test(u))).size === 30
-      && await vs.evaluate(() => window.__nahravky > 0), `${mp3.length} mp3, ${await vs.evaluate(() => window.__nahravky)} played`);
+    const vzorku = new Set(mp3.filter(u => /\/sounds\/piano\//.test(u))).size;
+    kontrola('only the piano recordings around the song are loaded (not all 30) and an on-screen key plays one', vzorku > 0 && vzorku < 30
+      && await vs.evaluate(() => window.__nahravky > 0), `${vzorku} of 30 samples, ${await vs.evaluate(() => window.__nahravky)} played`);
   kontrola('no page errors (How you play)', vs.chyby.length === 0, vs.chyby.join(' | '));
   // backup reminder on Home: playing for over a week and no backup yet → shown; Later hides it
   const zp = await stranka({ ...DATA(), data: { ...DATA().data, statistiky: JSON.stringify({ e: { 'Ode to Joy.musicxml#2': { verze: 1, pokusu: 1,
@@ -733,7 +736,7 @@ try {
     const volby = (await h.locator('#predCo .stupen-text b').allInnerTexts()).map(x => x.trim());
     kontrola('the version picker is a ladder of five, easiest first, each with its description, and extra options closed',
       await h.locator('#vicPanel').isVisible() && await h.locator('#predCo input:checked').inputValue() === '2'
-      && volby.join('|') === 'Melodie, snadný rytmus nejsnazší|Celá melodie|Melodie a basy|Melodie a akordy|Všechny noty nejtěžší'
+      && volby.join('|') === 'Melodie, snadný rytmus nejsnazší|Celá melodie|Melodie a basy|Melodie a akordy|Melodie s doprovodem nejtěžší'
       && /Melodie přesně v rytmu/.test(await h.locator('#predCo .stupen:has(input:checked) small').textContent())
       && !(await h.locator('#tonina').isVisible()), volby.join(' | '));
     kontrola('the left-hand arrangement only shows with Melody and chords', !(await h.locator('#styl').isVisible()));
@@ -764,8 +767,8 @@ try {
     if (await h.locator('#predCo input[value="4"]:not([disabled])').count()) {
       await h.locator('#predCo input[value="4"]').check();
       await h.waitForTimeout(500);
-      kontrola('a score version with a left hand (Melody and chords) sets both hands and shows the style', (await h.locator('#predRuce [data-ruka="vse"]').getAttribute('aria-pressed')) === 'true'
-        && await h.locator('#styl').isVisible() && /Melodie a akordy, oběma rukama/.test(await souhrnText()), await souhrnText());
+      kontrola('a score version with a left hand (Melody and chords) sets both hands; the style is on Melody with accompaniment', (await h.locator('#predRuce [data-ruka="vse"]').getAttribute('aria-pressed')) === 'true'
+        && !(await h.locator('#styl').isVisible()) && /Melodie a akordy, oběma rukama/.test(await souhrnText()), await souhrnText());
       await h.locator('#predRuce [data-ruka="1"]').click();
       await h.waitForTimeout(300);
       kontrola('the hand can be changed, with help about the remaining part',
@@ -805,7 +808,8 @@ try {
       await h.waitForTimeout(400);
       await h.selectOption('#tonina', 'C');
       await h.waitForTimeout(500);
-      kontrola('All the notes in another key says the notes get simplified', /zjednoduš/.test(await h.locator('#predCoPopis').innerText()), await h.locator('#predCoPopis').innerText());
+      kontrola('Melody with accompaniment in another key: nothing simplified (only All the notes of a written left hand is)',
+        await h.locator('#styl').isVisible() && !(await h.locator('#predCoPopis').isVisible()), await h.locator('#predCoPopis').innerText());
       await h.selectOption('#tonina', 'ne');
       await h.locator('#predCo input[value="2"]').check();
       await h.waitForTimeout(400);
@@ -1246,8 +1250,8 @@ try {
     kontrola('1280 px: the full menu, nothing collapsed', (await sirka.locator('#kdo .horni-menu.sbalene').count()) === 0 && await viditelna(sirka, '#kdo .menu-settings')
       && !(await viditelna(sirka, '#kdo .menu-vse')));
     await sirka.close();
-    const tel = await stranka(DATA(), 390, 844);
-    kontrola('390 px: the language, AI and Menu, nothing outside the screen', await viditelna(tel, '#kdo .jazyk-volba') && await viditelna(tel, '#kdo .menu-ai') && await viditelna(tel, '#kdo .menu-vse')
+    const tel = await stranka(DATA(), 390, 844, 'cs', true, 'en-US', null, true);
+    kontrola('390 px phone (isMobile): the language, AI and Menu, nothing outside the screen', await viditelna(tel, '#kdo .jazyk-volba') && await viditelna(tel, '#kdo .menu-ai') && await viditelna(tel, '#kdo .menu-vse')
       && !(await viditelna(tel, '#kdo .menu-songs')) && !(await viditelna(tel, '#kdo .menu-settings')) && !(await ven(tel)));
     await tel.locator('#kdo .menu-vse').click();
     const polozky = await tel.locator('#menuOkno button[class*="menu-"]').evaluateAll(el => el.filter(e => e.getClientRects().length).map(e => e.className));
@@ -1262,6 +1266,35 @@ try {
     kontrola('390 px Home: AI and Menu, nothing outside the screen', await viditelna(tel, '#domu .menu-vse') && !(await ven(tel)));
     kontrola('no page errors (390 px)', tel.chyby.length === 0, tel.chyby.join(' | '));
     await tel.close();
+    // a phone in the game, portrait and landscape: Quit and Pause on screen, keys a finger wide, the whole keyboard visible
+    for (const [w, hgt] of [[390, 844], [844, 390]]) {
+      const g = await stranka(DATA(), w, hgt, 'cs', true, 'en-US', null, true);
+      await g.locator('#kdo .dlazdice-hrace', { hasText: 'Fík' }).click();
+      await g.waitForTimeout(500);
+      await g.locator('#pisne .dl', { hasText: 'Frère Jacques' }).click();
+      await g.waitForSelector('#predNoty svg', { timeout: 15000 });
+      await g.locator('#predHrat').click();
+      await g.waitForSelector('#klavesy .klavesa', { timeout: 15000 });
+      await g.waitForTimeout(400);
+      const m = await g.evaluate(() => {
+        const r = s => document.querySelector(s).getBoundingClientRect(), W = document.documentElement.clientWidth, H = document.documentElement.clientHeight;
+        const bile = [...document.querySelectorAll('#klavesy .klavesa.bila')].map(k => k.getBoundingClientRect().width);
+        return { W, H, pauza: r('#pauza'), zpet: r('#zpet'), jak: getComputedStyle(document.querySelector('#hraJak')).display,
+          jmeno: document.querySelector('#pauza').textContent.trim(), klavesy: r('#klavesy'), noty: r('#noty'), bila: Math.min(...bile),
+          toast: Number(getComputedStyle(document.querySelector('#toast')).zIndex) };
+      });
+      if (w < hgt) {
+        kontrola('390×844 game: Quit and Pause fully on screen (icons, named), the way of playing hidden', m.pauza.right <= m.W && m.pauza.left >= 0
+          && m.zpet.left >= 0 && m.pauza.width >= 44 && m.jak === 'none' && m.jmeno.length > 0, JSON.stringify({ p: m.pauza.right, W: m.W, jak: m.jak }));
+        kontrola('390×844 game: white keys at least 40 px wide', m.bila >= 40, String(m.bila));
+      } else {
+        kontrola('844×390 game: the whole keyboard and the notes fit on screen', m.klavesy.bottom <= m.H + 1 && m.noty.height >= 100 && m.klavesy.height >= 90,
+          JSON.stringify({ k: m.klavesy.bottom, H: m.H, n: m.noty.height }));
+      }
+      kontrola(`${w}×${hgt}: the toast is above every window (z-index ≥ 70)`, m.toast >= 70, String(m.toast));
+      kontrola(`no page errors (${w}×${hgt} game)`, g.chyby.length === 0, g.chyby.join(' | '));
+      await g.close();
+    }
     const tab = await stranka(DATA(), 900, 700);
     await tab.locator('#kdo .dlazdice-hrace', { hasText: 'Fík' }).click();
     await tab.waitForTimeout(500);
@@ -1427,12 +1460,12 @@ try {
     await doProhlizece(k, KNIHOVNA_DATA, MOJE);
     await vyberHrace(k, 'Ela');
     kontrola('For me: the library songs Ela played (with the author from the index)', (await dlazdice(k, 'Skákal pes').count()) === 1
-      && (await dlazdice(k, 'Pásla ovečky').count()) === 1 && (await dlazdice(k, 'Skákal pes').locator('small').first().textContent()) === 'traditional');
+      && (await dlazdice(k, 'Pásla ovečky').count()) === 1 && (await dlazdice(k, 'Skákal pes').locator('small').first().textContent()) === 'lidová');
     const navrhy = await k.locator('#pisne .dl[data-soubor^="library/"]').evaluateAll(el => el.map(e => e.dataset.soubor));
     kontrola('For me also suggests a few library songs she has not played (up to 4)', navrhy.length >= 3 && navrhy.length <= 6, navrhy.join());
     const zal = await k.locator('#zalozky button:visible').allInnerTexts();
-    kontrola('tabs: For me, All songs, Favourites, the four shelves and Mine',
-      zal.join() === 'Pro mě,Všechny písničky,Oblíbené,Dětské,Lidové ze světa,Vánoční,Klasika,Moje', zal.join());
+    kontrola('tabs: For me, All songs, Favourites, the six shelves and Mine',
+      zal.join() === 'Pro mě,Všechny písničky,Oblíbené,Dětské,České lidové,Lidové ze světa,Státní hymny,Vánoční,Klasika,Moje', zal.join());
     await snimek(k, 'domu-knihovna');
     await zalozka(k, 'vsechny');
     kontrola('All songs includes the library, the samples and the player’s own songs',
@@ -1679,7 +1712,7 @@ try {
     await doProhlizece(kne, NOVACEK, MOJE);
     await vyberHrace(kne, 'Ela');
     const zal = await kne.locator('#zalozky button:visible').allInnerTexts();
-    kontrola('English tabs', zal.join() === "For me,All songs,Favourites,Children's songs,Folk songs of the world,Christmas,Classics,Mine", zal.join());
+    kontrola('English tabs', zal.join() === "For me,All songs,Favourites,Children's songs,Czech folk songs,Folk songs of the world,National anthems,Christmas,Classics,Mine", zal.join());
     await zalozka(kne, sPrekladem.police); await ukazVse(kne);
     kontrola('English translation line', (await naPolici(kne)).find(d => d.soubor === sPrekladem.soubor)?.preklad === sPrekladem.preklad.en);
   });

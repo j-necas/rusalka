@@ -11,9 +11,11 @@ a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
 1. **Hráč:** začni hrát rovnou. Profil si můžeš vytvořit na Domů přes **Host → + Nový hráč** (zvířátko, dítě/dospělý).
    Pokud Rusalka zná víc hráčů, při spuštění si jednoho vybereš.
 2. **Písnička:** klepni na písničku. Novou přidáš tlačítkem **Přidat písničku**:
-   - MusicXML (`.musicxml`, `.xml`, `.mxl`) se načte přímo,
+   - MusicXML (`.musicxml`, `.xml`, `.mxl`) se načte přímo; takty, jejichž délka nesedí nebo si jimi převod nebyl jistý
+     (změna taktu či tóniny, transponující part, vynechaný hlas), aplikace vypíše a nabídne otevřít editor,
    - MIDI (`.mid`, `.midi`, `.kar`) převede aplikace sama: vybereš stopu s melodií (a případně levou ruku),
-     noty se zarovnají na mřížku, rozdělí do taktů, odhadne se předznamenání a předtaktí, slabiky z karaoke souborů
+     noty se zarovnají na mřížku (tak jemnou, aby se žádné dvě noty
+     neslily; když se slít musely, aplikace to napíše), rozdělí do taktů, odhadne se předznamenání a předtaktí, slabiky z karaoke souborů
      se přiřadí k notám. Výsledek se otevře v editoru,
    - PDF a fotky not aplikace nepřevádí – viz **Noty z papíru** níže.
 
@@ -28,7 +30,9 @@ a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
 3. **Tři kroky učení** (a poslech zvlášť):
    1. *Najdi noty*: bez tempa, čeká na správnou klávesu.
    2. *S doprovodem*: doprovod hraje v tempu, ale u každé noty počká, dokud nezazní.
-   3. *V rytmu*: odpočet podle taktu, doprovod a hodnocení načasování.
+   3. *V rytmu*: odpočet celých taktů podle taktu (předtaktí začne na své době, metronom zdůrazní 1. dobu), doprovod
+      a hodnocení načasování. Správná klávesa trochu pozdě nebo brzy se počítá jako poloviční zásah na své notě, nikdy
+      hůř než vynechaná nota.
 
    *Poslechnout* (tlačítko vedle kroků): aplikace zahraje a ukáže klávesy.
 
@@ -90,7 +94,9 @@ a **O Rusalce**. Kde se odkazy nevejdou, ukáže lišta jen **AI** a **Menu**.
    spolu s celou stránkou). Dospělý hráč má u dvouručních skladeb rovnou zvolené obě ruce.
 7. **Upravit noty:** editor kterékoli písničky (klepni na notu; šipky výška, ←→ další nota, 1–6 délka, `.` tečka,
    `R` pomlka, `T` ligatura, Cmd+Z zpět). Tón zahraný na klavíru se zapíše do vybrané noty.
-8. **Kalibrace** (v režimu V rytmu přes Pauza → Klavír a zvuk): změří zpoždění klavíru/zvuku (Bluetooth) a odečítá ho.
+8. **Kalibrace** (v režimu V rytmu přes Pauza → Klavír a zvuk): změří zpoždění klavíru/zvuku (Bluetooth) a odečítá ho,
+   zvlášť pro klavír, mikrofon a klávesy na obrazovce (s mikrofonem se počítá jakýkoli zvuk). Bez měření Rusalka
+   odečítá zpoždění zvukového výstupu a u mikrofonu ještě jeho vlastní zpoždění rozpoznání (asi 60 ms).
 9. **Mikrofon:** hraní bez MIDI (akustické piano, flétna, zpěv).
    - Na začátku je potřeba chvilka ticha na změření šumu.
    - Aplikace ví, kterou notu čeká, a ověřuje jen ji.
@@ -122,6 +128,9 @@ na obrazovce nebo s mikrofonem.
   z prohlížeče. Po restartu prohlížeče se může zeptat znovu (**Povolit přístup ke složce**). Rozložení:
   `rusalka.json`, `pisne/`, `data/*.json`, `zalohy/` (původní soubory před úpravou v editoru).
   Když se soubor s daty mezitím změnil jinde (jiný tab, jiný počítač), aplikace ho před zápisem sloučí.
+  Jakmile jsou data z prohlížeče zkopírovaná do složky a ověřená, kopie v prohlížeči se vyprázdní; když složka čeká
+  na povolení, nový pokrok (i písničky) se drží v prohlížeči a potom přesune do složky. **Ukládat zase do
+  prohlížeče** s převzetím dat udělá z prohlížeče přesnou kopii složky (nic smazaného se nevrátí).
 - **Ukázky** (volná díla, `songs/`) jsou součástí webu a Rusalka je ukazuje jako písničky z knihovny na jejich
   policích. Vlastní písnička se stejným jménem souboru má přednost. Písničky z knihovny, které hráč odebral z Domova, si aplikace pamatuje pro každého
   hráče v `data/knihovnaSkryte.json`.
@@ -164,7 +173,7 @@ node tools/samples.mjs             # znovu vygeneruje ukázkové písničky (vol
 Vydání: tag `v*` spustí `.github/workflows/release.yml` – sestaví zipy se skilly a připraví
 koncept vydání; zveřejní ho člověk.
 
-Prerekvizity: Node.js 18+. Web na GitHub Pages sestaví a nasadí `.github/workflows/pages.yml` (zapíná se
+Prerekvizity: Node.js 22+. Web na GitHub Pages sestaví a nasadí `.github/workflows/pages.yml` (zapíná se
 v nastavení repozitáře: Pages → Source: GitHub Actions).
 
 ## Architektura

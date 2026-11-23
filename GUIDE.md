@@ -11,9 +11,12 @@ piano, data and backups) and **About**. Where the links don't fit, the bar shows
 1. **Player:** start playing right away. You can create a profile on Home under **Guest → + New player** (an animal picture, child or adult).
    If Rusalka has several players, choose one when you open the app.
 2. **Song:** tap a song. To add a new one, use **Add a song**:
-   - MusicXML (`.musicxml`, `.xml`, `.mxl`) loads directly,
+   - MusicXML (`.musicxml`, `.xml`, `.mxl`) loads directly; bars whose length doesn't add up or that the conversion was
+     unsure about (a change of time or key, a transposing part, a dropped voice) are listed with an offer to open the
+     editor,
    - MIDI (`.mid`, `.midi`, `.kar`) is converted by the app itself: you choose the track with the melody (and
-     optionally the left hand), the notes are snapped to a grid and split into bars, the key signature and any
+     optionally the left hand), the notes are snapped to a grid (the finest one the onsets need, so no two notes merge;
+     notes that still had to merge are reported) and split into bars, the key signature and any
      pickup bar are guessed, and syllables from karaoke files are matched to the notes. The result opens in the
      editor,
    - the app does not convert PDFs or photos of sheet music – see **Sheet music on paper** below.
@@ -30,7 +33,9 @@ piano, data and backups) and **About**. Where the links don't fit, the bar shows
 3. **Three learning steps** (plus listening on its own):
    1. *Find the notes*: no tempo, waits for the right key.
    2. *With backing*: the accompaniment keeps the tempo but waits at each note until it is played.
-   3. *In rhythm*: a count-in based on the time signature, accompaniment, and feedback on timing.
+   3. *In rhythm*: a count-in of whole bars based on the time signature (a pickup starts on its beat, the metronome
+      accents beat 1), accompaniment, and feedback on timing. The right key a little too late or too early counts
+      as half a hit on its note, never worse than skipping it.
 
    *Listen* (the button next to the steps): the app plays the song and shows the keys.
 
@@ -95,7 +100,10 @@ piano, data and backups) and **About**. Where the links don't fit, the bar shows
    room together with the full page). Adult players have both hands selected straight away for two-handed pieces.
 7. **Edit notes:** an editor for any song (tap a note; arrow keys change the pitch, ←→ next note, 1–6 length, `.`
    dot, `R` rest, `T` tie, Cmd+Z undo). A note played on the piano is written into the selected note.
-8. **Calibration** (Pause → Piano and sound in In rhythm mode): measures the delay of the piano or sound (Bluetooth) and subtracts it.
+8. **Calibration** (Pause → Piano and sound in In rhythm mode): measures the delay of the piano or sound (Bluetooth) and subtracts it,
+   separately for the piano, the microphone and the on-screen keys (with the microphone any sound counts). Without
+   a measurement Rusalka subtracts the sound output latency, and for the microphone also its own detection delay
+   (about 60 ms).
 9. **Microphone:** playing without MIDI (acoustic piano, recorder, singing).
    - It needs a moment of silence at the start to measure the background noise.
    - The app knows which note it is waiting for and only listens for that one.
@@ -129,7 +137,10 @@ an iPad don't support MIDI: there you play on the on-screen keys or with the mic
   app offers to fill it with the data from the browser. After a browser restart it may ask again (**Allow folder
   access**). Layout: `rusalka.json`, `pisne/` (songs), `data/*.json`, `zalohy/` (original files from before an
   edit in the editor). If a data file has changed elsewhere in the meantime (another tab, another computer), the
-  app merges it before writing.
+  app merges it before writing. Once the browser's data have been copied into the folder and checked, the browser
+  copy is emptied; while the folder waits for permission, new progress (songs too) is kept in the browser and moved
+  into the folder afterwards. **Save in the browser again** with the data taken over makes the browser an exact copy
+  of the folder (nothing deleted comes back).
 - **Samples** (public-domain works, `songs/`) are part of the website and are shown as library songs on their
   shelves. Your own song with the same file name takes priority. Library songs a player removed from home are remembered per
   player in `data/knihovnaSkryte.json`.
@@ -172,7 +183,7 @@ node tools/samples.mjs             # regenerates the sample songs (public domain
 Release: a `v*` tag runs `.github/workflows/release.yml` – it builds the skill zips and
 prepares a draft release; a person publishes it.
 
-Requirements: Node.js 18+. The GitHub Pages website is built and deployed by `.github/workflows/pages.yml`
+Requirements: Node.js 22+. The GitHub Pages website is built and deployed by `.github/workflows/pages.yml`
 (enable it in the repository settings: Pages → Source: GitHub Actions).
 
 ## Architecture
