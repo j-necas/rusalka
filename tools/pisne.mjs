@@ -19,7 +19,7 @@ const SVG = 'http://www.w3.org/2000/svg';
 // the note colours of the app (BARVY in static/app.js, by pitch class); E's yellow takes a dark letter
 const BARVY = ['#E53935', '#E53935', '#F57C00', '#F57C00', '#F2C200', '#43A047', '#43A047', '#00A3B8', '#00A3B8', '#3F51B5', '#3F51B5', '#8E24AA'];
 const TMAVE = new Set([4]);
-const POLICE = ['children', 'folk', 'christmas', 'classics'];
+const POLICE = ['children', 'czech', 'folk', 'christmas', 'classics'];
 /** the languages with song pages; a song in another language is listed on the page of its neighbour */
 export const JAZYKY_PISNI = ['cs', 'en', 'de', 'fr', 'it'];
 const JAZYK_STRANKY = { sk: 'cs' };   // Slovak songs with the Czech ones; the rest of the few (es, ru, ja, no …) in English

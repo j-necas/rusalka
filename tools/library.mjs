@@ -11,7 +11,11 @@ import { zTextu } from '../static/lib/notation.js';
 import { kontrola, naMusicXml, zMusicXml, rozvin, vysky, zlomek, soucetTaktu, tonyAkordu, metrum } from '../static/lib/song.js';
 import { obtiznost } from '../static/lib/difficulty.js';
 
-export const POLICE = ['children', 'folk', 'christmas', 'classics'];
+export const POLICE = ['children', 'czech', 'folk', 'christmas', 'classics'];
+/** a shelf whose songs live in another shelf's folder: Czech folk songs stay in folk/, so their address (and the players'
+ *  results stored under it) did not change when they got their own shelf */
+const SLOZKA = { czech: 'folk' };
+export const slozkaPolice = police => SLOZKA[police] || police;
 const POVINNE = ['txt', 'police', 'jazyk', 'zdroj', 'volne'];
 const JMENO = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const UKAZKY = new URL('../songs/index.json', import.meta.url);
@@ -69,7 +73,7 @@ export async function postavKnihovnu({ zdroj, cil, ukazky = UKAZKY }) {
     const chybi = POVINNE.filter(k => typeof z?.[k] !== 'string' || !z[k].trim());
     if (chybi.length) chyby.push(`catalog.json: ${txt}: missing ${chybi.join(', ')}`);
     if (z?.police && !POLICE.includes(z.police)) chyby.push(`catalog.json: ${txt}: unknown shelf "${z.police}" (${POLICE.join(', ')})`);
-    else if (z?.police && typeof z.txt === 'string' && z.txt.split('/')[0] !== z.police) chyby.push(`catalog.json: ${txt}: shelf "${z.police}" but the file is in ${z.txt.split('/')[0]}/`);
+    else if (z?.police && typeof z.txt === 'string' && z.txt.split('/')[0] !== slozkaPolice(z.police)) chyby.push(`catalog.json: ${txt}: shelf "${z.police}" but the file is in ${z.txt.split('/')[0]}/, not ${slozkaPolice(z.police)}/`);
     if (z?.preklad != null && (typeof z.preklad !== 'object' || Object.entries(z.preklad).some(([k, v]) => !['en', 'cs'].includes(k) || typeof v !== 'string')))
       chyby.push(`catalog.json: ${txt}: preklad must be { en?, cs? } with text`);
     if (z?.slova != null && !radkyTextu(z.slova))
@@ -92,7 +96,7 @@ export async function postavKnihovnu({ zdroj, cil, ukazky = UKAZKY }) {
     const z = zaznamy.get(txt);
     const pred = chyby.length;
     if (!z) chyby.push(`${txt}: no entry in catalog.json`);
-    if (!POLICE.includes(police)) chyby.push(`${txt}: unknown shelf "${police}" (${POLICE.join(', ')})`);
+    if (!POLICE.some(p => slozkaPolice(p) === police)) chyby.push(`${txt}: unknown shelf "${police}" (${POLICE.join(', ')})`);
     if (!JMENO.test(jmeno)) chyby.push(`${txt}: file name must be lowercase letters, digits and hyphens`);
     if (chyby.length > pred) continue;                   // a bad name may not even form a valid URL
     const cesta = new URL(`${encodeURIComponent(police)}/${encodeURIComponent(soubor)}`, zdroj);
@@ -112,7 +116,7 @@ export async function postavKnihovnu({ zdroj, cil, ukazky = UKAZKY }) {
     const tk = await toolkit();
     if (!tk.loadData(xml) || tk.getPageCount() < 1 || !tk.renderToSVG(1).includes('<svg')) { chyby.push(`${txt}: Verovio cannot render it`); continue; }
     const model = zMusicXml(xml);                        // difficulty from the file as the app reads it
-    const polozka = { soubor: `library/${police}/${jmeno}.musicxml`, nazev: pisen.nazev, police, stupen: obtiznost(model).stupen,
+    const polozka = { soubor: `library/${police}/${jmeno}.musicxml`, nazev: pisen.nazev, police: z.police || police, stupen: obtiznost(model).stupen,
       autor: pisen.autor || '', jazyk: z.jazyk };
     if (z.preklad && Object.keys(z.preklad).length) polozka.preklad = z.preklad;
     if (z.slova) polozka.slova = z.slova;

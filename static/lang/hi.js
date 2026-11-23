@@ -19,6 +19,7 @@ export default {
   "knihovna.hledat": "गीत खोजें",
   "knihovna.nedostupna": "लाइब्रेरी लोड नहीं हो सकी।",
   "knihovna.police.children": "बच्चों के गीत",
+  "knihovna.police.czech": "चेक लोकगीत",
   "knihovna.police.folk": "दुनिया के लोकगीत",
   "knihovna.police.christmas": "क्रिसमस",
   "knihovna.police.classics": "शास्त्रीय",

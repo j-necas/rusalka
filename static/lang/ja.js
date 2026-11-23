@@ -247,6 +247,7 @@ export default {
   "knihovna.hledat": "曲を探す",
   "knihovna.nedostupna": "ライブラリーを読み込めませんでした。",
   "knihovna.police.children": "童謡",
+  "knihovna.police.czech": "チェコの民謡",
   "knihovna.police.folk": "世界の民謡",
   "knihovna.police.christmas": "クリスマス",
   "knihovna.police.classics": "クラシック",

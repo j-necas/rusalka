@@ -490,7 +490,7 @@
  },
  {
   "txt": "folk/pasla-ovecky.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Common version today, compared with two scores on Czech Wikisource: A. Vorel, Naše písně (Brno 1912) and Náš poklad, which agree except the „dupy/cupy“ bars (10, 12); there this follows Naše písně (alternating notes; Náš poklad repeats one note) with the common text „cupy, cupy, cup“; confirmed as sung today in the parent's review (17 Nov 2026); first strophe",
   "volne": "traditional (Czech folk song)",
@@ -520,7 +520,7 @@
  },
  {
   "txt": "folk/ach-synku-synku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Compared note by note with three scores that agree: the Wikimedia Commons score and MIDI used in the Czech Wikipedia article „Ach synku, synku“ (CC0, C major, followed here with its lyrics), L. Kuba, Slovanstvo ve svých zpěvech (Czech Wikisource, B major) and F. Sládek, Náš poklad (Czech Wikisource, A-flat major); Vorel's Naše písně has a different, rarer variant with leaps, not used; first strophe",
   "volne": "traditional (Czech folk song)",
@@ -530,7 +530,7 @@
  },
  {
   "txt": "folk/andulko-safarova.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Melody and lyrics compared note by note with F. Sládek, Náš poklad (Czech Wikisource, D major; grace notes left out), the lidovepisne.cz MIDI file (Wayback Machine copy, C major) and the abcnotation.com transcription „Andulko The Goose Girl“ (folkinfo.org, BBC Singing Together 1957, C major). The first line is repeated, as in Náš poklad and the MIDI (the abc version sings it once). „ven“ is on the 5th, as in the MIDI and the abc version (Náš poklad has the 3rd). First strophe",
   "volne": "traditional (Czech folk song; the melody is sometimes credited to František Kmoch †1912, free either way)",
@@ -540,7 +540,7 @@
  },
  {
   "txt": "folk/na-ty-louce-zeleny.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Compared note by note with K. J. Erben's tune (Nápěvy prostonárodních písní českých, 1862, no. 437, on Czech Wikisource, „Mysliveček (Na tý louce)“) and Pavel Hokr's teaching sheet (pavelhokr.cz, C major, no lyrics). They agree except on „je“ in bar 10, where this follows Hokr (two slurred notes, as sung today). Second half repeated as in both. First strophe, Erben's text",
   "volne": "traditional (Czech folk song from Chodsko)",
@@ -571,7 +571,7 @@
  },
  {
   "txt": "folk/horela-lipa-horela.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "The Czech song „Hořela lípa, hořela“ (the Slovak „Horela lipka“ has another tune). Bars 1-4 compared note by note with R. Wünsch, České nápěvy (1922, Czech Wikisource, G major, melody without lyrics) and M. Jurči, Pesničky pre všetkých, song id 15658 (pesnicky.orava.sk/data/noty/h/horela_lipa_horela_akordeon_1.pdf, D major, 3/4, with lyrics); they agree. Bars 5-8 and the lyrics follow Jurči (as sung today). There Wünsch has a variant (A G F# G A B | C D E | D G D C B A | B A G) whose underlay is unclear. Jurči's other „Hořela lípa“ (id 8771, horela_lipa_horela_akordeon.pdf, 2/4) is a different tune, not used. First strophe",
   "volne": "traditional (Czech folk song)",
@@ -581,7 +581,7 @@
  },
  {
   "txt": "folk/kdyby-byl-bavorov.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Compared note by note with Pavel Hokr's teaching sheet (pavelhokr.cz, C major), the harmonika.cz sheet (C major) and M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, F major, upper voice). All three agree. In „za vodičkou“ this uses even notes (harmonika.cz, Jurči; Hokr dots the first). First strophe",
   "volne": "traditional (Czech folk song)",
@@ -591,7 +591,7 @@
  },
  {
   "txt": "folk/kdyz-jsem-ja-slouzil.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Compared note by note with Pavel Hokr's teaching sheet (pavelhokr.cz, C major, 4/4) and M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, D major, 2/4). They agree except on the first note, where this follows Hokr. Rhythm as in Jurči, transposed to G major. Text as in Erben, Prostonárodní české písně a říkadla (no. 126). First strophe",
   "volne": "traditional (Czech folk song)",
@@ -601,7 +601,7 @@
  },
  {
   "txt": "folk/cerveny-satecku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Follows the single-line vocal part of M. Jurči, Pesničky pre všetkých, guitar edition (pesnicky.orava.sk/data/noty/c/cerveny_satecku_kolem_se_toc_gitara.pdf, G major), transposed to C major. The leaps on „se“ are in that vocal line. The same author's two-voice melody sheet (B-flat major) agrees in its upper voice except bar 6, where I followed the vocal line. The notypisni.cz free preview shows only bars 1-4, and they agree. The repeat is written out for the second line („má milá se hněvá“). First strophe",
   "volne": "traditional (Czech folk song)",
@@ -611,7 +611,7 @@
  },
  {
   "txt": "folk/okolo-hradce.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Follows the upper voice of M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, piano sheet, G major, two voices); the notypisni.cz free preview (first eight bars, also two voices) agrees. I found no single-line source. Bars 6-8 („tři růže (tři růže)“) therefore follow Jurči's upper voice. Verse and refrain with repeats and endings as printed; the „Vojáci jdou“ trio is left out. First strophe",
   "volne": "traditional (Czech folk song)",
@@ -621,7 +621,7 @@
  },
  {
   "txt": "folk/koupim-ja-si-kone-vrany.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Upper voice of two two-voice prints that agree: M. Jurči, Pesničky pre všetkých (pesnicky.orava.sk, piano, accordion and heligonka sheets, F major) and P. Shýbal's waltz arrangement (midisoubory.cz scans). I found no single-line source. I took the upper voice because Jurči puts the tune on top wherever it can be checked: his two-voice sheets match single-line sources in Červený šátečku (his own guitar edition), Tancuj (Die Klingende Brücke) and Kdyby byl Bavorov (Hokr). Not proven for this song. First strophe; the second half is repeated as printed; confirmed by the single-line tune in J. and K. Filip, Kantareto (1948), no. 24 (Wikimedia Commons scan), which equals this upper voice in all 16 bars",
   "volne": "traditional (Czech folk song)",
@@ -1557,28 +1557,28 @@
  },
  {
   "txt": "folk/pod-nasim-okynkem.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0010]: https://badatelska.pisnovna.cz/pisen/10/erben-karel-jaromir-ach-neni-tu-neni-co-by-me-tesilo. ABC checked with two parsers; practice tempo. First verse: https://badatelska.pisnovna.cz/pisen/E%20ml%C3%A1d-0422.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/vyletela-holubicka.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0751]: https://badatelska.pisnovna.cz/pisen/755/erben-karel-jaromir-vyletela-holubicka-ze-skaly-probudila. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0484/erben-karel-jaromir-vyletela-holubicka-ze-skaly-probudila-cerne-oci-ze-spani.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/okolo-trebone.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0484]: https://badatelska.pisnovna.cz/pisen/489/erben-karel-jaromir-okolo-trebone-pasou-se-tam-kone. ABC checked with two parsers, transposed by -9 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0726/erben-karel-jaromir-okolo-trebone-pasou-se-tam-kone-dej-kobylam-to-ti-povidam.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/cerne-oci-jdete-spat.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0091]: https://badatelska.pisnovna.cz/pisen/94/erben-karel-jaromir-cerne-oci-jdete-spat. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0235/erben-karel-jaromir-cerne-oci-jdete-spat-vsak-musite-rano-vstat.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
@@ -1639,7 +1639,7 @@
  },
  {
   "txt": "folk/siroky-hluboky.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0626]: https://badatelska.pisnovna.cz/pisen/630/erben-karel-jaromir-siroky-hluboky-ty-vltavsky-tune. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0284/erben-karel-jaromir-siroky-hluboky-ty-vltavsky-tune-mel-jsem-ja-panenku.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
@@ -1659,7 +1659,7 @@
  },
  {
   "txt": "folk/kdyz-jsem-ja-sel-kolem-lesa.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0274]: https://badatelska.pisnovna.cz/pisen/277/erben-karel-jaromir-kdyz-jsem-ja-sel-kolem-lesa. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0324/erben-karel-jaromir-kdyz-jsem-ja-sel-kolem-lesa-byla-velka-rosa-sed-jsem-si-pod-stromecek.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1672,7 +1672,7 @@
  },
  {
   "txt": "folk/kdyz-jsem-ja-sel-k-taboru.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0275]: https://badatelska.pisnovna.cz/pisen/278/erben-karel-jaromir-kdyz-jsem-ja-sel-k-taboru-dohonil-jsem. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0441/erben-karel-jaromir-kdyz-jsem-ja-sel-k-taboru-dohonil-jsem-barboru-pojd-barusko.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1685,7 +1685,7 @@
  },
  {
   "txt": "folk/kdyz-jsem-k-vam-chodival.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0282]: https://badatelska.pisnovna.cz/pisen/285/erben-karel-jaromir-kdyz-jsem-k-vam-chodival-pes-na-me-vrcel. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0390/erben-karel-jaromir-kdyz-jsem-k-vam-chodival-pres-ty-lesy-ach-ouvej-pres-ty-lesy-bejvalas.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1705,7 +1705,7 @@
  },
  {
   "txt": "folk/na-tom-prazskem-moste.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Illner, Jozef: Čechův sen [IllnerR] [IllnerR-0009]: https://badatelska.pisnovna.cz/pisen/17283/iller-jozef-na-tom-prazskem-moste. ABC checked with two parsers, transposed by -9 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0797/erben-karel-jaromir-na-tom-prazskym-moste-rozmarynka-roste-zadny-ji-tam-nezaliva.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1718,7 +1718,7 @@
  },
  {
   "txt": "folk/pasla-husy-nade-dvorem.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0502]: https://badatelska.pisnovna.cz/pisen/507/erben-karel-jaromir-pasla-husy-nade-dvorem-sama-sedela. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_rozpr-0033/erben-karel-jaromir-pasla-husy-nade-dvorem-sama-sedela-pod-javorem-sama-sedela-pod-javorem.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1730,7 +1730,7 @@
  },
  {
   "txt": "folk/pod-nasima-okny-tece-vodicka.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0535]: https://badatelska.pisnovna.cz/pisen/540/erben-karel-jaromir-pod-nasima-okny-tece-vodicka. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0379/erben-karel-jaromir-pod-nasima-okny-tece-vodicka-napoj-mne-ma-mila-meho-konicka.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
@@ -1761,7 +1761,7 @@
  },
  {
   "txt": "folk/kdyby-tady-byla-takova-panna.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Weis, Karel: Blaťácké písně [WBP] [WBP III-0108]: https://badatelska.pisnovna.cz/pisen/22325/weis-karel-kdyby-tady-byla-takova-panna-ktera-by-me-chtela. ABC checked with two parsers, transposed by -3 semitones; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/WBP_III-0108/weis-karel-kdyby-tady-byla-takova-panna-ktera-by-me-chtela.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1779,21 +1779,21 @@
  },
  {
   "txt": "folk/pucala-ma-mila-pucalku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0569]: https://badatelska.pisnovna.cz/pisen/573/erben-karel-jaromir-pucala-ma-mila-pucalku-nesla-ji-milemu. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_stav-0256/erben-karel-jaromir-pucala-ma-mila-pucalku-nesla-ji-milemu-na-salku-od-lesa-k-lesu-pucalku-nesu.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/sla-panenka-do-vamberka.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0636]: https://badatelska.pisnovna.cz/pisen/640/erben-karel-jaromir-sla-panenka-do-vamberka-nesla-v-nusi. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0188/erben-karel-jaromir-sla-panenka-do-vamberka-nesla-v-nusi-kurata-potkal-on-ji-jeji-milej.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/nade-mlejnem-je-hajecek.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0408]: https://badatelska.pisnovna.cz/pisen/411/erben-karel-jaromir-nade-mlejnem-je-hajecek-tam-se-prochazi. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0002/erben-karel-jaromir-nade-mlejnem-je-hajecek-tam-se-prochazi-sateckem-hazi.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1807,7 +1807,7 @@
  },
  {
   "txt": "folk/kdyz-jsme-se-tak-sesli.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0303]: https://badatelska.pisnovna.cz/pisen/306/erben-karel-jaromir-kdyz-jsme-se-tak-sesli-kamaradi-z-mokre. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_spol-0010/erben-karel-jaromir-kdyz-jsme-se-tak-sesli-kamaradi-z-mokre-ctvrti-pospolu-dejme-sobe-nalejt.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1822,7 +1822,7 @@
  },
  {
   "txt": "folk/jedna-je-cesticka-k-taboru.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0198]: https://badatelska.pisnovna.cz/pisen/201/erben-karel-jaromir-jedna-je-cesticka-k-taboru-druha-je. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0349/erben-karel-jaromir-jedna-je-cesticka-k-taboru-druha-je-od-tabora-ja-tam-tou-cestickou-nepudu.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1835,7 +1835,7 @@
  },
  {
   "txt": "folk/roste-stromek-dubovy.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0579]: https://badatelska.pisnovna.cz/pisen/583/erben-karel-jaromir-roste-stromek-dubovy-a-dubovy. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0153/erben-karel-jaromir-roste-stromek-dubovy-ach-dubovy-na-vrsicku-tenoucky.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1850,7 +1850,7 @@
  },
  {
   "txt": "folk/kdyz-jsem-ja-pryc.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0265]: https://badatelska.pisnovna.cz/pisen/268/erben-karel-jaromir-kdyz-jsem-ja-pryc-tak-nejsem-doma. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/268/erben-karel-jaromir-kdyz-jsem-ja-pryc-tak-nejsem-doma.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1863,7 +1863,7 @@
  },
  {
   "txt": "folk/povez-mne-vavrousku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0545]: https://badatelska.pisnovna.cz/pisen/459/erben-karel-jaromir-povez-mne-vavrousku-povez-povez-po-com. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0119/erben-karel-jaromir-povez-mne-vavrousku-povez-povez-po-cem-je-v-klatovech-voves.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1880,7 +1880,7 @@
  },
  {
   "txt": "folk/site-mne-maticko-kosilicku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0627]: https://badatelska.pisnovna.cz/pisen/631/erben-karel-jaromir-site-mne-maticko-kosilicku. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/631/erben-karel-jaromir-site-mne-maticko-kosilicku.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1892,14 +1892,14 @@
  },
  {
   "txt": "folk/kudy-je-kudy-je-cesticka-k-vilovu.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0332]: https://badatelska.pisnovna.cz/pisen/335/erben-karel-jaromir-kudy-je-kudy-je-cesticka-k-vilovu. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0521/erben-karel-jaromir-kudy-je-kudy-je-cesticka-k-vilovu-cesticka-k-vam-cesticka-daleka.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/varvazovskej-zamek-na-kaminku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0713]: https://badatelska.pisnovna.cz/pisen/717/erben-karel-jaromir-varvazovskej-zamek-na-kaminku. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0479/erben-karel-jaromir-varvazovskej-zamek-kamen-na-kaminku-vzazala-mne-ma-panenka-o-jednu-hubinku.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1912,14 +1912,14 @@
  },
  {
   "txt": "folk/na-nasem-dvore-velika-louze-do-pasu.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0418]: https://badatelska.pisnovna.cz/pisen/421/erben-karel-jaromir-na-nasem-dvore-velika-louze-do-pasu. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0367/erben-karel-jaromir-na-nasem-dvore-velika-louze-do-pasu-ze-je-ztratila-ta-moje-mila.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/kmotre-vavro-kmotre-riho-nestejskej-si-nic.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0313]: https://badatelska.pisnovna.cz/pisen/316/erben-karel-jaromir-kmotre-vavro-kmotre-riho-nestejskej-si-nic. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_hist-0011/erben-karel-jaromir-kmotre-vavro-kmotre-riho-nestejskej-si-nic-ze-jsi-prisel-o-kobylu.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1936,28 +1936,28 @@
  },
  {
   "txt": "folk/a-ja-vzdycky.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0020]: https://badatelska.pisnovna.cz/pisen/20/erben-karel-jaromir-a-ja-vzdycky-co-me-ma-hlavicka-poboliva. ABC checked with two parsers, transposed by -10 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0514/erben-karel-jaromir-a-ja-vzdycky-co-me-ma-hlavicka-poboliva-ma-hlava-boli.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/jen-ty-mne.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0208]: https://badatelska.pisnovna.cz/pisen/211/erben-karel-jaromir-jen-ty-mne-senkyrko-piva-nalej. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_spol-0023/erben-karel-jaromir-jen-ty-mne-senkyrko-piva-nalej-na-me-se-nekoukej-ze-jsem-malej.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/mura-na-pavlaci-casto-nasi-duru-tlaci.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0399]: https://badatelska.pisnovna.cz/pisen/402/erben-karel-jaromir-mura-na-pavlaci-casto-nasi-duru-tlaci. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0583/erben-karel-jaromir-mura-na-pavlaci-casto-nasi-duru-tlaci-prisel-tata-zahnal-muru.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/sedlak-sedlak-sedlak-jeste-jednou-sedlak.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0589]: https://badatelska.pisnovna.cz/pisen/593/erben-karel-jaromir-sedlak-sedlak-sedlak-jeste-jednou-sedlak. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0155/erben-karel-jaromir-sedlak-sedlak-sedlak-jeste-jednou-sedlak-zlamal-si-ruchadlo.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1970,7 +1970,7 @@
  },
  {
   "txt": "folk/kdyz-jsem-sel-okolo-haje-zeleneho.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0294]: https://badatelska.pisnovna.cz/pisen/297/erben-karel-jaromir-kdyz-jsem-sel-okolo-haje-zeleneho. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0436/erben-karel-jaromir-kdyz-jsem-sel-okolo-hajku-zeleneho-kdyz-jsem-sel-okolo-luk.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -1991,7 +1991,7 @@
  },
  {
   "txt": "folk/zazpivej-slavicku-vesele-na-tej-nasi-doline.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0780]: https://badatelska.pisnovna.cz/pisen/784/erben-karel-jaromir-zazpivej-slavicku-vesele-na-tej-nasi-doline. ABC checked with two parsers, transposed by 2 semitones; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0191/erben-karel-jaromir-zazpivej-slavicku-vesele-na-tej-nasi-doline-co-mi-je-od-boha-souzeno.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2008,14 +2008,14 @@
  },
  {
   "txt": "folk/ten-krumlovsky-zamek-na-zelenych-lukach.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0656]: https://badatelska.pisnovna.cz/pisen/660/erben-karel-jaromir-ten-krumlovsky-zamek-na-zelenych-lukach. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/660/erben-karel-jaromir-ten-krumlovsky-zamek-na-zelenych-lukach.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/kdyby-mne-byl-dal-zlatej-taticek.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0256]: https://badatelska.pisnovna.cz/pisen/259/erben-karel-jaromir-kdyby-mne-byl-dal-zlatej-taticek. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0377/erben-karel-jaromir-kdyby-mne-byl-dal-zlatej-taticek-dokud-jsem-bejval-malej-chlapicek-ruzenec.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2031,14 +2031,14 @@
  },
  {
   "txt": "folk/jetelka-jetelka-trava-zelena.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0218]: https://badatelska.pisnovna.cz/pisen/221/erben-karel-jaromir-jetelka-jetelka-trava-zelena. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0624/erben-karel-jaromir-jetelka-jetelka-trava-zelena-puspersky-mladence-pejcha-premaha.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/uz-s-tebou.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0704]: https://badatelska.pisnovna.cz/pisen/708/erben-karel-jaromir-uz-s-tebou-ma-mila-naposled-tancuju. ABC checked with two parsers, transposed by -2 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0322/erben-karel-jaromir-uz-s-tebou-ma-mila-naposled-tancuju-uz-ja-odtud-zejtra-rano.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2051,7 +2051,7 @@
  },
  {
   "txt": "folk/nad-pusperkem-je-vrsecek.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0409]: https://badatelska.pisnovna.cz/pisen/412/erben-karel-jaromir-nad-pusperkem-je-vrsecek-a-on-tam-stoji. ABC checked with two parsers, transposed by 2 semitones; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0588/erben-karel-jaromir-nad-pusperkem-je-vrsecek-na-nem-cerna-zem-palili-tam-koralicku.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2064,7 +2064,7 @@
  },
  {
   "txt": "folk/slysel-jsem-konicky-rejchtati.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0599]: https://badatelska.pisnovna.cz/pisen/603/erben-karel-jaromir-slysel-jsem-videl-jsem-konicky-rejchtati. ABC checked with two parsers, transposed by -10 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0377/erben-karel-jaromir-slysel-jsem-videl-jsem-konicky-rejchtati-kone-rejchtat.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2081,14 +2081,14 @@
  },
  {
   "txt": "folk/ovcak-pase-ovce-na-zeleny-louce.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0493]: https://badatelska.pisnovna.cz/pisen/498/erben-karel-jaromir-ovcak-pase-ovce-na-zeleny-louce. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/498/erben-karel-jaromir-ovcak-pase-ovce-na-zeleny-louce.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/ci-je-to-louka-tam-u-rybnika.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0094]: https://badatelska.pisnovna.cz/pisen/97/erben-karel-jaromir-ci-je-to-louka-tam-u-rybnika. ABC checked with two parsers, transposed by 2 semitones; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0199/erben-karel-jaromir-ci-je-to-louka-tam-u-rybnika-tipalova-hola-hola-hola-tipal-neni-doma.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2105,14 +2105,14 @@
  },
  {
   "txt": "folk/rostou-rostou-rostou-konope-za-cestou.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0580]: https://badatelska.pisnovna.cz/pisen/584/erben-karel-jaromir-rostou-rostou-rostou-konope-za-cestou. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0759/erben-karel-jaromir-rostou-rostou-rostou-konope-za-cestou-a-jsou-pekne-zelene.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/kdyz-jsem-nebyl-doma.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0285]: https://badatelska.pisnovna.cz/pisen/288/erben-karel-jaromir-kdyz-jsem-nebyl-doma-stala-se-mne-skoda. ABC checked with two parsers, transposed by -2 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0430/erben-karel-jaromir-kdyz-jsem-nebyl-doma-holka-se-mne-vdala-byl-jsem-v-bavorich.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2129,7 +2129,7 @@
  },
  {
   "txt": "folk/ja-jsem-panna-ruze.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0161]: https://badatelska.pisnovna.cz/pisen/164/erben-karel-jaromir-ja-jsem-panna-ruze-dokud-nemam-muze. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/164/erben-karel-jaromir-ja-jsem-panna-ruze-dokud-nemam-muze.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2142,7 +2142,7 @@
  },
  {
   "txt": "folk/litej-ptacku-litej-mas-zelene-peri.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0352]: https://badatelska.pisnovna.cz/pisen/355/erben-karel-jaromir-litej-ptacku-litej-mas-zelene-peri. ABC checked with two parsers, transposed by -2 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0306/erben-karel-jaromir-litej-ptacku-litej-mas-zelene-peri-kazda-panna-blazen.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2155,21 +2155,21 @@
  },
  {
   "txt": "folk/adamku-nas-copak-delas.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0002]: https://badatelska.pisnovna.cz/pisen/2/erben-karel-jaromir-adamku-nas-copak-delas. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0116/erben-karel-jaromir-adamku-nas-copak-delas-na-louce-ti-pasou-ty-jsi-mezi-chasou.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/kdyz-jsem-ja-sel-na-prochazku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0276]: https://badatelska.pisnovna.cz/pisen/279/erben-karel-jaromir-kdyz-jsem-ja-sel-na-prochazku-skrze-dve. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/279/erben-karel-jaromir-kdyz-jsem-ja-sel-na-prochazku-skrze-dve.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/nerek-jsem-dnes-tejden.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0465]: https://badatelska.pisnovna.cz/pisen/470/erben-karel-jaromir-nerek-jsem-dnes-tejden-ze-budu-vojak. ABC checked with two parsers, transposed by -10 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0367/erben-karel-jaromir-nerek-jsem-dnes-tejden-ze-budu-vojak-ze-budu-nosivat-na-kveru-bodak.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2186,7 +2186,7 @@
  },
  {
   "txt": "folk/jaky-je-to-korenicko-kapradi.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0171]: https://badatelska.pisnovna.cz/pisen/174/erben-karel-jaromir-jaky-je-to-korenicko-kapradi. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0097/erben-karel-jaromir-jake-je-to-korenicko-kapradi-povezou-te-ma-panenko-do-prahy.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2203,7 +2203,7 @@
  },
  {
   "txt": "folk/pres-ty-pusty-lesy.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0552]: https://badatelska.pisnovna.cz/pisen/556/erben-karel-jaromir-pres-ty-pusty-lesy-poteseni-kde-jsi. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0371/erben-karel-jaromir-pres-ty-pusty-lesy-poteseni-kde-jsi-vzdaleny-ach-vzdaleny-.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2218,14 +2218,14 @@
  },
  {
   "txt": "folk/ja-ja-ja-cela-ztrapena.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0152]: https://badatelska.pisnovna.cz/pisen/155/erben-karel-jaromir-ja-ja-ja-cela-ztrapena. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/155/erben-karel-jaromir-ja-ja-ja-cela-ztrapena.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/pod-kopeckem-trava-zelena.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0532]: https://badatelska.pisnovna.cz/pisen/537/erben-karel-jaromir-pod-kopeckem-trava-zelena. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_rozpr-0052/erben-karel-jaromir-pod-kopeckem-trava-zelena-po-ni-se-prochazi-panna-maria-potkala-ji-svata-alzbeta.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2238,21 +2238,21 @@
  },
  {
   "txt": "folk/zadnemu-tak-neni.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0791]: https://badatelska.pisnovna.cz/pisen/795/erben-karel-jaromir-zadnemu-tak-neni-zadnemu-tak-neni-mamo. ABC checked with two parsers, transposed by -1 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_svat-0067/erben-karel-jaromir-zadnemu-tak-neni-mamo-jako-vam-kdyz-si-ustelete-nestejska-se-vam.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/u-naseho-chliva-vrabec-sobe-zpiva.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0686]: https://badatelska.pisnovna.cz/pisen/690/erben-karel-jaromir-u-naseho-chliva-vrabec-sobe-zpiva. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0574/erben-karel-jaromir-u-naseho-chliva-strnad-sobe-zpiva-ze-z-velkeho-milovani-malokdy-co-byva.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/roztrhany-kalhoty-vitr-do-nich-fouka.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0581]: https://badatelska.pisnovna.cz/pisen/585/erben-karel-jaromir-roztrhany-kalhoty-vitr-do-nich-fouka. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_spol-0086/erben-karel-jaromir-roztrhany-kalhoty-vitr-do-nich-fouka-budu-si-je-zasivat.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2265,14 +2265,14 @@
  },
  {
   "txt": "folk/kdyz-jsem-odchazel.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0286]: https://badatelska.pisnovna.cz/pisen/289/erben-karel-jaromir-kdyz-jsem-odchazel-muzika-hrala. ABC checked with two parsers, transposed by -12 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/289/erben-karel-jaromir-kdyz-jsem-odchazel-muzika-hrala.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/ja-mam-louku-pri-doline.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0181]: https://badatelska.pisnovna.cz/pisen/184/erben-karel-jaromir-ja-mam-louku-pri-doline-na-ni-trava-nevyhyne. ABC checked with two parsers, transposed by 2 semitones; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0204/erben-karel-jaromir-ja-mam-louku-pri-doline-na-ni-trava-nevyhyne-nebyhyne-hup-hup-hup.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2285,14 +2285,14 @@
  },
  {
   "txt": "folk/co-to-mas.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0079]: https://badatelska.pisnovna.cz/pisen/79/erben-karel-jaromir-co-to-mas-ma-mila-co-to-mas-za-celo. ABC checked with two parsers, transposed by -3 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0053/erben-karel-jaromir-co-to-mas-ma-mila-co-to-mas-za-celo-jak-jsem-te-polibil.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/vyrostla-mne-bila-ruze.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0753]: https://badatelska.pisnovna.cz/pisen/757/erben-karel-jaromir-vyrostla-mne-bila-ruze-trhat-ja-ji-nebudu. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0327/erben-karel-jaromir-vyrostla-mne-bila-ruze-trhat-ja-ji-nebudu-milovala-jsem-vojtiska.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2305,7 +2305,7 @@
  },
  {
   "txt": "folk/ta-zdejsi-hospoda-z-drobneho-kameni.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0648]: https://badatelska.pisnovna.cz/pisen/652/erben-karel-jaromir-ta-zdejsi-hospoda-z-drobneho-kameni. ABC checked with two parsers, transposed by -4 semitones; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0700/erben-karel-jaromir-ta-zdejsi-hospoda-z-drobneho-kameni-kdo-nema-penize-at-do-ni-nechodi.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2318,7 +2318,7 @@
  },
  {
   "txt": "folk/kdo-to-jde-k-nam.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0248]: https://badatelska.pisnovna.cz/pisen/251/erben-karel-jaromir-kdo-to-jde-k-nam-ja-ho-neznam. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0498/erben-karel-jaromir-kdo-to-jde-k-nam-ja-ho-neznam-ja-si-mu-rucicek-spinit-nedam.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2334,7 +2334,7 @@
  },
  {
   "txt": "folk/vore-ma-panenka-na-strani.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0734]: https://badatelska.pisnovna.cz/pisen/738/erben-karel-jaromir-vore-ma-panenka-na-strani-coz-ji-ty-konicky. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0161/erben-karel-jaromir-vore-ma-panenka-na-strani-coz-ji-ty-konicky-rejtaji-hop-hop-simlicku.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2351,7 +2351,7 @@
  },
  {
   "txt": "folk/pockej-holka-neutikej-dej-mi-salatu.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0523]: https://badatelska.pisnovna.cz/pisen/528/erben-karel-jaromir-pockej-holka-neutikej-dej-mi-salatu. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/528/erben-karel-jaromir-pockej-holka-neutikej-dej-mi-salatu.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2367,14 +2367,14 @@
  },
  {
   "txt": "folk/vcera-nedele-byla.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0715]: https://badatelska.pisnovna.cz/pisen/719/erben-karel-jaromir-vcera-nedele-byla-ja-jsem-doma-nebyla. ABC checked with two parsers, transposed by -2 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0359/erben-karel-jaromir-vcera-nedele-byla-ja-jsem-doma-nebyla-zala-jsem-travicku.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/hop-hej-cibulari-cibulari-jedou.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0124]: https://badatelska.pisnovna.cz/pisen/127/erben-karel-jaromir-hop-hej-cibulari-cibulari-jedou. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0018/erben-karel-jaromir-hop-hej-cibulari-cibulari-jedou-cibulicku-vezou.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2391,7 +2391,7 @@
  },
  {
   "txt": "folk/ach-boli-me.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0003]: https://badatelska.pisnovna.cz/pisen/3/erben-karel-jaromir-ach-boli-me-boli-me-to-srdecko-v-mem-tele. ABC checked with two parsers, transposed by -8 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0328/erben-karel-jaromir-ach-boli-me-boli-me-to-srdecko-v-mem-tele-vsak-uz-mne-to-davno-povidali.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2404,14 +2404,14 @@
  },
  {
   "txt": "folk/nerikej-ma-panenko-nerikej-nic.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0466]: https://badatelska.pisnovna.cz/pisen/471/erben-karel-jaromir-nerikej-ma-panenko-nerikej-nic. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0181/erben-karel-jaromir-nerikej-ma-panenko-nerikej-nic-ze-jsme-spolu-mluvili.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/kdyby-moje-mila-same-pentle-byla.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0258]: https://badatelska.pisnovna.cz/pisen/261/erben-karel-jaromir-kdyby-moje-mila-same-pentle-byla. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0193/erben-karel-jaromir-kdyby-moje-mila-samy-pentle-byla-a-vsem-se-libila-a-ja-si-ji-prece-nevezmu.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2427,14 +2427,14 @@
  },
  {
   "txt": "folk/letela-husicka-letela-pres-pole.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0344]: https://badatelska.pisnovna.cz/pisen/347/erben-karel-jaromir-letela-husicka-letela-pres-pole. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0274/erben-karel-jaromir-letela-husicka-letela-pres-pole-tam-kde-bejvavalo.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/ci-to-konicky.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0096]: https://badatelska.pisnovna.cz/pisen/99/erben-karel-jaromir-ci-to-konicky-ci-to. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0163/erben-karel-jaromir-ci-to-konicky-ci-to-poslapaly-nam-zito-poslapaly-nam-jary.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2447,7 +2447,7 @@
  },
  {
   "txt": "folk/proc-vy-sem-k-nam.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0563]: https://badatelska.pisnovna.cz/pisen/567/erben-karel-jaromir-proc-vy-sem-k-nam-hosi-jdete. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0014/erben-karel-jaromir-proc-vy-sem-k-nam-hosi-jdete-kdyz-s-sebou-nic-nenesete.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2460,14 +2460,14 @@
  },
  {
   "txt": "folk/ja-jsem-uz-jako-muz.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0163]: https://badatelska.pisnovna.cz/pisen/166/erben-karel-jaromir-ja-jsem-uz-jako-muz-klobouk-mam. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_svat-0212/erben-karel-jaromir-ja-jsem-uz-jako-muz-klobouk-mam-klepouchej-zeno-ma-poslouchej.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/byt-prselo-jen-se-lilo.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0061]: https://badatelska.pisnovna.cz/pisen/61/erben-karel-jaromir-byt-prselo-jen-se-lilo. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0015/erben-karel-jaromir-byt-prselo-jen-se-lilo-za-tezky-by-mi-nebylo-do-cimelic-do-kostela.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2480,7 +2480,7 @@
  },
  {
   "txt": "folk/vosy-vosy-vosy-srsani-vyleteli-na-me.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0735]: https://badatelska.pisnovna.cz/pisen/739/erben-karel-jaromir-vosy-vosy-vosy-srsani-vyleteli-na-me. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0352/erben-karel-jaromir-vosy-vosy-vosy-srsani-vyleteli-na-me-ze-skaly-ze-skaly-ze-skaly-ze-skalicky.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2495,21 +2495,21 @@
  },
  {
   "txt": "folk/az-ja-pujdu-od-bety.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0042]: https://badatelska.pisnovna.cz/pisen/42/erben-karel-jaromir-az-ja-pujdu-od-bety-zastavim-se-u-tety. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0739/erben-karel-jaromir-az-ja-pujdu-od-bety-zastavim-se-u-tety-vona-ma-vona-da.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/alou-alou-zahrajte-mne.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0023]: https://badatelska.pisnovna.cz/pisen/23/erben-karel-jaromir-alou-alou-zahrajte-mne. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_stav-0398/erben-karel-jaromir-alou-alou-zahrajte-mne-hodne-zvesela-ze-mne-moje-nejmilejsi-vodpovedela.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/i-proc-tak-prilis-places.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0802]: https://badatelska.pisnovna.cz/pisen/806/erben-karel-jaromir-i-proc-tak-prilis-places-kvilis. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_pohr-0002/erben-karel-jaromir-i-proc-tak-prilis-places-a-kvilis-pro-smrt-mileho-detatka-sveho.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2522,7 +2522,7 @@
  },
  {
   "txt": "folk/pasla-ovcicky-v-zelenem-hajecku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0505]: https://badatelska.pisnovna.cz/pisen/510/erben-karel-jaromir-pasla-ovcicky-v-zelenem-hajecku. ABC checked with two parsers, transposed by -12 semitones; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0224/erben-karel-jaromir-pasla-ovcicky-v-zelenem-hajecku-v-cernem-lese-ja-zahoukal-hale-halihou.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2539,7 +2539,7 @@
  },
  {
   "txt": "folk/o-nasi-veselce-psi-se-porvali.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0486]: https://badatelska.pisnovna.cz/pisen/491/erben-karel-jaromir-o-nasi-veselce-psi-se-porvali. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0168/erben-karel-jaromir-o-nasi-veselce-psi-se-porvali-ze-jsou-po-malicku-kosti-dostali.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2556,14 +2556,14 @@
  },
  {
   "txt": "folk/mela-jsem-mileho.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0383]: https://badatelska.pisnovna.cz/pisen/386/erben-karel-jaromir-mela-jsem-mileho-uz-nemam-nic. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0394/erben-karel-jaromir-mela-jsem-mileho-uz-nemam-nic-dal-jest-mi-hubicek-kolik-tisic.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/coz-ten-slavicek-od-pulnoci-zpiva.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0087]: https://badatelska.pisnovna.cz/pisen/90/erben-karel-jaromir-coz-ten-slavicek-od-pulnoci-zpiva. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0140/erben-karel-jaromir-coz-ten-slavicek-od-pulnoci-zpiva-coz-se-ten-hlasek-pekne-rozliha.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2577,7 +2577,7 @@
  },
  {
   "txt": "folk/kdyz-jsem-ja-sel-od-svy-mily.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0278]: https://badatelska.pisnovna.cz/pisen/281/erben-karel-jaromir-kdyz-jsem-ja-sel-od-svy-mily-skrivanci-uz. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0172/erben-karel-jaromir-kdyz-jsem-ja-sel-vod-svy-mily-skrivanci-uz-zpivali-kdyz-jsem-prisel-do-mastale.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2590,7 +2590,7 @@
  },
  {
   "txt": "folk/ma-mila-slouzi-za-vodou.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0364]: https://badatelska.pisnovna.cz/pisen/367/erben-karel-jaromir-ma-mila-slouzi-za-vodou-ja-zase-slouzim. ABC checked with two parsers, transposed by -9 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0014/erben-karel-jaromir-ma-mila-slouzi-za-vodou-ja-zase-slouzim-za-druhou-kterak-ja-si-poradit-mam.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2603,7 +2603,7 @@
  },
  {
   "txt": "folk/kdybys-byl-jenicku-poslouchal-maticku.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0259]: https://badatelska.pisnovna.cz/pisen/262/erben-karel-jaromir-kdybys-byl-jenicku-poslouchal-maticku. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/262/erben-karel-jaromir-kdybys-byl-jenicku-poslouchal-maticku.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2616,7 +2616,7 @@
  },
  {
   "txt": "folk/letela-husicka-letela-z-vysoka.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0345]: https://badatelska.pisnovna.cz/pisen/348/erben-karel-jaromir-letela-husicka-letela-z-vysoka. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0701/erben-karel-jaromir-letela-husicka-letela-z-vysoka-nemohla-preletet-padla-do-potoka.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2629,7 +2629,7 @@
  },
  {
   "txt": "folk/nas-kocour-strakatej-ma-ocas-utatej.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0431]: https://badatelska.pisnovna.cz/pisen/434/erben-karel-jaromir-nas-kocour-strakatej-ma-ocas-utatej. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_spol-0104/erben-karel-jaromir-nas-kocour-strakatej-ma-ocas-utatej.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2642,7 +2642,7 @@
  },
  {
   "txt": "folk/k-pusperku-je-cesta-zlata.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0326]: https://badatelska.pisnovna.cz/pisen/329/erben-karel-jaromir-k-pusperku-je-cesta-zlata-cela-trnickem. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0117/erben-karel-jaromir-k-pusperku-je-cesta-zlata-cela-trnickem-pojata-to-trnicko-bile-kvete.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2655,7 +2655,7 @@
  },
  {
   "txt": "folk/stala-ma-mila-na-vysokej-skale.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0602]: https://badatelska.pisnovna.cz/pisen/606/erben-karel-jaromir-stala-ma-mila-na-vysokej-skale. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0409/erben-karel-jaromir-stala-ma-mila-na-vysokej-skale-stala-ma-mila-na-kopecku-tak-dlouho-tam-stala.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2672,7 +2672,7 @@
  },
  {
   "txt": "folk/kdyz-se-ten-ovisek-vymetaval.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0307]: https://badatelska.pisnovna.cz/pisen/310/erben-karel-jaromir-kdyz-se-ten-ovisek-vymetaval. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0399/erben-karel-jaromir-kdyz-se-ten-ovisek-vymetaval-jeste-mne-muj-milej-milovaval.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2689,21 +2689,21 @@
  },
  {
   "txt": "folk/sedela-pod-borovickou.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0583]: https://badatelska.pisnovna.cz/pisen/587/erben-karel-jaromir-sedela-pod-borovickou-plakala-ze-ma. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0110/erben-karel-jaromir-sedela-pod-borovickou-plakala-ze-ma-chudickou-kyticku-rozmarynovou.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/zasazuj-holecku-zasazuj-kone.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0774]: https://badatelska.pisnovna.cz/pisen/778/erben-karel-jaromir-zasazuj-holecku-zasazuj-kone. ABC checked with two parsers, transposed by -9 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/778/erben-karel-jaromir-zasazuj-holecku-zasazuj-kone.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/nic-me-tu-netesi.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0477]: https://badatelska.pisnovna.cz/pisen/482/erben-karel-jaromir-nic-me-tu-netesi-jen-ta-panska-zahrada. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/Hol_V-0053/holas-cenek-nic-me-tu-netesi-jen-jedna-zahrada-po-ktere-jsem-chodil.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2717,14 +2717,14 @@
  },
  {
   "txt": "folk/v-dobrem-jsme-se-sesli.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0717]: https://badatelska.pisnovna.cz/pisen/721/erben-karel-jaromir-v-dobrem-jsme-se-sesli-v-dobrem-se-rozejdem. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_spol-0066/erben-karel-jaromir-v-dobrem-jsme-se-sesli-v-dobrem-se-rozejdem-nezli-se-rozejdem.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/alou-pani-muzikanti-vsem-s-kurazi.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0024]: https://badatelska.pisnovna.cz/pisen/24/erben-karel-jaromir-alou-pani-muzikanti-vsem-s-kurazi. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0658/erben-karel-jaromir-alou-pani-muzikanti-vsem-s-kurazi-a-mne-taky-vsem-s-kurazi-a-mne-taky.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2737,7 +2737,7 @@
  },
  {
   "txt": "folk/sil-jsem-proso-na-souvrati.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0593]: https://badatelska.pisnovna.cz/pisen/597/erben-karel-jaromir-sil-jsem-proso-na-souvrati-nebudu-ho-ziti. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0403/erben-karel-jaromir-sil-jsem-proso-na-souvrati-nebudu-ho-ziti-miloval-jsem-jedno-devce.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2750,28 +2750,28 @@
  },
  {
   "txt": "folk/ze-zeme-jsem-na-zem-prisel.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0784]: https://badatelska.pisnovna.cz/pisen/788/erben-karel-jaromir-ze-zeme-jsem-na-zem-prisel-na-zemi-jsem. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_marn-0001/erben-karel-jaromir-ze-zeme-jsem-na-zem-prisel-na-zemi-jsem-rozum-nasel-po-ni-chodim-jako-pan.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/nestarej-se-zeno-ma-ze-my-nic-nemame.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0468]: https://badatelska.pisnovna.cz/pisen/473/erben-karel-jaromir-nestarej-se-zeno-ma-ze-my-nic-nemame. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_svat-0177/erben-karel-jaromir-nestarej-se-zeno-ma-ze-my-nic-nemame-zabijeme-komara-masa-nadelame.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/jak-ziva-jsem-nevidela-na-buku-zaludu.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0174]: https://badatelska.pisnovna.cz/pisen/177/erben-karel-jaromir-jak-ziva-jsem-nevidela-na-buku-zaludu. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0788/erben-karel-jaromir-jakziva-jsem-nevidela-na-buku-zaludu-proc-by-mladenec-opustil-svou-pannu.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/mam-sedivou-hlavu.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0365]: https://badatelska.pisnovna.cz/pisen/368/erben-karel-jaromir-mam-sedivou-hlavu. ABC checked with two parsers, transposed by -10 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_spol-0114/erben-karel-jaromir-mam-sedivou-mam-sedivou-mam-sedivou-hlavu-hlavu-od-starosti.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2787,14 +2787,14 @@
  },
  {
   "txt": "folk/nechod-ma-mila-do-lesa-pada-studena.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0450]: https://badatelska.pisnovna.cz/pisen/454/erben-karel-jaromir-nechod-ma-mila-do-lesa-pada-studena. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0139/erben-karel-jaromir-nechod-ma-mila-do-lesa-pada-studena-rosa-strevicky-mas-stary.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/ja-jsem-chlapec-cisarsky.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0155]: https://badatelska.pisnovna.cz/pisen/158/erben-karel-jaromir-ja-jsem-chlapec-cisarsky-kdo-jste-devcatka. ABC checked with two parsers, transposed by -2 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0345/erben-karel-jaromir-ja-jsem-chlapec-cisarsky-kdo-jste-devcatka-hezky-ja-vas-budu-verbovati.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2808,14 +2808,14 @@
  },
  {
   "txt": "folk/boleslav-to-krasne-mesto.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0053]: https://badatelska.pisnovna.cz/pisen/53/erben-karel-jaromir-boleslav-to-krasne-mesto. ABC checked with two parsers, transposed by -1 semitones; practice tempo. Simple original chord accompaniment. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/53/erben-karel-jaromir-boleslav-to-krasne-mesto.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/nas-kohoutek-kokrha.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0432]: https://badatelska.pisnovna.cz/pisen/435/erben-karel-jaromir-nas-kohoutek-kokrha-kokrha-bude-brzo-rano. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0022/erben-karel-jaromir-nas-kohoutek-kokrha-bude-brzo-rano-muj-jenicek-zpomina.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2831,7 +2831,7 @@
  },
  {
   "txt": "folk/jsou-jsou-na-potoce-racata.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0222]: https://badatelska.pisnovna.cz/pisen/225/erben-karel-jaromir-jsou-jsou-na-potoce-racata. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0098/erben-karel-jaromir-jsou-jsou-na-potoce-racata-raci-pudeme-na-ne-vybereme-je.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2844,7 +2844,7 @@
  },
  {
   "txt": "folk/hezka-bys-ty-byla.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0117]: https://badatelska.pisnovna.cz/pisen/120/erben-karel-jaromir-hezka-bys-ty-byla-pres-tebe-tu-neni. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0474/erben-karel-jaromir-hezka-bys-ty-byla-pres-tebe-tu-neni-jen-skoda-preskoda-ze-tech-penez-neni.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2857,7 +2857,7 @@
  },
  {
   "txt": "folk/mne-se-mne-se-mne-se-mne-se-vsecko-zda.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0394]: https://badatelska.pisnovna.cz/pisen/397/erben-karel-jaromir-mne-se-mne-se-mne-se-mne-se-vsecko-zda. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0438/erben-karel-jaromir-mne-se-mne-se-mne-se-mne-se-vsecko-zda-ze-moje-mila-modre-oci-ma.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2878,7 +2878,7 @@
  },
  {
   "txt": "folk/ctyri-kravy-malo-travy-pomalu-jim-dejte.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0098]: https://badatelska.pisnovna.cz/pisen/101/erben-karel-jaromir-ctyri-kravy-malo-travy-pomalu-jim-dejte. ABC checked with two parsers; practice tempo. Simple original chord accompaniment. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_svat-0051/erben-karel-jaromir-ctyry-kravy-malo-travy-po-malu-jim-dejte-ctyry-kone-dva-pacholci.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2895,7 +2895,7 @@
  },
  {
   "txt": "folk/sedi-mila-za-stoleckem-jako-z-ruze-kvet.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0584]: https://badatelska.pisnovna.cz/pisen/588/erben-karel-jaromir-sedi-mila-za-stoleckem-jako-z-ruze-kvet. ABC checked with two parsers; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0084/erben-karel-jaromir-sedi-mila-za-stoleckem-jako-z-ruze-kvet-sama-sobe-povidala-ze-jich-mela-pet.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2908,7 +2908,7 @@
  },
  {
   "txt": "folk/nic-mi-to-lito-neni.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0478]: https://badatelska.pisnovna.cz/pisen/483/erben-karel-jaromir-nic-mi-to-lito-neni-ze-slouzim-cisarovi. ABC checked with two parsers, transposed by 2 semitones; practice tempo. First verse displayed beside the score: https://badatelska.pisnovna.cz/pisen/E_stav-0358/erben-karel-jaromir-nic-mne-to-lito-neni-ze-slouzim-cisarovi-preci-se-mam-lepsi-nezli-svec-a-krejci.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)",
@@ -2923,42 +2923,42 @@
  },
  {
   "txt": "folk/ja-jsem-z-kutny-hory-koudelniku-syn.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0165]: https://badatelska.pisnovna.cz/pisen/168/erben-karel-jaromir-ja-jsem-z-kutny-hory-koudelniku-syn. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_stav-0033/erben-karel-jaromir-ja-jsem-z-kutny-hory-z-kutny-hory-koudelniku-syn-ja-mam-v-praze-tri-domy.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/co-dela-ma-panenka-o-vanoci.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0063]: https://badatelska.pisnovna.cz/pisen/63/erben-karel-jaromir-co-dela-ma-panenka-o-vanoci. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_stav-0208/erben-karel-jaromir-co-dela-ma-panenka-o-vanoci-vo-dela-ma-panenka-v-lite.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/pockej-povim-na-te-zes-byl-na-salate.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0526]: https://badatelska.pisnovna.cz/pisen/531/erben-karel-jaromir-pockej-povim-na-te-zes-byl-na-salate. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0714/erben-karel-jaromir-pockej-povim-na-te-zes-byl-na-salate-na-salate-okurkovym.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/nase-anka-pekla-dolky.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0423]: https://badatelska.pisnovna.cz/pisen/426/erben-karel-jaromir-nase-anka-pekla-dolky-sypala-je-pernikem. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/426/erben-karel-jaromir-nase-anka-pekla-dolky-sypala-je-pernikem.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/pasla-panenka-pava-mezi-horama-sama.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0507]: https://badatelska.pisnovna.cz/pisen/512/erben-karel-jaromir-pasla-panenka-pava-mezi-horama-sama. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_rozpr-0036/erben-karel-jaromir-pasla-panenka-pava-mezi-horama-sama-jeli-tam-tudy-pani-pojed-panenko-s-nami.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
  },
  {
   "txt": "folk/slouzila-ma-mila-mezi-horama.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Písňovna (Institute of Ethnology, Czech Academy of Sciences), Erben, Karel Jaromír: Nápěvy Prostonárodních písní českých [EN] [EN-0594]: https://badatelska.pisnovna.cz/pisen/598/erben-karel-jaromir-slouzila-ma-mila-mezi-horama. ABC checked with two parsers; practice tempo. First verse with syllables aligned to the score: https://badatelska.pisnovna.cz/pisen/E_mlad-0463/erben-karel-jaromir-slouzila-ma-mila-mezi-horama-napsala-psanicko-ze-uz-se-vdala.",
   "volne": "traditional; Písňovna notation CC0 1.0 (https://www.pisnovna.cz/o-pisnovne)"
@@ -3465,7 +3465,7 @@
  },
  {
   "txt": "folk/kde-domov-muj.txt",
-  "police": "folk",
+  "police": "czech",
   "jazyk": "cs",
   "zdroj": "Melodie a první sloka podle § 7 a přílohy č. 6 zákona č. 3/1993 Sb. ve znění zákona č. 154/1998 Sb., který přetiskuje autentický notový zápis z roku 1933. https://e-sbirka.gov.cz/sb/1993/3?odkazId=26415875&predmetneDatum=2000-06-30&zalozka=text",
   "volne": "František Škroup († 1862) a Josef Kajetán Tyl († 1856), vlastní přepis melodie ze zákonné přílohy.",

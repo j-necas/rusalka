@@ -17,6 +17,7 @@ export default {
   "knihovna.hledat": "ابحث عن أغنية",
   "knihovna.nedostupna": "تعذّر تحميل المكتبة.",
   "knihovna.police.children": "أغاني الأطفال",
+  "knihovna.police.czech": "أغانٍ شعبية تشيكية",
   "knihovna.police.folk": "أغانٍ شعبية من العالم",
   "knihovna.police.christmas": "عيد الميلاد",
   "knihovna.police.classics": "كلاسيكيات",

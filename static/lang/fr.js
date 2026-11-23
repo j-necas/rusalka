@@ -18,6 +18,7 @@ export default {
   "knihovna.hledat": "Trouver une chanson",
   "knihovna.nedostupna": "Impossible de charger la bibliothèque.",
   "knihovna.police.children": "Comptines",
+  "knihovna.police.czech": "Chansons populaires tchèques",
   "knihovna.police.folk": "Chansons populaires du monde",
   "knihovna.police.christmas": "Noël",
   "knihovna.police.classics": "Classique",

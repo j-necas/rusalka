@@ -16,6 +16,7 @@ export default {
 "knihovna.hledat": "Знайти пісню",
 "knihovna.nedostupna": "Не вдалося завантажити бібліотеку.",
 "knihovna.police.children": "Дитячі",
+"knihovna.police.czech": "Чеські народні пісні",
 "knihovna.police.folk": "Народні пісні світу",
 "knihovna.police.christmas": "Різдвяні",
 "knihovna.police.classics": "Класика",

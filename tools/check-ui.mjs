@@ -1597,7 +1597,7 @@ try {
   const sPrekladem = INDEX.find(p => p.preklad?.cs);
   const bezDiakritiky = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   const NOVACEK = { profily: PROFILY, profil: 'e' };
-  const UKAZKY_POLICE = { children: 6, folk: 0, christmas: 2, classics: 4 };   // the sample songs on each shelf
+  const UKAZKY_POLICE = { children: 6, czech: 0, folk: 0, christmas: 2, classics: 4 };   // the sample songs on each shelf
   const kn = await stranka(DATA(), 1280, 860, 'cs', false);
   const naPolici = p => p.locator('#pisne .dl[data-soubor]').evaluateAll(el => el.map(d => ({ soubor: d.dataset.soubor,
     nazev: d.querySelector('b').innerText.trim(), stupen: Number(d.dataset.stupen), tezsi: d.classList.contains('tezsi'),

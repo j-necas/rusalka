@@ -18,6 +18,7 @@ export default {
   "knihovna.hledat": "Nájdi pesničku",
   "knihovna.nedostupna": "Knižnicu sa nepodarilo načítať.",
   "knihovna.police.children": "Detské",
+  "knihovna.police.czech": "České ľudové",
   "knihovna.police.folk": "Ľudové zo sveta",
   "knihovna.police.christmas": "Vianočné",
   "knihovna.police.classics": "Klasika",

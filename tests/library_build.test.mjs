@@ -115,6 +115,17 @@ test('a duplicate title, or a title of a starter song, is an error', async t => 
   assert.ok(chyby.some(c => c.includes('christmas/c.txt') && /starter/i.test(c)), chyby.join('\n'));
 });
 
+test('Czech folk songs stay in folk/ (their address keeps the players\' results) but stand on their own shelf', async t => {
+  const { zdroj, cil } = knihovna(t, { 'folk/kacenky.txt': PISEN('Kačenky'), 'folk/ducks.txt': PISEN('Ducks') },
+    [ZAZNAM('folk/kacenky.txt', { police: 'czech' }), ZAZNAM('folk/ducks.txt', { jazyk: 'en' })]);
+  const { index, chyby } = await postavKnihovnu({ zdroj, cil });
+  assert.deepEqual(chyby, []);
+  assert.deepEqual(index.map(p => [p.soubor, p.police]),
+    [['library/folk/kacenky.musicxml', 'czech'], ['library/folk/ducks.musicxml', 'folk']]);
+  const spatne = knihovna(t, { 'children/a.txt': PISEN('A') }, [ZAZNAM('children/a.txt', { police: 'czech' })]);
+  assert.ok((await postavKnihovnu(spatne)).chyby.some(c => /czech/.test(c) && /folk\//.test(c)), 'czech belongs in folk/');
+});
+
 test('an unknown shelf is an error', async t => {
   const { zdroj, cil, d } = knihovna(t, { 'pop/a.txt': PISEN('A') }, [ZAZNAM('pop/a.txt')]);
   const { chyby } = await postavKnihovnu({ zdroj, cil });

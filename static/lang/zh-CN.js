@@ -248,6 +248,7 @@ export default {
   "knihovna.hledat": "查找歌曲",
   "knihovna.nedostupna": "无法加载曲库。",
   "knihovna.police.children": "儿歌",
+  "knihovna.police.czech": "捷克民歌",
   "knihovna.police.folk": "世界民歌",
   "knihovna.police.christmas": "圣诞歌曲",
   "knihovna.police.classics": "古典",

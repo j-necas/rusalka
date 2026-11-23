@@ -2,7 +2,7 @@
 // Polozka = { soubor, nazev, police, stupen: 1|2|3, autor, jazyk, preklad?: { en?, cs? } }.
 import { KROKY, hotovy } from './recommend.js';
 
-export const POLICE = ['children', 'folk', 'christmas', 'classics'];
+export const POLICE = ['children', 'czech', 'folk', 'christmas', 'classics'];
 const cs = (a, b) => String(a).localeCompare(String(b), 'cs');
 const klice = (stat, soubor) => Object.entries(stat || {}).filter(([k]) => k.startsWith(soubor + '#'));
 const bezDiakritiky = t => String(t ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();

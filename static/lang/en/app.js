@@ -34,6 +34,7 @@ export default {
   'knihovna.hledat': 'Find a song',
   'knihovna.nedostupna': 'The library could not be loaded.',
   'knihovna.police.children': "Children's songs",
+  'knihovna.police.czech': "Czech folk songs",
   'knihovna.police.folk': 'Folk songs of the world',
   'knihovna.police.christmas': 'Christmas',
   'knihovna.police.classics': 'Classics',

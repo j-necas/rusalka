@@ -18,6 +18,7 @@ export default {
   "knihovna.hledat": "Lied finden",
   "knihovna.nedostupna": "Die Bibliothek konnte nicht geladen werden.",
   "knihovna.police.children": "Kinderlieder",
+  "knihovna.police.czech": "Tschechische Volkslieder",
   "knihovna.police.folk": "Volkslieder aus aller Welt",
   "knihovna.police.christmas": "Weihnachten",
   "knihovna.police.classics": "Klassik",

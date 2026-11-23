@@ -18,6 +18,7 @@ export default {
   "knihovna.hledat": "Encontrar uma música",
   "knihovna.nedostupna": "Não foi possível carregar a biblioteca.",
   "knihovna.police.children": "Infantis",
+  "knihovna.police.czech": "Populares checas",
   "knihovna.police.folk": "Populares do mundo",
   "knihovna.police.christmas": "Natal",
   "knihovna.police.classics": "Clássicos",
