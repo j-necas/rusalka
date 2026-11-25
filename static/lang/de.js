@@ -189,6 +189,7 @@ export default {
   "app.dataCteni": "Die Daten konnten nicht geladen werden. {chyba}",
   "app.nacitani": "Rusalka wird geladen…",
   "app.vyberPuvodniSlozku": "Bitte wählen Sie den ursprünglichen Ordner „{slozka}“.",
+  "app.potvrditPuvodniSlozku": "Der Browser konnte den gespeicherten Ordner nicht überprüfen. Ist „{slozka}“ der ursprüngliche Rusalka-Ordner? Wenn Sie bestätigen, wird er wieder verbunden und der neue Fortschritt aus diesem Browser zusammengeführt.",
   "app.dataCeka": "Rusalka wartet auf den Zugriff auf „{slozka}“. Bis Sie den Zugriff erlauben, wird neuer Fortschritt in diesem Browser gespeichert.",
   "app.dataPredObnovou": "Sicherung von vor der Wiederherstellung herunterladen",
   "app.dataPosledniZaloha": "Zuletzt heruntergeladene Sicherung vom {datum}.",

@@ -509,6 +509,7 @@ export default {
   "app.dataCteni": "Impossibile caricare i dati. {chyba}",
   "app.nacitani": "Caricamento di Rusalka…",
   "app.vyberPuvodniSlozku": "Seleziona la cartella originale «{slozka}».",
+  "app.potvrditPuvodniSlozku": "Il browser non ha potuto verificare la cartella salvata. «{slozka}» è la cartella originale di Rusalka? Confermando, la ricollegherai e unirai i nuovi progressi salvati in questo browser.",
   "app.dataCeka": "Rusalka attende l’autorizzazione ad accedere alla cartella «{slozka}». Nel frattempo i nuovi progressi vengono salvati in questo browser.",
   "app.dataPredObnovou": "Scarica il backup precedente al ripristino",
   "app.dataPosledniZaloha": "Ultimo backup scaricato il {datum}.",

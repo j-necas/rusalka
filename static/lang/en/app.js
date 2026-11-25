@@ -163,6 +163,7 @@ export default {
   "app.dataCteni": "Could not load data. {chyba}",
   "app.nacitani": "Loading Rusalka…",
   "app.vyberPuvodniSlozku": "Select the original folder “{slozka}”.",
+  "app.potvrditPuvodniSlozku": "The browser could not verify the saved folder. Is “{slozka}” the original Rusalka folder? Confirming reconnects it and merges new progress saved in this browser.",
   "app.dataCeka": "Select “{slozka}” again to restore access. New progress is saved in this browser in the meantime.",
   "app.dataPredObnovou": "Download the pre-restore backup",
   "app.dataPosledniZaloha": "Last backup downloaded on {datum}.",

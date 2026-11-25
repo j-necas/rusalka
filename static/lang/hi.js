@@ -167,6 +167,7 @@ export default {
   "app.dataCteni": "डेटा लोड नहीं हो सका। {chyba}",
   "app.nacitani": "Rusalka लोड हो रही है…",
   "app.vyberPuvodniSlozku": "मूल फ़ोल्डर “{slozka}” चुनें।",
+  "app.potvrditPuvodniSlozku": "ब्राउज़र सहेजे गए फ़ोल्डर की पुष्टि नहीं कर सका। क्या “{slozka}” Rusalka का मूल फ़ोल्डर है? पुष्टि करने पर फ़ोल्डर फिर जुड़ेगा और इस ब्राउज़र में सहेजी गई नई प्रगति उसमें मिल जाएगी।",
   "app.dataCeka": "Rusalka को “{slozka}” फ़ोल्डर की अनुमति का इंतज़ार है। तब तक नई प्रगति इसी ब्राउज़र में सहेजी जाएगी।",
   "app.dataPredObnovou": "बहाली से पहले का बैकअप डाउनलोड करें",
   "app.dataPosledniZaloha": "पिछला बैकअप {datum} को डाउनलोड किया गया था।",

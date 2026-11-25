@@ -98,6 +98,11 @@ try {
   await slozky.addInitScript(() => {
     FileSystemDirectoryHandle.prototype.queryPermission = () => new Promise(() => {});
     FileSystemDirectoryHandle.prototype.requestPermission = () => new Promise(() => {});
+    const isSameEntry = FileSystemDirectoryHandle.prototype.isSameEntry;
+    FileSystemDirectoryHandle.prototype.isSameEntry = function (jina) {
+      if (window.testStaryOdkaz) return Promise.reject(new DOMException('The user aborted a request.', 'AbortError'));
+      return isSameEntry.call(this, jina);
+    };
     window.showDirectoryPicker = async ({ mode }) => {
       if (mode !== 'readwrite') throw new Error('Expected a writable picker');
       if (!window.testVyber) throw new DOMException('Cancelled', 'AbortError');
@@ -130,10 +135,33 @@ try {
     console.error('Storage feedback:', await page.locator('#toast, main:not(.skryta) .data-chyba').allTextContents());
     throw e;
   });
-  await page.evaluate(() => { window.testVyber = 'Rusalka'; });
+  await page.evaluate(() => {
+    window.testVyber = 'Rusalka'; window.testStaryOdkaz = true;
+    document.getElementById('toast').textContent = '';
+  });
   await znovu.click();
+  await upozorneni.waitFor({ timeout: 4000 }); // same name without a Rusalka marker is insufficient
+  await page.evaluate(async () => {
+    const { ProhlizecUloziste, SlozkaUloziste } = await import('/lib/storage.js');
+    const koren = await navigator.storage.getDirectory();
+    await new SlozkaUloziste(await koren.getDirectoryHandle('Rusalka')).pripravit();
+    await new ProhlizecUloziste().zapisData('oblibene', { host: ['Ode to Joy.musicxml'] });
+  });
+  await znovu.click();
+  const potvrzeni = page.locator('#potvrzeni');
+  await potvrzeni.waitFor({ timeout: 4000 });
+  await page.locator('#potvrzeniNe').click();
+  await znovu.waitFor({ state: 'visible', timeout: 4000 });
+  const oblibeneVeSlozce = () => page.evaluate(async () => {
+    const { SlozkaUloziste } = await import('/lib/storage.js');
+    const koren = await navigator.storage.getDirectory();
+    return new SlozkaUloziste(await koren.getDirectoryHandle('Rusalka')).ctiData('oblibene');
+  });
+  kontrola('cancelling confirmation leaves browser progress out of the folder', await oblibeneVeSlozce() === null);
+  await znovu.click();
+  await page.locator('#potvrzeniAno').click({ timeout: 4000 });
   await znovu.waitFor({ state: 'hidden', timeout: 4000 });
-  kontrola('the original folder reconnects through the picker after cancellation and a different selection', true);
+  kontrola('confirmation reconnects the marked folder and merges browser progress', (await oblibeneVeSlozce())?.host?.[0] === 'Ode to Joy.musicxml');
   await slozky.close();
 } finally {
   await browser.close();

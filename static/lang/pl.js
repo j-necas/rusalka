@@ -672,6 +672,7 @@ export default {
   "app.dataCteni": "Nie udało się wczytać danych. {chyba}",
   "app.nacitani": "Wczytywanie Rusalki…",
   "app.vyberPuvodniSlozku": "Wybierz pierwotny folder „{slozka}”.",
+  "app.potvrditPuvodniSlozku": "Przeglądarka nie mogła zweryfikować zapisanego folderu. Czy „{slozka}” to pierwotny folder Rusałki? Potwierdzenie połączy go ponownie i scali nowe postępy zapisane w tej przeglądarce.",
   "app.dataCeka": "Rusałka czeka na dostęp do folderu „{slozka}”. Do tego czasu nowe postępy są zapisywane w tej przeglądarce.",
   "app.dataPredObnovou": "Pobierz kopię sprzed przywrócenia",
   "app.dataPosledniZaloha": "Ostatnią kopię zapasową pobrano {datum}.",

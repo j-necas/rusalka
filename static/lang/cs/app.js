@@ -163,6 +163,7 @@ export default {
   "app.dataCteni": "Data se nepodařilo načíst. {chyba}",
   "app.nacitani": "Rusalka se načítá…",
   "app.vyberPuvodniSlozku": "Vyberte původní složku „{slozka}“.",
+  "app.potvrditPuvodniSlozku": "Prohlížeč nedokázal ověřit uloženou složku. Je „{slozka}“ původní složka Rusalky? Potvrzením ji znovu připojíte a sloučíte s ní nový pokrok z tohoto prohlížeče.",
   "app.dataCeka": "Pro obnovení přístupu znovu vyberte složku „{slozka}“. Nový pokrok se mezitím ukládá v prohlížeči.",
   "app.dataPredObnovou": "Stáhnout zálohu před obnovou",
   "app.dataPosledniZaloha": "Poslední stažená záloha je z {datum}.",

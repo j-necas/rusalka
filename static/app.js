@@ -495,15 +495,28 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     try { return await window.showDirectoryPicker({ id: 'rusalka', mode: 'readwrite' }); }
     catch (e) { if (e.name !== 'AbortError') throw e; return null; }
   }
+  // null stops the current action without replacing the saved folder or transferring data.
+  async function stejnaSlozka(slozka) {
+    try { return await slozka.h.isSameEntry(UL.slozka.h); }
+    catch (e) { if (e.name !== 'AbortError') throw e; }
+    const slozkaPuvodni = UL.slozka.nazev;
+    if (slozka.nazev !== slozkaPuvodni) return false;
+    if (!await slozka.maPlatnouZnacku()) {
+      toast(t('app.vyberPuvodniSlozku', { slozka: slozkaPuvodni }), 5000);
+      return null;
+    }
+    return await potvrd(t('app.potvrditPuvodniSlozku', { slozka: slozkaPuvodni }), t('app.dataPrevzitAno')) || null;
+  }
   async function povolSlozku() {
     if (!UL.slozka || UL.aktivni === UL.slozka) return;
     const h = await vyberSlozku();
     if (!h) return;
-    if (!await h.isSameEntry(UL.slozka.h)) {
-      toast(t('app.vyberPuvodniSlozku', { slozka: UL.slozka.nazev }), 5000);
-      return;
-    }
     const slozka = novaSlozka(h);
+    const stejna = await stejnaSlozka(slozka);
+    if (stejna === false) {
+      toast(t('app.vyberPuvodniSlozku', { slozka: UL.slozka.nazev }), 5000);
+    }
+    if (!stejna) return;
     await obnovSlozku(slozka);
     await nastaveniProhlizece.zapis('slozka', h);
     UL.slozka = slozka;
@@ -517,10 +530,12 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
     const h = await vyberSlozku();
     if (!h) return;
     const s = novaSlozka(h);
-    await s.overVerzi();
-    if (UL.slozka && await h.isSameEntry(UL.slozka.h)) {
+    const stejna = UL.slozka ? await stejnaSlozka(s) : false;
+    if (stejna === null) return;
+    if (stejna) {
       await obnovSlozku(s);
     } else {
+      await s.overVerzi();
       let kopie = false;
       if (!await s.maData()) {
         kopie = await potvrd(t('app.slozkaPrazdna'), t('app.dataPrevzitAno'), t('app.dataBezPrevzeti'));

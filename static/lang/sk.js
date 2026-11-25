@@ -264,6 +264,7 @@ export default {
   "app.dataCteni": "Údaje sa nepodarilo načítať. {chyba}",
   "app.nacitani": "Rusalka sa načítava…",
   "app.vyberPuvodniSlozku": "Vyberte pôvodný priečinok „{slozka}“.",
+  "app.potvrditPuvodniSlozku": "Prehliadač nedokázal overiť uložený priečinok. Je „{slozka}“ pôvodný priečinok Rusalky? Potvrdením ho znova pripojíte a zlúčite s ním nový pokrok z tohto prehliadača.",
   "app.dataCeka": "Rusalka čaká na prístup k priečinku „{slozka}“. Dovtedy sa nový pokrok ukladá v tomto prehliadači.",
   "app.dataPredObnovou": "Stiahnuť zálohu spred obnovy",
   "app.dataPosledniZaloha": "Posledná stiahnutá záloha je z {datum}.",

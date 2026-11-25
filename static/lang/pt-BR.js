@@ -169,6 +169,7 @@ export default {
   "app.dataCteni": "Não foi possível carregar os dados. {chyba}",
   "app.nacitani": "Carregando a Rusalka…",
   "app.vyberPuvodniSlozku": "Selecione a pasta original “{slozka}”.",
+  "app.potvrditPuvodniSlozku": "O navegador não conseguiu verificar a pasta salva. “{slozka}” é a pasta original da Rusalka? Ao confirmar, ela será reconectada e o novo progresso salvo neste navegador será mesclado.",
   "app.dataCeka": "O Rusalka está aguardando acesso à pasta “{slozka}”. Até você permitir o acesso, o progresso novo será salvo neste navegador.",
   "app.dataPredObnovou": "Baixar o backup anterior à restauração",
   "app.dataPosledniZaloha": "Último backup baixado em {datum}.",

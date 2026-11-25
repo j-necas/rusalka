@@ -175,6 +175,7 @@ export default {
   "app.dataCteni": "Impossible de charger les données. {chyba}",
   "app.nacitani": "Chargement de Rusalka…",
   "app.vyberPuvodniSlozku": "Sélectionnez le dossier d’origine « {slozka} ».",
+  "app.potvrditPuvodniSlozku": "Le navigateur n’a pas pu vérifier le dossier enregistré. « {slozka} » est-il le dossier d’origine de Rusalka ? Confirmez pour le reconnecter et y fusionner la nouvelle progression enregistrée dans ce navigateur.",
   "app.dataCeka": "Rusalka attend l’autorisation d’accéder à « {slozka} ». Les nouveaux progrès sont enregistrés dans ce navigateur en attendant.",
   "app.dataPredObnovou": "Télécharger la sauvegarde faite avant la restauration",
   "app.dataPosledniZaloha": "Dernière sauvegarde téléchargée le {datum}.",

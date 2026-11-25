@@ -175,6 +175,7 @@ export default {
   "app.dataCteni": "No se pudieron cargar los datos. {chyba}",
   "app.nacitani": "Cargando Rusalka…",
   "app.vyberPuvodniSlozku": "Selecciona la carpeta original «{slozka}».",
+  "app.potvrditPuvodniSlozku": "El navegador no pudo verificar la carpeta guardada. ¿Es «{slozka}» la carpeta original de Rusalka? Al confirmar, se volverá a conectar y se combinará el progreso nuevo guardado en este navegador.",
   "app.dataCeka": "Rusalka está esperando permiso para acceder a «{slozka}». Hasta entonces, el progreso nuevo se guarda en este navegador.",
   "app.dataPredObnovou": "Descargar la copia anterior a la restauración",
   "app.dataPosledniZaloha": "Última copia de seguridad descargada el {datum}.",

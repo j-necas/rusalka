@@ -403,6 +403,7 @@ export default {
   "app.dataCteni": "データを読み込めませんでした。{chyba}",
   "app.nacitani": "Rusalka を読み込んでいます…",
   "app.vyberPuvodniSlozku": "元のフォルダー「{slozka}」を選択してください。",
+  "app.potvrditPuvodniSlozku": "ブラウザーが保存済みのフォルダーを確認できませんでした。「{slozka}」は Rusalka の元のフォルダーですか？ 確認すると再接続し、このブラウザーに保存された新しい練習記録を統合します。",
   "app.dataCeka": "Rusalka は「{slozka}」へのアクセス許可を待っています。許可されるまでは、新しい練習記録をこのブラウザーに保存します。",
   "app.dataPredObnovou": "復元前のバックアップをダウンロード",
   "app.dataPosledniZaloha": "前回バックアップをダウンロードした日付は {datum} です。",

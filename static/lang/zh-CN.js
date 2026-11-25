@@ -404,6 +404,7 @@ export default {
   "app.dataCteni": "无法加载数据。{chyba}",
   "app.nacitani": "正在加载 Rusalka…",
   "app.vyberPuvodniSlozku": "请选择原来的文件夹“{slozka}”。",
+  "app.potvrditPuvodniSlozku": "浏览器无法验证已保存的文件夹。“{slozka}”是 Rusalka 原来的文件夹吗？确认后将重新连接该文件夹，并合并此浏览器中保存的新进度。",
   "app.dataCeka": "Rusalka 正在等待访问“{slozka}”文件夹的权限。获准前，新进度将保存在此浏览器中。",
   "app.dataPredObnovou": "下载恢复前的备份",
   "app.dataPosledniZaloha": "最近一次下载备份的日期为 {datum}。",

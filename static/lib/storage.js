@@ -34,11 +34,11 @@ function ctiJson(bajty, soubor) {
 }
 /** the marker rusalka.json: only a readable newer version stops writing; an unreadable one is like no marker
  *  (→ false, it gets rewritten) */
-function overVerzi(bajty) {
+function ctiZnacku(bajty) {
   let znacka;
-  try { znacka = ctiJson(bajty, 'rusalka.json'); } catch { return false; }
+  try { znacka = ctiJson(bajty, 'rusalka.json'); } catch { return null; }
   if (znacka?.verze > VERZE) throw chybaDat('app.dataVerze');
-  return jeObjekt(znacka);
+  return jeObjekt(znacka) ? znacka : null;
 }
 async function pokudExistuje(fn) {
   try { return await fn(); }
@@ -154,8 +154,12 @@ export class SlozkaUloziste {
   constructor(handle, hlasit = console.warn) { this.h = handle; this.cteno = new Map(); this.hlasit = hlasit; }
   async overVerzi() {
     const b = await ctiSoubor(this.h, 'rusalka.json');
-    if (b && !overVerzi(b)) await zapisSoubor(this.h, 'rusalka.json', znacka());   // unreadable: written again, not a lock
+    if (b && !ctiZnacku(b)) await zapisSoubor(this.h, 'rusalka.json', znacka());   // unreadable: written again, not a lock
     return !!b;
+  }
+  async maPlatnouZnacku() {
+    const b = await ctiSoubor(this.h, 'rusalka.json');
+    return !!b && ctiZnacku(b)?.verze === VERZE;
   }
   get nazev() { return this.h.name; }
   /** 'granted' | 'prompt' | 'denied' – after a browser restart permission usually has to be granted again */
@@ -370,7 +374,7 @@ export async function obnov(ul, zipBajty, { predObnovou } = {}) {
       m = new Map(klice.map(k => [k.slice(o.length), m.get(k)]));
     }
   }
-  if (m.has('rusalka.json')) overVerzi(m.get('rusalka.json'));   // an unreadable marker in a backup is ignored
+  if (m.has('rusalka.json')) ctiZnacku(m.get('rusalka.json'));   // an unreadable marker in a backup is ignored
   const pisne = [], data = [];
   for (const [jm, b] of m) {
     const [slozka, soubor, dalsi] = jm.split('/');
