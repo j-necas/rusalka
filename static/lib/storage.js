@@ -166,7 +166,7 @@ export class SlozkaUloziste {
     try {
       return await Promise.race([
         this.h.queryPermission({ mode: 'readwrite' }),
-        new Promise(ok => { casovac = setTimeout(() => ok('prompt'), 3000); }),
+        new Promise(ok => { casovac = setTimeout(() => ok('prompt'), 750); }),
       ]);
     } finally { clearTimeout(casovac); }
   }

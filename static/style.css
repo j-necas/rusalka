@@ -30,6 +30,8 @@ body {
 button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 .skryta { display: none !important; }
+#nacitani { display: grid; place-items: center; min-height: 100dvh; color: var(--akcent); font-weight: 700; }
+body:has(> main:not(.skryta), > #chybaStartu) > #nacitani { display: none; }
 :focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
 /* on the player's colour (results, Continue on Home) the accent outline would vanish: a white one */
 #vysledek :focus-visible, .pokracuj :focus-visible { outline-color: #fff; }

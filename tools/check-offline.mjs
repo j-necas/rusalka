@@ -93,6 +93,48 @@ try {
   await page.waitForSelector('main:not(.skryta)');
   const noveCss = await page.evaluate(() => fetch('style.css').then(r => r.text()));
   kontrola('… after closing the window the new version is used', noveCss.includes('new version'));
+
+  const slozky = await browser.newContext({ serviceWorkers: 'block', locale: 'en-US' });
+  await slozky.addInitScript(() => {
+    FileSystemDirectoryHandle.prototype.queryPermission = () => new Promise(() => {});
+    FileSystemDirectoryHandle.prototype.requestPermission = () => new Promise(() => {});
+    window.showDirectoryPicker = async ({ mode }) => {
+      if (mode !== 'readwrite') throw new Error('Expected a writable picker');
+      if (!window.testVyber) throw new DOMException('Cancelled', 'AbortError');
+      return (await navigator.storage.getDirectory()).getDirectoryHandle(window.testVyber, { create: true });
+    };
+  });
+  page = await slozky.newPage();
+  await page.goto(URL0);
+  await page.waitForSelector('main:not(.skryta)');
+  await page.evaluate(async () => {
+    const { nastaveniProhlizece } = await import('/lib/storage.js');
+    const koren = await navigator.storage.getDirectory();
+    await nastaveniProhlizece.zapis('slozka', await koren.getDirectoryHandle('Rusalka', { create: true }));
+  });
+  let povolNacteni;
+  const cekani = new Promise(ok => { povolNacteni = ok; });
+  await page.route('**/app.js?*', async route => { await cekani; await route.continue(); });
+  await page.reload({ waitUntil: 'commit' });
+  await page.locator('#nacitani').waitFor({ state: 'visible' });
+  kontrola('startup shows a status while the app is loading', true);
+  povolNacteni();
+  const znovu = page.locator('main:not(.skryta) .data-povolit');
+  await znovu.waitFor({ timeout: 4000 });
+  kontrola('a pending folder permission still opens the app without the loading status', !await page.locator('#nacitani').isVisible());
+  await znovu.click();    // cancelling leaves the original folder connected but waiting
+  await page.evaluate(() => { window.testVyber = 'Jina'; });
+  await znovu.click();
+  const upozorneni = page.locator('#toast').filter({ hasText: 'Select the original folder' });
+  await upozorneni.waitFor({ timeout: 4000 }).catch(async e => {
+    console.error('Storage feedback:', await page.locator('#toast, main:not(.skryta) .data-chyba').allTextContents());
+    throw e;
+  });
+  await page.evaluate(() => { window.testVyber = 'Rusalka'; });
+  await znovu.click();
+  await znovu.waitFor({ state: 'hidden', timeout: 4000 });
+  kontrola('the original folder reconnects through the picker after cancellation and a different selection', true);
+  await slozky.close();
 } finally {
   await browser.close();
   server.close();

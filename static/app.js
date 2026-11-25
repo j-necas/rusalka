@@ -491,22 +491,32 @@ import { naDomove, urovenHrace, dalsiZKnihovny, seradPolici, hledej, POLICE, pol
       finally { meniData = false; }
     };
   }
+  async function vyberSlozku() {
+    try { return await window.showDirectoryPicker({ id: 'rusalka', mode: 'readwrite' }); }
+    catch (e) { if (e.name !== 'AbortError') throw e; return null; }
+  }
   async function povolSlozku() {
     if (!UL.slozka || UL.aktivni === UL.slozka) return;
-    if (await UL.slozka.povol() !== 'granted') { toast(t('app.bezPovoleni'), 5000); return; }
-    await obnovSlozku(UL.slozka);
+    const h = await vyberSlozku();
+    if (!h) return;
+    if (!await h.isSameEntry(UL.slozka.h)) {
+      toast(t('app.vyberPuvodniSlozku', { slozka: UL.slozka.nazev }), 5000);
+      return;
+    }
+    const slozka = novaSlozka(h);
+    await obnovSlozku(slozka);
+    await nastaveniProhlizece.zapis('slozka', h);
+    UL.slozka = slozka;
     UL.chybaSlozky = '';
-    await prepniNa(UL.slozka);
+    await prepniNa(slozka);
     await uklidProhlizece();
   }
   $('#ulozistePovolit').onclick = priZmeneDat(povolSlozku);
   for (const p of pruhyDat) p.querySelector('button').onclick = $('#ulozistePovolit').onclick;
   $('#ulozisteSlozka').onclick = priZmeneDat(async () => {
-    let h;
-    try { h = await window.showDirectoryPicker({ id: 'rusalka', mode: 'readwrite' }); }
-    catch (e) { if (e.name === 'AbortError') return; throw e; }
+    const h = await vyberSlozku();
+    if (!h) return;
     const s = novaSlozka(h);
-    if (await s.povol() !== 'granted') { toast(t('app.slozkaNelze'), 5000); return; }
     await s.overVerzi();
     if (UL.slozka && await h.isSameEntry(UL.slozka.h)) {
       await obnovSlozku(s);

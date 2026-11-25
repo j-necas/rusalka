@@ -56,7 +56,7 @@ test('folder: an unanswered permission check falls back to asking again', async 
   h.queryPermission = () => new Promise(() => {});
   const s = new SlozkaUloziste(h);
   const stav = s.stav();
-  t.mock.timers.tick(3000);
+  t.mock.timers.tick(750);
   const vysledek = await Promise.race([stav, new Promise(ok => setImmediate(() => ok(null)))]);
   assert.equal(vysledek, 'prompt');
   assert.equal(await s.povol(), 'granted');
