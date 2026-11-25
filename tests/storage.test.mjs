@@ -50,6 +50,18 @@ test('folder: no permission after restart → prompt, grant; marker and layout',
   assert.equal(await s.maData(), true);
 });
 
+test('folder: an unanswered permission check falls back to asking again', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const h = new FakeSlozka();
+  h.queryPermission = () => new Promise(() => {});
+  const s = new SlozkaUloziste(h);
+  const stav = s.stav();
+  t.mock.timers.tick(3000);
+  const vysledek = await Promise.race([stav, new Promise(ok => setImmediate(() => ok(null)))]);
+  assert.equal(vysledek, 'prompt');
+  assert.equal(await s.povol(), 'granted');
+});
+
 test('folder: a file changed elsewhere is merged before writing, not overwritten', async () => {
   const h = new FakeSlozka(), s = new SlozkaUloziste(h);
   await s.pripravit();

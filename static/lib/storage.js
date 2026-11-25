@@ -159,7 +159,17 @@ export class SlozkaUloziste {
   }
   get nazev() { return this.h.name; }
   /** 'granted' | 'prompt' | 'denied' – after a browser restart permission usually has to be granted again */
-  async stav() { return this.h.queryPermission ? this.h.queryPermission({ mode: 'readwrite' }) : 'granted'; }
+  async stav() {
+    if (!this.h.queryPermission) return 'granted';
+    // Chrome can leave this query pending for a saved handle. Continue in browser storage and let the user retry.
+    let casovac;
+    try {
+      return await Promise.race([
+        this.h.queryPermission({ mode: 'readwrite' }),
+        new Promise(ok => { casovac = setTimeout(() => ok('prompt'), 3000); }),
+      ]);
+    } finally { clearTimeout(casovac); }
+  }
   async povol() { return this.h.requestPermission ? this.h.requestPermission({ mode: 'readwrite' }) : 'granted'; }
   /** a Rusalka folder? (marker rusalka.json, or at least pisne/ or data/) */
   async jeRusalky() {
